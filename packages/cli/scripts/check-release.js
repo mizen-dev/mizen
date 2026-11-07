@@ -34,9 +34,12 @@ const staging = await mkdtemp(join(tmpdir(), "mizen release café "));
 try {
 	const archives = await Promise.all(
 		["ui", "cli"].map((name) => {
+			// Do not rely on prepack: users may disable lifecycle scripts globally.
+			const cwd = join(root, "packages", name);
+			execute("pnpm", ["run", "build"], { cwd });
 			const file = join(staging, `mizen-${name}.tgz`);
-			execute("pnpm", ["pack", "--out", file], {
-				cwd: join(root, "packages", name),
+			execute("pnpm", ["pack", "--config.ignoreScripts=true", "--out", file], {
+				cwd,
 			});
 			return inspectArchive(file, name === "ui" ? ui : cli);
 		})

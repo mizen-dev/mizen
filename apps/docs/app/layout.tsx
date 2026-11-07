@@ -1,3 +1,4 @@
+import "@mizen-labs/ui/styles.css";
 import "./globals.css";
 import "@fontsource-variable/jetbrains-mono/wght.css";
 import "@fontsource-variable/wix-madefor-text/wght.css";

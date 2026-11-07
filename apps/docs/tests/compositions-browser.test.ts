@@ -326,11 +326,11 @@ describe("main page compositions", { timeout: 30_000 }, () => {
 		);
 		expect(
 			darkCanvasRing.contrast,
-			"dark canvas focus ring"
+			`dark canvas focus ring: ${JSON.stringify(darkCanvasRing)}`
 		).toBeGreaterThanOrEqual(3);
 		expect(
 			darkCardRing.contrast,
-			"dark workarea focus ring"
+			`dark workarea focus ring: ${JSON.stringify(darkCardRing)}`
 		).toBeGreaterThanOrEqual(3);
 		const darkSwitch = canvas.getByRole("switch", { name: "Weekly summary" });
 		await darkSwitch.check();
