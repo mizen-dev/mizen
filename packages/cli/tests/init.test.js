@@ -390,7 +390,14 @@ test("failed verification shows diagnostic paths and repairs in human output", (
 	// Evidence inside the app reads relative to it.
 	assert.ok(
 		result.stdout.includes(
-			"node_modules/@mizen-labs/ui/node_modules/react/package.json"
+			join(
+				"node_modules",
+				"@mizen-labs",
+				"ui",
+				"node_modules",
+				"react",
+				"package.json"
+			)
 		)
 	);
 	assert.ok(

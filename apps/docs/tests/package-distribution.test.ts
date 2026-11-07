@@ -25,9 +25,20 @@ interface PackedPackage {
 it("packs every public export and preserves client boundaries", async () => {
 	const destination = await mkdtemp(join(tmpdir(), "mizen-package-"));
 	try {
+		// Build explicitly so lifecycle settings cannot change the archive contents.
+		await execute("pnpm", ["run", "build"], {
+			cwd: uiRoot,
+			timeout: 180_000,
+		});
 		const { stdout } = await execute(
 			"pnpm",
-			["pack", "--json", "--out", join(destination, "ui.tgz")],
+			[
+				"pack",
+				"--config.ignoreScripts=true",
+				"--json",
+				"--out",
+				join(destination, "ui.tgz"),
+			],
 			{ cwd: uiRoot, timeout: 15_000 }
 		);
 		const packed: PackedPackage = JSON.parse(stdout);
@@ -65,4 +76,4 @@ it("packs every public export and preserves client boundaries", async () => {
 	} finally {
 		await rm(destination, { force: true, recursive: true });
 	}
-}, 20_000);
+}, 200_000);

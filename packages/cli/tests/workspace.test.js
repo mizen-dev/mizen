@@ -27,7 +27,7 @@ function put(root, path, value) {
 	);
 }
 function workspace(t, kind = "pnpm", patterns = ["apps/*", "packages/*"]) {
-	const root = realpathSync(
+	const root = realpathSync.native(
 		mkdtempSync(join(tmpdir(), "mizen workspace café "))
 	);
 	t.after(() => rmSync(root, { force: true, recursive: true }));
