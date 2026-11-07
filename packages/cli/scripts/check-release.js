@@ -9,7 +9,7 @@ import {
 import { arch, platform, tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { cleanup } from "./cleanup.js";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 import { execute } from "./process.js";
 import {
 	inspectArchive,

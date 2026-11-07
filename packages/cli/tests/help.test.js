@@ -6,13 +6,13 @@ import {
 	mkdtempSync,
 	readdirSync,
 	readFileSync,
-	rmSync,
 	writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 import { CliError, normalizeError } from "../dist/errors.js";
 import { parseOutput } from "./helpers/output.js";
 
@@ -20,6 +20,8 @@ const binary = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
 function run(args, options = {}) {
 	return spawnSync(process.execPath, [binary, ...args], {
 		encoding: "utf8",
+		killSignal: "SIGKILL",
+		timeout: 30_000,
 		...options,
 	});
 }
@@ -51,7 +53,7 @@ test("each command has relevant help, examples, and unchanged JSON envelopes", (
 
 test("help bypasses app inspection and writes even with --yes and an invalid app", (t) => {
 	const cwd = mkdtempSync(join(tmpdir(), "mizen-help-"));
-	t.after(() => rmSync(cwd, { force: true, recursive: true }));
+	t.after(() => cleanup(cwd));
 	writeFileSync(join(cwd, "package.json"), "intentionally invalid JSON\n");
 	const result = run(
 		["init", "--cwd", cwd, "--yes", "--feature", "diagram", "--help"],
@@ -147,7 +149,7 @@ test("unexpected failures retain context and explain what to report", () => {
 
 test("help and version still work when the bundled catalog is unavailable", (t) => {
 	const cwd = mkdtempSync(join(tmpdir(), "mizen-help-recovery-"));
-	t.after(() => rmSync(cwd, { force: true, recursive: true }));
+	t.after(() => cleanup(cwd));
 	mkdirSync(join(cwd, "dist"));
 	writeFileSync(
 		join(cwd, "package.json"),
@@ -169,6 +171,8 @@ test("help and version still work when the bundled catalog is unavailable", (t) 
 		spawnSync(process.execPath, [join(cwd, "dist/cli.js"), ...args], {
 			cwd,
 			encoding: "utf8",
+			killSignal: "SIGKILL",
+			timeout: 30_000,
 		});
 	const help = invoke(["doctor", "--help", "--json"]);
 	assert.equal(help.status, 0, help.stderr);

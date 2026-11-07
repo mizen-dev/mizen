@@ -5,13 +5,13 @@ import {
 	mkdirSync,
 	mkdtempSync,
 	readFileSync,
-	rmSync,
 	writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 import { frameworkOf } from "../dist/doctor/project.js";
 import { fakePnpm } from "./helpers/fake-pnpm.js";
 import { parseOutput } from "./helpers/output.js";
@@ -29,7 +29,7 @@ function put(root, path, value) {
 }
 function fixture(t, extension = "tsx") {
 	const root = mkdtempSync(join(tmpdir(), "mizen-vite-"));
-	t.after(() => rmSync(root, { force: true, recursive: true }));
+	t.after(() => cleanup(root));
 	put(root, "package.json", {
 		dependencies: {
 			"@mizen-labs/ui": "0.1.0",
@@ -77,7 +77,7 @@ function run(root, command = "init", args = []) {
 	const result = spawnSync(
 		process.execPath,
 		[binary, command, "--cwd", root, "--json", ...args],
-		{ encoding: "utf8" }
+		{ encoding: "utf8", killSignal: "SIGKILL", timeout: 30_000 }
 	);
 	// A result prints on stdout; an error prints on stderr, never both.
 	assert.ok(!(result.stdout && result.stderr), result.stderr);
@@ -244,6 +244,8 @@ test("a changed HTML entry during dependency installation stops source applicati
 		{
 			encoding: "utf8",
 			env,
+			killSignal: "SIGKILL",
+			timeout: 30_000,
 		}
 	);
 	assert.equal(result.status, 1, result.stderr);

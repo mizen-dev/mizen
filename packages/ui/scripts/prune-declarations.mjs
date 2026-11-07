@@ -4,7 +4,6 @@ import {
 	mkdtemp,
 	readdir,
 	readFile,
-	rm,
 	unlink,
 	writeFile,
 } from "node:fs/promises";
@@ -12,6 +11,7 @@ import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 
 const TYPESCRIPT_FILE = /\.(?:[cm]?ts|tsx)$/u;
 const DECLARATION_FILE = /\.d\.[cm]?ts$/u;
@@ -103,7 +103,13 @@ async function publicGraph() {
 				...entries,
 				assets,
 			],
-			{ cwd: root, encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }
+			{
+				cwd: root,
+				encoding: "utf8",
+				killSignal: "SIGKILL",
+				maxBuffer: 32 * 1024 * 1024,
+				timeout: 120_000,
+			}
 		);
 		return new Set(
 			graph
@@ -112,7 +118,7 @@ async function publicGraph() {
 				.map((file) => resolve(file))
 		);
 	} finally {
-		await rm(temporary, { force: true, recursive: true });
+		await cleanup(temporary);
 	}
 }
 const retained = await publicGraph();

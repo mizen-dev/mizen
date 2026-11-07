@@ -6,6 +6,7 @@ export const INSTALL_TIMEOUT_MS = 600_000;
 export function execute(command, args, options = {}) {
 	const result = spawn.sync(command, args, {
 		encoding: "utf8",
+		killSignal: "SIGKILL",
 		maxBuffer: 4_000_000,
 		timeout: 180_000,
 		...options,

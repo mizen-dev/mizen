@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { cleanup } from "../scripts/cleanup.js";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 
 test("cleanup removes its temporary directory", async () => {
 	const directory = await fs.mkdtemp(join(tmpdir(), "mizen-cleanup-"));

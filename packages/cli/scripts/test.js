@@ -12,7 +12,9 @@ const result = spawnSync(
 	process.execPath,
 	["--test", "--test-concurrency=1", ...files],
 	{
+		killSignal: "SIGKILL",
 		stdio: "inherit",
+		timeout: 2_400_000,
 	}
 );
 if (result.error) {

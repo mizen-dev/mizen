@@ -7,7 +7,6 @@ import {
 	readFileSync,
 	readlinkSync,
 	realpathSync,
-	rmSync,
 	symlinkSync,
 	writeFileSync,
 } from "node:fs";
@@ -15,6 +14,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 import { parseOutput } from "./helpers/output.js";
 
 const binary = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
@@ -30,7 +30,7 @@ function workspace(t, kind = "pnpm", patterns = ["apps/*", "packages/*"]) {
 	const root = realpathSync.native(
 		mkdtempSync(join(tmpdir(), "mizen workspace café "))
 	);
-	t.after(() => rmSync(root, { force: true, recursive: true }));
+	t.after(() => cleanup(root));
 	put(root, "package.json", {
 		name: "workspace",
 		packageManager: kind === "pnpm" ? "pnpm@12.15.0" : "npm@10.9.8",
@@ -123,7 +123,7 @@ function run(root, args = []) {
 	const result = spawnSync(
 		process.execPath,
 		[binary, "doctor", "--workspace", "--cwd", root, "--json", ...args],
-		{ encoding: "utf8" }
+		{ encoding: "utf8", killSignal: "SIGKILL", timeout: 30_000 }
 	);
 	assert.equal(result.stderr, "");
 	return { ...parseOutput(result.stdout), exit: result.status };
@@ -359,7 +359,7 @@ test("workspace root applications are checked without enabling root init", (t) =
 	const init = spawnSync(
 		process.execPath,
 		[binary, "init", "--workspace", "--cwd", root, "--yes", "--json"],
-		{ encoding: "utf8" }
+		{ encoding: "utf8", killSignal: "SIGKILL", timeout: 30_000 }
 	);
 	assert.equal(init.status, 2);
 	assert.equal(parseOutput(init.stderr).error.reason, "unknown_option");
@@ -432,7 +432,7 @@ test("legacy npm package declarations and human output retain app context", (t) 
 	const human = spawnSync(
 		process.execPath,
 		[binary, "doctor", "--workspace", "--cwd", root],
-		{ encoding: "utf8" }
+		{ encoding: "utf8", killSignal: "SIGKILL", timeout: 30_000 }
 	);
 	assert.equal(human.status, 0, human.stderr);
 	assert.ok(human.stdout.includes("apps/web (next"));

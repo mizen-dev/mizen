@@ -15,6 +15,7 @@ import { basename, dirname, join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { create } from "tar";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 import { applyFiles } from "../dist/init/transaction.js";
 import { fakePnpm } from "./helpers/fake-pnpm.js";
 import { parseOutput } from "./helpers/output.js";
@@ -46,7 +47,7 @@ function put(root, path, value) {
 
 function fixture(t, framework = "next") {
 	const root = mkdtempSync(join(tmpdir(), "mizen-init-"));
-	t.after(() => rmSync(root, { force: true, recursive: true }));
+	t.after(() => cleanup(root));
 	const dependency = framework === "next" ? "next" : "@tanstack/react-start";
 	put(root, "package.json", {
 		dependencies: { [dependency]: "1.0.0", "@mizen-labs/ui": "0.1.0" },
@@ -83,7 +84,7 @@ function run(root, args = [], env = process.env) {
 	const result = spawnSync(
 		process.execPath,
 		[binary, "init", "--cwd", root, "--json", ...args],
-		{ encoding: "utf8", env }
+		{ encoding: "utf8", env, killSignal: "SIGKILL", timeout: 30_000 }
 	);
 	// A result prints on stdout; an error prints on stderr, never both.
 	assert.ok(!(result.stdout && result.stderr), result.stderr);
@@ -382,7 +383,7 @@ test("failed verification shows diagnostic paths and repairs in human output", (
 	const result = spawnSync(
 		process.execPath,
 		[binary, "init", "--cwd", root, "--yes"],
-		{ encoding: "utf8" }
+		{ encoding: "utf8", killSignal: "SIGKILL", timeout: 30_000 }
 	);
 	assert.equal(result.status, 1, result.stderr);
 	assert.ok(result.stderr.includes("mizen doctor --cwd "));

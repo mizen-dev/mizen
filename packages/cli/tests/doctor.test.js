@@ -13,6 +13,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 import { versionCheck } from "../dist/doctor/packages.js";
 import { parseOutput } from "./helpers/output.js";
 
@@ -32,7 +33,7 @@ function put(root, path, value) {
 
 function fixture(t, framework = "next") {
 	const root = mkdtempSync(join(tmpdir(), "mizen-doctor-"));
-	t.after(() => rmSync(root, { force: true, recursive: true }));
+	t.after(() => cleanup(root));
 	put(root, "package.json", {
 		dependencies: {
 			[framework === "next" ? "next" : "@tanstack/react-start"]: "1.0.0",
@@ -85,7 +86,7 @@ function run(root, args = []) {
 	const output = spawnSync(
 		process.execPath,
 		[binary, "doctor", "--cwd", root, "--json", ...args],
-		{ encoding: "utf8" }
+		{ encoding: "utf8", killSignal: "SIGKILL", timeout: 30_000 }
 	);
 	assert.equal(output.stderr, "");
 	const response = parseOutput(output.stdout);
@@ -220,7 +221,7 @@ test("doctor preserves project sources and reports useful human output", (t) => 
 	const result = spawnSync(
 		process.execPath,
 		[binary, "doctor", "--cwd", root],
-		{ encoding: "utf8" }
+		{ encoding: "utf8", killSignal: "SIGKILL", timeout: 30_000 }
 	);
 	assert.equal(result.status, 0, result.stderr);
 	assert.ok(result.stdout.includes("✓ Healthy."));

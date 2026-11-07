@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
-import { mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 import { inputHashes } from "../scripts/benchmark/fixtures.js";
 import {
 	directoryBytes,
@@ -31,7 +32,7 @@ test("benchmark statistics retain outliers and use nearest-rank p95", () => {
 
 test("installed size counts logical file bytes without following directory links", async (t) => {
 	const root = await mkdtemp(join(tmpdir(), "mizen benchmark size "));
-	t.after(() => rm(root, { force: true, recursive: true }));
+	t.after(() => cleanup(root));
 	await mkdir(join(root, "nested"));
 	await writeFile(join(root, "file"), "abc");
 	await writeFile(join(root, "nested/file"), "12345");
@@ -45,7 +46,7 @@ test("installed size counts logical file bytes without following directory links
 
 test("replay hashes detect a changed fixture without hashing installed dependencies", async (t) => {
 	const root = await mkdtemp(join(tmpdir(), "mizen benchmark inputs "));
-	t.after(() => rm(root, { force: true, recursive: true }));
+	t.after(() => cleanup(root));
 	await mkdir(join(root, "cli-only"));
 	await mkdir(join(root, "app/src"), { recursive: true });
 	for (const path of [

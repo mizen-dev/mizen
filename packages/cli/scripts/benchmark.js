@@ -19,6 +19,7 @@ import {
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 import {
 	hashFiles,
 	inputHashes,
@@ -33,7 +34,6 @@ import {
 	measure,
 	protocol,
 } from "./benchmark/measure.js";
-import { cleanup } from "./cleanup.js";
 import { execute } from "./process.js";
 import { inspectArchive } from "./release/archive.js";
 

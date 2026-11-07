@@ -36,8 +36,9 @@ function installDependencies(plan: InitPlan): boolean {
 	}
 	const result = spawn.sync(plan.install.command, plan.install.args, {
 		cwd: plan.project,
+		killSignal: "SIGKILL",
 		maxBuffer: 2_000_000,
-		timeout: 120_000,
+		timeout: 600_000,
 	});
 	return !result.error && result.status === 0;
 }

@@ -71,6 +71,7 @@ function invocation(binary, cwd, command) {
 	const output = execute(process.execPath, [binary, ...command.args], {
 		cwd,
 		env,
+		timeout: 30_000,
 	});
 	const elapsed = performance.now() - start;
 	validate(command.name, output);

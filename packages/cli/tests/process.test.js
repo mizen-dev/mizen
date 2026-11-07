@@ -22,9 +22,13 @@ test("failed commands retain arguments and both output streams", () => {
 test("command timeouts retain their original error code and cause", () => {
 	assert.throws(
 		() =>
-			execute(process.execPath, ["-e", "setInterval(() => {}, 1000)"], {
-				timeout: 200,
-			}),
+			execute(
+				process.execPath,
+				["-e", 'process.on("SIGTERM", () => {}); setInterval(() => {}, 1000)'],
+				{
+					timeout: 200,
+				}
+			),
 		(error) => {
 			assert.equal(error.cause.code, "ETIMEDOUT");
 			assert.ok(error.message.includes("failed (ETIMEDOUT)"));

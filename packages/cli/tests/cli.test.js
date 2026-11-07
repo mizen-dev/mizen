@@ -1,18 +1,16 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import {
-	mkdtempSync,
-	readdirSync,
-	readFileSync,
-	rmSync,
-	writeFileSync,
-} from "node:fs";
+import { mkdtempSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
-import { execute as execFileSync } from "../scripts/process.js";
+import { cleanup } from "../../../scripts/cleanup.mjs";
+import {
+	execute as execFileSync,
+	INSTALL_TIMEOUT_MS,
+} from "../scripts/process.js";
 import { parseOutput, schema } from "./helpers/output.js";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -28,6 +26,8 @@ const manifest = readJson("../package.json");
 function run(args, options = {}) {
 	return spawnSync(process.execPath, [binary, ...args], {
 		encoding: "utf8",
+		killSignal: "SIGKILL",
+		timeout: 30_000,
 		...options,
 	});
 }
@@ -114,7 +114,7 @@ test("invalid commands and options produce structured failures and stable exit c
 	);
 });
 
-test("discovery preserves project files", () => {
+test("discovery preserves project files", async () => {
 	const cwd = mkdtempSync(join(tmpdir(), "mizen-cli-project-"));
 	try {
 		writeFileSync(join(cwd, "package.json"), '{"private":true}\n');
@@ -128,11 +128,11 @@ test("discovery preserves project files", () => {
 			"// Keep local changes.\n"
 		);
 	} finally {
-		rmSync(cwd, { force: true, recursive: true });
+		await cleanup(cwd);
 	}
 });
 
-test("the packed CLI installs and runs without workspace files", () => {
+test("the packed CLI installs and runs without workspace files", async () => {
 	const destination = mkdtempSync(join(tmpdir(), "mizen-cli-packed-"));
 	try {
 		const archive = join(destination, "mizen-cli.tgz");
@@ -145,7 +145,7 @@ test("the packed CLI installs and runs without workspace files", () => {
 		execFileSync(
 			"npm",
 			["install", "--ignore-scripts", "--no-audit", "--no-fund", archive],
-			{ cwd: destination, stdio: "pipe", timeout: 120_000 }
+			{ cwd: destination, stdio: "pipe", timeout: INSTALL_TIMEOUT_MS }
 		);
 		const require = createRequire(join(destination, "package.json"));
 		const installedSchema = JSON.parse(
@@ -180,7 +180,7 @@ test("the packed CLI installs and runs without workspace files", () => {
 				destination,
 				"--json",
 			],
-			{ encoding: "utf8" }
+			{ encoding: "utf8", killSignal: "SIGKILL", timeout: 30_000 }
 		);
 		assert.equal(diagnosed.status, 1, diagnosed.stderr);
 		assert.ok(
@@ -200,7 +200,7 @@ test("the packed CLI installs and runs without workspace files", () => {
 				"--strict",
 				"--json",
 			],
-			{ encoding: "utf8" }
+			{ encoding: "utf8", killSignal: "SIGKILL", timeout: 30_000 }
 		);
 		assert.equal(workspace.status, 1, workspace.stderr);
 		const workspaceReport = parseOutput(workspace.stdout).data;
@@ -208,6 +208,6 @@ test("the packed CLI installs and runs without workspace files", () => {
 		assert.deepEqual(workspaceReport.apps, []);
 		assert.equal(workspaceReport.status, "incomplete");
 	} finally {
-		rmSync(destination, { force: true, recursive: true });
+		await cleanup(destination);
 	}
 });
