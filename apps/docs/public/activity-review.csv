@@ -1,0 +1,5 @@
+Component,State,Theme,Result
+Input,Focus,Light,Passed
+Input,Focus,Dark,Passed
+Input,Disabled,Light,Passed
+Input,Disabled,Dark,Passed

@@ -1,0 +1,64 @@
+import {
+	Checkbox,
+	CheckboxCard,
+	CheckboxGroup,
+	Field,
+	FieldLabel,
+	Stack,
+} from "@mizen/ui";
+
+export function CheckboxGroupDeliveryPreferencesExample1() {
+	return (
+		<Stack gap="4">
+			<Stack gap="3">
+				<CheckboxGroup
+					allValues={["email", "push"]}
+					aria-label="Notification channels"
+					defaultValue={["email"]}
+				>
+					<Field>
+						<FieldLabel>
+							<Checkbox parent />
+							All channels
+						</FieldLabel>
+					</Field>
+					<Field>
+						<FieldLabel>
+							<Checkbox name="notifications" value="email" />
+							Email
+						</FieldLabel>
+					</Field>
+					<Field>
+						<FieldLabel>
+							<Checkbox name="notifications" value="push" />
+							Push
+						</FieldLabel>
+					</Field>
+				</CheckboxGroup>
+			</Stack>
+		</Stack>
+	);
+}
+export function CheckboxGroupDigestScheduleExample2() {
+	return (
+		<Stack gap="4">
+			<Stack gap="3">
+				<CheckboxGroup aria-label="Digest options" defaultValue={["daily"]}>
+					<CheckboxCard
+						description="A concise summary each morning."
+						label="Daily digest"
+						name="digest"
+						value="daily"
+					/>
+					<CheckboxCard
+						description="Managed by your workspace."
+						disabled
+						label="Security digest"
+						name="digest"
+						value="security"
+					/>
+				</CheckboxGroup>
+			</Stack>
+		</Stack>
+	);
+}

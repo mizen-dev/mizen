@@ -1,0 +1,1080 @@
+{
+  "accordion": {
+    "boundaries": [
+      "Keep required instructions visible. Use Tabs when each section represents a separate view."
+    ],
+    "recommendations": [
+      "Use short section titles that explain the hidden content. Choose multiple expansion when users compare sections."
+    ]
+  },
+  "activity-feed": {
+    "boundaries": [
+      "Use Task List for progress through planned work. The application supplies and orders events."
+    ],
+    "recommendations": [
+      "Use a consistent chronological order. Include the actor, action, and a meaningful timestamp."
+    ]
+  },
+  "agent-thinking": {
+    "boundaries": [
+      "The application owns the reasoning stream and decides which steps to name. Agent Thinking shows them; it does not run tools or fetch sources.",
+      "Show reasoning the model chose to expose. Some providers only return a summary, or nothing."
+    ],
+    "recommendations": [
+      "Pass the reasoning so far with status streaming, name the current step in stage, and set status to complete when the answer starts. Pass duration when showing a reply from history."
+    ]
+  },
+  "alert": {
+    "boundaries": [
+      "Use Alert Dialog when a decision must interrupt the task. Do not announce routine updates as urgent alerts."
+    ],
+    "recommendations": [
+      "Explain the status and a useful next action. Choose announcement urgency to match the message."
+    ]
+  },
+  "alert-dialog": {
+    "boundaries": [
+      "Reserve interruption for consequential decisions. Use Dialog for ordinary editing tasks."
+    ],
+    "recommendations": [
+      "State the consequence before the confirming action. Name both the action and the safe way to cancel."
+    ]
+  },
+  "area-chart": {
+    "boundaries": [
+      "Up to six series. Fold the rest into \"Other\" or split into small multiples; never generate a seventh hue.",
+      "Use stacked or percent only when the series add up to a meaningful whole. Compare unrelated measures in separate charts, never on two y-axes."
+    ],
+    "recommendations": [
+      "Put the largest, steadiest series first so it forms the base of the stack. Keep series order and tones fixed when filters change."
+    ]
+  },
+  "approval-card": {
+    "boundaries": [
+      "The application runs the action and stores the decision. Approval Card only reports Approve, Deny, the note, and Always allow.",
+      "Use it for actions that are hard to undo, such as sending, deleting, or paying. For a tool call already on screen, Tool Call asks inline."
+    ],
+    "recommendations": [
+      "Name the action in the title as a verb phrase, say why in the description, and list what will happen in details. Pass a denial's note to the agent so it can change course."
+    ]
+  },
+  "aspect-ratio": {
+    "boundaries": [
+      "Aspect Ratio controls geometry. Image descriptions, loading, and media playback belong to the child content."
+    ],
+    "recommendations": [
+      "Reserve the intended media proportion before loading. Choose image fitting that preserves meaningful content."
+    ]
+  },
+  "attachment": {
+    "boundaries": [
+      "Use File Upload for file selection and upload progress. Attachment does not own transport or storage."
+    ],
+    "recommendations": [
+      "Show the filename and useful metadata such as format or size. Label preview and download actions."
+    ]
+  },
+  "avatar": {
+    "boundaries": [
+      "Use Thumbnail for general media. An avatar should not be the only visible identifier for a person."
+    ],
+    "recommendations": [
+      "Provide recognizable fallback content and useful image descriptions. Keep sizes consistent within the same context."
+    ]
+  },
+  "avatar-group": {
+    "boundaries": [
+      "The caller supplies members and overflow content. Use a list when users need to identify every participant."
+    ],
+    "recommendations": [
+      "Give the group a shared name and keep ordering meaningful. Explain any omitted members nearby."
+    ]
+  },
+  "badge": {
+    "boundaries": [
+      "Use Button or Link for explicit actions. A badge must not be the only indication of a critical state."
+    ],
+    "recommendations": [
+      "Use short labels for status or category. Pair semantic color with text that carries the meaning."
+    ]
+  },
+  "bar-list": {
+    "boundaries": [
+      "Use for nominal categories ranked by one measure. Rows always sort largest first; use CategoryComparison when the order is meaningful or values can be negative."
+    ],
+    "recommendations": [
+      "Keep labels short so they stay on the bar. Show at most about ten rows and fold the rest into \"Other\"."
+    ]
+  },
+  "blockquote": {
+    "boundaries": [
+      "Use ordinary text for emphasis or summaries. Blockquote represents another source's words."
+    ],
+    "recommendations": [
+      "Keep the quotation intact and put attribution outside the quoted text."
+    ]
+  },
+  "breadcrumb": {
+    "boundaries": [
+      "Breadcrumbs describe hierarchy, not browser history. Do not make the current page a redundant navigation action."
+    ],
+    "recommendations": [
+      "Show meaningful ancestors and name the current resource. Use real destinations for ancestor links.",
+      "Place decorative icons beside text as children. Give icon-only links and collapsed Menu triggers an accessible name."
+    ]
+  },
+  "button": {
+    "boundaries": [
+      "Use a link for navigation, including when composing with render.",
+      "Use Toggle for a persistent pressed state.",
+      "Use Alert Dialog when a destructive action needs confirmation."
+    ],
+    "recommendations": [
+      "Use default or brand for the main action. Keep supporting actions quieter.",
+      "Give icon buttons an aria-label. Hide decorative icons from assistive technology.",
+      "Keep the label when loading. Loading blocks activation and preserves keyboard focus.",
+      "Tab moves focus. Enter or Space activates an enabled button.",
+      "Button supports Server Components. Add event handlers in a Client Component."
+    ]
+  },
+  "button-group": {
+    "boundaries": [
+      "Use Toolbar for arrow-key command navigation. Button Group preserves each button's native Tab behavior.",
+      "ButtonGroup does not provide toolbar arrow-key navigation."
+    ],
+    "recommendations": [
+      "Connect buttons that act on the same task. Give the group an accessible name."
+    ]
+  },
+  "calendar": {
+    "boundaries": [
+      "Use Date Picker for compact editable entry. Date availability and booking rules belong to the application."
+    ],
+    "recommendations": [
+      "Specify locale and unavailable dates. Use range mode when the task selects a stay or reporting interval.",
+      "Use minValue, maxValue, or isDateUnavailable for real date constraints."
+    ]
+  },
+  "calendar-heatmap": {
+    "boundaries": [
+      "Dates are calendar days, not instants; convert timestamps to dates in the user's time zone first."
+    ],
+    "recommendations": [
+      "Show up to a year. The grid scrolls sideways in narrow containers rather than shrinking days below a readable size."
+    ]
+  },
+  "card": {
+    "boundaries": [
+      "Spacing can group ordinary content without another card. Keep independent actions outside a card-wide link."
+    ],
+    "recommendations": [
+      "Use a card for one meaningful resource or task. Keep its title, content, and actions in a clear reading order."
+    ]
+  },
+  "carousel": {
+    "boundaries": [
+      "Do not hide required instructions in later slides. Use a static list for content that users must compare together."
+    ],
+    "recommendations": [
+      "Keep navigation controls labeled and slide ordering meaningful. Allow users to review content at their own pace."
+    ]
+  },
+  "category-comparison": {
+    "boundaries": [
+      "Use Time Series for change over time. Do not compare values measured in incompatible units."
+    ],
+    "recommendations": [
+      "Order categories deliberately and keep the zero baseline visible. Explain the units and meaning of negative values."
+    ]
+  },
+  "chart-frame": {
+    "boundaries": [
+      "The chart definition owns the plot. Aggregation, filtering, and a readable data alternative belong to the application."
+    ],
+    "recommendations": [
+      "Name the chart's question and provide readable units. Keep detailed values available beyond pointer hover."
+    ]
+  },
+  "chart-legend": {
+    "boundaries": [
+      "This legend is static. Do not imply filtering or toggling unless the application provides those controls.",
+      "The legend describes series; it does not toggle their visibility."
+    ],
+    "recommendations": [
+      "Match series names and colors to the plot. Keep legend ordering consistent across related charts."
+    ]
+  },
+  "chart-tooltip": {
+    "boundaries": [
+      "The chart engine owns positioning and interaction. Essential information also needs a persistent readable representation.",
+      "ChartTooltip renders content; ChartFrame owns chart pointer and keyboard behavior."
+    ],
+    "recommendations": [
+      "Show the selected observation's label, units, and exact values. Keep series names consistent with the legend."
+    ]
+  },
+  "checkbox": {
+    "boundaries": [
+      "Use Radio Group for mutually exclusive choices. Use Switch for a setting that takes effect immediately."
+    ],
+    "recommendations": [
+      "Use a visible label for each independent choice. Put explanations beside the option they describe."
+    ]
+  },
+  "checkbox-group": {
+    "boundaries": [
+      "The group coordinates selected values. The application decides how those values affect records or permissions."
+    ],
+    "recommendations": [
+      "Give the group a shared label and each option a distinct value. Use parent selection for an explicit select-all task.",
+      "Set allValues when using the parent checkbox so it can derive mixed state."
+    ]
+  },
+  "citation": {
+    "boundaries": [
+      "Citation marks a work title. Use Link when the reader needs to open the source."
+    ],
+    "recommendations": [
+      "Use the work's title and include enough surrounding context to identify the source."
+    ]
+  },
+  "code": {
+    "boundaries": [
+      "Use Code Block for multiline examples. Inline code should not substitute for a control or heading."
+    ],
+    "recommendations": [
+      "Use inline code for identifiers, commands, and literal values within ordinary text."
+    ]
+  },
+  "code-block": {
+    "boundaries": [
+      "Code Block presents text and an optional copy action. It does not execute code or provide syntax highlighting."
+    ],
+    "recommendations": [
+      "Name the file or language and include the imports needed to use the example. Copy the same text that is displayed."
+    ]
+  },
+  "collapsible": {
+    "boundaries": [
+      "Use Accordion for related disclosure sections. Do not hide required input or critical errors."
+    ],
+    "recommendations": [
+      "Name the content being revealed and keep the trigger visible after expansion."
+    ]
+  },
+  "combobox": {
+    "boundaries": [
+      "Use Select for a short fixed list. Remote search, request cancellation, and result loading belong to the application."
+    ],
+    "recommendations": [
+      "Use filtering when the option set is hard to scan. Keep option labels distinct and explain empty results."
+    ]
+  },
+  "command": {
+    "boundaries": [
+      "Keep important actions available outside the palette. Use Combobox when selecting a form value."
+    ],
+    "recommendations": [
+      "Use action names that describe outcomes. Group related commands and show shortcuts when they exist."
+    ]
+  },
+  "composer": {
+    "boundaries": [
+      "Composer owns draft editing and input controls. Use Conversation for message history and auto-scroll, and Message for individual messages.",
+      "The caller owns sending, attachments, and retries. Submitting a draft does not prove successful delivery."
+    ],
+    "recommendations": [
+      "Name the message input and submit action. Preserve the draft when sending fails."
+    ]
+  },
+  "context-menu": {
+    "boundaries": [
+      "Provide a visible alternative for essential actions. Context menus must not be the only way to complete a task."
+    ],
+    "recommendations": [
+      "Offer actions specific to the resource under the pointer. Match labels to the same actions elsewhere."
+    ]
+  },
+  "data-table": {
+    "boundaries": [
+      "Use Table for static records that do not need managed state.",
+      "Keep remote queries and destructive mutations in the application.",
+      "Sorting needs a configured TanStack sorting feature and row model."
+    ],
+    "recommendations": [
+      "Keep search and filters near the records they affect.",
+      "State whether bulk selection covers a page or all filtered matches.",
+      "Keep data, columns, and feature configuration stable between renders.",
+      "Mark the identifying column as a row header so it freezes while the grid scrolls sideways.",
+      "Enable column resizing for wide working tables so people can fit columns to their data."
+    ]
+  },
+  "date-picker": {
+    "boundaries": [
+      "Values are dates, not timestamps. Use Date Time Input when the task requires a local time as well."
+    ],
+    "recommendations": [
+      "Label the date's purpose and state its constraints. Keep editable input and calendar selection available."
+    ]
+  },
+  "date-range-picker": {
+    "boundaries": [
+      "Define endpoint and timezone meaning in the application. Presets do not replace server validation.",
+      "A first calendar click may be a pending start; a complete range has both endpoints."
+    ],
+    "recommendations": [
+      "Explain the range's meaning and any stay limits. Use presets only for intervals relevant to the task."
+    ]
+  },
+  "date-time-input": {
+    "boundaries": [
+      "The control does not perform timezone conversion. The application resolves ambiguous or nonexistent local times."
+    ],
+    "recommendations": [
+      "Show the intended timezone beside local date and time entry. Preserve the user's entered value on validation failure."
+    ]
+  },
+  "diagram": {
+    "boundaries": [
+      "Read-only structural diagrams. Use Charts for measurements and Task List for execution progress.",
+      "Install the optional pele peer and import Diagram from @mizen/ui/diagram. Other Mizen entry points do not load the renderer.",
+      "Only flowchart, sequence, entity relationship, and state syntax are supported. Links, external images, custom icon markup, and math renderers are disabled."
+    ],
+    "recommendations": [
+      "Provide a concise aria-label and an aria-description explaining the relationships, branches, or transitions.",
+      "Keep diagrams focused. Wide diagrams scroll locally rather than shrinking labels below the reading size.",
+      "Use default diagram colors so nodes follow the active theme. Source style directives can override them."
+    ]
+  },
+  "dialog": {
+    "boundaries": [
+      "Use Alert Dialog for critical confirmation. Move long, multi-step work to a page when the overlay obscures context."
+    ],
+    "recommendations": [
+      "Give the task a clear title. Keep the main action and cancel action visible and predictable.",
+      "DialogTitle names the popup. DialogDescription supplies supporting context. Tab stays within a modal dialog; Escape closes it and returns focus to its trigger.",
+      "An uncontrolled composition can live in a Server Component. Use a Client Component for open state and callbacks. Close after a save succeeds, not before."
+    ]
+  },
+  "distribution": {
+    "boundaries": [
+      "The component counts supplied observations. Sampling, weighting, and statistical interpretation belong to the application."
+    ],
+    "recommendations": [
+      "Set an explicit domain and a useful bin count. Describe the observations and show interval meaning."
+    ]
+  },
+  "drawer": {
+    "boundaries": [
+      "Dragging must not be the only dismissal path. Use a page for tasks that require sustained reference to other content."
+    ],
+    "recommendations": [
+      "Use a clear title and an explicit close control. Keep scrolling content separate from the main action."
+    ]
+  },
+  "empty": {
+    "boundaries": [
+      "Use Error State for failed loading. Empty content must not imply that a failed request returned no records."
+    ],
+    "recommendations": [
+      "Explain whether data is absent or filtered out. Offer a relevant first action or a way to clear filters."
+    ]
+  },
+  "error-state": {
+    "boundaries": [
+      "Use Field Error for one invalid input and Empty for successful zero-result queries."
+    ],
+    "recommendations": [
+      "Explain the failed operation and provide a realistic recovery action. Preserve usable content and entered values."
+    ]
+  },
+  "field": {
+    "boundaries": [
+      "Field connects accessible descriptions. Business rules and server validation remain application responsibilities."
+    ],
+    "recommendations": [
+      "Compose the label, control, description, and error together. Explain how to correct an invalid value.",
+      "Clicking FieldLabel focuses its control. FieldDescription and visible FieldError text describe that control to assistive technology.",
+      "Static composition can live in a Server Component. Validation functions, bound form state, and event handlers belong in a Client Component."
+    ]
+  },
+  "fieldset": {
+    "boundaries": [
+      "Use Field for one control. A visual panel alone does not establish a form group."
+    ],
+    "recommendations": [
+      "Use a legend that describes the shared question. Keep individual control labels inside the group."
+    ]
+  },
+  "file-upload": {
+    "boundaries": [
+      "The application owns transport, cancellation, and retries. Validate file content and limits on the server."
+    ],
+    "recommendations": [
+      "Show accepted formats and size limits before selection. Keep rejection reasons and progress beside each file."
+    ]
+  },
+  "form": {
+    "boundaries": [
+      "Form coordinates client validation and submission. The server must validate submitted data and authorize mutations.",
+      "The focused example validates local form state. It does not persist data."
+    ],
+    "recommendations": [
+      "Show field errors near their controls. Preserve values after failed submission and provide a clear retry action."
+    ]
+  },
+  "frame": {
+    "boundaries": [
+      "Use Frame for a meaningful work area. Avoid wrapping every small group in another surface."
+    ],
+    "recommendations": [
+      "Use header, panel, and footer slots to separate task context, content, and completion actions."
+    ]
+  },
+  "funnel": {
+    "boundaries": [
+      "Shares are relative to the first stage, not to the previous one. State step conversion in text when it matters."
+    ],
+    "recommendations": [
+      "Order stages as users move through them, and keep one hue: length already shows the drop-off."
+    ]
+  },
+  "grid": {
+    "boundaries": [
+      "Use Table for data with row and column relationships. Visual columns do not establish table semantics."
+    ],
+    "recommendations": [
+      "Group peer content and check reading order as columns change. Test long content at narrow widths."
+    ]
+  },
+  "group": {
+    "boundaries": [
+      "Use Fieldset for a form question and Toolbar for command keyboard behavior. Group only controls visual arrangement."
+    ],
+    "recommendations": [
+      "Cluster compact controls that share a purpose and keep their labels clear."
+    ]
+  },
+  "heading": {
+    "boundaries": [
+      "Visual size does not replace semantic level. Avoid skipping heading levels to obtain a particular appearance."
+    ],
+    "recommendations": [
+      "Choose level from the document hierarchy and size from the desired visual emphasis."
+    ]
+  },
+  "heatmap": {
+    "boundaries": [
+      "Color shows magnitude, not causation. Use a table when reading individual values is the primary task."
+    ],
+    "recommendations": [
+      "Name both matrix dimensions and the value scale. Keep exact values available through the data table."
+    ]
+  },
+  "inline": {
+    "boundaries": [
+      "Use Grid when columns need alignment across rows. Inline does not supply group or toolbar semantics."
+    ],
+    "recommendations": [
+      "Use wrapping rows for related content that can remain understandable across multiple lines."
+    ]
+  },
+  "inline-citation": {
+    "boundaries": [
+      "The application decides what each claim cites. Inline Citation shows the source; it fetches only each site's favicon.",
+      "Streaming Text places citations for you. Use Inline Citation in your own text, such as Markdown or a summary."
+    ],
+    "recommendations": [
+      "Put the chip right after the claim it supports. Give sources a title and a one-line description, so the preview says what the page backs up."
+    ]
+  },
+  "input": {
+    "boundaries": [
+      "Use Textarea for multiline text and Number Field for numeric stepping. Placeholder text is not a label."
+    ],
+    "recommendations": [
+      "Use a visible label and the appropriate native type and autocomplete value. Keep examples in help text.",
+      "Input preserves native text editing and selection. Read-only values stay focusable; disabled values leave the tab order.",
+      "Pass defaultValue from a Server Component for an uncontrolled input. Keep value and onValueChange together in a Client Component for controlled editing."
+    ]
+  },
+  "input-group": {
+    "boundaries": [
+      "Keep the field label outside the input group. Decorative content must not replace the control's accessible name."
+    ],
+    "recommendations": [
+      "Use prefixes and suffixes for units or context. Give embedded action buttons accessible names."
+    ]
+  },
+  "kbd": {
+    "boundaries": [
+      "Kbd describes keys. Shortcut registration, conflicts, and discoverability belong to the application."
+    ],
+    "recommendations": [
+      "Show shortcuts that actually work and match the user's platform when the application supports it."
+    ]
+  },
+  "label": {
+    "boundaries": [
+      "Use Field Label inside Field compositions. Placeholder text and adjacent text do not replace label association."
+    ],
+    "recommendations": [
+      "Associate htmlFor with the control's stable ID. Describe the expected value rather than an implementation detail."
+    ]
+  },
+  "lightbox": {
+    "boundaries": [
+      "Use Dialog for editing tasks. Image loading and source quality remain application responsibilities."
+    ],
+    "recommendations": [
+      "Give the image useful alternative text and a clear title. Keep the close action visible."
+    ]
+  },
+  "link": {
+    "boundaries": [
+      "Use Button for commands that do not navigate. Avoid vague labels such as Click here."
+    ],
+    "recommendations": [
+      "Name the destination in the link text. Keep the real URL available for native browser navigation.",
+      "Use render for framework links. Put Next.js href or React Router to and routing options on that target. Do not nest anchors."
+    ]
+  },
+  "list": {
+    "boundaries": [
+      "Use Table for comparisons across columns. Avoid putting independent buttons inside a record-wide link."
+    ],
+    "recommendations": [
+      "Give the list a name and keep record content separate from trailing actions."
+    ]
+  },
+  "markdown": {
+    "boundaries": [
+      "Mizen ships no parser. The app owns parsing, plugins, raw HTML policy, and URL sanitizing for untrusted content.",
+      "Footnote labels share one ID across documents on a page; this is a remark-rehype limitation."
+    ],
+    "recommendations": [
+      "Render the document inside Markdown with markdownComponents, for example through react-markdown with remark-gfm and skipHtml.",
+      "Give each document an id and pass it as the parser's footnote prefix."
+    ]
+  },
+  "menu": {
+    "boundaries": [
+      "Use link items for navigation. Forms and longer editing tasks belong in Popover or Dialog."
+    ],
+    "recommendations": [
+      "Group related actions and keep destructive commands distinct. Use checkbox or radio items for persistent choices."
+    ]
+  },
+  "menubar": {
+    "boundaries": [
+      "Use Navigation Menu for site destinations. Menubar groups application commands with menu keyboard behavior."
+    ],
+    "recommendations": [
+      "Use familiar command categories and consistent ordering. Keep individual menus short and task-focused."
+    ]
+  },
+  "message": {
+    "boundaries": [
+      "The application stores messages and runs turns. Message shows one turn; Edit only reports the new text.",
+      "Show time in the reader's time zone. Format it on the client or from their settings, and pass the instant as dateTime."
+    ],
+    "recommendations": [
+      "Use from=\"user\" for people and from=\"agent\" for the agent's turn, and put AgentThinking, ToolCallGroup, and StreamingText inside the agent's Message in the order they arrive. Add author and avatar only in group chats."
+    ]
+  },
+  "meter": {
+    "boundaries": [
+      "Use Progress for task completion. Meter represents a measurement within a known range."
+    ],
+    "recommendations": [
+      "Label the measured quantity and its range. Show units and the exact value when they affect decisions."
+    ]
+  },
+  "metric": {
+    "boundaries": [
+      "The component presents values. Calculations, rounding policy, and freshness belong to the application."
+    ],
+    "recommendations": [
+      "Pair the value with its unit and reporting period. Explain the comparison or source in the description."
+    ]
+  },
+  "metric-trend": {
+    "boundaries": [
+      "The application supplies the trend visualization and calculations. Color alone must not indicate improvement."
+    ],
+    "recommendations": [
+      "State the reporting period and the comparison baseline. Keep the current value readable without interpreting the plot.",
+      "Put the legend in actions and pass legend={false} to the chart. Set good=\"down\" on MetricDelta for metrics where a fall is good, such as refunds."
+    ]
+  },
+  "navigation-menu": {
+    "boundaries": [
+      "Use Menu for commands. Route matching and framework navigation remain application responsibilities."
+    ],
+    "recommendations": [
+      "Use destination names and mark the current route. Keep menus short enough to scan without searching."
+    ]
+  },
+  "number-field": {
+    "boundaries": [
+      "Use Input for identifiers such as account numbers. Validate numeric business limits again on submission."
+    ],
+    "recommendations": [
+      "Set meaningful bounds and steps. Specify locale and formatting when displaying currency or other units."
+    ]
+  },
+  "otp-field": {
+    "boundaries": [
+      "Completing the slots does not verify the code. Expiry, rate limits, and verification belong to the server."
+    ],
+    "recommendations": [
+      "State the code length and delivery method. Allow paste and show verification errors near the field."
+    ]
+  },
+  "overflow-list": {
+    "boundaries": [
+      "Do not hide essential actions behind a count. Use a full list when reviewing every item is the task.",
+      "visibleCount is fixed, not viewport-measured."
+    ],
+    "recommendations": [
+      "Keep the most useful items visible and label the overflow action with what it reveals."
+    ]
+  },
+  "pagination": {
+    "boundaries": [
+      "The application owns fetching and page state. Use Data Table Pagination for a managed table instance."
+    ],
+    "recommendations": [
+      "Keep page destinations shareable and mark the current page. Disable unavailable previous and next actions."
+    ]
+  },
+  "part-to-whole": {
+    "boundaries": [
+      "Use non-negative parts from the same total. Use Category Comparison for signed or independent values."
+    ],
+    "recommendations": [
+      "Name the whole and each part. Use a deliberate part order and keep the complete legend visible."
+    ]
+  },
+  "popover": {
+    "boundaries": [
+      "Use Tooltip for brief noninteractive help. Use Dialog when the task needs modal focus."
+    ],
+    "recommendations": [
+      "Keep the content tied to its trigger. Use a title when the popup presents a task or settings."
+    ]
+  },
+  "preview-card": {
+    "boundaries": [
+      "Do not put required actions or instructions only in a hover preview. Use Popover for explicit interaction."
+    ],
+    "recommendations": [
+      "Show supplementary context for a linked resource. Keep the destination understandable without the preview."
+    ]
+  },
+  "progress": {
+    "boundaries": [
+      "Use Meter for bounded measurements. Do not invent percentages from elapsed time."
+    ],
+    "recommendations": [
+      "Name the operation and use actual completion data. Use an indeterminate state when progress cannot be measured."
+    ]
+  },
+  "progress-rings": {
+    "boundaries": [
+      "Each ring measures progress toward its own goal. Do not compare ring lengths across rings with different goals."
+    ],
+    "recommendations": [
+      "Use display strings for units such as \"1h 45m\". Keep to three rings so each stays distinct."
+    ]
+  },
+  "property-list": {
+    "boundaries": [
+      "Use Table for comparisons across multiple records. Property List describes one resource through label/value pairs."
+    ],
+    "recommendations": [
+      "Use consistent property names and readable values. Order the most useful facts first."
+    ]
+  },
+  "question-card": {
+    "boundaries": [
+      "The application sends the answers back to the agent. Question Card collects them and reports them once, after the last question.",
+      "Ask only what the agent cannot decide itself. Use Approval Card to ask permission for one action."
+    ],
+    "recommendations": [
+      "Keep each question to one decision with two to five options, put the trade-off in each option's description, and leave Something else on unless the options cover every case."
+    ]
+  },
+  "radar-chart": {
+    "boundaries": [
+      "Readers judge radar areas poorly. Use it for profiles on one shared scale, and CategoryComparison when exact differences matter.",
+      "Axis order changes the shape; keep it fixed across charts that readers compare."
+    ],
+    "recommendations": [
+      "Normalize measures to one scale, such as 0–10, and state the scale in the label."
+    ]
+  },
+  "radial-bars": {
+    "boundaries": [
+      "Outer rings look longer than inner ones at the same value. Use RadialBars for a compact ranking; use BarList or CategoryComparison when readers compare values."
+    ],
+    "recommendations": [
+      "Keep labels and exact values in the tiles, and fold small items into \"Other\"."
+    ]
+  },
+  "radio-group": {
+    "boundaries": [
+      "Use Checkbox Group when multiple choices are allowed. Use Select when a compact list better fits the task."
+    ],
+    "recommendations": [
+      "Give the group one question and each option a distinct value. Use descriptions for meaningful differences."
+    ]
+  },
+  "sankey-chart": {
+    "boundaries": [
+      "Two columns only: every link runs from a source to a target. Split multi-step flows into several charts."
+    ],
+    "recommendations": [
+      "Order sources and targets so the largest flows run straight across; that keeps ribbons from crossing."
+    ]
+  },
+  "scatter-chart": {
+    "boundaries": [
+      "Association does not establish causation. The application owns statistical analysis and data preparation."
+    ],
+    "recommendations": [
+      "Label both axes and units. Give points meaningful names and preserve access to exact values."
+    ]
+  },
+  "score-gauge": {
+    "boundaries": [
+      "The score is the sum of part values; use it only when parts add up to a meaningful total."
+    ],
+    "recommendations": [
+      "Name the score's meaning beside it, such as \"Excellent\", and keep part labels short."
+    ]
+  },
+  "scroll-area": {
+    "boundaries": [
+      "Use TableContainer for tables and CodeBlockContent for code. Avoid nested scrolling without a clear task reason."
+    ],
+    "recommendations": [
+      "Keep scroll regions bounded and their content reachable by keyboard. Preserve visible context around wide content.",
+      "Constrain the parent height when content must scroll."
+    ]
+  },
+  "section": {
+    "boundaries": [
+      "Section provides arrangement. The caller supplies the heading and accessible document structure."
+    ],
+    "recommendations": [
+      "Group one topic or task and give it a heading when it forms a document section."
+    ]
+  },
+  "segmented-control": {
+    "boundaries": [
+      "Use Tabs for switching panels and Radio Group for a longer form question."
+    ],
+    "recommendations": [
+      "Use short labels for a small set of peer choices. Keep the selected value visible."
+    ]
+  },
+  "select": {
+    "boundaries": [
+      "Use Combobox for text filtering. Multiple selection needs visible selected values and a clear way to change them."
+    ],
+    "recommendations": [
+      "Label the field and use readable option names. Provide explicit labels when values are objects.",
+      "SelectLabel names the trigger. Enter or Space opens the popup; arrow keys move through options and typing finds matching labels. Escape dismisses it.",
+      "Uncontrolled composition with serializable items can live in a Server Component. Controlled values, callbacks, and object formatting functions belong in a Client Component."
+    ]
+  },
+  "separator": {
+    "boundaries": [
+      "Do not add a divider between every item. Use headings to explain the relationship between sections."
+    ],
+    "recommendations": [
+      "Use a divider between meaningful groups when spacing alone does not separate them clearly."
+    ]
+  },
+  "sheet": {
+    "boundaries": [
+      "Use Dialog for short centered tasks. Avoid stacking sheets for a multi-step workflow."
+    ],
+    "recommendations": [
+      "Keep the task related to the underlying page. Put the title and completion controls in predictable positions."
+    ]
+  },
+  "skeleton": {
+    "boundaries": [
+      "Keep placeholders out of the accessibility reading order. Show an explicit error when loading fails."
+    ],
+    "recommendations": [
+      "Match the expected content's broad shape and preserve layout space while loading."
+    ]
+  },
+  "slider": {
+    "boundaries": [
+      "Use Number Field when exact entry matters more than relative adjustment. Sliders need meaningful bounds."
+    ],
+    "recommendations": [
+      "Show the current value and units. Give each thumb a name when selecting a range.",
+      "Use getAriaLabel to name each thumb in a range."
+    ]
+  },
+  "sources": {
+    "boundaries": [
+      "The application finds and stores sources. Sources shows them; it fetches only each site's favicon.",
+      "Show sources the agent used for this reply, not every search result it saw."
+    ],
+    "recommendations": [
+      "Pass every source part as it arrives; Sources drops repeats. Give documents a title so they read as more than a domain."
+    ]
+  },
+  "spacer": {
+    "boundaries": [
+      "Use layout gaps for ordinary spacing. Spacer requires a flex layout with available space."
+    ],
+    "recommendations": [
+      "Use available flex space to separate supporting controls from the main action."
+    ]
+  },
+  "spinner": {
+    "boundaries": [
+      "Use Button loading for button actions and Progress for measurable completion. A spinner does not announce the operation by itself."
+    ],
+    "recommendations": [
+      "Place loading feedback beside the operation and explain what is pending."
+    ]
+  },
+  "stack": {
+    "boundaries": [
+      "Use Section when a document region needs section semantics. Stack does not add accessible structure by itself."
+    ],
+    "recommendations": [
+      "Arrange related content in reading order. Gaps follow the 4px scale: 1 for a title and its description, 6 between fields, 8 between groups; larger gaps between groups than inside them."
+    ]
+  },
+  "status-dot": {
+    "boundaries": [
+      "The dot is a supporting indicator. Use visible text when the state affects a user's next action."
+    ],
+    "recommendations": [
+      "Provide a label that names the status and keep it close to the affected resource."
+    ]
+  },
+  "stepper": {
+    "boundaries": [
+      "The application owns transitions and validation. A step indicator does not authorize skipping required steps."
+    ],
+    "recommendations": [
+      "Name each step and show completed, current, and upcoming states. Explain how users can return to earlier work."
+    ]
+  },
+  "streaming-text": {
+    "boundaries": [
+      "The application owns the stream, retries, and where feedback is stored. Streaming Text shows them; it does not fetch or send anything.",
+      "It renders plain text with inline citations. Use Markdown for formatted replies."
+    ],
+    "recommendations": [
+      "Pass the reply so far on every update and set status to complete when the stream ends. Place each citation right after the claim it supports."
+    ]
+  },
+  "switch": {
+    "boundaries": [
+      "Use Checkbox for choices collected before submission. The application owns saving and rollback."
+    ],
+    "recommendations": [
+      "Describe the setting in its enabled state. Keep immediate changes visible and explain failed updates."
+    ]
+  },
+  "table": {
+    "boundaries": [
+      "Table provides semantic presentation, not sorting or row-selection state.",
+      "Use Data Table when the task needs filtering, sorting, selection, or virtualization."
+    ],
+    "recommendations": [
+      "Use row headers for identifying columns and align numeric values consistently.",
+      "Keep wide records inside the named TableContainer scroll region."
+    ]
+  },
+  "tabs": {
+    "boundaries": [
+      "Use navigation links for routes. Tabs change views within the current context."
+    ],
+    "recommendations": [
+      "Use concise labels for related panels. Keep panel headings and reading order consistent."
+    ]
+  },
+  "task-list": {
+    "boundaries": [
+      "The application runs the agent and stores the plan. Task List shows each step's state; Approve, Revise, and Retry only report the choice.",
+      "Use it for steps the agent decides on before it starts. Calls it makes along the way belong in Tool Call Group."
+    ],
+    "recommendations": [
+      "Keep step titles short and in the imperative, such as \"Run the visual tests\". Update each step's status as the agent works, and mark exactly one step as running."
+    ]
+  },
+  "terminal": {
+    "boundaries": [
+      "The application runs the command and streams its output. Terminal shows it; it never runs anything.",
+      "Output renders as text with red, bold, and dim kept. Other terminal colors show as plain text, and cursor moves are dropped."
+    ],
+    "recommendations": [
+      "Pass the output as it grows and the exit code once it ends, so a failure opens on its own. Put a turn's commands next to its tool calls, in the order they ran."
+    ]
+  },
+  "text": {
+    "boundaries": [
+      "Use Heading for headings and Label for controls. Text renders body paragraphs."
+    ],
+    "recommendations": [
+      "Use body for prose, ui for dense interface text, and caption for metadata. Set tone=\"muted\" for supporting text; muted ink keeps readable contrast at every size."
+    ]
+  },
+  "textarea": {
+    "boundaries": [
+      "Use Input for single-line values. Textarea does not sanitize or interpret submitted content."
+    ],
+    "recommendations": [
+      "Show the expected content and any length limit near the field. Allow enough space to review a normal response."
+    ]
+  },
+  "thumbnail": {
+    "boundaries": [
+      "Use Avatar for a person or identity. Image fetching and fallback policy remain application responsibilities."
+    ],
+    "recommendations": [
+      "Choose a size that supports recognition. Describe informative images and use empty alt text for decorative ones."
+    ]
+  },
+  "time-input": {
+    "boundaries": [
+      "The value has no date or timezone. Resolve those explicitly before storing an instant."
+    ],
+    "recommendations": [
+      "State which local time the field represents. Set native bounds and step where the task requires them."
+    ]
+  },
+  "time-series": {
+    "boundaries": [
+      "Do not turn missing data into zero. Aggregation intervals and timezone meaning belong to the application.",
+      "Put formatter callbacks in a Client Component. Data and timeZone remain caller-owned."
+    ],
+    "recommendations": [
+      "Label the series and units. Choose the reporting timezone explicitly and preserve gaps for missing observations."
+    ]
+  },
+  "timestamp": {
+    "boundaries": [
+      "Use date inputs for editable local values. A timestamp represents an instant, not an unresolved local appointment."
+    ],
+    "recommendations": [
+      "Provide a timezone-bearing instant and choose locale and timezone explicitly for consistent output."
+    ]
+  },
+  "toast": {
+    "boundaries": [
+      "Keep critical errors and required decisions on the page. Toasts are temporary feedback."
+    ],
+    "recommendations": [
+      "Mount ToastProvider once at the app boundary. Add AnchoredToastProvider for anchored feedback. Examples use their shared managers.",
+      "Report the outcome of an action in a short message. Offer a relevant recovery action when available."
+    ]
+  },
+  "toggle": {
+    "boundaries": [
+      "Use Button for a one-time action. Use Switch for an immediate setting with explicit on/off meaning."
+    ],
+    "recommendations": [
+      "Name the option being enabled. Keep its label stable between pressed and unpressed states."
+    ]
+  },
+  "toggle-group": {
+    "boundaries": [
+      "Use Segmented Control for a single choice. Use Toolbar when the group also contains unrelated commands."
+    ],
+    "recommendations": [
+      "Group related formatting or selection options. Name icon-only toggles and make selected states visible."
+    ]
+  },
+  "token": {
+    "boundaries": [
+      "Use Token for metadata, filters, and reversible selections. Combobox owns multi-select input behavior."
+    ],
+    "recommendations": [
+      "Use a short label, two or three meaningful category colors, and icons only when they help recognition. Keep hidden labels accessible."
+    ]
+  },
+  "tool-call": {
+    "boundaries": [
+      "The application runs tools and stores approvals. Tool Call shows each call's state; Approve and Deny only report the choice.",
+      "Arguments and results render as given. Remove secrets before passing them in."
+    ],
+    "recommendations": [
+      "Map each SDK tool part to one call with its toolCallId, and group a turn's calls with ToolCallGroup. Write the title in present tense while running and past tense when complete."
+    ]
+  },
+  "toolbar": {
+    "boundaries": [
+      "Use Button Group when independent Tab stops are preferable. The toolbar does not execute application commands."
+    ],
+    "recommendations": [
+      "Group commands by purpose and label icon-only controls. Keep keyboard order aligned with visual order.",
+      "Name the toolbar and use its arrow-key navigation to move between controls."
+    ]
+  },
+  "tooltip": {
+    "boundaries": [
+      "Do not place interactive content in a tooltip; use Popover.",
+      "Keep required instructions visible rather than available only on hover."
+    ],
+    "recommendations": [
+      "Use a short explanation for a control whose intent needs clarification.",
+      "Group adjacent hints with TooltipProvider. Use TooltipCreateHandle for one popup that moves between detached triggers."
+    ]
+  },
+  "tree": {
+    "boundaries": [
+      "Use Side Navigation for grouped route links. The application owns resource loading and activation outcomes."
+    ],
+    "recommendations": [
+      "Use resource names and stable identifiers. Keep expansion distinct from selection and activation."
+    ]
+  },
+  "visually-hidden": {
+    "boundaries": [
+      "Do not hide instructions needed by sighted users. Keep interactive controls visibly reachable."
+    ],
+    "recommendations": [
+      "Use hidden text to clarify an otherwise ambiguous control or visual indicator."
+    ]
+  },
+  "suggestion": {
+    "boundaries": [
+      "Suggestion sends nothing itself. onClick receives the prompt, and the application sends it.",
+      "Keep each prompt short enough to read at a glance; long prompts make the row scroll."
+    ],
+    "recommendations": [
+      "Show a few starters above an empty composer, and send the label as the message as is. Disable the row while the agent works."
+    ]
+  },
+  "conversation": {
+    "boundaries": [
+      "The application sends messages and streams replies. Conversation lays out and scrolls the thread; it stores nothing.",
+      "Give it a parent with a bounded height, such as a full-height panel. It does not size the page."
+    ],
+    "recommendations": [
+      "Key each turn by its message id and pass the person's turns as Message from=\"user\", so they settle near the top when sent. Set busy while a reply streams, and add navigation once threads get long."
+    ]
+  },
+  "message-scroller": {
+    "boundaries": [
+      "Message Scroller handles scrolling only: it renders no messages and fetches no history.",
+      "Keep messageId stable across renders; an index shifts when earlier messages load and breaks the reader's place."
+    ],
+    "recommendations": [
+      "Use Conversation for an agent thread; reach for Message Scroller for other transcripts, such as a team chat or a log. Anchor turns the person sends, and load earlier messages above without scrolling yourself."
+    ]
+  }
+}

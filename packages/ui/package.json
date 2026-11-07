@@ -1,0 +1,764 @@
+{
+  "name": "@mizen/ui",
+  "version": "0.1.0",
+  "description": "React components for product interfaces, built on Base UI and StyleX, with docs agents can read.",
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "design-system",
+    "base-ui",
+    "stylex",
+    "accessibility"
+  ],
+  "license": "MIT",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.stylex.js",
+    "**/*.stylex.ts"
+  ],
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./colors.stylex": "./src/styles/colors.stylex.ts",
+    "./conditions.stylex": "./src/styles/conditions.stylex.ts",
+    "./dimensions.stylex": "./src/styles/dimensions.stylex.ts",
+    "./fonts.stylex": "./src/styles/fonts.stylex.ts",
+    "./interaction.stylex": "./src/styles/interaction.stylex.ts",
+    "./motion.stylex": "./src/styles/motion.stylex.ts",
+    "./palette.stylex": "./src/styles/palette.stylex.ts",
+    "./shape.stylex": "./src/styles/shape.stylex.ts",
+    "./spacing.stylex": "./src/styles/spacing.stylex.ts",
+    "./shadows.stylex": "./src/styles/shadows.stylex.ts",
+    "./typography.stylex": "./src/styles/typography.stylex.ts",
+    "./typography.styles": {
+      "source": "./src/styles/typography.styles.ts",
+      "types": "./dist/styles/typography.styles.d.ts",
+      "default": "./dist/styles/typography.styles.js"
+    },
+    "./accordion": {
+      "source": "./src/components/accordion/accordion.tsx",
+      "types": "./dist/components/accordion/accordion.d.ts",
+      "default": "./dist/components/accordion/accordion.js"
+    },
+    "./agent-thinking": {
+      "source": "./src/components/agent-thinking/agent-thinking.tsx",
+      "types": "./dist/components/agent-thinking/agent-thinking.d.ts",
+      "default": "./dist/components/agent-thinking/agent-thinking.js"
+    },
+    "./alert": {
+      "source": "./src/components/alert/alert.tsx",
+      "types": "./dist/components/alert/alert.d.ts",
+      "default": "./dist/components/alert/alert.js"
+    },
+    "./alert-dialog": {
+      "source": "./src/components/alert-dialog/alert-dialog.tsx",
+      "types": "./dist/components/alert-dialog/alert-dialog.d.ts",
+      "default": "./dist/components/alert-dialog/alert-dialog.js"
+    },
+    "./avatar": {
+      "source": "./src/components/avatar/avatar.tsx",
+      "types": "./dist/components/avatar/avatar.d.ts",
+      "default": "./dist/components/avatar/avatar.js"
+    },
+    "./avatar-group": {
+      "source": "./src/components/avatar/avatar.tsx",
+      "types": "./dist/components/avatar/avatar.d.ts",
+      "default": "./dist/components/avatar/avatar.js"
+    },
+    "./token": {
+      "source": "./src/components/token/token.tsx",
+      "types": "./dist/components/token/token.d.ts",
+      "default": "./dist/components/token/token.js"
+    },
+    "./badge": {
+      "source": "./src/components/badge/badge.tsx",
+      "types": "./dist/components/badge/badge.d.ts",
+      "default": "./dist/components/badge/badge.js"
+    },
+    "./button": {
+      "source": "./src/components/button/button.tsx",
+      "types": "./dist/components/button/button.d.ts",
+      "default": "./dist/components/button/button.js"
+    },
+    "./button-group": {
+      "source": "./src/components/button-group/button-group.tsx",
+      "types": "./dist/components/button-group/button-group.d.ts",
+      "default": "./dist/components/button-group/button-group.js"
+    },
+    "./calendar": {
+      "source": "./src/components/calendar/calendar.tsx",
+      "types": "./dist/components/calendar/calendar.d.ts",
+      "default": "./dist/components/calendar/calendar.js"
+    },
+    "./card": {
+      "source": "./src/components/card/card.tsx",
+      "types": "./dist/components/card/card.d.ts",
+      "default": "./dist/components/card/card.js"
+    },
+    "./checkbox": {
+      "source": "./src/components/checkbox/checkbox.tsx",
+      "types": "./dist/components/checkbox/checkbox.d.ts",
+      "default": "./dist/components/checkbox/checkbox.js"
+    },
+    "./checkbox-card": {
+      "source": "./src/components/checkbox/checkbox-card.tsx",
+      "types": "./dist/components/checkbox/checkbox-card.d.ts",
+      "default": "./dist/components/checkbox/checkbox-card.js"
+    },
+    "./checkbox-group": {
+      "source": "./src/components/checkbox-group/checkbox-group.tsx",
+      "types": "./dist/components/checkbox-group/checkbox-group.d.ts",
+      "default": "./dist/components/checkbox-group/checkbox-group.js"
+    },
+    "./code": {
+      "source": "./src/components/code/code.tsx",
+      "types": "./dist/components/code/code.d.ts",
+      "default": "./dist/components/code/code.js"
+    },
+    "./code-block": {
+      "source": "./src/components/code-block/code-block.tsx",
+      "types": "./dist/components/code-block/code-block.d.ts",
+      "default": "./dist/components/code-block/code-block.js"
+    },
+    "./collapsible": {
+      "source": "./src/components/collapsible/collapsible.tsx",
+      "types": "./dist/components/collapsible/collapsible.d.ts",
+      "default": "./dist/components/collapsible/collapsible.js"
+    },
+    "./combobox": {
+      "source": "./src/components/combobox/combobox.tsx",
+      "types": "./dist/components/combobox/combobox.d.ts",
+      "default": "./dist/components/combobox/combobox.js"
+    },
+    "./command": {
+      "source": "./src/components/command/command.tsx",
+      "types": "./dist/components/command/command.d.ts",
+      "default": "./dist/components/command/command.js"
+    },
+    "./context-menu": {
+      "source": "./src/components/context-menu/context-menu.tsx",
+      "types": "./dist/components/context-menu/context-menu.d.ts",
+      "default": "./dist/components/context-menu/context-menu.js"
+    },
+    "./date-picker": {
+      "source": "./src/components/date-picker/date-picker.tsx",
+      "types": "./dist/components/date-picker/date-picker.d.ts",
+      "default": "./dist/components/date-picker/date-picker.js"
+    },
+    "./date-range-picker": {
+      "source": "./src/components/date-range-picker/date-range-picker.tsx",
+      "types": "./dist/components/date-range-picker/date-range-picker.d.ts",
+      "default": "./dist/components/date-range-picker/date-range-picker.js"
+    },
+    "./date-time-input": {
+      "source": "./src/components/date-time-input/date-time-input.tsx",
+      "types": "./dist/components/date-time-input/date-time-input.d.ts",
+      "default": "./dist/components/date-time-input/date-time-input.js"
+    },
+    "./dialog": {
+      "source": "./src/components/dialog/dialog.tsx",
+      "types": "./dist/components/dialog/dialog.d.ts",
+      "default": "./dist/components/dialog/dialog.js"
+    },
+    "./drawer": {
+      "source": "./src/components/drawer/drawer.tsx",
+      "types": "./dist/components/drawer/drawer.d.ts",
+      "default": "./dist/components/drawer/drawer.js"
+    },
+    "./empty": {
+      "source": "./src/components/empty/empty.tsx",
+      "types": "./dist/components/empty/empty.d.ts",
+      "default": "./dist/components/empty/empty.js"
+    },
+    "./error-state": {
+      "source": "./src/components/error-state/error-state.tsx",
+      "types": "./dist/components/error-state/error-state.d.ts",
+      "default": "./dist/components/error-state/error-state.js"
+    },
+    "./field": {
+      "source": "./src/components/field/field.tsx",
+      "types": "./dist/components/field/field.d.ts",
+      "default": "./dist/components/field/field.js"
+    },
+    "./fieldset": {
+      "source": "./src/components/fieldset/fieldset.tsx",
+      "types": "./dist/components/fieldset/fieldset.d.ts",
+      "default": "./dist/components/fieldset/fieldset.js"
+    },
+    "./file-upload": {
+      "source": "./src/components/file-upload/file-upload.tsx",
+      "types": "./dist/components/file-upload/file-upload.d.ts",
+      "default": "./dist/components/file-upload/file-upload.js"
+    },
+    "./form": {
+      "source": "./src/form.ts",
+      "types": "./dist/form.d.ts",
+      "default": "./dist/form.js"
+    },
+    "./frame": {
+      "source": "./src/components/frame/frame.tsx",
+      "types": "./dist/components/frame/frame.d.ts",
+      "default": "./dist/components/frame/frame.js"
+    },
+    "./grid": {
+      "source": "./src/components/grid/grid.tsx",
+      "types": "./dist/components/grid/grid.d.ts",
+      "default": "./dist/components/grid/grid.js"
+    },
+    "./group": {
+      "source": "./src/components/group/group.tsx",
+      "types": "./dist/components/group/group.d.ts",
+      "default": "./dist/components/group/group.js"
+    },
+    "./heading": {
+      "source": "./src/components/heading/heading.tsx",
+      "types": "./dist/components/heading/heading.d.ts",
+      "default": "./dist/components/heading/heading.js"
+    },
+    "./inline-citation": {
+      "source": "./src/components/inline-citation/inline-citation.tsx",
+      "types": "./dist/components/inline-citation/inline-citation.d.ts",
+      "default": "./dist/components/inline-citation/inline-citation.js"
+    },
+    "./input": {
+      "source": "./src/components/input/input.tsx",
+      "types": "./dist/components/input/input.d.ts",
+      "default": "./dist/components/input/input.js"
+    },
+    "./input-group": {
+      "source": "./src/components/input-group/input-group.tsx",
+      "types": "./dist/components/input-group/input-group.d.ts",
+      "default": "./dist/components/input-group/input-group.js"
+    },
+    "./inline": {
+      "source": "./src/components/inline/inline.tsx",
+      "types": "./dist/components/inline/inline.d.ts",
+      "default": "./dist/components/inline/inline.js"
+    },
+    "./kbd": {
+      "source": "./src/components/kbd/kbd.tsx",
+      "types": "./dist/components/kbd/kbd.d.ts",
+      "default": "./dist/components/kbd/kbd.js"
+    },
+    "./label": {
+      "source": "./src/components/label/label.tsx",
+      "types": "./dist/components/label/label.d.ts",
+      "default": "./dist/components/label/label.js"
+    },
+    "./menu": {
+      "source": "./src/components/menu/menu.tsx",
+      "types": "./dist/components/menu/menu.d.ts",
+      "default": "./dist/components/menu/menu.js"
+    },
+    "./metric": {
+      "source": "./src/components/metric/metric.tsx",
+      "types": "./dist/components/metric/metric.d.ts",
+      "default": "./dist/components/metric/metric.js"
+    },
+    "./number-field": {
+      "source": "./src/components/number-field/number-field.tsx",
+      "types": "./dist/components/number-field/number-field.d.ts",
+      "default": "./dist/components/number-field/number-field.js"
+    },
+    "./otp-field": {
+      "source": "./src/components/otp-field/otp-field.tsx",
+      "types": "./dist/components/otp-field/otp-field.d.ts",
+      "default": "./dist/components/otp-field/otp-field.js"
+    },
+    "./popover": {
+      "source": "./src/components/popover/popover.tsx",
+      "types": "./dist/components/popover/popover.d.ts",
+      "default": "./dist/components/popover/popover.js"
+    },
+    "./preview-card": {
+      "source": "./src/components/preview-card/preview-card.tsx",
+      "types": "./dist/components/preview-card/preview-card.d.ts",
+      "default": "./dist/components/preview-card/preview-card.js"
+    },
+    "./progress": {
+      "source": "./src/components/progress/progress.tsx",
+      "types": "./dist/components/progress/progress.d.ts",
+      "default": "./dist/components/progress/progress.js"
+    },
+    "./property-list": {
+      "source": "./src/components/property-list/property-list.tsx",
+      "types": "./dist/components/property-list/property-list.d.ts",
+      "default": "./dist/components/property-list/property-list.js"
+    },
+    "./radio": {
+      "source": "./src/components/radio/radio.tsx",
+      "types": "./dist/components/radio/radio.d.ts",
+      "default": "./dist/components/radio/radio.js"
+    },
+    "./radio-card": {
+      "source": "./src/components/radio/radio-card.tsx",
+      "types": "./dist/components/radio/radio-card.d.ts",
+      "default": "./dist/components/radio/radio-card.js"
+    },
+    "./radio-group": {
+      "source": "./src/components/radio-group/radio-group.tsx",
+      "types": "./dist/components/radio-group/radio-group.d.ts",
+      "default": "./dist/components/radio-group/radio-group.js"
+    },
+    "./segmented-control": {
+      "source": "./src/components/segmented-control/segmented-control.tsx",
+      "types": "./dist/components/segmented-control/segmented-control.d.ts",
+      "default": "./dist/components/segmented-control/segmented-control.js"
+    },
+    "./scroll-area": {
+      "source": "./src/components/scroll-area/scroll-area.tsx",
+      "types": "./dist/components/scroll-area/scroll-area.d.ts",
+      "default": "./dist/components/scroll-area/scroll-area.js"
+    },
+    "./section": {
+      "source": "./src/components/section/section.tsx",
+      "types": "./dist/components/section/section.d.ts",
+      "default": "./dist/components/section/section.js"
+    },
+    "./task-list": {
+      "source": "./src/components/task-list/task-list.tsx",
+      "types": "./dist/components/task-list/task-list.d.ts",
+      "default": "./dist/components/task-list/task-list.js"
+    },
+    "./conversation": {
+      "source": "./src/components/conversation/conversation.tsx",
+      "types": "./dist/components/conversation/conversation.d.ts",
+      "default": "./dist/components/conversation/conversation.js"
+    },
+    "./message-scroller": {
+      "source": "./src/components/message-scroller/message-scroller.tsx",
+      "types": "./dist/components/message-scroller/message-scroller.d.ts",
+      "default": "./dist/components/message-scroller/message-scroller.js"
+    },
+    "./suggestion": {
+      "source": "./src/components/suggestion/suggestion.tsx",
+      "types": "./dist/components/suggestion/suggestion.d.ts",
+      "default": "./dist/components/suggestion/suggestion.js"
+    },
+    "./terminal": {
+      "source": "./src/components/terminal/terminal.tsx",
+      "types": "./dist/components/terminal/terminal.d.ts",
+      "default": "./dist/components/terminal/terminal.js"
+    },
+    "./text": {
+      "source": "./src/components/text/text.tsx",
+      "types": "./dist/components/text/text.d.ts",
+      "default": "./dist/components/text/text.js"
+    },
+    "./textarea": {
+      "source": "./src/components/textarea/textarea.tsx",
+      "types": "./dist/components/textarea/textarea.d.ts",
+      "default": "./dist/components/textarea/textarea.js"
+    },
+    "./switch": {
+      "source": "./src/components/switch/switch.tsx",
+      "types": "./dist/components/switch/switch.d.ts",
+      "default": "./dist/components/switch/switch.js"
+    },
+    "./select": {
+      "source": "./src/components/select/select.tsx",
+      "types": "./dist/components/select/select.d.ts",
+      "default": "./dist/components/select/select.js"
+    },
+    "./separator": {
+      "source": "./src/components/separator/separator.tsx",
+      "types": "./dist/components/separator/separator.d.ts",
+      "default": "./dist/components/separator/separator.js"
+    },
+    "./sheet": {
+      "source": "./src/components/sheet/sheet.tsx",
+      "types": "./dist/components/sheet/sheet.d.ts",
+      "default": "./dist/components/sheet/sheet.js"
+    },
+    "./skeleton": {
+      "source": "./src/components/skeleton/skeleton.tsx",
+      "types": "./dist/components/skeleton/skeleton.d.ts",
+      "default": "./dist/components/skeleton/skeleton.js"
+    },
+    "./slider": {
+      "source": "./src/components/slider/slider.tsx",
+      "types": "./dist/components/slider/slider.d.ts",
+      "default": "./dist/components/slider/slider.js"
+    },
+    "./sources": {
+      "source": "./src/components/sources/sources.tsx",
+      "types": "./dist/components/sources/sources.d.ts",
+      "default": "./dist/components/sources/sources.js"
+    },
+    "./spacer": {
+      "source": "./src/components/spacer/spacer.tsx",
+      "types": "./dist/components/spacer/spacer.d.ts",
+      "default": "./dist/components/spacer/spacer.js"
+    },
+    "./stack": {
+      "source": "./src/components/stack/stack.tsx",
+      "types": "./dist/components/stack/stack.d.ts",
+      "default": "./dist/components/stack/stack.js"
+    },
+    "./status-dot": {
+      "source": "./src/components/status-dot/status-dot.tsx",
+      "types": "./dist/components/status-dot/status-dot.d.ts",
+      "default": "./dist/components/status-dot/status-dot.js"
+    },
+    "./spinner": {
+      "source": "./src/components/spinner/spinner.tsx",
+      "types": "./dist/components/spinner/spinner.d.ts",
+      "default": "./dist/components/spinner/spinner.js"
+    },
+    "./streaming-text": {
+      "source": "./src/components/streaming-text/streaming-text.tsx",
+      "types": "./dist/components/streaming-text/streaming-text.d.ts",
+      "default": "./dist/components/streaming-text/streaming-text.js"
+    },
+    "./toggle": {
+      "source": "./src/components/toggle/toggle.tsx",
+      "types": "./dist/components/toggle/toggle.d.ts",
+      "default": "./dist/components/toggle/toggle.js"
+    },
+    "./toggle-group": {
+      "source": "./src/components/toggle/toggle.tsx",
+      "types": "./dist/components/toggle/toggle.d.ts",
+      "default": "./dist/components/toggle/toggle.js"
+    },
+    "./tool-call": {
+      "source": "./src/components/tool-call/tool-call.tsx",
+      "types": "./dist/components/tool-call/tool-call.d.ts",
+      "default": "./dist/components/tool-call/tool-call.js"
+    },
+    "./tool-call-group": {
+      "source": "./src/components/tool-call/tool-call-group.tsx",
+      "types": "./dist/components/tool-call/tool-call-group.d.ts",
+      "default": "./dist/components/tool-call/tool-call-group.js"
+    },
+    "./toolbar": {
+      "source": "./src/components/toolbar/toolbar.tsx",
+      "types": "./dist/components/toolbar/toolbar.d.ts",
+      "default": "./dist/components/toolbar/toolbar.js"
+    },
+    "./tabs": {
+      "source": "./src/components/tabs/tabs.tsx",
+      "types": "./dist/components/tabs/tabs.d.ts",
+      "default": "./dist/components/tabs/tabs.js"
+    },
+    "./time-input": {
+      "source": "./src/components/time-input/time-input.tsx",
+      "types": "./dist/components/time-input/time-input.d.ts",
+      "default": "./dist/components/time-input/time-input.js"
+    },
+    "./toast": {
+      "source": "./src/components/toast/toast.tsx",
+      "types": "./dist/components/toast/toast.d.ts",
+      "default": "./dist/components/toast/toast.js"
+    },
+    "./theme": {
+      "source": "./src/theme/index.ts",
+      "types": "./dist/theme/index.d.ts",
+      "default": "./dist/theme/index.js"
+    },
+    "./tooltip": {
+      "source": "./src/components/tooltip/tooltip.tsx",
+      "types": "./dist/components/tooltip/tooltip.d.ts",
+      "default": "./dist/components/tooltip/tooltip.js"
+    },
+    "./use-copy-to-clipboard": {
+      "source": "./src/use-copy-to-clipboard.ts",
+      "types": "./dist/use-copy-to-clipboard.d.ts",
+      "default": "./dist/use-copy-to-clipboard.js"
+    },
+    "./breadcrumb": {
+      "source": "./src/components/breadcrumb/breadcrumb.tsx",
+      "types": "./dist/components/breadcrumb/breadcrumb.d.ts",
+      "default": "./dist/components/breadcrumb/breadcrumb.js"
+    },
+    "./pagination": {
+      "source": "./src/components/pagination/pagination.tsx",
+      "types": "./dist/components/pagination/pagination.d.ts",
+      "default": "./dist/components/pagination/pagination.js"
+    },
+    "./navigation-menu": {
+      "source": "./src/components/navigation-menu/navigation-menu.tsx",
+      "types": "./dist/components/navigation-menu/navigation-menu.d.ts",
+      "default": "./dist/components/navigation-menu/navigation-menu.js"
+    },
+    "./stepper": {
+      "source": "./src/components/stepper/stepper.tsx",
+      "types": "./dist/components/stepper/stepper.d.ts",
+      "default": "./dist/components/stepper/stepper.js"
+    },
+    "./table": {
+      "source": "./src/components/table/table.tsx",
+      "types": "./dist/components/table/table.d.ts",
+      "default": "./dist/components/table/table.js"
+    },
+    "./data-table": {
+      "source": "./src/components/data-table/data-table.tsx",
+      "types": "./dist/components/data-table/data-table.d.ts",
+      "default": "./dist/components/data-table/data-table.js"
+    },
+    "./list": {
+      "source": "./src/components/list/list.tsx",
+      "types": "./dist/components/list/list.d.ts",
+      "default": "./dist/components/list/list.js"
+    },
+    "./activity-feed": {
+      "source": "./src/components/activity-feed/activity-feed.tsx",
+      "types": "./dist/components/activity-feed/activity-feed.d.ts",
+      "default": "./dist/components/activity-feed/activity-feed.js"
+    },
+    "./overflow-list": {
+      "source": "./src/components/overflow-list/overflow-list.tsx",
+      "types": "./dist/components/overflow-list/overflow-list.d.ts",
+      "default": "./dist/components/overflow-list/overflow-list.js"
+    },
+    "./tree": {
+      "source": "./src/components/tree/tree.tsx",
+      "types": "./dist/components/tree/tree.d.ts",
+      "default": "./dist/components/tree/tree.js"
+    },
+    "./approval-card": {
+      "source": "./src/components/approval-card/approval-card.tsx",
+      "types": "./dist/components/approval-card/approval-card.d.ts",
+      "default": "./dist/components/approval-card/approval-card.js"
+    },
+    "./aspect-ratio": {
+      "source": "./src/components/aspect-ratio/aspect-ratio.tsx",
+      "types": "./dist/components/aspect-ratio/aspect-ratio.d.ts",
+      "default": "./dist/components/aspect-ratio/aspect-ratio.js"
+    },
+    "./blockquote": {
+      "source": "./src/components/blockquote/blockquote.tsx",
+      "types": "./dist/components/blockquote/blockquote.d.ts",
+      "default": "./dist/components/blockquote/blockquote.js"
+    },
+    "./citation": {
+      "source": "./src/components/citation/citation.tsx",
+      "types": "./dist/components/citation/citation.d.ts",
+      "default": "./dist/components/citation/citation.js"
+    },
+    "./carousel": {
+      "source": "./src/components/carousel/carousel.tsx",
+      "types": "./dist/components/carousel/carousel.d.ts",
+      "default": "./dist/components/carousel/carousel.js"
+    },
+    "./lightbox": {
+      "source": "./src/components/lightbox/lightbox.tsx",
+      "types": "./dist/components/lightbox/lightbox.d.ts",
+      "default": "./dist/components/lightbox/lightbox.js"
+    },
+    "./markdown": {
+      "source": "./src/components/markdown/markdown.tsx",
+      "types": "./dist/components/markdown/markdown.d.ts",
+      "default": "./dist/components/markdown/markdown.js"
+    },
+    "./thumbnail": {
+      "source": "./src/components/thumbnail/thumbnail.tsx",
+      "types": "./dist/components/thumbnail/thumbnail.d.ts",
+      "default": "./dist/components/thumbnail/thumbnail.js"
+    },
+    "./timestamp": {
+      "source": "./src/components/timestamp/timestamp.tsx",
+      "types": "./dist/components/timestamp/timestamp.d.ts",
+      "default": "./dist/components/timestamp/timestamp.js"
+    },
+    "./link": {
+      "source": "./src/components/link/link.tsx",
+      "types": "./dist/components/link/link.d.ts",
+      "default": "./dist/components/link/link.js"
+    },
+    "./visually-hidden": {
+      "source": "./src/components/visually-hidden/visually-hidden.tsx",
+      "types": "./dist/components/visually-hidden/visually-hidden.d.ts",
+      "default": "./dist/components/visually-hidden/visually-hidden.js"
+    },
+    "./message": {
+      "source": "./src/components/message/message.tsx",
+      "types": "./dist/components/message/message.d.ts",
+      "default": "./dist/components/message/message.js"
+    },
+    "./meter": {
+      "source": "./src/components/meter/meter.tsx",
+      "types": "./dist/components/meter/meter.d.ts",
+      "default": "./dist/components/meter/meter.js"
+    },
+    "./menubar": {
+      "source": "./src/components/menubar/menubar.tsx",
+      "types": "./dist/components/menubar/menubar.d.ts",
+      "default": "./dist/components/menubar/menubar.js"
+    },
+    "./attachment": {
+      "source": "./src/components/attachment/attachment.tsx",
+      "types": "./dist/components/attachment/attachment.d.ts",
+      "default": "./dist/components/attachment/attachment.js"
+    },
+    "./chart-frame": {
+      "source": "./src/components/chart-frame/chart-frame.tsx",
+      "types": "./dist/components/chart-frame/chart-frame.d.ts",
+      "default": "./dist/components/chart-frame/chart-frame.js"
+    },
+    "./chart-legend": {
+      "source": "./src/components/chart-legend/chart-legend.tsx",
+      "types": "./dist/components/chart-legend/chart-legend.d.ts",
+      "default": "./dist/components/chart-legend/chart-legend.js"
+    },
+    "./chart-tooltip": {
+      "source": "./src/components/chart-tooltip/chart-tooltip.tsx",
+      "types": "./dist/components/chart-tooltip/chart-tooltip.d.ts",
+      "default": "./dist/components/chart-tooltip/chart-tooltip.js"
+    },
+    "./category-comparison": {
+      "source": "./src/components/category-comparison/category-comparison.tsx",
+      "types": "./dist/components/category-comparison/category-comparison.d.ts",
+      "default": "./dist/components/category-comparison/category-comparison.js"
+    },
+    "./distribution": {
+      "source": "./src/components/distribution/distribution.tsx",
+      "types": "./dist/components/distribution/distribution.d.ts",
+      "default": "./dist/components/distribution/distribution.js"
+    },
+    "./heatmap": {
+      "source": "./src/components/heatmap/heatmap.tsx",
+      "types": "./dist/components/heatmap/heatmap.d.ts",
+      "default": "./dist/components/heatmap/heatmap.js"
+    },
+    "./application-structure.stylex": "./src/styles/application-structure.stylex.ts",
+    "./part-to-whole": {
+      "source": "./src/components/part-to-whole/part-to-whole.tsx",
+      "types": "./dist/components/part-to-whole/part-to-whole.d.ts",
+      "default": "./dist/components/part-to-whole/part-to-whole.js"
+    },
+    "./scatter-chart": {
+      "source": "./src/components/scatter-chart/scatter-chart.tsx",
+      "types": "./dist/components/scatter-chart/scatter-chart.d.ts",
+      "default": "./dist/components/scatter-chart/scatter-chart.js"
+    },
+    "./metric-trend": {
+      "source": "./src/components/metric-trend/metric-trend.tsx",
+      "types": "./dist/components/metric-trend/metric-trend.d.ts",
+      "default": "./dist/components/metric-trend/metric-trend.js"
+    },
+    "./bar-list": {
+      "source": "./src/components/bar-list/bar-list.tsx",
+      "types": "./dist/components/bar-list/bar-list.d.ts",
+      "default": "./dist/components/bar-list/bar-list.js"
+    },
+    "./funnel": {
+      "source": "./src/components/funnel/funnel.tsx",
+      "types": "./dist/components/funnel/funnel.d.ts",
+      "default": "./dist/components/funnel/funnel.js"
+    },
+    "./progress-rings": {
+      "source": "./src/components/progress-rings/progress-rings.tsx",
+      "types": "./dist/components/progress-rings/progress-rings.d.ts",
+      "default": "./dist/components/progress-rings/progress-rings.js"
+    },
+    "./score-gauge": {
+      "source": "./src/components/score-gauge/score-gauge.tsx",
+      "types": "./dist/components/score-gauge/score-gauge.d.ts",
+      "default": "./dist/components/score-gauge/score-gauge.js"
+    },
+    "./calendar-heatmap": {
+      "source": "./src/components/calendar-heatmap/calendar-heatmap.tsx",
+      "types": "./dist/components/calendar-heatmap/calendar-heatmap.d.ts",
+      "default": "./dist/components/calendar-heatmap/calendar-heatmap.js"
+    },
+    "./question-card": {
+      "source": "./src/components/question-card/question-card.tsx",
+      "types": "./dist/components/question-card/question-card.d.ts",
+      "default": "./dist/components/question-card/question-card.js"
+    },
+    "./radar-chart": {
+      "source": "./src/components/radar-chart/radar-chart.tsx",
+      "types": "./dist/components/radar-chart/radar-chart.d.ts",
+      "default": "./dist/components/radar-chart/radar-chart.js"
+    },
+    "./radial-bars": {
+      "source": "./src/components/radial-bars/radial-bars.tsx",
+      "types": "./dist/components/radial-bars/radial-bars.d.ts",
+      "default": "./dist/components/radial-bars/radial-bars.js"
+    },
+    "./sankey-chart": {
+      "source": "./src/components/sankey-chart/sankey-chart.tsx",
+      "types": "./dist/components/sankey-chart/sankey-chart.d.ts",
+      "default": "./dist/components/sankey-chart/sankey-chart.js"
+    },
+    "./area-chart": {
+      "source": "./src/components/area-chart/area-chart.tsx",
+      "types": "./dist/components/area-chart/area-chart.d.ts",
+      "default": "./dist/components/area-chart/area-chart.js"
+    },
+    "./time-series": {
+      "source": "./src/components/time-series/time-series.tsx",
+      "types": "./dist/components/time-series/time-series.d.ts",
+      "default": "./dist/components/time-series/time-series.js"
+    },
+    "./composer": {
+      "source": "./src/components/composer/composer.tsx",
+      "types": "./dist/components/composer/composer.d.ts",
+      "default": "./dist/components/composer/composer.js"
+    },
+    "./diagram": {
+      "source": "./src/components/diagram/diagram.tsx",
+      "types": "./dist/components/diagram/diagram.d.ts",
+      "default": "./dist/components/diagram/diagram.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./theme/initialize": {
+      "source": "./src/theme/initialize.ts",
+      "types": "./dist/theme/initialize.d.ts",
+      "default": "./dist/theme/initialize.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('dist',{force:true,recursive:true})\" && babel src --out-dir dist --extensions .ts,.tsx --root-mode upward --copy-files --compact true && tsc -p tsconfig.build.json && node scripts/prune-declarations.mjs && node scripts/build-styles.mjs",
+    "dev": "babel src --out-dir dist --extensions .ts,.tsx --root-mode upward --watch --copy-files",
+    "lint": "eslint .",
+    "prepack": "pnpm build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.9.0",
+    "@daypicker/react": "10.0.2",
+    "@stylexjs/stylex": "^0.19.1",
+    "@tabler/icons-react": "3.49.0",
+    "@tanstack/charts": "1.1.0",
+    "@tanstack/react-form": "1.33.5",
+    "@tanstack/react-table": "9.3.1",
+    "@tanstack/react-virtual": "3.14.13",
+    "@types/d3-scale": "4.0.9",
+    "@types/d3-shape": "3.2.0",
+    "d3-scale": "4.0.2",
+    "d3-shape": "3.2.0",
+    "motion": "14.9.1",
+    "sugar-high": "2.6.4"
+  },
+  "devDependencies": {
+    "@stylexjs/postcss-plugin": "^0.19.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "pele": "1.13.0",
+    "postcss": "^8.5.31",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "peerDependencies": {
+    "pele": "^1.13.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependenciesMeta": {
+    "pele": {
+      "optional": true
+    }
+  }
+}

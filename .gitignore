@@ -1,0 +1,66 @@
+# Debug
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+.pnpm-store/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+dist
+dist-ssr
+*.local
+.next/
+.vercel/
+.wrangler/
+
+*.tsbuildinfo
+
+# Turborepo
+.turbo/
+
+# Testing
+coverage
+/apps/docs/.usage-check-*/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode/
+.idea
+!/.idea/icon.svg
+
+# Misc
+.DS_Store
+Thumbs.db
+*.pem
+.impeccable
+.codegraph
+.omo
+.playwright-mcp
+.openchamber
+# Local Claude state stays private; shared project skills are tracked.
+.claude/*
+
+# AI
+.agents
+skills-lock.json
+
+# Verified local release candidates
+/artifacts/release/
+
+# Reproducible CLI benchmark evidence
+/artifacts/benchmarks/

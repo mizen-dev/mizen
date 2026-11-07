@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  packages:
+    name: Packages / ${{ matrix.os }} / Node ${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: ['22.18.0', '24.11.0']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        with:
+          runtime: node@${{ matrix.node }}
+          cache: true
+          require-lockfile: true
+      - name: Build package dependencies
+        run: pnpm --filter @mizen/ui build
+      - name: CLI contracts and installed framework diagnostics
+        run: pnpm --filter @mizen/cli test
+        env:
+          MIZEN_PACKED_CONSUMER: '1'
+      - name: Verify release archives with npm and pnpm
+        run: pnpm release:check
+      - name: Retain verified candidates
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release-${{ matrix.os }}-node-${{ matrix.node }}
+          path: artifacts/release/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Benchmark installed CLI and package size
+        run: pnpm benchmark:cli
+      - name: Retain CLI benchmark reports and replay inputs
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: cli-benchmark-${{ matrix.os }}-node-${{ matrix.node }}
+          path: artifacts/benchmarks/
+          if-no-files-found: warn
+          retention-days: 14
+
+  consumers:
+    name: Quality and production consumers
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      MIZEN_DOCS_TEST_URL: http://localhost:3100
+      MIZEN_PACKED_CONSUMER: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        with:
+          runtime: node@24
+          cache: true
+          require-lockfile: true
+      - run: pnpm build
+      - run: pnpm lint:check
+      - run: pnpm typecheck
+      - name: Install Chromium
+        run: pnpm --filter @mizen/docs exec playwright install --with-deps chromium
+      - name: Theme, source, and distribution contracts
+        run: >-
+          pnpm --filter @mizen/docs test
+          tests/theme-behavior.test.ts tests/theme-contract.test.ts
+          tests/theme-storage.test.ts tests/theme-transition-guard.test.ts
+          tests/package-distribution.test.ts tests/docs-source-contract.test.ts
+      - name: Packed init, production builds, and browser behavior
+        run: pnpm --filter @mizen/docs test tests/cli-init.integration.test.ts

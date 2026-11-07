@@ -1,0 +1,68 @@
+import { execFile } from "node:child_process";
+import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { promisify } from "node:util";
+import { expect, it } from "vitest";
+
+const uiRoot = new URL("../../../packages/ui/", import.meta.url).pathname;
+const execute = promisify(execFile);
+const CLIENT_BOUNDARY = /^"use client";/;
+
+interface PackageExport {
+	default: string;
+	types: string;
+}
+
+interface PackageManifest {
+	exports: Record<string, string | PackageExport>;
+}
+
+interface PackedPackage {
+	files: { path: string }[];
+}
+
+it("packs every public export and preserves client boundaries", async () => {
+	const destination = await mkdtemp(join(tmpdir(), "mizen-package-"));
+	try {
+		const { stdout } = await execute(
+			"pnpm",
+			["pack", "--json", "--out", join(destination, "ui.tgz")],
+			{ cwd: uiRoot, timeout: 15_000 }
+		);
+		const packed: PackedPackage = JSON.parse(stdout);
+		const paths = packed.files.map(({ path }) => `./${path}`);
+		const manifest: PackageManifest = JSON.parse(
+			await readFile(join(uiRoot, "package.json"), "utf8")
+		);
+		const cssExport = manifest.exports["./styles.css"];
+		expect(typeof cssExport).toBe("string");
+		const css = await readFile(join(uiRoot, cssExport as string), "utf8");
+		expect(css).not.toContain("@stylex;");
+		// Both the default tokens and dark overrides must ship in the archive.
+		expect(css).toContain("oklch(0.93 0.006 285)");
+		expect(css).toContain("oklch(1 0 0)");
+		expect(css).toContain("@media");
+		await Promise.all(
+			Object.entries(manifest.exports).map(async ([name, entry]) => {
+				const targets =
+					typeof entry === "string" ? [entry] : Object.values(entry);
+				for (const target of targets) {
+					expect(paths, `${name} must ship ${target}`).toContain(target);
+				}
+				if (typeof entry === "string") {
+					return;
+				}
+				const source = await readFile(join(uiRoot, entry.types), "utf8");
+				if (source.startsWith('"use client";')) {
+					const compiled = await readFile(join(uiRoot, entry.default), "utf8");
+					expect(compiled, `${name} must retain its client boundary`).toMatch(
+						CLIENT_BOUNDARY
+					);
+				}
+			})
+		);
+	} finally {
+		await rm(destination, { force: true, recursive: true });
+	}
+}, 20_000);

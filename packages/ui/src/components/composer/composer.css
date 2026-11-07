@@ -1,0 +1,75 @@
+/* Layout variables are scoped to each frame, including nested composers. */
+[data-slot="composer"] {
+	--composer-preferred-rows: initial;
+
+	--composer-columns: none;
+	--composer-rows: none;
+
+	--composer-frame-inset: 0px;
+	--composer-scroll-inset: var(--composer-padding);
+	--composer-text-inset: 0.75rem;
+	--composer-editor-column: auto;
+	--composer-editor-row: auto;
+
+	--composer-actions-column: auto;
+	--composer-actions-row: auto;
+	--composer-group-row: auto;
+	--composer-start-column: auto;
+	--composer-end-column: auto;
+	--composer-group-gap: initial;
+}
+[data-slot="composer"][data-layout="adaptive"] {
+	--composer-preferred-rows: 1;
+
+	--composer-columns: auto minmax(0, 1fr) auto;
+	--composer-editor-row: 1;
+	--composer-editor-column: 1 / -1;
+	--composer-actions-row: 2;
+	--composer-actions-column: 1 / -1;
+	--composer-rows: minmax(0, 1fr) auto;
+}
+[data-slot="composer"][data-layout="adaptive"]:not([data-multiline]) {
+	--composer-rows: none;
+	--composer-frame-inset: var(--composer-padding);
+	--composer-scroll-inset: 0px;
+	--composer-text-inset: 4px;
+	--composer-editor-column: 2;
+
+	--composer-group-row: 1;
+	--composer-start-column: 1;
+	--composer-end-column: 3;
+	--composer-group-gap: 8px;
+}
+[data-slot="composer-input"] {
+	field-sizing: content;
+	min-height: calc(var(--composer-min-rows, 1) * 1lh + 0.75rem);
+}
+[data-layout="adaptive"] > [data-slot="composer-scroll-area"] {
+	--composer-min-rows: 1;
+}
+[data-slot="composer-scroll-area"] > [data-slot="composer-viewport"] {
+	--composer-row-limit: calc(
+		var(--composer-max-rows) *
+		var(--composer-line-height, 1.5rem) +
+		var(--composer-input-padding, 0.75rem)
+	);
+	height: auto;
+	min-height: 0;
+	max-height: min(50dvh, var(--composer-max-height, var(--composer-row-limit)));
+	overscroll-behavior: contain;
+}
+[data-slot="composer-suggestions-scroll"] > [data-slot="composer-viewport"] {
+	height: auto;
+	max-height: min(16rem, var(--available-height, 16rem));
+}
+[data-slot="composer-token-icon"] {
+	& > svg {
+		display: inline-block;
+		width: 0.875em;
+		height: 0.875em;
+		vertical-align: -0.125em;
+	}
+	&::after {
+		content: "\2060\00a0";
+	}
+}

@@ -1,0 +1,10 @@
+language js
+
+`React.$hook($args)` where {
+	$hook <: or {
+		`useEffect`,
+		`useLayoutEffect`,
+		`useInsertionEffect`
+	},
+	register_diagnostic(span=$hook, message="Effect hooks are banned. Use an event handler, a ref callback, or useSyncExternalStore.")
+}

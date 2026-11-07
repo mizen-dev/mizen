@@ -1,0 +1,118 @@
+import { create } from "@stylexjs/stylex";
+import { colors } from "../../styles/colors.stylex";
+import { controlSize } from "../../styles/dimensions.stylex";
+import { palette } from "../../styles/palette.stylex";
+import { space } from "../../styles/spacing.stylex";
+import {
+	fontSize,
+	fontWeight,
+	lineHeight,
+} from "../../styles/typography.stylex";
+
+export const avatarStyles = create({
+	defaultSize: {
+		fontSize: fontSize["12"],
+		height: controlSize.sm,
+		width: controlSize.sm,
+	},
+	fallback: {
+		alignItems: "center",
+		backgroundColor: colors.secondary,
+		boxSizing: "border-box",
+		color: colors.secondaryContent,
+		display: "flex",
+		fontWeight: fontWeight.medium,
+		height: "100%",
+		insetBlock: 0,
+		insetInline: 0,
+		justifyContent: "center",
+		lineHeight: lineHeight.none,
+		position: "absolute",
+		width: "100%",
+	},
+	group: {
+		alignItems: "center",
+		boxSizing: "border-box",
+		display: "inline-flex",
+		flexDirection: "row",
+	},
+	// Grouped avatars overlap by an eighth of their size, so two-letter
+	// initials stay readable beside the 2px separating ring.
+	groupOverlapDefault: {
+		marginInlineStart: {
+			":not(:first-child)": `calc(-0.125 * ${controlSize.sm})`,
+			default: space["0"],
+		},
+	},
+	groupOverlapLg: {
+		marginInlineStart: {
+			":not(:first-child)": `calc(-0.125 * ${controlSize.lg})`,
+			default: space["0"],
+		},
+	},
+	groupOverlapSm: {
+		marginInlineStart: {
+			":not(:first-child)": `calc(-0.125 * ${controlSize["2xs"]})`,
+			default: space["0"],
+		},
+	},
+	groupRing: {
+		boxShadow: `0 0 0 2px ${colors.surface}`,
+	},
+	image: {
+		boxSizing: "border-box",
+		display: {
+			"[data-error]": "none",
+			"[data-loading]": "none",
+			default: "block",
+		},
+		height: "100%",
+		objectFit: "cover",
+		width: "100%",
+	},
+	lg: {
+		fontSize: fontSize["14"],
+		height: controlSize.lg,
+		width: controlSize.lg,
+	},
+	root: {
+		alignItems: "center",
+		backgroundColor: colors.secondary,
+		borderRadius: "9999px",
+		boxSizing: "border-box",
+		color: colors.secondaryContent,
+		display: "inline-flex",
+		flexShrink: 0,
+		fontWeight: fontWeight.medium,
+		justifyContent: "center",
+		lineHeight: lineHeight.none,
+		overflow: "hidden",
+		position: "relative",
+		userSelect: "none",
+		verticalAlign: "middle",
+	},
+	sm: {
+		fontSize: fontSize["12"],
+		height: controlSize["2xs"],
+		width: controlSize["2xs"],
+	},
+});
+
+export const avatarFallbackColors = create({
+	blue: {
+		backgroundColor: `color-mix(in oklch, ${palette.blue700} 18%, ${colors.surface})`,
+		color: `color-mix(in oklch, ${palette.blue700} 45%, ${colors.content})`,
+	},
+	green: {
+		backgroundColor: `color-mix(in oklch, ${palette.green700} 18%, ${colors.surface})`,
+		color: `color-mix(in oklch, ${palette.green700} 45%, ${colors.content})`,
+	},
+	orange: {
+		backgroundColor: `color-mix(in oklch, ${palette.orange700} 18%, ${colors.surface})`,
+		color: `color-mix(in oklch, ${palette.orange700} 45%, ${colors.content})`,
+	},
+	purple: {
+		backgroundColor: `color-mix(in oklch, ${palette.violet700} 18%, ${colors.surface})`,
+		color: `color-mix(in oklch, ${palette.violet700} 45%, ${colors.content})`,
+	},
+});

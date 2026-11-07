@@ -1,0 +1,684 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:mizen:cli:output:v1",
+  "title": "Mizen CLI output, schema version 1",
+  "description": "One complete --json response. The envelope is fixed; payloads permit additive fields. Results go to stdout. Errors go to stderr as one line. Doctor and init can print a result envelope with exit code 1 when a check or install fails.",
+  "oneOf": [
+    {
+      "$ref": "#/definitions/HelpOutput"
+    },
+    {
+      "$ref": "#/definitions/VersionOutput"
+    },
+    {
+      "$ref": "#/definitions/SearchOutput"
+    },
+    {
+      "$ref": "#/definitions/InfoOutput"
+    },
+    {
+      "$ref": "#/definitions/DoctorOutput"
+    },
+    {
+      "$ref": "#/definitions/InitOutput"
+    },
+    {
+      "$ref": "#/definitions/ErrorOutput"
+    }
+  ],
+  "definitions": {
+    "ApiProperty": {
+      "type": "object",
+      "properties": {
+        "defaultValue": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["defaultValue", "description", "name", "type"]
+    },
+    "ComponentSummary": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entryPoint": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "category",
+        "description",
+        "entryPoint",
+        "name",
+        "slug",
+        "status"
+      ]
+    },
+    "Component": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entryPoint": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "api": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiProperty"
+          }
+        },
+        "documentationPath": {
+          "type": "string"
+        },
+        "guidance": {
+          "type": "object",
+          "properties": {
+            "boundaries": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "recommendations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": ["boundaries", "recommendations"]
+        },
+        "apiSections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "properties": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/ApiProperty"
+                }
+              }
+            },
+            "required": ["name", "description", "properties"]
+          }
+        },
+        "usageSections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              }
+            },
+            "required": ["code", "description", "id", "title"]
+          }
+        },
+        "contract": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "category",
+        "description",
+        "entryPoint",
+        "name",
+        "slug",
+        "status",
+        "api",
+        "documentationPath",
+        "guidance"
+      ]
+    },
+    "Diagnostic": {
+      "type": "object",
+      "properties": {
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string"
+        },
+        "packageManager": {
+          "type": "string"
+        },
+        "repair": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pass", "error", "unverified"]
+        },
+        "project": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["evidence", "id", "message", "status"]
+    },
+    "DoctorResult": {
+      "type": "object",
+      "properties": {
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Diagnostic"
+          }
+        },
+        "project": {
+          "type": ["string", "null"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["healthy", "incomplete", "failed"]
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "errors": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "passed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unverified": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": ["errors", "passed", "unverified"]
+        },
+        "framework": {
+          "type": "string",
+          "enum": ["next", "start", "vite", "unknown"]
+        },
+        "uiVersion": {
+          "type": ["string", "null"]
+        },
+        "workspace": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "enum": ["npm", "pnpm"],
+                  "type": "string"
+                },
+                "patterns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "source": {
+                  "type": "string"
+                }
+              },
+              "required": ["kind", "patterns", "source"]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "apps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceApp"
+          }
+        },
+        "skipped": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": ["string", "null"]
+              },
+              "path": {
+                "type": "string"
+              },
+              "project": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["skipped", "unverified"]
+              }
+            },
+            "required": ["name", "path", "project", "reason", "status"]
+          }
+        }
+      },
+      "required": ["diagnostics", "project", "status", "summary"],
+      "dependencies": {
+        "workspace": ["apps", "skipped"],
+        "apps": ["workspace", "skipped"],
+        "skipped": ["workspace", "apps"]
+      }
+    },
+    "FileEdit": {
+      "type": "object",
+      "properties": {
+        "after": {
+          "type": "string"
+        },
+        "before": {
+          "type": ["string", "null"]
+        },
+        "diff": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      },
+      "required": ["after", "before", "diff", "path"]
+    },
+    "Install": {
+      "type": "object",
+      "properties": {
+        "archive": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                }
+              },
+              "required": ["path", "sha256"]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "command": {
+          "type": "string",
+          "enum": ["npm", "pnpm"]
+        },
+        "packages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["archive", "args", "command", "packages"]
+    },
+    "InitPlan": {
+      "type": "object",
+      "properties": {
+        "edits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileEdit"
+          }
+        },
+        "framework": {
+          "type": "string",
+          "enum": ["next", "start", "vite"]
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "before": {
+                "type": ["string", "null"]
+              }
+            },
+            "required": ["path", "before"]
+          }
+        },
+        "install": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Install"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "manifestBefore": {
+          "type": "string"
+        },
+        "project": {
+          "type": "string"
+        },
+        "uiVersion": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "edits",
+        "framework",
+        "install",
+        "manifestBefore",
+        "project",
+        "uiVersion"
+      ]
+    },
+    "InitResult": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "plan": {
+          "$ref": "#/definitions/InitPlan"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "planned",
+            "unchanged",
+            "applied",
+            "install-failed",
+            "verification-failed"
+          ]
+        },
+        "verification": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DoctorResult"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": ["message", "plan", "status", "verification"]
+    },
+    "HelpOutput": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "command": {
+          "const": "help"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "usage": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": ["usage"]
+        }
+      },
+      "required": ["schemaVersion", "command", "data"],
+      "additionalProperties": false
+    },
+    "VersionOutput": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "command": {
+          "const": "version"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": ["version"]
+        }
+      },
+      "required": ["schemaVersion", "command", "data"],
+      "additionalProperties": false
+    },
+    "SearchOutput": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "command": {
+          "const": "search"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "components": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ComponentSummary"
+              }
+            },
+            "query": {
+              "type": "string"
+            },
+            "uiVersion": {
+              "type": "string"
+            }
+          },
+          "required": ["components", "query", "uiVersion"]
+        }
+      },
+      "required": ["schemaVersion", "command", "data"],
+      "additionalProperties": false
+    },
+    "InfoOutput": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "command": {
+          "const": "info"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "component": {
+              "$ref": "#/definitions/Component"
+            },
+            "uiVersion": {
+              "type": "string"
+            }
+          },
+          "required": ["component", "uiVersion"]
+        }
+      },
+      "required": ["schemaVersion", "command", "data"],
+      "additionalProperties": false
+    },
+    "DoctorOutput": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "command": {
+          "const": "doctor"
+        },
+        "data": {
+          "$ref": "#/definitions/DoctorResult"
+        }
+      },
+      "required": ["schemaVersion", "command", "data"],
+      "additionalProperties": false
+    },
+    "InitOutput": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "command": {
+          "const": "init"
+        },
+        "data": {
+          "$ref": "#/definitions/InitResult"
+        }
+      },
+      "required": ["schemaVersion", "command", "data"],
+      "additionalProperties": false
+    },
+    "ErrorOutput": {
+      "type": "object",
+      "description": "Printed as one line on stderr; stdout stays empty. The exit code is 2 for usage and missing input, 1 for other failures.",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "error": {
+          "type": "object",
+          "properties": {
+            "reason": {
+              "type": "string",
+              "enum": [
+                "internal_error",
+                "invalid_arguments",
+                "unknown_option",
+                "unknown_command",
+                "missing_name",
+                "not_found",
+                "project_not_found",
+                "conflict",
+                "recovery_required"
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "The human headline. Read reason, never parse this."
+            },
+            "next": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "argv": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "command": {
+                    "type": "string"
+                  }
+                },
+                "required": ["argv", "command"],
+                "additionalProperties": false
+              }
+            },
+            "data": {
+              "type": "object"
+            }
+          },
+          "required": ["reason", "message"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["schemaVersion", "error"],
+      "additionalProperties": false
+    },
+    "WorkspaceApp": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DoctorResult"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": ["string", "null"]
+            },
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": ["name", "path"]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+import { defineConsts } from "@stylexjs/stylex";
+
+export const palette = defineConsts({
+	amber300: "oklch(0.74 0.11 88)",
+	amber500: "oklch(0.63 0.12 88)",
+	amber700: "oklch(0.53 0.1 88)",
+	blue300: "oklch(0.74 0.12 250)",
+	blue500: "oklch(0.63 0.14 250)",
+	blue700: "oklch(0.54 0.14 250)",
+	green300: "oklch(0.74 0.12 150)",
+	green500: "oklch(0.63 0.14 150)",
+	green700: "oklch(0.54 0.12 150)",
+	orange300: "oklch(0.74 0.14 32)",
+	orange500: "oklch(0.63 0.155 32)",
+	orange700: "oklch(0.56 0.17 32)",
+	pink300: "oklch(0.74 0.14 325)",
+	pink500: "oklch(0.63 0.16 325)",
+	pink700: "oklch(0.56 0.18 325)",
+	rose300: "oklch(0.74 0.12 0)",
+	rose500: "oklch(0.63 0.145 0)",
+	rose700: "oklch(0.48 0.17 0)",
+	teal300: "oklch(0.74 0.11 200)",
+	teal500: "oklch(0.63 0.08 200)",
+	teal700: "oklch(0.56 0.08 200)",
+	violet300: "oklch(0.74 0.13 285)",
+	violet500: "oklch(0.63 0.155 285)",
+	violet700: "oklch(0.54 0.18 285)",
+});

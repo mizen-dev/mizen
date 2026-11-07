@@ -1,0 +1,93 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+  "extends": [
+    "ultracite/biome/core",
+    "ultracite/biome/react",
+    "ultracite/biome/next"
+  ],
+  "files": {
+    "includes": ["!**/.next", "!**/node_modules", "!**/.turbo", "!**/dist"],
+    "maxSize": 2097152
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "tab",
+    "indentWidth": 2
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "style": {
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "paths": {
+              "react": {
+                "importNames": [
+                  "useEffect",
+                  "useLayoutEffect",
+                  "useInsertionEffect"
+                ],
+                "message": "Effect hooks are banned. Use an event handler, a ref callback, or useSyncExternalStore."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double"
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["packages/ui/src/index.ts"],
+      "linter": {
+        "rules": {
+          "performance": {
+            "noBarrelFile": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["babel.config.js"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noGlobalDirnameFilename": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages/ui/src/components/**"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noLabelWithoutControl": {
+              "level": "error",
+              "options": {
+                "labelComponents": []
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages/ui/package.json"],
+      "assist": {
+        "actions": {
+          "source": {
+            "useSortedPackageJson": "off"
+          }
+        }
+      }
+    }
+  ],
+  "plugins": ["./biome-plugins/no-effect-hooks.grit"]
+}

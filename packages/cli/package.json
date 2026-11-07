@@ -1,0 +1,51 @@
+{
+  "name": "@mizen/cli",
+  "version": "0.1.0",
+  "description": "Discover Mizen components from the same catalog as its documentation.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    "./schema/v1.json": "./schema/v1.json"
+  },
+  "bin": {
+    "mizen": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "schema"
+  ],
+  "scripts": {
+    "benchmark": "node scripts/benchmark.js",
+    "build": "tsc -p tsconfig.json && node scripts/build-catalog.js",
+    "lint": "eslint .",
+    "prepack": "pnpm build",
+    "release:check": "node scripts/check-release.js",
+    "test": "pnpm build && node scripts/test.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@babel/parser": "8.0.8",
+    "cross-spawn": "7.0.6",
+    "diff": "9.0.0",
+    "fast-glob": "3.3.3",
+    "minimatch": "11.0.4",
+    "parse5": "8.1.0",
+    "semver": "7.8.5",
+    "tar": "7.5.22",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "6.0.6",
+    "@types/node": "^26.6.5",
+    "@types/semver": "^7.7.1",
+    "ajv": "8.20.0",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=22.18.0 <23 || >=24.11.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

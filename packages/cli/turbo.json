@@ -1,0 +1,15 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "$TURBO_ROOT$/apps/docs/app/docs-registry-data.json",
+        "$TURBO_ROOT$/apps/docs/app/component-guidance-data.json",
+        "$TURBO_ROOT$/packages/ui/package.json"
+      ],
+      "outputs": ["dist/**"]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+:is([data-slot="button"], [data-slot="toolbar-button"])
+	> svg:not([data-slot="button-loading-indicator"]) {
+	flex-shrink: 0;
+	width: 1em;
+	height: 1em;
+}
+
+:is([data-slot="button"], [data-slot="toolbar-button"])[data-loading]
+	> :not([data-slot="button-loading-indicator"]) {
+	opacity: 0;
+}
+
+/* A toolbar scrolls instead of squeezing its buttons onto two lines. */
+[data-slot="toolbar-button"] {
+	flex-shrink: 0;
+}

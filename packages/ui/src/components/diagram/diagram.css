@@ -1,0 +1,51 @@
+/* Pele owns the SVG DOM. Center diagrams narrower than their container. */
+[data-slot="diagram-canvas"] > svg {
+	display: block;
+	margin-inline: auto;
+}
+
+/* Pele styles its zoom controls inline; match Mizen's quiet floating toolbar.
+   They appear on hover or keyboard focus so they never cover the diagram at
+   rest; touch screens zoom with a pinch, so the buttons stay hidden there. */
+[data-slot="diagram-canvas"] .pele-zoom {
+	padding: 3px !important;
+	border-color: color-mix(in oklch, var(--pele-fg) 12%, transparent) !important;
+	border-radius: 10px !important;
+	box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+	opacity: 0;
+	transition: opacity 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-slot="diagram-canvas"] .pele-zoom button {
+	width: 26px !important;
+	height: 26px !important;
+	color: var(--pele-muted) !important;
+	border-radius: 7px !important;
+}
+[data-slot="diagram-canvas"]:focus-within .pele-zoom {
+	opacity: 1;
+}
+@media (hover: none) {
+	[data-slot="diagram-canvas"] .pele-zoom {
+		display: none !important;
+	}
+}
+@media (hover: hover) {
+	[data-slot="diagram-canvas"]:hover .pele-zoom {
+		opacity: 1;
+	}
+	[data-slot="diagram-canvas"] .pele-zoom button:hover:not(:disabled) {
+		color: var(--pele-fg) !important;
+		background: color-mix(in oklch, var(--pele-fg) 8%, transparent) !important;
+	}
+}
+[data-slot="diagram-canvas"] .pele-zoom button:focus-visible {
+	outline: 3px solid var(--pele-accent);
+	outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-slot="diagram-canvas"] * {
+		transition: none !important;
+		animation: none !important;
+	}
+}

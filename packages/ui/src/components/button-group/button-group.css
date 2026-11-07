@@ -1,0 +1,125 @@
+/* Triggers rendered as Buttons (Menu, Popover, Dialog) carry their own slot,
+   such as menu-trigger, so they join the group too. First and last are
+   counted among items only: an open popup inserts hidden focus guards. */
+[data-slot="button-group"]
+> :is([data-slot="button"], [data-slot$="-trigger"]) {
+	flex-shrink: 0;
+	align-self: stretch !important;
+	white-space: nowrap;
+}
+
+[data-slot="button-group"]:where([data-orientation="horizontal"])
+	> :is([data-slot="button"], [data-slot$="-trigger"])
+	~ :is([data-slot="button"], [data-slot$="-trigger"]) {
+	margin-inline-start: -1px;
+}
+
+[data-slot="button-group"]:where([data-orientation="vertical"])
+	> :is([data-slot="button"], [data-slot$="-trigger"])
+	~ :is([data-slot="button"], [data-slot$="-trigger"]) {
+	margin-block-start: -1px;
+}
+
+[data-slot="button-group"]
+	> :is([data-slot="button"], [data-slot$="-trigger"]):focus-visible {
+	z-index: 1;
+}
+
+[data-slot="button-group"]
+	> :is([data-slot="button"], [data-slot$="-trigger"])
+	~ :is([data-slot="button"], [data-slot$="-trigger"])::after {
+	position: absolute;
+	pointer-events: none;
+	content: "";
+	background-color: var(--mizen-joined-divider-color);
+}
+
+[data-slot="button-group"]:where([data-orientation="horizontal"])
+	> :is([data-slot="button"], [data-slot$="-trigger"])
+	~ :is([data-slot="button"], [data-slot$="-trigger"])::after {
+	inset-block: var(--mizen-joined-divider-inset);
+	inset-inline-start: 0;
+	inline-size: 1px;
+}
+
+[data-slot="button-group"]:where([data-orientation="vertical"])
+	> :is([data-slot="button"], [data-slot$="-trigger"])
+	~ :is([data-slot="button"], [data-slot$="-trigger"])::after {
+	inset-block-start: 0;
+	inset-inline: var(--mizen-joined-divider-inset);
+	block-size: 1px;
+}
+
+/* System-owned attached geometry overrides StyleX's atomic radius priority. */
+[data-slot="button-group"]:where([data-orientation="horizontal"])
+	> :is([data-slot="button"], [data-slot$="-trigger"])
+	~ :is([data-slot="button"], [data-slot$="-trigger"]) {
+	border-inline-start-color: transparent !important;
+	border-start-start-radius: 0 !important;
+	border-end-start-radius: 0 !important;
+}
+
+[data-slot="button-group"]:where([data-orientation="horizontal"])
+	> :is([data-slot="button"], [data-slot$="-trigger"]):has(
+		~ :is([data-slot="button"], [data-slot$="-trigger"])
+	) {
+	border-inline-end-color: transparent !important;
+	border-start-end-radius: 0 !important;
+	border-end-end-radius: 0 !important;
+}
+
+[data-slot="button-group"]:where([data-orientation="vertical"])
+	> :is([data-slot="button"], [data-slot$="-trigger"])
+	~ :is([data-slot="button"], [data-slot$="-trigger"]) {
+	border-block-start-color: transparent !important;
+	border-start-start-radius: 0 !important;
+	border-start-end-radius: 0 !important;
+}
+
+[data-slot="button-group"]:where([data-orientation="vertical"])
+	> :is([data-slot="button"], [data-slot$="-trigger"]):has(
+		~ :is([data-slot="button"], [data-slot$="-trigger"])
+	) {
+	border-block-end-color: transparent !important;
+	border-end-start-radius: 0 !important;
+	border-end-end-radius: 0 !important;
+}
+
+/* Joined edges also hide the surface layer's border. */
+[data-slot="button-group"]:where([data-orientation="horizontal"])
+	> :is([data-slot="button"], [data-slot$="-trigger"])
+	~ :is([data-slot="button"], [data-slot$="-trigger"])::before {
+	border-inline-start-color: transparent !important;
+}
+
+[data-slot="button-group"]:where([data-orientation="horizontal"])
+	> :is([data-slot="button"], [data-slot$="-trigger"]):has(
+		~ :is([data-slot="button"], [data-slot$="-trigger"])
+	)::before {
+	border-inline-end-color: transparent !important;
+}
+
+[data-slot="button-group"]:where([data-orientation="vertical"])
+	> :is([data-slot="button"], [data-slot$="-trigger"])
+	~ :is([data-slot="button"], [data-slot$="-trigger"])::before {
+	border-block-start-color: transparent !important;
+}
+
+[data-slot="button-group"]:where([data-orientation="vertical"])
+	> :is([data-slot="button"], [data-slot$="-trigger"]):has(
+		~ :is([data-slot="button"], [data-slot$="-trigger"])
+	)::before {
+	border-block-end-color: transparent !important;
+}
+
+/* Pressing a joined button contracts only across the group, so the shared
+   outline stays continuous along it. */
+[data-slot="button-group"]:where([data-orientation="horizontal"])
+> :is([data-slot="button"], [data-slot$="-trigger"]):active::before {
+	inset-inline: -1px !important;
+}
+
+[data-slot="button-group"]:where([data-orientation="vertical"])
+	> :is([data-slot="button"], [data-slot$="-trigger"]):active::before {
+	inset-block: -1px !important;
+}
