@@ -8,7 +8,6 @@ import {
 	copyFile,
 	cp,
 	mkdtemp,
-	rm,
 	stat,
 	writeFile,
 } from "node:fs/promises";
@@ -18,7 +17,10 @@ import { join } from "node:path";
 import { promisify } from "node:util";
 import { type Browser, type BrowserContext, chromium } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { expect, it } from "vitest";
+import { expect, it, onTestFinished } from "vitest";
+import { INSTALL_TIMEOUT_MS } from "../../../packages/cli/scripts/process.js";
+import { stopProcess } from "../../../packages/cli/scripts/stop-process.js";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 import { verifyPackedPublicTypes } from "./packed-public-types";
 
 const execute = promisify(execFile);
@@ -124,18 +126,22 @@ function executeCommand(
 	maxBuffer = 1_000_000,
 	env: NodeJS.ProcessEnv = process.env
 ) {
-	return execute(command, args, { cwd, env, maxBuffer, timeout }).catch(
-		(error: unknown) => {
-			const output = error as Error & { stderr?: string; stdout?: string };
-			const diagnostics = [output.stdout, output.stderr]
-				.filter((value): value is string => Boolean(value?.trim()))
-				.join("\n");
-			const message = error instanceof Error ? error.message : String(error);
-			throw new Error([message, diagnostics].filter(Boolean).join("\n"), {
-				cause: error,
-			});
-		}
-	);
+	return execute(command, args, {
+		cwd,
+		env,
+		killSignal: "SIGKILL",
+		maxBuffer,
+		timeout,
+	}).catch((error: unknown) => {
+		const output = error as Error & { stderr?: string; stdout?: string };
+		const diagnostics = [output.stdout, output.stderr]
+			.filter((value): value is string => Boolean(value?.trim()))
+			.join("\n");
+		const message = error instanceof Error ? error.message : String(error);
+		throw new Error([message, diagnostics].filter(Boolean).join("\n"), {
+			cause: error,
+		});
+	});
 }
 
 async function prepareConsumer(
@@ -153,7 +159,7 @@ async function prepareConsumer(
 		"pnpm",
 		["pack", "--json", "--out", archive],
 		packageRoot,
-		30_000
+		180_000
 	);
 	const consumerArchive = join(consumerRoot, "mizen-ui.tgz");
 	await copyFile(archive, consumerArchive);
@@ -161,7 +167,7 @@ async function prepareConsumer(
 		"pnpm",
 		["install", "--ignore-scripts", "--no-frozen-lockfile"],
 		consumerRoot,
-		120_000
+		INSTALL_TIMEOUT_MS
 	);
 	if (target.typecheck) {
 		await verifyPackedPublicTypes(consumerRoot);
@@ -240,7 +246,9 @@ async function waitForServer(
 		throw new Error(`Packed consumer server did not start: ${server.output()}`);
 	}
 	try {
-		const response = await fetch(server.origin);
+		const response = await fetch(server.origin, {
+			signal: AbortSignal.timeout(1000),
+		});
 		if (response.ok) {
 			return;
 		}
@@ -252,13 +260,7 @@ async function waitForServer(
 }
 
 async function stopServer(server?: ProductionServer): Promise<void> {
-	if (!server || server.process.exitCode !== null) {
-		return;
-	}
-	await new Promise<void>((resolve) => {
-		server.process.once("exit", () => resolve());
-		server.process.kill("SIGTERM");
-	});
+	await stopProcess(server?.process);
 }
 
 async function verifyConsumer(
@@ -268,6 +270,7 @@ async function verifyConsumer(
 ): Promise<void> {
 	let browser: Browser | undefined;
 	let context: BrowserContext | undefined;
+	onTestFinished(() => browser?.close(), 10_000);
 	try {
 		browser = await chromium.launch({
 			executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH,
@@ -412,13 +415,15 @@ async function verifyConsumer(
 		await context.tracing.stop();
 	} catch (error) {
 		const tracePath = artifact(target, "trace.zip");
-		await context?.tracing.stop({ path: tracePath });
+		await context?.tracing
+			.stop({ path: tracePath })
+			.catch((traceError: unknown) => {
+				console.warn("Could not save consumer trace:", traceError);
+			});
 		if (error instanceof Error) {
 			error.message += `\nTrace: ${tracePath}`;
 		}
 		throw error;
-	} finally {
-		await browser?.close();
 	}
 }
 
@@ -516,16 +521,18 @@ for (const target of targets) {
 			const archive = join(destination, "mizen-ui.tgz");
 			let server: ProductionServer | undefined;
 
-			try {
-				await prepareConsumer(target, consumerRoot, archive);
-				server = await startProductionServer(target, consumerRoot);
-				await waitForServer(server);
-				await verifyConsumer(target, server.origin, (await stat(archive)).size);
-			} finally {
-				await stopServer(server);
-				await rm(destination, { force: true, recursive: true });
-			}
+			onTestFinished(async () => {
+				try {
+					await stopServer(server);
+				} finally {
+					await cleanup(destination);
+				}
+			}, 25_000);
+			await prepareConsumer(target, consumerRoot, archive);
+			server = await startProductionServer(target, consumerRoot);
+			await waitForServer(server);
+			await verifyConsumer(target, server.origin, (await stat(archive)).size);
 		},
-		300_000
+		2_400_000
 	);
 }

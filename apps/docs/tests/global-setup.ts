@@ -9,6 +9,8 @@ export default async function setup() {
 		// Local runs refresh compiled exports; external servers need a current UI watcher.
 		await promisify(execFile)("pnpm", ["--filter", "@mizen-labs/ui", "build"], {
 			cwd: docsRoot,
+			killSignal: "SIGKILL",
+			timeout: 180_000,
 		});
 	}
 	const handle = await setupTestServer(docsRoot);

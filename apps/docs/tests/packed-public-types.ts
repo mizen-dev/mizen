@@ -3,6 +3,7 @@ import { mkdir, readFile, realpath, rename, writeFile } from "node:fs/promises";
 import { join, sep } from "node:path";
 import { promisify } from "node:util";
 import { expect } from "vitest";
+import { INSTALL_TIMEOUT_MS } from "../../../packages/cli/scripts/process.js";
 
 const MISSING_TRANSITIVE = /(?:TS7016|TS2307).*closed/u;
 const execute = promisify(execFile);
@@ -81,12 +82,23 @@ export async function verifyPackedPublicTypes(
 	const declaration = join(installed, "dist/closed.d.ts");
 	const withheld = `${declaration}.withheld`;
 	await rename(declaration, withheld);
+	let verificationError: unknown;
 	try {
 		await expect(
 			checkModes(consumerRoot, directory, source, [modes[0]])
 		).rejects.toThrow(MISSING_TRANSITIVE);
+	} catch (error) {
+		verificationError = error;
+		throw error;
 	} finally {
-		await rename(withheld, declaration);
+		await rename(withheld, declaration).catch((restoreError: unknown) => {
+			throw new AggregateError(
+				[verificationError, restoreError].filter(
+					(error) => error !== undefined
+				),
+				"Could not restore the declaration after the negative control"
+			);
+		});
 	}
 	// Source conditions expose optional feature implementations, so check them
 	// with their declared peers after proving compiled imports work without them.
@@ -103,7 +115,7 @@ export async function verifyPackedPublicTypes(
 				"--no-frozen-lockfile",
 				...peers,
 			],
-			{ cwd: consumerRoot, timeout: 120_000 }
+			{ cwd: consumerRoot, killSignal: "SIGKILL", timeout: INSTALL_TIMEOUT_MS }
 		);
 	}
 	await checkModes(
@@ -144,6 +156,7 @@ async function checkModes(
 			);
 			return execute("pnpm", ["exec", "tsc", "--project", config], {
 				cwd: consumerRoot,
+				killSignal: "SIGKILL",
 				maxBuffer: 8_000_000,
 				timeout: 60_000,
 			}).then(

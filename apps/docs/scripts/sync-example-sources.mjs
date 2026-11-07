@@ -375,7 +375,9 @@ function formatUsageSources(usage) {
 						`${SNIPPET_MARKER}\n${snippet.code.replace(USE_CLIENT, "")}`
 				)
 				.join("\n"),
+			killSignal: "SIGKILL",
 			maxBuffer: 64 * 1024 * 1024,
+			timeout: 20_000,
 		}
 	)
 		.split(`${SNIPPET_MARKER}\n`)

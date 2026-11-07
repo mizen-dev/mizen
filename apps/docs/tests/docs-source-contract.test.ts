@@ -1,7 +1,8 @@
 import { execFileSync } from "node:child_process";
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { cleanup } from "../../../scripts/cleanup.mjs";
 import { getComponentGuidance } from "../app/component-guidance";
 import { componentDocs, renderComponentMarkdown } from "../app/docs-registry";
 import {
@@ -22,7 +23,7 @@ describe("documentation sources", () => {
 			}
 		}
 	});
-	it("typechecks and lints copied usage examples independently", () => {
+	it("typechecks and lints copied usage examples independently", async () => {
 		const docsRoot = new URL("..", import.meta.url).pathname;
 		const directory = mkdtempSync(join(docsRoot, ".usage-check-"));
 		const names = new Map<string, string>();
@@ -52,7 +53,7 @@ describe("documentation sources", () => {
 			execFileSync(
 				"pnpm",
 				["exec", "tsc", "--project", join(directory, "tsconfig.json")],
-				{ cwd: docsRoot, stdio: "inherit" }
+				{ cwd: docsRoot, stdio: "inherit", timeout: 60_000 }
 			);
 			execFileSync(
 				"pnpm",
@@ -60,17 +61,23 @@ describe("documentation sources", () => {
 				{
 					cwd: docsRoot,
 					stdio: "inherit",
+					timeout: 60_000,
 				}
 			);
 		} finally {
-			rmSync(directory, { force: true, recursive: true });
+			await cleanup(directory);
 		}
-	});
+	}, 150_000);
 	it("keeps every published example and supporting file equal to its preview source", () => {
-		execFileSync(process.execPath, [
-			new URL("../scripts/sync-example-sources.mjs", import.meta.url).pathname,
-			"--check",
-		]);
+		execFileSync(
+			process.execPath,
+			[
+				new URL("../scripts/sync-example-sources.mjs", import.meta.url)
+					.pathname,
+				"--check",
+			],
+			{ timeout: 30_000 }
+		);
 		for (const component of componentDocs) {
 			// A component previews its specimen, or else its first usage example.
 			const example = findExampleSource(component.slug);
