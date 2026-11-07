@@ -1,3 +1,8 @@
+import { execFile } from "node:child_process";
+import { mkdtemp, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { promisify } from "node:util";
 import {
 	type Browser,
 	type BrowserType,
@@ -14,6 +19,7 @@ import {
 	teardownTestServer,
 } from "./test-helper";
 
+const execute = promisify(execFile);
 const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
 const browserTypes: readonly [string, BrowserType][] = [
 	["Chromium", chromium],
@@ -34,13 +40,30 @@ describe("focused cross-browser readiness", () => {
 	it.each(browserTypes)(
 		"%s supports keyboard, motion, theme, RTL, and enlarged text",
 		async (_name, browserType) => {
-			const browser = await browserType.launch({ headless: true });
+			// Isolate Firefox app data from macOS 27's protected personal profile.
+			// https://github.com/microsoft/playwright/issues/42768
+			const env =
+				process.platform === "darwin" && browserType === firefox
+					? {
+							...process.env,
+							CFFIXED_USER_HOME: await mkdtemp(
+								join(tmpdir(), "mizen-firefox-data-")
+							),
+						}
+					: undefined;
+			let browser: Browser | undefined;
 			try {
+				browser = await browserType.launch({ env, headless: true });
 				await verifyDialogKeyboard(browser);
 				await verifyDrawerMotion(browser);
 				await verifyTablePreferences(browser);
 			} finally {
-				await browser.close();
+				await browser?.close();
+				// macOS adds a deny-delete ACL to this disposable Library folder.
+				if (env) {
+					await execute("chmod", ["-RN", env.CFFIXED_USER_HOME]);
+					await rm(env.CFFIXED_USER_HOME, { force: true, recursive: true });
+				}
 			}
 		},
 		120_000
