@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton, Stack } from "@mizen/ui";
+import { Skeleton, Stack } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { specimenStyles } from "./specimen.styles";
 import { SpecimenSection } from "./specimen-section";

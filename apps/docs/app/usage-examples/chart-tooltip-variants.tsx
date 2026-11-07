@@ -11,13 +11,13 @@ import {
 	Section,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	Metric,
 	MetricDescription,
 	MetricLabel,
 	MetricValue,
-} from "@mizen/ui/metric";
+} from "@mizen-labs/ui/metric";
 import { props } from "@stylexjs/stylex";
 import { defineChart, lineY } from "@tanstack/charts";
 import type { ChartTooltipBodyRenderContext } from "@tanstack/charts/react/tooltip";

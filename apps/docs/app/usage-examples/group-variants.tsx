@@ -1,6 +1,6 @@
 "use client";
-import { Button, Heading, Stack, Text } from "@mizen/ui";
-import { Group } from "@mizen/ui/group";
+import { Button, Heading, Stack, Text } from "@mizen-labs/ui";
+import { Group } from "@mizen-labs/ui/group";
 import { useCallback, useState } from "react";
 
 export function GroupWorkspaceChangesExample1() {

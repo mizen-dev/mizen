@@ -1,17 +1,21 @@
-import { colors } from "@mizen/ui/colors.stylex";
-import { conditions } from "@mizen/ui/conditions.stylex";
-import { fonts } from "@mizen/ui/fonts.stylex";
-import { borderWidth, focus, focusMotion } from "@mizen/ui/interaction.stylex";
-import { duration, easing } from "@mizen/ui/motion.stylex";
-import { shadows } from "@mizen/ui/shadows.stylex";
-import { shape } from "@mizen/ui/shape.stylex";
-import { space } from "@mizen/ui/spacing.stylex";
+import { colors } from "@mizen-labs/ui/colors.stylex";
+import { conditions } from "@mizen-labs/ui/conditions.stylex";
+import { fonts } from "@mizen-labs/ui/fonts.stylex";
+import {
+	borderWidth,
+	focus,
+	focusMotion,
+} from "@mizen-labs/ui/interaction.stylex";
+import { duration, easing } from "@mizen-labs/ui/motion.stylex";
+import { shadows } from "@mizen-labs/ui/shadows.stylex";
+import { shape } from "@mizen-labs/ui/shape.stylex";
+import { space } from "@mizen-labs/ui/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
 	letterSpacing,
 	lineHeight,
-} from "@mizen/ui/typography.stylex";
+} from "@mizen-labs/ui/typography.stylex";
 import { create } from "@stylexjs/stylex";
 import { header } from "../header.stylex";
 

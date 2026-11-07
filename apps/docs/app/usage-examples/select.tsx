@@ -7,7 +7,7 @@ import {
 	SelectPopup,
 	SelectTrigger,
 	SelectValue,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { useState } from "react";
 
 export function WorkspaceSelect() {

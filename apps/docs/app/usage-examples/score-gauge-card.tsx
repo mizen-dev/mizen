@@ -1,6 +1,6 @@
 "use client";
 
-import { MetricTrend, ScoreGauge } from "@mizen/ui";
+import { MetricTrend, ScoreGauge } from "@mizen-labs/ui";
 import { IconMoon } from "@tabler/icons-react";
 import { useState } from "react";
 import { PeriodSelect } from "./chart-controls";

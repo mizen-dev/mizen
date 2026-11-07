@@ -88,7 +88,7 @@ try {
 		),
 	};
 	install(join(staging, "app"), Boolean(from));
-	const binary = join(staging, "app/node_modules/@mizen/cli/dist/cli.js");
+	const binary = join(staging, "app/node_modules/@mizen-labs/cli/dist/cli.js");
 	console.log("Measuring installed CLI processes…");
 	const report = {
 		commands: measure(binary, join(staging, "app")),

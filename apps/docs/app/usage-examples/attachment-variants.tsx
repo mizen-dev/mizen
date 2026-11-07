@@ -9,7 +9,7 @@ import {
 	Link,
 	Stack,
 	Thumbnail,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function AttachmentReleaseFilesExample1() {
 	return (

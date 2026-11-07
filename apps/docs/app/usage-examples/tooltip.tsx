@@ -5,7 +5,7 @@ import {
 	TooltipPopup,
 	TooltipProvider,
 	TooltipTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconKeyboard } from "@tabler/icons-react";
 
 export function LinkTooltip() {

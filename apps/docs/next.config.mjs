@@ -16,7 +16,7 @@ export default {
 			},
 		];
 	},
-	transpilePackages: ["@mizen/ui"],
+	transpilePackages: ["@mizen-labs/ui"],
 	// The monorepo root, so Turbopack watches packages/ui. StyleX's PostCSS
 	// plugin reports those sources as dependencies; outside the root they go
 	// unwatched and package style edits never reach the CSS.

@@ -5,7 +5,7 @@ import {
 	MenuItem,
 	MenuPopup,
 	MenuTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconChevronDown } from "@tabler/icons-react";
 
 export function ViewButtonGroup() {

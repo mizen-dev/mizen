@@ -1,6 +1,6 @@
 "use client";
 
-import { MetricDelta, MetricTrend, PartToWhole } from "@mizen/ui";
+import { MetricDelta, MetricTrend, PartToWhole } from "@mizen-labs/ui";
 import { IconHeadset } from "@tabler/icons-react";
 import { useState } from "react";
 import { PeriodSelect } from "./chart-controls";

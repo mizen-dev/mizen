@@ -8,7 +8,7 @@ import {
 	type ComposerValue,
 	Suggestion,
 	Suggestions,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import {
 	IconBug,

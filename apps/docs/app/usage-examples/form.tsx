@@ -9,7 +9,7 @@ import {
 	Stack,
 	Text,
 	useForm,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { useCallback, useState } from "react";
 import { specimenStyles } from "../components/[slug]/specimens/form-specimen.styles";

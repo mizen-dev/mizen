@@ -1,4 +1,4 @@
-import { Heading, Stack, Text } from "@mizen/ui";
+import { Heading, Stack, Text } from "@mizen-labs/ui";
 import type { ReactNode } from "react";
 import { PreviewCanvas, PreviewWorkspace } from "../../preview-workspace";
 

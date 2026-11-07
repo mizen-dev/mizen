@@ -1,6 +1,6 @@
 "use client";
 
-import { AreaChart, type AreaChartSeries } from "@mizen/ui";
+import { AreaChart, type AreaChartSeries } from "@mizen-labs/ui";
 
 const month = (index: number) => Date.UTC(2026, index, 1);
 const toPoints = (values: number[]) =>

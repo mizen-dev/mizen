@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Stack } from "@mizen/ui";
-import { Diagram } from "@mizen/ui/diagram";
+import { Button, Stack } from "@mizen-labs/ui";
+import { Diagram } from "@mizen-labs/ui/diagram";
 import { useCallback, useState } from "react";
 
 const sequence = `sequenceDiagram

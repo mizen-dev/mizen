@@ -1,6 +1,6 @@
 "use client";
 
-import { isThemePreference, useTheme } from "@mizen/ui/theme";
+import { isThemePreference, useTheme } from "@mizen-labs/ui/theme";
 import { useCallback } from "react";
 
 export function ThemeSelect() {

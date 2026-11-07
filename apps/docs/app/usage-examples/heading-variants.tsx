@@ -1,4 +1,4 @@
-import { Heading } from "@mizen/ui";
+import { Heading } from "@mizen-labs/ui";
 
 export function HeadingDisplayHeadingH1Example1() {
 	return (

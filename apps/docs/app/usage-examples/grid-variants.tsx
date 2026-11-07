@@ -8,7 +8,7 @@ import {
 	Inline,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 const projects = [
 	{

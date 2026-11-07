@@ -23,7 +23,7 @@ import {
 	MenuSubPopup,
 	MenuSubTrigger,
 	MenuTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 

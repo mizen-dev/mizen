@@ -21,7 +21,7 @@ npx --no-install mizen --help
 				},
 			],
 			paragraphs: [
-				"The package is @mizen/cli and its executable is mizen. It is an unpublished 0.1.0 candidate. Use matching CLI and UI archives; public @latest commands are not available yet.",
+				"The package is @mizen-labs/cli and its executable is mizen. It is an unpublished 0.1.0 candidate. Use matching CLI and UI archives; public @latest commands are not available yet.",
 				"Obtain the candidate archives and copy mizen-cli.tgz and mizen-ui.tgz into your app. Install the CLI as a development dependency, then use the local executable. Node must satisfy >=22.18.0 <23 or >=24.11.0. npm and pnpm are supported for setup.",
 			],
 			title: "Use the release candidate",
@@ -29,8 +29,8 @@ npx --no-install mizen --help
 		{
 			code: {
 				title: "sh",
-				value: `pnpm --filter @mizen/cli pack --out ./mizen-cli.tgz
-pnpm --filter @mizen/ui pack --out ./mizen-ui.tgz`,
+				value: `pnpm --filter @mizen-labs/cli pack --out ./mizen-cli.tgz
+pnpm --filter @mizen-labs/ui pack --out ./mizen-ui.tgz`,
 			},
 			id: "pack",
 			paragraphs: [
@@ -143,7 +143,7 @@ npx --no-install mizen --version`,
 				{ href: "/docs/for-agents", label: "Guidance for coding agents" },
 			],
 			paragraphs: [
-				"--json prints one schema version 1 document. Results go to stdout; an error goes to stderr as one line, with a stable reason and the next command to run. The package exports a local Draft-07 schema at @mizen/cli/schema/v1.json. Payloads permit additive fields; command names, field types, and reasons define the contract.",
+				"--json prints one schema version 1 document. Results go to stdout; an error goes to stderr as one line, with a stable reason and the next command to run. The package exports a local Draft-07 schema at @mizen-labs/cli/schema/v1.json. Payloads permit additive fields; command names, field types, and reasons define the contract.",
 				"Check the process exit separately: 0 means success, including a plan or no changes needed; 2 is invalid usage or missing input; 1 is every other failure, including failed doctor checks, unverified checks with --strict, init conflicts, and failed installs.",
 				"Doctor failures remain doctor reports. Init installation or verification failures remain init reports. Other failures use an error envelope. Human messages can change; automation should use fields and codes. Source previews can contain local application code, so choose where to store or share them.",
 			],

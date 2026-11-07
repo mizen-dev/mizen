@@ -20,7 +20,7 @@ import {
 	Kbd,
 	KbdGroup,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	IconArchive,
 	IconArrowDown,

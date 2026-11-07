@@ -6,12 +6,12 @@ import { execute } from "../process.js";
 const smoke = `import assert from "node:assert/strict";
 import { readFileSync, statSync } from "node:fs";
 const entry = (name) => new URL(import.meta.resolve(name));
-for (const name of ["@mizen/ui/button", "@mizen/ui/theme/initialize"]) {
+for (const name of ["@mizen-labs/ui/button", "@mizen-labs/ui/theme/initialize"]) {
   assert.ok(statSync(entry(name)).size > 0);
 }
-const schema = JSON.parse(readFileSync(entry("@mizen/cli/schema/v1.json"), "utf8"));
+const schema = JSON.parse(readFileSync(entry("@mizen-labs/cli/schema/v1.json"), "utf8"));
 assert.equal(schema.$id, "urn:mizen:cli:output:v1");
-const css = readFileSync(entry("@mizen/ui/styles.css"), "utf8");
+const css = readFileSync(entry("@mizen-labs/ui/styles.css"), "utf8");
 assert.ok(css.length > 0);
 assert.ok(!css.includes("@stylex;"));
 `;
@@ -34,8 +34,8 @@ export async function checkConsumer(
 		`${JSON.stringify(
 			{
 				dependencies: {
-					"@mizen/cli": "file:../../mizen-cli.tgz",
-					"@mizen/ui": "file:../../mizen-ui.tgz",
+					"@mizen-labs/cli": "file:../../mizen-cli.tgz",
+					"@mizen-labs/ui": "file:../../mizen-ui.tgz",
 					react: reactVersion,
 					"react-dom": reactVersion,
 				},
@@ -66,7 +66,7 @@ export async function checkConsumer(
 	assert.equal(run(["--version"]).trim(), version);
 	const info = JSON.parse(run(["info", "button", "--json"]));
 	assert.equal(info.schemaVersion, 1);
-	assert.equal(info.data.component.entryPoint, "@mizen/ui/button");
+	assert.equal(info.data.component.entryPoint, "@mizen-labs/ui/button");
 	const doctor = JSON.parse(run(["doctor", "--json"]));
 	assert.equal(doctor.data.summary.errors, 0, JSON.stringify(doctor.data));
 	assert.equal(doctor.data.uiVersion, version);

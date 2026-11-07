@@ -32,9 +32,9 @@ jobs:
           cache: true
           require-lockfile: true
       - name: Build package dependencies
-        run: pnpm --filter @mizen/ui build
+        run: pnpm --filter @mizen-labs/ui build
       - name: CLI contracts and installed framework diagnostics
-        run: pnpm --filter @mizen/cli test
+        run: pnpm --filter @mizen-labs/cli test
         env:
           MIZEN_PACKED_CONSUMER: '1'
       - name: Verify release archives with npm and pnpm
@@ -78,12 +78,12 @@ jobs:
       - run: pnpm lint:check
       - run: pnpm typecheck
       - name: Install Chromium
-        run: pnpm --filter @mizen/docs exec playwright install --with-deps chromium
+        run: pnpm --filter @mizen-labs/docs exec playwright install --with-deps chromium
       - name: Theme, source, and distribution contracts
         run: >-
-          pnpm --filter @mizen/docs test
+          pnpm --filter @mizen-labs/docs test
           tests/theme-behavior.test.ts tests/theme-contract.test.ts
           tests/theme-storage.test.ts tests/theme-transition-guard.test.ts
           tests/package-distribution.test.ts tests/docs-source-contract.test.ts
       - name: Packed init, production builds, and browser behavior
-        run: pnpm --filter @mizen/docs test tests/cli-init.integration.test.ts
+        run: pnpm --filter @mizen-labs/docs test tests/cli-init.integration.test.ts

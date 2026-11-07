@@ -1,4 +1,4 @@
-import { Field, FieldDescription, FieldLabel, Switch } from "@mizen/ui";
+import { Field, FieldDescription, FieldLabel, Switch } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { specimenStyles } from "./specimen.styles";
 import { SpecimenSection } from "./specimen-section";

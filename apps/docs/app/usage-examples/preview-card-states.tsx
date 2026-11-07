@@ -7,7 +7,7 @@ import {
 	PreviewCardTrigger,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { useCallback, useState } from "react";
 
 export function PreviewCardControlled() {

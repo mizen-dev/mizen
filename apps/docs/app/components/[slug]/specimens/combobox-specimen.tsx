@@ -7,7 +7,7 @@ import {
 	ComboboxItem,
 	ComboboxList,
 	ComboboxPopup,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 const frameworks = [
 	"React",

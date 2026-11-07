@@ -1,5 +1,5 @@
 "use client";
-import { Badge, ListItem, OverflowList, Stack } from "@mizen/ui";
+import { Badge, ListItem, OverflowList, Stack } from "@mizen-labs/ui";
 
 export function OverflowListReleaseContributorsExample1() {
 	return (

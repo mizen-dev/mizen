@@ -5,7 +5,7 @@ import type {
 	FramePanelProps,
 	FrameProps,
 	FrameTitleProps,
-} from "@mizen/ui/frame";
+} from "@mizen-labs/ui/frame";
 import { type Browser, chromium, type Page } from "playwright";
 import { type ComponentPropsWithRef, createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -114,10 +114,10 @@ describe("Frame compound component and docs specimen", () => {
 	}, 120_000);
 
 	it("resolves root and subpath exports with six closed native prop contracts", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/frame")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/frame")).toContain(
 			"packages/ui/dist/components/frame/frame.js"
 		);
 		expect(contractChecks).toEqual(Array.from({ length: 12 }, () => true));

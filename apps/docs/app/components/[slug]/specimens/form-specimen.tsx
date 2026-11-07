@@ -15,7 +15,7 @@ import {
 	Stack,
 	Text,
 	useForm,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { useCallback, useRef, useState } from "react";
 import { PreviewWorkspace } from "../../preview-workspace";

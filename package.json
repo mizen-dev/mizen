@@ -2,15 +2,23 @@
   "name": "mizen",
   "version": "0.0.1",
   "private": true,
+  "homepage": "https://github.com/mizen-labs/mizen#readme",
+  "bugs": {
+    "url": "https://github.com/mizen-labs/mizen/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mizen-labs/mizen.git"
+  },
   "scripts": {
-    "benchmark:cli": "pnpm --filter @mizen/cli benchmark",
+    "benchmark:cli": "pnpm --filter @mizen-labs/cli benchmark",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "format": "biome format --write .",
     "lint": "turbo run lint",
     "lint:check": "ultracite check && turbo run lint",
     "lint:fix": "ultracite fix",
-    "release:check": "pnpm --filter @mizen/cli release:check",
+    "release:check": "pnpm --filter @mizen-labs/cli release:check",
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {

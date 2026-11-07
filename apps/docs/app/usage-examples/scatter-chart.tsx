@@ -1,6 +1,6 @@
 "use client";
 
-import { ScatterChart } from "@mizen/ui";
+import { ScatterChart } from "@mizen-labs/ui";
 import { useCallback } from "react";
 
 export function StudyOutcomes() {

@@ -1,6 +1,11 @@
 "use client";
 
-import { ChartLegend, MetricDelta, MetricTrend, TimeSeries } from "@mizen/ui";
+import {
+	ChartLegend,
+	MetricDelta,
+	MetricTrend,
+	TimeSeries,
+} from "@mizen-labs/ui";
 import { IconCoin } from "@tabler/icons-react";
 
 const toPoints = (thousands: number[]) =>

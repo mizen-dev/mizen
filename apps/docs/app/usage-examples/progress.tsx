@@ -6,7 +6,7 @@ import {
 	ProgressTrack,
 	ProgressValue,
 	Spacer,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function ExportProgress() {
 	return (

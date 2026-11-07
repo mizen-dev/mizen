@@ -33,7 +33,7 @@ import type {
 	CommandProps,
 	CommandSeparatorProps,
 	CommandShortcutProps,
-} from "@mizen/ui/command";
+} from "@mizen-labs/ui/command";
 
 type AcceptsAll<T, K extends PropertyKey> = [K] extends [keyof T]
 	? true

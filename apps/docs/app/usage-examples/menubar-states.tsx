@@ -16,7 +16,7 @@ import {
 	MenuSubTrigger,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconFile, IconSettings } from "@tabler/icons-react";
 import { useState } from "react";
 

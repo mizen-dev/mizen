@@ -1,6 +1,6 @@
 "use client";
-import { Button, Group, Stack } from "@mizen/ui";
-import { anchoredToastManager, toastManager } from "@mizen/ui/toast";
+import { Button, Group, Stack } from "@mizen-labs/ui";
+import { anchoredToastManager, toastManager } from "@mizen-labs/ui/toast";
 import type { MouseEvent } from "react";
 import { useCallback, useRef } from "react";
 

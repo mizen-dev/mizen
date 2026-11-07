@@ -1,4 +1,4 @@
-import { Heading, Section, Stack, Text } from "@mizen/ui";
+import { Heading, Section, Stack, Text } from "@mizen-labs/ui";
 import { SpecimenSection } from "./specimen-section";
 
 export function SectionSpecimen() {

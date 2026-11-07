@@ -10,7 +10,7 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function ActivityDrawer() {
 	return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { ApprovalCard, type ApprovalCardStatus, Button } from "@mizen/ui";
+import { ApprovalCard, type ApprovalCardStatus, Button } from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import { IconMail, IconTrash } from "@tabler/icons-react";
 import { useCallback, useState } from "react";

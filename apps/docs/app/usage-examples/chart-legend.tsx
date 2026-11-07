@@ -1,4 +1,4 @@
-import { ChartLegend } from "@mizen/ui";
+import { ChartLegend } from "@mizen-labs/ui";
 
 export function RevenueLegend() {
 	const items = [

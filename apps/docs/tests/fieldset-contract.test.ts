@@ -1,7 +1,10 @@
 // @vitest-environment happy-dom
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import type { FieldsetLegendProps, FieldsetProps } from "@mizen/ui/fieldset";
+import type {
+	FieldsetLegendProps,
+	FieldsetProps,
+} from "@mizen-labs/ui/fieldset";
 import { describe, expect, it, vi } from "vitest";
 import { FieldsetPrimitive } from "../../../packages/ui/src/components/fieldset/fieldset";
 

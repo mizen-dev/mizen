@@ -8,7 +8,7 @@ import {
 	MenuPopup,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function MenubarNorthstarLaunchExample1() {
 	return (

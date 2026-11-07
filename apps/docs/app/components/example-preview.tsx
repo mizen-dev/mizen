@@ -6,7 +6,7 @@ import {
 	TabsList,
 	TabsPanel,
 	TabsTab,
-} from "@mizen/ui/tabs";
+} from "@mizen-labs/ui/tabs";
 import type { ReactNode } from "react";
 
 export function ExamplePreview({

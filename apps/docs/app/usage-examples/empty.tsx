@@ -6,7 +6,7 @@ import {
 	EmptyHeader,
 	EmptyMedia,
 	EmptyTitle,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconFolder } from "@tabler/icons-react";
 
 export function NoRepositories() {

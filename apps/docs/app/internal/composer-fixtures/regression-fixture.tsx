@@ -10,7 +10,7 @@ import {
 	type ComposerQuery,
 	type ComposerValue,
 	getComposerText,
-} from "@mizen/ui/composer";
+} from "@mizen-labs/ui/composer";
 import { type FormEvent, StrictMode, useCallback, useState } from "react";
 
 const INITIAL: ComposerValue = [{ text: "Initial", type: "text" }];

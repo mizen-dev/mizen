@@ -1,6 +1,6 @@
 "use client";
-import { Group, Stack, Text, Toggle } from "@mizen/ui";
-import { space } from "@mizen/ui/spacing.stylex";
+import { Group, Stack, Text, Toggle } from "@mizen-labs/ui";
+import { space } from "@mizen-labs/ui/spacing.stylex";
 import { create, props } from "@stylexjs/stylex";
 import { IconBold, IconItalic, IconPin } from "@tabler/icons-react";
 import { useState } from "react";

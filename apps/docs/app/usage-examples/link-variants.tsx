@@ -1,4 +1,4 @@
-import { Link, Stack, Text } from "@mizen/ui";
+import { Link, Stack, Text } from "@mizen-labs/ui";
 
 export function LinkWorkspaceResourcesExample1() {
 	return (

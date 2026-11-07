@@ -11,7 +11,7 @@ import {
 	NumberFieldInput,
 	NumberFieldScrubArea,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { useState } from "react";
 
 export function NumberFieldPurchaseDetailsExample1() {

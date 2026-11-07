@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Tooltip, TooltipPopup, TooltipTrigger } from "@mizen/ui";
-import { type ThemePreference, useTheme } from "@mizen/ui/theme";
+import { Button, Tooltip, TooltipPopup, TooltipTrigger } from "@mizen-labs/ui";
+import { type ThemePreference, useTheme } from "@mizen-labs/ui/theme";
 import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons-react";
 import { useCallback, useSyncExternalStore } from "react";
 

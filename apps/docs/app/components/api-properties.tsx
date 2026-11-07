@@ -1,4 +1,4 @@
-import { TableContainer } from "@mizen/ui";
+import { TableContainer } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import type { ApiProperty, ComponentDoc } from "../docs-registry";
 import { docsStyles } from "./docs.styles";

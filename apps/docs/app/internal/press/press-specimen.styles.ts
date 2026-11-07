@@ -1,6 +1,6 @@
-import { colors } from "@mizen/ui/colors.stylex";
-import { space } from "@mizen/ui/spacing.stylex";
-import { fontSize, lineHeight } from "@mizen/ui/typography.stylex";
+import { colors } from "@mizen-labs/ui/colors.stylex";
+import { space } from "@mizen-labs/ui/spacing.stylex";
+import { fontSize, lineHeight } from "@mizen-labs/ui/typography.stylex";
 import { create } from "@stylexjs/stylex";
 
 export const pressStyles = create({

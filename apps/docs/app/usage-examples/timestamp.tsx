@@ -1,4 +1,4 @@
-import { Timestamp } from "@mizen/ui";
+import { Timestamp } from "@mizen-labs/ui";
 
 export function EditedAt() {
 	// A fixed `now` keeps the docs stable; leave it out to count from render.

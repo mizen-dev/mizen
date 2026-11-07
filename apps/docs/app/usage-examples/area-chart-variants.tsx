@@ -9,7 +9,7 @@ import {
 	MetricDelta,
 	MetricTrend,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { useCallback, useState } from "react";
 
 const month = (index: number) => Date.UTC(2026, index, 1);

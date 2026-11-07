@@ -49,7 +49,7 @@ export function member(object: SyntaxNode, key: string): boolean {
 }
 
 function arrayChange(value: unknown): Change | null {
-	const present = staticArrayContains(value, "@mizen/ui");
+	const present = staticArrayContains(value, "@mizen-labs/ui");
 	if (present === null) {
 		return conflict(
 			"The bundling setting is not a literal string array. Configure Mizen manually."
@@ -61,7 +61,7 @@ function arrayChange(value: unknown): Change | null {
 	const at = position(value, "start") + 1;
 	const node = value as SyntaxNode;
 	const comma = (node.elements as unknown[]).length ? ", " : "";
-	return { end: at, start: at, text: `"@mizen/ui"${comma}` };
+	return { end: at, start: at, text: `"@mizen-labs/ui"${comma}` };
 }
 
 function bundlingChange(
@@ -71,19 +71,19 @@ function bundlingChange(
 ): Change | null {
 	if (framework === "next") {
 		if (!member(config, "transpilePackages")) {
-			return addProperty(config, "transpilePackages", '["@mizen/ui"]');
+			return addProperty(config, "transpilePackages", '["@mizen-labs/ui"]');
 		}
 		return arrayChange(property(config, "transpilePackages"));
 	}
 	if (!member(config, "ssr")) {
-		return addProperty(config, "ssr", '{ noExternal: ["@mizen/ui"] }');
+		return addProperty(config, "ssr", '{ noExternal: ["@mizen-labs/ui"] }');
 	}
 	const ssr = property(config, "ssr");
 	if (!literalObject(ssr)) {
 		return conflict("Computed ssr configuration needs manual setup.");
 	}
 	if (!member(ssr, "noExternal")) {
-		return addProperty(ssr, "noExternal", '["@mizen/ui"]');
+		return addProperty(ssr, "noExternal", '["@mizen-labs/ui"]');
 	}
 	const external = property(ssr, "noExternal");
 	if (

@@ -6,7 +6,7 @@ import {
 	Stack,
 	Switch,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 const notifications = [
 	["mentions", "Mentions and replies", true],

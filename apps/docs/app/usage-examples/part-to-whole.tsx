@@ -1,6 +1,6 @@
 "use client";
 
-import { PartToWhole } from "@mizen/ui";
+import { PartToWhole } from "@mizen-labs/ui";
 
 export function SupportShare() {
 	const parts = [

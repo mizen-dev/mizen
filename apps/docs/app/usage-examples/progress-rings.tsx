@@ -1,6 +1,6 @@
 "use client";
 
-import { ProgressRings } from "@mizen/ui";
+import { ProgressRings } from "@mizen-labs/ui";
 
 export function DailyActivityRings() {
 	return (

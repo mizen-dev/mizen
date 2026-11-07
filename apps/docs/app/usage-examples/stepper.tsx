@@ -4,7 +4,7 @@ import {
 	StepperIndicator,
 	StepperItem,
 	StepperTitle,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconRocket } from "@tabler/icons-react";
 
 const setupSteps = [

@@ -1,6 +1,6 @@
 "use client";
 
-import { CategoryComparison } from "@mizen/ui";
+import { CategoryComparison } from "@mizen-labs/ui";
 import { useCallback } from "react";
 
 export function TicketsByTeam() {

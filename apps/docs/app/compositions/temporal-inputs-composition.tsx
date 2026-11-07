@@ -13,7 +13,7 @@ import {
 	Stack,
 	Text,
 	TimeInput,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { type FormEvent, useCallback, useState } from "react";
 import { SpecimenSection } from "../components/[slug]/specimens/specimen-section";
 import { PreviewWorkspace } from "../components/preview-workspace";

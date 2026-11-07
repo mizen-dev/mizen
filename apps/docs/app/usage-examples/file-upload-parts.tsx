@@ -1,5 +1,5 @@
 "use client";
-import type { FileUploadDropzoneState, FileUploadStatus } from "@mizen/ui";
+import type { FileUploadDropzoneState, FileUploadStatus } from "@mizen-labs/ui";
 import {
 	Button,
 	FileUploadItemName,
@@ -10,7 +10,7 @@ import {
 	FileUploadItemStatus,
 	FileUploadTrigger,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { IconAlertCircle, IconUpload } from "@tabler/icons-react";
 import type { MouseEvent } from "react";

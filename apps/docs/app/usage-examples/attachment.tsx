@@ -6,7 +6,7 @@ import {
 	AttachmentMedia,
 	AttachmentName,
 	Button,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconDownload, IconFileSpreadsheet } from "@tabler/icons-react";
 
 export function ReportAttachment() {

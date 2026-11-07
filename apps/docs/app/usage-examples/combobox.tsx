@@ -14,7 +14,7 @@ import {
 	Field,
 	FieldLabel,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 const frameworks = [
 	"React",

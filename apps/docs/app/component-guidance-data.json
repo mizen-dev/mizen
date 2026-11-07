@@ -337,7 +337,7 @@
   "diagram": {
     "boundaries": [
       "Read-only structural diagrams. Use Charts for measurements and Task List for execution progress.",
-      "Install the optional pele peer and import Diagram from @mizen/ui/diagram. Other Mizen entry points do not load the renderer.",
+      "Install the optional pele peer and import Diagram from @mizen-labs/ui/diagram. Other Mizen entry points do not load the renderer.",
       "Only flowchart, sequence, entity relationship, and state syntax are supported. Links, external images, custom icon markup, and math renderers are disabled."
     ],
     "recommendations": [

@@ -8,7 +8,7 @@ import {
 	Input,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { type FormEvent, useCallback, useState } from "react";
 import { pageStyles } from "../page.styles";

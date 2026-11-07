@@ -11,7 +11,7 @@ import {
 	PopoverTitle,
 	PopoverTrigger,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function PopoverProjectIdentityExample1() {
 	return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button, Heading, Inline, Stack, Text } from "@mizen/ui";
+import { Badge, Button, Heading, Inline, Stack, Text } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { IconPlus } from "@tabler/icons-react";
 import { useCallback, useState } from "react";

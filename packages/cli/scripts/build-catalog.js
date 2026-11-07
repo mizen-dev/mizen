@@ -20,7 +20,7 @@ const catalog = components.map((component) => {
 	return {
 		...component,
 		documentationPath: `/docs/components/${slug}`,
-		entryPoint: `@mizen/ui/${slug}`,
+		entryPoint: `@mizen-labs/ui/${slug}`,
 		guidance: guidance[slug],
 	};
 });

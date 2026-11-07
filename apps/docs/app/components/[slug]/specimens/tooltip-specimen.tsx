@@ -7,7 +7,7 @@ import {
 	TooltipPopup,
 	TooltipProvider,
 	TooltipTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconPlus } from "@tabler/icons-react";
 import { SpecimenSection } from "./specimen-section";
 

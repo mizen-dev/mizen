@@ -1,4 +1,4 @@
-import { Badge, Inline } from "@mizen/ui";
+import { Badge, Inline } from "@mizen-labs/ui";
 
 export function ReleaseBadge() {
 	return (

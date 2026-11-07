@@ -1,6 +1,10 @@
 "use client";
 
-import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@mizen/ui";
+import {
+	Collapsible,
+	CollapsiblePanel,
+	CollapsibleTrigger,
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import type { Icon } from "@tabler/icons-react";
 import {

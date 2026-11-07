@@ -1,4 +1,4 @@
-import { Field, FieldDescription, FieldLabel, Switch } from "@mizen/ui";
+import { Field, FieldDescription, FieldLabel, Switch } from "@mizen-labs/ui";
 export function AutomaticUpdatesSwitch() {
 	return (
 		<Field>

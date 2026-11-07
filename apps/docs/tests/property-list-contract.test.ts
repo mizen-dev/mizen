@@ -90,7 +90,7 @@ describe("PropertyList contract and semantics", () => {
 	});
 
 	it("resolves package export and enforces closed prop contracts", () => {
-		expect(import.meta.resolve("@mizen/ui/property-list")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/property-list")).toContain(
 			"packages/ui/dist/components/property-list/property-list.js"
 		);
 		expect(contractChecks.every((check) => check === true)).toBe(true);

@@ -8,8 +8,8 @@ import {
 	Input,
 	Stack,
 	Text,
-} from "@mizen/ui";
-import { DataTable } from "@mizen/ui/data-table";
+} from "@mizen-labs/ui";
+import { DataTable } from "@mizen-labs/ui/data-table";
 import {
 	type ColumnDef,
 	columnFilteringFeature,

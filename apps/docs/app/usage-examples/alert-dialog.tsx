@@ -8,7 +8,7 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 	Button,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function ConfirmDiscard() {
 	return (

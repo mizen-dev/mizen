@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, TaskList, type TaskListStep } from "@mizen/ui";
+import { Button, TaskList, type TaskListStep } from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import { useCallback, useRef, useState } from "react";
 

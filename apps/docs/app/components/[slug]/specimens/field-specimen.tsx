@@ -1,5 +1,5 @@
 "use client";
-import { Field, FieldDescription, FieldLabel, Input } from "@mizen/ui";
+import { Field, FieldDescription, FieldLabel, Input } from "@mizen-labs/ui";
 
 export function FieldSpecimen() {
 	return (

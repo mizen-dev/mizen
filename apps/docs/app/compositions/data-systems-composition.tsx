@@ -16,7 +16,7 @@ import {
 	Stack,
 	Text,
 	Tree,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { useState } from "react";
 import { PreviewWorkspace } from "../components/preview-workspace";
 

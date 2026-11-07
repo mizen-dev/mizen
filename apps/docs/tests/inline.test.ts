@@ -1,4 +1,4 @@
-import type { InlineProps } from "@mizen/ui/inline";
+import type { InlineProps } from "@mizen-labs/ui/inline";
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
@@ -50,10 +50,10 @@ describe("Inline component and docs specimen", () => {
 	}, 120_000);
 
 	it("resolves root and inline subpath exports with a closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/inline")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/inline")).toContain(
 			"packages/ui/dist/components/inline/inline.js"
 		);
 		const acceptsRole = false satisfies InlinePropsAcceptsRole;

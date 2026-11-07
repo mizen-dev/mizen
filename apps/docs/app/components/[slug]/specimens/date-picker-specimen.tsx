@@ -1,6 +1,6 @@
 "use client";
 
-import { DatePicker, Heading, Stack, Text } from "@mizen/ui";
+import { DatePicker, Heading, Stack, Text } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { type ReactElement, useState } from "react";
 import { specimenStyles } from "./date-picker-specimen.styles";

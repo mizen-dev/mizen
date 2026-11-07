@@ -1,6 +1,6 @@
 "use client";
 
-import { MetricTrend, ProgressRings } from "@mizen/ui";
+import { MetricTrend, ProgressRings } from "@mizen-labs/ui";
 import { IconActivity } from "@tabler/icons-react";
 
 export function ActivityRingsCard() {

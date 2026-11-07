@@ -11,7 +11,7 @@ import {
 	Spinner,
 	Text,
 	useComposerContext,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { IconArrowUp } from "@tabler/icons-react";
 import { type FormEvent, useCallback, useState } from "react";

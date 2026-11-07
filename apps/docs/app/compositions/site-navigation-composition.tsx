@@ -10,7 +10,7 @@ import {
 	Section,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import Link from "next/link";
 import { PreviewWorkspace } from "../components/preview-workspace";
 

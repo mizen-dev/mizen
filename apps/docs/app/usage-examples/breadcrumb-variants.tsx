@@ -9,7 +9,7 @@ import {
 	Heading,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import Link from "next/link";
 
 export function BreadcrumbWorkspaceResourcesExample1() {

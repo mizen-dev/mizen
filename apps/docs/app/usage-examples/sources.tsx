@@ -1,4 +1,4 @@
-import { Sources, type SourcesItem } from "@mizen/ui";
+import { Sources, type SourcesItem } from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 
 const styles = create({

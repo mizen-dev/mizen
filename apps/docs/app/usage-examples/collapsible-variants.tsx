@@ -1,10 +1,10 @@
 "use client";
-import { Button, type ButtonProps, Inline, Stack, Text } from "@mizen/ui";
+import { Button, type ButtonProps, Inline, Stack, Text } from "@mizen-labs/ui";
 import {
 	Collapsible,
 	CollapsiblePanel,
 	CollapsibleTrigger,
-} from "@mizen/ui/collapsible";
+} from "@mizen-labs/ui/collapsible";
 import { props } from "@stylexjs/stylex";
 import { IconChevronDown } from "@tabler/icons-react";
 import { useCallback, useState } from "react";

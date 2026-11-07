@@ -5,7 +5,7 @@ import {
 	ToolCall,
 	ToolCallGroup,
 	type ToolCallGroupCall,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import {
 	IconFileText,

@@ -7,7 +7,7 @@ import {
 	OTPFieldInput,
 	OTPFieldSeparator,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function OtpFieldVerifyYourAccountExample1() {
 	return (

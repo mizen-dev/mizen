@@ -10,7 +10,7 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 	Button,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { useCallback, useState } from "react";
 import { specimenStyles as previewStyles } from "./specimen.styles";

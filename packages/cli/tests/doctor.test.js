@@ -17,8 +17,8 @@ import { versionCheck } from "../dist/doctor/packages.js";
 import { parseOutput } from "./helpers/output.js";
 
 const binary = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
-const layout = `import "@mizen/ui/styles.css";
-import { ThemeProvider as Provider, ThemeScript as Script } from "@mizen/ui/theme";
+const layout = `import "@mizen-labs/ui/styles.css";
+import { ThemeProvider as Provider, ThemeScript as Script } from "@mizen-labs/ui/theme";
 export default function Root({children}) { return <html><head><Script /></head><body><Provider>{children}</Provider></body></html>; }`;
 
 function put(root, path, value) {
@@ -46,8 +46,8 @@ function fixture(t, framework = "next") {
 		name: frameworkPackage,
 		version: "16.3.8",
 	});
-	put(root, "node_modules/@mizen/ui/package.json", {
-		name: "@mizen/ui",
+	put(root, "node_modules/@mizen-labs/ui/package.json", {
+		name: "@mizen-labs/ui",
 		peerDependencies: { react: "^19.2.8", "react-dom": "^19.2.8" },
 		version: "0.1.0",
 	});
@@ -58,22 +58,22 @@ function fixture(t, framework = "next") {
 		put(
 			root,
 			"next.config.mjs",
-			`export default {transpilePackages:["@mizen/ui"]};`
+			`export default {transpilePackages:["@mizen-labs/ui"]};`
 		);
 		put(root, "app/layout.tsx", layout);
 	} else {
 		put(
 			root,
 			"vite.config.ts",
-			`import { defineConfig } from "vite"; export default defineConfig({ssr:{noExternal:["@mizen/ui"]}});`
+			`import { defineConfig } from "vite"; export default defineConfig({ssr:{noExternal:["@mizen-labs/ui"]}});`
 		);
 		put(
 			root,
 			"src/routes/__root.tsx",
 			layout
 				.replace(
-					'import "@mizen/ui/styles.css";',
-					'import css from "@mizen/ui/styles.css?url";\nimport {createRootRoute} from "@tanstack/react-router";\nexport const Route=createRootRoute({shellComponent:Root,head:()=>({links:[{href:css,rel:"stylesheet"}]})});'
+					'import "@mizen-labs/ui/styles.css";',
+					'import css from "@mizen-labs/ui/styles.css?url";\nimport {createRootRoute} from "@tanstack/react-router";\nexport const Route=createRootRoute({shellComponent:Root,head:()=>({links:[{href:css,rel:"stylesheet"}]})});'
 				)
 				.replace("export default function Root", "function Root")
 		);
@@ -115,7 +115,7 @@ test("missing installation, incompatible peers, and duplicate React produce conf
 		name: "react",
 		version: "18.3.1",
 	});
-	put(root, "node_modules/@mizen/ui/node_modules/react/package.json", {
+	put(root, "node_modules/@mizen-labs/ui/node_modules/react/package.json", {
 		name: "react",
 		version: "19.3.0",
 	});
@@ -123,7 +123,7 @@ test("missing installation, incompatible peers, and duplicate React produce conf
 	assert.equal(result.exit, 1);
 	assert.equal(diagnostic(result, "package.react").status, "error");
 	assert.equal(diagnostic(result, "identity.react").status, "error");
-	rmSync(join(root, "node_modules/@mizen/ui"), { recursive: true });
+	rmSync(join(root, "node_modules/@mizen-labs/ui"), { recursive: true });
 	result = run(root);
 	assert.equal(diagnostic(result, "package.mizen").status, "error");
 });
@@ -153,8 +153,8 @@ test("comments, strings, unlinked CSS URLs, and delegated theme setup never coun
 	put(
 		root,
 		"app/layout.tsx",
-		`// import "@mizen/ui/styles.css"; <ThemeScript /> <ThemeProvider />
-import css from "@mizen/ui/styles.css?url";
+		`// import "@mizen-labs/ui/styles.css"; <ThemeScript /> <ThemeProvider />
+import css from "@mizen-labs/ui/styles.css?url";
 const example = '<head><ThemeScript /></head>'; export default function Root() { return <html><body /></html>; }`
 	);
 	const result = run(root);
@@ -170,9 +170,9 @@ test("computed, spread, mutated, and broken configurations remain unverified and
 	const marker = join(root, "EXECUTED");
 	for (const config of [
 		`import {writeFileSync} from "node:fs"; writeFileSync(${JSON.stringify(marker)}, "bad"); export default getConfig();`,
-		`const overrides={}; export default {transpilePackages:["@mizen/ui"],...overrides};`,
-		`const config={transpilePackages:["@mizen/ui"]}; config.transpilePackages=[]; export default config;`,
-		`// export default {transpilePackages:["@mizen/ui"]};`,
+		`const overrides={}; export default {transpilePackages:["@mizen-labs/ui"],...overrides};`,
+		`const config={transpilePackages:["@mizen-labs/ui"]}; config.transpilePackages=[]; export default config;`,
+		`// export default {transpilePackages:["@mizen-labs/ui"]};`,
 		"export default {broken",
 	]) {
 		put(root, "next.config.mjs", config);

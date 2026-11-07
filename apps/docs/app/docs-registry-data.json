@@ -1129,7 +1129,7 @@
       },
       {
         "name": "SelectButton",
-        "description": "Select-style button that works outside Select context. Import from @mizen/ui/select.",
+        "description": "Select-style button that works outside Select context. Import from @mizen-labs/ui/select.",
         "properties": [
           {
             "name": "size",
@@ -1157,7 +1157,7 @@
         "id": "installation",
         "title": "Installation",
         "description": "Install the Mizen package and import the required parts. These examples use Mizen surfaces and Tabler icons.",
-        "code": "import {\n  Combobox, ComboboxInput, ComboboxPopup, ComboboxList,\n  ComboboxItem, ComboboxEmpty,\n} from \"@mizen/ui/combobox\";"
+        "code": "import {\n  Combobox, ComboboxInput, ComboboxPopup, ComboboxList,\n  ComboboxItem, ComboboxEmpty,\n} from \"@mizen-labs/ui/combobox\";"
       },
       {
         "id": "single-selection",
@@ -1279,7 +1279,7 @@
       "clientBoundary": "Server composition is supported. Hooks and event handlers belong in a consumer Client Component.",
       "dependencies": [],
       "imports": {
-        "@mizen/ui": [
+        "@mizen-labs/ui": [
           "Field",
           "FieldLabel",
           "FieldDescription",
@@ -1523,7 +1523,7 @@
       "clientBoundary": "Uncontrolled server composition is supported. Controlled values with handlers require a consumer Client Component.",
       "dependencies": [],
       "imports": {
-        "@mizen/ui": ["Input"]
+        "@mizen-labs/ui": ["Input"]
       },
       "stateOwnership": "Use native uncontrolled form values or application-controlled value and onChange."
     },
@@ -2311,7 +2311,7 @@
       "clientBoundary": "Uncontrolled server composition is supported. onValueChange and custom render callbacks require a consumer Client Component.",
       "dependencies": [],
       "imports": {
-        "@mizen/ui": [
+        "@mizen-labs/ui": [
           "Select",
           "SelectTrigger",
           "SelectValue",
@@ -3352,7 +3352,7 @@
       },
       {
         "name": "AvatarCharacter",
-        "description": "Standalone SVG character. Import from @mizen/ui or @mizen/ui/avatar. Same exact seed produces the same design without storage, network calls, or random state. Designs can repeat across seeds. Omit label beside visible identity text.",
+        "description": "Standalone SVG character. Import from @mizen-labs/ui or @mizen-labs/ui/avatar. Same exact seed produces the same design without storage, network calls, or random state. Designs can repeat across seeds. Omit label beside visible identity text.",
         "properties": [
           {
             "name": "seed",
@@ -4654,13 +4654,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "Join the reasoning parts of the latest assistant message. It is thinking while the request is pending or streaming and no answer text has arrived, so the thinking indicator also covers the wait before the first token.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { AgentThinking } from \"@mizen/ui\";\n\nexport function AssistantThinking() {\n\tconst { messages, status } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tconst parts = reply?.parts ?? [];\n\tconst reasoning = parts\n\t\t.flatMap((part) => (part.type === \"reasoning\" ? [part.text] : []))\n\t\t.join(\"\\n\\n\");\n\tconst answering = parts.some((part) => part.type === \"text\" && part.text);\n\t// Thinking until the first words of the answer arrive.\n\tconst thinking =\n\t\t(status === \"submitted\" || status === \"streaming\") && !answering;\n\tif (!(thinking || reasoning)) return null;\n\treturn (\n\t\t<AgentThinking\n\t\t\tcontent={reasoning}\n\t\t\tstatus={thinking ? \"streaming\" : \"complete\"}\n\t\t/>\n\t);\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { AgentThinking } from \"@mizen-labs/ui\";\n\nexport function AssistantThinking() {\n\tconst { messages, status } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tconst parts = reply?.parts ?? [];\n\tconst reasoning = parts\n\t\t.flatMap((part) => (part.type === \"reasoning\" ? [part.text] : []))\n\t\t.join(\"\\n\\n\");\n\tconst answering = parts.some((part) => part.type === \"text\" && part.text);\n\t// Thinking until the first words of the answer arrive.\n\tconst thinking =\n\t\t(status === \"submitted\" || status === \"streaming\") && !answering;\n\tif (!(thinking || reasoning)) return null;\n\treturn (\n\t\t<AgentThinking\n\t\t\tcontent={reasoning}\n\t\t\tstatus={thinking ? \"streaming\" : \"complete\"}\n\t\t/>\n\t);\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "Reasoning arrives as thinking parts with content. The same rule decides when thinking ends: the first answer text.",
-        "code": "import { fetchServerSentEvents, useChat } from \"@tanstack/ai-react\";\nimport { AgentThinking } from \"@mizen/ui\";\n\nexport function AssistantThinking() {\n\tconst { messages, status } = useChat({\n\t\tconnection: fetchServerSentEvents(\"/api/chat\"),\n\t});\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tconst parts = reply?.parts ?? [];\n\tconst reasoning = parts\n\t\t.flatMap((part) => (part.type === \"thinking\" ? [part.content] : []))\n\t\t.join(\"\\n\\n\");\n\tconst answering = parts.some((part) => part.type === \"text\" && part.content);\n\tconst thinking =\n\t\t(status === \"submitted\" || status === \"streaming\") && !answering;\n\tif (!(thinking || reasoning)) return null;\n\treturn (\n\t\t<AgentThinking\n\t\t\tcontent={reasoning}\n\t\t\tstatus={thinking ? \"streaming\" : \"complete\"}\n\t\t/>\n\t);\n}"
+        "code": "import { fetchServerSentEvents, useChat } from \"@tanstack/ai-react\";\nimport { AgentThinking } from \"@mizen-labs/ui\";\n\nexport function AssistantThinking() {\n\tconst { messages, status } = useChat({\n\t\tconnection: fetchServerSentEvents(\"/api/chat\"),\n\t});\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tconst parts = reply?.parts ?? [];\n\tconst reasoning = parts\n\t\t.flatMap((part) => (part.type === \"thinking\" ? [part.content] : []))\n\t\t.join(\"\\n\\n\");\n\tconst answering = parts.some((part) => part.type === \"text\" && part.content);\n\tconst thinking =\n\t\t(status === \"submitted\" || status === \"streaming\") && !answering;\n\tif (!(thinking || reasoning)) return null;\n\treturn (\n\t\t<AgentThinking\n\t\t\tcontent={reasoning}\n\t\t\tstatus={thinking ? \"streaming\" : \"complete\"}\n\t\t/>\n\t);\n}"
       }
     ]
   },
@@ -4719,13 +4719,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "Each tool-<name> part becomes one call, keyed by its toolCallId. Map the part's state to a status, and answer approvals with addToolApprovalResponse.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { ToolCallGroup, type ToolCallState } from \"@mizen/ui\";\n\nfunction statusOf(part: { state: string; approval?: { approved?: boolean } }): ToolCallState {\n\tif (part.state === \"approval-requested\") return \"approval\";\n\tif (part.state === \"output-available\") return \"complete\";\n\tif (part.state === \"output-error\") return \"error\";\n\tif (part.state === \"output-denied\" || part.approval?.approved === false) {\n\t\treturn \"denied\";\n\t}\n\treturn \"running\"; // input-streaming, input-available, approval-responded\n}\n\nexport function AssistantTools() {\n\tconst { addToolApprovalResponse, messages } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tconst calls = (reply?.parts ?? []).flatMap((part) => {\n\t\tif (!part.type.startsWith(\"tool-\")) return [];\n\t\treturn [\n\t\t\t{\n\t\t\t\terror: part.errorText,\n\t\t\t\tid: part.toolCallId,\n\t\t\t\tinput: part.input,\n\t\t\t\tname: part.type.slice(\"tool-\".length),\n\t\t\t\tonApprove: () =>\n\t\t\t\t\taddToolApprovalResponse({ approved: true, id: part.approval.id }),\n\t\t\t\tonDeny: () =>\n\t\t\t\t\taddToolApprovalResponse({ approved: false, id: part.approval.id }),\n\t\t\t\toutput: part.output,\n\t\t\t\tstatus: statusOf(part),\n\t\t\t},\n\t\t];\n\t});\n\treturn calls.length > 0 ? <ToolCallGroup calls={calls} /> : null;\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { ToolCallGroup, type ToolCallState } from \"@mizen-labs/ui\";\n\nfunction statusOf(part: { state: string; approval?: { approved?: boolean } }): ToolCallState {\n\tif (part.state === \"approval-requested\") return \"approval\";\n\tif (part.state === \"output-available\") return \"complete\";\n\tif (part.state === \"output-error\") return \"error\";\n\tif (part.state === \"output-denied\" || part.approval?.approved === false) {\n\t\treturn \"denied\";\n\t}\n\treturn \"running\"; // input-streaming, input-available, approval-responded\n}\n\nexport function AssistantTools() {\n\tconst { addToolApprovalResponse, messages } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tconst calls = (reply?.parts ?? []).flatMap((part) => {\n\t\tif (!part.type.startsWith(\"tool-\")) return [];\n\t\treturn [\n\t\t\t{\n\t\t\t\terror: part.errorText,\n\t\t\t\tid: part.toolCallId,\n\t\t\t\tinput: part.input,\n\t\t\t\tname: part.type.slice(\"tool-\".length),\n\t\t\t\tonApprove: () =>\n\t\t\t\t\taddToolApprovalResponse({ approved: true, id: part.approval.id }),\n\t\t\t\tonDeny: () =>\n\t\t\t\t\taddToolApprovalResponse({ approved: false, id: part.approval.id }),\n\t\t\t\toutput: part.output,\n\t\t\t\tstatus: statusOf(part),\n\t\t\t},\n\t\t];\n\t});\n\treturn calls.length > 0 ? <ToolCallGroup calls={calls} /> : null;\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "tool-call parts carry id, name, input, output, and state. The docs do not show how an app answers an approval, so wire Approve and Deny to your own handler.",
-        "code": "import { fetchServerSentEvents, useChat } from \"@tanstack/ai-react\";\nimport { ToolCallGroup, type ToolCallState } from \"@mizen/ui\";\n\nconst status: Record<string, ToolCallState> = {\n\t\"approval-requested\": \"approval\",\n\tcomplete: \"complete\",\n\terror: \"error\",\n};\n\nexport function AssistantTools() {\n\tconst { messages } = useChat({\n\t\tconnection: fetchServerSentEvents(\"/api/chat\"),\n\t});\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tconst calls = (reply?.parts ?? []).flatMap((part) =>\n\t\tpart.type === \"tool-call\"\n\t\t\t? [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: part.id,\n\t\t\t\t\t\tinput: part.input,\n\t\t\t\t\t\tname: part.name,\n\t\t\t\t\t\toutput: part.output,\n\t\t\t\t\t\t// awaiting-input, input-streaming, input-complete, approval-responded\n\t\t\t\t\t\tstatus: status[part.state] ?? \"running\",\n\t\t\t\t\t\t// Answer approvals with your app's handler for part.approval.\n\t\t\t\t\t},\n\t\t\t\t]\n\t\t\t: []\n\t);\n\treturn calls.length > 0 ? <ToolCallGroup calls={calls} /> : null;\n}"
+        "code": "import { fetchServerSentEvents, useChat } from \"@tanstack/ai-react\";\nimport { ToolCallGroup, type ToolCallState } from \"@mizen-labs/ui\";\n\nconst status: Record<string, ToolCallState> = {\n\t\"approval-requested\": \"approval\",\n\tcomplete: \"complete\",\n\terror: \"error\",\n};\n\nexport function AssistantTools() {\n\tconst { messages } = useChat({\n\t\tconnection: fetchServerSentEvents(\"/api/chat\"),\n\t});\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tconst calls = (reply?.parts ?? []).flatMap((part) =>\n\t\tpart.type === \"tool-call\"\n\t\t\t? [\n\t\t\t\t\t{\n\t\t\t\t\t\tid: part.id,\n\t\t\t\t\t\tinput: part.input,\n\t\t\t\t\t\tname: part.name,\n\t\t\t\t\t\toutput: part.output,\n\t\t\t\t\t\t// awaiting-input, input-streaming, input-complete, approval-responded\n\t\t\t\t\t\tstatus: status[part.state] ?? \"running\",\n\t\t\t\t\t\t// Answer approvals with your app's handler for part.approval.\n\t\t\t\t\t},\n\t\t\t\t]\n\t\t\t: []\n\t);\n\treturn calls.length > 0 ? <ToolCallGroup calls={calls} /> : null;\n}"
       }
     ]
   },
@@ -4790,13 +4790,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "Branch on the message role. Editing calls sendMessage with the message's id, which replaces it and runs the turn again. An error before any reply marks the last message as not sent, and Retry calls regenerate.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { Message, StreamingText } from \"@mizen/ui\";\n\nfunction textOf(message: { parts: { text?: string; type: string }[] }) {\n\treturn message.parts\n\t\t.flatMap((part) => (part.type === \"text\" ? [part.text] : []))\n\t\t.join(\"\");\n}\n\nexport function Thread() {\n\tconst { error, messages, regenerate, sendMessage, status } = useChat();\n\treturn messages.map((message, index) => {\n\t\tconst last = index === messages.length - 1;\n\t\tif (message.role === \"user\") {\n\t\t\treturn (\n\t\t\t\t<Message\n\t\t\t\t\tfrom=\"user\"\n\t\t\t\t\tkey={message.id}\n\t\t\t\t\t// An error before any reply leaves the person's message last.\n\t\t\t\t\tonRetry={() => regenerate()}\n\t\t\t\t\tstatus={error && last ? \"failed\" : \"sent\"}\n\t\t\t\t\t// A messageId replaces that message and runs the turn again.\n\t\t\t\t\tonEdit={(text) => sendMessage({ messageId: message.id, text })}\n\t\t\t\t>\n\t\t\t\t\t{textOf(message)}\n\t\t\t\t</Message>\n\t\t\t);\n\t\t}\n\t\treturn (\n\t\t\t<Message from=\"agent\" key={message.id}>\n\t\t\t\t{/* AgentThinking and ToolCallGroup go here; see their pages. */}\n\t\t\t\t<StreamingText\n\t\t\t\t\tcontent={textOf(message)}\n\t\t\t\t\tstatus={last && status === \"streaming\" ? \"streaming\" : \"complete\"}\n\t\t\t\t/>\n\t\t\t</Message>\n\t\t);\n\t});\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { Message, StreamingText } from \"@mizen-labs/ui\";\n\nfunction textOf(message: { parts: { text?: string; type: string }[] }) {\n\treturn message.parts\n\t\t.flatMap((part) => (part.type === \"text\" ? [part.text] : []))\n\t\t.join(\"\");\n}\n\nexport function Thread() {\n\tconst { error, messages, regenerate, sendMessage, status } = useChat();\n\treturn messages.map((message, index) => {\n\t\tconst last = index === messages.length - 1;\n\t\tif (message.role === \"user\") {\n\t\t\treturn (\n\t\t\t\t<Message\n\t\t\t\t\tfrom=\"user\"\n\t\t\t\t\tkey={message.id}\n\t\t\t\t\t// An error before any reply leaves the person's message last.\n\t\t\t\t\tonRetry={() => regenerate()}\n\t\t\t\t\tstatus={error && last ? \"failed\" : \"sent\"}\n\t\t\t\t\t// A messageId replaces that message and runs the turn again.\n\t\t\t\t\tonEdit={(text) => sendMessage({ messageId: message.id, text })}\n\t\t\t\t>\n\t\t\t\t\t{textOf(message)}\n\t\t\t\t</Message>\n\t\t\t);\n\t\t}\n\t\treturn (\n\t\t\t<Message from=\"agent\" key={message.id}>\n\t\t\t\t{/* AgentThinking and ToolCallGroup go here; see their pages. */}\n\t\t\t\t<StreamingText\n\t\t\t\t\tcontent={textOf(message)}\n\t\t\t\t\tstatus={last && status === \"streaming\" ? \"streaming\" : \"complete\"}\n\t\t\t\t/>\n\t\t\t</Message>\n\t\t);\n\t});\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "Text parts carry content instead of text. The docs do not show how to replace a sent message, so pass Edit to your own handler.",
-        "code": "import { fetchServerSentEvents, useChat } from \"@tanstack/ai-react\";\nimport { Message, StreamingText } from \"@mizen/ui\";\n\nfunction textOf(message: { parts: { content?: string; type: string }[] }) {\n\treturn message.parts\n\t\t.flatMap((part) => (part.type === \"text\" ? [part.content] : []))\n\t\t.join(\"\");\n}\n\nexport function Thread({ onEdit }: { onEdit: (id: string, text: string) => void }) {\n\tconst { error, isLoading, messages, reload } = useChat({\n\t\tconnection: fetchServerSentEvents(\"/api/chat\"),\n\t});\n\treturn messages.map((message, index) =>\n\t\tmessage.role === \"user\" ? (\n\t\t\t<Message\n\t\t\t\tfrom=\"user\"\n\t\t\t\tkey={message.id}\n\t\t\t\tonRetry={reload}\n\t\t\t\tstatus={error && index === messages.length - 1 ? \"failed\" : \"sent\"}\n\t\t\t\t// Your handler drops the later turns and sends the new text.\n\t\t\t\tonEdit={(text) => onEdit(message.id, text)}\n\t\t\t>\n\t\t\t\t{textOf(message)}\n\t\t\t</Message>\n\t\t) : (\n\t\t\t<Message from=\"agent\" key={message.id}>\n\t\t\t\t<StreamingText\n\t\t\t\t\tcontent={textOf(message)}\n\t\t\t\t\tstatus={isLoading && index === messages.length - 1 ? \"streaming\" : \"complete\"}\n\t\t\t\t/>\n\t\t\t</Message>\n\t\t)\n\t);\n}"
+        "code": "import { fetchServerSentEvents, useChat } from \"@tanstack/ai-react\";\nimport { Message, StreamingText } from \"@mizen-labs/ui\";\n\nfunction textOf(message: { parts: { content?: string; type: string }[] }) {\n\treturn message.parts\n\t\t.flatMap((part) => (part.type === \"text\" ? [part.content] : []))\n\t\t.join(\"\");\n}\n\nexport function Thread({ onEdit }: { onEdit: (id: string, text: string) => void }) {\n\tconst { error, isLoading, messages, reload } = useChat({\n\t\tconnection: fetchServerSentEvents(\"/api/chat\"),\n\t});\n\treturn messages.map((message, index) =>\n\t\tmessage.role === \"user\" ? (\n\t\t\t<Message\n\t\t\t\tfrom=\"user\"\n\t\t\t\tkey={message.id}\n\t\t\t\tonRetry={reload}\n\t\t\t\tstatus={error && index === messages.length - 1 ? \"failed\" : \"sent\"}\n\t\t\t\t// Your handler drops the later turns and sends the new text.\n\t\t\t\tonEdit={(text) => onEdit(message.id, text)}\n\t\t\t>\n\t\t\t\t{textOf(message)}\n\t\t\t</Message>\n\t\t) : (\n\t\t\t<Message from=\"agent\" key={message.id}>\n\t\t\t\t<StreamingText\n\t\t\t\t\tcontent={textOf(message)}\n\t\t\t\t\tstatus={isLoading && index === messages.length - 1 ? \"streaming\" : \"complete\"}\n\t\t\t\t/>\n\t\t\t</Message>\n\t\t)\n\t);\n}"
       }
     ]
   },
@@ -4825,13 +4825,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "Collect the reply's source-url and source-document parts. A title is optional on source-url; Sources falls back to the domain.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { Sources, type SourcesItem } from \"@mizen/ui\";\n\nfunction sourcesOf(message: { parts: { type: string }[] }): SourcesItem[] {\n\treturn message.parts.flatMap((part) => {\n\t\tif (part.type === \"source-url\") {\n\t\t\treturn [{ href: part.url, title: part.title }];\n\t\t}\n\t\tif (part.type === \"source-document\") {\n\t\t\treturn [{ title: part.title }];\n\t\t}\n\t\treturn [];\n\t});\n}\n\nexport function ReplySources() {\n\tconst { messages } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\t// Sources drops repeats, so a page cited twice shows once.\n\treturn reply ? <Sources sources={sourcesOf(reply)} /> : null;\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { Sources, type SourcesItem } from \"@mizen-labs/ui\";\n\nfunction sourcesOf(message: { parts: { type: string }[] }): SourcesItem[] {\n\treturn message.parts.flatMap((part) => {\n\t\tif (part.type === \"source-url\") {\n\t\t\treturn [{ href: part.url, title: part.title }];\n\t\t}\n\t\tif (part.type === \"source-document\") {\n\t\t\treturn [{ title: part.title }];\n\t\t}\n\t\treturn [];\n\t});\n}\n\nexport function ReplySources() {\n\tconst { messages } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\t// Sources drops repeats, so a page cited twice shows once.\n\treturn reply ? <Sources sources={sourcesOf(reply)} /> : null;\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "TanStack AI has no source part. Return sources from your tool or server as data, then pass them to Sources.",
-        "code": "import { Sources } from \"@mizen/ui\";\n\n// For example, from a search tool's result.\nexport function SearchSources({ results }: { results: { title: string; url: string }[] }) {\n\treturn (\n\t\t<Sources\n\t\t\tsources={results.map((result) => ({ href: result.url, title: result.title }))}\n\t\t/>\n\t);\n}"
+        "code": "import { Sources } from \"@mizen-labs/ui\";\n\n// For example, from a search tool's result.\nexport function SearchSources({ results }: { results: { title: string; url: string }[] }) {\n\treturn (\n\t\t<Sources\n\t\t\tsources={results.map((result) => ({ href: result.url, title: result.title }))}\n\t\t/>\n\t);\n}"
       }
     ]
   },
@@ -4878,13 +4878,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "The AI SDK has no plan part. Stream the plan as a custom data part and update each step's status as the agent works.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { TaskList, type TaskListStep } from \"@mizen/ui\";\n\n// Your agent streams its plan as a data part, such as data-plan, and\n// updates each step's status as it works.\ntype PlanPart = {\n\tdata: { steps: TaskListStep[]; title: string };\n\ttype: \"data-plan\";\n};\n\nexport function AgentPlan({ onApprove }: { onApprove: () => void }) {\n\tconst { messages, status } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tconst plan = reply?.parts.findLast(\n\t\t(part): part is PlanPart => part.type === \"data-plan\"\n\t);\n\tif (!plan) return null;\n\treturn (\n\t\t<TaskList\n\t\t\t// Ask before running while the agent waits for an answer.\n\t\t\tapproval={status === \"ready\" && plan.data.steps.every((step) => step.status === \"pending\")}\n\t\t\tonApprove={onApprove}\n\t\t\tsteps={plan.data.steps}\n\t\t\ttitle={plan.data.title}\n\t\t/>\n\t);\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { TaskList, type TaskListStep } from \"@mizen-labs/ui\";\n\n// Your agent streams its plan as a data part, such as data-plan, and\n// updates each step's status as it works.\ntype PlanPart = {\n\tdata: { steps: TaskListStep[]; title: string };\n\ttype: \"data-plan\";\n};\n\nexport function AgentPlan({ onApprove }: { onApprove: () => void }) {\n\tconst { messages, status } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tconst plan = reply?.parts.findLast(\n\t\t(part): part is PlanPart => part.type === \"data-plan\"\n\t);\n\tif (!plan) return null;\n\treturn (\n\t\t<TaskList\n\t\t\t// Ask before running while the agent waits for an answer.\n\t\t\tapproval={status === \"ready\" && plan.data.steps.every((step) => step.status === \"pending\")}\n\t\t\tonApprove={onApprove}\n\t\t\tsteps={plan.data.steps}\n\t\t\ttitle={plan.data.title}\n\t\t/>\n\t);\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "Return the plan from a tool, such as a plan tool the model calls first, and read its output from the tool-call part.",
-        "code": "import { TaskList, type TaskListStep } from \"@mizen/ui\";\n\n// part is a tool-call part whose tool returns { title, steps }.\nexport function PlanFromTool({ part }: { part: { output?: { steps: TaskListStep[]; title: string } } }) {\n\treturn part.output ? (\n\t\t<TaskList steps={part.output.steps} title={part.output.title} />\n\t) : null;\n}"
+        "code": "import { TaskList, type TaskListStep } from \"@mizen-labs/ui\";\n\n// part is a tool-call part whose tool returns { title, steps }.\nexport function PlanFromTool({ part }: { part: { output?: { steps: TaskListStep[]; title: string } } }) {\n\treturn part.output ? (\n\t\t<TaskList steps={part.output.steps} title={part.output.title} />\n\t) : null;\n}"
       }
     ]
   },
@@ -4907,13 +4907,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "Each source-url part is a citation. In your own text, render a chip where the part appears; Streaming Text does this for [n] markers and { source } parts. title is optional; the chip falls back to the domain.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { InlineCitation, type InlineCitationSource, Text } from \"@mizen/ui\";\n\n// Render text parts as they come, and each source-url part as a chip where\n// it appears in the reply.\nexport function CitedReply() {\n\tconst { messages } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\treturn (\n\t\t<Text>\n\t\t\t{reply?.parts.map((part, index) => {\n\t\t\t\tif (part.type === \"text\") return part.text;\n\t\t\t\tif (part.type === \"source-url\") {\n\t\t\t\t\tconst source: InlineCitationSource = { href: part.url, title: part.title };\n\t\t\t\t\treturn <InlineCitation key={index} sources={[source]} />;\n\t\t\t\t}\n\t\t\t\treturn null;\n\t\t\t})}\n\t\t</Text>\n\t);\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { InlineCitation, type InlineCitationSource, Text } from \"@mizen-labs/ui\";\n\n// Render text parts as they come, and each source-url part as a chip where\n// it appears in the reply.\nexport function CitedReply() {\n\tconst { messages } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\treturn (\n\t\t<Text>\n\t\t\t{reply?.parts.map((part, index) => {\n\t\t\t\tif (part.type === \"text\") return part.text;\n\t\t\t\tif (part.type === \"source-url\") {\n\t\t\t\t\tconst source: InlineCitationSource = { href: part.url, title: part.title };\n\t\t\t\t\treturn <InlineCitation key={index} sources={[source]} />;\n\t\t\t\t}\n\t\t\t\treturn null;\n\t\t\t})}\n\t\t</Text>\n\t);\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "TanStack AI has no source part. Have the model cite with [n] markers and pass the sources to Streaming Text, which turns each marker into a chip, or place chips yourself from your tool's results.",
-        "code": "import { InlineCitation } from \"@mizen/ui\";\n\nexport function Claim({ text, url, title }: { text: string; title: string; url: string }) {\n\treturn (\n\t\t<>\n\t\t\t{text}\n\t\t\t<InlineCitation sources={[{ href: url, title }]} />\n\t\t</>\n\t);\n}"
+        "code": "import { InlineCitation } from \"@mizen-labs/ui\";\n\nexport function Claim({ text, url, title }: { text: string; title: string; url: string }) {\n\treturn (\n\t\t<>\n\t\t\t{text}\n\t\t\t<InlineCitation sources={[{ href: url, title }]} />\n\t\t</>\n\t);\n}"
       }
     ]
   },
@@ -4966,13 +4966,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "Show the card while a tool part is approval-requested. A note given with a denial reaches the model as its reason. Decisions made by a rule arrive with isAutomatic set.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { ApprovalCard } from \"@mizen/ui\";\n\n// Render a tool part that waits for approval, or one that was decided.\nexport function ToolApproval({ part }: { part: ToolPart }) {\n\tconst { addToolApprovalResponse } = useChat();\n\tif (part.state === \"approval-requested\" && !part.approval.isAutomatic) {\n\t\treturn (\n\t\t\t<ApprovalCard\n\t\t\t\tdescription={part.approval.requestReason}\n\t\t\t\tdetails={[{ label: \"Command\", value: part.input.command }]}\n\t\t\t\tonApprove={() =>\n\t\t\t\t\taddToolApprovalResponse({ approved: true, id: part.approval.id })\n\t\t\t\t}\n\t\t\t\t// A note reaches the model with the denial.\n\t\t\t\tonDeny={({ note }) =>\n\t\t\t\t\taddToolApprovalResponse({\n\t\t\t\t\t\tapproved: false,\n\t\t\t\t\t\tid: part.approval.id,\n\t\t\t\t\t\treason: note,\n\t\t\t\t\t})\n\t\t\t\t}\n\t\t\t\tstatus=\"pending\"\n\t\t\t\ttitle={`Run ${part.input.command}`}\n\t\t\t/>\n\t\t);\n\t}\n\tif (part.approval?.approved === undefined) return null;\n\treturn (\n\t\t<ApprovalCard\n\t\t\tautomatic={part.approval.isAutomatic}\n\t\t\tnote={part.approval.reason}\n\t\t\tstatus={part.approval.approved ? \"approved\" : \"denied\"}\n\t\t\ttitle={`Run ${part.input.command}`}\n\t\t/>\n\t);\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { ApprovalCard } from \"@mizen-labs/ui\";\n\n// Render a tool part that waits for approval, or one that was decided.\nexport function ToolApproval({ part }: { part: ToolPart }) {\n\tconst { addToolApprovalResponse } = useChat();\n\tif (part.state === \"approval-requested\" && !part.approval.isAutomatic) {\n\t\treturn (\n\t\t\t<ApprovalCard\n\t\t\t\tdescription={part.approval.requestReason}\n\t\t\t\tdetails={[{ label: \"Command\", value: part.input.command }]}\n\t\t\t\tonApprove={() =>\n\t\t\t\t\taddToolApprovalResponse({ approved: true, id: part.approval.id })\n\t\t\t\t}\n\t\t\t\t// A note reaches the model with the denial.\n\t\t\t\tonDeny={({ note }) =>\n\t\t\t\t\taddToolApprovalResponse({\n\t\t\t\t\t\tapproved: false,\n\t\t\t\t\t\tid: part.approval.id,\n\t\t\t\t\t\treason: note,\n\t\t\t\t\t})\n\t\t\t\t}\n\t\t\t\tstatus=\"pending\"\n\t\t\t\ttitle={`Run ${part.input.command}`}\n\t\t\t/>\n\t\t);\n\t}\n\tif (part.approval?.approved === undefined) return null;\n\treturn (\n\t\t<ApprovalCard\n\t\t\tautomatic={part.approval.isAutomatic}\n\t\t\tnote={part.approval.reason}\n\t\t\tstatus={part.approval.approved ? \"approved\" : \"denied\"}\n\t\t\ttitle={`Run ${part.input.command}`}\n\t\t/>\n\t);\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "tool-call parts in the approval-requested state carry the input. Pass the person's answer to your app's handler.",
-        "code": "import { ApprovalCard } from \"@mizen/ui\";\n\n// part is a tool-call part in the approval-requested state. The docs do not\n// show how to answer it, so pass your app's handler.\nexport function ToolApproval({ part, respond }: { part: { input: { command: string } }; respond: (approved: boolean, note?: string) => void }) {\n\treturn (\n\t\t<ApprovalCard\n\t\t\tonApprove={() => respond(true)}\n\t\t\tonDeny={({ note }) => respond(false, note)}\n\t\t\tstatus=\"pending\"\n\t\t\ttitle={`Run ${part.input.command}`}\n\t\t/>\n\t);\n}"
+        "code": "import { ApprovalCard } from \"@mizen-labs/ui\";\n\n// part is a tool-call part in the approval-requested state. The docs do not\n// show how to answer it, so pass your app's handler.\nexport function ToolApproval({ part, respond }: { part: { input: { command: string } }; respond: (approved: boolean, note?: string) => void }) {\n\treturn (\n\t\t<ApprovalCard\n\t\t\tonApprove={() => respond(true)}\n\t\t\tonDeny={({ note }) => respond(false, note)}\n\t\t\tstatus=\"pending\"\n\t\t\ttitle={`Run ${part.input.command}`}\n\t\t/>\n\t);\n}"
       }
     ]
   },
@@ -5013,13 +5013,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "Make asking a client-side tool. The model sends the questions as its input, and addToolOutput returns the answers, so the agent continues with them.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { QuestionCard, type QuestionCardQuestion } from \"@mizen/ui\";\n\n// askQuestions is a client-side tool: the model sends the questions as its\n// input, and the person's answers become its output.\nexport function AskQuestions({ part }: { part: AskQuestionsPart }) {\n\tconst { addToolOutput } = useChat();\n\tconst questions: QuestionCardQuestion[] = part.input.questions;\n\tif (part.state === \"output-available\") {\n\t\treturn (\n\t\t\t<QuestionCard answers={part.output} questions={questions} status=\"answered\" />\n\t\t);\n\t}\n\treturn (\n\t\t<QuestionCard\n\t\t\tonSubmit={(answers) =>\n\t\t\t\taddToolOutput({\n\t\t\t\t\toutput: answers,\n\t\t\t\t\ttool: \"askQuestions\",\n\t\t\t\t\ttoolCallId: part.toolCallId,\n\t\t\t\t})\n\t\t\t}\n\t\t\tquestions={questions}\n\t\t\tstatus=\"pending\"\n\t\t/>\n\t);\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { QuestionCard, type QuestionCardQuestion } from \"@mizen-labs/ui\";\n\n// askQuestions is a client-side tool: the model sends the questions as its\n// input, and the person's answers become its output.\nexport function AskQuestions({ part }: { part: AskQuestionsPart }) {\n\tconst { addToolOutput } = useChat();\n\tconst questions: QuestionCardQuestion[] = part.input.questions;\n\tif (part.state === \"output-available\") {\n\t\treturn (\n\t\t\t<QuestionCard answers={part.output} questions={questions} status=\"answered\" />\n\t\t);\n\t}\n\treturn (\n\t\t<QuestionCard\n\t\t\tonSubmit={(answers) =>\n\t\t\t\taddToolOutput({\n\t\t\t\t\toutput: answers,\n\t\t\t\t\ttool: \"askQuestions\",\n\t\t\t\t\ttoolCallId: part.toolCallId,\n\t\t\t\t})\n\t\t\t}\n\t\t\tquestions={questions}\n\t\t\tstatus=\"pending\"\n\t\t/>\n\t);\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "Use a client tool whose input is the questions, and return the answers as its result.",
-        "code": "import { QuestionCard, type QuestionCardQuestion } from \"@mizen/ui\";\n\n// A client tool whose input is the questions. Return the answers as its\n// result with your app's handler for client tools.\nexport function AskQuestions({ part, answer }: { part: { input?: { questions: QuestionCardQuestion[] }; output?: Record<string, string[]> }; answer: (answers: Record<string, string[]>) => void }) {\n\tif (!part.input) return null;\n\treturn (\n\t\t<QuestionCard\n\t\t\tanswers={part.output}\n\t\t\tonSubmit={answer}\n\t\t\tquestions={part.input.questions}\n\t\t\tstatus={part.output ? \"answered\" : \"pending\"}\n\t\t/>\n\t);\n}"
+        "code": "import { QuestionCard, type QuestionCardQuestion } from \"@mizen-labs/ui\";\n\n// A client tool whose input is the questions. Return the answers as its\n// result with your app's handler for client tools.\nexport function AskQuestions({ part, answer }: { part: { input?: { questions: QuestionCardQuestion[] }; output?: Record<string, string[]> }; answer: (answers: Record<string, string[]>) => void }) {\n\tif (!part.input) return null;\n\treturn (\n\t\t<QuestionCard\n\t\t\tanswers={part.output}\n\t\t\tonSubmit={answer}\n\t\t\tquestions={part.input.questions}\n\t\t\tstatus={part.output ? \"answered\" : \"pending\"}\n\t\t/>\n\t);\n}"
       }
     ]
   },
@@ -5072,13 +5072,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "Key each turn by the message id. Mark the log busy while the reply streams.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport {\n\tComposer,\n\tComposerInput,\n\tConversation,\n\tConversationContent,\n\tConversationFooter,\n\tgetComposerText,\n\tMessage,\n\tStreamingText,\n} from \"@mizen/ui\";\n\nexport function Chat() {\n\tconst { messages, sendMessage, status } = useChat();\n\tconst streaming = status === \"submitted\" || status === \"streaming\";\n\treturn (\n\t\t<Conversation>\n\t\t\t<ConversationContent busy={streaming}>\n\t\t\t\t{messages.map((message) =>\n\t\t\t\t\tmessage.role === \"user\" ? (\n\t\t\t\t\t\t<Message from=\"user\" key={message.id}>\n\t\t\t\t\t\t\t{textOf(message)}\n\t\t\t\t\t\t</Message>\n\t\t\t\t\t) : (\n\t\t\t\t\t\t<Message from=\"agent\" key={message.id}>\n\t\t\t\t\t\t\t<StreamingText content={textOf(message)} status={streaming ? \"streaming\" : \"complete\"} />\n\t\t\t\t\t\t</Message>\n\t\t\t\t\t)\n\t\t\t\t)}\n\t\t\t</ConversationContent>\n\t\t\t<ConversationFooter>\n\t\t\t\t<Composer onSubmit={(value) => sendMessage({ text: getComposerText(value) })}>\n\t\t\t\t\t<ComposerInput aria-label=\"Message\" />\n\t\t\t\t</Composer>\n\t\t\t</ConversationFooter>\n\t\t</Conversation>\n\t);\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport {\n\tComposer,\n\tComposerInput,\n\tConversation,\n\tConversationContent,\n\tConversationFooter,\n\tgetComposerText,\n\tMessage,\n\tStreamingText,\n} from \"@mizen-labs/ui\";\n\nexport function Chat() {\n\tconst { messages, sendMessage, status } = useChat();\n\tconst streaming = status === \"submitted\" || status === \"streaming\";\n\treturn (\n\t\t<Conversation>\n\t\t\t<ConversationContent busy={streaming}>\n\t\t\t\t{messages.map((message) =>\n\t\t\t\t\tmessage.role === \"user\" ? (\n\t\t\t\t\t\t<Message from=\"user\" key={message.id}>\n\t\t\t\t\t\t\t{textOf(message)}\n\t\t\t\t\t\t</Message>\n\t\t\t\t\t) : (\n\t\t\t\t\t\t<Message from=\"agent\" key={message.id}>\n\t\t\t\t\t\t\t<StreamingText content={textOf(message)} status={streaming ? \"streaming\" : \"complete\"} />\n\t\t\t\t\t\t</Message>\n\t\t\t\t\t)\n\t\t\t\t)}\n\t\t\t</ConversationContent>\n\t\t\t<ConversationFooter>\n\t\t\t\t<Composer onSubmit={(value) => sendMessage({ text: getComposerText(value) })}>\n\t\t\t\t\t<ComposerInput aria-label=\"Message\" />\n\t\t\t\t</Composer>\n\t\t\t</ConversationFooter>\n\t\t</Conversation>\n\t);\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "Same shape: one turn per message, keyed by its id.",
-        "code": "import { useChat } from \"@tanstack/ai-react\";\nimport { Conversation, ConversationContent, Message, StreamingText } from \"@mizen/ui\";\n\nexport function Thread() {\n\tconst { isLoading, messages } = useChat();\n\treturn (\n\t\t<Conversation>\n\t\t\t<ConversationContent busy={isLoading}>\n\t\t\t\t{messages.map((message) =>\n\t\t\t\t\tmessage.role === \"user\" ? (\n\t\t\t\t\t\t<Message from=\"user\" key={message.id}>{textOf(message)}</Message>\n\t\t\t\t\t) : (\n\t\t\t\t\t\t<Message from=\"agent\" key={message.id}>\n\t\t\t\t\t\t\t<StreamingText content={textOf(message)} status={isLoading ? \"streaming\" : \"complete\"} />\n\t\t\t\t\t\t</Message>\n\t\t\t\t\t)\n\t\t\t\t)}\n\t\t\t</ConversationContent>\n\t\t</Conversation>\n\t);\n}"
+        "code": "import { useChat } from \"@tanstack/ai-react\";\nimport { Conversation, ConversationContent, Message, StreamingText } from \"@mizen-labs/ui\";\n\nexport function Thread() {\n\tconst { isLoading, messages } = useChat();\n\treturn (\n\t\t<Conversation>\n\t\t\t<ConversationContent busy={isLoading}>\n\t\t\t\t{messages.map((message) =>\n\t\t\t\t\tmessage.role === \"user\" ? (\n\t\t\t\t\t\t<Message from=\"user\" key={message.id}>{textOf(message)}</Message>\n\t\t\t\t\t) : (\n\t\t\t\t\t\t<Message from=\"agent\" key={message.id}>\n\t\t\t\t\t\t\t<StreamingText content={textOf(message)} status={isLoading ? \"streaming\" : \"complete\"} />\n\t\t\t\t\t\t</Message>\n\t\t\t\t\t)\n\t\t\t\t)}\n\t\t\t</ConversationContent>\n\t\t</Conversation>\n\t);\n}"
       }
     ]
   },
@@ -5137,13 +5137,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "Wrap each message in an item keyed by its id, and anchor the person's turns. Conversation does this for you.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport {\n\tMessageScroller,\n\tMessageScrollerButton,\n\tMessageScrollerContent,\n\tMessageScrollerItem,\n\tMessageScrollerViewport,\n} from \"@mizen/ui\";\n\nexport function Transcript() {\n\tconst { messages } = useChat();\n\treturn (\n\t\t<MessageScroller>\n\t\t\t<MessageScrollerViewport>\n\t\t\t\t<MessageScrollerContent>\n\t\t\t\t\t{messages.map((message) => (\n\t\t\t\t\t\t<MessageScrollerItem\n\t\t\t\t\t\t\tkey={message.id}\n\t\t\t\t\t\t\tmessageId={message.id}\n\t\t\t\t\t\t\tscrollAnchor={message.role === \"user\"}\n\t\t\t\t\t\t>\n\t\t\t\t\t\t\t<Row message={message} />\n\t\t\t\t\t\t</MessageScrollerItem>\n\t\t\t\t\t))}\n\t\t\t\t</MessageScrollerContent>\n\t\t\t</MessageScrollerViewport>\n\t\t\t<MessageScrollerButton />\n\t\t</MessageScroller>\n\t);\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport {\n\tMessageScroller,\n\tMessageScrollerButton,\n\tMessageScrollerContent,\n\tMessageScrollerItem,\n\tMessageScrollerViewport,\n} from \"@mizen-labs/ui\";\n\nexport function Transcript() {\n\tconst { messages } = useChat();\n\treturn (\n\t\t<MessageScroller>\n\t\t\t<MessageScrollerViewport>\n\t\t\t\t<MessageScrollerContent>\n\t\t\t\t\t{messages.map((message) => (\n\t\t\t\t\t\t<MessageScrollerItem\n\t\t\t\t\t\t\tkey={message.id}\n\t\t\t\t\t\t\tmessageId={message.id}\n\t\t\t\t\t\t\tscrollAnchor={message.role === \"user\"}\n\t\t\t\t\t\t>\n\t\t\t\t\t\t\t<Row message={message} />\n\t\t\t\t\t\t</MessageScrollerItem>\n\t\t\t\t\t))}\n\t\t\t\t</MessageScrollerContent>\n\t\t\t</MessageScrollerViewport>\n\t\t\t<MessageScrollerButton />\n\t\t</MessageScroller>\n\t);\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "The same items, keyed by the message id.",
-        "code": "import { useChat } from \"@tanstack/ai-react\";\nimport { MessageScroller, MessageScrollerContent, MessageScrollerItem, MessageScrollerViewport } from \"@mizen/ui\";\n\nexport function Transcript() {\n\tconst { messages } = useChat();\n\treturn (\n\t\t<MessageScroller>\n\t\t\t<MessageScrollerViewport>\n\t\t\t\t<MessageScrollerContent>\n\t\t\t\t\t{messages.map((message) => (\n\t\t\t\t\t\t<MessageScrollerItem key={message.id} messageId={message.id} scrollAnchor={message.role === \"user\"}>\n\t\t\t\t\t\t\t<Row message={message} />\n\t\t\t\t\t\t</MessageScrollerItem>\n\t\t\t\t\t))}\n\t\t\t\t</MessageScrollerContent>\n\t\t\t</MessageScrollerViewport>\n\t\t</MessageScroller>\n\t);\n}"
+        "code": "import { useChat } from \"@tanstack/ai-react\";\nimport { MessageScroller, MessageScrollerContent, MessageScrollerItem, MessageScrollerViewport } from \"@mizen-labs/ui\";\n\nexport function Transcript() {\n\tconst { messages } = useChat();\n\treturn (\n\t\t<MessageScroller>\n\t\t\t<MessageScrollerViewport>\n\t\t\t\t<MessageScrollerContent>\n\t\t\t\t\t{messages.map((message) => (\n\t\t\t\t\t\t<MessageScrollerItem key={message.id} messageId={message.id} scrollAnchor={message.role === \"user\"}>\n\t\t\t\t\t\t\t<Row message={message} />\n\t\t\t\t\t\t</MessageScrollerItem>\n\t\t\t\t\t))}\n\t\t\t\t</MessageScrollerContent>\n\t\t\t</MessageScrollerViewport>\n\t\t</MessageScroller>\n\t);\n}"
       }
     ]
   },
@@ -5190,13 +5190,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "The label is the message. Send it as is, and disable the row while the agent answers.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { Suggestion, Suggestions } from \"@mizen/ui\";\n\nconst starters = [\"Fix the failing build\", \"Write tests for the form\"];\n\nexport function Starters() {\n\tconst { sendMessage, status } = useChat();\n\tconst busy = status === \"submitted\" || status === \"streaming\";\n\treturn (\n\t\t<Suggestions>\n\t\t\t{starters.map((starter) => (\n\t\t\t\t<Suggestion\n\t\t\t\t\tdisabled={busy}\n\t\t\t\t\tkey={starter}\n\t\t\t\t\tonClick={(text) => sendMessage({ text })}\n\t\t\t\t\tsuggestion={starter}\n\t\t\t\t/>\n\t\t\t))}\n\t\t</Suggestions>\n\t);\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { Suggestion, Suggestions } from \"@mizen-labs/ui\";\n\nconst starters = [\"Fix the failing build\", \"Write tests for the form\"];\n\nexport function Starters() {\n\tconst { sendMessage, status } = useChat();\n\tconst busy = status === \"submitted\" || status === \"streaming\";\n\treturn (\n\t\t<Suggestions>\n\t\t\t{starters.map((starter) => (\n\t\t\t\t<Suggestion\n\t\t\t\t\tdisabled={busy}\n\t\t\t\t\tkey={starter}\n\t\t\t\t\tonClick={(text) => sendMessage({ text })}\n\t\t\t\t\tsuggestion={starter}\n\t\t\t\t/>\n\t\t\t))}\n\t\t</Suggestions>\n\t);\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "Send the suggestion as the user's message with the chat's send function.",
-        "code": "import { useChat } from \"@tanstack/ai-react\";\nimport { Suggestion, Suggestions } from \"@mizen/ui\";\n\nconst starters = [\"Fix the failing build\", \"Write tests for the form\"];\n\nexport function Starters() {\n\tconst { isLoading, sendMessage } = useChat();\n\treturn (\n\t\t<Suggestions>\n\t\t\t{starters.map((starter) => (\n\t\t\t\t<Suggestion\n\t\t\t\t\tdisabled={isLoading}\n\t\t\t\t\tkey={starter}\n\t\t\t\t\tonClick={(text) => sendMessage(text)}\n\t\t\t\t\tsuggestion={starter}\n\t\t\t\t/>\n\t\t\t))}\n\t\t</Suggestions>\n\t);\n}"
+        "code": "import { useChat } from \"@tanstack/ai-react\";\nimport { Suggestion, Suggestions } from \"@mizen-labs/ui\";\n\nconst starters = [\"Fix the failing build\", \"Write tests for the form\"];\n\nexport function Starters() {\n\tconst { isLoading, sendMessage } = useChat();\n\treturn (\n\t\t<Suggestions>\n\t\t\t{starters.map((starter) => (\n\t\t\t\t<Suggestion\n\t\t\t\t\tdisabled={isLoading}\n\t\t\t\t\tkey={starter}\n\t\t\t\t\tonClick={(text) => sendMessage(text)}\n\t\t\t\t\tsuggestion={starter}\n\t\t\t\t/>\n\t\t\t))}\n\t\t</Suggestions>\n\t);\n}"
       }
     ]
   },
@@ -5243,13 +5243,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "A tool result arrives only when the command exits. To stream the output while it runs, write it from the tool as a data part with the tool call's id; the AI SDK replaces a part with the same id, so the output grows in place.",
-        "code": "// app/api/chat/route.ts: stream output while the command runs.\nexecute: async ({ command }, { toolCallId }) => {\n\tlet output = \"\";\n\tfor await (const chunk of run(command)) {\n\t\toutput += chunk;\n\t\t// The same id replaces the part, so the output grows in place.\n\t\twriter.write({ data: { output }, id: toolCallId, type: \"data-output\" });\n\t}\n\treturn { exitCode: await exitCodeOf(command), output };\n},\n\nimport { useChat } from \"@ai-sdk/react\";\nimport { Terminal } from \"@mizen/ui\";\n\nexport function CommandRun({ part, message }: { message: UIMessage; part: RunCommandPart }) {\n\tconst live = message.parts.findLast(\n\t\t(other) => other.type === \"data-output\" && other.id === part.toolCallId\n\t);\n\tif (part.state === \"output-available\") {\n\t\treturn (\n\t\t\t<Terminal\n\t\t\t\tcommand={part.input.command}\n\t\t\t\texitCode={part.output.exitCode}\n\t\t\t\toutput={part.output.output}\n\t\t\t\tstatus={part.output.exitCode === 0 ? \"complete\" : \"error\"}\n\t\t\t/>\n\t\t);\n\t}\n\treturn (\n\t\t<Terminal\n\t\t\tcommand={part.input?.command ?? \"\"}\n\t\t\toutput={live?.data.output}\n\t\t\tstatus=\"running\"\n\t\t/>\n\t);\n}"
+        "code": "// app/api/chat/route.ts: stream output while the command runs.\nexecute: async ({ command }, { toolCallId }) => {\n\tlet output = \"\";\n\tfor await (const chunk of run(command)) {\n\t\toutput += chunk;\n\t\t// The same id replaces the part, so the output grows in place.\n\t\twriter.write({ data: { output }, id: toolCallId, type: \"data-output\" });\n\t}\n\treturn { exitCode: await exitCodeOf(command), output };\n},\n\nimport { useChat } from \"@ai-sdk/react\";\nimport { Terminal } from \"@mizen-labs/ui\";\n\nexport function CommandRun({ part, message }: { message: UIMessage; part: RunCommandPart }) {\n\tconst live = message.parts.findLast(\n\t\t(other) => other.type === \"data-output\" && other.id === part.toolCallId\n\t);\n\tif (part.state === \"output-available\") {\n\t\treturn (\n\t\t\t<Terminal\n\t\t\t\tcommand={part.input.command}\n\t\t\t\texitCode={part.output.exitCode}\n\t\t\t\toutput={part.output.output}\n\t\t\t\tstatus={part.output.exitCode === 0 ? \"complete\" : \"error\"}\n\t\t\t/>\n\t\t);\n\t}\n\treturn (\n\t\t<Terminal\n\t\t\tcommand={part.input?.command ?? \"\"}\n\t\t\toutput={live?.data.output}\n\t\t\tstatus=\"running\"\n\t\t/>\n\t);\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "Read the command from the tool-call part's input, and the output and exit code from its result once it completes.",
-        "code": "import { Terminal } from \"@mizen/ui\";\n\nexport function CommandRun({ part }: { part: { input: { command: string }; output?: { exitCode: number; output: string } } }) {\n\tconst result = part.output;\n\treturn (\n\t\t<Terminal\n\t\t\tcommand={part.input.command}\n\t\t\texitCode={result?.exitCode}\n\t\t\toutput={result?.output}\n\t\t\tstatus={result ? (result.exitCode === 0 ? \"complete\" : \"error\") : \"running\"}\n\t\t/>\n\t);\n}"
+        "code": "import { Terminal } from \"@mizen-labs/ui\";\n\nexport function CommandRun({ part }: { part: { input: { command: string }; output?: { exitCode: number; output: string } } }) {\n\tconst result = part.output;\n\treturn (\n\t\t<Terminal\n\t\t\tcommand={part.input.command}\n\t\t\texitCode={result?.exitCode}\n\t\t\toutput={result?.output}\n\t\t\tstatus={result ? (result.exitCode === 0 ? \"complete\" : \"error\") : \"running\"}\n\t\t/>\n\t);\n}"
       }
     ]
   },
@@ -5296,13 +5296,13 @@
         "id": "ai-sdk",
         "title": "With the AI SDK",
         "description": "Join the text parts of the latest assistant message and pass useChat's status. source-url parts become linked sources and source-document parts show as titled text. If the provider writes [1] markers, they become chips for those sources. Earlier replies in the thread are complete; only the latest one streams.",
-        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { StreamingText, type StreamingTextSource } from \"@mizen/ui\";\n\nexport function AssistantReply() {\n\tconst { messages, regenerate, status } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tif (!reply) return null;\n\tconst content = reply.parts\n\t\t.flatMap((part) => (part.type === \"text\" ? [part.text] : []))\n\t\t.join(\"\");\n\tconst sources: StreamingTextSource[] = reply.parts.flatMap((part) => {\n\t\tif (part.type === \"source-url\") return [{ href: part.url, title: part.title }];\n\t\tif (part.type === \"source-document\") return [{ title: part.title }];\n\t\treturn [];\n\t});\n\treturn (\n\t\t<StreamingText\n\t\t\tcontent={content}\n\t\t\tonRetry={() => regenerate()}\n\t\t\tsources={sources}\n\t\t\tstatus={\n\t\t\t\tstatus === \"error\"\n\t\t\t\t\t? \"error\"\n\t\t\t\t\t: status === \"streaming\" || status === \"submitted\"\n\t\t\t\t\t\t? \"streaming\"\n\t\t\t\t\t\t: \"complete\"\n\t\t\t}\n\t\t/>\n\t);\n}"
+        "code": "import { useChat } from \"@ai-sdk/react\";\nimport { StreamingText, type StreamingTextSource } from \"@mizen-labs/ui\";\n\nexport function AssistantReply() {\n\tconst { messages, regenerate, status } = useChat();\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tif (!reply) return null;\n\tconst content = reply.parts\n\t\t.flatMap((part) => (part.type === \"text\" ? [part.text] : []))\n\t\t.join(\"\");\n\tconst sources: StreamingTextSource[] = reply.parts.flatMap((part) => {\n\t\tif (part.type === \"source-url\") return [{ href: part.url, title: part.title }];\n\t\tif (part.type === \"source-document\") return [{ title: part.title }];\n\t\treturn [];\n\t});\n\treturn (\n\t\t<StreamingText\n\t\t\tcontent={content}\n\t\t\tonRetry={() => regenerate()}\n\t\t\tsources={sources}\n\t\t\tstatus={\n\t\t\t\tstatus === \"error\"\n\t\t\t\t\t? \"error\"\n\t\t\t\t\t: status === \"streaming\" || status === \"submitted\"\n\t\t\t\t\t\t? \"streaming\"\n\t\t\t\t\t\t: \"complete\"\n\t\t\t}\n\t\t/>\n\t);\n}"
       },
       {
         "id": "tanstack-ai",
         "title": "With TanStack AI",
         "description": "Text parts carry content rather than text, and reload() runs the last message again. Its message parts have no source type, so map cited pages from your search tool's results into sources.",
-        "code": "import { fetchServerSentEvents, useChat } from \"@tanstack/ai-react\";\nimport { StreamingText } from \"@mizen/ui\";\n\nexport function AssistantReply() {\n\tconst { messages, reload, status } = useChat({\n\t\tconnection: fetchServerSentEvents(\"/api/chat\"),\n\t});\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tif (!reply) return null;\n\tconst content = reply.parts\n\t\t.flatMap((part) => (part.type === \"text\" ? [part.content] : []))\n\t\t.join(\"\");\n\treturn (\n\t\t<StreamingText\n\t\t\tcontent={content}\n\t\t\tonRetry={reload}\n\t\t\tstatus={\n\t\t\t\tstatus === \"error\"\n\t\t\t\t\t? \"error\"\n\t\t\t\t\t: status === \"streaming\" || status === \"submitted\"\n\t\t\t\t\t\t? \"streaming\"\n\t\t\t\t\t\t: \"complete\"\n\t\t\t}\n\t\t/>\n\t);\n}"
+        "code": "import { fetchServerSentEvents, useChat } from \"@tanstack/ai-react\";\nimport { StreamingText } from \"@mizen-labs/ui\";\n\nexport function AssistantReply() {\n\tconst { messages, reload, status } = useChat({\n\t\tconnection: fetchServerSentEvents(\"/api/chat\"),\n\t});\n\tconst reply = messages.findLast((message) => message.role === \"assistant\");\n\tif (!reply) return null;\n\tconst content = reply.parts\n\t\t.flatMap((part) => (part.type === \"text\" ? [part.content] : []))\n\t\t.join(\"\");\n\treturn (\n\t\t<StreamingText\n\t\t\tcontent={content}\n\t\t\tonRetry={reload}\n\t\t\tstatus={\n\t\t\t\tstatus === \"error\"\n\t\t\t\t\t? \"error\"\n\t\t\t\t\t: status === \"streaming\" || status === \"submitted\"\n\t\t\t\t\t\t? \"streaming\"\n\t\t\t\t\t\t: \"complete\"\n\t\t\t}\n\t\t/>\n\t);\n}"
       }
     ]
   },
@@ -6038,7 +6038,7 @@
         "globalFilteringFeature": ["columnFilteringFeature"]
       },
       "imports": {
-        "@mizen/ui/data-table": ["DataTable", "DataTablePagination"]
+        "@mizen-labs/ui/data-table": ["DataTable", "DataTablePagination"]
       },
       "stateOwnership": "The application owns data, columns, filtering, sorting, pagination, selection, and mutations. DataTable presents the instance; virtualization is optional."
     },
@@ -7451,7 +7451,7 @@
         "id": "optional-renderer",
         "title": "Optional renderer",
         "description": "Install pele@^1.13.0 in the consuming app. Import from this dedicated entry point; the root Mizen import does not load the renderer. Rendering starts after hydration.",
-        "code": "import { Diagram } from \"@mizen/ui/diagram\";"
+        "code": "import { Diagram } from \"@mizen-labs/ui/diagram\";"
       }
     ],
     "contract": {
@@ -7463,7 +7463,7 @@
       "clientBoundary": "Client component. The named figure and loading feedback server-render; Pele loads and draws after hydration.",
       "dependencies": ["pele"],
       "imports": {
-        "@mizen/ui/diagram": ["Diagram"]
+        "@mizen-labs/ui/diagram": ["Diagram"]
       },
       "stateOwnership": "The caller owns source text, caption, and data status. Diagram owns renderer loading, parse errors, resize subscriptions, and cleanup."
     }

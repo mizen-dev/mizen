@@ -1,5 +1,5 @@
-import { Button, Inline, Stack, Text } from "@mizen/ui";
-import { Kbd, KbdGroup } from "@mizen/ui/kbd";
+import { Button, Inline, Stack, Text } from "@mizen-labs/ui";
+import { Kbd, KbdGroup } from "@mizen-labs/ui/kbd";
 
 export function KbdStandaloneKeysExample1() {
 	return (

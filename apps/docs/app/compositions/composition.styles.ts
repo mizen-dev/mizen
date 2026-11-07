@@ -1,14 +1,14 @@
-import { colors } from "@mizen/ui/colors.stylex";
-import { conditions } from "@mizen/ui/conditions.stylex";
-import { fonts } from "@mizen/ui/fonts.stylex";
-import { shape } from "@mizen/ui/shape.stylex";
-import { space } from "@mizen/ui/spacing.stylex";
+import { colors } from "@mizen-labs/ui/colors.stylex";
+import { conditions } from "@mizen-labs/ui/conditions.stylex";
+import { fonts } from "@mizen-labs/ui/fonts.stylex";
+import { shape } from "@mizen-labs/ui/shape.stylex";
+import { space } from "@mizen-labs/ui/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
 	letterSpacing,
 	lineHeight,
-} from "@mizen/ui/typography.stylex";
+} from "@mizen-labs/ui/typography.stylex";
 import { create } from "@stylexjs/stylex";
 
 export const compositionStyles = create({

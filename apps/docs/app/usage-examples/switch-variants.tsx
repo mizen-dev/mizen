@@ -1,4 +1,10 @@
-import { Field, FieldDescription, FieldLabel, Stack, Switch } from "@mizen/ui";
+import {
+	Field,
+	FieldDescription,
+	FieldLabel,
+	Stack,
+	Switch,
+} from "@mizen-labs/ui";
 
 export function SwitchWorkspacePreferencesExample1() {
 	return (

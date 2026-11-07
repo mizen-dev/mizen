@@ -6,7 +6,7 @@ import {
 	FieldsetLegend,
 	Input,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 export function ContactDetailsFieldset() {
 	return (
 		<Fieldset>

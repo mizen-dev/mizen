@@ -4,9 +4,9 @@ import {
 	CodeBlockCopy,
 	CodeBlockHeader,
 	CodeBlockTitle,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
-const saveButton = `import { Button } from "@mizen/ui";
+const saveButton = `import { Button } from "@mizen-labs/ui";
 
 // Saves the draft and shows progress while the request runs.
 export function SaveButton({ pending }: { pending: boolean }) {
@@ -32,7 +32,7 @@ export function SaveButtonSource() {
 	);
 }
 
-const installCommand = "pnpm add @mizen/ui";
+const installCommand = "pnpm add @mizen-labs/ui";
 
 export function InstallCommand() {
 	return (

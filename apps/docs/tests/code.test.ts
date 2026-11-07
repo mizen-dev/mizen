@@ -1,4 +1,4 @@
-import type { CodeProps } from "@mizen/ui/code";
+import type { CodeProps } from "@mizen-labs/ui/code";
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
@@ -51,10 +51,10 @@ describe("Code component and docs specimen", () => {
 	}, 120_000);
 
 	it("resolves root and code subpath exports with a closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/code")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/code")).toContain(
 			"packages/ui/dist/components/code/code.js"
 		);
 		const acceptsRole = false satisfies CodePropsAcceptsRole;

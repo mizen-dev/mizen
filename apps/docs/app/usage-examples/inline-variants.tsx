@@ -1,6 +1,6 @@
 "use client";
-import { Button, Heading, Stack, Text } from "@mizen/ui";
-import { Inline } from "@mizen/ui/inline";
+import { Button, Heading, Stack, Text } from "@mizen-labs/ui";
+import { Inline } from "@mizen-labs/ui/inline";
 import { useCallback, useState } from "react";
 
 export function InlineProductionReleaseExample1() {

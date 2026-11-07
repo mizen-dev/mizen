@@ -1,4 +1,11 @@
-import { Avatar, AvatarFallback, Badge, Group, Inline, Text } from "@mizen/ui";
+import {
+	Avatar,
+	AvatarFallback,
+	Badge,
+	Group,
+	Inline,
+	Text,
+} from "@mizen-labs/ui";
 
 export function ReleaseSummary() {
 	return (

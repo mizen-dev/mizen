@@ -1,7 +1,7 @@
 "use client";
 
-import { Field, FieldLabel, Input, Stack, Switch } from "@mizen/ui";
-import { Button } from "@mizen/ui/button";
+import { Field, FieldLabel, Input, Stack, Switch } from "@mizen-labs/ui";
+import { Button } from "@mizen-labs/ui/button";
 import {
 	Frame,
 	FrameDescription,
@@ -9,9 +9,9 @@ import {
 	FrameHeader,
 	FramePanel,
 	FrameTitle,
-} from "@mizen/ui/frame";
-import { Group } from "@mizen/ui/group";
-import { Text } from "@mizen/ui/text";
+} from "@mizen-labs/ui/frame";
+import { Group } from "@mizen-labs/ui/group";
+import { Text } from "@mizen-labs/ui/text";
 import { type FormEvent, useCallback, useState } from "react";
 import { SpecimenSection } from "./specimen-section";
 

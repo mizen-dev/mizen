@@ -2,7 +2,7 @@ import {
 	Blockquote,
 	BlockquoteAttribution,
 	BlockquoteContent,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function ArchitectureQuote() {
 	return (

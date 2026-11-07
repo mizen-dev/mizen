@@ -6,7 +6,7 @@ import {
 	FieldError,
 	FieldLabel,
 	Input,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function LabeledField() {
 	return (

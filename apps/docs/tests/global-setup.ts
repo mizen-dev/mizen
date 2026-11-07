@@ -7,7 +7,7 @@ const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
 export default async function setup() {
 	if (!process.env.MIZEN_DOCS_TEST_URL) {
 		// Local runs refresh compiled exports; external servers need a current UI watcher.
-		await promisify(execFile)("pnpm", ["--filter", "@mizen/ui", "build"], {
+		await promisify(execFile)("pnpm", ["--filter", "@mizen-labs/ui", "build"], {
 			cwd: docsRoot,
 		});
 	}

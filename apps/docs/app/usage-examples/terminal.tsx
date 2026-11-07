@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Terminal, type TerminalStatus } from "@mizen/ui";
+import { Button, Terminal, type TerminalStatus } from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import { useCallback, useRef, useState } from "react";
 

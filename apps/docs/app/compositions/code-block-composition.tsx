@@ -7,7 +7,7 @@ import {
 	Heading,
 	Section,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { workspaceSettingsSource } from "./code-block-source";
 
 export function CodeBlockExamples() {

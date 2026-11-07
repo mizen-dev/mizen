@@ -26,10 +26,14 @@ import {
 	MenuTrigger,
 	Switch,
 	Token,
-} from "@mizen/ui";
-import { colors } from "@mizen/ui/colors.stylex";
-import { space } from "@mizen/ui/spacing.stylex";
-import { fontSize, fontWeight, lineHeight } from "@mizen/ui/typography.stylex";
+} from "@mizen-labs/ui";
+import { colors } from "@mizen-labs/ui/colors.stylex";
+import { space } from "@mizen-labs/ui/spacing.stylex";
+import {
+	fontSize,
+	fontWeight,
+	lineHeight,
+} from "@mizen-labs/ui/typography.stylex";
 import { create, props } from "@stylexjs/stylex";
 import { IconCircleFilled, IconFilter, IconTag } from "@tabler/icons-react";
 import { useCallback, useId, useState } from "react";

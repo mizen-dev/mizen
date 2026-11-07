@@ -7,7 +7,7 @@ import {
 	Slider,
 	SliderValue,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { useState } from "react";
 import { sliderPreviewStyles } from "./slider-preview.styles";

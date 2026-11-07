@@ -2,7 +2,7 @@ import type { Guide } from "./guides";
 
 const usage = `"use client";
 
-import { Button, useCopyToClipboard, VisuallyHidden } from "@mizen/ui";
+import { Button, useCopyToClipboard, VisuallyHidden } from "@mizen-labs/ui";
 import { IconCheck, IconCopy } from "@tabler/icons-react";
 
 export function CopyInvite({ link }: { link: string }) {

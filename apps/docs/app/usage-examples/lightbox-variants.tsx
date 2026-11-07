@@ -8,7 +8,7 @@ import {
 	LightboxTitle,
 	LightboxTrigger,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { mediaContentStyles } from "../compositions/media-content.styles";
 

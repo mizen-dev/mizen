@@ -1,4 +1,4 @@
-import { Inline, Spinner, Text } from "@mizen/ui";
+import { Inline, Spinner, Text } from "@mizen-labs/ui";
 
 export function SyncStatus() {
 	return (

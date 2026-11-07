@@ -1,4 +1,4 @@
-import type { CardProps } from "@mizen/ui/card";
+import type { CardProps } from "@mizen-labs/ui/card";
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
@@ -64,13 +64,13 @@ describe("Card component browser behavior", () => {
 	}, 120_000);
 
 	it("resolves package root and card subpath exports with closed prop types", () => {
-		// Given the @mizen/ui workspace package
+		// Given the @mizen-labs/ui workspace package
 		// When resolving root and subpath entrypoints
 		// Then both resolve cleanly to dist files without extra props
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/card")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/card")).toContain(
 			"packages/ui/dist/components/card/card.js"
 		);
 		const acceptsClickable = false satisfies CardPropsAcceptsClickable;

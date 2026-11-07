@@ -1,6 +1,6 @@
 "use client";
 
-import { Heatmap, MetricDelta, MetricTrend } from "@mizen/ui";
+import { Heatmap, MetricDelta, MetricTrend } from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import { IconUsers } from "@tabler/icons-react";
 import { useState } from "react";

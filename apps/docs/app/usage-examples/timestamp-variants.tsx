@@ -1,4 +1,4 @@
-import { Stack, Text, Timestamp } from "@mizen/ui";
+import { Stack, Text, Timestamp } from "@mizen-labs/ui";
 import { richContentDateTime } from "../compositions/rich-content-source";
 
 export function TimestampDocumentHistoryExample1() {

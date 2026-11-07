@@ -1,4 +1,4 @@
-import { Link, Text } from "@mizen/ui";
+import { Link, Text } from "@mizen-labs/ui";
 
 export function DocumentationLink() {
 	return (

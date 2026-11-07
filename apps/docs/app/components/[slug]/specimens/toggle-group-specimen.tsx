@@ -1,6 +1,6 @@
 "use client";
 
-import { Heading, Text, Toggle, ToggleGroup } from "@mizen/ui";
+import { Heading, Text, Toggle, ToggleGroup } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { useState } from "react";
 import { toolbarPreviewStyles } from "../../../compositions/toolbar-preview.styles";

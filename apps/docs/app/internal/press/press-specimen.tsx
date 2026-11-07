@@ -9,7 +9,7 @@ import {
 	Toggle,
 	ToggleGroup,
 	ToggleGroupItem,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { IconBold, IconItalic, IconPlus } from "@tabler/icons-react";
 import { pressStyles as s } from "./press-specimen.styles";

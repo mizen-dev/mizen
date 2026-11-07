@@ -4,7 +4,7 @@ import type {
 	ProgressProps,
 	ProgressTrackProps,
 	ProgressValueProps,
-} from "@mizen/ui/progress";
+} from "@mizen-labs/ui/progress";
 import type { HTMLAttributes, RefObject } from "react";
 import { createElement, createRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -108,10 +108,10 @@ const INDICATOR_INLINE_STYLE_REGEX =
 
 describe("Progress component contract and SSR semantics", () => {
 	it("resolves root and subpath exports with an exact closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/progress")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/progress")).toContain(
 			"packages/ui/dist/components/progress/progress.js"
 		);
 		expect(contractChecks).toEqual(expectedContractChecks);

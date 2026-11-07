@@ -11,8 +11,8 @@ import {
 	Input,
 	Stack,
 	Text,
-} from "@mizen/ui";
-import { space } from "@mizen/ui/spacing.stylex";
+} from "@mizen-labs/ui";
+import { space } from "@mizen-labs/ui/spacing.stylex";
 import { create, props } from "@stylexjs/stylex";
 import { useState } from "react";
 

@@ -17,7 +17,7 @@ import {
 	getComposerText,
 	Text,
 	useComposerContext,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import {
 	IconAt,

@@ -1,7 +1,16 @@
 {
-  "name": "@mizen/cli",
+  "name": "@mizen-labs/cli",
   "version": "0.1.0",
   "description": "Discover Mizen components from the same catalog as its documentation.",
+  "homepage": "https://github.com/mizen-labs/mizen/tree/main/packages/cli#readme",
+  "bugs": {
+    "url": "https://github.com/mizen-labs/mizen/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mizen-labs/mizen.git",
+    "directory": "packages/cli"
+  },
   "license": "MIT",
   "type": "module",
   "exports": {

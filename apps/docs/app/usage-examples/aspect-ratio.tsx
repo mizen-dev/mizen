@@ -1,4 +1,4 @@
-import { AspectRatio } from "@mizen/ui";
+import { AspectRatio } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { mediaContentStyles } from "../compositions/media-content.styles";
 

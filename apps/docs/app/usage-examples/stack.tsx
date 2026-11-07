@@ -1,4 +1,4 @@
-import { Group, Stack, Text } from "@mizen/ui";
+import { Group, Stack, Text } from "@mizen-labs/ui";
 import { IconCircleCheck, IconClock } from "@tabler/icons-react";
 
 const checks = [

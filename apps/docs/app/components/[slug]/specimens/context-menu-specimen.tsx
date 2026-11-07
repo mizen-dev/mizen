@@ -22,7 +22,7 @@ import {
 	Heading,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { IconFile } from "@tabler/icons-react";
 import { useRef, useSyncExternalStore } from "react";

@@ -1,7 +1,7 @@
-import { Badge, Heading, Stack } from "@mizen/ui";
-import { Inline } from "@mizen/ui/inline";
-import { Spacer } from "@mizen/ui/spacer";
-import { Text } from "@mizen/ui/text";
+import { Badge, Heading, Stack } from "@mizen-labs/ui";
+import { Inline } from "@mizen-labs/ui/inline";
+import { Spacer } from "@mizen-labs/ui/spacer";
+import { Text } from "@mizen-labs/ui/text";
 
 export function SpacerProjectStatusExample1() {
 	return (

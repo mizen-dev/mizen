@@ -5,7 +5,7 @@ import type {
 	ErrorStateMediaProps,
 	ErrorStateProps,
 	ErrorStateTitleProps,
-} from "@mizen/ui/error-state";
+} from "@mizen-labs/ui/error-state";
 import type { ComponentPropsWithRef, ReactElement, ReactNode } from "react";
 import { createRef, createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -112,10 +112,10 @@ type MaliciousComp = (props: {
 
 describe("ErrorState component contract and SSR semantics", () => {
 	it("resolves root and subpath exports with exact closed prop contracts", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/error-state")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/error-state")).toContain(
 			"packages/ui/dist/components/error-state/error-state.js"
 		);
 		expect(contractChecks.every((c) => c === true)).toBe(true);

@@ -127,14 +127,14 @@ async function peerChecks(
 }
 
 export async function packageChecks(project: string) {
-	const ui = await installedFrom(project, "@mizen/ui");
+	const ui = await installedFrom(project, "@mizen-labs/ui");
 	if (!ui) {
 		return {
 			diagnostics: [
 				check(
 					"package.mizen",
 					"error",
-					"@mizen/ui cannot be resolved from this app.",
+					"@mizen-labs/ui cannot be resolved from this app.",
 					[join(project, "package.json")],
 					"Install Mizen in the target app, then rerun doctor."
 				),
@@ -150,7 +150,7 @@ export async function packageChecks(project: string) {
 			check(
 				"package.mizen",
 				"pass",
-				`Resolved @mizen/ui ${ui.manifest.version ?? "(unknown version)"}.`,
+				`Resolved @mizen-labs/ui ${ui.manifest.version ?? "(unknown version)"}.`,
 				[ui.path]
 			),
 			...peers.flat(),

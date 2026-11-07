@@ -1,6 +1,6 @@
 "use client";
 
-import { Funnel } from "@mizen/ui";
+import { Funnel } from "@mizen-labs/ui";
 import {
 	IconBolt,
 	IconBuilding,

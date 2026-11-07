@@ -1,4 +1,4 @@
-import { Stack } from "@mizen/ui";
+import { Stack } from "@mizen-labs/ui";
 import {
 	PreviewCardAlexMorganExample1,
 	PreviewCardMizentokensExample2,

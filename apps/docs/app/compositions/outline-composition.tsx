@@ -1,6 +1,18 @@
-import { Heading, Link, List, ListItem, Section, Stack, Text } from "@mizen/ui";
-import { colors } from "@mizen/ui/colors.stylex";
-import { borderWidth, focus, focusMotion } from "@mizen/ui/interaction.stylex";
+import {
+	Heading,
+	Link,
+	List,
+	ListItem,
+	Section,
+	Stack,
+	Text,
+} from "@mizen-labs/ui";
+import { colors } from "@mizen-labs/ui/colors.stylex";
+import {
+	borderWidth,
+	focus,
+	focusMotion,
+} from "@mizen-labs/ui/interaction.stylex";
 import { create, props } from "@stylexjs/stylex";
 
 const outlineStyles = create({

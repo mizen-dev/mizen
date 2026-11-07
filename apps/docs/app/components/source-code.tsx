@@ -4,8 +4,8 @@ import {
 	CodeBlockCopy,
 	CodeBlockHeader,
 	CodeBlockTitle,
-} from "@mizen/ui";
-import { ScrollArea } from "@mizen/ui/scroll-area";
+} from "@mizen-labs/ui";
+import { ScrollArea } from "@mizen-labs/ui/scroll-area";
 import { props } from "@stylexjs/stylex";
 import { docsStyles } from "./docs.styles";
 

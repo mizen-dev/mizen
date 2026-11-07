@@ -1,6 +1,6 @@
 "use client";
 
-import { RadarChart } from "@mizen/ui";
+import { RadarChart } from "@mizen-labs/ui";
 
 const axes = [
 	{ id: "speed", label: "Speed" },

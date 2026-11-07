@@ -12,7 +12,7 @@ import {
 	ConversationFooter,
 	Suggestion,
 	Suggestions,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import { IconPlayerPlay } from "@tabler/icons-react";
 import { useCallback } from "react";

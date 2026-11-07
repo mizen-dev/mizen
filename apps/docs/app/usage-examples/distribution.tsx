@@ -1,6 +1,6 @@
 "use client";
 
-import { Distribution } from "@mizen/ui";
+import { Distribution } from "@mizen-labs/ui";
 import { useCallback } from "react";
 
 export function ResponseTimeDistribution() {

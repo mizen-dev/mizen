@@ -1,4 +1,4 @@
-import { Diagram } from "@mizen/ui/diagram";
+import { Diagram } from "@mizen-labs/ui/diagram";
 
 const pipeline = `flowchart LR
   subgraph CI[Continuous integration]

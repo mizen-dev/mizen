@@ -1,10 +1,10 @@
-import { Heading, Stack, Text } from "@mizen/ui";
+import { Heading, Stack, Text } from "@mizen-labs/ui";
 import {
 	Avatar,
 	AvatarFallback,
 	AvatarGroup,
 	AvatarImage,
-} from "@mizen/ui/avatar-group";
+} from "@mizen-labs/ui/avatar-group";
 import { props } from "@stylexjs/stylex";
 import { specimenStyles } from "../components/[slug]/specimens/specimen.styles";
 

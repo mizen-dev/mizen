@@ -7,7 +7,7 @@ import {
 	NumberFieldGroup,
 	NumberFieldIncrement,
 	NumberFieldInput,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 export function BoundedQuantity() {
 	return (
 		<Field>

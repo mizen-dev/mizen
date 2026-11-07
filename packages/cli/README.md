@@ -1,4 +1,4 @@
-# @mizen/cli
+# @mizen-labs/cli
 
 An unpublished CLI candidate for Mizen. The first commands discover components
 from a bundled snapshot of the same metadata and guidance used by the docs.
@@ -9,7 +9,7 @@ only an explicit --yes applies them.
 ## Run in this workspace
 
 ```sh
-pnpm --filter @mizen/cli build
+pnpm --filter @mizen-labs/cli build
 node packages/cli/dist/cli.js --help
 ```
 
@@ -24,7 +24,7 @@ node packages/cli/dist/cli.js info diagram --json
 ## Try the archive
 
 ```sh
-pnpm --filter @mizen/cli pack --out /tmp/mizen-cli.tgz
+pnpm --filter @mizen-labs/cli pack --out /tmp/mizen-cli.tgz
 # In a consumer project:
 npm install -D /tmp/mizen-cli.tgz
 npx --no-install mizen search forms
@@ -81,9 +81,9 @@ Use fields and reasons for automation; human wording may change. Schema version
 ## Verify
 
 ```sh
-pnpm --filter @mizen/cli test
-pnpm --filter @mizen/cli lint
-pnpm --filter @mizen/cli typecheck
+pnpm --filter @mizen-labs/cli test
+pnpm --filter @mizen-labs/cli lint
+pnpm --filter @mizen-labs/cli typecheck
 ```
 
 Tests install the packed archive in a temporary app. They verify catalog parity,
@@ -91,7 +91,7 @@ failure codes, project preservation, and independent execution. Installation may
 need network access for declared dependencies; the installed commands work offline.
 
 ```sh
-MIZEN_PACKED_CONSUMER=1 pnpm --filter @mizen/cli test
+MIZEN_PACKED_CONSUMER=1 pnpm --filter @mizen-labs/cli test
 ```
 
 The opt-in checkpoint installs the packed UI into the Next.js and TanStack Start
@@ -166,13 +166,13 @@ create an application, select a font, or replace existing document defaults.
 Until publication, pack a matching UI archive from this repository:
 
 ```sh
-pnpm --filter @mizen/ui pack --out /tmp/mizen-ui.tgz
+pnpm --filter @mizen-labs/ui pack --out /tmp/mizen-ui.tgz
 node packages/cli/dist/cli.js init --cwd /path/to/app --package /tmp/mizen-ui.tgz --dry-run
 node packages/cli/dist/cli.js init --cwd /path/to/app --package /tmp/mizen-ui.tgz --yes
 ```
 
 An installed, declared Mizen package matching the CLI catalog needs no `--package`.
-Archives must contain `@mizen/ui` at the catalog version. Init inspects the archive
+Archives must contain `@mizen-labs/ui` at the catalog version. Init inspects the archive
 without extracting it and records its SHA-256 for a check before application.
 The current reader bounds archive size at 50 MB and manifest size at 1 MB.
 
@@ -238,7 +238,7 @@ node packages/cli/dist/cli.js init --cwd /path/to/vite-app --package /tmp/mizen-
 node packages/cli/dist/cli.js doctor --cwd /path/to/vite-app --strict
 ```
 
-initializeTheme from @mizen/ui/theme/initialize applies the initial theme before
+initializeTheme from @mizen-labs/ui/theme/initialize applies the initial theme before
 React mounts. It shares root-theme behavior with ThemeProvider; subsequent changes
 belong to the provider. Custom initialization options (storage, storageKey, defaultTheme)
 must match provider options. Init stops for manual review when existing custom props
@@ -301,13 +301,13 @@ Arguments after `--` remain literal, including `--help` and `--json`.
 ### JSON output schema
 
 The package includes a local Draft-07 JSON Schema at
-`@mizen/cli/schema/v1.json`, with identifier `urn:mizen:cli:output:v1`.
+`@mizen-labs/cli/schema/v1.json`, with identifier `urn:mizen:cli:output:v1`.
 It covers help, version, search, info, doctor, init, and errors. No network request
 is needed to resolve it. For example, in Node with your own validator:
 
 ```js
 import Ajv from "ajv";
-import schema from "@mizen/cli/schema/v1.json" with { type: "json" };
+import schema from "@mizen-labs/cli/schema/v1.json" with { type: "json" };
 
 const validate = new Ajv({ strict: true }).compile(schema);
 const response = JSON.parse(stdout);

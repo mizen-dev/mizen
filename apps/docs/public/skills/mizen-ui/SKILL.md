@@ -29,7 +29,7 @@ those requirements when simplifying a copied example.
 
 ## Compose the interface
 
-- Import only documented exports from `@mizen/ui` or its documented subpaths.
+- Import only documented exports from `@mizen-labs/ui` or its documented subpaths.
   Compound parts are named exports, not guessed namespace properties.
 - Styling contracts are closed. Do not pass `className`, `style`, `sx`, or
   `xstyle` to components that omit them. Use their semantic props and existing

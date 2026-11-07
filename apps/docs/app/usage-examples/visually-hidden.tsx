@@ -1,4 +1,11 @@
-import { Button, Group, Spacer, Stack, Text, VisuallyHidden } from "@mizen/ui";
+import {
+	Button,
+	Group,
+	Spacer,
+	Stack,
+	Text,
+	VisuallyHidden,
+} from "@mizen-labs/ui";
 import { IconDownload, IconShare, IconTrash } from "@tabler/icons-react";
 
 const files = ["Q3 report.pdf", "Brand guidelines.pdf", "Launch plan.docx"];

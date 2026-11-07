@@ -1,6 +1,6 @@
 "use client";
 
-import { TimeSeries } from "@mizen/ui";
+import { TimeSeries } from "@mizen-labs/ui";
 import { useCallback } from "react";
 
 export function DailyVisitors() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { typographyStyles } from "@mizen/ui/typography.styles";
+import { typographyStyles } from "@mizen-labs/ui/typography.styles";
 import { props } from "@stylexjs/stylex";
 import Link from "next/link";
 import { groupedComponentDocs } from "./docs-registry";

@@ -16,7 +16,7 @@ import {
 	ContextMenuSubPopup,
 	ContextMenuSubTrigger,
 	ContextMenuTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	IconExternalLink,
 	IconFile,

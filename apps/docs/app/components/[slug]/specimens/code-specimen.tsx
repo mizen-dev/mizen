@@ -1,5 +1,5 @@
-import { Code } from "@mizen/ui/code";
-import { Text } from "@mizen/ui/text";
+import { Code } from "@mizen-labs/ui/code";
+import { Text } from "@mizen-labs/ui/text";
 import { props } from "@stylexjs/stylex";
 import { pageStyles } from "../../../page.styles";
 import { SpecimenSection } from "./specimen-section";

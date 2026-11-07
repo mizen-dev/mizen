@@ -32,7 +32,7 @@ function fixture(t, extension = "tsx") {
 	t.after(() => rmSync(root, { force: true, recursive: true }));
 	put(root, "package.json", {
 		dependencies: {
-			"@mizen/ui": "0.1.0",
+			"@mizen-labs/ui": "0.1.0",
 			react: "19.3.0",
 			"react-dom": "19.3.0",
 		},
@@ -40,18 +40,18 @@ function fixture(t, extension = "tsx") {
 		private: true,
 	});
 	put(root, "pnpm-lock.yaml", "keep-lockfile");
-	put(root, "node_modules/@mizen/ui/package.json", {
+	put(root, "node_modules/@mizen-labs/ui/package.json", {
 		exports: {
 			"./package.json": "./package.json",
 			"./theme/initialize": "./initialize.js",
 		},
-		name: "@mizen/ui",
+		name: "@mizen-labs/ui",
 		peerDependencies: { react: "^19.2.8", "react-dom": "^19.2.8" },
 		version: "0.1.0",
 	});
 	put(
 		root,
-		"node_modules/@mizen/ui/initialize.js",
+		"node_modules/@mizen-labs/ui/initialize.js",
 		"export function initializeTheme() {}\n"
 	);
 	for (const name of ["react", "react-dom", "vite"]) {
@@ -148,7 +148,7 @@ test("aliased providers inside StrictMode are reused and ReactDOM namespace moun
 	put(
 		root,
 		"src/main.tsx",
-		`import React from 'react';import ReactDOM from 'react-dom/client';import {ThemeProvider as Provider} from '@mizen/ui/theme';import App from './App';ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><Provider><App /></Provider></React.StrictMode>);`
+		`import React from 'react';import ReactDOM from 'react-dom/client';import {ThemeProvider as Provider} from '@mizen-labs/ui/theme';import App from './App';ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><Provider><App /></Provider></React.StrictMode>);`
 	);
 	const result = run(root, "init", ["--yes"]);
 	assert.equal(result.exit, 0, JSON.stringify(result));
@@ -183,7 +183,7 @@ test("unused main files and render helpers do not count as configured roots", (t
 	put(
 		root,
 		"src/main.jsx",
-		`import '@mizen/ui/styles.css';import {ThemeProvider} from '@mizen/ui/theme';`
+		`import '@mizen-labs/ui/styles.css';import {ThemeProvider} from '@mizen-labs/ui/theme';`
 	);
 	const before = run(root, "doctor");
 	assert.equal(
@@ -204,7 +204,7 @@ test("partial provider coverage blocks a write instead of creating nested themes
 	put(
 		root,
 		"src/main.tsx",
-		`import {createRoot} from 'react-dom/client';import {ThemeProvider} from '@mizen/ui/theme';createRoot(document.getElementById('root')).render(<><ThemeProvider><App /></ThemeProvider><Other /></>);`
+		`import {createRoot} from 'react-dom/client';import {ThemeProvider} from '@mizen-labs/ui/theme';createRoot(document.getElementById('root')).render(<><ThemeProvider><App /></ThemeProvider><Other /></>);`
 	);
 	assert.equal(run(root, "init", ["--yes"]).exit, 1);
 	assert.equal(existsSync(join(root, ".mizen-init-journal.json")), false);
@@ -212,12 +212,12 @@ test("partial provider coverage blocks a write instead of creating nested themes
 
 test("a changed HTML entry during dependency installation stops source application", (t) => {
 	const root = fixture(t);
-	put(root, "node_modules/@mizen/ui/package.json", {
+	put(root, "node_modules/@mizen-labs/ui/package.json", {
 		exports: {
 			"./package.json": "./package.json",
 			"./theme/initialize": "./initialize.js",
 		},
-		name: "@mizen/ui",
+		name: "@mizen-labs/ui",
 		peerDependencies: {
 			pele: "^1.13.0",
 			react: "^19.2.8",
@@ -225,13 +225,13 @@ test("a changed HTML entry during dependency installation stops source applicati
 		},
 		version: "0.1.0",
 	});
-	const uiPath = join(root, "node_modules/@mizen/ui/package.json");
+	const uiPath = join(root, "node_modules/@mizen-labs/ui/package.json");
 	const ui = JSON.parse(readFileSync(uiPath, "utf8"));
 	ui.exports = {
 		"./package.json": "./package.json",
 		"./theme/initialize": "./initialize.js",
 	};
-	put(root, "node_modules/@mizen/ui/package.json", ui);
+	put(root, "node_modules/@mizen-labs/ui/package.json", ui);
 	const original = readFileSync(join(root, "src/main.tsx"), "utf8");
 	const changed = '<script type="module" src="/src/other.tsx"></script>';
 	const env = fakePnpm(
@@ -264,7 +264,7 @@ test("bootstrap is inserted before mounting and late initialization is never dup
 	put(
 		root,
 		"src/main.tsx",
-		`import {initializeTheme as boot} from '@mizen/ui/theme/initialize';\n${main}\nboot();`
+		`import {initializeTheme as boot} from '@mizen-labs/ui/theme/initialize';\n${main}\nboot();`
 	);
 	const result = run(root, "init", ["--yes"]);
 	assert.equal(result.exit, 1, JSON.stringify(result));
@@ -273,13 +273,13 @@ test("bootstrap is inserted before mounting and late initialization is never dup
 
 test("custom provider options require a matching explicit bootstrap", (t) => {
 	const root = fixture(t);
-	const custom = `import {ThemeProvider as Provider} from '@mizen/ui/theme';\n${main.replace("<App />", '<Provider defaultTheme="dark"><App /></Provider>')}`;
+	const custom = `import {ThemeProvider as Provider} from '@mizen-labs/ui/theme';\n${main.replace("<App />", '<Provider defaultTheme="dark"><App /></Provider>')}`;
 	put(root, "src/main.tsx", custom);
 	assert.equal(run(root, "init", ["--yes"]).exit, 1);
 	put(
 		root,
 		"src/main.tsx",
-		`import {initializeTheme as boot} from '@mizen/ui/theme/initialize';\n${custom.replace("mount(document", 'boot({defaultTheme:"dark"});\nmount(document')}`
+		`import {initializeTheme as boot} from '@mizen-labs/ui/theme/initialize';\n${custom.replace("mount(document", 'boot({defaultTheme:"dark"});\nmount(document')}`
 	);
 	assert.equal(run(root, "init", ["--yes"]).exit, 0);
 	assert.equal(run(root, "doctor", ["--strict"]).exit, 0);
@@ -287,10 +287,10 @@ test("custom provider options require a matching explicit bootstrap", (t) => {
 
 test("older UI candidates without the initializer stop before source edits", (t) => {
 	const root = fixture(t);
-	const path = join(root, "node_modules/@mizen/ui/package.json");
+	const path = join(root, "node_modules/@mizen-labs/ui/package.json");
 	const ui = JSON.parse(readFileSync(path, "utf8"));
 	Reflect.deleteProperty(ui.exports, "./theme/initialize");
-	put(root, "node_modules/@mizen/ui/package.json", ui);
+	put(root, "node_modules/@mizen-labs/ui/package.json", ui);
 	const result = run(root, "init", ["--yes"]);
 	assert.equal(result.exit, 1, JSON.stringify(result));
 	assert.ok(result.error.message.includes("lacks synchronous"));

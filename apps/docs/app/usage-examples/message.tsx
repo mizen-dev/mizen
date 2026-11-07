@@ -8,7 +8,7 @@ import {
 	Message,
 	StreamingText,
 	type StreamingTextSource,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import { useCallback, useState } from "react";
 

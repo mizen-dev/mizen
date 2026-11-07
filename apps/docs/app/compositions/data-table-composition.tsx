@@ -19,9 +19,9 @@ import {
 	SelectValue,
 	Stack,
 	Text,
-} from "@mizen/ui";
-import { DataTable, DataTablePagination } from "@mizen/ui/data-table";
-import { typographyStyles } from "@mizen/ui/typography.styles";
+} from "@mizen-labs/ui";
+import { DataTable, DataTablePagination } from "@mizen-labs/ui/data-table";
+import { typographyStyles } from "@mizen-labs/ui/typography.styles";
 import { props } from "@stylexjs/stylex";
 import { IconX } from "@tabler/icons-react";
 import {

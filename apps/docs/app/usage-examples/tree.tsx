@@ -1,4 +1,4 @@
-import { Tree, type TreeItemData } from "@mizen/ui";
+import { Tree, type TreeItemData } from "@mizen-labs/ui";
 import {
 	IconBraces,
 	IconFileTypeCss,

@@ -61,7 +61,7 @@ export const guides: Guide[] = [
 			{
 				id: "status",
 				paragraphs: [
-					"The manifest targets @mizen/ui 0.1.0, but no public npm release is available yet. Before 1.0, minor versions can change the API.",
+					"The manifest targets @mizen-labs/ui 0.1.0, but no public npm release is available yet. Before 1.0, minor versions can change the API.",
 				],
 				title: "Status",
 			},
@@ -75,7 +75,7 @@ export const guides: Guide[] = [
 		sections: [
 			{
 				code: {
-					value: `pnpm --filter @mizen/ui pack --out /tmp/mizen-ui.tgz
+					value: `pnpm --filter @mizen-labs/ui pack --out /tmp/mizen-ui.tgz
 # In your consumer app:
 npm install /tmp/mizen-ui.tgz`,
 				},
@@ -83,14 +83,14 @@ npm install /tmp/mizen-ui.tgz`,
 				links: [{ href: "/docs/cli", label: "CLI setup and diagnostics" }],
 				paragraphs: [
 					"The 0.1.0 release candidate is not yet published on npm. Pack it from the repository, then install the archive in an existing React app. Workspace apps can use workspace:* instead.",
-					"React and ReactDOM must satisfy ^19.2.8. Import @mizen/ui/styles.css once at the application root. It contains the compiled atomic styles; components load their own structural CSS. No consumer Babel or PostCSS setup is required.",
+					"React and ReactDOM must satisfy ^19.2.8. Import @mizen-labs/ui/styles.css once at the application root. It contains the compiled atomic styles; components load their own structural CSS. No consumer Babel or PostCSS setup is required.",
 				],
 				title: "Install the release candidate",
 			},
 			{
 				code: {
 					title: "next.config.mjs",
-					value: `export default { transpilePackages: ["@mizen/ui"] };`,
+					value: `export default { transpilePackages: ["@mizen-labs/ui"] };`,
 				},
 				id: "next",
 				links: [
@@ -115,7 +115,7 @@ npm install /tmp/mizen-ui.tgz`,
 				},
 				id: "stylesheet",
 				paragraphs: [
-					"Import @mizen/ui/styles.css before your app stylesheet in the root layout. The theming guide shows the complete Next layout; the root route below shows TanStack Start.",
+					"Import @mizen-labs/ui/styles.css before your app stylesheet in the root layout. The theming guide shows the complete Next layout; the root route below shows TanStack Start.",
 					"Your app owns its document defaults. Set your interface font on body; Mizen controls inherit it.",
 				],
 				title: "Global stylesheet",
@@ -123,9 +123,9 @@ npm install /tmp/mizen-ui.tgz`,
 			{
 				code: {
 					title: "src/main.tsx",
-					value: `import "@mizen/ui/styles.css";
-import { ThemeProvider } from "@mizen/ui/theme";
-import { initializeTheme } from "@mizen/ui/theme/initialize";
+					value: `import "@mizen-labs/ui/styles.css";
+import { ThemeProvider } from "@mizen-labs/ui/theme";
+import { initializeTheme } from "@mizen-labs/ui/theme/initialize";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
@@ -153,23 +153,23 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   // Mizen imports its own CSS files, so the server bundle must include it.
-  ssr: { noExternal: ["@mizen/ui"] },
+  ssr: { noExternal: ["@mizen-labs/ui"] },
   plugins: [tanstackStart(), viteReact()],
 });`,
 				},
 				id: "tanstack-start",
 				paragraphs: [
 					"TanStack Start builds with Vite. The package ships its atomic CSS, so no StyleX compiler plugin is needed in the consumer.",
-					"Keep @mizen/ui out of the server's externals. Its components import their own CSS files, which Node cannot load directly.",
+					"Keep @mizen-labs/ui out of the server's externals. Its components import their own CSS files, which Node cannot load directly.",
 				],
 				title: "TanStack Start: Vite",
 			},
 			{
 				code: {
 					title: "src/routes/__root.jsx",
-					value: `import mizenCss from "@mizen/ui/styles.css?url";
+					value: `import mizenCss from "@mizen-labs/ui/styles.css?url";
 import fontCss from "@fontsource-variable/wix-madefor-text/wght.css?url";
-import { ThemeProvider, ThemeScript } from "@mizen/ui/theme";
+import { ThemeProvider, ThemeScript } from "@mizen-labs/ui/theme";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import appCss from "../styles.css?url";
 
@@ -247,8 +247,8 @@ function RootDocument({ children }) {
 			},
 			{
 				code: {
-					value: `import { colors } from "@mizen/ui/colors.stylex";
-import { space } from "@mizen/ui/spacing.stylex";
+					value: `import { colors } from "@mizen-labs/ui/colors.stylex";
+import { space } from "@mizen-labs/ui/spacing.stylex";
 import { create, props } from "@stylexjs/stylex";
 
 const styles = create({
@@ -283,7 +283,7 @@ export function Workarea() {
 					{ href: "/docs/foundations", label: "Foundations" },
 				],
 				paragraphs: [
-					"Tokens are StyleX variables, imported from subpaths: colors, spacing, shape, typography, motion, interaction, shadows, dimensions, fonts, palette, and conditions, each as @mizen/ui/<name>.stylex. Type roles live in @mizen/ui/typography.styles.",
+					"Tokens are StyleX variables, imported from subpaths: colors, spacing, shape, typography, motion, interaction, shadows, dimensions, fonts, palette, and conditions, each as @mizen-labs/ui/<name>.stylex. Type roles live in @mizen-labs/ui/typography.styles.",
 					"Themes swap the variables, so styles written with tokens follow light and dark mode automatically.",
 				],
 				title: "Token subpaths",
@@ -405,9 +405,9 @@ export function Workarea() {
 			{
 				code: {
 					title: "app/layout.tsx",
-					value: `import "@mizen/ui/styles.css";
+					value: `import "@mizen-labs/ui/styles.css";
 import "./globals.css";
-import { ThemeProvider, ThemeScript } from "@mizen/ui/theme";
+import { ThemeProvider, ThemeScript } from "@mizen-labs/ui/theme";
 import type { ReactNode } from "react";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -421,7 +421,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				},
 				id: "bootstrap",
 				paragraphs: [
-					"Import the theme helpers from @mizen/ui/theme. Emit ThemeScript synchronously in the server or static document head before body content. Wrap the app in ThemeProvider. Both default to system and the mizen-theme storage key.",
+					"Import the theme helpers from @mizen-labs/ui/theme. Emit ThemeScript synchronously in the server or static document head before body content. Wrap the app in ThemeProvider. Both default to system and the mizen-theme storage key.",
 					"The app owns the fonts. This example uses system fonts. Load custom families only when needed and apply your interface font to body. The package stylesheet supplies the default light and dark themes. Custom createTheme overrides require your own StyleX compiler setup.",
 				],
 				title: "Theme and font layout",
@@ -430,8 +430,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				code: {
 					value: `"use client";
 
-import { Button } from "@mizen/ui/button";
-import { useTheme } from "@mizen/ui/theme";
+import { Button } from "@mizen-labs/ui/button";
+import { useTheme } from "@mizen-labs/ui/theme";
 
 export function SystemThemeAction() {
   const { setTheme } = useTheme();
@@ -519,7 +519,7 @@ export function SystemThemeAction() {
 			},
 			{
 				code: {
-					value: `import { Field, FieldDescription, FieldLabel, Input } from "@mizen/ui";
+					value: `import { Field, FieldDescription, FieldLabel, Input } from "@mizen-labs/ui";
 
 export function ContactEmail() {
   return (
@@ -574,7 +574,7 @@ export function ContactEmail() {
 				code: {
 					value: `"use client";
 
-import { Button } from "@mizen/ui/button";
+import { Button } from "@mizen-labs/ui/button";
 import { useState } from "react";
 
 export function ReviewAction() {

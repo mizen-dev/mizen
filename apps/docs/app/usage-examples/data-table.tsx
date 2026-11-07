@@ -1,6 +1,6 @@
 "use client";
 
-import { DataTable } from "@mizen/ui/data-table";
+import { DataTable } from "@mizen-labs/ui/data-table";
 import {
 	type ColumnDef,
 	columnResizingFeature,

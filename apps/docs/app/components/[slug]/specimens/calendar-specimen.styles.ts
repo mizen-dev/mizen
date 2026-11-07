@@ -1,4 +1,4 @@
-import { space } from "@mizen/ui/spacing.stylex";
+import { space } from "@mizen-labs/ui/spacing.stylex";
 import { create } from "@stylexjs/stylex";
 
 export const specimenStyles = create({

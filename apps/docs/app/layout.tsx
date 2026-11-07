@@ -1,9 +1,9 @@
 import "./globals.css";
 import "@fontsource-variable/jetbrains-mono/wght.css";
 import "@fontsource-variable/wix-madefor-text/wght.css";
-import { colors } from "@mizen/ui/colors.stylex";
-import { ThemeProvider, ThemeScript } from "@mizen/ui/theme";
-import { AnchoredToastProvider, ToastProvider } from "@mizen/ui/toast";
+import { colors } from "@mizen-labs/ui/colors.stylex";
+import { ThemeProvider, ThemeScript } from "@mizen-labs/ui/theme";
+import { AnchoredToastProvider, ToastProvider } from "@mizen-labs/ui/toast";
 import { props } from "@stylexjs/stylex";
 import type { Metadata } from "next";
 import { shellStyles } from "./docs-shell.styles";

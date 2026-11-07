@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@mizen/ui";
-import { toastManager } from "@mizen/ui/toast";
+import { Button } from "@mizen-labs/ui";
+import { toastManager } from "@mizen-labs/ui/toast";
 import { useCallback } from "react";
 
 export function ExampleToast() {

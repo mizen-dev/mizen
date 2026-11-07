@@ -1,4 +1,4 @@
-import { Markdown, markdownComponents, Stack } from "@mizen/ui";
+import { Markdown, markdownComponents, Stack } from "@mizen-labs/ui";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { markdownSource } from "../compositions/rich-content-source";

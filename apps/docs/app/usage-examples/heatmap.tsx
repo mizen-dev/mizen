@@ -1,6 +1,6 @@
 "use client";
 
-import { Heatmap } from "@mizen/ui";
+import { Heatmap } from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 
 // A small grid sizes to its cells, so it sits centered in the stage.

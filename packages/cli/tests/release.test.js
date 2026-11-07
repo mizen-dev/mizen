@@ -17,14 +17,14 @@ import {
 const ui = {
 	exports: { ".": { default: "./dist/index.js", types: "./dist/index.d.ts" } },
 	license: "MIT",
-	name: "@mizen/ui",
+	name: "@mizen-labs/ui",
 	publishConfig: { access: "public" },
 	version: "0.1.0",
 };
 const cli = {
 	...ui,
 	engines: { node: ">=22.18.0 <23 || >=24.11.0" },
-	name: "@mizen/cli",
+	name: "@mizen-labs/cli",
 };
 
 function entries() {

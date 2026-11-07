@@ -5,8 +5,8 @@ import {
 	InputGroupAddon,
 	InputGroupInput,
 	ScrollArea,
-} from "@mizen/ui";
-import { typographyStyles } from "@mizen/ui/typography.styles";
+} from "@mizen-labs/ui";
+import { typographyStyles } from "@mizen-labs/ui/typography.styles";
 import { props } from "@stylexjs/stylex";
 import { IconSearch } from "@tabler/icons-react";
 import Link from "next/link";

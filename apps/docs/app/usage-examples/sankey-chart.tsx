@@ -1,6 +1,6 @@
 "use client";
 
-import { SankeyChart } from "@mizen/ui";
+import { SankeyChart } from "@mizen-labs/ui";
 
 const formatHours = (value: number) => `${value}h`;
 

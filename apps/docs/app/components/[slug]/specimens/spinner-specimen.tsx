@@ -1,6 +1,6 @@
-import { Inline } from "@mizen/ui/inline";
-import { Spinner } from "@mizen/ui/spinner";
-import { Text } from "@mizen/ui/text";
+import { Inline } from "@mizen-labs/ui/inline";
+import { Spinner } from "@mizen-labs/ui/spinner";
+import { Text } from "@mizen-labs/ui/text";
 import { SpecimenSection } from "./specimen-section";
 
 export function SpinnerSpecimen() {

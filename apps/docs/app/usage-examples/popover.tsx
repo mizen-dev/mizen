@@ -7,7 +7,7 @@ import {
 	PopoverPopup,
 	PopoverTitle,
 	PopoverTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function WorkspacePopover() {
 	return (

@@ -1,4 +1,4 @@
-import type { TextProps } from "@mizen/ui/text";
+import type { TextProps } from "@mizen-labs/ui/text";
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
@@ -51,17 +51,17 @@ describe("Text component and docs specimen", () => {
 		throwTeardownFailures(results);
 	}, 120_000);
 
-	it("given @mizen/ui and @mizen/ui/text, resolves export targets and type contracts", () => {
+	it("given @mizen-labs/ui and @mizen-labs/ui/text, resolves export targets and type contracts", () => {
 		// Given: package exports configured in packages/ui/package.json
 		// When: resolving the package root and subpath export targets
-		const rootPath = import.meta.resolve("@mizen/ui");
-		const subpath = import.meta.resolve("@mizen/ui/text");
+		const rootPath = import.meta.resolve("@mizen-labs/ui");
+		const subpath = import.meta.resolve("@mizen-labs/ui/text");
 
 		// Then: both point to their built distribution entrypoints
 		expect(rootPath).toContain("packages/ui/dist/index.js");
 		expect(subpath).toContain("packages/ui/dist/components/text/text.js");
 
-		// And: typecheck verifies @mizen/ui/text exports TextProps without runtime JSX import
+		// And: typecheck verifies @mizen-labs/ui/text exports TextProps without runtime JSX import
 		const sampleProps = { size: "body" } as const satisfies TextProps;
 		const textPropsAcceptsRole = false satisfies TextPropsAcceptsRole;
 		expect(sampleProps.size).toBe("body");

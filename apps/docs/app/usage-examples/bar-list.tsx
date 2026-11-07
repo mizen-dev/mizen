@@ -1,6 +1,6 @@
 "use client";
 
-import { BarList } from "@mizen/ui";
+import { BarList } from "@mizen-labs/ui";
 import {
 	IconDeviceDesktop,
 	IconDeviceMobile,

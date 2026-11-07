@@ -1,6 +1,6 @@
 "use client";
 
-import { Funnel, MetricDelta, MetricTrend } from "@mizen/ui";
+import { Funnel, MetricDelta, MetricTrend } from "@mizen-labs/ui";
 import {
 	IconBolt,
 	IconBuilding,

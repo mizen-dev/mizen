@@ -30,7 +30,10 @@ const optionHelp: Record<OptionName, readonly [string, string]> = {
 	help: ["-h, --help", "Show help"],
 	json: ["--json", "Print one JSON document (schema version 1)"],
 	"no-color": ["--no-color", "Turn off color"],
-	package: ["--package <FILE>", "Install @mizen/ui from a local .tgz archive"],
+	package: [
+		"--package <FILE>",
+		"Install @mizen-labs/ui from a local .tgz archive",
+	],
 	"package-manager": [
 		"--package-manager <NAME>",
 		"Use npm or pnpm when the app declares neither",
@@ -92,7 +95,7 @@ const commands = {
 			"Supports Next.js App Router, TanStack Start, and React + Vite apps.",
 			"The package manager must match the app's declaration and lockfile.",
 			"Installs skip lifecycle scripts.",
-			"Until @mizen/ui is published, pass a matching local archive with --package.",
+			"Until @mizen-labs/ui is published, pass a matching local archive with --package.",
 			"--yes never overwrites a conflict. If init stops midway,",
 			".mizen-init-journal.json records each edit. Restore or finish them,",
 			"then remove the journal.",

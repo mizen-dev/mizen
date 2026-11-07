@@ -1,4 +1,4 @@
-import { Input, Label, Stack } from "@mizen/ui";
+import { Input, Label, Stack } from "@mizen-labs/ui";
 
 export function WorkspaceNameField() {
 	return (

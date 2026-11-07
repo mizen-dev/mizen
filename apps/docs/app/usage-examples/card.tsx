@@ -9,7 +9,7 @@ import {
 	CardHeader,
 	CardTitle,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function ProjectCard() {
 	return (

@@ -1,4 +1,4 @@
-import type { SeparatorProps } from "@mizen/ui/separator";
+import type { SeparatorProps } from "@mizen-labs/ui/separator";
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
@@ -60,10 +60,10 @@ describe("Separator component and docs specimen", () => {
 	}, 120_000);
 
 	it("resolves root and separator subpath exports with a closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/separator")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/separator")).toContain(
 			"packages/ui/dist/components/separator/separator.js"
 		);
 		const acceptsRole = false satisfies SeparatorPropsAcceptsRole;

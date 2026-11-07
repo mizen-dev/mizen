@@ -1,4 +1,4 @@
-import { ChartTooltip } from "@mizen/ui";
+import { ChartTooltip } from "@mizen-labs/ui";
 
 export function RevenueTooltip() {
 	const items = [

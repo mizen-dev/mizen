@@ -8,7 +8,7 @@ import {
 	FieldLabel,
 	Input,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { type FormEvent, useCallback, useState } from "react";
 
 export function ConsumerSettings() {

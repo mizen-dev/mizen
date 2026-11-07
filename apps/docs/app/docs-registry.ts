@@ -154,7 +154,7 @@ export function renderComponentMarkdown(component: ComponentDoc) {
 		"",
 		...renderApiMarkdown(component),
 		"",
-		`Import the public component and exported prop types from \`@mizen/ui\`. See the rendered example at \`/docs/components/${component.slug}\`.`,
+		`Import the public component and exported prop types from \`@mizen-labs/ui\`. See the rendered example at \`/docs/components/${component.slug}\`.`,
 		"",
 	].join("\n");
 }

@@ -39,7 +39,7 @@ import {
 	Text,
 	Textarea,
 	useForm,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { type FormEvent, useCallback, useRef, useState } from "react";
 import { compositionStyles } from "./composition.styles";

@@ -8,7 +8,7 @@ import {
 	ComposerInput,
 	ComposerSubmit,
 	type ComposerValue,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { useState } from "react";
 
 export function ClientPromptComposer() {

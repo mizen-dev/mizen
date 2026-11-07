@@ -44,8 +44,8 @@ async function configCheck(
 	);
 	const repair =
 		framework === "next"
-			? 'Include "@mizen/ui" in transpilePackages.'
-			: 'Include "@mizen/ui" in ssr.noExternal.';
+			? 'Include "@mizen-labs/ui" in transpilePackages.'
+			: 'Include "@mizen-labs/ui" in ssr.noExternal.';
 	if (!file) {
 		return check(
 			"setup.bundling",
@@ -75,7 +75,7 @@ async function configCheck(
 	const present =
 		framework === "start" && literalTrue(value)
 			? true
-			: staticArrayContains(value, "@mizen/ui");
+			: staticArrayContains(value, "@mizen-labs/ui");
 	return check(
 		"setup.bundling",
 		present === true ? "pass" : "unverified",
@@ -90,7 +90,9 @@ async function configCheck(
 function aliases(ast: SyntaxNode, exported: string): string[] {
 	return imports(ast)
 		.filter((node) =>
-			["@mizen/ui/theme", "@mizen/ui"].includes(literal(node.source) ?? "")
+			["@mizen-labs/ui/theme", "@mizen-labs/ui"].includes(
+				literal(node.source) ?? ""
+			)
 		)
 		.flatMap((node) => (Array.isArray(node.specifiers) ? node.specifiers : []))
 		.filter(
@@ -132,13 +134,13 @@ function themeCheck(
 
 function stylesheetCheck(ast: SyntaxNode, path: string): Diagnostic {
 	const cssImports = imports(ast).filter(
-		(node) => literal(node.source) === "@mizen/ui/styles.css"
+		(node) => literal(node.source) === "@mizen-labs/ui/styles.css"
 	);
 	const direct = cssImports.some(
 		(node) => Array.isArray(node.specifiers) && node.specifiers.length === 0
 	);
 	const urlBindings = imports(ast)
-		.filter((node) => literal(node.source) === "@mizen/ui/styles.css?url")
+		.filter((node) => literal(node.source) === "@mizen-labs/ui/styles.css?url")
 		.flatMap((node) => (Array.isArray(node.specifiers) ? node.specifiers : []))
 		.map((node) => (isNode(node) ? nameOf(node.local) : null))
 		.filter((name): name is string => name !== null);
@@ -155,7 +157,7 @@ function stylesheetCheck(ast: SyntaxNode, path: string): Diagnostic {
 			? "Root syntax declares Mizen's compiled stylesheet. Verify delivery in a browser."
 			: "No direct stylesheet import or URL/link declaration was verified. Indirect CSS or custom extraction may supply it.",
 		[path],
-		"Import @mizen/ui/styles.css at the app root, or verify your equivalent CSS pipeline manually."
+		"Import @mizen-labs/ui/styles.css at the app root, or verify your equivalent CSS pipeline manually."
 	);
 }
 

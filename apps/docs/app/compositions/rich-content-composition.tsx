@@ -6,7 +6,7 @@ import {
 	Text,
 	Thumbnail,
 	Timestamp,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { PreviewWorkspace } from "../components/preview-workspace";

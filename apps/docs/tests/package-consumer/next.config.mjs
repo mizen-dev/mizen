@@ -1,4 +1,4 @@
 export default {
 	experimental: { cpus: 1 },
-	transpilePackages: ["@mizen/ui"],
+	transpilePackages: ["@mizen-labs/ui"],
 };

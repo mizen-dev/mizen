@@ -7,7 +7,7 @@ import {
 	MetricValue,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { chartExampleStyles } from "../compositions/chart-composition.styles";
 

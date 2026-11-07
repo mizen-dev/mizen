@@ -1,5 +1,5 @@
-import { shape } from "@mizen/ui/shape.stylex";
-import { space } from "@mizen/ui/spacing.stylex";
+import { shape } from "@mizen-labs/ui/shape.stylex";
+import { space } from "@mizen-labs/ui/spacing.stylex";
 import { create } from "@stylexjs/stylex";
 
 export const carouselPreviewStyles = create({

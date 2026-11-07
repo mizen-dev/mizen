@@ -35,7 +35,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { type ChangeEvent, useCallback, useState } from "react";
 import { compositionStyles } from "./composition.styles";

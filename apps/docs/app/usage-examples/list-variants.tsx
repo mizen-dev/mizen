@@ -8,7 +8,7 @@ import {
 	ListItem,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { listCompositionStyles } from "../compositions/list-composition.styles";
 

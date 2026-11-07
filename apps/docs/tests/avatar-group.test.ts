@@ -73,10 +73,10 @@ describe("AvatarGroup component browser behavior", () => {
 	}, 120_000);
 
 	it("resolves package root and avatar-group subpath exports", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/avatar-group")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/avatar-group")).toContain(
 			"packages/ui/dist/components/avatar/avatar.js"
 		);
 	});

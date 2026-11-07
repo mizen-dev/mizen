@@ -1,4 +1,4 @@
-import { Grid, MetricDelta, MetricTrend } from "@mizen/ui";
+import { Grid, MetricDelta, MetricTrend } from "@mizen-labs/ui";
 import {
 	IconCoin,
 	IconMessageCircle,

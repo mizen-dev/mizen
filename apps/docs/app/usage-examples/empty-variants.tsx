@@ -17,7 +17,7 @@ import {
 	Heading,
 	Stack,
 	StatusDot,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { IconFolder, IconSearch, IconUsers } from "@tabler/icons-react";
 import { pageStyles } from "../page.styles";

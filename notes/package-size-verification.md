@@ -1,6 +1,6 @@
 # Package-size correction — 2026-11-07
 
-The @mizen/ui archive fell from 774,870 to 675,955 bytes: 98,915 bytes smaller,
+The @mizen-labs/ui archive fell from 774,870 to 675,955 bytes: 98,915 bytes smaller,
 with 4,045 bytes remaining under the unchanged 680,000-byte limit.
 
 The production build now:

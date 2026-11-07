@@ -8,7 +8,7 @@ import {
 	SelectPopup,
 	SelectTrigger,
 	SelectValue,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconCalendar } from "@tabler/icons-react";
 import { useCallback } from "react";
 

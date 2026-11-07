@@ -1,5 +1,5 @@
 "use client";
-import { Button, ButtonGroup, Heading, Stack, Text } from "@mizen/ui";
+import { Button, ButtonGroup, Heading, Stack, Text } from "@mizen-labs/ui";
 import { useCallback, useState } from "react";
 
 export function ButtonGroupPublishAReleaseExample1() {

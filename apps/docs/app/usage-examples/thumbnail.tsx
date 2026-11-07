@@ -1,4 +1,4 @@
-import { Inline, Thumbnail } from "@mizen/ui";
+import { Inline, Thumbnail } from "@mizen-labs/ui";
 
 const photos = [
 	{

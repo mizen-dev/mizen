@@ -1,7 +1,7 @@
-import { Badge, Heading } from "@mizen/ui";
-import { Inline } from "@mizen/ui/inline";
-import { Spacer } from "@mizen/ui/spacer";
-import { Text } from "@mizen/ui/text";
+import { Badge, Heading } from "@mizen-labs/ui";
+import { Inline } from "@mizen-labs/ui/inline";
+import { Spacer } from "@mizen-labs/ui/spacer";
+import { Text } from "@mizen-labs/ui/text";
 import { SpecimenSection } from "./specimen-section";
 
 export function SpacerSpecimen() {

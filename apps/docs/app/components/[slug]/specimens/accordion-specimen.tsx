@@ -1,12 +1,12 @@
 "use client";
 
-import { Button, darkTheme, Inline, Stack } from "@mizen/ui";
+import { Button, darkTheme, Inline, Stack } from "@mizen-labs/ui";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionPanel,
 	AccordionTrigger,
-} from "@mizen/ui/accordion";
+} from "@mizen-labs/ui/accordion";
 import { props } from "@stylexjs/stylex";
 import { useCallback, useState } from "react";
 import { pageStyles } from "../../../page.styles";

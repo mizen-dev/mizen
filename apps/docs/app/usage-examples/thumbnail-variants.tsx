@@ -1,4 +1,4 @@
-import { Inline, Stack, Text, Thumbnail } from "@mizen/ui";
+import { Inline, Stack, Text, Thumbnail } from "@mizen-labs/ui";
 import { richContentImage } from "../compositions/rich-content-source";
 
 export function ThumbnailDesignAssetsExample1() {

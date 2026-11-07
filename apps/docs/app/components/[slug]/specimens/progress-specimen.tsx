@@ -9,7 +9,7 @@ import {
 	ProgressValue,
 	Spacer,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { pageStyles } from "../../../page.styles";
 import { SpecimenSection } from "./specimen-section";

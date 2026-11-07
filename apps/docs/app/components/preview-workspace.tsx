@@ -1,4 +1,4 @@
-import { Heading, Stack, Text } from "@mizen/ui";
+import { Heading, Stack, Text } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import type { ReactNode } from "react";
 import { previewWorkspaceStyles } from "./preview-workspace.styles";

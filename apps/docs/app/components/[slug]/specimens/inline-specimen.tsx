@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Heading, Text } from "@mizen/ui";
-import { Inline } from "@mizen/ui/inline";
+import { Button, Heading, Text } from "@mizen-labs/ui";
+import { Inline } from "@mizen-labs/ui/inline";
 import { props } from "@stylexjs/stylex";
 import { useCallback, useState } from "react";
 import { specimenStyles as previewStyles } from "./specimen.styles";

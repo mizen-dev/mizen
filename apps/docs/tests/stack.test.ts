@@ -1,4 +1,4 @@
-import type { StackProps } from "@mizen/ui/stack";
+import type { StackProps } from "@mizen-labs/ui/stack";
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
@@ -50,10 +50,10 @@ describe("Stack component and docs specimen", () => {
 	}, 120_000);
 
 	it("resolves root and stack subpath exports with a closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/stack")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/stack")).toContain(
 			"packages/ui/dist/components/stack/stack.js"
 		);
 		const acceptsRole = false satisfies StackPropsAcceptsRole;

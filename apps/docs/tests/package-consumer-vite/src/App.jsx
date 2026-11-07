@@ -6,8 +6,8 @@ import {
 	DialogPopup,
 	DialogTitle,
 	Stack,
-} from "@mizen/ui";
-import { isThemePreference, useTheme } from "@mizen/ui/theme";
+} from "@mizen-labs/ui";
+import { isThemePreference, useTheme } from "@mizen-labs/ui/theme";
 import { useCallback, useState } from "react";
 
 export default function App() {

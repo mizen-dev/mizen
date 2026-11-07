@@ -1,6 +1,6 @@
 "use client";
 
-import { BarList, MetricDelta, MetricTrend } from "@mizen/ui";
+import { BarList, MetricDelta, MetricTrend } from "@mizen-labs/ui";
 import {
 	IconDeviceDesktop,
 	IconDeviceMobile,

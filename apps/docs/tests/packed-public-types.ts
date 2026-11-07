@@ -40,7 +40,8 @@ function publicImport(name: string, index: number): string {
 	if (name.includes("*")) {
 		throw new Error("Add packed import cases for export patterns.");
 	}
-	const specifier = name === "." ? "@mizen/ui" : `@mizen/ui${name.slice(1)}`;
+	const specifier =
+		name === "." ? "@mizen-labs/ui" : `@mizen-labs/ui${name.slice(1)}`;
 	return name.endsWith(".css")
 		? `import ${JSON.stringify(specifier)};`
 		: `import type * as Entry${index} from ${JSON.stringify(specifier)};\nexport type Surface${index} = typeof Entry${index};`;
@@ -49,7 +50,7 @@ function publicImport(name: string, index: number): string {
 export async function verifyPackedPublicTypes(
 	consumerRoot: string
 ): Promise<void> {
-	const installed = join(consumerRoot, "node_modules/@mizen/ui");
+	const installed = join(consumerRoot, "node_modules/@mizen-labs/ui");
 	const actual = await realpath(installed);
 	if (!actual.startsWith(`${await realpath(consumerRoot)}${sep}`)) {
 		throw new Error("Public type audit must use the installed archive.");

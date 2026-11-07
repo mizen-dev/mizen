@@ -1,4 +1,4 @@
-import { Spinner } from "@mizen/ui/spinner";
+import { Spinner } from "@mizen-labs/ui/spinner";
 
 export function SpinnerThinkingExample() {
 	return <Spinner aria-label="Thinking" variant="thinking" />;

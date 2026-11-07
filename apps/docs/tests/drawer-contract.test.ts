@@ -148,8 +148,8 @@ describe("Drawer contract and runtime semantics", () => {
 	afterEach(() => {
 		document.body.innerHTML = "";
 	});
-	it("resolves @mizen/ui/drawer as a public subpath", () => {
-		const resolved = import.meta.resolve("@mizen/ui/drawer");
+	it("resolves @mizen-labs/ui/drawer as a public subpath", () => {
+		const resolved = import.meta.resolve("@mizen-labs/ui/drawer");
 		expect(resolved).toContain("drawer");
 	});
 

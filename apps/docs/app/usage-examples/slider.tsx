@@ -1,4 +1,4 @@
-import { Field, FieldDescription, FieldLabel, Slider } from "@mizen/ui";
+import { Field, FieldDescription, FieldLabel, Slider } from "@mizen-labs/ui";
 export function VolumeSlider() {
 	return (
 		<Field>

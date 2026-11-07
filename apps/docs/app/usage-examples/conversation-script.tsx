@@ -10,7 +10,7 @@ import {
 	type TerminalStatus,
 	ToolCallGroup,
 	type ToolCallGroupCall,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { useCallback, useRef, useState } from "react";
 
 // A scripted agent for the Conversation examples: a scene is the composer's

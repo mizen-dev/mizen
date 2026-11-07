@@ -1,4 +1,4 @@
-import { Text, type TextProps } from "@mizen/ui/text";
+import { Text, type TextProps } from "@mizen-labs/ui/text";
 import { props } from "@stylexjs/stylex";
 import { pageStyles } from "../../../page.styles";
 import { PreviewWorkspace } from "../../preview-workspace";

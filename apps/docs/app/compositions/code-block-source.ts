@@ -5,7 +5,7 @@ export const workspaceSettingsSource = `import {
 	FieldDescription,
 	FieldLabel,
 	Input,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 const setupMessage = "<main>ready</main>";
 

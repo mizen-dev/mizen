@@ -1,4 +1,4 @@
-import type { SpacerProps } from "@mizen/ui/spacer";
+import type { SpacerProps } from "@mizen-labs/ui/spacer";
 import { type Browser, chromium, type Page } from "playwright";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -69,10 +69,10 @@ describe("Spacer component and docs specimen", () => {
 	}, 120_000);
 
 	it("resolves root and spacer subpath exports with a closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/spacer")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/spacer")).toContain(
 			"packages/ui/dist/components/spacer/spacer.js"
 		);
 		const acceptsChildren = false satisfies SpacerPropsAcceptsChildren;

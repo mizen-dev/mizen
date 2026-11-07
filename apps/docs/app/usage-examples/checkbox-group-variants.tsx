@@ -5,7 +5,7 @@ import {
 	Field,
 	FieldLabel,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function CheckboxGroupDeliveryPreferencesExample1() {
 	return (

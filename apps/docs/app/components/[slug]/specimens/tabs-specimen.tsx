@@ -16,7 +16,7 @@ import {
 	TabsPanel,
 	TabsTab,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { specimenStyles } from "./specimen.styles";
 import { SpecimenSection } from "./specimen-section";

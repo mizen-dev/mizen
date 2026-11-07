@@ -7,7 +7,7 @@
     },
     "dev": {
       "dependsOn": ["^build"],
-      "with": ["@mizen/docs#dev", "@mizen/ui#dev"],
+      "with": ["@mizen-labs/docs#dev", "@mizen-labs/ui#dev"],
       "cache": false,
       "persistent": true
     },

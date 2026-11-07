@@ -23,7 +23,7 @@ import {
 	MenuTrigger,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function DialogNorthstarLaunchExample1() {
 	return (

@@ -8,7 +8,7 @@ import {
 	AlertTitle,
 	Button,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	IconAlertCircle,
 	IconAlertTriangle,

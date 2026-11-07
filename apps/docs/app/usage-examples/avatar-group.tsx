@@ -4,7 +4,7 @@ import {
 	AvatarFallback,
 	AvatarGroup,
 	AvatarImage,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function ProjectContributors() {
 	return (

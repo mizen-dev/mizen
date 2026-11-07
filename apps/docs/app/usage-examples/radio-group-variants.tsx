@@ -5,7 +5,7 @@ import {
 	RadioCard,
 	RadioGroup,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function RadioGroupReadingPreferencesExample1() {
 	return (

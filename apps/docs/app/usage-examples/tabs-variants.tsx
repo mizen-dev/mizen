@@ -16,7 +16,7 @@ import {
 	TabsPanel,
 	TabsTab,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconLayoutGrid, IconList } from "@tabler/icons-react";
 
 export function TabsProjectOverviewExample1() {

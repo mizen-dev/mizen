@@ -18,7 +18,7 @@ import {
 	MessageScrollerItem,
 	MessageScrollerViewport,
 	useMessageScroller,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import { useCallback, useRef, useState } from "react";
 

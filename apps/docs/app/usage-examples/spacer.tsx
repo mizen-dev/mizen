@@ -1,4 +1,4 @@
-import { Button, Group, Inline, Spacer } from "@mizen/ui";
+import { Button, Group, Inline, Spacer } from "@mizen-labs/ui";
 
 export function SplitActions() {
 	return (

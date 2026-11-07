@@ -114,11 +114,11 @@ describe("Heading component and docs specimen", () => {
 		}
 	}, 120_000);
 
-	it("given @mizen/ui and @mizen/ui/heading, resolves export targets", () => {
+	it("given @mizen-labs/ui and @mizen-labs/ui/heading, resolves export targets", () => {
 		// Given: package exports configured in packages/ui/package.json
 		// When: resolving the package root and subpath export targets
-		const rootPath = import.meta.resolve("@mizen/ui");
-		const subpath = import.meta.resolve("@mizen/ui/heading");
+		const rootPath = import.meta.resolve("@mizen-labs/ui");
+		const subpath = import.meta.resolve("@mizen-labs/ui/heading");
 
 		// Then: both point to their built distribution entrypoints
 		expect(rootPath).toContain("packages/ui/dist/index.js");

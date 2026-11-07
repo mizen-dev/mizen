@@ -23,7 +23,7 @@ export async function viteSetupChecks(project: string): Promise<Diagnostic[]> {
 		const ast = parseSource(entry.source);
 		const css = imports(ast).some(
 			(node) =>
-				literal(node.source) === "@mizen/ui/styles.css" &&
+				literal(node.source) === "@mizen-labs/ui/styles.css" &&
 				Array.isArray(node.specifiers) &&
 				node.specifiers.length === 0
 		);
@@ -44,7 +44,7 @@ export async function viteSetupChecks(project: string): Promise<Diagnostic[]> {
 					? "The client entry imports Mizen's compiled stylesheet."
 					: "No direct Mizen stylesheet import was verified in the client entry.",
 				[path],
-				"Import @mizen/ui/styles.css in the module loaded by index.html."
+				"Import @mizen-labs/ui/styles.css in the module loaded by index.html."
 			),
 			check(
 				"setup.theme",
@@ -53,7 +53,7 @@ export async function viteSetupChecks(project: string): Promise<Diagnostic[]> {
 					? "ThemeProvider covers the mounted client tree. No SSR ThemeScript is needed for this client-only entry."
 					: "A ThemeProvider covering createRoot(...).render(...) was not verified.",
 				[path],
-				"Wrap the mounted React tree in ThemeProvider from @mizen/ui/theme; keep existing StrictMode and app providers."
+				"Wrap the mounted React tree in ThemeProvider from @mizen-labs/ui/theme; keep existing StrictMode and app providers."
 			),
 		];
 	} catch {
@@ -80,12 +80,12 @@ function bootstrapCheck(
 			"unverified",
 			"A synchronous initializeTheme call before React mounting was not verified.",
 			[path],
-			"Call initializeTheme from @mizen/ui/theme/initialize before createRoot, using options matching ThemeProvider."
+			"Call initializeTheme from @mizen-labs/ui/theme/initialize before createRoot, using options matching ThemeProvider."
 		);
 	}
 	try {
 		createRequire(join(project, "package.json")).resolve(
-			"@mizen/ui/theme/initialize"
+			"@mizen-labs/ui/theme/initialize"
 		);
 	} catch {
 		return check(

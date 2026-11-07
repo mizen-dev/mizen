@@ -7,7 +7,7 @@ import {
 	SegmentedControlItem,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconChartBar, IconLayoutGrid, IconList } from "@tabler/icons-react";
 import { useState } from "react";
 

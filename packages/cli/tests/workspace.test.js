@@ -49,18 +49,18 @@ function workspace(t, kind = "pnpm", patterns = ["apps/*", "packages/*"]) {
 		kind === "pnpm" ? "pnpm-lock.yaml" : "package-lock.json",
 		"keep-lockfile"
 	);
-	put(root, "node_modules/@mizen/ui/package.json", {
+	put(root, "node_modules/@mizen-labs/ui/package.json", {
 		exports: {
 			"./package.json": "./package.json",
 			"./theme/initialize": "./initialize.js",
 		},
-		name: "@mizen/ui",
+		name: "@mizen-labs/ui",
 		peerDependencies: { react: "^19.2.8", "react-dom": "^19.2.8" },
 		version: "0.1.0",
 	});
 	put(
 		root,
-		"node_modules/@mizen/ui/initialize.js",
+		"node_modules/@mizen-labs/ui/initialize.js",
 		"export function initializeTheme() {}\n"
 	);
 	for (const name of ["react", "react-dom"]) {
@@ -77,7 +77,7 @@ function app(root, path, framework = "next") {
 	put(project, "package.json", {
 		dependencies: {
 			[name]: "1.0.0",
-			"@mizen/ui": "0.1.0",
+			"@mizen-labs/ui": "0.1.0",
 			react: "19.3.0",
 			"react-dom": "19.3.0",
 		},
@@ -92,29 +92,29 @@ function app(root, path, framework = "next") {
 		put(
 			project,
 			"src/main.tsx",
-			`import "@mizen/ui/styles.css"; import {ThemeProvider} from "@mizen/ui/theme"; import {initializeTheme} from "@mizen/ui/theme/initialize"; import {createRoot} from "react-dom/client"; initializeTheme(); createRoot(document.getElementById("root")).render(<ThemeProvider><App/></ThemeProvider>);`
+			`import "@mizen-labs/ui/styles.css"; import {ThemeProvider} from "@mizen-labs/ui/theme"; import {initializeTheme} from "@mizen-labs/ui/theme/initialize"; import {createRoot} from "react-dom/client"; initializeTheme(); createRoot(document.getElementById("root")).render(<ThemeProvider><App/></ThemeProvider>);`
 		);
 	} else if (framework === "start") {
 		put(
 			project,
 			"vite.config.ts",
-			'export default {ssr:{noExternal:["@mizen/ui"]}};'
+			'export default {ssr:{noExternal:["@mizen-labs/ui"]}};'
 		);
 		put(
 			project,
 			"src/routes/__root.tsx",
-			`import {createRootRoute} from "@tanstack/react-router"; import css from "@mizen/ui/styles.css?url"; import {ThemeProvider,ThemeScript} from "@mizen/ui/theme"; export const Route=createRootRoute({head:()=>({links:[{href:css,rel:"stylesheet"}]}),shellComponent:Root}); function Root({children}) {return <html><head><ThemeScript/></head><body><ThemeProvider>{children}</ThemeProvider></body></html>;}`
+			`import {createRootRoute} from "@tanstack/react-router"; import css from "@mizen-labs/ui/styles.css?url"; import {ThemeProvider,ThemeScript} from "@mizen-labs/ui/theme"; export const Route=createRootRoute({head:()=>({links:[{href:css,rel:"stylesheet"}]}),shellComponent:Root}); function Root({children}) {return <html><head><ThemeScript/></head><body><ThemeProvider>{children}</ThemeProvider></body></html>;}`
 		);
 	} else {
 		put(
 			project,
 			"next.config.mjs",
-			'export default {transpilePackages:["@mizen/ui"]};'
+			'export default {transpilePackages:["@mizen-labs/ui"]};'
 		);
 		put(
 			project,
 			"app/layout.tsx",
-			'import "@mizen/ui/styles.css"; import {ThemeProvider,ThemeScript} from "@mizen/ui/theme"; export default function Root({children}) {return <html><head><ThemeScript/></head><body><ThemeProvider>{children}</ThemeProvider></body></html>;}'
+			'import "@mizen-labs/ui/styles.css"; import {ThemeProvider,ThemeScript} from "@mizen-labs/ui/theme"; export default function Root({children}) {return <html><head><ThemeScript/></head><body><ThemeProvider>{children}</ThemeProvider></body></html>;}'
 		);
 	}
 	return project;

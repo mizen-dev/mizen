@@ -1,5 +1,5 @@
 "use client";
-import { Inline, Stack, Text, Token, type TokenColor } from "@mizen/ui";
+import { Inline, Stack, Text, Token, type TokenColor } from "@mizen-labs/ui";
 import { IconTag, IconUser } from "@tabler/icons-react";
 import { useCallback, useState } from "react";
 

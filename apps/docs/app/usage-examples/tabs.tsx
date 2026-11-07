@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@mizen/ui";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { tabsPreviewStyles } from "./tabs-preview.styles";
 export function ProjectTabs() {

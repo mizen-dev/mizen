@@ -55,10 +55,10 @@ describe("Avatar component browser behavior", () => {
 	}, 120_000);
 
 	it("resolves package root and avatar subpath exports", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/avatar")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/avatar")).toContain(
 			"packages/ui/dist/components/avatar/avatar.js"
 		);
 	});

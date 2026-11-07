@@ -1,5 +1,5 @@
-import { Button } from "@mizen/ui";
-import { typeRoles } from "@mizen/ui/typography.styles";
+import { Button } from "@mizen-labs/ui";
+import { typeRoles } from "@mizen-labs/ui/typography.styles";
 import { props } from "@stylexjs/stylex";
 import { IconArrowRight } from "@tabler/icons-react";
 import type { Metadata } from "next";

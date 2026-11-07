@@ -11,7 +11,7 @@ import {
 	TooltipPopup,
 	TooltipProvider,
 	TooltipTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { IconBold, IconItalic, IconUnderline } from "@tabler/icons-react";
 import { Fragment as ReactFragment, useState } from "react";

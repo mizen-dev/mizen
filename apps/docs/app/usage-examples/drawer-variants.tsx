@@ -12,7 +12,7 @@ import {
 	DrawerTrigger,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function DrawerProductionWorkspaceExample1() {
 	return (

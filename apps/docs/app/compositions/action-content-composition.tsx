@@ -19,7 +19,7 @@ import {
 	Stack,
 	Text,
 	Thumbnail,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconX } from "@tabler/icons-react";
 import { useCallback, useState } from "react";
 import { PreviewWorkspace } from "../components/preview-workspace";

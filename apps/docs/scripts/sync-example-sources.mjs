@@ -397,7 +397,7 @@ if (process.argv.includes("--check")) {
 		JSON.stringify(sources)
 	) {
 		throw new Error(
-			"Example sources changed. Run pnpm --filter @mizen/docs docs:sync."
+			"Example sources changed. Run pnpm --filter @mizen-labs/docs docs:sync."
 		);
 	}
 } else {

@@ -1,4 +1,4 @@
-import type { SkeletonProps, SkeletonShape } from "@mizen/ui/skeleton";
+import type { SkeletonProps, SkeletonShape } from "@mizen-labs/ui/skeleton";
 import type { RefObject } from "react";
 import { createElement, createRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -41,10 +41,10 @@ const expectedContractChecks = [
 
 describe("Skeleton component contract and SSR semantics", () => {
 	it("resolves root and subpath exports with an exact closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/skeleton")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/skeleton")).toContain(
 			"packages/ui/dist/components/skeleton/skeleton.js"
 		);
 		expect(contractChecks).toEqual(expectedContractChecks);

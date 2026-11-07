@@ -6,7 +6,7 @@ import {
 	ListItem,
 	ScrollArea,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 
 // The scroll region needs a bounded parent.

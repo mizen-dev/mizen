@@ -4,10 +4,10 @@ import {
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from "@mizen/ui";
-import { Badge } from "@mizen/ui/badge";
-import { Inline } from "@mizen/ui/inline";
-import { Stack } from "@mizen/ui/stack";
+} from "@mizen-labs/ui";
+import { Badge } from "@mizen-labs/ui/badge";
+import { Inline } from "@mizen-labs/ui/inline";
+import { Stack } from "@mizen-labs/ui/stack";
 import { SpecimenSection } from "./specimen-section";
 
 const variantSamples = [

@@ -6,10 +6,10 @@ import {
 	CollapsiblePanel,
 	CollapsibleTrigger,
 	Stack,
-} from "@mizen/ui";
-import { conditions } from "@mizen/ui/conditions.stylex";
-import { duration, easing } from "@mizen/ui/motion.stylex";
-import { space } from "@mizen/ui/spacing.stylex";
+} from "@mizen-labs/ui";
+import { conditions } from "@mizen-labs/ui/conditions.stylex";
+import { duration, easing } from "@mizen-labs/ui/motion.stylex";
+import { space } from "@mizen-labs/ui/spacing.stylex";
 import { create, props } from "@stylexjs/stylex";
 import { IconChevronDown } from "@tabler/icons-react";
 import { type ReactNode, useState } from "react";

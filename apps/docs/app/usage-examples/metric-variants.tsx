@@ -1,10 +1,10 @@
-import { Badge, Card, CardContent, Code, Grid, Stack } from "@mizen/ui";
+import { Badge, Card, CardContent, Code, Grid, Stack } from "@mizen-labs/ui";
 import {
 	Metric,
 	MetricDescription,
 	MetricLabel,
 	MetricValue,
-} from "@mizen/ui/metric";
+} from "@mizen-labs/ui/metric";
 
 export function MetricSubscriptionsExample1() {
 	return (

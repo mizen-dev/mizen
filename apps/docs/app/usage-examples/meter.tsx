@@ -6,7 +6,7 @@ import {
 	MeterTrack,
 	MeterValue,
 	Spacer,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function StorageCapacity() {
 	return (

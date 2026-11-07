@@ -45,7 +45,7 @@ UI TypeScript + StyleX declarations
   -> Babel emits packages/ui/dist JavaScript
   -> TypeScript emits declarations into dist
   -> StyleX PostCSS emits dist/styles.css during the package build
-  -> Consumers import @mizen/ui/styles.css once at the app root
+  -> Consumers import @mizen-labs/ui/styles.css once at the app root
 ```
 
 Components retain imports for their structural CSS. Next uses `transpilePackages`;
@@ -71,10 +71,10 @@ guide covers setup.
 
 ## CLI
 
-The unpublished `@mizen/cli` candidate provides offline component discovery:
+The unpublished `@mizen-labs/cli` candidate provides offline component discovery:
 
 ```sh
-pnpm --filter @mizen/cli build
+pnpm --filter @mizen-labs/cli build
 node packages/cli/dist/cli.js search approval
 node packages/cli/dist/cli.js info button --json
 ```
@@ -116,7 +116,7 @@ entry point.
 ```sh
 pnpm lint:check
 pnpm typecheck
-pnpm --filter @mizen/docs test
+pnpm --filter @mizen-labs/docs test
 ```
 
 Vitest compiles the UI once before starting its browser server. With
@@ -130,7 +130,7 @@ passing engines and one failed launch. Rerun it on another macOS or Linux host, 
 after a Playwright release with a compatible Firefox build.
 
 ```sh
-pnpm --filter @mizen/docs exec playwright install chromium firefox webkit
+pnpm --filter @mizen-labs/docs exec playwright install chromium firefox webkit
 ```
 
 Run focused tests during a slice. Run `pnpm build` at integration or release
@@ -145,8 +145,8 @@ and type files.
 The packed Next and TanStack Start consumers are opt-in integration checkpoints:
 
 ```sh
-pnpm --filter @mizen/ui build
-MIZEN_PACKED_CONSUMER=1 MIZEN_DOCS_TEST_URL=http://localhost:3000 pnpm --filter @mizen/docs exec vitest run tests/package-consumer.integration.test.ts
+pnpm --filter @mizen-labs/ui build
+MIZEN_PACKED_CONSUMER=1 MIZEN_DOCS_TEST_URL=http://localhost:3000 pnpm --filter @mizen-labs/docs exec vitest run tests/package-consumer.integration.test.ts
 ```
 
 It packs the UI, installs the archive in a temporary independent app, and builds it.
@@ -229,11 +229,11 @@ Breadcrumb, Pagination, and Stepper anatomy can compose from server components. 
 
 ### Charts
 
-`ChartFrame` adapts TanStack Charts 1.1.0 with a required accessible name and deterministic initial width for server rendering. Definitions keep datum and axis callback types inferred. Axes default to 12px regular text, and chart colors follow the active theme. `ChartTooltip` supplies the body while TanStack owns placement and interaction. `ChartLegend` renders a named native list with matching series tones. `TimeSeries` accepts unique integer epoch-millisecond points on a UTC temporal scale. `null` values create gaps, while zero remains a value. Set an explicit `timeZone` for displayed dates. Its optional `formatValue` callback formats values in both the axis and tooltip. The component supports a full chart or compact sparkline and draws one series. `MetricTrend` composes existing metric parts with a caller-owned chart or sparkline and caller-owned value; it does not infer change. `CategoryComparison` draws one caller-ordered horizontal series around zero; unique IDs allow repeated labels, and signed values extend on either side. Its `formatValue` applies to axis ticks and tooltips. `Distribution` bins caller-provided finite numeric values into equal-width intervals over a required explicit domain. It defaults to eight bins, includes both domain endpoints, uses left-inclusive/right-exclusive interior bins, and includes the maximum in the final bin. Values outside the domain are rejected; an empty sample reports an empty state. Its optional `formatValue` formats domain units on the axis and tooltip, while bin counts use the selected locale. `PartToWhole` shows caller-ordered nonnegative values in one donut chart; zero-value categories stay in the legend beside their share. Import chart parts and types from `@mizen/ui` or their matching subpaths.
+`ChartFrame` adapts TanStack Charts 1.1.0 with a required accessible name and deterministic initial width for server rendering. Definitions keep datum and axis callback types inferred. Axes default to 12px regular text, and chart colors follow the active theme. `ChartTooltip` supplies the body while TanStack owns placement and interaction. `ChartLegend` renders a named native list with matching series tones. `TimeSeries` accepts unique integer epoch-millisecond points on a UTC temporal scale. `null` values create gaps, while zero remains a value. Set an explicit `timeZone` for displayed dates. Its optional `formatValue` callback formats values in both the axis and tooltip. The component supports a full chart or compact sparkline and draws one series. `MetricTrend` composes existing metric parts with a caller-owned chart or sparkline and caller-owned value; it does not infer change. `CategoryComparison` draws one caller-ordered horizontal series around zero; unique IDs allow repeated labels, and signed values extend on either side. Its `formatValue` applies to axis ticks and tooltips. `Distribution` bins caller-provided finite numeric values into equal-width intervals over a required explicit domain. It defaults to eight bins, includes both domain endpoints, uses left-inclusive/right-exclusive interior bins, and includes the maximum in the final bin. Values outside the domain are rejected; an empty sample reports an empty state. Its optional `formatValue` formats domain units on the axis and tooltip, while bin counts use the selected locale. `PartToWhole` shows caller-ordered nonnegative values in one donut chart; zero-value categories stay in the legend beside their share. Import chart parts and types from `@mizen-labs/ui` or their matching subpaths.
 
 ### Agentic
 
-`Composer` combines a named draft input with a form submit action. Enter submits, Shift+Enter inserts a line break, and IME composition stays intact. `submitDisabled` blocks sending while preserving the draft; the caller owns asynchronous state and clearing. Import it from `@mizen/ui` or `@mizen/ui/composer`.
+`Composer` combines a named draft input with a form submit action. Enter submits, Shift+Enter inserts a line break, and IME composition stays intact. `submitDisabled` blocks sending while preserving the draft; the caller owns asynchronous state and clearing. Import it from `@mizen-labs/ui` or `@mizen-labs/ui/composer`.
 
 The Agentic group includes conversation, streaming text, tool calls, approvals, questions, and task progress. Consult the component catalog for current APIs and examples. The internal specimen gallery keeps the Agent Selector recipe, composed from `Field` and `Select`.
 
@@ -243,7 +243,7 @@ Construct definitions and callbacks in a client component. Chart Frame still ren
 
 `TableContainer` names and contains a native table with horizontal or two-axis scrolling. Compose `Table`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableHead`, `TableCell`, and `TableCaption`. Headers stick by default. Mark the first header, row header, and footer cell with `sticky` to keep the category column visible on wide screens. `numeric` aligns values with tabular numerals. The application owns data and totals; `DataTable` remains a separate integration for sorting, filtering, or selection behavior.
 
-Row headings reserve at least 8rem below 40rem and 16rem on wider screens; labels can wrap. All nine parts support server rendering. They and their prop types are available from both `@mizen/ui` and `@mizen/ui/table`. Consult `packages/ui/package.json` for the current export map.
+Row headings reserve at least 8rem below 40rem and 16rem on wider screens; labels can wrap. All nine parts support server rendering. They and their prop types are available from both `@mizen-labs/ui` and `@mizen-labs/ui/table`. Consult `packages/ui/package.json` for the current export map.
 
 ### Data Table
 
@@ -253,7 +253,7 @@ Paging is the default. Set `virtualized` for large, read-only datasets; TanStack
 
 ### List
 
-`List`, `ListItem`, `ListContent`, and `ListActions` compose a named native list with separate record content and trailing controls. Keep actions inside `ListActions`; rows remain plain list items rather than clickable containers. The props and components are available from `@mizen/ui` and `@mizen/ui/list`.
+`List`, `ListItem`, `ListContent`, and `ListActions` compose a named native list with separate record content and trailing controls. Keep actions inside `ListActions`; rows remain plain list items rather than clickable containers. The props and components are available from `@mizen-labs/ui` and `@mizen-labs/ui/list`.
 
 ### Data compositions
 
@@ -283,7 +283,7 @@ All five families have root and component subpath exports. Aspect Ratio, Blockqu
 
 ### Code Block
 
-`CodeBlock` composes a figure, caption, named preformatted source, and optional copy action. The caller owns the source string and can provide highlighted React content. No syntax-highlighting engine or code-language configuration is included. The components and props are available from `@mizen/ui` and `@mizen/ui/code-block`.
+`CodeBlock` composes a figure, caption, named preformatted source, and optional copy action. The caller owns the source string and can provide highlighted React content. No syntax-highlighting engine or code-language configuration is included. The components and props are available from `@mizen-labs/ui` and `@mizen-labs/ui/code-block`.
 
 ### Markdown, Thumbnail, and Timestamp
 
@@ -291,7 +291,7 @@ All five families have root and component subpath exports. Aspect Ratio, Blockqu
 
 `Thumbnail` renders a native image with required `src` and `alt`, and a finite `sm`, `default`, or `lg` size. `Timestamp` renders a native `time` element from an ISO instant with `Z` or an explicit offset. Set its `locale`, `timeZone`, and `format` for stable display; the source instant remains machine-readable.
 
-All three components and their prop types are available from `@mizen/ui` and their matching subpaths. They support server rendering.
+All three components and their prop types are available from `@mizen-labs/ui` and their matching subpaths. They support server rendering.
 
 ### Link, Visually Hidden, and Meter
 
@@ -309,7 +309,7 @@ The Page Outline recipe composes existing `List` and `Link` parts with named sec
 
 ### Optional diagrams
 
-Install `pele` and import `Diagram` from `@mizen/ui/diagram`. This entry point
+Install `pele` and import `Diagram` from `@mizen-labs/ui/diagram`. This entry point
 is separate from the root import, so other components do not load the diagram
 engine. The first version supports flowcharts, sequences, entity relationships,
 and state diagrams. Give each diagram an `aria-label`, and describe its important

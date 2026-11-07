@@ -1,4 +1,4 @@
-import { Skeleton, Stack } from "@mizen/ui";
+import { Skeleton, Stack } from "@mizen-labs/ui";
 
 export function LoadingProjectCard() {
 	return (

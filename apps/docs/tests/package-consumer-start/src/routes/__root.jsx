@@ -1,6 +1,6 @@
 import fontCss from "@fontsource-variable/wix-madefor-text/wght.css?url";
-import mizenCss from "@mizen/ui/styles.css?url";
-import { ThemeProvider, ThemeScript } from "@mizen/ui/theme";
+import mizenCss from "@mizen-labs/ui/styles.css?url";
+import { ThemeProvider, ThemeScript } from "@mizen-labs/ui/theme";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import appCss from "../styles.css?url";
 

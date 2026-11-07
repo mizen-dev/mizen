@@ -1,5 +1,5 @@
 "use client";
-import { Heading, Stack, Text, Tree } from "@mizen/ui";
+import { Heading, Stack, Text, Tree } from "@mizen-labs/ui";
 import { useState } from "react";
 
 const files = [

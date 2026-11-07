@@ -82,7 +82,7 @@ test("info preserves API, guidance, contracts, and examples from the source cata
 		assert.deepEqual(component, {
 			...source,
 			documentationPath: `/docs/components/${source.slug}`,
-			entryPoint: `@mizen/ui/${source.slug}`,
+			entryPoint: `@mizen-labs/ui/${source.slug}`,
 			guidance: guidance[source.slug],
 		});
 	}
@@ -149,10 +149,10 @@ test("the packed CLI installs and runs without workspace files", () => {
 		);
 		const require = createRequire(join(destination, "package.json"));
 		const installedSchema = JSON.parse(
-			readFileSync(require.resolve("@mizen/cli/schema/v1.json"), "utf8")
+			readFileSync(require.resolve("@mizen-labs/cli/schema/v1.json"), "utf8")
 		);
 		assert.deepEqual(installedSchema, schema);
-		const installed = join(destination, "node_modules/@mizen/cli");
+		const installed = join(destination, "node_modules/@mizen-labs/cli");
 		const output = execFileSync(
 			process.execPath,
 			[join(installed, "dist/cli.js"), "info", "conversation", "--json"],
@@ -160,7 +160,7 @@ test("the packed CLI installs and runs without workspace files", () => {
 		);
 		assert.equal(
 			parseOutput(output).data.component.entryPoint,
-			"@mizen/ui/conversation"
+			"@mizen-labs/ui/conversation"
 		);
 		assert.ok(
 			readdirSync(join(destination, "node_modules/.bin")).some((name) =>

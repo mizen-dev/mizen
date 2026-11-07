@@ -1,4 +1,10 @@
-import { Menu, Menubar, MenubarTrigger, MenuItem, MenuPopup } from "@mizen/ui";
+import {
+	Menu,
+	Menubar,
+	MenubarTrigger,
+	MenuItem,
+	MenuPopup,
+} from "@mizen-labs/ui";
 export function EditorMenubar() {
 	return (
 		<Menubar aria-label="Editor menu">

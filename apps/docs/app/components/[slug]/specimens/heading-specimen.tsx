@@ -1,4 +1,4 @@
-import { Heading } from "@mizen/ui";
+import { Heading } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { pageStyles } from "../../../page.styles";
 import { PreviewWorkspace } from "../../preview-workspace";

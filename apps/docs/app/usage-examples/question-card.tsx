@@ -5,7 +5,7 @@ import {
 	QuestionCard,
 	type QuestionCardAnswers,
 	type QuestionCardQuestion,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import { useCallback, useState } from "react";
 

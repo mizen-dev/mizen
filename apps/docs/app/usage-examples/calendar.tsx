@@ -1,5 +1,5 @@
 "use client";
-import { Calendar } from "@mizen/ui";
+import { Calendar } from "@mizen-labs/ui";
 import { useState } from "react";
 export function AppointmentCalendar() {
 	const [date, setDate] = useState<Date | undefined>(new Date(2026, 9, 15));

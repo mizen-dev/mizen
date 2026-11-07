@@ -7,7 +7,7 @@ import {
 	Stack,
 	Text,
 	TimeInput,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function TimeInputReviewScheduleExample1() {
 	return (

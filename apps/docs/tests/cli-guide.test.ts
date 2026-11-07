@@ -17,7 +17,7 @@ describe("Getting started CLI guide", () => {
 		expect(guides[position]).toBe(cliGuide);
 		const markdown = renderGuideMarkdown(cliGuide);
 		expect(markdown).toContain("mizen doctor --workspace");
-		expect(markdown).toContain("@mizen/cli/schema/v1.json");
+		expect(markdown).toContain("@mizen-labs/cli/schema/v1.json");
 		expect(markdown).toContain("unpublished");
 		for (const section of cliGuide.sections) {
 			expect(markdown).toContain(`## ${section.title}`);

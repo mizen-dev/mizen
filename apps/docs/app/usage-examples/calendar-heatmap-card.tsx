@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarHeatmap, MetricDelta, MetricTrend } from "@mizen/ui";
+import { CalendarHeatmap, MetricDelta, MetricTrend } from "@mizen-labs/ui";
 import { IconGitCommit } from "@tabler/icons-react";
 
 const DAY = 86_400_000;

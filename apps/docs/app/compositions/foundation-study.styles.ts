@@ -1,5 +1,5 @@
-import { conditions } from "@mizen/ui/conditions.stylex";
-import { space } from "@mizen/ui/spacing.stylex";
+import { conditions } from "@mizen-labs/ui/conditions.stylex";
+import { space } from "@mizen-labs/ui/spacing.stylex";
 import { create } from "@stylexjs/stylex";
 
 export const foundationStudyStyles = create({

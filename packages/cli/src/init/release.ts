@@ -45,9 +45,12 @@ async function inspectArchive(
 		return conflict("The archive must contain one package/package.json.");
 	}
 	const manifest = parseManifest(sources[0], path);
-	if (manifest.name !== "@mizen/ui" || manifest.version !== expectedVersion) {
+	if (
+		manifest.name !== "@mizen-labs/ui" ||
+		manifest.version !== expectedVersion
+	) {
 		return conflict(
-			`Use an @mizen/ui ${expectedVersion} archive matching this CLI's catalog.`
+			`Use an @mizen-labs/ui ${expectedVersion} archive matching this CLI's catalog.`
 		);
 	}
 	return {

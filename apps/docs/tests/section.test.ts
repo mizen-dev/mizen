@@ -1,4 +1,4 @@
-import type { SectionProps } from "@mizen/ui/section";
+import type { SectionProps } from "@mizen-labs/ui/section";
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
@@ -50,10 +50,10 @@ describe("Section component and docs specimen", () => {
 	}, 120_000);
 
 	it("resolves root and section subpath exports with a closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/section")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/section")).toContain(
 			"packages/ui/dist/components/section/section.js"
 		);
 		const acceptsRole = false satisfies SectionPropsAcceptsRole;

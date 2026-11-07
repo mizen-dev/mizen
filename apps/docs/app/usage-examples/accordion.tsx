@@ -7,7 +7,7 @@ import {
 	AccordionTrigger,
 	Button,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	IconBell,
 	IconCreditCard,

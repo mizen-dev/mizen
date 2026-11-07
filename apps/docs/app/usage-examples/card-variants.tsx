@@ -11,7 +11,7 @@ import {
 	CardTitle,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function CardReleaseHealthExample1() {
 	return (

@@ -1,5 +1,5 @@
-import { darkTheme, Heading, Inline, Stack, Text } from "@mizen/ui";
-import { Avatar, AvatarFallback, AvatarImage } from "@mizen/ui/avatar";
+import { darkTheme, Heading, Inline, Stack, Text } from "@mizen-labs/ui";
+import { Avatar, AvatarFallback, AvatarImage } from "@mizen-labs/ui/avatar";
 import { props } from "@stylexjs/stylex";
 import { pageStyles } from "../../../page.styles";
 import { specimenStyles } from "./specimen.styles";

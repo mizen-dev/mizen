@@ -1,4 +1,4 @@
-import { Checkbox, Field, FieldError, FieldLabel, Stack } from "@mizen/ui";
+import { Checkbox, Field, FieldError, FieldLabel, Stack } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { pageStyles } from "../page.styles";
 

@@ -1,4 +1,9 @@
-import { Metric, MetricDescription, MetricLabel, MetricValue } from "@mizen/ui";
+import {
+	Metric,
+	MetricDescription,
+	MetricLabel,
+	MetricValue,
+} from "@mizen-labs/ui";
 
 export function ActiveSubscriptions() {
 	return (

@@ -1,11 +1,11 @@
 "use client";
-import { Button, Inline, Stack } from "@mizen/ui";
+import { Button, Inline, Stack } from "@mizen-labs/ui";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionPanel,
 	AccordionTrigger,
-} from "@mizen/ui/accordion";
+} from "@mizen-labs/ui/accordion";
 import { IconBell, IconUsers } from "@tabler/icons-react";
 import { useCallback, useState } from "react";
 

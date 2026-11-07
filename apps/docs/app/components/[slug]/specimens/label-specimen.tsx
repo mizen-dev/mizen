@@ -1,5 +1,5 @@
-import { Input } from "@mizen/ui";
-import { Label } from "@mizen/ui/label";
+import { Input } from "@mizen-labs/ui";
+import { Label } from "@mizen-labs/ui/label";
 import { props } from "@stylexjs/stylex";
 import { pageStyles } from "../../../page.styles";
 import { specimenStyles } from "./specimen.styles";

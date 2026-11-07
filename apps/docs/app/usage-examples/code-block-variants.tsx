@@ -4,7 +4,7 @@ import {
 	CodeBlockCopy,
 	CodeBlockHeader,
 	CodeBlockTitle,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { workspaceSettingsSource } from "../compositions/code-block-source";
 
 export function CodeBlockCodeBlockExample1() {

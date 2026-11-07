@@ -1,4 +1,4 @@
-import { Card, Heatmap, Inline, ScatterChart, Stack } from "@mizen/ui";
+import { Card, Heatmap, Inline, ScatterChart, Stack } from "@mizen-labs/ui";
 import { createFileRoute } from "@tanstack/react-router";
 import { ThemeSelect } from "../theme-select";
 import { WorkspaceControls } from "../workspace-controls";

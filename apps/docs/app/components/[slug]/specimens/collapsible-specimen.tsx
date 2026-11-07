@@ -9,12 +9,12 @@ import {
 	Inline,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	Collapsible,
 	CollapsiblePanel,
 	CollapsibleTrigger,
-} from "@mizen/ui/collapsible";
+} from "@mizen-labs/ui/collapsible";
 import { props } from "@stylexjs/stylex";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import { useCallback, useState } from "react";

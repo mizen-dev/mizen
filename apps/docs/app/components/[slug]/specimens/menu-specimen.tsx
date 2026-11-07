@@ -15,7 +15,7 @@ import {
 	MenuSubPopup,
 	MenuSubTrigger,
 	MenuTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { IconFolder } from "@tabler/icons-react";
 import { specimenStyles as previewStyles } from "./specimen.styles";

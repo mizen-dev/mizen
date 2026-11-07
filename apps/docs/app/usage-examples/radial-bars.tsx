@@ -1,6 +1,6 @@
 "use client";
 
-import { RadialBars } from "@mizen/ui";
+import { RadialBars } from "@mizen-labs/ui";
 
 export function VisitorsByBrowser() {
 	return (

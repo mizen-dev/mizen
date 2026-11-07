@@ -7,7 +7,7 @@ import {
 	Tooltip,
 	TooltipPopup,
 	TooltipTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconPlus } from "@tabler/icons-react";
 
 function PlusIcon() {

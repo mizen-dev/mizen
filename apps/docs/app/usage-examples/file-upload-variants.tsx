@@ -3,7 +3,7 @@ import type {
 	FileRejection,
 	FileRejectionCode,
 	FileUploadChangeDetails,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	Button,
 	FileUpload,
@@ -13,7 +13,7 @@ import {
 	FileUploadList,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { useCallback, useRef, useState } from "react";
 import { FileUploadPrompt, FileUploadRow } from "./file-upload-parts";

@@ -1,5 +1,10 @@
 "use client";
-import { DatePicker, Field, FieldDescription, FieldLabel } from "@mizen/ui";
+import {
+	DatePicker,
+	Field,
+	FieldDescription,
+	FieldLabel,
+} from "@mizen-labs/ui";
 import { useState } from "react";
 
 const longDate = new Intl.DateTimeFormat("en-US", {

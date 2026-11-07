@@ -12,7 +12,7 @@ import {
 	ComposerSubmit,
 	ComposerToken,
 	type ComposerTokenPart,
-} from "@mizen/ui/composer";
+} from "@mizen-labs/ui/composer";
 import {
 	type ComponentProps,
 	type KeyboardEvent,

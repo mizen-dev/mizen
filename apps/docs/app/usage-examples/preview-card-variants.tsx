@@ -8,9 +8,13 @@ import {
 	PreviewCardTrigger,
 	Stack,
 	Text,
-} from "@mizen/ui";
-import { colors } from "@mizen/ui/colors.stylex";
-import { fontSize, fontWeight, lineHeight } from "@mizen/ui/typography.stylex";
+} from "@mizen-labs/ui";
+import { colors } from "@mizen-labs/ui/colors.stylex";
+import {
+	fontSize,
+	fontWeight,
+	lineHeight,
+} from "@mizen-labs/ui/typography.stylex";
 import { create, props } from "@stylexjs/stylex";
 
 const styles = create({

@@ -13,7 +13,7 @@ import {
 	Stack,
 	Text,
 	TimeSeries,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import { chartExampleStyles } from "./chart-composition.styles";
 

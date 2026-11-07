@@ -6,7 +6,7 @@ import {
 	Heading,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { type ReactElement, useState } from "react";
 import { specimenStyles } from "./calendar-specimen.styles";

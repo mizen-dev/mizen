@@ -1,4 +1,4 @@
-import { List, ListContent, ListItem, Text } from "@mizen/ui";
+import { List, ListContent, ListItem, Text } from "@mizen-labs/ui";
 
 export function ProjectList() {
 	return (

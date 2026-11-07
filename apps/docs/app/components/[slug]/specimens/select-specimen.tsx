@@ -6,7 +6,7 @@ import {
 	SelectPopup,
 	SelectTrigger,
 	SelectValue,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function SelectSpecimen() {
 	return (

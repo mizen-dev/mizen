@@ -131,11 +131,11 @@ async function selectedRelease(
 	specifier?: string
 ) {
 	const archive = specifier ? await releaseArchive(specifier, version) : null;
-	const installed = await installedFrom(project, "@mizen/ui");
+	const installed = await installedFrom(project, "@mizen-labs/ui");
 	const ui = archive?.manifest ?? installed?.manifest;
 	if (!ui || ui.version !== version) {
 		return conflict(
-			`Mizen is unpublished. Pass --package /path/to/mizen-ui.tgz for @mizen/ui ${version}.`
+			`Mizen is unpublished. Pass --package /path/to/mizen-ui.tgz for @mizen-labs/ui ${version}.`
 		);
 	}
 	await compatiblePeers(project, ui);
@@ -148,7 +148,7 @@ function mizenPackage(
 	version: string
 ): string[] {
 	const declared = { ...manifest.dependencies, ...manifest.devDependencies }[
-		"@mizen/ui"
+		"@mizen-labs/ui"
 	];
 	if (
 		release.installed &&
@@ -178,7 +178,7 @@ export async function installation(
 	const release = await selectedRelease(project, version, specifier);
 	if (frameworkOf(manifest) === "vite" && !supportsInitialization(release.ui)) {
 		return conflict(
-			"This UI build lacks synchronous client theme initialization. Rebuild and pack @mizen/ui before running Vite init."
+			"This UI build lacks synchronous client theme initialization. Rebuild and pack @mizen-labs/ui before running Vite init."
 		);
 	}
 	const packages = [

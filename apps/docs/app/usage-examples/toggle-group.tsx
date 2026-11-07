@@ -1,4 +1,4 @@
-import { Group, ToggleGroup, ToggleGroupItem } from "@mizen/ui";
+import { Group, ToggleGroup, ToggleGroupItem } from "@mizen-labs/ui";
 import {
 	IconAlignCenter,
 	IconAlignLeft,

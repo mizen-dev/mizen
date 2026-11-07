@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@fontsource-variable/wix-madefor-text": "5.3.0",
-    "@mizen/ui": "file:./mizen-ui.tgz",
+    "@mizen-labs/ui": "file:./mizen-ui.tgz",
     "next": "16.3.8",
     "react": "19.3.0",
     "react-dom": "19.3.0"

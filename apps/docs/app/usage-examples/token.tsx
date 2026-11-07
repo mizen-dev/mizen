@@ -1,4 +1,4 @@
-import { Inline, Token } from "@mizen/ui";
+import { Inline, Token } from "@mizen-labs/ui";
 import { IconAccessible, IconKeyboard } from "@tabler/icons-react";
 
 export function CategoryTokens() {

@@ -1,4 +1,4 @@
-import { colors } from "@mizen/ui/colors.stylex";
+import { colors } from "@mizen-labs/ui/colors.stylex";
 import { create } from "@stylexjs/stylex";
 
 // Reuse Mizen's categorical swatches, including their dark-theme values.

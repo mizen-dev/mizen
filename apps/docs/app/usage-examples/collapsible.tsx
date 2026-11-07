@@ -1,4 +1,8 @@
-import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@mizen/ui";
+import {
+	Collapsible,
+	CollapsiblePanel,
+	CollapsibleTrigger,
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { IconChevronDown } from "@tabler/icons-react";
 import { collapsibleExampleStyles as styles } from "./collapsible.styles";

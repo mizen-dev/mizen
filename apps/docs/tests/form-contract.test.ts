@@ -165,7 +165,7 @@ describe("TanStack Form integration contract and exports", () => {
 		expect(typeof rootFocusFirstInvalidControl).toBe("function");
 	});
 
-	it("exports useForm and focusFirstInvalidControl from @mizen/ui/form subpath", () => {
+	it("exports useForm and focusFirstInvalidControl from @mizen-labs/ui/form subpath", () => {
 		expect(typeof useForm).toBe("function");
 		expect(typeof focusFirstInvalidControl).toBe("function");
 	});

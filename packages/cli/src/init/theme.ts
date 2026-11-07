@@ -39,8 +39,8 @@ function inside(parent: SyntaxNode, node: SyntaxNode): boolean {
 
 function themeBinding(ast: SyntaxNode, exported: string) {
 	const existing =
-		importedName(ast, exported, "@mizen/ui/theme") ??
-		importedName(ast, exported, "@mizen/ui");
+		importedName(ast, exported, "@mizen-labs/ui/theme") ??
+		importedName(ast, exported, "@mizen-labs/ui");
 	return {
 		imported: existing !== null,
 		name: existing ?? bindingName(ast, exported),
@@ -212,7 +212,7 @@ export function themeSource(
 		edits.push(
 			importEdit(
 				ast,
-				`import { ${names.join(", ")} } from "@mizen/ui/theme";`,
+				`import { ${names.join(", ")} } from "@mizen-labs/ui/theme";`,
 				source
 			)
 		);
@@ -226,7 +226,9 @@ function assertBindings(
 	bindings: string[]
 ): void {
 	const themeImports = imports(ast).filter((node) =>
-		["@mizen/ui", "@mizen/ui/theme"].includes(literal(node.source) ?? "")
+		["@mizen-labs/ui", "@mizen-labs/ui/theme"].includes(
+			literal(node.source) ?? ""
+		)
 	);
 	const namespaces = themeImports
 		.flatMap((node) => (Array.isArray(node.specifiers) ? node.specifiers : []))

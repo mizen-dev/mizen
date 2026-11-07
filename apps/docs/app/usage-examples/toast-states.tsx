@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Group } from "@mizen/ui";
-import { toastManager } from "@mizen/ui/toast";
+import { Button, Group } from "@mizen-labs/ui";
+import { toastManager } from "@mizen-labs/ui/toast";
 import type { MouseEvent } from "react";
 
 const statuses: Record<

@@ -1,4 +1,4 @@
-import { Button, Inline } from "@mizen/ui";
+import { Button, Inline } from "@mizen-labs/ui";
 import { IconPlus } from "@tabler/icons-react";
 
 export function BrandAction() {

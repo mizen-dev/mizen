@@ -13,7 +13,7 @@ import {
 	MenuItem,
 	MenuPopup,
 	MenuTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconFileText, IconFolder, IconHome } from "@tabler/icons-react";
 import Link from "next/link";
 

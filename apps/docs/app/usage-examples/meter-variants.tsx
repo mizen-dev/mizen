@@ -10,7 +10,7 @@ import {
 	PropertyListValue,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function MeterStorageUsageExample1() {
 	return (

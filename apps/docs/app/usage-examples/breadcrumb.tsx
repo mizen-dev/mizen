@@ -5,7 +5,7 @@ import {
 	BreadcrumbList,
 	BreadcrumbPage,
 	BreadcrumbSeparator,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 export function ProjectBreadcrumb() {
 	return (
 		<Breadcrumb aria-label="Breadcrumb">

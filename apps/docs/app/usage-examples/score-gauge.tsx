@@ -1,6 +1,6 @@
 "use client";
 
-import { ScoreGauge } from "@mizen/ui";
+import { ScoreGauge } from "@mizen-labs/ui";
 
 export function SleepScore() {
 	return (

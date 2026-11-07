@@ -1,6 +1,6 @@
 "use client";
 
-import { MetricTrend, SankeyChart } from "@mizen/ui";
+import { MetricTrend, SankeyChart } from "@mizen-labs/ui";
 import { IconClock } from "@tabler/icons-react";
 import { useState } from "react";
 import { PeriodSelect } from "./chart-controls";

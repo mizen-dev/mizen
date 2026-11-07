@@ -10,7 +10,7 @@ import {
 	NavigationMenuTrigger,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconBook, IconFileText } from "@tabler/icons-react";
 import Link from "next/link";
 import { useCallback, useState } from "react";

@@ -12,7 +12,7 @@ import {
 	Section,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 const numberFormat = new Intl.NumberFormat("en-US");
 

@@ -8,7 +8,7 @@ import {
 	TooltipPopup,
 	TooltipProvider,
 	TooltipTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconBold, IconItalic, IconUnderline } from "@tabler/icons-react";
 import { useState } from "react";
 

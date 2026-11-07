@@ -4,7 +4,7 @@ import type {
 	FileRejection,
 	FileRejectionCode,
 	FileUploadChangeDetails,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	FileUpload,
 	FileUploadDropzone,
@@ -20,7 +20,7 @@ import {
 	Spacer,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import { useCallback, useState } from "react";
 import { specimenStyles as previewStyles } from "./specimen.styles";

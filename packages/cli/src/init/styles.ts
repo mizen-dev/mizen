@@ -91,7 +91,7 @@ function linksChange(head: unknown, binding: string): Change | null {
 
 function startStyles(source: string): string {
 	const ast = parseSource(source);
-	const imported = defaultImport(ast, "@mizen/ui/styles.css?url");
+	const imported = defaultImport(ast, "@mizen-labs/ui/styles.css?url");
 	const binding = imported ?? uniqueName(ast, "mizenStylesheet");
 	const config = startRoute(ast);
 	const edits: Change[] = [];
@@ -99,7 +99,7 @@ function startStyles(source: string): string {
 		edits.push(
 			importEdit(
 				ast,
-				`import ${binding} from "@mizen/ui/styles.css?url";`,
+				`import ${binding} from "@mizen-labs/ui/styles.css?url";`,
 				source
 			)
 		);
@@ -124,13 +124,13 @@ function startStyles(source: string): string {
 function nextStyles(source: string): string {
 	const ast = parseSource(source);
 	const existing = imports(ast).filter(
-		(node) => literal(node.source) === "@mizen/ui/styles.css"
+		(node) => literal(node.source) === "@mizen-labs/ui/styles.css"
 	);
 	if (existing.length) {
 		return source;
 	}
 	return changes(source, [
-		importEdit(ast, 'import "@mizen/ui/styles.css";', source, "first"),
+		importEdit(ast, 'import "@mizen-labs/ui/styles.css";', source, "first"),
 	]);
 }
 

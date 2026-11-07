@@ -40,14 +40,14 @@ import {
 	SheetTitle,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	PropertyList,
 	PropertyListItem,
 	PropertyListLabel,
 	PropertyListValue,
-} from "@mizen/ui/property-list";
-import { typographyStyles } from "@mizen/ui/typography.styles";
+} from "@mizen-labs/ui/property-list";
+import { typographyStyles } from "@mizen-labs/ui/typography.styles";
 import { props } from "@stylexjs/stylex";
 import {
 	type ChangeEvent,

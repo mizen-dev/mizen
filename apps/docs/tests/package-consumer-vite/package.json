@@ -6,7 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@mizen/ui": "file:./mizen-ui.tgz",
+    "@mizen-labs/ui": "file:./mizen-ui.tgz",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },

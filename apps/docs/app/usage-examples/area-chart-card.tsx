@@ -7,7 +7,7 @@ import {
 	MetricDelta,
 	MetricTrend,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconUsers } from "@tabler/icons-react";
 import { useState } from "react";
 import { PeriodSelect } from "./chart-controls";

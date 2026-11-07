@@ -45,7 +45,7 @@ async function freshFixture(destination: string, start: boolean) {
 	}
 	const packagePath = join(app, "package.json");
 	const manifest = JSON.parse(await readFile(packagePath, "utf8"));
-	Reflect.deleteProperty(manifest.dependencies, "@mizen/ui");
+	Reflect.deleteProperty(manifest.dependencies, "@mizen-labs/ui");
 	await writeFile(packagePath, JSON.stringify(manifest, null, 2));
 	const rootPath = join(
 		app,
@@ -57,9 +57,9 @@ async function freshFixture(destination: string, start: boolean) {
 		.filter(
 			(line) =>
 				!(
-					line.includes('from "@mizen/ui/theme"') ||
-					line.includes('from "@mizen/ui/styles.css?url"') ||
-					line.includes('import "@mizen/ui/styles.css"') ||
+					line.includes('from "@mizen-labs/ui/theme"') ||
+					line.includes('from "@mizen-labs/ui/styles.css?url"') ||
+					line.includes('import "@mizen-labs/ui/styles.css"') ||
 					line.includes("href: mizenCss")
 				)
 		)
@@ -71,8 +71,8 @@ async function freshFixture(destination: string, start: boolean) {
 	await writeFile(rootPath, root);
 	const configPath = join(app, start ? "vite.config.js" : "next.config.mjs");
 	const config = (await readFile(configPath, "utf8"))
-		.replace('ssr: { noExternal: ["@mizen/ui"] },', "")
-		.replace('transpilePackages: ["@mizen/ui"],', "");
+		.replace('ssr: { noExternal: ["@mizen-labs/ui"] },', "")
+		.replace('transpilePackages: ["@mizen-labs/ui"],', "");
 	await writeFile(configPath, config);
 	return app;
 }
@@ -268,7 +268,7 @@ for (const start of [false, true]) {
 					],
 					destination
 				);
-				const binary = join(tools, "node_modules/@mizen/cli/dist/cli.js");
+				const binary = join(tools, "node_modules/@mizen-labs/cli/dist/cli.js");
 				const app = await freshFixture(destination, start);
 				const manager = start ? "pnpm" : "npm";
 				await command(
@@ -346,7 +346,7 @@ async function plainViteFixture(destination: string, typescript: boolean) {
 	});
 	const manifestPath = join(app, "package.json");
 	const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-	Reflect.deleteProperty(manifest.dependencies, "@mizen/ui");
+	Reflect.deleteProperty(manifest.dependencies, "@mizen-labs/ui");
 	if (!typescript) {
 		await writeFile(manifestPath, JSON.stringify(manifest, null, 2));
 		return app;
@@ -451,7 +451,7 @@ for (const typescript of [false, true]) {
 				);
 				const config = await readFile(join(app, "vite.config.js"), "utf8");
 				const html = await readFile(join(app, "index.html"), "utf8");
-				const binary = join(tools, "node_modules/@mizen/cli/dist/cli.js");
+				const binary = join(tools, "node_modules/@mizen-labs/cli/dist/cli.js");
 				const args = [
 					binary,
 					"init",

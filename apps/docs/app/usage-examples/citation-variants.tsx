@@ -1,4 +1,4 @@
-import { Citation, Stack, Text } from "@mizen/ui";
+import { Citation, Stack, Text } from "@mizen-labs/ui";
 
 export function CitationSourceTitlesExample1() {
 	return (

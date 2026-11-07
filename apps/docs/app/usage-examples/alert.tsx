@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@mizen/ui";
+import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@mizen-labs/ui";
 import { IconAlertTriangle } from "@tabler/icons-react";
 
 export function MaintenanceNotice() {

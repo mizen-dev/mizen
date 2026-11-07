@@ -1,4 +1,4 @@
-import type { ResolvedTheme, ThemePreference } from "@mizen/ui/theme";
+import type { ResolvedTheme, ThemePreference } from "@mizen-labs/ui/theme";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";

@@ -29,14 +29,14 @@ export async function prepare(root, staging, from) {
 	await mkdir(join(staging, "cli-only"));
 	await mkdir(join(staging, "app/src"), { recursive: true });
 	await writeJson(join(staging, "cli-only/package.json"), {
-		dependencies: { "@mizen/cli": "file:../mizen-cli.tgz" },
+		dependencies: { "@mizen-labs/cli": "file:../mizen-cli.tgz" },
 		private: true,
 	});
 	await writeJson(join(staging, "app/package.json"), {
 		dependencies: {
 			...vite.dependencies,
-			"@mizen/cli": "file:../mizen-cli.tgz",
-			"@mizen/ui": "file:../mizen-ui.tgz",
+			"@mizen-labs/cli": "file:../mizen-cli.tgz",
+			"@mizen-labs/ui": "file:../mizen-ui.tgz",
 			vite: vite.devDependencies.vite,
 		},
 		name: "mizen-cli-benchmark-app",
@@ -50,9 +50,9 @@ export async function prepare(root, staging, from) {
 	await writeFile(
 		join(staging, "app/src/main.jsx"),
 		`import { createRoot } from "react-dom/client";
-import { ThemeProvider } from "@mizen/ui/theme";
-import { initializeTheme } from "@mizen/ui/theme/initialize";
-import "@mizen/ui/styles.css";
+import { ThemeProvider } from "@mizen-labs/ui/theme";
+import { initializeTheme } from "@mizen-labs/ui/theme/initialize";
+import "@mizen-labs/ui/styles.css";
 initializeTheme();
 createRoot(document.getElementById("root")).render(<ThemeProvider><main>Benchmark</main></ThemeProvider>);
 `

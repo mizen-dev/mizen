@@ -1,4 +1,4 @@
-import { Citation, Text } from "@mizen/ui";
+import { Citation, Text } from "@mizen-labs/ui";
 
 export function SourceMention() {
 	return (

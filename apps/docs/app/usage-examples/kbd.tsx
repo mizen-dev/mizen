@@ -1,4 +1,4 @@
-import { Group, Kbd, KbdGroup, Spacer, Stack, Text } from "@mizen/ui";
+import { Group, Kbd, KbdGroup, Spacer, Stack, Text } from "@mizen-labs/ui";
 
 const shortcuts = [
 	["Search", ["Cmd", "K"]],

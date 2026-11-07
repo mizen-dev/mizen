@@ -1,6 +1,6 @@
 "use client";
 
-import { Funnel } from "@mizen/ui";
+import { Funnel } from "@mizen-labs/ui";
 
 // presentation="flow" draws one band that narrows from stage to stage.
 export function FunnelFlowExample() {

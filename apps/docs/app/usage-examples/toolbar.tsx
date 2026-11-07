@@ -7,7 +7,7 @@ import {
 	ToolbarButton,
 	ToolbarGroup,
 	ToolbarSeparator,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import {
 	IconArrowBackUp,

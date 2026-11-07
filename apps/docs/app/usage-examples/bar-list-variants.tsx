@@ -1,6 +1,6 @@
 "use client";
 
-import { BarList } from "@mizen/ui";
+import { BarList } from "@mizen-labs/ui";
 
 // Without icons, a longer list of sources ranks by visits.
 export function BarListTopSourcesExample() {

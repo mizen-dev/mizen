@@ -7,7 +7,7 @@ import {
 	Heading,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import type { FormEvent } from "react";
 import { useCallback, useState } from "react";

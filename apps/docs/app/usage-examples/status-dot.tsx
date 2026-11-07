@@ -1,4 +1,4 @@
-import { Inline, StatusDot, Text } from "@mizen/ui";
+import { Inline, StatusDot, Text } from "@mizen-labs/ui";
 
 export function ServiceStatus() {
 	return (

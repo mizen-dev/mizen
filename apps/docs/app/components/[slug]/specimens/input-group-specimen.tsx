@@ -11,7 +11,7 @@ import {
 	InputGroupText,
 	InputGroupTextarea,
 	Kbd,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { pageStyles } from "../../../page.styles";
 import { specimenStyles } from "./specimen.styles";

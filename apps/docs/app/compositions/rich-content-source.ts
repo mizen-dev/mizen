@@ -14,7 +14,7 @@ export const markdownSource = [
 	"> Keep rendered content semantic and easy to scan.",
 	"",
 	"~~~tsx",
-	'import { Field, FieldControl, FieldLabel, Input } from "@mizen/ui";',
+	'import { Field, FieldControl, FieldLabel, Input } from "@mizen-labs/ui";',
 	'const audit = await workspace.permissions.auditTrail.filter((entry) => entry.actor === "current-user" && entry.action === "settings.updated" && entry.resource === "workspace.preferences.notifications");',
 	'export const releaseStatus = "ready";',
 	"~~~",

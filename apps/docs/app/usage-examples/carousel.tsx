@@ -7,7 +7,7 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 	Inline,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { carouselPreviewStyles as styles } from "./carousel-preview.styles";
 

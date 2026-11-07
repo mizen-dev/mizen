@@ -16,7 +16,7 @@ import {
 	Kbd,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { useCallback, useMemo, useState } from "react";
 
 export function ProjectCommand() {

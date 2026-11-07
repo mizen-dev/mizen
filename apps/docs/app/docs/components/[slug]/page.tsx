@@ -467,8 +467,8 @@ export default async function ComponentPage({
 							API reference
 						</h2>
 						<p {...props(docsStyles.documentDescription)}>
-							Public props from <code>@mizen/ui</code>. Use exported prop types
-							for the complete TypeScript contract.
+							Public props from <code>@mizen-labs/ui</code>. Use exported prop
+							types for the complete TypeScript contract.
 						</p>
 						<ComponentApiProperties component={component} />
 					</section>

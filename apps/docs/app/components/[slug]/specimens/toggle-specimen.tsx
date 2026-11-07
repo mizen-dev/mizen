@@ -1,4 +1,4 @@
-import { Group, Toggle } from "@mizen/ui";
+import { Group, Toggle } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { IconPlus } from "@tabler/icons-react";
 import { specimenStyles } from "./specimen.styles";

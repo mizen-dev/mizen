@@ -1,4 +1,4 @@
-import { Badge, Group } from "@mizen/ui";
+import { Badge, Group } from "@mizen-labs/ui";
 
 export function ProjectActions() {
 	return (

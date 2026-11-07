@@ -10,7 +10,7 @@ import {
 	MenuSubPopup,
 	MenuSubTrigger,
 	MenuTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	IconChevronDown,
 	IconCopy,

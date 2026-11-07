@@ -1,4 +1,4 @@
-import { Heading, Inline, Separator, Stack, Text } from "@mizen/ui";
+import { Heading, Inline, Separator, Stack, Text } from "@mizen-labs/ui";
 
 export function SeparatorAccountDetailsExample1() {
 	return (

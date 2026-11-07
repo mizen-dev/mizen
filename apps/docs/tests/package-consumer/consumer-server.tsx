@@ -1,6 +1,12 @@
-import { Button, colors, Markdown, markdownComponents, Stack } from "@mizen/ui";
-import type { ButtonProps } from "@mizen/ui/button";
-import { Stack as StackSubpath } from "@mizen/ui/stack";
+import {
+	Button,
+	colors,
+	Markdown,
+	markdownComponents,
+	Stack,
+} from "@mizen-labs/ui";
+import type { ButtonProps } from "@mizen-labs/ui/button";
+import { Stack as StackSubpath } from "@mizen-labs/ui/stack";
 
 export function StaticServerComposition() {
 	const labeledIconButton: ButtonProps = {

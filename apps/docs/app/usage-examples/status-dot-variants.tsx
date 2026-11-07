@@ -1,7 +1,7 @@
-import { Inline } from "@mizen/ui/inline";
-import { Stack } from "@mizen/ui/stack";
-import { StatusDot } from "@mizen/ui/status-dot";
-import { Text } from "@mizen/ui/text";
+import { Inline } from "@mizen-labs/ui/inline";
+import { Stack } from "@mizen-labs/ui/stack";
+import { StatusDot } from "@mizen-labs/ui/status-dot";
+import { Text } from "@mizen-labs/ui/text";
 
 const statusSamples = [
 	{ label: "Operational", variant: "success" },

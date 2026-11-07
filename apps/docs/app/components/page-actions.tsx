@@ -10,7 +10,7 @@ import {
 	MenuTrigger,
 	useCopyToClipboard,
 	VisuallyHidden,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconCheck, IconChevronDown, IconCopy } from "@tabler/icons-react";
 import { useCallback } from "react";
 

@@ -1,4 +1,4 @@
-import type { BadgeProps } from "@mizen/ui/badge";
+import type { BadgeProps } from "@mizen-labs/ui/badge";
 import { type Browser, chromium, type Locator, type Page } from "playwright";
 import type { ComponentPropsWithRef, RefObject } from "react";
 import { createElement, createRef } from "react";
@@ -148,10 +148,10 @@ describe("Badge component contract", () => {
 	}, 120_000);
 
 	it("resolves root and subpath exports with a closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/badge")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/badge")).toContain(
 			"packages/ui/dist/components/badge/badge.js"
 		);
 		expect(contractChecks).toEqual([

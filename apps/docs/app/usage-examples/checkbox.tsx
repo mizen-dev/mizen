@@ -1,4 +1,4 @@
-import { Checkbox, Field, FieldLabel } from "@mizen/ui";
+import { Checkbox, Field, FieldLabel } from "@mizen-labs/ui";
 export function ProductUpdatesCheckbox() {
 	return (
 		<Field>

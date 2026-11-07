@@ -6,7 +6,7 @@ import {
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import NextLink from "next/link";
 export function SearchResultsPagination() {
 	return (

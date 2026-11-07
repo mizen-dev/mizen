@@ -1,4 +1,4 @@
-import { Group, Toggle } from "@mizen/ui";
+import { Group, Toggle } from "@mizen-labs/ui";
 import { IconBell, IconPin } from "@tabler/icons-react";
 
 export function BoldToggle() {

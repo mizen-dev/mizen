@@ -16,7 +16,7 @@ import {
 	MenuSubTrigger,
 	MenuTrigger,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	IconCopy,
 	IconExternalLink,

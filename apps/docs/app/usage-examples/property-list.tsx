@@ -3,7 +3,7 @@ import {
 	PropertyListItem,
 	PropertyListLabel,
 	PropertyListValue,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function DeploymentMetadata() {
 	return (

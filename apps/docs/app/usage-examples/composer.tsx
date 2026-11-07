@@ -17,7 +17,7 @@ import {
 	ComposerSubmit,
 	type ComposerValue,
 	getComposerText,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import {
 	IconBrandOpenai,

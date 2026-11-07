@@ -1,5 +1,5 @@
-import { Stack } from "@mizen/ui";
-import { Text, type TextProps } from "@mizen/ui/text";
+import { Stack } from "@mizen-labs/ui";
+import { Text, type TextProps } from "@mizen-labs/ui/text";
 import { props } from "@stylexjs/stylex";
 import { pageStyles } from "../page.styles";
 

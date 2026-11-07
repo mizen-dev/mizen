@@ -5,7 +5,7 @@ import type {
 	AlertProps,
 	AlertTitleProps,
 	AlertVariant,
-} from "@mizen/ui/alert";
+} from "@mizen-labs/ui/alert";
 import type { ComponentPropsWithRef, RefObject } from "react";
 import { createElement, createRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -124,10 +124,10 @@ const expectedContractChecks = [
 
 describe("Alert component contract and SSR semantics", () => {
 	it("resolves root and subpath exports with exact closed prop contracts", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/alert")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/alert")).toContain(
 			"packages/ui/dist/components/alert/alert.js"
 		);
 		expect(contractChecks).toEqual(expectedContractChecks);

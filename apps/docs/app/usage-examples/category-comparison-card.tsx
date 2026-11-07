@@ -5,7 +5,7 @@ import {
 	ChartLegend,
 	MetricDelta,
 	MetricTrend,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconCoin, IconShoppingCart } from "@tabler/icons-react";
 import { useState } from "react";
 import { PeriodTabs } from "./chart-controls";

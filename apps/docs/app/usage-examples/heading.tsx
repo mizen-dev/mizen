@@ -1,4 +1,4 @@
-import { Heading, Stack } from "@mizen/ui";
+import { Heading, Stack } from "@mizen-labs/ui";
 
 export function ArticleHeadings() {
 	return (

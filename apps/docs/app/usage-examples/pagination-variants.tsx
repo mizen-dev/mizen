@@ -15,8 +15,8 @@ import {
 	TableHeader,
 	TableRow,
 	Text,
-} from "@mizen/ui";
-import { typographyStyles } from "@mizen/ui/typography.styles";
+} from "@mizen-labs/ui";
+import { typographyStyles } from "@mizen-labs/ui/typography.styles";
 import { props } from "@stylexjs/stylex";
 import { type MouseEvent, useCallback, useState } from "react";
 

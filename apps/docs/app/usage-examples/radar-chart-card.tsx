@@ -1,6 +1,11 @@
 "use client";
 
-import { ChartLegend, MetricDelta, MetricTrend, RadarChart } from "@mizen/ui";
+import {
+	ChartLegend,
+	MetricDelta,
+	MetricTrend,
+	RadarChart,
+} from "@mizen-labs/ui";
 import { IconTargetArrow } from "@tabler/icons-react";
 
 export function VendorScoreCard() {

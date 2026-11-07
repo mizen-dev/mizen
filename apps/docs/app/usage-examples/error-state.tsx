@@ -6,7 +6,7 @@ import {
 	ErrorStateHeader,
 	ErrorStateMedia,
 	ErrorStateTitle,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { IconAlertTriangle } from "@tabler/icons-react";
 
 export function DashboardLoadFailure() {

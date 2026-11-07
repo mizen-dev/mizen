@@ -176,7 +176,7 @@ async function prepareConsumer(
 		process.execPath,
 		[
 			"-e",
-			`const { createRequire } = require("node:module"); const { realpathSync } = require("node:fs"); const host = createRequire(${JSON.stringify(join(consumerRoot, "package.json"))}); const library = createRequire(${JSON.stringify(join(consumerRoot, "node_modules/@mizen/ui/package.json"))}); console.log(JSON.stringify(Object.fromEntries(["react", "react-dom"].map((name) => [name, [realpathSync(host.resolve(name)), realpathSync(library.resolve(name))]]))));`,
+			`const { createRequire } = require("node:module"); const { realpathSync } = require("node:fs"); const host = createRequire(${JSON.stringify(join(consumerRoot, "package.json"))}); const library = createRequire(${JSON.stringify(join(consumerRoot, "node_modules/@mizen-labs/ui/package.json"))}); console.log(JSON.stringify(Object.fromEntries(["react", "react-dom"].map((name) => [name, [realpathSync(host.resolve(name)), realpathSync(library.resolve(name))]]))));`,
 		],
 		consumerRoot,
 		10_000
@@ -186,7 +186,7 @@ async function prepareConsumer(
 		[string, string]
 	>;
 	for (const name of ["react", "react-dom"] as const) {
-		expect(modulePaths[name][1], `${name} resolved from @mizen/ui`).toBe(
+		expect(modulePaths[name][1], `${name} resolved from @mizen-labs/ui`).toBe(
 			modulePaths[name][0]
 		);
 	}

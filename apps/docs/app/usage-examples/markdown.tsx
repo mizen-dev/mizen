@@ -1,4 +1,4 @@
-import { Markdown, markdownComponents } from "@mizen/ui";
+import { Markdown, markdownComponents } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";

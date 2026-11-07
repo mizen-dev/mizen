@@ -6,7 +6,7 @@ import {
 	FieldError,
 	FieldLabel,
 	Slider,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { useState } from "react";
 import { specimenStyles } from "./specimen.styles";

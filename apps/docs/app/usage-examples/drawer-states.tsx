@@ -22,7 +22,7 @@ import {
 	DrawerTrigger,
 	Inline,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function DrawerInsetPositions() {
 	return (

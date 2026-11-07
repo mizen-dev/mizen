@@ -13,7 +13,7 @@ import {
 	SelectValue,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { useCallback, useState } from "react";
 
 const agents = [

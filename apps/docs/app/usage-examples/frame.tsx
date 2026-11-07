@@ -13,7 +13,7 @@ import {
 	Spacer,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 const members = [
 	["MC", "purple", "Maya Chen", "maya@northstar.dev", "Owner"],

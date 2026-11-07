@@ -6,7 +6,7 @@ import {
 	InputGroupAddon,
 	InputGroupInput,
 	InputGroupText,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 export function WebsiteInputGroup() {
 	return (
 		<Field>

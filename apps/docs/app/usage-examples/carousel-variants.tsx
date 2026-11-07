@@ -9,7 +9,7 @@ import {
 	Inline,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { mediaContentStyles } from "../compositions/media-content.styles";
 

@@ -1,6 +1,15 @@
 {
-  "name": "@mizen/docs",
+  "name": "@mizen-labs/docs",
   "private": true,
+  "homepage": "https://github.com/mizen-labs/mizen#readme",
+  "bugs": {
+    "url": "https://github.com/mizen-labs/mizen/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mizen-labs/mizen.git",
+    "directory": "apps/docs"
+  },
   "scripts": {
     "build": "next build --turbopack",
     "components:capture": "node scripts/capture-component-previews.mjs",
@@ -14,7 +23,7 @@
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
     "@fontsource-variable/wix-madefor-text": "5.3.0",
-    "@mizen/ui": "workspace:*",
+    "@mizen-labs/ui": "workspace:*",
     "@stylexjs/stylex": "^0.19.1",
     "@tabler/icons-react": "^3.49.0",
     "@tanstack/charts": "1.1.0",

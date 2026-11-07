@@ -140,10 +140,10 @@ const contractChecks: ApiContract = [
 
 describe("ContextMenu type contracts", () => {
 	it("exports runtime members and matches identity aliases", async () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/context-menu")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/context-menu")).toContain(
 			"packages/ui/dist/components/context-menu/context-menu.js"
 		);
 

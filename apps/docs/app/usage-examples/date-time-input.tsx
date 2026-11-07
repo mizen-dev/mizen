@@ -1,4 +1,9 @@
-import { DateTimeInput, Field, FieldDescription, FieldLabel } from "@mizen/ui";
+import {
+	DateTimeInput,
+	Field,
+	FieldDescription,
+	FieldLabel,
+} from "@mizen-labs/ui";
 export function LaunchDateTime() {
 	return (
 		<Field>

@@ -7,13 +7,13 @@ import {
 	CardTitle,
 	Code,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	PropertyList,
 	PropertyListItem,
 	PropertyListLabel,
 	PropertyListValue,
-} from "@mizen/ui/property-list";
+} from "@mizen-labs/ui/property-list";
 import { SpecimenSection } from "./specimen-section";
 
 export function PropertyListSpecimen() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { ProgressRings } from "@mizen/ui";
+import { ProgressRings } from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 
 const styles = create({

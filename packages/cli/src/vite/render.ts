@@ -110,7 +110,7 @@ export function renderArgument(ast: SyntaxNode): SyntaxNode | null {
 }
 
 export function providerNames(ast: SyntaxNode): string[] {
-	return ["@mizen/ui/theme", "@mizen/ui"].flatMap((source) =>
+	return ["@mizen-labs/ui/theme", "@mizen-labs/ui"].flatMap((source) =>
 		bindings(ast, source, "ThemeProvider")
 	);
 }
@@ -171,9 +171,9 @@ export function bootstrapCalls(ast: SyntaxNode): SyntaxNode[] {
 		return [];
 	}
 	const names = [
-		"@mizen/ui/theme/initialize",
-		"@mizen/ui/theme",
-		"@mizen/ui",
+		"@mizen-labs/ui/theme/initialize",
+		"@mizen-labs/ui/theme",
+		"@mizen-labs/ui",
 	].flatMap((source) => bindings(ast, source, "initializeTheme"));
 	return ast.program.body
 		.filter((node) => isNode(node) && node.type === "ExpressionStatement")

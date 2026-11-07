@@ -1,5 +1,5 @@
 "use client";
-import { Textarea } from "@mizen/ui";
+import { Textarea } from "@mizen-labs/ui";
 
 export function TextareaSpecimen() {
 	return (

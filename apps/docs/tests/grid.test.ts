@@ -1,4 +1,4 @@
-import type { GridProps } from "@mizen/ui/grid";
+import type { GridProps } from "@mizen-labs/ui/grid";
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
@@ -78,10 +78,10 @@ describe("Grid component and docs specimen", () => {
 	}, 120_000);
 
 	it("resolves root and grid subpath exports with a closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/grid")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/grid")).toContain(
 			"packages/ui/dist/components/grid/grid.js"
 		);
 		const acceptsRole = false satisfies GridPropsAcceptsRole;

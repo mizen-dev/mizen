@@ -3,7 +3,7 @@ import {
 	type InlineCitationSource,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 
 const styles = create({

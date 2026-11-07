@@ -8,7 +8,7 @@ import {
 	Stack,
 	Text,
 	Textarea,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { type FormEvent, useCallback, useState } from "react";
 
 export function ProjectSummaryTextarea() {

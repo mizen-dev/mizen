@@ -6,7 +6,7 @@ import {
 	PopoverPopup,
 	PopoverTitle,
 	PopoverTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { type MouseEvent, useCallback, useState } from "react";
 import { ActiveComponentNavigation } from "./active-component-navigation";

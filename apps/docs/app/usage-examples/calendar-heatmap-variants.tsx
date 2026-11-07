@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarHeatmap } from "@mizen/ui";
+import { CalendarHeatmap } from "@mizen-labs/ui";
 
 const DAY = 86_400_000;
 const start = Date.UTC(2026, 6, 1);

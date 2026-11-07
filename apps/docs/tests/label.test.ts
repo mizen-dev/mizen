@@ -1,4 +1,4 @@
-import type { LabelProps } from "@mizen/ui/label";
+import type { LabelProps } from "@mizen-labs/ui/label";
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
@@ -50,10 +50,10 @@ describe("Label component and docs specimen", () => {
 	}, 120_000);
 
 	it("resolves root and label subpath exports with a closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/label")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/label")).toContain(
 			"packages/ui/dist/components/label/label.js"
 		);
 		const props = { htmlFor: "name" } satisfies LabelProps;

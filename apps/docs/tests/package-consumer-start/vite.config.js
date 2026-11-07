@@ -5,5 +5,5 @@ import { defineConfig } from "vite";
 export default defineConfig({
 	plugins: [tanstackStart(), viteReact()],
 	// Mizen imports its own CSS files, so the server bundle must include it.
-	ssr: { noExternal: ["@mizen/ui"] },
+	ssr: { noExternal: ["@mizen-labs/ui"] },
 });

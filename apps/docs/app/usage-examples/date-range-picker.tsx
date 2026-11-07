@@ -5,7 +5,7 @@ import {
 	Field,
 	FieldDescription,
 	FieldLabel,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { useState } from "react";
 
 // Fixed parts, not formatRange: its spacing differs between server and browser.

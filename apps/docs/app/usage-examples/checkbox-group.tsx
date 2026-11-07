@@ -5,7 +5,7 @@ import {
 	FieldLabel,
 	Heading,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 export function NotificationChannels() {
 	return (
 		<Stack gap="3">

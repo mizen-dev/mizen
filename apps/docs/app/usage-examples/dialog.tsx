@@ -10,7 +10,7 @@ import {
 	DialogPopup,
 	DialogTitle,
 	DialogTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { useCallback, useState } from "react";
 
 export function BasicDialog() {

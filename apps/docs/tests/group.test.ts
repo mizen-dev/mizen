@@ -1,4 +1,4 @@
-import type { GroupProps } from "@mizen/ui/group";
+import type { GroupProps } from "@mizen-labs/ui/group";
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import {
@@ -50,10 +50,10 @@ describe("Group component and docs specimen", () => {
 	}, 120_000);
 
 	it("resolves root and group subpath exports with a closed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/group")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/group")).toContain(
 			"packages/ui/dist/components/group/group.js"
 		);
 		const acceptsRole = false satisfies GroupPropsAcceptsRole;

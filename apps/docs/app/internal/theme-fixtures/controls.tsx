@@ -10,7 +10,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { useState } from "react";
 import { pageStyles } from "../../page.styles";

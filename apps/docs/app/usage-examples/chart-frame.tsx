@@ -1,6 +1,6 @@
 "use client";
 
-import { ChartFrame, ChartTooltip, chartColors } from "@mizen/ui";
+import { ChartFrame, ChartTooltip, chartColors } from "@mizen-labs/ui";
 import { barY, defineChart } from "@tanstack/charts";
 import type { ChartTooltipBodyRenderContext } from "@tanstack/charts/react/tooltip";
 import { scaleBand } from "@tanstack/charts/scales/band";

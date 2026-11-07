@@ -1,4 +1,4 @@
-import { Stack, Text, VisuallyHidden } from "@mizen/ui";
+import { Stack, Text, VisuallyHidden } from "@mizen-labs/ui";
 
 export function VisuallyHiddenInboxExample1() {
 	return (

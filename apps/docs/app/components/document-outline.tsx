@@ -1,6 +1,6 @@
 "use client";
 
-import { ScrollArea } from "@mizen/ui/scroll-area";
+import { ScrollArea } from "@mizen-labs/ui/scroll-area";
 import { props } from "@stylexjs/stylex";
 import { useCallback, useState } from "react";
 import { docsStyles } from "./docs.styles";

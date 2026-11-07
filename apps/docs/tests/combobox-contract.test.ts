@@ -33,7 +33,7 @@ import type {
 	ComboboxSeparatorProps,
 	ComboboxStatusProps,
 	ComboboxTriggerProps,
-} from "@mizen/ui/combobox";
+} from "@mizen-labs/ui/combobox";
 
 type AcceptsAll<T, K extends PropertyKey> = [K] extends [keyof T]
 	? true

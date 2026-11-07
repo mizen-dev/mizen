@@ -1,6 +1,6 @@
 "use client";
 
-import { Link, Stack, Text } from "@mizen/ui";
+import { Link, Stack, Text } from "@mizen-labs/ui";
 import NextLink from "next/link";
 import { MemoryRouter, Route, Link as RouterLink, Routes } from "react-router";
 

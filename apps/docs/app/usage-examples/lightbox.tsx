@@ -1,4 +1,4 @@
-import { LightboxGallery } from "@mizen/ui";
+import { LightboxGallery } from "@mizen-labs/ui";
 
 const photos = [
 	{

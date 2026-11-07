@@ -7,7 +7,7 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function ProjectTable() {
 	return (

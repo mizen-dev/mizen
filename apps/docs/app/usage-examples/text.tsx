@@ -1,4 +1,4 @@
-import { Stack, Text } from "@mizen/ui";
+import { Stack, Text } from "@mizen-labs/ui";
 
 export function ReadingText() {
 	return (

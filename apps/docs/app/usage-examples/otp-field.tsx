@@ -4,7 +4,7 @@ import {
 	FieldLabel,
 	OTPField,
 	OTPFieldInput,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 export function VerificationCode() {
 	return (
 		<Field>

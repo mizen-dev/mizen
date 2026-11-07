@@ -4,7 +4,7 @@ import {
 	AvatarFallback,
 	AvatarImage,
 	Inline,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 // Photos where people have them; a generated character where they do not.
 export function MemberAvatar() {

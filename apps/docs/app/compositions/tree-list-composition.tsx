@@ -1,6 +1,6 @@
 "use client";
 
-import { Heading, Section, Stack, Text, Tree } from "@mizen/ui";
+import { Heading, Section, Stack, Text, Tree } from "@mizen-labs/ui";
 import { useState } from "react";
 
 const workspaceItems = [

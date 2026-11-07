@@ -1,4 +1,4 @@
-import type { StatusDotProps } from "@mizen/ui/status-dot";
+import type { StatusDotProps } from "@mizen-labs/ui/status-dot";
 import { type Browser, chromium, type Page } from "playwright";
 import type { ComponentPropsWithRef, RefObject } from "react";
 import { createElement, createRef } from "react";
@@ -171,10 +171,10 @@ describe("StatusDot component contract", () => {
 	}, 120_000);
 
 	it("resolves root and subpath exports with a fixed prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/status-dot")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/status-dot")).toContain(
 			"packages/ui/dist/components/status-dot/status-dot.js"
 		);
 		expect(contractChecks).toEqual([

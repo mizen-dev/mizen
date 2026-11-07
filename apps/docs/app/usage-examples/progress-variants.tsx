@@ -9,7 +9,7 @@ import {
 	Spacer,
 	Stack,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function ProgressWorkspaceExportExample1() {
 	return (

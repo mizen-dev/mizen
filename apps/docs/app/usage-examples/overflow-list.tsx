@@ -1,4 +1,4 @@
-import { Badge, ListItem, OverflowList } from "@mizen/ui";
+import { Badge, ListItem, OverflowList } from "@mizen-labs/ui";
 
 export function Contributors() {
 	return (

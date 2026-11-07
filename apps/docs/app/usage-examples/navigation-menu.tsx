@@ -6,7 +6,7 @@ import {
 	NavigationMenuList,
 	NavigationMenuPopup,
 	NavigationMenuTrigger,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 export function ProductNavigationMenu() {
 	return (
 		<NavigationMenu aria-label="Main navigation">

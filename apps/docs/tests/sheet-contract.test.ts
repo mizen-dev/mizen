@@ -117,8 +117,8 @@ describe("Sheet contract and runtime semantics", () => {
 	afterEach(() => {
 		document.body.innerHTML = "";
 	});
-	it("resolves @mizen/ui/sheet as a public subpath", () => {
-		const resolved = import.meta.resolve("@mizen/ui/sheet");
+	it("resolves @mizen-labs/ui/sheet as a public subpath", () => {
+		const resolved = import.meta.resolve("@mizen-labs/ui/sheet");
 		expect(resolved).toContain("sheet");
 	});
 

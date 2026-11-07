@@ -5,7 +5,7 @@ import {
 	Button,
 	StreamingText,
 	type StreamingTextSource,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { create, props } from "@stylexjs/stylex";
 import { useCallback, useRef, useState } from "react";
 

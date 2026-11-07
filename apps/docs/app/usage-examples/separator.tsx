@@ -1,4 +1,4 @@
-import { Group, Separator, Spacer, Stack, Text } from "@mizen/ui";
+import { Group, Separator, Spacer, Stack, Text } from "@mizen-labs/ui";
 
 const items = [
 	["Team plan, 8 seats", "$192.00"],

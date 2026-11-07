@@ -11,7 +11,7 @@ import {
 	PopoverTitle,
 	PopoverTrigger,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { specimenStyles as previewStyles } from "./specimen.styles";
 import { SpecimenSection } from "./specimen-section";

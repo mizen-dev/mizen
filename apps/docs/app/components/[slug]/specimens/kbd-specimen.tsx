@@ -1,5 +1,5 @@
-import { Button, darkTheme, Inline, Stack, Text } from "@mizen/ui";
-import { Kbd, KbdGroup } from "@mizen/ui/kbd";
+import { Button, darkTheme, Inline, Stack, Text } from "@mizen-labs/ui";
+import { Kbd, KbdGroup } from "@mizen-labs/ui/kbd";
 import { props } from "@stylexjs/stylex";
 import { pageStyles } from "../../../page.styles";
 import { SpecimenSection } from "./specimen-section";

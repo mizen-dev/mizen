@@ -23,7 +23,7 @@ import {
 	TabsTab,
 	Text,
 	Timestamp,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { useCallback, useRef, useState } from "react";
 import { compositionStyles } from "./composition.styles";

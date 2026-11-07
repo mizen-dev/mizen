@@ -47,9 +47,11 @@ function clientTheme(source: string): string {
 	}
 	const namespace = imports(ast)
 		.filter((node) =>
-			["@mizen/ui/theme", "@mizen/ui", "@mizen/ui/theme/initialize"].includes(
-				literal(node.source) ?? ""
-			)
+			[
+				"@mizen-labs/ui/theme",
+				"@mizen-labs/ui",
+				"@mizen-labs/ui/theme/initialize",
+			].includes(literal(node.source) ?? "")
 		)
 		.flatMap((node) => (Array.isArray(node.specifiers) ? node.specifiers : []))
 		.some((node) => isNode(node) && node.type === "ImportNamespaceSpecifier");
@@ -57,8 +59,8 @@ function clientTheme(source: string): string {
 		return conflict("Namespace Mizen imports require manual provider review.");
 	}
 	const provider =
-		importedName(ast, "ThemeProvider", "@mizen/ui/theme") ??
-		importedName(ast, "ThemeProvider", "@mizen/ui");
+		importedName(ast, "ThemeProvider", "@mizen-labs/ui/theme") ??
+		importedName(ast, "ThemeProvider", "@mizen-labs/ui");
 	if (hasProvider(ast, tree) && !providerCovers(ast, tree)) {
 		return conflict(
 			"An existing provider covers only part of the render tree. Review it before init."
@@ -75,7 +77,7 @@ function clientTheme(source: string): string {
 			edits.push(
 				importEdit(
 					ast,
-					`import { ${specifier("ThemeProvider", name)} } from "@mizen/ui/theme";`,
+					`import { ${specifier("ThemeProvider", name)} } from "@mizen-labs/ui/theme";`,
 					source
 				)
 			);
@@ -86,14 +88,19 @@ function clientTheme(source: string): string {
 	const result = parseSource(themed);
 	const css = imports(result).some(
 		(node) =>
-			literal(node.source) === "@mizen/ui/styles.css" &&
+			literal(node.source) === "@mizen-labs/ui/styles.css" &&
 			Array.isArray(node.specifiers) &&
 			node.specifiers.length === 0
 	);
 	const after = css
 		? themed
 		: changes(themed, [
-				importEdit(result, 'import "@mizen/ui/styles.css";', themed, "first"),
+				importEdit(
+					result,
+					'import "@mizen-labs/ui/styles.css";',
+					themed,
+					"first"
+				),
 			]);
 	return after;
 }

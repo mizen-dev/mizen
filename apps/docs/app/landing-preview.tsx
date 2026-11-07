@@ -17,8 +17,8 @@ import {
 	TableHeader,
 	TableRow,
 	TimeSeries,
-} from "@mizen/ui";
-import { typeRoles } from "@mizen/ui/typography.styles";
+} from "@mizen-labs/ui";
+import { typeRoles } from "@mizen-labs/ui/typography.styles";
 import { props } from "@stylexjs/stylex";
 import {
 	IconArrowUpRight,

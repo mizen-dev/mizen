@@ -1,15 +1,15 @@
-import { colors } from "@mizen/ui/colors.stylex";
-import { conditions } from "@mizen/ui/conditions.stylex";
+import { colors } from "@mizen-labs/ui/colors.stylex";
+import { conditions } from "@mizen-labs/ui/conditions.stylex";
 import {
 	borderWidth,
 	focus,
 	focusMotion,
 	focusOutline,
-} from "@mizen/ui/interaction.stylex";
-import { shadows } from "@mizen/ui/shadows.stylex";
-import { shape } from "@mizen/ui/shape.stylex";
-import { space } from "@mizen/ui/spacing.stylex";
-import { fontWeight } from "@mizen/ui/typography.stylex";
+} from "@mizen-labs/ui/interaction.stylex";
+import { shadows } from "@mizen-labs/ui/shadows.stylex";
+import { shape } from "@mizen-labs/ui/shape.stylex";
+import { space } from "@mizen-labs/ui/spacing.stylex";
+import { fontWeight } from "@mizen-labs/ui/typography.stylex";
 import { create } from "@stylexjs/stylex";
 
 // The hero uses a fluid display scale; the live dashboard uses product type roles.

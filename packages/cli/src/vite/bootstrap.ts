@@ -28,9 +28,9 @@ export function bootstrapEdits(
 	}
 	ensureDefaultProvider(ast, tree);
 	const existing = [
-		"@mizen/ui/theme/initialize",
-		"@mizen/ui/theme",
-		"@mizen/ui",
+		"@mizen-labs/ui/theme/initialize",
+		"@mizen-labs/ui/theme",
+		"@mizen-labs/ui",
 	]
 		.map((sourcePath) => importedName(ast, "initializeTheme", sourcePath))
 		.find((binding) => binding !== null);
@@ -48,7 +48,7 @@ export function bootstrapEdits(
 		edits.push(
 			importEdit(
 				ast,
-				`import { ${specifier("initializeTheme", name)} } from "@mizen/ui/theme/initialize";`,
+				`import { ${specifier("initializeTheme", name)} } from "@mizen-labs/ui/theme/initialize";`,
 				source
 			)
 		);

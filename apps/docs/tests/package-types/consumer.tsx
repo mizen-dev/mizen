@@ -3,7 +3,7 @@ import type {
 	HeatmapRow as RootHeatmapRow,
 	ScatterChartPoint as RootScatterChartPoint,
 	ScatterChartProps as RootScatterChartProps,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import {
 	ActivityFeed,
 	ActivityFeedContent,
@@ -128,32 +128,32 @@ import {
 	ToolbarButton,
 	Tree,
 	VisuallyHidden,
-} from "@mizen/ui";
-import { ActivityFeed as SubpathActivityFeed } from "@mizen/ui/activity-feed";
-import { applicationStructure } from "@mizen/ui/application-structure.stylex";
-import { AspectRatio as SubpathAspectRatio } from "@mizen/ui/aspect-ratio";
-import { Blockquote as SubpathBlockquote } from "@mizen/ui/blockquote";
-import { Button, type ButtonProps } from "@mizen/ui/button";
-import { Carousel as SubpathCarousel } from "@mizen/ui/carousel";
+} from "@mizen-labs/ui";
+import { ActivityFeed as SubpathActivityFeed } from "@mizen-labs/ui/activity-feed";
+import { applicationStructure } from "@mizen-labs/ui/application-structure.stylex";
+import { AspectRatio as SubpathAspectRatio } from "@mizen-labs/ui/aspect-ratio";
+import { Blockquote as SubpathBlockquote } from "@mizen-labs/ui/blockquote";
+import { Button, type ButtonProps } from "@mizen-labs/ui/button";
+import { Carousel as SubpathCarousel } from "@mizen-labs/ui/carousel";
 import {
 	type CategoryComparisonProps,
 	CategoryComparison as SubpathCategoryComparison,
-} from "@mizen/ui/category-comparison";
+} from "@mizen-labs/ui/category-comparison";
 import {
 	type ChartFrameProps,
 	ChartFrame as SubpathChartFrame,
-} from "@mizen/ui/chart-frame";
+} from "@mizen-labs/ui/chart-frame";
 import {
 	type ChartLegendItem,
 	type ChartLegendProps,
 	ChartLegend as SubpathChartLegend,
-} from "@mizen/ui/chart-legend";
+} from "@mizen-labs/ui/chart-legend";
 import {
 	type ChartTooltipItem,
 	type ChartTooltipProps,
 	ChartTooltip as SubpathChartTooltip,
-} from "@mizen/ui/chart-tooltip";
-import { Citation as SubpathCitation } from "@mizen/ui/citation";
+} from "@mizen-labs/ui/chart-tooltip";
+import { Citation as SubpathCitation } from "@mizen-labs/ui/citation";
 import {
 	type CodeBlockContentProps,
 	type CodeBlockCopyProps,
@@ -165,7 +165,7 @@ import {
 	CodeBlockCopy as SubpathCodeBlockCopy,
 	CodeBlockHeader as SubpathCodeBlockHeader,
 	CodeBlockTitle as SubpathCodeBlockTitle,
-} from "@mizen/ui/code-block";
+} from "@mizen-labs/ui/code-block";
 import {
 	Composer,
 	ComposerActionGroup,
@@ -175,32 +175,32 @@ import {
 	ComposerSubmit,
 	type ComposerValue,
 	getComposerText,
-} from "@mizen/ui/composer";
+} from "@mizen-labs/ui/composer";
 import {
 	DataTable as SubpathDataTable,
 	DataTablePagination as SubpathDataTablePagination,
 	type DataTableProps as SubpathDataTableProps,
-} from "@mizen/ui/data-table";
+} from "@mizen-labs/ui/data-table";
 import {
 	DateRangePicker,
 	type DateRangePreset,
-} from "@mizen/ui/date-range-picker";
+} from "@mizen-labs/ui/date-range-picker";
 import {
 	type DiagramProps,
 	Diagram as OptionalDiagram,
-} from "@mizen/ui/diagram";
+} from "@mizen-labs/ui/diagram";
 import {
 	type DistributionProps,
 	Distribution as SubpathDistribution,
-} from "@mizen/ui/distribution";
+} from "@mizen-labs/ui/distribution";
 import type {
 	HeatmapProps as SubpathHeatmapProps,
 	HeatmapRow as SubpathHeatmapRow,
-} from "@mizen/ui/heatmap";
-import { Heatmap as SubpathHeatmap } from "@mizen/ui/heatmap";
-import { Input, type InputProps } from "@mizen/ui/input";
-import { Lightbox as SubpathLightbox } from "@mizen/ui/lightbox";
-import { type LinkProps, Link as SubpathLink } from "@mizen/ui/link";
+} from "@mizen-labs/ui/heatmap";
+import { Heatmap as SubpathHeatmap } from "@mizen-labs/ui/heatmap";
+import { Input, type InputProps } from "@mizen-labs/ui/input";
+import { Lightbox as SubpathLightbox } from "@mizen-labs/ui/lightbox";
+import { type LinkProps, Link as SubpathLink } from "@mizen-labs/ui/link";
 import {
 	List as SubpathList,
 	ListActions as SubpathListActions,
@@ -210,11 +210,11 @@ import {
 	ListItem as SubpathListItem,
 	type ListItemProps as SubpathListItemProps,
 	type ListProps as SubpathListProps,
-} from "@mizen/ui/list";
+} from "@mizen-labs/ui/list";
 import {
 	type MarkdownProps,
 	Markdown as SubpathMarkdown,
-} from "@mizen/ui/markdown";
+} from "@mizen-labs/ui/markdown";
 import {
 	type MeterProps,
 	Meter as SubpathMeter,
@@ -222,20 +222,20 @@ import {
 	MeterLabel as SubpathMeterLabel,
 	MeterTrack as SubpathMeterTrack,
 	MeterValue as SubpathMeterValue,
-} from "@mizen/ui/meter";
-import type { MetricTrendProps } from "@mizen/ui/metric-trend";
-import { MetricTrend as SubpathMetricTrend } from "@mizen/ui/metric-trend";
-import { OverflowList as SubpathOverflowList } from "@mizen/ui/overflow-list";
-import { palette } from "@mizen/ui/palette.stylex";
+} from "@mizen-labs/ui/meter";
+import type { MetricTrendProps } from "@mizen-labs/ui/metric-trend";
+import { MetricTrend as SubpathMetricTrend } from "@mizen-labs/ui/metric-trend";
+import { OverflowList as SubpathOverflowList } from "@mizen-labs/ui/overflow-list";
+import { palette } from "@mizen-labs/ui/palette.stylex";
 import {
 	type PartToWholeProps,
 	PartToWhole as SubpathPartToWhole,
-} from "@mizen/ui/part-to-whole";
+} from "@mizen-labs/ui/part-to-whole";
 import type {
 	ScatterChartPoint as SubpathScatterChartPoint,
 	ScatterChartProps as SubpathScatterChartProps,
-} from "@mizen/ui/scatter-chart";
-import { ScatterChart as SubpathScatterChart } from "@mizen/ui/scatter-chart";
+} from "@mizen-labs/ui/scatter-chart";
+import { ScatterChart as SubpathScatterChart } from "@mizen-labs/ui/scatter-chart";
 import {
 	Select as SubpathSelect,
 	SelectItem as SubpathSelectItem,
@@ -243,27 +243,27 @@ import {
 	type SelectProps as SubpathSelectProps,
 	SelectTrigger as SubpathSelectTrigger,
 	SelectValue as SubpathSelectValue,
-} from "@mizen/ui/select";
-import { TableContainer as SubpathTableContainer } from "@mizen/ui/table";
+} from "@mizen-labs/ui/select";
+import { TableContainer as SubpathTableContainer } from "@mizen-labs/ui/table";
 import {
 	Thumbnail as SubpathThumbnail,
 	type ThumbnailProps as SubpathThumbnailProps,
 	type ThumbnailSize,
-} from "@mizen/ui/thumbnail";
+} from "@mizen-labs/ui/thumbnail";
 import {
 	TimeSeries as SubpathTimeSeries,
 	type TimeSeriesProps,
-} from "@mizen/ui/time-series";
+} from "@mizen-labs/ui/time-series";
 import {
 	Timestamp as SubpathTimestamp,
 	type TimestampFormat,
 	type TimestampProps,
-} from "@mizen/ui/timestamp";
-import { Tree as SubpathTree } from "@mizen/ui/tree";
+} from "@mizen-labs/ui/timestamp";
+import { Tree as SubpathTree } from "@mizen-labs/ui/tree";
 import {
 	VisuallyHidden as SubpathVisuallyHidden,
 	type VisuallyHiddenProps,
-} from "@mizen/ui/visually-hidden";
+} from "@mizen-labs/ui/visually-hidden";
 import { defineChart, lineY } from "@tanstack/charts";
 import { scaleLinear } from "@tanstack/charts/scales/linear";
 import { scalePoint } from "@tanstack/charts/scales/point";
@@ -282,118 +282,118 @@ import {
 
 // Resolve public imports without the docs app's allowJs escape hatch.
 export type PublicModules = [
-	typeof import("@mizen/ui"),
-	typeof import("@mizen/ui/colors.stylex"),
-	typeof import("@mizen/ui/conditions.stylex"),
-	typeof import("@mizen/ui/dimensions.stylex"),
-	typeof import("@mizen/ui/fonts.stylex"),
-	typeof import("@mizen/ui/palette.stylex"),
-	typeof import("@mizen/ui/interaction.stylex"),
-	typeof import("@mizen/ui/motion.stylex"),
-	typeof import("@mizen/ui/shape.stylex"),
-	typeof import("@mizen/ui/spacing.stylex"),
-	typeof import("@mizen/ui/shadows.stylex"),
-	typeof import("@mizen/ui/typography.stylex"),
-	typeof import("@mizen/ui/typography.styles"),
-	typeof import("@mizen/ui/application-structure.stylex"),
-	typeof import("@mizen/ui/accordion"),
-	typeof import("@mizen/ui/attachment"),
-	typeof import("@mizen/ui/alert"),
-	typeof import("@mizen/ui/alert-dialog"),
-	typeof import("@mizen/ui/avatar"),
-	typeof import("@mizen/ui/avatar-group"),
-	typeof import("@mizen/ui/badge"),
-	typeof import("@mizen/ui/breadcrumb"),
-	typeof import("@mizen/ui/button"),
-	typeof import("@mizen/ui/button-group"),
-	typeof import("@mizen/ui/calendar"),
-	typeof import("@mizen/ui/card"),
-	typeof import("@mizen/ui/chart-frame"),
-	typeof import("@mizen/ui/category-comparison"),
-	typeof import("@mizen/ui/distribution"),
-	typeof import("@mizen/ui/heatmap"),
-	typeof import("@mizen/ui/part-to-whole"),
-	typeof import("@mizen/ui/scatter-chart"),
-	typeof import("@mizen/ui/chart-legend"),
-	typeof import("@mizen/ui/chart-tooltip"),
-	typeof import("@mizen/ui/metric-trend"),
-	typeof import("@mizen/ui/checkbox"),
-	typeof import("@mizen/ui/checkbox-card"),
-	typeof import("@mizen/ui/checkbox-group"),
-	typeof import("@mizen/ui/code"),
-	typeof import("@mizen/ui/code-block"),
-	typeof import("@mizen/ui/collapsible"),
-	typeof import("@mizen/ui/combobox"),
-	typeof import("@mizen/ui/command"),
-	typeof import("@mizen/ui/context-menu"),
-	typeof import("@mizen/ui/date-picker"),
-	typeof import("@mizen/ui/date-range-picker"),
-	typeof import("@mizen/ui/date-time-input"),
-	typeof import("@mizen/ui/dialog"),
-	typeof import("@mizen/ui/drawer"),
-	typeof import("@mizen/ui/empty"),
-	typeof import("@mizen/ui/error-state"),
-	typeof import("@mizen/ui/field"),
-	typeof import("@mizen/ui/fieldset"),
-	typeof import("@mizen/ui/file-upload"),
-	typeof import("@mizen/ui/form"),
-	typeof import("@mizen/ui/frame"),
-	typeof import("@mizen/ui/grid"),
-	typeof import("@mizen/ui/group"),
-	typeof import("@mizen/ui/heading"),
-	typeof import("@mizen/ui/input"),
-	typeof import("@mizen/ui/input-group"),
-	typeof import("@mizen/ui/inline"),
-	typeof import("@mizen/ui/kbd"),
-	typeof import("@mizen/ui/label"),
-	typeof import("@mizen/ui/link"),
-	typeof import("@mizen/ui/list"),
-	typeof import("@mizen/ui/markdown"),
-	typeof import("@mizen/ui/menu"),
-	typeof import("@mizen/ui/menubar"),
-	typeof import("@mizen/ui/meter"),
-	typeof import("@mizen/ui/metric"),
-	typeof import("@mizen/ui/navigation-menu"),
-	typeof import("@mizen/ui/number-field"),
-	typeof import("@mizen/ui/otp-field"),
-	typeof import("@mizen/ui/pagination"),
-	typeof import("@mizen/ui/popover"),
-	typeof import("@mizen/ui/preview-card"),
-	typeof import("@mizen/ui/progress"),
-	typeof import("@mizen/ui/property-list"),
-	typeof import("@mizen/ui/radio"),
-	typeof import("@mizen/ui/radio-card"),
-	typeof import("@mizen/ui/radio-group"),
-	typeof import("@mizen/ui/scroll-area"),
-	typeof import("@mizen/ui/section"),
-	typeof import("@mizen/ui/separator"),
-	typeof import("@mizen/ui/sheet"),
-	typeof import("@mizen/ui/skeleton"),
-	typeof import("@mizen/ui/slider"),
-	typeof import("@mizen/ui/spacer"),
-	typeof import("@mizen/ui/spinner"),
-	typeof import("@mizen/ui/stack"),
-	typeof import("@mizen/ui/status-dot"),
-	typeof import("@mizen/ui/stepper"),
-	typeof import("@mizen/ui/table"),
-	typeof import("@mizen/ui/data-table"),
-	typeof import("@mizen/ui/text"),
-	typeof import("@mizen/ui/textarea"),
-	typeof import("@mizen/ui/thumbnail"),
-	typeof import("@mizen/ui/switch"),
-	typeof import("@mizen/ui/select"),
-	typeof import("@mizen/ui/segmented-control"),
-	typeof import("@mizen/ui/toggle"),
-	typeof import("@mizen/ui/toggle-group"),
-	typeof import("@mizen/ui/tabs"),
-	typeof import("@mizen/ui/theme"),
-	typeof import("@mizen/ui/time-input"),
-	typeof import("@mizen/ui/timestamp"),
-	typeof import("@mizen/ui/time-series"),
-	typeof import("@mizen/ui/toast"),
-	typeof import("@mizen/ui/visually-hidden"),
-	typeof import("@mizen/ui/tooltip"),
-	typeof import("@mizen/ui/toolbar"),
+	typeof import("@mizen-labs/ui"),
+	typeof import("@mizen-labs/ui/colors.stylex"),
+	typeof import("@mizen-labs/ui/conditions.stylex"),
+	typeof import("@mizen-labs/ui/dimensions.stylex"),
+	typeof import("@mizen-labs/ui/fonts.stylex"),
+	typeof import("@mizen-labs/ui/palette.stylex"),
+	typeof import("@mizen-labs/ui/interaction.stylex"),
+	typeof import("@mizen-labs/ui/motion.stylex"),
+	typeof import("@mizen-labs/ui/shape.stylex"),
+	typeof import("@mizen-labs/ui/spacing.stylex"),
+	typeof import("@mizen-labs/ui/shadows.stylex"),
+	typeof import("@mizen-labs/ui/typography.stylex"),
+	typeof import("@mizen-labs/ui/typography.styles"),
+	typeof import("@mizen-labs/ui/application-structure.stylex"),
+	typeof import("@mizen-labs/ui/accordion"),
+	typeof import("@mizen-labs/ui/attachment"),
+	typeof import("@mizen-labs/ui/alert"),
+	typeof import("@mizen-labs/ui/alert-dialog"),
+	typeof import("@mizen-labs/ui/avatar"),
+	typeof import("@mizen-labs/ui/avatar-group"),
+	typeof import("@mizen-labs/ui/badge"),
+	typeof import("@mizen-labs/ui/breadcrumb"),
+	typeof import("@mizen-labs/ui/button"),
+	typeof import("@mizen-labs/ui/button-group"),
+	typeof import("@mizen-labs/ui/calendar"),
+	typeof import("@mizen-labs/ui/card"),
+	typeof import("@mizen-labs/ui/chart-frame"),
+	typeof import("@mizen-labs/ui/category-comparison"),
+	typeof import("@mizen-labs/ui/distribution"),
+	typeof import("@mizen-labs/ui/heatmap"),
+	typeof import("@mizen-labs/ui/part-to-whole"),
+	typeof import("@mizen-labs/ui/scatter-chart"),
+	typeof import("@mizen-labs/ui/chart-legend"),
+	typeof import("@mizen-labs/ui/chart-tooltip"),
+	typeof import("@mizen-labs/ui/metric-trend"),
+	typeof import("@mizen-labs/ui/checkbox"),
+	typeof import("@mizen-labs/ui/checkbox-card"),
+	typeof import("@mizen-labs/ui/checkbox-group"),
+	typeof import("@mizen-labs/ui/code"),
+	typeof import("@mizen-labs/ui/code-block"),
+	typeof import("@mizen-labs/ui/collapsible"),
+	typeof import("@mizen-labs/ui/combobox"),
+	typeof import("@mizen-labs/ui/command"),
+	typeof import("@mizen-labs/ui/context-menu"),
+	typeof import("@mizen-labs/ui/date-picker"),
+	typeof import("@mizen-labs/ui/date-range-picker"),
+	typeof import("@mizen-labs/ui/date-time-input"),
+	typeof import("@mizen-labs/ui/dialog"),
+	typeof import("@mizen-labs/ui/drawer"),
+	typeof import("@mizen-labs/ui/empty"),
+	typeof import("@mizen-labs/ui/error-state"),
+	typeof import("@mizen-labs/ui/field"),
+	typeof import("@mizen-labs/ui/fieldset"),
+	typeof import("@mizen-labs/ui/file-upload"),
+	typeof import("@mizen-labs/ui/form"),
+	typeof import("@mizen-labs/ui/frame"),
+	typeof import("@mizen-labs/ui/grid"),
+	typeof import("@mizen-labs/ui/group"),
+	typeof import("@mizen-labs/ui/heading"),
+	typeof import("@mizen-labs/ui/input"),
+	typeof import("@mizen-labs/ui/input-group"),
+	typeof import("@mizen-labs/ui/inline"),
+	typeof import("@mizen-labs/ui/kbd"),
+	typeof import("@mizen-labs/ui/label"),
+	typeof import("@mizen-labs/ui/link"),
+	typeof import("@mizen-labs/ui/list"),
+	typeof import("@mizen-labs/ui/markdown"),
+	typeof import("@mizen-labs/ui/menu"),
+	typeof import("@mizen-labs/ui/menubar"),
+	typeof import("@mizen-labs/ui/meter"),
+	typeof import("@mizen-labs/ui/metric"),
+	typeof import("@mizen-labs/ui/navigation-menu"),
+	typeof import("@mizen-labs/ui/number-field"),
+	typeof import("@mizen-labs/ui/otp-field"),
+	typeof import("@mizen-labs/ui/pagination"),
+	typeof import("@mizen-labs/ui/popover"),
+	typeof import("@mizen-labs/ui/preview-card"),
+	typeof import("@mizen-labs/ui/progress"),
+	typeof import("@mizen-labs/ui/property-list"),
+	typeof import("@mizen-labs/ui/radio"),
+	typeof import("@mizen-labs/ui/radio-card"),
+	typeof import("@mizen-labs/ui/radio-group"),
+	typeof import("@mizen-labs/ui/scroll-area"),
+	typeof import("@mizen-labs/ui/section"),
+	typeof import("@mizen-labs/ui/separator"),
+	typeof import("@mizen-labs/ui/sheet"),
+	typeof import("@mizen-labs/ui/skeleton"),
+	typeof import("@mizen-labs/ui/slider"),
+	typeof import("@mizen-labs/ui/spacer"),
+	typeof import("@mizen-labs/ui/spinner"),
+	typeof import("@mizen-labs/ui/stack"),
+	typeof import("@mizen-labs/ui/status-dot"),
+	typeof import("@mizen-labs/ui/stepper"),
+	typeof import("@mizen-labs/ui/table"),
+	typeof import("@mizen-labs/ui/data-table"),
+	typeof import("@mizen-labs/ui/text"),
+	typeof import("@mizen-labs/ui/textarea"),
+	typeof import("@mizen-labs/ui/thumbnail"),
+	typeof import("@mizen-labs/ui/switch"),
+	typeof import("@mizen-labs/ui/select"),
+	typeof import("@mizen-labs/ui/segmented-control"),
+	typeof import("@mizen-labs/ui/toggle"),
+	typeof import("@mizen-labs/ui/toggle-group"),
+	typeof import("@mizen-labs/ui/tabs"),
+	typeof import("@mizen-labs/ui/theme"),
+	typeof import("@mizen-labs/ui/time-input"),
+	typeof import("@mizen-labs/ui/timestamp"),
+	typeof import("@mizen-labs/ui/time-series"),
+	typeof import("@mizen-labs/ui/toast"),
+	typeof import("@mizen-labs/ui/visually-hidden"),
+	typeof import("@mizen-labs/ui/tooltip"),
+	typeof import("@mizen-labs/ui/toolbar"),
 ];
 
 const buttonProps: ButtonProps = { "aria-label": "Add", size: "icon-sm" };

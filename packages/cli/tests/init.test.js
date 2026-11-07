@@ -21,7 +21,7 @@ import { parseOutput } from "./helpers/output.js";
 
 const binary = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
 const manifest = {
-	name: "@mizen/ui",
+	name: "@mizen-labs/ui",
 	peerDependencies: {
 		pele: "^1.13.0",
 		react: "^19.2.8",
@@ -49,11 +49,11 @@ function fixture(t, framework = "next") {
 	t.after(() => rmSync(root, { force: true, recursive: true }));
 	const dependency = framework === "next" ? "next" : "@tanstack/react-start";
 	put(root, "package.json", {
-		dependencies: { [dependency]: "1.0.0", "@mizen/ui": "0.1.0" },
+		dependencies: { [dependency]: "1.0.0", "@mizen-labs/ui": "0.1.0" },
 		private: true,
 	});
 	put(root, "pnpm-lock.yaml", "keep-lockfile");
-	put(root, "node_modules/@mizen/ui/package.json", manifest);
+	put(root, "node_modules/@mizen-labs/ui/package.json", manifest);
 	put(root, `node_modules/${dependency}/package.json`, {
 		name: dependency,
 		version: "1.0.0",
@@ -277,7 +277,7 @@ test("--dry-run takes precedence over --yes, and malformed sources remain untouc
 test("existing alias providers are reused, while namespace and shadowed bindings need review", (t) => {
 	const root = fixture(t);
 	const aliased =
-		`import {ThemeProvider as ExistingProvider,ThemeScript as ExistingScript} from "@mizen/ui/theme";\n` +
+		`import {ThemeProvider as ExistingProvider,ThemeScript as ExistingScript} from "@mizen-labs/ui/theme";\n` +
 		nextRoot
 			.replace(
 				"<body>",
@@ -292,7 +292,7 @@ test("existing alias providers are reused, while namespace and shadowed bindings
 	put(
 		root,
 		"app/layout.tsx",
-		`import * as Mizen from "@mizen/ui/theme";\n${nextRoot}`
+		`import * as Mizen from "@mizen-labs/ui/theme";\n${nextRoot}`
 	);
 	assert.equal(run(root, ["--yes"]).exit, 1);
 	put(
@@ -371,7 +371,7 @@ test("new imports retain CRLF source line endings", (t) => {
 
 test("failed verification shows diagnostic paths and repairs in human output", (t) => {
 	const root = fixture(t);
-	put(root, "node_modules/@mizen/ui/node_modules/react/package.json", {
+	put(root, "node_modules/@mizen-labs/ui/node_modules/react/package.json", {
 		name: "react",
 		version: "19.3.0",
 	});
@@ -390,7 +390,7 @@ test("failed verification shows diagnostic paths and repairs in human output", (
 	// Evidence inside the app reads relative to it.
 	assert.ok(
 		result.stdout.includes(
-			"node_modules/@mizen/ui/node_modules/react/package.json"
+			"node_modules/@mizen-labs/ui/node_modules/react/package.json"
 		)
 	);
 	assert.ok(

@@ -1,4 +1,4 @@
-import { Field, FieldDescription, FieldLabel, TimeInput } from "@mizen/ui";
+import { Field, FieldDescription, FieldLabel, TimeInput } from "@mizen-labs/ui";
 export function AppointmentTime() {
 	return (
 		<Field>

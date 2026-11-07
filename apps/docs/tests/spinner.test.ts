@@ -1,4 +1,4 @@
-import type { SpinnerProps } from "@mizen/ui/spinner";
+import type { SpinnerProps } from "@mizen-labs/ui/spinner";
 import { type Browser, chromium, type Page } from "playwright";
 import type { ComponentPropsWithRef, RefObject } from "react";
 import { createElement, createRef } from "react";
@@ -112,10 +112,10 @@ describe("Spinner component contract", () => {
 	}, 120_000);
 
 	it("resolves root and subpath exports with a closed SVG prop contract", () => {
-		expect(import.meta.resolve("@mizen/ui")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui")).toContain(
 			"packages/ui/dist/index.js"
 		);
-		expect(import.meta.resolve("@mizen/ui/spinner")).toContain(
+		expect(import.meta.resolve("@mizen-labs/ui/spinner")).toContain(
 			"packages/ui/dist/components/spinner/spinner.js"
 		);
 		expect(contractChecks).toEqual([

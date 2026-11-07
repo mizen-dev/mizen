@@ -1,6 +1,6 @@
 "use client";
 
-import { MetricDelta, MetricTrend, ScatterChart } from "@mizen/ui";
+import { MetricDelta, MetricTrend, ScatterChart } from "@mizen-labs/ui";
 import { IconCoin } from "@tabler/icons-react";
 import { useState } from "react";
 import { PeriodSelect } from "./chart-controls";

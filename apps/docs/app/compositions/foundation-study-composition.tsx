@@ -49,7 +49,7 @@ import {
 	TabsPanel,
 	TabsTab,
 	Text,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { foundationStudyStyles } from "./foundation-study.styles";
 

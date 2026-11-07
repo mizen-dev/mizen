@@ -20,7 +20,7 @@ import {
 	Heading,
 	Inline,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import {
 	IconAlertTriangle,

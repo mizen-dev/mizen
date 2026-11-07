@@ -39,7 +39,7 @@ import {
 	TableRow,
 	Text,
 	TimeSeries,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { type ChangeEvent, useCallback, useRef, useState } from "react";
 import type {

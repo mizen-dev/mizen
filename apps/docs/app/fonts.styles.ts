@@ -1,4 +1,4 @@
-import { fonts } from "@mizen/ui/fonts.stylex";
+import { fonts } from "@mizen-labs/ui/fonts.stylex";
 import { createTheme } from "@stylexjs/stylex";
 
 // The site chooses its fonts; shared components do not require these families.

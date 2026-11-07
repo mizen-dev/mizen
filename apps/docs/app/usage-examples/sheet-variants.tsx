@@ -14,7 +14,7 @@ import {
 	SheetTitle,
 	SheetTrigger,
 	Stack,
-} from "@mizen/ui";
+} from "@mizen-labs/ui";
 
 export function SheetWorkspacePreferencesExample1() {
 	return (

@@ -8,7 +8,7 @@ import type {
 	InputGroupProps,
 	InputGroupTextareaProps,
 	InputGroupTextProps,
-} from "@mizen/ui/input-group";
+} from "@mizen-labs/ui/input-group";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("@stylexjs/stylex", () => ({

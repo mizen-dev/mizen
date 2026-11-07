@@ -1,8 +1,12 @@
-import { colors } from "@mizen/ui/colors.stylex";
-import { borderWidth } from "@mizen/ui/interaction.stylex";
-import { shape } from "@mizen/ui/shape.stylex";
-import { space } from "@mizen/ui/spacing.stylex";
-import { fontSize, fontWeight, lineHeight } from "@mizen/ui/typography.stylex";
+import { colors } from "@mizen-labs/ui/colors.stylex";
+import { borderWidth } from "@mizen-labs/ui/interaction.stylex";
+import { shape } from "@mizen-labs/ui/shape.stylex";
+import { space } from "@mizen-labs/ui/spacing.stylex";
+import {
+	fontSize,
+	fontWeight,
+	lineHeight,
+} from "@mizen-labs/ui/typography.stylex";
 import { create } from "@stylexjs/stylex";
 
 export const specimenStyles = create({
