@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { execute } from "../process.js";
+import { execute, INSTALL_TIMEOUT_MS } from "../process.js";
 
 const smoke = `import assert from "node:assert/strict";
 import { readFileSync, statSync } from "node:fs";
@@ -59,7 +59,7 @@ export async function checkConsumer(
 				]
 			: ["install", "--ignore-scripts", "--no-frozen-lockfile", "--prod=false"];
 	// Fresh Windows installs can exceed the default command timeout.
-	execute(manager, install, { cwd: directory, timeout: 600_000 });
+	execute(manager, install, { cwd: directory, timeout: INSTALL_TIMEOUT_MS });
 	const prefix =
 		manager === "npm" ? ["exec", "--no", "--", "mizen"] : ["exec", "mizen"];
 	const run = (args) =>

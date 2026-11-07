@@ -5,7 +5,6 @@ import {
 	mkdir,
 	mkdtemp,
 	readFile,
-	rm,
 	writeFile,
 } from "node:fs/promises";
 import {
@@ -34,6 +33,7 @@ import {
 	measure,
 	protocol,
 } from "./benchmark/measure.js";
+import { cleanup } from "./cleanup.js";
 import { execute } from "./process.js";
 import { inspectArchive } from "./release/archive.js";
 
@@ -76,6 +76,7 @@ try {
 		...expected,
 		version: previous?.package.version ?? expected.version,
 	});
+	console.log("Installing CLI-only benchmark dependencies…");
 	install(join(staging, "cli-only"), Boolean(from));
 	const sizes = {
 		archiveBytes: archive.record.bytes,
@@ -87,6 +88,7 @@ try {
 			0
 		),
 	};
+	console.log("Installing app benchmark dependencies…");
 	install(join(staging, "app"), Boolean(from));
 	const binary = join(staging, "app/node_modules/@mizen-labs/cli/dist/cli.js");
 	console.log("Measuring installed CLI processes…");
@@ -156,5 +158,5 @@ try {
 	console.log(summary);
 	console.log(`Benchmark evidence: ${destination}`);
 } finally {
-	await rm(staging, { force: true, recursive: true });
+	await cleanup(staging);
 }

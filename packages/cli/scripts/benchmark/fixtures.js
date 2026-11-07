@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { cp, mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, join } from "node:path";
-import { execute } from "../process.js";
+import { execute, INSTALL_TIMEOUT_MS } from "../process.js";
 
 export async function writeJson(path, value) {
 	await writeFile(path, `${JSON.stringify(value, null, 2)}\n`);
@@ -69,7 +69,7 @@ export function install(directory, replay) {
 			"--no-fund",
 			"--omit=dev",
 		],
-		{ cwd: directory }
+		{ cwd: directory, timeout: INSTALL_TIMEOUT_MS }
 	);
 }
 

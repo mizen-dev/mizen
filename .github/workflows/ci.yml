@@ -115,7 +115,7 @@ jobs:
   benchmarks:
     name: Benchmarks / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -130,13 +130,16 @@ jobs:
           cache: true
           require-lockfile: true
       - name: Benchmark installed CLI and package size
-        run: pnpm benchmark:cli
+        shell: bash
+        run: pnpm benchmark:cli 2>&1 | tee benchmark.log
       - name: Retain CLI benchmark reports and replay inputs
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: cli-benchmark-${{ matrix.os }}-node-24.11.0
-          path: artifacts/benchmarks/
+          path: |
+            artifacts/benchmarks/
+            benchmark.log
           if-no-files-found: warn
           retention-days: 14
   ci:

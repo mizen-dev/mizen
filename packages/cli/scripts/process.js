@@ -1,5 +1,7 @@
 import spawn from "cross-spawn";
 
+export const INSTALL_TIMEOUT_MS = 600_000;
+
 // Resolve Windows package-manager .cmd shims without assembling shell commands.
 export function execute(command, args, options = {}) {
 	const result = spawn.sync(command, args, {
