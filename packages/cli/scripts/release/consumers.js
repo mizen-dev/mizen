@@ -58,7 +58,8 @@ export async function checkConsumer(
 					"--include=dev",
 				]
 			: ["install", "--ignore-scripts", "--no-frozen-lockfile", "--prod=false"];
-	execute(manager, install, { cwd: directory });
+	// Fresh Windows installs can exceed the default command timeout.
+	execute(manager, install, { cwd: directory, timeout: 600_000 });
 	const prefix =
 		manager === "npm" ? ["exec", "--no", "--", "mizen"] : ["exec", "mizen"];
 	const run = (args) =>

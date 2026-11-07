@@ -102,6 +102,20 @@ try {
 		`${JSON.stringify(manifest, null, 2)}\n`
 	);
 	console.log(`Release checks passed. Candidate: ${destination}`);
+} catch (error) {
+	// Print the verification error before cleanup can fail on a locked directory.
+	console.error("Release verification failed:", error);
+	throw error;
 } finally {
-	await rm(staging, { force: true, recursive: true });
+	await rm(staging, {
+		force: true,
+		maxRetries: 5,
+		recursive: true,
+		retryDelay: 1000,
+	}).catch((error) => {
+		console.warn(
+			`Could not remove temporary release directory ${staging}:`,
+			error
+		);
+	});
 }

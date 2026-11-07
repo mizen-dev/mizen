@@ -10,7 +10,8 @@ export function execute(command, args, options = {}) {
 	});
 	if (result.error || result.status !== 0) {
 		throw new Error(
-			`${command} failed (${result.status ?? result.error?.code}):\n${result.stdout ?? ""}\n${result.stderr ?? ""}`
+			`${command} ${args.join(" ")} failed (${result.error?.code ?? result.status}):\n${result.stdout ?? ""}\n${result.stderr ?? ""}`,
+			{ cause: result.error }
 		);
 	}
 	return result.stdout;
