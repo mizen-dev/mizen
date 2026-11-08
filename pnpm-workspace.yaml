@@ -5,6 +5,10 @@ minimumReleaseAgeExclude:
   - sugar-high@2.6.4
   - "@tanstack/charts@1.5.0"
 permissions:
+  esbuild@0.28.2:
+    build: true
+  workerd@1.20261101.1 || 1.20261104.1:
+    build: true
   "@tanstack/charts":
     skills: true
   "@tanstack/react-table":
