@@ -61,13 +61,21 @@ Component loaders prepare the requested page's example modules before committing
 navigation. The current document stays visible while data and examples load.
 A top progress indicator appears after 200 ms; the docs shell remains interactive.
 
+Server functions validate documentation slugs at runtime. Well-formed unknown
+slugs still use the normal not-found flow. Route errors provide a data retry and
+a full reload for failed JavaScript imports, without exposing raw errors.
+Public page routes define canonical URLs from the package homepage; component
+and guide metadata comes from their loader data.
+
 The document head preloads the Wix Madefor Text Latin variable font using Vite's
 hashed asset URL. CSS reuses that request. JetBrains Mono and other language
 subsets load on demand; all font faces retain `font-display: swap`.
 
-Routing uses Start's default hash and page-top scrolling. Automatic scroll
-restoration is disabled because it also restores nested carousel and example
-positions. Client-side back navigation therefore does not restore page scroll.
+Routing uses Start's hash and page-top scrolling. A document-only history cache
+restores the window on back/forward navigation, keeping up to 100 entries per
+mounted document. Nested examples and the sidebar keep their own scroll state.
+The cache does not persist across reloads; the browser handles document reloads.
+Router Devtools is available in development and excluded from production.
 
 Next.js is retained only for real Next Link demonstrations and consumer checks.
 A small router context adapter lets these examples navigate within the Start host.
@@ -129,3 +137,19 @@ MIZEN_DOCS_PERFORMANCE=1 MIZEN_DOCS_TEST_URL=http://127.0.0.1:4173 pnpm --filter
 These opt-in checks require the production `/assets/` bundles. They measure decoded
 JavaScript bytes, independent of transport compression, and verify that history
 navigation reuses the document fetched on hover.
+
+Verify a built preview or deployed public hostname with:
+
+```sh
+node apps/docs/scripts/verify-deployment.mjs http://127.0.0.1:4173
+node apps/docs/scripts/verify-deployment.mjs https://ui.mizen-labs.dev
+```
+
+This checks HTML revalidation, immutable hashed JavaScript, the Markdown endpoint,
+and missing-asset responses. `public/_headers` gives `/assets/*` a one-year browser
+cache; Cloudflare's default HTML revalidation stays in place. This rule does not
+cache Worker-generated server functions or docs endpoints.
+
+Before accepting a deployment, run the public check and exercise a tab opened
+before the release: navigate to an uncached page, then verify reload recovery if
+an old chunk is unavailable. A local preview cannot verify cross-release behavior.

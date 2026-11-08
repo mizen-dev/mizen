@@ -52,7 +52,9 @@ describe("chart frame browser behavior", () => {
 				errors.push(message.text());
 			}
 		});
-		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${handle.url}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		await expectLocator(page.locator("html")).toHaveAttribute(
 			"data-theme",
 			theme

@@ -28,7 +28,9 @@ describe("Tree browser behavior", { timeout: 30_000 }, () => {
 	});
 
 	it("supports nested expansion, typeahead, disabled items, and RTL arrows", async () => {
-		await page.goto(`${docsUrl}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${docsUrl}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		const tree = page
 			.getByTestId("tree-example")
 			.getByRole("tree", { name: "Workspace files" });
@@ -79,7 +81,9 @@ describe("Tree browser behavior", { timeout: 30_000 }, () => {
 	});
 
 	it("keeps single selection separate from focus and expansion", async () => {
-		await page.goto(`${docsUrl}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${docsUrl}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		const section = page.getByTestId("tree-list-example");
 		const tree = section.getByRole("tree", {
 			name: "Workspace files, controlled selection",

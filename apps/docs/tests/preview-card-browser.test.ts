@@ -20,6 +20,7 @@ let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
 const errors: string[] = [];
+const CARD_URL = /\/docs\/components\/card\/?$/u;
 
 describe("Preview Card browser states", { timeout: 20_000 }, () => {
 	beforeAll(async () => {
@@ -115,7 +116,7 @@ describe("Preview Card browser states", { timeout: 20_000 }, () => {
 			await page.keyboard.press("Escape");
 			await popup.waitFor({ state: "detached" });
 			await page.keyboard.press("Enter");
-			await page.waitForURL("**/docs/components/card");
+			await page.waitForURL(CARD_URL);
 		}
 	);
 

@@ -195,3 +195,172 @@ it("retains the current document until the next page examples are ready", async 
 		await page.close();
 	}
 });
+
+it("recovers from a failed page request without replacing the shell", async () => {
+	const page = await browser.newPage();
+	try {
+		await page.goto(`${handle.url}/docs/components/button`, {
+			waitUntil: "networkidle",
+		});
+		const shell = await page
+			.locator('[data-slot="docs-shell"]')
+			.elementHandle();
+		await page.route("**/_serverFn/**", (route) => route.abort("failed"));
+		await page
+			.locator('[data-slot="desktop-sidebar"]')
+			.getByRole("link", { exact: true, name: "Installation" })
+			.click();
+		await expectLocator(
+			page.getByRole("heading", { name: "Unable to load this page" })
+		).toBeVisible();
+		expect(
+			await shell?.evaluate(
+				(element) => element.isConnected && element.checkVisibility()
+			)
+		).toBe(true);
+		await page.unroute("**/_serverFn/**");
+		await page.getByRole("button", { exact: true, name: "Try again" }).click();
+		await expectLocator(
+			page.getByRole("heading", { exact: true, level: 1, name: "Installation" })
+		).toBeVisible();
+		await expectLocator(
+			page.locator('[data-slot="navigation-progress"]')
+		).toHaveCount(0);
+	} finally {
+		await page.close();
+	}
+});
+
+it("offers reload recovery when an example chunk fails", async () => {
+	const page = await browser.newPage();
+	try {
+		await page.goto(`${handle.url}/docs/components/button`, {
+			waitUntil: "networkidle",
+		});
+		await page.route(INPUT_SPECIMEN, (route) => route.abort("failed"));
+		await page
+			.locator('[data-slot="desktop-sidebar"]')
+			.getByRole("link", { exact: true, name: "Input" })
+			.click();
+		await expectLocator(
+			page.getByRole("heading", { name: "Unable to load this page" })
+		).toBeVisible();
+		await expectLocator(
+			page.locator('[data-slot="desktop-sidebar"]')
+		).toBeVisible();
+		await page.unroute(INPUT_SPECIMEN);
+		await page
+			.getByRole("button", { exact: true, name: "Reload page" })
+			.click();
+		await expectLocator(
+			page.getByRole("heading", { exact: true, level: 1, name: "Input" })
+		).toBeVisible();
+	} finally {
+		await page.close();
+	}
+});
+
+it("updates component metadata and replaces canonicals during navigation", async () => {
+	const page = await browser.newPage();
+	try {
+		await page.goto(`${handle.url}/docs/components/button?source=test`, {
+			waitUntil: "networkidle",
+		});
+		await expectLocator(page).toHaveTitle("Button · Mizen UI");
+		await expectLocator(page.locator('meta[name="description"]')).toHaveCount(
+			1
+		);
+		await expectLocator(page.locator('link[rel="canonical"]')).toHaveAttribute(
+			"href",
+			"https://ui.mizen-labs.dev/docs/components/button/"
+		);
+		await page
+			.locator('[data-slot="desktop-sidebar"]')
+			.getByRole("link", { exact: true, name: "Installation" })
+			.click();
+		await expectLocator(page).toHaveTitle("Installation");
+		await expectLocator(page.locator('link[rel="canonical"]')).toHaveCount(1);
+		await expectLocator(page.locator('link[rel="canonical"]')).toHaveAttribute(
+			"href",
+			"https://ui.mizen-labs.dev/docs/installation/"
+		);
+	} finally {
+		await page.close();
+	}
+});
+
+it("restores document history without restoring the persistent sidebar", async () => {
+	const page = await browser.newPage();
+	try {
+		await page.goto(`${handle.url}/docs/components/button`, {
+			waitUntil: "networkidle",
+		});
+		await page.evaluate(() => {
+			window.scrollTo({ behavior: "instant", top: 600 });
+			const sidebar = document.querySelector(
+				'[data-slot="desktop-sidebar"] [data-slot="scroll-area-viewport"]'
+			);
+			if (sidebar) {
+				sidebar.scrollTop = 100;
+			}
+		});
+		await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(600);
+		await page.evaluate(() =>
+			window.__TSR_ROUTER__?.navigate({
+				params: { slug: "input" },
+				to: "/docs/components/$slug",
+			})
+		);
+		await expectLocator(
+			page.getByRole("heading", { exact: true, level: 1, name: "Input" })
+		).toBeVisible();
+		await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+		await page.evaluate(() => {
+			window.scrollTo({ behavior: "instant", top: 350 });
+			const sidebar = document.querySelector(
+				'[data-slot="desktop-sidebar"] [data-slot="scroll-area-viewport"]'
+			);
+			if (sidebar) {
+				sidebar.scrollTop = 200;
+			}
+		});
+		await page.goBack();
+		await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(600);
+		expect(
+			await page
+				.locator(
+					'[data-slot="desktop-sidebar"] [data-slot="scroll-area-viewport"]'
+				)
+				.evaluate((element) => element.scrollTop)
+		).toBe(200);
+		await page.goForward();
+		await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(350);
+	} finally {
+		await page.close();
+	}
+});
+
+it("still scrolls new hash links to the requested section", async () => {
+	const page = await browser.newPage();
+	try {
+		await page.goto(`${handle.url}/docs/components/button`, {
+			waitUntil: "networkidle",
+		});
+		await page.evaluate(() =>
+			window.__TSR_ROUTER__?.navigate({
+				hash: "api",
+				params: { slug: "input" },
+				to: "/docs/components/$slug",
+			})
+		);
+		await expect
+			.poll(() =>
+				page
+					.locator("#api")
+					.evaluate((element) => Math.abs(element.getBoundingClientRect().top))
+			)
+			.toBeLessThan(200);
+	} finally {
+		await page.close();
+	}
+});

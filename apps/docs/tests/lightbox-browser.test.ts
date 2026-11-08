@@ -23,7 +23,9 @@ describe("Lightbox browser behavior", { timeout: 30_000 }, () => {
 	});
 
 	it("opens a named modal, fits its image, and restores focus on close", async () => {
-		await page.goto(`${docsUrl}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${docsUrl}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		const example = page.getByTestId("lightbox-example");
 		const trigger = example.getByRole("button", { name: "Open image preview" });
 		await trigger.scrollIntoViewIfNeeded();
@@ -97,7 +99,9 @@ describe("Lightbox browser behavior", { timeout: 30_000 }, () => {
 
 	it("keeps enlarged media content within a narrow viewport", async () => {
 		await page.setViewportSize({ height: 740, width: 390 });
-		await page.goto(`${docsUrl}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${docsUrl}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		await page.addStyleTag({
 			content:
 				"html {font-size:32px !important} * {line-height:1.5 !important;letter-spacing:0.12em !important;word-spacing:0.16em !important}",

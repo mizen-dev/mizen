@@ -9,6 +9,7 @@ import {
 
 const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const errors: string[] = [];
+const DOCS_URL = /\/docs\/?$/u;
 let handle: TestServerHandle;
 let browser: Browser;
 
@@ -127,7 +128,7 @@ describe("small primitive browser behavior", () => {
 				.getByRole("link", { name: "component index" });
 			await link.focus();
 			await link.press("Enter");
-			expect(new URL(page.url()).pathname).toBe("/docs");
+			await expectLocator(page).toHaveURL(DOCS_URL);
 
 			await page.goto(`${handle.url}/internal/specimens`, {
 				waitUntil: "load",

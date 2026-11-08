@@ -33,7 +33,9 @@ describe("Page outline recipe", { timeout: 30_000 }, () => {
 				errors.push(message.text());
 			}
 		});
-		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${handle.url}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 	}, 120_000);
 
 	afterAll(async () => {

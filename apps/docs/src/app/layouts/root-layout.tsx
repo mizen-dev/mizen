@@ -1,5 +1,7 @@
 import { HeadContent, Scripts } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { NextExampleRouter } from "../../shared/lib/next-example-router";
+import { useDocumentScroll } from "../lib/use-document-scroll";
 import "@mizen-labs/ui/styles.css";
 import "../styles/globals.css";
 import "@fontsource-variable/jetbrains-mono/wght.css";
@@ -24,6 +26,7 @@ const selectionCss = `::selection { background-color: ${colors.brandBackground};
 export default function RootLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
+	const documentScroll = useDocumentScroll();
 	return (
 		<html data-scroll-behavior="smooth" lang="en" suppressHydrationWarning>
 			<head>
@@ -31,7 +34,7 @@ export default function RootLayout({
 				<HeadContent />
 				<style>{selectionCss}</style>
 			</head>
-			<body {...props(docsFonts, shellStyles.canvas)}>
+			<body ref={documentScroll} {...props(docsFonts, shellStyles.canvas)}>
 				<ThemeProvider>
 					<AnchoredToastProvider>
 						<ToastProvider>
@@ -39,6 +42,9 @@ export default function RootLayout({
 						</ToastProvider>
 					</AnchoredToastProvider>
 				</ThemeProvider>
+				{import.meta.env.DEV ? (
+					<TanStackRouterDevtools initialIsOpen={false} />
+				) : null}
 				<Scripts />
 			</body>
 		</html>

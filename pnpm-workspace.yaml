@@ -4,6 +4,8 @@ packages:
 minimumReleaseAgeExclude:
   - sugar-high@2.6.4
   - "@tanstack/charts@1.5.0"
+  - "@tanstack/react-router-devtools@1.167.3"
+  - "@tanstack/router-devtools-core@1.168.3"
 permissions:
   esbuild@0.28.2:
     build: true

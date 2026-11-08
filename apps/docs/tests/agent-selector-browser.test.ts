@@ -42,7 +42,7 @@ describe("agent selector recipe", () => {
 
 		try {
 			await page.goto(`${handle.url}/internal/specimens`, {
-				waitUntil: "load",
+				waitUntil: "networkidle",
 			});
 			const section = page.getByTestId("agent-selector-example");
 			const trigger = section.getByRole("combobox", { name: "Agent" });
@@ -95,7 +95,7 @@ describe("agent selector recipe", () => {
 		page.on("pageerror", (error) => errors.push(error.message));
 		try {
 			await page.goto(`${handle.url}/internal/specimens`, {
-				waitUntil: "load",
+				waitUntil: "networkidle",
 			});
 			const section = page.getByTestId("agent-selector-example");
 			await expectLocator(
