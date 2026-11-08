@@ -1,7 +1,14 @@
 // @vitest-environment happy-dom
 import { act, createElement } from "react";
 import { createRoot } from "react-dom/client";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	vi,
+} from "vite-plus/test";
 import {
 	AnchoredToastProvider,
 	anchoredToastManager,
@@ -121,7 +128,7 @@ describe("Toast provider and manager behavior", () => {
 				type: "custom-unknown",
 			});
 		});
-		const el = document.getElementById("unknown-toast-root");
+		const el = document.querySelector("#unknown-toast-root");
 		expect(el?.querySelector('[data-slot="toast-icon"]')).toBeNull();
 		act(() => {
 			toastManager.close(unknownId);

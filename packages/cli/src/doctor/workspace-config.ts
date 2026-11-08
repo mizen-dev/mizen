@@ -174,11 +174,11 @@ async function findDeclaration(
 		: findDeclaration(parent, requested);
 }
 
-const NEGATION = /^!+/;
-const LEADING_SLASH = /^\.?\/+/;
-const DRIVE = /^[a-z]:\//i;
-const PARENT_SEGMENT = /(?:^|[/({|,])\.\.(?=\/|[)}|,]|$)/;
-const GROUPED_ABSOLUTE = /[({|,](?:\/|[a-z]:\/)/i;
+const NEGATION = /^!+/u;
+const LEADING_SLASH = /^\.?\/+/u;
+const DRIVE = /^[a-z]:\//iu;
+const PARENT_SEGMENT = /(?:^|[/({|,])\.\.(?=\/|[)}|,]|$)/u;
+const GROUPED_ABSOLUTE = /[({|,](?:\/|[a-z]:\/)/iu;
 function normalize(pattern: string, kind: Workspace["kind"]) {
 	const prefix = pattern.match(NEGATION)?.[0] ?? "";
 	let value = pattern.slice(prefix.length).replaceAll("\\", "/");

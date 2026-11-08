@@ -86,7 +86,7 @@ function Feedback({
 }
 
 function DiagramCanvas({ source }: { source: string }) {
-	const prefix = useId().replace(/[^A-Za-z0-9_-]/g, "");
+	const prefix = useId().replace(/[^A-Za-z0-9_-]/gu, "");
 	const [state, setState] = useState<{
 		error?: DiagramError;
 		status: DiagramState;

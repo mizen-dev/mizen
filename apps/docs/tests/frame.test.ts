@@ -9,7 +9,7 @@ import type {
 import { type Browser, chromium, type Page } from "playwright";
 import { type ComponentPropsWithRef, createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vite-plus/test";
 import {
 	Frame,
 	FrameDescription,
@@ -56,10 +56,10 @@ const contractChecks = [
 	true satisfies AcceptsRole<FrameFooterProps>,
 ] as const;
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const NON_TRANSPARENT_REGEX = /transparent|rgba\(0, 0, 0, 0\)/;
-const PIXEL_VALUE_REGEX = /^\d+(\.\d+)?px$/;
-const NONE_REGEX = /^none$/;
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const NON_TRANSPARENT_REGEX = /transparent|rgba\(0, 0, 0, 0\)/u;
+const PIXEL_VALUE_REGEX = /^\d+(?:\.\d+)?px$/u;
+const NONE_REGEX = /^none$/u;
 const PERSONAL_WORKSPACE_EXAMPLE =
 	'[aria-label="Frame: Personal workspace example"]';
 let handle: TestServerHandle, browser: Browser, page: Page;

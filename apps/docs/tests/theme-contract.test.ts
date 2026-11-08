@@ -1,7 +1,13 @@
 import type { ResolvedTheme, ThemePreference } from "@mizen-labs/ui/theme";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
+import {
+	initializeTheme,
+	ThemeProvider,
+	ThemeScript,
+	useTheme,
+} from "../../../packages/ui/src/theme/index";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(styles: T): T => styles,
@@ -18,13 +24,6 @@ vi.mock("@stylexjs/stylex", () => ({
 	}),
 	when: { ancestor: () => ":where(*)" },
 }));
-
-import {
-	initializeTheme,
-	ThemeProvider,
-	ThemeScript,
-	useTheme,
-} from "../../../packages/ui/src/theme/index";
 
 type Exact<Actual, Expected> = [Actual] extends [Expected]
 	? [Expected] extends [Actual]

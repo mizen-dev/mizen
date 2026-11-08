@@ -2,7 +2,7 @@
 
 import { act, createElement } from "react";
 import { createRoot } from "react-dom/client";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { DirectionProvider } from "../../../packages/ui/node_modules/@base-ui/react/direction-provider";
 import {
 	ContextMenu,

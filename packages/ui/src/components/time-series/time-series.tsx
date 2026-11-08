@@ -311,7 +311,7 @@ function TimeSeriesPlot({
 		[formatValue, numberFormatter]
 	);
 	// Gradient IDs must stay unique when several charts share a page.
-	const idPrefix = useId().replace(/[^\w-]/g, "");
+	const idPrefix = useId().replace(/[^\w-]/gu, "");
 	const definition = useMemo(() => {
 		const rows = toRows(points);
 		return defineChart(

@@ -1,4 +1,5 @@
 import sourceData from "./example-sources.json";
+import { importStatement } from "./import-statement";
 
 interface ExampleEntry {
 	exportName: string;
@@ -76,7 +77,7 @@ export function renderExampleMarkdown(slug: string) {
 }
 
 function renderCodeFence(code: string) {
-	const runs = code.match(/`+/g) ?? [];
+	const runs = code.match(/`+/gu) ?? [];
 	const fence = "`".repeat(Math.max(3, ...runs.map((run) => run.length + 1)));
 	return [`${fence}tsx`, code.trimEnd(), fence];
 }
@@ -87,15 +88,6 @@ export function getComponentUsage(slug: string): {
 	imports: readonly string[];
 } {
 	return sourceData.components[slug as keyof typeof sourceData.components];
-}
-
-// The import line, wrapped the way the formatter would past 80 columns.
-export function importStatement(names: readonly string[]) {
-	const sorted = names.toSorted();
-	const line = `import { ${sorted.join(", ")} } from "@mizen-labs/ui";`;
-	return line.length <= 80
-		? line
-		: `import {\n${sorted.map((name) => `\t${name},`).join("\n")}\n} from "@mizen-labs/ui";`;
 }
 
 // Usage and anatomy for the Markdown export, matching the page.

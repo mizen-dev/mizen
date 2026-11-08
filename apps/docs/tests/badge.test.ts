@@ -3,7 +3,7 @@ import { type Browser, chromium, type Locator, type Page } from "playwright";
 import type { ComponentPropsWithRef, RefObject } from "react";
 import { createElement, createRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vite-plus/test";
 import { Badge } from "../../../packages/ui/src/components/badge/badge";
 import {
 	setupTestServer,
@@ -45,7 +45,7 @@ const variants = [
 	"brand",
 ] as const;
 const sizes = ["default", "sm", "lg"] as const;
-const transparentColor = /transparent|rgba\(0, 0, 0, 0\)/;
+const transparentColor = /transparent|rgba\(0, 0, 0, 0\)/u;
 
 const contractChecks = [
 	true satisfies ClosedProps<BadgeProps>,
@@ -58,7 +58,7 @@ const contractChecks = [
 	true satisfies Accepts<BadgeProps, "ref">,
 ] as const;
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;

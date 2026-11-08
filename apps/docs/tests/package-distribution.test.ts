@@ -3,12 +3,12 @@ import { mkdtemp, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { promisify } from "node:util";
-import { expect, it } from "vitest";
+import { expect, it } from "vite-plus/test";
 import { cleanup } from "../../../scripts/cleanup.mjs";
 
 const uiRoot = new URL("../../../packages/ui/", import.meta.url).pathname;
 const execute = promisify(execFile);
-const CLIENT_BOUNDARY = /^"use client";/;
+const CLIENT_BOUNDARY = /^"use client";/u;
 
 interface PackageExport {
 	default: string;

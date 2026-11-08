@@ -1,7 +1,25 @@
 // @vitest-environment happy-dom
+
+import { props } from "@stylexjs/stylex";
 import { act, createElement, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	vi,
+} from "vite-plus/test";
+import { darkTheme } from "../../../packages/ui/src/styles/themes";
+import {
+	initializeTheme,
+	type ThemePreference,
+	ThemeProvider,
+	type ThemeProviderProps,
+	type ThemeStorage,
+	useTheme,
+} from "../../../packages/ui/src/theme/index";
 
 vi.mock("@stylexjs/stylex", () => ({
 	createTheme: <T extends object>(_vars: unknown, styles: T) => ({
@@ -18,20 +36,9 @@ vi.mock("@stylexjs/stylex", () => ({
 	when: { ancestor: () => ":where(*)" },
 }));
 
-import { props } from "@stylexjs/stylex";
-import { darkTheme } from "../../../packages/ui/src/styles/themes";
-import {
-	initializeTheme,
-	type ThemePreference,
-	ThemeProvider,
-	type ThemeProviderProps,
-	type ThemeStorage,
-	useTheme,
-} from "../../../packages/ui/src/theme/index";
-
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
 
-const WHITESPACE_REGEX = /\s+/;
+const WHITESPACE_REGEX = /\s+/u;
 
 function getDarkTokens(): readonly string[] {
 	return (props(darkTheme).className ?? "")

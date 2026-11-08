@@ -3,7 +3,7 @@ import { type Browser, chromium, type Page } from "playwright";
 import type { ComponentPropsWithRef, RefObject } from "react";
 import { createElement, createRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vite-plus/test";
 import { Spinner } from "../../../packages/ui/src/components/spinner/spinner";
 import {
 	setupTestServer,
@@ -62,9 +62,9 @@ const contractChecks = [
 	false satisfies Accepts<SpinnerProps, "width">,
 	true satisfies Accepts<SpinnerProps, "ref">,
 ] as const;
-const transparentColor = /transparent|rgba\(0, 0, 0, 0\)/;
+const transparentColor = /transparent|rgba\(0, 0, 0, 0\)/u;
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;

@@ -1,13 +1,13 @@
 // biome-ignore-all lint/performance/noAwaitInLoops: These browser gestures and navigations must share one page sequentially.
 import { type Browser, chromium, type Locator, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const previewName = /preview$/i;
+const previewName = /preview$/iu;
 let browser: Browser;
 let page: Page;
 let handle: TestServerHandle;

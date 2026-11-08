@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import { act, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	NumberField,
 	NumberFieldDecrement,
@@ -23,11 +23,19 @@ vi.mock("@stylexjs/stylex", () => ({
 	props: (...args: unknown[]) => ({
 		className: JSON.stringify(args),
 	}),
-	when: { ancestor: () => ":where(*)" },
+	when: {
+		ancestor: () => ":where(*)",
+	},
 }));
-
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
-
+function BadScrubDirect({ bad }: { bad: Record<string, unknown> }) {
+	return Reflect.apply(NumberFieldScrubArea, undefined, [
+		{
+			...bad,
+			children: "Width",
+		},
+	]);
+}
 function mount(
 	element: Parameters<ReturnType<typeof createRoot>["render"]>[0]
 ) {
@@ -46,14 +54,16 @@ function mount(
 		},
 	};
 }
-
 describe("NumberField affordances, directions, and typography", () => {
 	it("renders direction-aware visible scrub state and area cursor treatment", () => {
 		const { container: hContainer, unmount: hUnmount } = mount(
 			h(
 				NumberField,
 				null,
-				h(NumberFieldScrubArea, { direction: "horizontal", label: "Width" })
+				h(NumberFieldScrubArea, {
+					direction: "horizontal",
+					label: "Width",
+				})
 			)
 		);
 		const hScrub = hContainer.querySelector(
@@ -65,12 +75,17 @@ describe("NumberField affordances, directions, and typography", () => {
 			JSON.stringify(numberFieldStyles.scrubArea)
 		);
 		hUnmount();
-
 		const { container: vContainer, unmount: vUnmount } = mount(
 			h(
 				NumberField,
 				null,
-				h(NumberFieldScrubArea, { direction: "vertical" }, "Height")
+				h(
+					NumberFieldScrubArea,
+					{
+						direction: "vertical",
+					},
+					"Height"
+				)
 			)
 		);
 		const vScrub = vContainer.querySelector(
@@ -82,28 +97,37 @@ describe("NumberField affordances, directions, and typography", () => {
 		);
 		vUnmount();
 	});
-
 	it("protects data-direction against direct and polymorphic render overrides", () => {
-		const bad = { "data-direction": "evil" };
-		function BadScrubDirect() {
-			return Reflect.apply(NumberFieldScrubArea, undefined, [
-				{ ...bad, children: "Width" },
-			]);
-		}
-
+		const bad = {
+			"data-direction": "evil",
+		};
 		const { container: directContainer, unmount: directUnmount } = mount(
-			h(NumberField, null, h(BadScrubDirect))
+			h(
+				NumberField,
+				null,
+				h(BadScrubDirect, {
+					bad,
+				})
+			)
 		);
 		const directScrub = directContainer.querySelector(
 			'[data-slot="number-field-scrub-area"]'
 		);
 		expect(directScrub?.getAttribute("data-direction")).toBe("horizontal");
 		directUnmount();
-
 		const renderBad = (p: object) =>
-			h("span", { ...p, "data-direction": "evil-render" });
+			h("span", {
+				...p,
+				"data-direction": "evil-render",
+			});
 		const { container: renderContainer, unmount: renderUnmount } = mount(
-			h(NumberField, null, h(NumberFieldScrubArea, { render: renderBad }))
+			h(
+				NumberField,
+				null,
+				h(NumberFieldScrubArea, {
+					render: renderBad,
+				})
+			)
 		);
 		const renderScrub = renderContainer.querySelector(
 			'[data-slot="number-field-scrub-area"]'
@@ -111,7 +135,6 @@ describe("NumberField affordances, directions, and typography", () => {
 		expect(renderScrub?.getAttribute("data-direction")).toBe("horizontal");
 		renderUnmount();
 	});
-
 	it("applies size typography contract to input preserving mobile 16px floor", () => {
 		expect(numberFieldStyles.inputSm).toMatchObject({
 			fontSize: {
@@ -119,11 +142,12 @@ describe("NumberField affordances, directions, and typography", () => {
 				default: fontSize["16"],
 			},
 		});
-
 		const { container, unmount } = mount(
 			h(
 				NumberField,
-				{ size: "sm" },
+				{
+					size: "sm",
+				},
 				h(NumberFieldGroup, null, h(NumberFieldInput, null))
 			)
 		);
@@ -135,7 +159,6 @@ describe("NumberField affordances, directions, and typography", () => {
 		);
 		unmount();
 	});
-
 	it("configures non-interactive cursor affordances on read-only and disabled states", () => {
 		expect(numberFieldStyles.scrubArea).toMatchObject({
 			cursor: {
@@ -143,25 +166,24 @@ describe("NumberField affordances, directions, and typography", () => {
 				default: "ew-resize",
 			},
 		});
-
 		expect(numberFieldStyles.scrubAreaVertical).toMatchObject({
 			cursor: {
 				":is([data-disabled], [data-readonly])": "not-allowed",
 				default: "ns-resize",
 			},
 		});
-
 		expect(numberFieldStyles.stepper).toMatchObject({
 			cursor: {
 				":is([data-disabled], [data-readonly])": "not-allowed",
 				default: "pointer",
 			},
 		});
-
 		const { container: roContainer, unmount: roUnmount } = mount(
 			h(
 				NumberField,
-				{ readOnly: true },
+				{
+					readOnly: true,
+				},
 				h(NumberFieldScrubArea, null, "Fixed"),
 				h(
 					NumberFieldGroup,
@@ -181,11 +203,12 @@ describe("NumberField affordances, directions, and typography", () => {
 		expect(roDec?.getAttribute("aria-disabled")).toBe("true");
 		expect(roInc?.getAttribute("aria-disabled")).toBe("true");
 		roUnmount();
-
 		const { container: disContainer, unmount: disUnmount } = mount(
 			h(
 				NumberField,
-				{ disabled: true },
+				{
+					disabled: true,
+				},
 				h(NumberFieldScrubArea, null, "Fixed"),
 				h(
 					NumberFieldGroup,

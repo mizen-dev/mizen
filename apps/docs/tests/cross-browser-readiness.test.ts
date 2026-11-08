@@ -11,7 +11,7 @@ import {
 	type Page,
 	webkit,
 } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setDocsTheme,
 	setupTestServer,
@@ -20,7 +20,7 @@ import {
 } from "./test-helper";
 
 const execute = promisify(execFile);
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const browserTypes: readonly [string, BrowserType][] = [
 	["Chromium", chromium],
 	["Firefox", firefox],

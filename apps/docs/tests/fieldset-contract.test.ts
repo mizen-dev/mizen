@@ -5,7 +5,7 @@ import type {
 	FieldsetLegendProps,
 	FieldsetProps,
 } from "@mizen-labs/ui/fieldset";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { FieldsetPrimitive } from "../../../packages/ui/src/components/fieldset/fieldset";
 
 vi.mock("@stylexjs/stylex", () => ({

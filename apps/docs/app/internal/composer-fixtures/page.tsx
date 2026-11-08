@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import {
 	ComposerNestedFormFixture,
 	ComposerStatesFixture,
@@ -7,7 +6,7 @@ import {
 import { ComposerPresentationFixture } from "./presentation-fixture";
 import { ComposerRegressionFixture } from "./regression-fixture";
 
-export const metadata: Metadata = {
+export const metadata = {
 	robots: { index: false },
 	title: "Composer fixtures · Mizen UI",
 };

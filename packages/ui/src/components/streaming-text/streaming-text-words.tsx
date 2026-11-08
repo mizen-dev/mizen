@@ -22,10 +22,10 @@ type Token =
 const BURST_MS = 400;
 const WORD_STAGGER_MS = 30;
 // A word with the space after it, or a run of leading space.
-const WORD_PATTERN = /\S+\s*|\s+/g;
-const TRAILING_SPACE = /\s$/;
+const WORD_PATTERN = /\S+\s*|\s+/gu;
+const TRAILING_SPACE = /\s$/u;
 // A numbered citation marker such as [1], as some providers write them.
-const CITATION_MARKER = /\[(\d{1,3})\]/g;
+const CITATION_MARKER = /\[(?<citation>\d{1,3})\]/gu;
 
 // Turns [n] markers into citations of sources[n - 1]. A marker with no
 // matching source stays text, so stray brackets in prose survive.
@@ -54,7 +54,7 @@ function toParts(
 	);
 }
 
-const BLANK = /^\s*$/;
+const BLANK = /^\s*$/u;
 
 // Citations at one point, such as [1][2] or [1] [2], become one group, so
 // they show as one chip.

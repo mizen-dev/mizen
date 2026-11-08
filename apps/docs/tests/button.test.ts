@@ -1,14 +1,14 @@
 import { type Browser, chromium, type Locator, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const noAnimation = /^none$/;
-const translucentRing = /lab\(.* \/ 0\.6\)$/;
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const noAnimation = /^none$/u;
+const translucentRing = /(?:oklch|oklab|lab)\(.* \/ 0\.6\)$/u;
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;

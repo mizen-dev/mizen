@@ -89,11 +89,11 @@ export function getComponentDoc(slug: string) {
 
 function markdownCell(value: string) {
 	return value
-		.replace(/&/g, "&amp;")
-		.replace(/</g, "&lt;")
-		.replace(/>/g, "&gt;")
-		.replace(/\|/g, "\\|")
-		.replace(/\r?\n/g, " ");
+		.replace(/&/gu, "&amp;")
+		.replace(/</gu, "&lt;")
+		.replace(/>/gu, "&gt;")
+		.replace(/\|/gu, "\\|")
+		.replace(/\r?\n/gu, " ");
 }
 
 function renderApiTable(properties: readonly ApiProperty[]) {

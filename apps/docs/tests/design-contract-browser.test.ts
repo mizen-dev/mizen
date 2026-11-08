@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import registry from "../app/docs-registry-data.json" with { type: "json" };
 import {
 	setupTestServer,
@@ -12,7 +12,7 @@ import {
 // in a baseline that only shrinks: a new violation fails, and a fixed one must
 // be removed by rerunning with UPDATE_DESIGN_BASELINE=1.
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const baselinePath = new URL("./design-contract-baseline.json", import.meta.url)
 	.pathname;
 const PREVIEWS = '[data-slot="component-preview"], [data-slot="usage-preview"]';

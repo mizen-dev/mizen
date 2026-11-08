@@ -6,7 +6,7 @@ import type {
 } from "react";
 import { createRef, createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	Card,
 	CardAction,
@@ -37,8 +37,8 @@ vi.mock("@stylexjs/stylex", () => ({
 	when: { ancestor: () => ":where(*)" },
 }));
 
-const CARD_SLOT_REGEX = /^<div[^>]*data-slot="card"/;
-const ANCHOR_HREF_REGEX = /^<a[^>]*href="\/dest"/;
+const CARD_SLOT_REGEX = /^<div[^>]*data-slot="card"/u;
+const ANCHOR_HREF_REGEX = /^<a[^>]*href="\/dest"/u;
 
 type Exact<Actual, Expected> = [Actual] extends [Expected]
 	? [Expected] extends [Actual]

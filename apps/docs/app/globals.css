@@ -7,7 +7,6 @@
 
 html {
 	scroll-behavior: smooth;
-	scrollbar-gutter: stable;
 	color-scheme: light dark;
 }
 
@@ -21,8 +20,7 @@ html[data-theme="dark"] {
 
 body {
 	margin: 0;
-	font-family:
-		"Wix Madefor Text Variable", ui-sans-serif, system-ui, sans-serif;
+	font-family: "Wix Madefor Text Variable", system-ui, sans-serif;
 }
 
 button,
@@ -52,11 +50,17 @@ a {
 	overflow: hidden;
 	white-space: nowrap;
 	border: 0;
-	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
 }
 
 @media (prefers-reduced-motion: reduce) {
 	html {
 		scroll-behavior: auto;
+	}
+}
+
+@supports (scrollbar-gutter: stable) {
+	html {
+		scrollbar-gutter: stable;
 	}
 }

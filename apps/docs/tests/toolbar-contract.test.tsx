@@ -2,7 +2,7 @@
 
 import { createRef, createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { buttonStyles } from "../../../packages/ui/src/components/button/button.styles";
 import {
 	Toolbar,

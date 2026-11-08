@@ -1,37 +1,17 @@
 import { props } from "@stylexjs/stylex";
-import type { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import { Link } from "@tanstack/react-router";
 import { docsStyles } from "../../components/docs.styles";
 import { DocumentOutline } from "../../components/document-outline";
 import { PageActions } from "../../components/page-actions";
 import { SourceCode } from "../../components/source-code";
-import { getGuide, guides } from "../../guides";
+import type { getGuide } from "../../guides";
 
-export function generateStaticParams() {
-	return guides.map(({ slug }) => ({ guide: slug }));
-}
-
-export async function generateMetadata({
-	params,
+export default function GuidePage({
+	guide,
 }: {
-	params: Promise<{ guide: string }>;
-}): Promise<Metadata> {
-	const { guide: slug } = await params;
-	const guide = getGuide(slug);
-	return { description: guide?.description, title: guide?.title };
-}
-
-export default async function GuidePage({
-	params,
-}: {
-	params: Promise<{ guide: string }>;
+	guide: NonNullable<ReturnType<typeof getGuide>>;
 }) {
-	const { guide: slug } = await params;
-	const guide = getGuide(slug);
-	if (!guide) {
-		notFound();
-	}
+	const { slug } = guide;
 	const sections = guide.sections.map(({ id, title }) => ({
 		id,
 		label: title,
@@ -78,7 +58,7 @@ export default async function GuidePage({
 								<ul {...props(docsStyles.guideLinks)}>
 									{links.map(({ href, label }) => (
 										<li key={href}>
-											<Link href={href}>{label}</Link>
+											<Link to={href}>{label}</Link>
 										</li>
 									))}
 								</ul>

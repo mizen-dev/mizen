@@ -3,7 +3,7 @@ import { type Browser, chromium, type Page } from "playwright";
 import type { ComponentPropsWithRef, RefObject } from "react";
 import { createElement, createRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vite-plus/test";
 import { StatusDot } from "../../../packages/ui/src/components/status-dot/status-dot";
 import {
 	setupTestServer,
@@ -42,7 +42,7 @@ type Requires<Props, Key extends keyof Props> =
 	object extends Pick<Props, Key> ? false : true;
 
 const variants = ["success", "warning", "error", "accent", "neutral"] as const;
-const transparentColor = /transparent|rgba\(0, 0, 0, 0\)/;
+const transparentColor = /transparent|rgba\(0, 0, 0, 0\)/u;
 const contractChecks = [
 	true satisfies FixedProps<StatusDotProps>,
 	false satisfies Accepts<StatusDotProps, "children">,
@@ -59,7 +59,7 @@ const contractChecks = [
 	true satisfies Requires<StatusDotProps, "label">,
 ] as const;
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const SERVICE_STATES_EXAMPLE =
 	'[aria-label="Status dot: Service states example"]';
 let handle: TestServerHandle;

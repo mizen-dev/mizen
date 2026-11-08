@@ -1,6 +1,9 @@
 // @vitest-environment happy-dom
 import { act, createElement as h } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
+import { DateRangePicker } from "../../../packages/ui/src/components/date-range-picker/date-range-picker";
+import type { DateRangePreset } from "../../../packages/ui/src/components/date-range-picker/date-range-picker.types";
+import { mount } from "./calendar-test-helpers";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(s: T): T => s,
@@ -15,10 +18,6 @@ vi.mock("@stylexjs/stylex", () => ({
 }));
 
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
-
-import { DateRangePicker } from "../../../packages/ui/src/components/date-range-picker/date-range-picker";
-import type { DateRangePreset } from "../../../packages/ui/src/components/date-range-picker/date-range-picker.types";
-import { mount } from "./calendar-test-helpers";
 
 describe("DateRangePicker presets behavior", () => {
 	const samplePresets: readonly DateRangePreset[] = [

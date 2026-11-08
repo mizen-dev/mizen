@@ -1,13 +1,13 @@
 import { type Browser, chromium } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const errors: string[] = [];
 let browser: Browser;
 let handle: TestServerHandle;
@@ -67,8 +67,12 @@ describe("agent selector recipe", () => {
 			});
 			await expectLocator(planning).toBeVisible();
 			await expectLocator(writing).toHaveAttribute("aria-disabled", "true");
+			await expectLocator(
+				page.getByRole("option", { exact: true, name: "Research" })
+			).toBeFocused();
 
 			await page.keyboard.press("ArrowDown");
+			await expectLocator(planning).toBeFocused();
 			await page.keyboard.press("Enter");
 			await expectLocator(trigger).toContainText("Planning");
 			await expectLocator(details).toHaveText(

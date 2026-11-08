@@ -1,8 +1,8 @@
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { FileTypeIcon, getFileKind } from "../app/compositions/file-type-icon";
 
-const ICON_CLASS = /class="([^"]+)"/;
+const ICON_CLASS = /class="(?<className>[^"]+)"/u;
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(styles: T): T => styles,

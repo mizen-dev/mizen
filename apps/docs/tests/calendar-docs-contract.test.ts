@@ -1,7 +1,8 @@
 // @vitest-environment happy-dom
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
+import { getComponentDoc } from "../app/docs-registry";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(styles: T): T => styles,
@@ -16,11 +17,9 @@ vi.mock("@stylexjs/stylex", () => ({
 	when: { ancestor: (selector: string) => selector },
 }));
 
-import { getComponentDoc } from "../app/docs-registry";
-
 const CALENDAR_SPECIMEN_IMPORT_REGEX =
-	/import\s*\{\s*CalendarSpecimen\s*}\s*from\s*["']\.\/calendar-specimen["'];?/;
-const CALENDAR_SPECIMEN_ENTRY_REGEX = /calendar:\s*CalendarSpecimen/;
+	/import\s*\{\s*CalendarSpecimen\s*\}\s*from\s*["']\.\/calendar-specimen["'];?/u;
+const CALENDAR_SPECIMEN_ENTRY_REGEX = /calendar:\s*CalendarSpecimen/u;
 
 describe("Calendar publishing, docs registry, specimen, and roadmap contract", () => {
 	it("declares typed subpath in packages/ui/package.json", () => {

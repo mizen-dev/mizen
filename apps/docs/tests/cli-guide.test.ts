@@ -1,6 +1,6 @@
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { cliGuide } from "../app/cli-guide";
 import { guides, renderGuideMarkdown } from "../app/guides";
 

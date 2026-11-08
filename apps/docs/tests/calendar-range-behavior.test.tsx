@@ -1,6 +1,17 @@
 // @vitest-environment happy-dom
 import { act, createElement as h } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
+import {
+	Calendar,
+	type CalendarRangeValue,
+} from "../../../packages/ui/src/components/calendar/calendar";
+import {
+	findDayButton,
+	isDate,
+	isDaySelected,
+	isRangeValue,
+	mount,
+} from "./calendar-test-helpers";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(s: T): T => s,
@@ -15,18 +26,6 @@ vi.mock("@stylexjs/stylex", () => ({
 }));
 
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
-
-import {
-	Calendar,
-	type CalendarRangeValue,
-} from "../../../packages/ui/src/components/calendar/calendar";
-import {
-	findDayButton,
-	isDate,
-	isDaySelected,
-	isRangeValue,
-	mount,
-} from "./calendar-test-helpers";
 
 describe("Calendar range-mode uncontrolled selection behavior and constraints", () => {
 	it("starts and completes an uncontrolled range selection with native Date values", () => {

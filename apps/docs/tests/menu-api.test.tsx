@@ -2,7 +2,7 @@
 
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { Menu as BaseMenu } from "../../../packages/ui/node_modules/@base-ui/react/menu/index.mjs";
 import type {
 	MenuItemProps,

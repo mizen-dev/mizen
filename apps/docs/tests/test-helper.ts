@@ -7,7 +7,7 @@ const RETRY_DELAY_MS = 250;
 const SERVER_START_TIMEOUT_MS = 30_000;
 const STDERR_LINE_CHAR_LIMIT = 2000;
 const STDERR_TAIL_LINES = 20;
-const CARRIAGE_RETURN_REGEX = /\r$/;
+const CARRIAGE_RETURN_REGEX = /\r$/u;
 
 export interface TestServerHandle {
 	readonly server?: ChildProcess;
@@ -227,16 +227,7 @@ export async function setupTestServer(
 	const port = await getAvailablePort();
 	const server = spawn(
 		"pnpm",
-		[
-			"exec",
-			"next",
-			"dev",
-			"--turbopack",
-			"--hostname",
-			"127.0.0.1",
-			"--port",
-			String(port),
-		],
+		["exec", "vp", "dev", "--host", "127.0.0.1", "--port", String(port)],
 		{
 			cwd: docsRoot,
 			detached: true,
@@ -272,7 +263,7 @@ export async function teardownTestServer(
 	await stopProcess(handle?.server);
 }
 
-const THEME_TOGGLE_NAME = /^Theme: /;
+const THEME_TOGGLE_NAME = /^Theme: /u;
 const THEME_LABELS = {
 	dark: "Theme: Dark",
 	light: "Theme: Light",

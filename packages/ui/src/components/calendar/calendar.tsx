@@ -6,16 +6,6 @@ import { props } from "@stylexjs/stylex";
 import type { ReactElement } from "react";
 import { useCallback, useMemo, useState } from "react";
 import { calendarStyles } from "./calendar.styles";
-
-export type {
-	CalendarLocale,
-	CalendarProps,
-	CalendarRangeProps,
-	CalendarRangeValue,
-	CalendarSingleProps,
-	CalendarVariant,
-} from "./calendar.types";
-
 import type {
 	CalendarProps,
 	CalendarRangeProps,
@@ -30,6 +20,15 @@ import {
 	getCalendarClassNames,
 	normalizeCalendarRange,
 } from "./calendar-utils";
+
+export type {
+	CalendarLocale,
+	CalendarProps,
+	CalendarRangeProps,
+	CalendarRangeValue,
+	CalendarSingleProps,
+	CalendarVariant,
+} from "./calendar.types";
 
 function SingleCalendarView(singleProps: CalendarSingleProps): ReactElement {
 	const [isControlled] = useState(() => Object.hasOwn(singleProps, "value"));

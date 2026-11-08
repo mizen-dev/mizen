@@ -7,7 +7,7 @@ import {
 	describe,
 	expect,
 	it,
-} from "vitest";
+} from "vite-plus/test";
 import {
 	setDocsTheme,
 	setupTestServer,
@@ -15,7 +15,7 @@ import {
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;

@@ -5,9 +5,9 @@ import semver from "semver";
 import { list } from "tar";
 
 const ALLOWED_PATH =
-	/^(?:dist\/|src\/|schema\/|package\.json$|LICENSE$|README\.md$|CHANGELOG\.md$)/;
-const RELATIVE_PREFIX = /^\.\//;
-const PACKAGE_PREFIX = /^package\//;
+	/^(?:dist\/|src\/|schema\/|package\.json$|LICENSE$|README\.md$|CHANGELOG\.md$)/u;
+const RELATIVE_PREFIX = /^\.\//u;
+const PACKAGE_PREFIX = /^package\//u;
 
 export function validateVersions(ui, cli, root) {
 	assert.ok(semver.valid(ui.version), "UI version must be valid semver.");

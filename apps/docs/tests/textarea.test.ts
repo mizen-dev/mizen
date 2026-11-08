@@ -1,13 +1,15 @@
 import { type Browser, chromium, type Locator, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const transparentColor = /rgba\(0, 0, 0, 0\)|transparent/;
+const PERCEPTUAL_COLOR = /^(?:oklch|oklab|lab)\(/u;
+
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const transparentColor = /rgba\(0, 0, 0, 0\)|transparent/u;
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -124,7 +126,7 @@ describe("Textarea component route", () => {
 				const style = getComputedStyle(element);
 				return [style.outlineColor, style.outlineWidth, style.outlineOffset];
 			})
-		).toEqual([expect.stringContaining("lab("), "3px", "0px"]);
+		).toEqual([expect.stringMatching(PERCEPTUAL_COLOR), "3px", "0px"]);
 
 		const readOnly = textareaExample("Read-only note").getByRole("textbox");
 		expect(await readOnly.isEditable()).toBe(false);

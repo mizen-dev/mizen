@@ -1,5 +1,11 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, afterEach, beforeAll, beforeEach, expect } from "vitest";
+import {
+	afterAll,
+	afterEach,
+	beforeAll,
+	beforeEach,
+	expect,
+} from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
@@ -16,7 +22,7 @@ export const SLOT_TRIGGER = '[data-slot="file-upload-trigger"]';
 export const SLOT_ITEM = '[data-slot="file-upload-item"]';
 export const SLOT_ITEM_NAME = '[data-slot="file-upload-item-name"]';
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 
 function throwTeardownFailures(
 	results: readonly PromiseSettledResult<unknown>[]

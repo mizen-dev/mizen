@@ -1,13 +1,19 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, afterEach, beforeAll, beforeEach, expect } from "vitest";
+import {
+	afterAll,
+	afterEach,
+	beforeAll,
+	beforeEach,
+	expect,
+} from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-export const TRANSPARENT_COLOR_REGEX = /rgba\(0,\s*0,\s*0,\s*0\)|transparent/;
-export const WHITESPACE_REGEX = /\s+/;
+export const TRANSPARENT_COLOR_REGEX = /rgba\(0,\s*0,\s*0,\s*0\)|transparent/u;
+export const WHITESPACE_REGEX = /\s+/u;
 
 export const SLOT_INPUT_SELECTOR = '[data-slot="otp-field-input"]';
 export const TESTID_DEFAULT = '[data-testid="otp-field-default"]';
@@ -32,7 +38,7 @@ export const MOBILE_VIEWPORT = { height: 800, width: 375 };
 export const MIN_FOCUS_OUTLINE_WIDTH_PX = 2;
 export const ELEMENT_TIMEOUT_MS = 3000;
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 
 function throwTeardownFailures(
 	results: readonly PromiseSettledResult<unknown>[]

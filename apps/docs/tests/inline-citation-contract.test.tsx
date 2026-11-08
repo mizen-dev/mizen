@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { InlineCitation } from "../../../packages/ui/src/components/inline-citation/inline-citation";
 import { toTokens } from "../../../packages/ui/src/components/streaming-text/streaming-text-words";
 

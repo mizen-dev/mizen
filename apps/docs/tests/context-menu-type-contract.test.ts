@@ -1,19 +1,7 @@
 // @vitest-environment happy-dom
 import { type HTMLAttributes, createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
-
-Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
-vi.mock("@stylexjs/stylex", () => ({
-	create: <T extends object>(styles: T): T => styles,
-	defineConsts: <T extends object>(c: T): T => c,
-	defineMarker: () => ({}),
-	defineVars: <T extends object>(v: T): T => v,
-	keyframes: <T extends object>(k: T): T => k,
-	props: () => ({}),
-	when: { ancestor: () => ":where(*)" },
-}));
-
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	ContextMenu,
 	type ContextMenuCheckboxItemProps,
@@ -37,6 +25,17 @@ import {
 	ContextMenuTrigger,
 	type ContextMenuTriggerProps,
 } from "../../../packages/ui/src/components/context-menu/context-menu";
+
+Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
+vi.mock("@stylexjs/stylex", () => ({
+	create: <T extends object>(styles: T): T => styles,
+	defineConsts: <T extends object>(c: T): T => c,
+	defineMarker: () => ({}),
+	defineVars: <T extends object>(v: T): T => v,
+	keyframes: <T extends object>(k: T): T => k,
+	props: () => ({}),
+	when: { ancestor: () => ":where(*)" },
+}));
 
 type Accepts<T, K extends PropertyKey> = K extends keyof T ? true : false;
 type RejectsAll<T, K extends PropertyKey> = [Extract<keyof T, K>] extends [

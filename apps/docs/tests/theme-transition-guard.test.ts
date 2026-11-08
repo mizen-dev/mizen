@@ -1,7 +1,27 @@
 // @vitest-environment happy-dom
 import { act, createElement, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	vi,
+} from "vite-plus/test";
+import {
+	ThemeProvider,
+	type ThemeProviderProps,
+	type ThemeStorage,
+	useTheme,
+} from "../../../packages/ui/src/theme/index";
+import {
+	applyThemeTransitionGuard,
+	cleanThemeTransitionGuard,
+	finishThemeTransitionGuard,
+	THEME_GUARD_CSS,
+	THEME_GUARD_STYLE_ID,
+} from "../../../packages/ui/src/theme/theme-transition-guard";
 
 vi.mock("@stylexjs/stylex", () => ({
 	createTheme: <T extends object>(_vars: unknown, styles: T) => ({
@@ -17,20 +37,6 @@ vi.mock("@stylexjs/stylex", () => ({
 	}),
 	when: { ancestor: () => ":where(*)" },
 }));
-
-import {
-	ThemeProvider,
-	type ThemeProviderProps,
-	type ThemeStorage,
-	useTheme,
-} from "../../../packages/ui/src/theme/index";
-import {
-	applyThemeTransitionGuard,
-	cleanThemeTransitionGuard,
-	finishThemeTransitionGuard,
-	THEME_GUARD_CSS,
-	THEME_GUARD_STYLE_ID,
-} from "../../../packages/ui/src/theme/theme-transition-guard";
 
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
 
@@ -105,13 +111,13 @@ describe("Theme transition style guard lifecycle", () => {
 		});
 
 		// Initial load should not have an active transition guard
-		expect(document.getElementById(THEME_GUARD_STYLE_ID)).toBeNull();
+		expect(document.querySelector(`#${THEME_GUARD_STYLE_ID}`)).toBeNull();
 
 		act(() => {
 			captured?.setTheme("dark");
 		});
 
-		const guard = document.getElementById(THEME_GUARD_STYLE_ID);
+		const guard = document.querySelector(`#${THEME_GUARD_STYLE_ID}`);
 		expect(guard).not.toBeNull();
 		expect(guard?.tagName).toBe("STYLE");
 		expect(guard?.textContent).toBe(THEME_GUARD_CSS);
@@ -128,7 +134,7 @@ describe("Theme transition style guard lifecycle", () => {
 
 		applyThemeTransitionGuard();
 
-		const guard = document.getElementById(THEME_GUARD_STYLE_ID);
+		const guard = document.querySelector(`#${THEME_GUARD_STYLE_ID}`);
 		expect(guard).not.toBeNull();
 		expect(guard?.getAttribute("nonce")).toBe("csp-test-nonce-1234");
 	});
@@ -167,10 +173,10 @@ describe("Theme transition style guard lifecycle", () => {
 
 		try {
 			applyThemeTransitionGuard();
-			expect(document.getElementById(THEME_GUARD_STYLE_ID)).not.toBeNull();
+			expect(document.querySelector(`#${THEME_GUARD_STYLE_ID}`)).not.toBeNull();
 
 			finishThemeTransitionGuard();
-			expect(document.getElementById(THEME_GUARD_STYLE_ID)).not.toBeNull();
+			expect(document.querySelector(`#${THEME_GUARD_STYLE_ID}`)).not.toBeNull();
 
 			// First rAF
 			const firstCallbacks = [...frameCallbacks];
@@ -178,7 +184,7 @@ describe("Theme transition style guard lifecycle", () => {
 			for (const cb of firstCallbacks) {
 				cb(performance.now());
 			}
-			expect(document.getElementById(THEME_GUARD_STYLE_ID)).not.toBeNull();
+			expect(document.querySelector(`#${THEME_GUARD_STYLE_ID}`)).not.toBeNull();
 
 			// Second rAF
 			const secondCallbacks = [...frameCallbacks];
@@ -186,7 +192,7 @@ describe("Theme transition style guard lifecycle", () => {
 			for (const cb of secondCallbacks) {
 				cb(performance.now());
 			}
-			expect(document.getElementById(THEME_GUARD_STYLE_ID)).toBeNull();
+			expect(document.querySelector(`#${THEME_GUARD_STYLE_ID}`)).toBeNull();
 		} finally {
 			window.requestAnimationFrame = originalRaf;
 			window.cancelAnimationFrame = originalCaf;
@@ -221,6 +227,6 @@ describe("Theme transition style guard lifecycle", () => {
 		});
 		roots.delete(root);
 
-		expect(document.getElementById(THEME_GUARD_STYLE_ID)).toBeNull();
+		expect(document.querySelector(`#${THEME_GUARD_STYLE_ID}`)).toBeNull();
 	});
 });

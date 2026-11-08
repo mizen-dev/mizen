@@ -6,7 +6,7 @@ export interface Recovery {
 	benefit: string;
 }
 
-const SAFE = /^[\w./:=@<>-]+$/;
+const SAFE = /^[\w./:=@<>-]+$/u;
 
 /** argv as one command line, quoting what the shell would split. */
 export function commandLine(argv: readonly string[]): string {
@@ -60,7 +60,7 @@ export function invalidUsage(
 	throw new CliError(reason, message, 2, { next: seeHelp(command) });
 }
 
-const UNKNOWN_OPTION = /Unknown option '([^']+)'/;
+const UNKNOWN_OPTION = /Unknown option '(?<option>[^']+)'/u;
 
 export function normalizeError(error: unknown, command?: string): CliError {
 	if (error instanceof CliError) {

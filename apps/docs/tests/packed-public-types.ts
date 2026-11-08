@@ -2,7 +2,7 @@ import { execFile } from "node:child_process";
 import { mkdir, readFile, realpath, rename, writeFile } from "node:fs/promises";
 import { join, sep } from "node:path";
 import { promisify } from "node:util";
-import { expect } from "vitest";
+import { expect } from "vite-plus/test";
 import { INSTALL_TIMEOUT_MS } from "../../../packages/cli/scripts/process.js";
 
 const MISSING_TRANSITIVE = /(?:TS7016|TS2307).*closed/u;

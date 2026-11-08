@@ -1,13 +1,13 @@
 import { type Browser, chromium } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 describe("Diagrams", () => {
@@ -22,8 +22,8 @@ describe("Diagrams", () => {
 		await browser?.close();
 		await teardownTestServer(handle);
 	});
-	for (const theme of ["light", "dark"]) {
-		for (const width of [1280, 375]) {
+	describe.each(["light", "dark"])("%s theme", (theme) => {
+		describe.each([1280, 375])("%s width", (width) => {
 			it(`renders every example diagram in ${theme} at ${width}px`, async () => {
 				const context = await browser.newContext({
 					reducedMotion: "reduce",
@@ -113,14 +113,18 @@ describe("Diagrams", () => {
 						.getByRole("button", { name: "Add publication step" })
 						.click();
 					await expectLocator(
-						page.locator("#DiagramUpdatingExample svg")
+						page.locator(
+							'#DiagramUpdatingExample [data-slot="diagram-canvas"] svg'
+						)
 					).toContainText("Published");
 					await page
 						.locator("#DiagramUpdatingExample")
 						.getByRole("button", { name: "Show draft flow" })
 						.click();
 					await expectLocator(
-						page.locator("#DiagramUpdatingExample svg")
+						page.locator(
+							'#DiagramUpdatingExample [data-slot="diagram-canvas"] svg'
+						)
 					).not.toContainText("Published");
 					const invalid = page.locator(
 						'[data-slot="diagram"][aria-label="Invalid workflow"]'
@@ -143,6 +147,6 @@ describe("Diagrams", () => {
 					await context.close();
 				}
 			}, 30_000);
-		}
-	}
+		});
+	});
 });

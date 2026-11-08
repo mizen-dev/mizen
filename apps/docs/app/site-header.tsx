@@ -1,5 +1,5 @@
 import { props } from "@stylexjs/stylex";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { shellStyles } from "./docs-shell.styles";
 import { MizenLogo } from "./mizen-logo";
 import { MobileNavigation } from "./mobile-navigation";
@@ -13,11 +13,7 @@ export function SiteHeader({ docs = false }: { docs?: boolean }) {
 			</a>
 			<header {...props(shellStyles.header)}>
 				<div {...props(shellStyles.headerInner)}>
-					<Link
-						aria-label="Mizen UI home"
-						href="/"
-						{...props(shellStyles.brand)}
-					>
+					<Link aria-label="Mizen UI home" to="/" {...props(shellStyles.brand)}>
 						<MizenLogo style={shellStyles.brandMark} />
 						Mizen UI
 					</Link>

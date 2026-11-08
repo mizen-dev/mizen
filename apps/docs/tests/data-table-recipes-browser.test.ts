@@ -1,6 +1,6 @@
 import { type Browser, chromium, type Page } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setDocsTheme,
 	setupTestServer,
@@ -8,10 +8,10 @@ import {
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const errors: string[] = [];
-const matchingRecords = /matching records/;
-const readOnlyVirtualizedView = /read-only virtualized view/;
+const matchingRecords = /matching records/u;
+const readOnlyVirtualizedView = /read-only virtualized view/u;
 const FILTERS_LIGHT_SCREENSHOT =
 	"/private/tmp/mizen-data-table-filters-light.png";
 const FILTERS_DARK_SCREENSHOT =

@@ -3,7 +3,7 @@
 import type { ComponentProps, ComponentType } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	PartToWhole,
 	type PartToWholeProps,
@@ -36,10 +36,10 @@ const RuntimePartToWhole = PartToWhole as ComponentType<
 	Record<string, unknown>
 >;
 
-const ARC_TAGS = /<path\b[^>]*data-ts-key="part-to-whole-arcs:[^"]*"[^>]*>/g;
-const ARC_PATH = /\bd="([^"]+)"/;
-const ARC_KEY = /data-ts-key="part-to-whole-arcs:([^"]+)"/;
-const INVALID_NUMBER = /(?:NaN|Infinity)/;
+const ARC_TAGS = /<path\b[^>]*data-ts-key="part-to-whole-arcs:[^"]*"[^>]*>/gu;
+const ARC_PATH = /\bd="(?<path>[^"]+)"/u;
+const ARC_KEY = /data-ts-key="part-to-whole-arcs:(?<key>[^"]+)"/u;
+const INVALID_NUMBER = /(?:NaN|Infinity)/u;
 
 function render(
 	parts: readonly { id: string; label: string; value: number }[],

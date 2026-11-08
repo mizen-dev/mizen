@@ -3,7 +3,7 @@
 import type { ComponentType } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { AreaChart } from "../../../packages/ui/src/components/area-chart/area-chart";
 
 vi.mock("@stylexjs/stylex", () => ({

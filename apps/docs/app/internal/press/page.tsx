@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
 import { PressSpecimen } from "./press-specimen";
 
-export const metadata: Metadata = {
+export const metadata = {
 	robots: { index: false },
 	title: "Press surfaces · Mizen UI",
 };

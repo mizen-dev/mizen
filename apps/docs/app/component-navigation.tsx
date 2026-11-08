@@ -2,7 +2,7 @@
 
 import { typographyStyles } from "@mizen-labs/ui/typography.styles";
 import { props } from "@stylexjs/stylex";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { groupedComponentDocs } from "./docs-registry";
 import { shellStyles } from "./docs-shell.styles";
 import { NavTreeGroup } from "./nav-tree";
@@ -42,8 +42,9 @@ export function ComponentNavigation({
 										isCurrent && shellStyles.navLinkCurrent
 									)}
 									aria-current={isCurrent ? "page" : undefined}
-									href={`/docs/components/${component.slug}`}
 									key={component.slug}
+									params={{ slug: component.slug }}
+									to="/docs/components/$slug"
 								>
 									<span {...props(typographyStyles.controlLabel)}>
 										{component.name}

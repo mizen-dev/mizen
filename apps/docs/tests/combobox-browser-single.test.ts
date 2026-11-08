@@ -1,13 +1,20 @@
 import { type Browser, chromium, type Locator, type Page } from "playwright";
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import {
+	afterAll,
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+} from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const transparentOutline = /transparent|rgba\(0, 0, 0, 0\)/;
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const transparentOutline = /transparent|rgba\(0, 0, 0, 0\)/u;
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;

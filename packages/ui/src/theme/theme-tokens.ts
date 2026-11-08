@@ -1,7 +1,7 @@
 import { props } from "@stylexjs/stylex";
 import { darkTheme } from "../styles/themes";
 
-const WHITESPACE_REGEX = /\s+/;
+const WHITESPACE_REGEX = /\s+/u;
 
 export function getDarkThemeTokens(): readonly string[] {
 	const result = props(darkTheme);

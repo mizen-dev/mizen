@@ -1,6 +1,8 @@
 // @vitest-environment happy-dom
 import { act, createElement as h } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
+import { Calendar } from "../../../packages/ui/src/components/calendar/calendar";
+import { findDayButton, findNavButton, mount } from "./calendar-test-helpers";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(s: T): T => s,
@@ -15,9 +17,6 @@ vi.mock("@stylexjs/stylex", () => ({
 }));
 
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
-
-import { Calendar } from "../../../packages/ui/src/components/calendar/calendar";
-import { findDayButton, findNavButton, mount } from "./calendar-test-helpers";
 
 describe("Calendar accessibility, navigation slots, and keyboard behavior", () => {
 	it("renders semantic grid structure and accessible previous and next month buttons", () => {

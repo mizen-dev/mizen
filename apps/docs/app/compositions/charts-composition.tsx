@@ -440,7 +440,7 @@ export function ChartPaletteExamples() {
 											<span {...props(specimenStyles.paletteLabel)}>
 												{step}
 												<span {...props(specimenStyles.paletteValue)}>
-													{palette[key].replace(/^oklch\(|\)$/g, "")}
+													{palette[key].replace(/^oklch\(|\)$/gu, "")}
 												</span>
 											</span>
 										</div>

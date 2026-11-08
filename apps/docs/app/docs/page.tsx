@@ -1,5 +1,5 @@
 import { props } from "@stylexjs/stylex";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { docsStyles } from "../components/docs.styles";
 import { guides } from "../guides";
 
@@ -21,7 +21,8 @@ export default function DocumentationPage() {
 						.map(({ slug, title, description }) => (
 							<div key={slug} {...props(docsStyles.exampleHeader)}>
 								<Link
-									href={`/docs/${slug}`}
+									params={{ guide: slug }}
+									to="/docs/$guide"
 									{...props(docsStyles.exampleTitle)}
 								>
 									{title}
@@ -37,7 +38,9 @@ export default function DocumentationPage() {
 						with copyable code, the import line, anatomy for compound
 						components, recommendations, usage boundaries, and an API reference.
 					</p>
-					<Link href="/docs/components/button">Start with Button</Link>
+					<Link params={{ slug: "button" }} to="/docs/components/$slug">
+						Start with Button
+					</Link>
 				</section>
 			</article>
 		</main>

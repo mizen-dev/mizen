@@ -1,14 +1,16 @@
 import { type Browser, chromium, type Locator, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const PERCEPTUAL_COLOR = /^(?:oklch|oklab|lab)\(/u;
+
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const TRANSPARENT_COLOR_REGEX =
-	/transparent|rgba\(0, 0, 0, 0\)|oklab\(0 0 0 \/ 0\)/;
+	/transparent|rgba\(0, 0, 0, 0\)|oklab\(0 0 0 \/ 0\)/u;
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -157,12 +159,12 @@ describe("Field component route", () => {
 			const style = getComputedStyle(element);
 			return [style.backgroundColor, style.color];
 		});
-		expect(darkColors[1]).toContain("lab(");
+		expect(darkColors[1]).toMatch(PERCEPTUAL_COLOR);
 		const darkPanel = darkField.locator("../..");
 		const darkPanelColor = await darkPanel.evaluate(
 			(element) => getComputedStyle(element).backgroundColor
 		);
-		expect(darkPanelColor).toContain("lab(");
+		expect(darkPanelColor).toMatch(PERCEPTUAL_COLOR);
 		expect(darkPanelColor).not.toBe(
 			await page.evaluate(
 				() =>

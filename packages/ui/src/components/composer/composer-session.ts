@@ -68,6 +68,8 @@ function undoDirection(event: KeyboardEvent): number {
 	return event.ctrlKey && event.key.toLowerCase() === "y" ? 1 : 0;
 }
 
+const getServerSnapshot = (): View => INITIAL;
+
 /** Transient editing state belongs to the mounted input; values belong to React. */
 export class ComposerSession {
 	private options: UseComposerEditorOptions;
@@ -90,7 +92,7 @@ export class ComposerSession {
 		this.history.reset(options.value);
 	}
 	getSnapshot = (): View => this.view;
-	getServerSnapshot = (): View => INITIAL;
+	getServerSnapshot = getServerSnapshot;
 	subscribe = (notify: () => void): (() => void) => {
 		this.observers.add(notify);
 		return () => {

@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import type { CalendarLocale } from "../../../packages/ui/src/components/calendar/calendar.types";
 import type { DatePicker } from "../../../packages/ui/src/components/date-picker/date-picker";
 import type { DatePickerProps } from "../../../packages/ui/src/components/date-picker/date-picker.types";

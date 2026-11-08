@@ -27,7 +27,7 @@ import {
 	IconChartLine,
 	IconUsers,
 } from "@tabler/icons-react";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { landingStyles as s } from "./landing.styles";
 import {
@@ -151,7 +151,8 @@ export function LandingPreview() {
 							actions={
 								<Link
 									aria-label="Explore Area Chart"
-									href="/docs/components/area-chart"
+									params={{ slug: "area-chart" }}
+									to="/docs/components/$slug"
 									{...props(s.textLink)}
 								>
 									<IconArrowUpRight aria-hidden="true" size={18} />

@@ -10,14 +10,17 @@
     "url": "git+https://github.com/mizen-labs/mizen.git",
     "directory": "apps/docs"
   },
+  "type": "module",
   "scripts": {
-    "build": "next build --turbopack",
+    "build": "vp build",
     "components:capture": "node scripts/capture-component-previews.mjs",
     "components:compare": "node scripts/compare-captures.mjs",
-    "dev": "next dev --turbopack",
-    "docs:sync": "node scripts/sync-example-sources.mjs && biome format --write app/example-sources.json",
+    "dev": "vp dev --port 3000",
+    "docs:sync": "node scripts/sync-example-sources.mjs && node scripts/sync-example-components.mjs && biome format --write app/example-sources.json app/example-components.gen.ts",
     "lint": "eslint .",
-    "test": "vitest run",
+    "preview": "vp preview",
+    "start": "node .output/server/index.mjs",
+    "test": "vp test run",
     "typecheck": "tsc --noEmit && tsc -p tests/package-types/tsconfig.json"
   },
   "dependencies": {
@@ -25,24 +28,36 @@
     "@fontsource-variable/wix-madefor-text": "5.3.0",
     "@mizen-labs/ui": "workspace:*",
     "@stylexjs/stylex": "^0.19.1",
-    "@tabler/icons-react": "^3.49.0",
-    "@tanstack/charts": "1.1.0",
+    "@tabler/icons-react": "^3.50.0",
+    "@tanstack/charts": "1.4.0",
+    "@tanstack/react-router": "1.170.46",
+    "@tanstack/react-start": "1.169.4",
     "@tanstack/react-table": "9.3.1",
-    "next": "^16.4.3",
+    "nitro": "3.0.261103-rc",
     "pele": "1.13.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-markdown": "10.1.0",
-    "react-router": "^8.5.0",
+    "react-router": "^8.5.1",
     "remark-gfm": "4.0.1"
   },
   "devDependencies": {
+    "@babel/core": "8.1.0",
     "@babel/eslint-parser": "^8.0.7",
-    "@types/node": "^26.6.5",
+    "@rolldown/plugin-babel": "0.3.0",
+    "@stylexjs/postcss-plugin": "^0.19.1",
+    "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "6.2.1",
     "happy-dom": "21.0.4",
-    "playwright": "^1.64.1",
-    "vitest": "^5.0.5"
+    "next": "^16.4.5",
+    "playwright": "^1.65.0",
+    "postcss-lightningcss": "^1.1.2",
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.5.0",
+    "vite-plus": "1.5.0"
+  },
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
   }
 }

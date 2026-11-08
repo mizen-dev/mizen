@@ -6,7 +6,7 @@ import { scaleLinear } from "@tanstack/charts/scales/linear";
 import type { ComponentProps, ComponentType } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	ChartFrame,
 	type ChartFrameProps,

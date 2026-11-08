@@ -12,13 +12,22 @@ import {
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { promisify } from "node:util";
-import { expect, it } from "vitest";
+import { expect, it } from "vite-plus/test";
 
 const execute = promisify(execFile);
 const workspace = new URL("../../../", import.meta.url).pathname;
 async function fixture(overrides: Record<string, unknown> = {}) {
-	const root = await mkdtemp(join(tmpdir(), "mizen-type-graph-"));
-	await Promise.all([mkdir(join(root, "scripts")), mkdir(join(root, "dist"))]);
+	const directory = await mkdtemp(join(tmpdir(), "mizen-type-graph-"));
+	const root = join(directory, "packages/ui");
+	await Promise.all([
+		mkdir(join(root, "scripts"), { recursive: true }),
+		mkdir(join(root, "dist"), { recursive: true }),
+		mkdir(join(directory, "scripts")),
+	]);
+	await copyFile(
+		join(workspace, "scripts/cleanup.mjs"),
+		join(directory, "scripts/cleanup.mjs")
+	);
 	await copyFile(
 		join(workspace, "packages/ui/scripts/prune-declarations.mjs"),
 		join(root, "scripts/prune-declarations.mjs")
@@ -76,7 +85,7 @@ it("keeps transitive public types and leaves runtime assets intact", async () =>
 			})
 		);
 	} finally {
-		await rm(root, { force: true, recursive: true });
+		await rm(dirname(dirname(root)), { force: true, recursive: true });
 	}
 });
 it("leaves declarations intact when a public entry is missing", async () => {
@@ -93,7 +102,7 @@ it("leaves declarations intact when a public entry is missing", async () => {
 			"export type Keep = string;"
 		);
 	} finally {
-		await rm(root, { force: true, recursive: true });
+		await rm(dirname(dirname(root)), { force: true, recursive: true });
 	}
 });
 
@@ -162,7 +171,7 @@ it("retains nested conditions, fallback targets, source imports and implicit dec
 			required["src/public.ts"]
 		);
 	} finally {
-		await rm(root, { force: true, recursive: true });
+		await rm(dirname(dirname(root)), { force: true, recursive: true });
 	}
 });
 it("retains cyclic imports and triple-slash ambient references", async () => {
@@ -186,7 +195,7 @@ it("retains cyclic imports and triple-slash ambient references", async () => {
 			"index.d.ts",
 		]);
 	} finally {
-		await rm(root, { force: true, recursive: true });
+		await rm(dirname(dirname(root)), { force: true, recursive: true });
 	}
 });
 it.each([
@@ -210,7 +219,7 @@ it.each([
 				"keep.d.ts",
 			]);
 		} finally {
-			await rm(root, { force: true, recursive: true });
+			await rm(dirname(dirname(root)), { force: true, recursive: true });
 		}
 	}
 );
@@ -233,7 +242,7 @@ it.each([
 				"keep.d.ts",
 			]);
 		} finally {
-			await rm(root, { force: true, recursive: true });
+			await rm(dirname(dirname(root)), { force: true, recursive: true });
 		}
 	}
 );

@@ -17,14 +17,14 @@ import { join } from "node:path";
 import { promisify } from "node:util";
 import { type Browser, type BrowserContext, chromium } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { expect, it, onTestFinished } from "vitest";
+import { expect, it, onTestFinished } from "vite-plus/test";
 import { INSTALL_TIMEOUT_MS } from "../../../packages/cli/scripts/process.js";
 import { stopProcess } from "../../../packages/cli/scripts/stop-process.js";
 import { cleanup } from "../../../scripts/cleanup.mjs";
 import { verifyPackedPublicTypes } from "./packed-public-types";
 
 const execute = promisify(execFile);
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const nextFixture = join(docsRoot, "tests/package-consumer");
 const packageRoot = join(docsRoot, "../../packages/ui");
 const runCheckpoint = process.env.MIZEN_PACKED_CONSUMER === "1";
@@ -498,7 +498,7 @@ async function verifyScatterTooltip(
 	await chart.focus();
 	await page.keyboard.press("ArrowRight");
 	const tooltip = page.locator("[data-slot='chart-tooltip']").last();
-	const tooltipText = await tooltip.innerText();
+	const tooltipText = await tooltip.textContent();
 	expect(tooltipText).toContain("Team A");
 	expect(tooltipText).toContain("Team size");
 	expect(tooltipText).toContain("18");

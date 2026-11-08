@@ -2,13 +2,12 @@ import { Button } from "@mizen-labs/ui";
 import { typeRoles } from "@mizen-labs/ui/typography.styles";
 import { props } from "@stylexjs/stylex";
 import { IconArrowRight } from "@tabler/icons-react";
-import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { componentDocs } from "../docs-registry";
 import { landingStyles as s } from "../landing.styles";
 import { LandingPreview } from "../landing-preview";
 
-export const metadata: Metadata = {
+export const metadata = {
 	description:
 		"React components for dashboards and data-rich interfaces. Explore interactive charts, metrics, and tables built with Base UI and StyleX.",
 	title: "Mizen UI",
@@ -32,7 +31,9 @@ export default function HomePage() {
 				<div {...props(s.actions)}>
 					<Button
 						nativeButton={false}
-						render={<Link href="/docs/installation" />}
+						render={
+							<Link params={{ guide: "installation" }} to="/docs/$guide" />
+						}
 						size="lg"
 						variant="brand"
 					>
@@ -40,7 +41,9 @@ export default function HomePage() {
 					</Button>
 					<Button
 						nativeButton={false}
-						render={<Link href="/docs/components/button" />}
+						render={
+							<Link params={{ slug: "button" }} to="/docs/components/$slug" />
+						}
 						size="lg"
 						variant="outline"
 					>
@@ -56,14 +59,23 @@ export default function HomePage() {
 			<footer {...props(s.footer)}>
 				<p {...props(typeRoles.ui, s.muted)}>Mizen UI · MIT licensed</p>
 				<nav aria-label="Home footer" {...props(s.footerLinks)}>
-					<Link href="/docs/foundations" {...props(typeRoles.ui, s.textLink)}>
+					<Link
+						params={{ guide: "foundations" }}
+						to="/docs/$guide"
+						{...props(typeRoles.ui, s.textLink)}
+					>
 						Foundations
 					</Link>
-					<Link href="/docs/cli" {...props(typeRoles.ui, s.textLink)}>
+					<Link
+						params={{ guide: "cli" }}
+						to="/docs/$guide"
+						{...props(typeRoles.ui, s.textLink)}
+					>
 						CLI
 					</Link>
 					<Link
-						href="/docs/integrations#consumer-agents"
+						params={{ guide: "for-agents" }}
+						to="/docs/$guide"
 						{...props(typeRoles.ui, s.textLink)}
 					>
 						For agents

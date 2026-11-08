@@ -1,6 +1,6 @@
 import { Heading, Stack, Text } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { ActionContentComposition } from "../../compositions/action-content-composition";
 import { AgentSelectorExamples } from "../../compositions/agent-selector-composition";
 import { AnalyticsWorkspaceExamples } from "../../compositions/analytics-workspace-composition";
@@ -51,7 +51,7 @@ export default function Page() {
 						Small, opinionated controls with stable APIs and deliberate
 						interaction.
 					</Text>
-					<Link href="/docs">Browse components</Link>
+					<Link to="/docs">Browse components</Link>
 				</Stack>
 				<FoundationStudy />
 				<section aria-label="Analytics workspace" id="analytics-workspace">

@@ -20,10 +20,10 @@ export type CitationSource = {
 	icon?: string;
 } & ({ href: string; title?: string } | { href?: undefined; title: string });
 
-const LEADING_WWW = /^www\./;
+const LEADING_WWW = /^www\./u;
 // Reserved for examples and tests (RFC 2606); they never serve an icon.
 const RESERVED_HOST =
-	/(^|\.)(example\.(com|net|org)|example|test|invalid|localhost)$/;
+	/(?:^|\.)(?:example\.(?:com|net|org)|example|test|invalid|localhost)$/u;
 
 function sourceDomain(href: string) {
 	return URL.canParse(href)

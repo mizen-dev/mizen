@@ -5,7 +5,16 @@ import reactHooks from "eslint-plugin-react-hooks";
 const TYPE_PROPERTY = "/^(fontSize|lineHeight|letterSpacing)$/";
 
 export default [
-	{ ignores: ["**/.next/**", "**/dist/**", "**/node_modules/**"] },
+	{
+		ignores: [
+			"**/.next/**",
+			"**/.output/**",
+			"**/.tanstack/**",
+			"**/routeTree.gen.ts",
+			"**/dist/**",
+			"**/node_modules/**",
+		],
+	},
 	{
 		files: ["**/*.{js,jsx,ts,tsx}"],
 		languageOptions: {

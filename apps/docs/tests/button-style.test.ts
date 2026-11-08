@@ -1,12 +1,14 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const PERCEPTUAL_COLOR = /^(?:oklch|oklab|lab)\(/u;
+
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -59,7 +61,7 @@ describe("Button semantic colors and styles", () => {
 			await primary.evaluate(
 				(element) => getComputedStyle(element, "::before").backgroundColor
 			)
-		).toContain("lab(");
+		).toMatch(PERCEPTUAL_COLOR);
 		const loading = page.getByRole("button", { name: "Saving" });
 		const loadingIndicator = loading.locator(
 			'[data-slot="button-loading-indicator"]'
@@ -68,7 +70,7 @@ describe("Button semantic colors and styles", () => {
 			await loadingIndicator.evaluate(
 				(element) => getComputedStyle(element).color
 			)
-		).toContain("lab(");
+		).toMatch(PERCEPTUAL_COLOR);
 		const secondary = page.getByRole("button", {
 			exact: true,
 			name: "Secondary",
@@ -88,13 +90,13 @@ describe("Button semantic colors and styles", () => {
 			await deleteButton.evaluate(
 				(element) => getComputedStyle(element, "::before").backgroundColor
 			)
-		).toContain("lab(");
+		).toMatch(PERCEPTUAL_COLOR);
 		await page.mouse.down();
 		expect(
 			await deleteButton.evaluate(
 				(element) => getComputedStyle(element, "::before").backgroundColor
 			)
-		).toContain("lab(");
+		).toMatch(PERCEPTUAL_COLOR);
 		await page.mouse.up();
 		await deleteButton.evaluate((element) => element.blur());
 		await page.reload({ waitUntil: "networkidle" });

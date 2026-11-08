@@ -1,5 +1,5 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setDocsTheme,
 	setupTestServer,
@@ -7,8 +7,8 @@ import {
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const INVALID_SVG_PATH = /NaN|Infinity|undefined/;
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const INVALID_SVG_PATH = /NaN|Infinity|undefined/u;
 const dashboardSelector = "[data-testid='analytics-workspace-example']";
 let handle: TestServerHandle;
 let browser: Browser;
@@ -17,7 +17,7 @@ const consoleErrors: string[] = [];
 const pageErrors: string[] = [];
 
 async function metric(testId: string): Promise<string> {
-	return (await page.getByTestId(testId).innerText()).trim();
+	return (await page.getByTestId(testId).textContent())?.trim() ?? "";
 }
 
 async function choose(label: string, option: string): Promise<void> {
@@ -188,17 +188,17 @@ describe("Analytics workspace browser integration", () => {
 		await search.fill("API Gateway");
 		await expectMetrics("265", "9", "3.40%", "189 ms");
 		expect(await table.locator("tbody tr").count()).toBe(1);
-		expect(await table.locator("tbody tr").innerText()).toContain(
+		expect(await table.locator("tbody tr").textContent()).toContain(
 			"API Gateway"
 		);
-		expect(await table.locator("tbody tr td:nth-child(3)").innerText()).toBe(
+		expect(await table.locator("tbody tr td:nth-child(3)").textContent()).toBe(
 			"265"
 		);
 		const chart = workspace.getByRole("img", { name: "Daily API requests" });
 		await chart.focus();
 		await page.keyboard.press("ArrowRight");
 		expect(
-			await workspace.locator("[data-slot='chart-tooltip-value']").innerText()
+			await workspace.locator("[data-slot='chart-tooltip-value']").textContent()
 		).toBe("35");
 
 		await search.fill("no matching resource");
@@ -218,10 +218,12 @@ describe("Analytics workspace browser integration", () => {
 		expect(
 			await workspace
 				.getByRole("combobox", { name: "Report period" })
-				.innerText()
+				.textContent()
 		).toContain("Last 14 days");
 		expect(
-			await workspace.getByRole("combobox", { name: "Environment" }).innerText()
+			await workspace
+				.getByRole("combobox", { name: "Environment" })
+				.textContent()
 		).toContain("All environments");
 		expect(await search.inputValue()).toBe("");
 		expect(await clear.count()).toBe(1);
@@ -318,10 +320,10 @@ describe("Analytics workspace browser integration", () => {
 			.locator("[data-slot='chart-tooltip']");
 		expect(await tooltip.isVisible()).toBe(true);
 		expect(
-			await tooltip.locator("[data-slot='chart-tooltip-term']").innerText()
+			await tooltip.locator("[data-slot='chart-tooltip-term']").textContent()
 		).toBe("Requests");
 		expect(["189", "231"]).toContain(
-			await tooltip.locator("[data-slot='chart-tooltip-value']").innerText()
+			await tooltip.locator("[data-slot='chart-tooltip-value']").textContent()
 		);
 
 		const geometry = await page
@@ -329,7 +331,7 @@ describe("Analytics workspace browser integration", () => {
 			.evaluate((svg, pattern) => {
 				const box = svg.getBoundingClientRect();
 				const paths = [...svg.querySelectorAll("path[d]")];
-				const invalidPathPattern = new RegExp(pattern);
+				const invalidPathPattern = new RegExp(pattern, "u");
 				const invalidPath = paths.some((path) =>
 					invalidPathPattern.test(path.getAttribute("d") ?? "")
 				);

@@ -2,7 +2,7 @@
 import { act, createRef, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	Stepper,
 	StepperDescription,
@@ -161,9 +161,9 @@ describe("Stepper contract and SSR semantics", () => {
 				)
 			)
 		);
-		expect(markup.match(/data-status="complete"/g)).toHaveLength(1);
-		expect(markup.match(/aria-current="step"/g)).toHaveLength(1);
-		expect(markup.match(/data-status="upcoming"/g)).toHaveLength(1);
+		expect(markup.match(/data-status="complete"/gu)).toHaveLength(1);
+		expect(markup.match(/aria-current="step"/gu)).toHaveLength(1);
+		expect(markup.match(/data-status="upcoming"/gu)).toHaveLength(1);
 	});
 
 	it("lets native click cancellation veto step selection", () => {

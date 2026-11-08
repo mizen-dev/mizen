@@ -8,7 +8,7 @@ import {
 	describe,
 	expect,
 	it,
-} from "vitest";
+} from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
@@ -76,7 +76,7 @@ describe("Remaining component state repairs", () => {
 		await teardownTestServer(handle);
 	});
 
-	for (const theme of ["light", "dark"] as const) {
+	describe.each(["light", "dark"] as const)("%s theme", (theme) => {
 		it(`keeps menu metadata readable and navigation backgrounds explicit in ${theme}`, async () => {
 			await page.addInitScript(
 				(value) => localStorage.setItem("mizen-theme", value),
@@ -130,7 +130,7 @@ describe("Remaining component state repairs", () => {
 				)
 				.not.toBe("rgba(0, 0, 0, 0)");
 		});
-	}
+	});
 
 	it("keeps disabled close and tree controls at rest during pointer input", async () => {
 		await page.goto(`${handle.url}/docs/components/sheet`, {

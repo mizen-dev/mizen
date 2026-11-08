@@ -24,7 +24,7 @@ export function NamedIconAction() {
 					<Text size="ui">{file}</Text>
 					<Spacer />
 					{actions.map(([Icon, verb]) => {
-						const labelId = `${file}-${verb}`.replace(/\W+/g, "-");
+						const labelId = `${file}-${verb}`.replace(/\W+/gu, "-");
 						return (
 							<Button
 								aria-labelledby={labelId}

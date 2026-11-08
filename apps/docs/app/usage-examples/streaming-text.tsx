@@ -47,7 +47,7 @@ const reply: readonly StreamingTextPart[] = [
 ];
 
 // Words and citations in order, the units a stream delivers.
-const WORD_BREAK = /(?<= )/;
+const WORD_BREAK = /(?<= )/u;
 const units: readonly StreamingTextPart[] = reply.flatMap(
 	(part): StreamingTextPart[] =>
 		typeof part === "string" ? part.split(WORD_BREAK) : [part]

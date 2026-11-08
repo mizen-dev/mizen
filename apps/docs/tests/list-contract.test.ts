@@ -1,5 +1,9 @@
 // @vitest-environment happy-dom
 
+import type { ComponentPropsWithRef } from "react";
+import { createElement as h } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	List,
 	ListActions,
@@ -20,11 +24,6 @@ vi.mock("@stylexjs/stylex", () => ({
 	props: () => ({}),
 	when: { ancestor: () => ":where(*)" },
 }));
-
-import type { ComponentPropsWithRef } from "react";
-import { createElement as h } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
 
 type Exact<A, B> = [A] extends [B] ? ([B] extends [A] ? true : false) : false;
 type Closed<P, E extends "ul" | "li" | "div"> = Exact<

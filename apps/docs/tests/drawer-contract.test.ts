@@ -2,7 +2,7 @@
 import { act, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vite-plus/test";
 import {
 	Drawer,
 	type DrawerBarProps,
@@ -30,9 +30,9 @@ import { drawerStyles } from "../../../packages/ui/src/components/drawer/drawer.
 import { drawerPositionsStyles } from "../../../packages/ui/src/components/drawer/drawer-positions.styles";
 
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
-const VIEWPORT_INSET_PATTERN = /var\(--drawer-viewport-inset/;
-const VIEWPORT_INSET_KEY_PATTERN = /--drawer-viewport-inset/;
-const ENDING_DURATION_PATTERN = /var\(--drawer-ending-duration/;
+const VIEWPORT_INSET_PATTERN = /var\(--drawer-viewport-inset/u;
+const VIEWPORT_INSET_KEY_PATTERN = /--drawer-viewport-inset/u;
+const ENDING_DURATION_PATTERN = /var\(--drawer-ending-duration/u;
 const propsSpy = vi.fn((_style?: readonly (object | undefined)[]) => ({}));
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(styles: T): T => styles,

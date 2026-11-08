@@ -1,6 +1,6 @@
 import { type Browser, chromium, type Page } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 
 let browser: Browser;
 let page: Page;

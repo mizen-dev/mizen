@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { act, createRef, createElement as h, isValidElement } from "react";
 import { createRoot } from "react-dom/client";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	Accordion,
 	AccordionItem,

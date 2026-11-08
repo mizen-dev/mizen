@@ -1,15 +1,15 @@
 import { type Browser, chromium } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const errors: string[] = [];
-const DONE = /^Move Card to container queries · 4 steps · \d+(\.\d)?s$/;
+const DONE = /^Move Card to container queries · 4 steps · \d+(?:\.\d)?s$/u;
 let handle: TestServerHandle;
 let browser: Browser;
 

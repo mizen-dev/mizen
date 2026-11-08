@@ -3,7 +3,7 @@
 import type { HTMLAttributes } from "react";
 import { act, createRef, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	ScrollArea,
 	ScrollAreaPrimitive,
@@ -23,7 +23,7 @@ vi.mock("@stylexjs/stylex", () => ({
 	when: { ancestor: () => ":where(*)" },
 }));
 
-const MIN_WIDTH_ZERO_STYLE_REGEX = /min-width:\s*0/;
+const MIN_WIDTH_ZERO_STYLE_REGEX = /min-width:\s*0/u;
 
 function mount(
 	element: Parameters<ReturnType<typeof createRoot>["render"]>[0]

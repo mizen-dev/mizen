@@ -1,6 +1,6 @@
 import { type Browser, chromium, type Locator, type Page } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setDocsTheme,
 	setupTestServer,
@@ -8,10 +8,10 @@ import {
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const SAVE_FAILURE = /Could not save your changes\. Your draft is preserved/;
-const SETTINGS_SAVE_FAILURE = /Your draft is still here/;
-const NORTHSTAR_SELECTION = /Select Northstar launch/;
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const SAVE_FAILURE = /Could not save your changes\. Your draft is preserved/u;
+const SETTINGS_SAVE_FAILURE = /Your draft is still here/u;
+const NORTHSTAR_SELECTION = /Select Northstar launch/u;
 const browserErrors: string[] = [];
 let handle: TestServerHandle;
 let browser: Browser;
@@ -535,7 +535,7 @@ describe("main page compositions", { timeout: 30_000 }, () => {
 		await expectLocator(editor).toBeHidden();
 	});
 
-	for (const theme of ["light", "dark"] as const) {
+	describe.each(["light", "dark"] as const)("%s theme", (theme) => {
 		it(`keeps ${theme} compositions usable with narrow, enlarged text`, async () => {
 			await page.setViewportSize({ height: 844, width: 390 });
 			await page.emulateMedia({ reducedMotion: "reduce" });
@@ -642,5 +642,5 @@ describe("main page compositions", { timeout: 30_000 }, () => {
 				path: `/private/tmp/mizen-compositions-${theme}-rtl-320-enlarged.png`,
 			});
 		});
-	}
+	});
 });

@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { promisify } from "node:util";
 import { chromium } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { expect, it, onTestFinished } from "vitest";
+import { expect, it, onTestFinished } from "vite-plus/test";
 import { INSTALL_TIMEOUT_MS } from "../../../packages/cli/scripts/process.js";
 import { stopProcess } from "../../../packages/cli/scripts/stop-process.js";
 import { cleanup } from "../../../scripts/cleanup.mjs";
@@ -372,12 +372,10 @@ async function plainViteFixture(destination: string, typescript: boolean) {
 			include: ["src"],
 		})
 	);
-	const main = (await readFile(join(app, "src/main.jsx"), "utf8"))
-		.replace(
-			'document.getElementById("root")',
-			'document.getElementById("root")!'
-		)
-		.replace("./App.jsx", "./App");
+	const main = (await readFile(join(app, "src/main.jsx"), "utf8")).replace(
+		"./App.jsx",
+		"./App"
+	);
 	await writeFile(join(app, "src/main.tsx"), main);
 	await writeFile(
 		join(app, "src/App.tsx"),

@@ -1,5 +1,5 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setDocsTheme,
 	setupTestServer,
@@ -7,7 +7,7 @@ import {
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -258,7 +258,7 @@ describe("Docs layout resilience", () => {
 			"/docs/components/data-table"
 		);
 		await search.fill("no such component");
-		expect(await navigation.getByRole("status").innerText()).toBe(
+		expect(await navigation.getByRole("status").textContent()).toBe(
 			"No matching components."
 		);
 		await search.fill("");
@@ -623,9 +623,12 @@ describe("Docs layout resilience", () => {
 		await expect.poll(() => input.isVisible()).toBe(false);
 		await example.getByRole("tab", { exact: true, name: "Preview" }).click();
 		expect(await input.inputValue()).toBe("Field notes");
-		expect(await page.locator("#ControlledInput").innerText()).toContain(
-			"Current value: Field notes"
-		);
+		expect(
+			await page
+				.locator("#ControlledInput")
+				.getByRole("tabpanel", { exact: true, name: "Preview" })
+				.textContent()
+		).toContain("Current value: Field notes");
 		expect(
 			await page.locator("#ReadOnlyInput input").getAttribute("readonly")
 		).not.toBeNull();
@@ -663,9 +666,12 @@ describe("Docs layout resilience", () => {
 			.locator("#InvalidField")
 			.getByRole("textbox", { name: "Project name" });
 		expect(await invalid.getAttribute("aria-invalid")).toBe("true");
-		expect(await page.locator("#InvalidField").innerText()).toContain(
-			"Enter a project name."
-		);
+		expect(
+			await page
+				.locator("#InvalidField")
+				.getByRole("tabpanel", { exact: true, name: "Preview" })
+				.textContent()
+		).toContain("Enter a project name.");
 	});
 
 	it("selects options and updates controlled multiple selection", async () => {
@@ -677,15 +683,15 @@ describe("Docs layout resilience", () => {
 			.getByRole("combobox", { name: "Workspace" });
 		await single.click();
 		await page.getByRole("option", { name: "Product team" }).click();
-		expect(await single.innerText()).toContain("Product team");
+		expect(await single.textContent()).toContain("Product team");
 		const multiple = page
 			.locator("#MultipleSelect")
 			.getByRole("combobox", { name: "Notification channels" });
 		await multiple.click();
 		await page.getByRole("option", { name: "Push notifications" }).click();
 		await page.keyboard.press("Escape");
-		expect(await multiple.innerText()).toContain("Email");
-		expect(await multiple.innerText()).toContain("Push notifications");
+		expect(await multiple.textContent()).toContain("Email");
+		expect(await multiple.textContent()).toContain("Push notifications");
 	});
 
 	it("dismisses both dialog examples and returns focus to their triggers", async () => {

@@ -1,13 +1,13 @@
 import type { TextProps } from "@mizen-labs/ui/text";
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const releaseNotesExample = '[aria-label="Text: Release notes example"]';
 let handle: TestServerHandle;
 let browser: Browser;

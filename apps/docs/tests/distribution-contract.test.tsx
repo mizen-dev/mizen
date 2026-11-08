@@ -3,7 +3,7 @@
 import type { ComponentProps, ComponentType } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	Distribution,
 	type DistributionProps,
@@ -46,12 +46,13 @@ const contract: DistributionContract = [
 const RuntimeDistribution = Distribution as ComponentType<
 	Record<string, unknown>
 >;
-const BAR_TAGS = /<rect\b[^>]*data-ts-key="distribution-bars:[^"]*"[^>]*>/g;
-const BAR_X = /\bx="([^"]+)"/;
-const BAR_Y = /\by="([^"]+)"/;
-const BAR_WIDTH = /\bwidth="([^"]+)"/;
-const BAR_HEIGHT = /\bheight="([^"]+)"/;
-const INVALID_GEOMETRY = /NaN|Infinity/;
+const BAR_TAGS = /<rect\b[^>]*data-ts-key="distribution-bars:[^"]*"[^>]*>/gu;
+const BAR_KEY = /data-ts-key="(?<key>[^"]+)"/u;
+const BAR_X = /\bx="(?<x>[^"]+)"/u;
+const BAR_Y = /\by="(?<y>[^"]+)"/u;
+const BAR_WIDTH = /\bwidth="(?<width>[^"]+)"/u;
+const BAR_HEIGHT = /\bheight="(?<height>[^"]+)"/u;
+const INVALID_GEOMETRY = /NaN|Infinity/u;
 
 const commonProps = {
 	"aria-label": "Response time distribution",
@@ -74,6 +75,7 @@ describe("Distribution contract", () => {
 		const markup = render(values, { binCount: 4 });
 		const bars = Array.from(markup.matchAll(BAR_TAGS), ([bar]) => ({
 			height: Number(bar.match(BAR_HEIGHT)?.[1]),
+			key: bar.match(BAR_KEY)?.[1],
 			width: Number(bar.match(BAR_WIDTH)?.[1]),
 			x: Number(bar.match(BAR_X)?.[1]),
 			y: Number(bar.match(BAR_Y)?.[1]),
@@ -83,6 +85,7 @@ describe("Distribution contract", () => {
 		expect(markup).toContain('data-slot="chart-frame"');
 		expect(markup).toContain('aria-label="Response time distribution"');
 		expect(bars).toHaveLength(4);
+		expect(new Set(bars.map(({ key }) => key)).size).toBe(4);
 		expect(bars.map(({ x }) => x)).toEqual(
 			[...bars.map(({ x }) => x)].sort((left, right) => left - right)
 		);

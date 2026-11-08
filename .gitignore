@@ -64,3 +64,7 @@ skills-lock.json
 
 # Reproducible CLI benchmark evidence
 /artifacts/benchmarks/
+
+# TanStack Start and Nitro
+.output/
+.tanstack/

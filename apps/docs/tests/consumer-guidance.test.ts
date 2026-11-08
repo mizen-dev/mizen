@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { expect, it } from "vitest";
+import { expect, it } from "vite-plus/test";
 import { GET } from "../app/docs/components/[slug]/metadata/route";
 import { componentDocs } from "../app/docs-registry";
 import { GET as getIndex } from "../app/llms.txt/route";

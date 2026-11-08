@@ -4,7 +4,7 @@ import type { HTMLAttributes } from "react";
 import { act, createRef, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { Button } from "../../../packages/ui/src/components/button/button";
 import {
 	Collapsible,
@@ -28,8 +28,8 @@ vi.mock("@stylexjs/stylex", () => ({
 	when: { ancestor: () => ":where(*)" },
 }));
 
-const COLLAPSIBLE_SLOT_REGEX = /^<div[^>]*data-slot="collapsible"/;
-const ANCHOR_HREF_REGEX = /<a[^>]*href="\/docs"/;
+const COLLAPSIBLE_SLOT_REGEX = /^<div[^>]*data-slot="collapsible"/u;
+const ANCHOR_HREF_REGEX = /<a[^>]*href="\/docs"/u;
 
 type Accepts<T, K extends PropertyKey> = K extends keyof T ? true : false;
 type RejectsAll<T, K extends PropertyKey> = [Extract<keyof T, K>] extends [

@@ -1,6 +1,6 @@
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	AvatarCharacter,
 	type AvatarCharacterProps,
@@ -23,7 +23,7 @@ const closed = [
 	true satisfies Rejects<AvatarCharacterProps, "children">,
 ] as const;
 
-const geometryPattern = /<svg[^>]*>([\s\S]*)<\/svg>/;
+const geometryPattern = /<svg[^>]*>(?<geometry>[\s\S]*)<\/svg>/u;
 const geometry = (seed: string, size?: AvatarCharacterProps["size"]) =>
 	renderToStaticMarkup(h(AvatarCharacter, { seed, size })).match(
 		geometryPattern

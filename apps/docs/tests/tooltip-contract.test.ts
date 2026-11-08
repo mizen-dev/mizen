@@ -2,7 +2,7 @@
 import { act, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 // biome-ignore lint/performance/noNamespaceImport: Verify the complete public export contract.
 import * as Tooltip from "../../../packages/ui/src/components/tooltip/tooltip";
 

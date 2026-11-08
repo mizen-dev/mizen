@@ -1,3 +1,5 @@
+import { HeadContent, Scripts } from "@tanstack/react-router";
+import { NextExampleRouter } from "./next-example-router";
 import "@mizen-labs/ui/styles.css";
 import "./globals.css";
 import "@fontsource-variable/jetbrains-mono/wght.css";
@@ -6,11 +8,10 @@ import { colors } from "@mizen-labs/ui/colors.stylex";
 import { ThemeProvider, ThemeScript } from "@mizen-labs/ui/theme";
 import { AnchoredToastProvider, ToastProvider } from "@mizen-labs/ui/toast";
 import { props } from "@stylexjs/stylex";
-import type { Metadata } from "next";
 import { shellStyles } from "./docs-shell.styles";
 import { docsFonts } from "./fonts.styles";
 
-export const metadata: Metadata = {
+export const metadata = {
 	description:
 		"Mizen UI components, documentation, blocks, and application examples.",
 	title: "Mizen UI",
@@ -27,14 +28,18 @@ export default function RootLayout({
 		<html data-scroll-behavior="smooth" lang="en" suppressHydrationWarning>
 			<head>
 				<ThemeScript />
+				<HeadContent />
 				<style>{selectionCss}</style>
 			</head>
 			<body {...props(docsFonts, shellStyles.canvas)}>
 				<ThemeProvider>
 					<AnchoredToastProvider>
-						<ToastProvider>{children}</ToastProvider>
+						<ToastProvider>
+							<NextExampleRouter>{children}</NextExampleRouter>
+						</ToastProvider>
 					</AnchoredToastProvider>
 				</ThemeProvider>
+				<Scripts />
 			</body>
 		</html>
 	);

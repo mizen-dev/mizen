@@ -238,7 +238,7 @@ function layoutRows(
 }
 
 function gradientId(id: string) {
-	return `area-chart-${id.replace(/[^\w-]/g, "_")}`;
+	return `area-chart-${id.replace(/[^\w-]/gu, "_")}`;
 }
 
 function getMarks(series: readonly PreparedSeries[], rows: AreaChartRow[]) {
@@ -388,7 +388,7 @@ function AreaChartPlot({
 			formatNumber(value, formatValue, numberFormatter, "formatValue", NAME),
 		[formatValue, numberFormatter]
 	);
-	const idPrefix = useId().replace(/[^\w-]/g, "");
+	const idPrefix = useId().replace(/[^\w-]/gu, "");
 	const definition = useMemo(() => {
 		const formatAxis = (value: number) =>
 			layout === "percent"

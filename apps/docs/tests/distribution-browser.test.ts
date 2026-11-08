@@ -1,13 +1,13 @@
 import { type Browser, chromium, type Locator } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const errors: string[] = [];
 let handle: TestServerHandle;
 let browser: Browser;
@@ -73,7 +73,11 @@ describe("distribution browser behavior", () => {
 				errors.push(message.text());
 			}
 		});
-		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${handle.url}/internal/specimens`, {
+			// A cold Vite server compiles the complete specimen page on demand.
+			timeout: 30_000,
+			waitUntil: "networkidle",
+		});
 		await expectLocator(page.locator("html")).toHaveAttribute(
 			"data-theme",
 			theme
@@ -101,29 +105,26 @@ describe("distribution browser behavior", () => {
 				});
 
 				await waitForChartMount(chart);
+				await chart.evaluate((node) =>
+					node.scrollIntoView({ behavior: "instant", block: "center" })
+				);
 				const bins = chart.locator('[data-ts-key^="distribution-bars:"]');
 				await expectLocator(bins).toHaveCount(8);
 				const tooltip = page.locator('[data-slot="chart-tooltip"]').last();
-				const visibleBin = await bins.evaluateAll(
-					(elements) =>
-						elements
-							.map((element) => element.getBoundingClientRect())
-							.filter((rect) => rect.width > 8 && rect.height > 8)
-							.map((rect) => ({
-								x: rect.x + rect.width / 2,
-								y: rect.y + rect.height / 2,
-							}))[0]
+				const visibleBin = await bins.evaluateAll((elements) =>
+					elements.findIndex((element) => {
+						const { width, height } = element.getBoundingClientRect();
+						return width > 8 && height > 8;
+					})
 				);
-				expect(visibleBin).toBeDefined();
-				if (visibleBin) {
-					await page.mouse.move(visibleBin.x, visibleBin.y);
-					await expectLocator(tooltip).toContainText("Tickets");
-					await expectLocator(tooltip).toContainText("5");
-					await page.screenshot({
-						caret: "initial",
-						path: `/private/tmp/mizen-distribution-pointer-${theme}.png`,
-					});
-				}
+				expect(visibleBin).toBeGreaterThanOrEqual(0);
+				await bins.nth(visibleBin).hover({ position: { x: 5, y: 5 } });
+				await expectLocator(tooltip).toContainText("Tickets");
+				await expectLocator(tooltip).toContainText("5");
+				await page.screenshot({
+					caret: "initial",
+					path: `/private/tmp/mizen-distribution-pointer-${theme}.png`,
+				});
 				await page.mouse.move(0, 0);
 				await chart.scrollIntoViewIfNeeded();
 				await chart.focus();

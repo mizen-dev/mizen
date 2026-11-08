@@ -62,7 +62,7 @@ export function ConversationEmptyState({
 }
 
 // React prefixes keys from Children.toArray; the id is the key as written.
-const KEY_PREFIX = /^\.\$/;
+const KEY_PREFIX = /^\.\$/u;
 
 function idOf(turn: ReactElement) {
 	return String(turn.key).replace(KEY_PREFIX, "");

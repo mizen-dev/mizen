@@ -1,7 +1,8 @@
 // @vitest-environment happy-dom
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
+import { getComponentDoc } from "../app/docs-registry";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(styles: T): T => styles,
@@ -16,12 +17,10 @@ vi.mock("@stylexjs/stylex", () => ({
 	when: { ancestor: (selector: string) => selector },
 }));
 
-import { getComponentDoc } from "../app/docs-registry";
-
 const DATE_RANGE_PICKER_SPECIMEN_IMPORT_REGEX =
-	/import\s*\{\s*DateRangePickerSpecimen\s*}\s*from\s*["']\.\/date-range-picker-specimen["'];?/;
+	/import\s*\{\s*DateRangePickerSpecimen\s*\}\s*from\s*["']\.\/date-range-picker-specimen["'];?/u;
 const DATE_RANGE_PICKER_SPECIMEN_ENTRY_REGEX =
-	/"date-range-picker":\s*DateRangePickerSpecimen/;
+	/"date-range-picker":\s*DateRangePickerSpecimen/u;
 
 describe("DateRangePicker docs contract", () => {
 	it("publishes preview metadata that matches the public component props", () => {

@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import { act, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { Button } from "../../../packages/ui/src/components/button/button";
 import { Input } from "../../../packages/ui/src/components/input/input";
 import {
@@ -22,11 +22,30 @@ vi.mock("@stylexjs/stylex", () => ({
 	defineVars: <T extends object>(v: T): T => v,
 	keyframes: <T extends object>(k: T): T => k,
 	props: () => ({}),
-	when: { ancestor: () => ":where(*)" },
+	when: {
+		ancestor: () => ":where(*)",
+	},
 }));
-
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
-
+function MaliciousGroup({ malicious }: { malicious: Record<string, unknown> }) {
+	return Reflect.apply(InputGroup, undefined, [malicious]);
+}
+function MaliciousInput({ malicious }: { malicious: Record<string, unknown> }) {
+	return Reflect.apply(InputGroupInput, undefined, [malicious]);
+}
+function MaliciousTextarea({
+	malicious,
+}: {
+	malicious: Record<string, unknown>;
+}) {
+	return Reflect.apply(InputGroupTextarea, undefined, [malicious]);
+}
+function MaliciousAddon({ malicious }: { malicious: Record<string, unknown> }) {
+	return Reflect.apply(InputGroupAddon, undefined, [malicious]);
+}
+function MaliciousText({ malicious }: { malicious: Record<string, unknown> }) {
+	return Reflect.apply(InputGroupText, undefined, [malicious]);
+}
 function mount(
 	element: Parameters<ReturnType<typeof createRoot>["render"]>[0]
 ) {
@@ -41,115 +60,110 @@ function mount(
 		},
 	};
 }
-
 describe("InputGroup anatomy and slot protection", () => {
 	it("renders canonical slots, roles, and default alignment", () => {
 		const { container, unmount } = mount(
 			h(
 				InputGroup,
 				null,
-				h(InputGroupInput, { placeholder: "Search..." }),
+				h(InputGroupInput, {
+					placeholder: "Search...",
+				}),
 				h(
 					InputGroupAddon,
-					{ align: "inline-start" },
+					{
+						align: "inline-start",
+					},
 					h(InputGroupText, null, "https://")
 				),
 				h(
 					InputGroupAddon,
-					{ align: "inline-end" },
-					h(Button, { size: "sm" }, "Go")
+					{
+						align: "inline-end",
+					},
+					h(
+						Button,
+						{
+							size: "sm",
+						},
+						"Go"
+					)
 				)
 			)
 		);
-
 		const group = container.querySelector('[data-slot="input-group"]');
 		expect(group).not.toBeNull();
 		expect(group?.getAttribute("role")).toBe("group");
-
 		const input = container.querySelector('[data-slot="input-group-input"]');
 		expect(input).not.toBeNull();
 		expect(input?.tagName.toLowerCase()).toBe("input");
-
 		const addons = container.querySelectorAll(
 			'[data-slot="input-group-addon"]'
 		);
 		expect(addons).toHaveLength(2);
 		expect(addons[0]?.getAttribute("data-align")).toBe("inline-start");
 		expect(addons[1]?.getAttribute("data-align")).toBe("inline-end");
-
 		const text = container.querySelector('[data-slot="input-group-text"]');
 		expect(text).not.toBeNull();
 		expect(text?.tagName.toLowerCase()).toBe("span");
 		expect(text?.textContent).toBe("https://");
-
 		unmount();
 	});
-
 	it("renders InputGroupTextarea with protected slot", () => {
 		const { container, unmount } = mount(
 			h(
 				InputGroup,
 				null,
-				h(InputGroupTextarea, { placeholder: "Note..." }),
+				h(InputGroupTextarea, {
+					placeholder: "Note...",
+				}),
 				h(
 					InputGroupAddon,
-					{ align: "block-end" },
+					{
+						align: "block-end",
+					},
 					h(InputGroupText, null, "0/100")
 				)
 			)
 		);
-
 		const textarea = container.querySelector(
 			'[data-slot="input-group-textarea"]'
 		);
 		expect(textarea).not.toBeNull();
 		expect(textarea?.tagName.toLowerCase()).toBe("textarea");
-
 		const addon = container.querySelector('[data-slot="input-group-addon"]');
 		expect(addon?.getAttribute("data-align")).toBe("block-end");
-
 		unmount();
 	});
-
 	it("protects data-slot from malicious prop overrides across all components", () => {
 		const malicious = {
 			className: "malicious-class",
 			"data-slot": "malicious-slot",
-			style: { color: "red" },
+			style: {
+				color: "red",
+			},
 		};
-
-		function MaliciousGroup() {
-			return Reflect.apply(InputGroup, undefined, [malicious]);
-		}
-
-		function MaliciousInput() {
-			return Reflect.apply(InputGroupInput, undefined, [malicious]);
-		}
-
-		function MaliciousTextarea() {
-			return Reflect.apply(InputGroupTextarea, undefined, [malicious]);
-		}
-
-		function MaliciousAddon() {
-			return Reflect.apply(InputGroupAddon, undefined, [malicious]);
-		}
-
-		function MaliciousText() {
-			return Reflect.apply(InputGroupText, undefined, [malicious]);
-		}
-
 		const { container, unmount } = mount(
 			h(
 				"div",
 				null,
-				h(MaliciousGroup),
-				h(MaliciousInput),
-				h(MaliciousTextarea),
-				h(MaliciousAddon),
-				h(MaliciousText)
+				h(MaliciousGroup, {
+					malicious,
+				}),
+				h(MaliciousInput, {
+					malicious,
+				}),
+				h(MaliciousTextarea, {
+					malicious,
+				}),
+				h(MaliciousAddon, {
+					malicious,
+				}),
+				h(MaliciousText, {
+					malicious,
+				})
 			)
 		);
-
 		expect(container.querySelector('[data-slot="malicious-slot"]')).toBeNull();
 		expect(container.querySelectorAll(".malicious-class")).toHaveLength(5);
 		for (const element of container.querySelectorAll<HTMLElement>(
@@ -170,10 +184,8 @@ describe("InputGroup anatomy and slot protection", () => {
 		expect(
 			container.querySelector('[data-slot="input-group-text"]')
 		).not.toBeNull();
-
 		unmount();
 	});
-
 	it("protects InputGroupInput data-slot against polymorphic render overrides", () => {
 		const { container, unmount } = mount(
 			h(InputGroupInput, {
@@ -182,7 +194,9 @@ describe("InputGroup anatomy and slot protection", () => {
 						...renderProps,
 						className: "render-input",
 						"data-slot": "override-slot",
-						style: { color: "blue" },
+						style: {
+							color: "blue",
+						},
 					}),
 			})
 		);
@@ -194,11 +208,18 @@ describe("InputGroup anatomy and slot protection", () => {
 		expect(input?.style.color).toBe("blue");
 		unmount();
 	});
-
 	it("retains native textarea ref contract and defaults the group role", () => {
-		const textareaRef = { current: null as HTMLTextAreaElement | null };
+		const textareaRef = {
+			current: null as HTMLTextAreaElement | null,
+		};
 		const { container, unmount } = mount(
-			h(InputGroup, null, h(InputGroupTextarea, { ref: textareaRef }))
+			h(
+				InputGroup,
+				null,
+				h(InputGroupTextarea, {
+					ref: textareaRef,
+				})
+			)
 		);
 		expect(textareaRef.current).toBe(
 			container.querySelector('[data-slot="input-group-textarea"]')
@@ -208,21 +229,25 @@ describe("InputGroup anatomy and slot protection", () => {
 		unmount();
 	});
 });
-
 describe("Unstyled seam on Input and Textarea", () => {
 	it("renders Input with unstyled seam", () => {
 		const { container, unmount } = mount(
-			h(Input, { placeholder: "Unstyled", unstyled: true })
+			h(Input, {
+				placeholder: "Unstyled",
+				unstyled: true,
+			})
 		);
 		const input = container.querySelector("input");
 		expect(input).not.toBeNull();
 		expect(input?.placeholder).toBe("Unstyled");
 		unmount();
 	});
-
 	it("renders Textarea with unstyled seam", () => {
 		const { container, unmount } = mount(
-			h(Textarea, { placeholder: "Unstyled textarea", unstyled: true })
+			h(Textarea, {
+				placeholder: "Unstyled textarea",
+				unstyled: true,
+			})
 		);
 		const textarea = container.querySelector("textarea");
 		expect(textarea).not.toBeNull();

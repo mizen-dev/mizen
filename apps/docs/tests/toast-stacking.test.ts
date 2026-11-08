@@ -1,5 +1,8 @@
 // @vitest-environment happy-dom
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
+import { toastStyles } from "../../../packages/ui/src/components/toast/toast.styles";
+import { toastStackedStyles } from "../../../packages/ui/src/components/toast/toast-stacked.styles";
+import { space } from "../../../packages/ui/src/styles/spacing.stylex";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: (styles: unknown) => styles,
@@ -10,10 +13,6 @@ vi.mock("@stylexjs/stylex", () => ({
 	props: () => ({}),
 	when: { ancestor: () => ":where(*)" },
 }));
-
-import { toastStyles } from "../../../packages/ui/src/components/toast/toast.styles";
-import { toastStackedStyles } from "../../../packages/ui/src/components/toast/toast-stacked.styles";
-import { space } from "../../../packages/ui/src/styles/spacing.stylex";
 
 describe("Toast stacking spacing and motion", () => {
 	it("removes pointer-events block from viewport and provides root hover bridge", () => {

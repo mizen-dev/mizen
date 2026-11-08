@@ -4,7 +4,7 @@ import type { ComponentPropsWithRef } from "react";
 import { act, createRef, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import {
 	Kbd,
 	KbdGroup,
@@ -15,10 +15,10 @@ import { kbdStyles } from "../../../packages/ui/src/components/kbd/kbd.styles";
 
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
 
-const kbdSlotRegex = /^<kbd[^>]*data-slot="kbd"/;
-const kbdGroupSlotRegex = /^<kbd[^>]*data-slot="kbd-group"/;
+const kbdSlotRegex = /^<kbd[^>]*data-slot="kbd"/u;
+const kbdGroupSlotRegex = /^<kbd[^>]*data-slot="kbd-group"/u;
 const kbdGroupHierarchyRegex =
-	/<kbd[^>]*><kbd[^>]*><span>⌘<\/span><\/kbd><kbd[^>]*><span>K<\/span><\/kbd><\/kbd>/;
+	/<kbd[^>]*><kbd[^>]*><span>⌘<\/span><\/kbd><kbd[^>]*><span>K<\/span><\/kbd><\/kbd>/u;
 
 const propsSpy = vi.fn((..._args: unknown[]) => ({}));
 

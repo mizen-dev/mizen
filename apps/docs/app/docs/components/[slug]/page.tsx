@@ -1,8 +1,6 @@
 import { props } from "@stylexjs/stylex";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getComponentGuidance } from "../../../component-guidance";
-import { getSpecimen } from "../../../components/[slug]/specimens";
+import { Link } from "@tanstack/react-router";
+import type { getComponentPageData } from "../../../../src/component-data.server";
 import { ComponentApiProperties } from "../../../components/api-properties";
 import { docsStyles } from "../../../components/docs.styles";
 import {
@@ -13,19 +11,16 @@ import { ExamplePreview } from "../../../components/example-preview";
 import { GuidanceTable } from "../../../components/guidance-table";
 import { PageActions } from "../../../components/page-actions";
 import { SourceCode } from "../../../components/source-code";
-import {
-	type ComponentDoc,
-	componentDocs,
+import type {
+	ComponentDoc,
 	getAdjacentComponents,
-	getComponentDoc,
 } from "../../../docs-registry";
-import {
+import { getSpecimen, usageComponents } from "../../../example-components.gen";
+import type {
 	getComponentUsage,
-	getExampleSource,
 	getUsageExamples,
-	importStatement,
 } from "../../../example-sources";
-import { usageComponents } from "../../../usage-examples";
+import { importStatement } from "../../../import-statement";
 
 const sections = [
 	["preview", "Preview"],
@@ -36,18 +31,6 @@ const sections = [
 	["boundaries", "Usage boundaries"],
 	["api", "API reference"],
 ] as const;
-
-export function generateStaticParams() {
-	return componentDocs.map(({ slug }) => ({ slug }));
-}
-
-const standaloneSpecimens = new Set([
-	"input",
-	"textarea",
-	"field",
-	"select",
-	"combobox",
-]);
 
 const widePreviews = new Set([
 	"conversation",
@@ -248,7 +231,8 @@ function Pager({ next, previous }: ReturnType<typeof getAdjacentComponents>) {
 		<nav aria-label="Previous and next" {...props(docsStyles.pager)}>
 			{previous ? (
 				<Link
-					href={`/docs/components/${previous.slug}`}
+					params={{ slug: previous.slug }}
+					to="/docs/components/$slug"
 					{...props(docsStyles.pagerLink)}
 				>
 					<span {...props(docsStyles.pagerLabel)}>Previous</span>
@@ -259,7 +243,8 @@ function Pager({ next, previous }: ReturnType<typeof getAdjacentComponents>) {
 			)}
 			{next ? (
 				<Link
-					href={`/docs/components/${next.slug}`}
+					params={{ slug: next.slug }}
+					to="/docs/components/$slug"
 					{...props(docsStyles.pagerLink, docsStyles.pagerNext)}
 				>
 					<span {...props(docsStyles.pagerLabel)}>Next</span>
@@ -270,30 +255,24 @@ function Pager({ next, previous }: ReturnType<typeof getAdjacentComponents>) {
 	);
 }
 
-export default async function ComponentPage({
-	params,
+export default function ComponentPage({
+	data,
 }: {
-	params: Promise<{ slug: string }>;
+	data: NonNullable<ReturnType<typeof getComponentPageData>>;
 }) {
-	const { slug } = await params;
-	const component = getComponentDoc(slug);
-	const allExamples = getUsageExamples(slug);
-	const presentation = standaloneSpecimens.has(slug)
-		? undefined
-		: allExamples[0];
+	const {
+		component,
+		presentation,
+		guidance,
+		example,
+		usageExamples,
+		usage,
+		adjacent,
+	} = data;
+	const { slug } = component;
 	const Specimen = presentation
 		? usageComponents[presentation.name]
 		: getSpecimen(slug);
-	if (!(component && Specimen)) {
-		notFound();
-	}
-	const guidance = getComponentGuidance(component);
-	const example = presentation
-		? { files: [{ code: presentation.code, path: presentation.path }] }
-		: getExampleSource(slug);
-	const usageExamples = presentation ? allExamples.slice(1) : allExamples;
-	const usage = getComponentUsage(slug);
-	const adjacent = getAdjacentComponents(slug);
 	const outlineSections = buildOutline(
 		component,
 		usageExamples,

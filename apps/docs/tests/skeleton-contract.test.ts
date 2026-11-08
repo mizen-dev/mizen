@@ -2,7 +2,7 @@ import type { SkeletonProps, SkeletonShape } from "@mizen-labs/ui/skeleton";
 import type { RefObject } from "react";
 import { createElement, createRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { Skeleton } from "../../../packages/ui/src/components/skeleton/skeleton";
 
 vi.mock("@stylexjs/stylex", () => ({

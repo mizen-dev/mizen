@@ -126,7 +126,7 @@ function plannedMessage(plan: InitPlan): string {
 	return `Planned ${parts.join(" and ")}. Nothing changed yet.`;
 }
 
-const PATCH_HEADER = /^(Index: |={10,})/;
+const PATCH_HEADER = /^(?:Index: |={10,})/u;
 
 // The unified diff without its banner lines, added lines green and removed
 // lines red.

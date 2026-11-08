@@ -4,7 +4,7 @@ import { getDarkThemeTokens } from "./theme-tokens";
 import type { ThemePreference, ThemeScriptProps } from "./types";
 
 function safeJson(value: unknown): string {
-	return JSON.stringify(value).replace(/</g, "\\u003c");
+	return JSON.stringify(value).replace(/</gu, "\\u003c");
 }
 
 function buildThemeScript(

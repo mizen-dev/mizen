@@ -1,5 +1,5 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setDocsTheme,
 	setupTestServer,
@@ -19,7 +19,7 @@ declare global {
 	}
 }
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 
@@ -332,7 +332,7 @@ describe("Theme browser integration and first-paint behavior", () => {
 		});
 
 		await page.waitForFunction(
-			() => document.getElementById("mizen-theme-transition-guard") === null
+			() => document.querySelector("#mizen-theme-transition-guard") === null
 		);
 
 		const settledDarkColors = await page.evaluate(() => {

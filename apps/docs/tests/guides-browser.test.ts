@@ -1,7 +1,7 @@
 // biome-ignore-all lint/performance/noAwaitInLoops: Sequential browser checks keep memory use bounded.
 import { type Browser, chromium, type Page } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import { guides } from "../app/guides";
 import {
 	setDocsTheme,

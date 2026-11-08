@@ -1,6 +1,11 @@
 // @vitest-environment happy-dom
+import type { ComponentProps } from "react";
 import { act, createRef, createElement as h, useState } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
+import type { CalendarRangeValue } from "../../../packages/ui/src/components/calendar/calendar.types";
+import { DateRangePicker } from "../../../packages/ui/src/components/date-range-picker/date-range-picker";
+import { findDayButton, mount } from "./calendar-test-helpers";
+import { setInputValue } from "./date-picker-test-helpers";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(s: T): T => s,
@@ -11,39 +16,19 @@ vi.mock("@stylexjs/stylex", () => ({
 	defineVars: <T extends object>(v: T): T => v,
 	keyframes: <T extends object>(k: T): T => k,
 	props: () => ({}),
-	when: { ancestor: () => ":where(*)" },
+	when: {
+		ancestor: () => ":where(*)",
+	},
 }));
-
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
-
-import type { CalendarRangeValue } from "../../../packages/ui/src/components/calendar/calendar.types";
-import { DateRangePicker } from "../../../packages/ui/src/components/date-range-picker/date-range-picker";
-import { findDayButton, mount } from "./calendar-test-helpers";
-import { setInputValue } from "./date-picker-test-helpers";
-
 describe("DateRangePicker component behavior", () => {
 	it("uses native required validity and blocks invalid range drafts before blur", () => {
 		const onSubmit = vi.fn();
-
-		function FormConsumer() {
-			return h(
-				"form",
-				{
-					onSubmit: (event) => {
-						event.preventDefault();
-						onSubmit();
-					},
-				},
-				h(DateRangePicker, {
-					minNights: 3,
-					name: "dateRange",
-					required: true,
-				}),
-				h("button", { type: "submit" }, "Submit")
-			);
-		}
-
-		const { container, unmount } = mount(h(FormConsumer));
+		const { container, unmount } = mount(
+			h(FormConsumer, {
+				onSubmit,
+			})
+		);
 		const form = container.querySelector("form");
 		const input = container.querySelector<HTMLInputElement>("input");
 		const submitButton = container.querySelector<HTMLButtonElement>(
@@ -55,23 +40,19 @@ describe("DateRangePicker component behavior", () => {
 		if (!(form && input && submitButton)) {
 			return;
 		}
-
 		expect(form.checkValidity()).toBe(false);
 		expect(input.validity.valueMissing).toBe(true);
 		expect(input.validity.customError).toBe(false);
-
 		act(() => input.focus());
 		act(() => setInputValue(input, " "));
 		expect(input.validity.valueMissing).toBe(false);
 		expect(input.validity.customError).toBe(true);
 		expect(form.checkValidity()).toBe(false);
-
 		act(() => setInputValue(input, "2026-10-03 – 2026-10-04"));
 		expect(form.checkValidity()).toBe(false);
 		expect(input.validity.customError).toBe(true);
 		act(() => form.requestSubmit(submitButton));
 		expect(onSubmit).not.toHaveBeenCalled();
-
 		act(() => setInputValue(input, "2026-10-03 – 2026-10-06"));
 		expect(input.validity.customError).toBe(false);
 		expect(form.checkValidity()).toBe(true);
@@ -79,7 +60,6 @@ describe("DateRangePicker component behavior", () => {
 		expect(onSubmit).toHaveBeenCalledTimes(1);
 		unmount();
 	});
-
 	it("blocks submitting a pending start date as a complete range", () => {
 		const onSubmit = vi.fn();
 		const { container, unmount } = mount(
@@ -91,8 +71,16 @@ describe("DateRangePicker component behavior", () => {
 						onSubmit();
 					},
 				},
-				h(DateRangePicker, { name: "dateRange" }),
-				h("button", { type: "submit" }, "Submit")
+				h(DateRangePicker, {
+					name: "dateRange",
+				}),
+				h(
+					"button",
+					{
+						type: "submit",
+					},
+					"Submit"
+				)
 			)
 		);
 		const form = container.querySelector("form");
@@ -104,7 +92,6 @@ describe("DateRangePicker component behavior", () => {
 		if (!(form && input && submitButton)) {
 			return;
 		}
-
 		act(() => {
 			input.focus();
 			setInputValue(input, "2026-10-03");
@@ -114,14 +101,19 @@ describe("DateRangePicker component behavior", () => {
 		expect(onSubmit).not.toHaveBeenCalled();
 		unmount();
 	});
-
 	it("restores the initial uncontrolled value on native form reset", async () => {
 		const initial = {
 			from: new Date(2026, 9, 3),
 			to: new Date(2026, 9, 10),
 		};
 		const { container, unmount } = mount(
-			h("form", {}, h(DateRangePicker, { defaultValue: initial }))
+			h(
+				"form",
+				{},
+				h(DateRangePicker, {
+					defaultValue: initial,
+				})
+			)
 		);
 		const form = container.querySelector("form");
 		const input = container.querySelector<HTMLInputElement>("input");
@@ -129,7 +121,6 @@ describe("DateRangePicker component behavior", () => {
 		if (!(form && input)) {
 			return;
 		}
-
 		act(() => {
 			input.focus();
 			setInputValue(input, "2026-10-04 – 2026-10-11");
@@ -143,7 +134,6 @@ describe("DateRangePicker component behavior", () => {
 		expect(input.value).toBe("2026-10-03 – 2026-10-10");
 		unmount();
 	});
-
 	it("renders canonical placeholder YYYY-MM-DD – YYYY-MM-DD", () => {
 		const { container, unmount } = mount(h(DateRangePicker, {}));
 		const input = container.querySelector("input");
@@ -151,21 +141,21 @@ describe("DateRangePicker component behavior", () => {
 		expect(input?.placeholder).toBe("YYYY-MM-DD – YYYY-MM-DD");
 		unmount();
 	});
-
 	it("renders initial value in canonical format YYYY-MM-DD – YYYY-MM-DD", () => {
 		const initial = {
 			from: new Date(2026, 9, 3),
 			to: new Date(2026, 9, 10),
 		};
 		const { container, unmount } = mount(
-			h(DateRangePicker, { defaultValue: initial })
+			h(DateRangePicker, {
+				defaultValue: initial,
+			})
 		);
 		const input = container.querySelector("input");
 		expect(input).not.toBeNull();
 		expect(input?.value).toBe("2026-10-03 – 2026-10-10");
 		unmount();
 	});
-
 	it("forwards the input ref and accessible name and description", () => {
 		const inputRef = createRef<HTMLInputElement>();
 		const { container, unmount } = mount(
@@ -184,7 +174,6 @@ describe("DateRangePicker component behavior", () => {
 		unmount();
 		expect(inputRef.current).toBeNull();
 	});
-
 	it("renders partial initial value as YYYY-MM-DD", () => {
 		const initial = {
 			from: new Date(2026, 9, 3),
@@ -200,16 +189,18 @@ describe("DateRangePicker component behavior", () => {
 		expect(input?.value).toBe("2026-10-03");
 		unmount();
 	});
-
 	it("commits valid range text on blur and triggers onValueChange", () => {
 		const onValueChange = vi.fn();
-		const { container, unmount } = mount(h(DateRangePicker, { onValueChange }));
+		const { container, unmount } = mount(
+			h(DateRangePicker, {
+				onValueChange,
+			})
+		);
 		const input = container.querySelector("input");
 		expect(input).not.toBeNull();
 		if (!input) {
 			return;
 		}
-
 		act(() => {
 			input.focus();
 		});
@@ -219,7 +210,6 @@ describe("DateRangePicker component behavior", () => {
 		act(() => {
 			input.blur();
 		});
-
 		expect(onValueChange).toHaveBeenCalledTimes(1);
 		const committed = onValueChange.mock.calls[0]?.[0];
 		expect(committed?.from.getFullYear()).toBe(2026);
@@ -231,10 +221,8 @@ describe("DateRangePicker component behavior", () => {
 		// Canonical display text reformatted on blur
 		expect(input.value).toBe("2026-10-03 – 2026-10-08");
 		expect(input.getAttribute("aria-invalid")).toBeNull();
-
 		unmount();
 	});
-
 	it("keeps invalid text on blur, sets aria-invalid, and does not emit onValueChange", () => {
 		const onValueChange = vi.fn();
 		const initial = {
@@ -242,14 +230,16 @@ describe("DateRangePicker component behavior", () => {
 			to: new Date(2026, 9, 10),
 		};
 		const { container, unmount } = mount(
-			h(DateRangePicker, { defaultValue: initial, onValueChange })
+			h(DateRangePicker, {
+				defaultValue: initial,
+				onValueChange,
+			})
 		);
 		const input = container.querySelector("input");
 		expect(input).not.toBeNull();
 		if (!input) {
 			return;
 		}
-
 		act(() => {
 			input.focus();
 		});
@@ -259,14 +249,11 @@ describe("DateRangePicker component behavior", () => {
 		act(() => {
 			input.blur();
 		});
-
 		expect(onValueChange).not.toHaveBeenCalled();
 		expect(input.value).toBe("2026-10-10 – 2026-10-03");
 		expect(input.getAttribute("aria-invalid")).toBe("true");
-
 		unmount();
 	});
-
 	it("restores latest committed value on Escape key in text input", () => {
 		const initial = {
 			from: new Date(2026, 9, 3),
@@ -283,7 +270,6 @@ describe("DateRangePicker component behavior", () => {
 		if (!input) {
 			return;
 		}
-
 		act(() => {
 			input.focus();
 		});
@@ -292,17 +278,17 @@ describe("DateRangePicker component behavior", () => {
 		});
 		act(() => {
 			input.dispatchEvent(
-				new KeyboardEvent("keydown", { bubbles: true, key: "Escape" })
+				new KeyboardEvent("keydown", {
+					bubbles: true,
+					key: "Escape",
+				})
 			);
 		});
-
 		expect(input.value).toBe("2026-10-03 – 2026-10-10");
 		expect(input.getAttribute("aria-invalid")).toBeNull();
 		expect(input.validity.customError).toBe(true);
-
 		unmount();
 	});
-
 	it("first calendar selection commits partial and keeps popup open; second selection completes and closes", () => {
 		const onValueChange = vi.fn();
 		const { container, unmount } = mount(
@@ -311,7 +297,6 @@ describe("DateRangePicker component behavior", () => {
 				onValueChange,
 			})
 		);
-
 		const trigger = container.querySelector(
 			"button[aria-label='Open calendar']"
 		);
@@ -324,9 +309,10 @@ describe("DateRangePicker component behavior", () => {
 		act(() => {
 			(trigger as HTMLButtonElement).click();
 		});
-
 		const currentYear = new Date().getFullYear();
-		const currentMonth = new Date().toLocaleString("en-US", { month: "long" });
+		const currentMonth = new Date().toLocaleString("en-US", {
+			month: "long",
+		});
 		const day10 = findDayButton(document.body, 10, currentMonth, currentYear);
 		const day15 = findDayButton(document.body, 15, currentMonth, currentYear);
 
@@ -334,7 +320,6 @@ describe("DateRangePicker component behavior", () => {
 		act(() => {
 			day10.click();
 		});
-
 		expect(onValueChange).toHaveBeenCalledTimes(1);
 		const firstCall = onValueChange.mock.calls[0]?.[0];
 		expect(firstCall?.from.getDate()).toBe(10);
@@ -347,15 +332,12 @@ describe("DateRangePicker component behavior", () => {
 		act(() => {
 			day15.click();
 		});
-
 		expect(onValueChange).toHaveBeenCalledTimes(2);
 		const secondCall = onValueChange.mock.calls[1]?.[0];
 		expect(secondCall?.from.getDate()).toBe(10);
 		expect(secondCall?.to.getDate()).toBe(15);
-
 		unmount();
 	});
-
 	it("respects readOnly and disabled properties", () => {
 		const onValueChange = vi.fn();
 		const initial = {
@@ -374,18 +356,15 @@ describe("DateRangePicker component behavior", () => {
 		if (!input) {
 			return;
 		}
-
 		act(() => {
 			setInputValue(input, "2026-10-01 – 2026-10-05");
 		});
 		act(() => {
 			input.blur();
 		});
-
 		expect(onValueChange).not.toHaveBeenCalled();
 		unmount();
 	});
-
 	it.each([10, 12])(
 		"completes an uncontrolled range ending on day %s",
 		(endDay) => {
@@ -396,7 +375,6 @@ describe("DateRangePicker component behavior", () => {
 					onValueChange,
 				})
 			);
-
 			const trigger = container.querySelector(
 				"button[aria-label='Open calendar']"
 			);
@@ -404,60 +382,45 @@ describe("DateRangePicker component behavior", () => {
 			if (!trigger) {
 				return;
 			}
-
 			act(() => {
 				(trigger as HTMLButtonElement).click();
 			});
-
 			const currentYear = new Date().getFullYear();
 			const currentMonth = new Date().toLocaleString("en-US", {
 				month: "long",
 			});
 			let day10 = findDayButton(document.body, 10, currentMonth, currentYear);
-
 			act(() => {
 				day10.click();
 			});
-
 			expect(onValueChange).toHaveBeenCalledTimes(1);
 			expect(onValueChange.mock.calls[0]?.[0]?.to).toBeUndefined();
 			expect(trigger.getAttribute("aria-expanded")).toBe("true");
 			day10 = findDayButton(document.body, endDay, currentMonth, currentYear);
-
 			act(() => {
 				day10.click();
 			});
-
 			expect(onValueChange).toHaveBeenCalledTimes(2);
 			const secondCall = onValueChange.mock.calls[1]?.[0];
 			expect(secondCall?.from.getDate()).toBe(10);
 			expect(secondCall?.to?.getDate()).toBe(endDay);
 			expect(trigger.getAttribute("aria-expanded")).toBe("false");
-
 			const input = container.querySelector("input");
 			expect(input?.value.endsWith(`-${String(endDay).padStart(2, "0")}`)).toBe(
 				true
 			);
-
 			unmount();
 		}
 	);
-
 	it.each([10, 12])(
 		"completes a controlled range ending on day %s",
 		(endDay) => {
 			const onValueChange = vi.fn();
-			const ControlledPicker = () => {
-				const [value, setValue] = useState<CalendarRangeValue | undefined>();
-				return h(DateRangePicker, {
-					onValueChange: (nextValue) => {
-						onValueChange(nextValue);
-						setValue(nextValue);
-					},
-					value,
-				});
-			};
-			const { container, unmount } = mount(h(ControlledPicker, {}));
+			const { container, unmount } = mount(
+				h(ControlledPicker, {
+					onValueChange,
+				})
+			);
 			const trigger = container.querySelector(
 				"button[aria-label='Open calendar']"
 			);
@@ -465,7 +428,6 @@ describe("DateRangePicker component behavior", () => {
 			if (!trigger) {
 				return;
 			}
-
 			act(() => {
 				(trigger as HTMLButtonElement).click();
 			});
@@ -488,7 +450,6 @@ describe("DateRangePicker component behavior", () => {
 			act(() => {
 				secondDay10.click();
 			});
-
 			expect(onValueChange).toHaveBeenCalledTimes(2);
 			const completed = onValueChange.mock.calls[1]?.[0];
 			expect(completed?.from.getDate()).toBe(10);
@@ -502,7 +463,6 @@ describe("DateRangePicker component behavior", () => {
 			unmount();
 		}
 	);
-
 	it("suppresses duplicate onValueChange callbacks when next range equals committedValue", () => {
 		const onValueChange = vi.fn();
 		const initial = {
@@ -515,13 +475,11 @@ describe("DateRangePicker component behavior", () => {
 				onValueChange,
 			})
 		);
-
 		const input = container.querySelector("input");
 		expect(input).not.toBeNull();
 		if (!input) {
 			return;
 		}
-
 		act(() => {
 			input.focus();
 		});
@@ -531,10 +489,47 @@ describe("DateRangePicker component behavior", () => {
 		act(() => {
 			input.blur();
 		});
-
 		expect(onValueChange).not.toHaveBeenCalled();
 		expect(input.getAttribute("aria-invalid")).toBeNull();
-
 		unmount();
 	});
 });
+function FormConsumer({ onSubmit }: { onSubmit: () => void }) {
+	return h(
+		"form",
+		{
+			onSubmit: (event) => {
+				event.preventDefault();
+				onSubmit();
+			},
+		},
+		h(DateRangePicker, {
+			minNights: 3,
+			name: "dateRange",
+			required: true,
+		}),
+		h(
+			"button",
+			{
+				type: "submit",
+			},
+			"Submit"
+		)
+	);
+}
+const ControlledPicker = ({
+	onValueChange,
+}: {
+	onValueChange: NonNullable<
+		ComponentProps<typeof DateRangePicker>["onValueChange"]
+	>;
+}) => {
+	const [value, setValue] = useState<CalendarRangeValue | undefined>();
+	return h(DateRangePicker, {
+		onValueChange: (nextValue) => {
+			onValueChange(nextValue);
+			setValue(nextValue);
+		},
+		value,
+	});
+};

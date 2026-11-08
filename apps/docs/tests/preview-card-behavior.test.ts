@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import { act, createRef, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	PreviewCard,
 	PreviewCardPopup,

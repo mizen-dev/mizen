@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { parseForESLint } from "@babel/eslint-parser";
 import { collectAnatomy } from "./component-anatomy.mjs";
 
-const EXPORT_PREFIX = /^export /;
+const EXPORT_PREFIX = /^export /u;
 const appRoot = fileURLToPath(new URL("../app/", import.meta.url));
 const registryPath = resolve(appRoot, "components/[slug]/specimens/index.ts");
 const outputPath = resolve(appRoot, "example-sources.json");
@@ -351,7 +351,7 @@ const biomeBin = createRequire(import.meta.url).resolve(
 );
 const SNIPPET_MARKER = "// @@mizen-usage-snippet@@";
 // Mid-batch, a directive reads as a plain expression, so lift it off first.
-const USE_CLIENT = /^(["'])use client\1;\s*/;
+const USE_CLIENT = /^(?<quote>["'])use client\1;\s*/u;
 
 function formatUsageSources(usage) {
 	const snippets = Object.values(usage).flat();

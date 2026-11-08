@@ -1,5 +1,5 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import docs from "../app/docs-registry-data.json" with { type: "json" };
 import { checkPreviewLayout } from "./preview-layout-checks";
 import {
@@ -11,7 +11,7 @@ import {
 // Every preview, at desktop and phone width, must paint something, stay in
 // its frame, sit near the center of its stage, and keep short labels on one
 // line. These are the regressions visual review kept finding by hand.
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const slugs = docs.map(({ slug }) => slug);
 let handle: TestServerHandle;
 let browser: Browser;

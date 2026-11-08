@@ -1,12 +1,12 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -203,7 +203,7 @@ describe("AvatarGroup component browser behavior", () => {
 		expect(await thirdAvatar.locator("img").count()).toBe(0);
 		const thirdFallback = thirdAvatar.locator('[data-slot="avatar-fallback"]');
 		await expect.poll(async () => thirdFallback.isVisible()).toBe(true);
-		expect(await thirdFallback.innerText()).toBe("MC");
+		expect(await thirdFallback.textContent()).toBe("MC");
 		expect(await thirdFallback.getAttribute("role")).toBe("img");
 		expect(await thirdFallback.getAttribute("aria-label")).toBe("Maya Chen");
 	});

@@ -1,6 +1,6 @@
 import { mkdir } from "node:fs/promises";
 import { type Browser, chromium } from "playwright";
-import { afterAll, beforeAll, expect, it } from "vitest";
+import { afterAll, beforeAll, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,

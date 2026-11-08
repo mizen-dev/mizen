@@ -1,13 +1,13 @@
 import { type Browser, chromium, type Page } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const errors: string[] = [];
 let handle: TestServerHandle;
 let browser: Browser;
@@ -67,7 +67,7 @@ describe("website and workspace navigation", { timeout: 30_000 }, () => {
 		await expectLocator(page).toHaveURL(`${handle.url}/docs/components/field`);
 	});
 
-	for (const theme of ["light", "dark"] as const) {
+	describe.each(["light", "dark"] as const)("%s theme", (theme) => {
 		it(`fits enlarged ${theme} navigation on narrow screens`, async () => {
 			await page.setViewportSize({ height: 900, width: 390 });
 			await page.emulateMedia({ reducedMotion: "reduce" });
@@ -105,5 +105,5 @@ describe("website and workspace navigation", { timeout: 30_000 }, () => {
 				path: `/private/tmp/mizen-site-navigation-${theme}.png`,
 			});
 		});
-	}
+	});
 });

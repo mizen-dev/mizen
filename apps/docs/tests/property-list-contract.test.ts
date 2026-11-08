@@ -4,7 +4,7 @@ import type { ComponentPropsWithRef, ReactElement, ReactNode } from "react";
 import { act, createRef, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import {
 	PropertyList,
 	PropertyListItem,
@@ -26,9 +26,9 @@ import {
 
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
 
-const propertyListSlotRegex = /^<dl[^>]*data-slot="property-list"/;
+const propertyListSlotRegex = /^<dl[^>]*data-slot="property-list"/u;
 const propertyListHierarchyRegex =
-	/<dl[^>]*><div[^>]*><dt[^>]*>Plan<\/dt><dd[^>]*>Enterprise<\/dd><\/div><\/dl>/;
+	/<dl[^>]*><div[^>]*><dt[^>]*>Plan<\/dt><dd[^>]*>Enterprise<\/dd><\/div><\/dl>/u;
 
 const propsSpy = vi.fn((..._args: unknown[]) => ({}));
 

@@ -9,17 +9,15 @@ import {
 import { typographyStyles } from "@mizen-labs/ui/typography.styles";
 import { props } from "@stylexjs/stylex";
 import { IconSearch } from "@tabler/icons-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, useLocation } from "@tanstack/react-router";
 import { type ChangeEvent, useCallback, useState } from "react";
 import { ComponentNavigation } from "./component-navigation";
 import { shellStyles } from "./docs-shell.styles";
 import { guides } from "./guides";
+import { NavTreeGroup } from "./nav-tree";
 
 const gettingStarted = guides.filter((guide) => guide.group === undefined);
 const hooks = guides.filter((guide) => guide.group === "Hooks");
-
-import { NavTreeGroup } from "./nav-tree";
 
 export function ActiveComponentNavigation({
 	aside = false,
@@ -27,7 +25,7 @@ export function ActiveComponentNavigation({
 	/** Desktop aside: search stays on top while the list scrolls. */
 	aside?: boolean;
 }) {
-	const pathname = usePathname();
+	const pathname = useLocation({ select: (location) => location.pathname });
 	const [query, setQuery] = useState("");
 	const changeQuery = useCallback(
 		(event: ChangeEvent<HTMLInputElement>) =>
@@ -64,8 +62,9 @@ export function ActiveComponentNavigation({
 					{gettingStarted.map(({ slug, title }) => (
 						<Link
 							aria-current={pathname === `/docs/${slug}` ? "page" : undefined}
-							href={`/docs/${slug}`}
 							key={slug}
+							params={{ guide: slug }}
+							to="/docs/$guide"
 							{...props(
 								shellStyles.navLink,
 								pathname === `/docs/${slug}` && shellStyles.navLinkCurrent
@@ -79,8 +78,9 @@ export function ActiveComponentNavigation({
 					{hooks.map(({ slug, title }) => (
 						<Link
 							aria-current={pathname === `/docs/${slug}` ? "page" : undefined}
-							href={`/docs/${slug}`}
 							key={slug}
+							params={{ guide: slug }}
+							to="/docs/$guide"
 							{...props(
 								shellStyles.navLink,
 								pathname === `/docs/${slug}` && shellStyles.navLinkCurrent

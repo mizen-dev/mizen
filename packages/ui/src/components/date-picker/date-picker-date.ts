@@ -22,7 +22,7 @@ export function formatIsoDate(date: Date | undefined): string {
 	return `${year}-${month}-${day}`;
 }
 
-const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/u;
 
 export function parseIsoDate(text: string): Date | undefined {
 	const trimmed = text.trim();

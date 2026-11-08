@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-const IDENTIFIER_BOUNDARY = /(?=[A-Z][a-z])/;
+const IDENTIFIER_BOUNDARY = /(?=[A-Z][a-z])/u;
 
 export function wrapIdentifier(value: string) {
 	return value.split(IDENTIFIER_BOUNDARY).map((part, index) => (

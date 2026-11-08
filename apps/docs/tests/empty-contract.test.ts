@@ -10,7 +10,7 @@ import type {
 import type { ComponentPropsWithRef, ReactElement, ReactNode } from "react";
 import { createRef, createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	Empty,
 	EmptyContent,
@@ -30,7 +30,7 @@ vi.mock("@stylexjs/stylex", () => ({
 	when: { ancestor: () => ":where(*)" },
 }));
 
-const emptySlotRegex = /^<div[^>]*data-slot="empty"/;
+const emptySlotRegex = /^<div[^>]*data-slot="empty"/u;
 
 type Exact<Actual, Expected> = [Actual] extends [Expected]
 	? [Expected] extends [Actual]
@@ -164,7 +164,7 @@ describe("Empty component contract and SSR semantics", () => {
 			expect(m).toContain(`data-variant="${variant}"`);
 			if (variant === "icon") {
 				expect(m).toContain('data-testid="icon"');
-				const matches = m.match(/aria-hidden="true"/g);
+				const matches = m.match(/aria-hidden="true"/gu);
 				expect(matches?.length).toBeGreaterThanOrEqual(3);
 			}
 		}

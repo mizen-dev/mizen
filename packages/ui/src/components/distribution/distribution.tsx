@@ -249,7 +249,7 @@ function DistributionChart({
 						fillOpacity: 0.82,
 						id: "distribution-bars",
 						inset: 1.25,
-						key: (_bin, index) => String(index),
+						key: ({ x1, x2 }) => `${x1}:${x2}`,
 						radius: 2,
 						x1: "x1",
 						x2: "x2",

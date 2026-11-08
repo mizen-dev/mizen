@@ -1,16 +1,5 @@
 // @vitest-environment happy-dom
-import { describe, expect, it, vi } from "vitest";
-
-vi.mock("@stylexjs/stylex", () => ({
-	create: (styles: unknown) => styles,
-	defineConsts: (constants: unknown) => constants,
-	defineMarker: () => ({}),
-	defineVars: (vars: unknown) => vars,
-	keyframes: (frames: unknown) => frames,
-	props: () => ({}),
-	when: { ancestor: () => ":where(*)" },
-}));
-
+import { describe, expect, it, vi } from "vite-plus/test";
 import type {
 	AnchoredToastProviderProps,
 	anchoredToastManager,
@@ -25,6 +14,16 @@ import {
 	getUpdateAnimation,
 	resolveSideOffset,
 } from "../../../packages/ui/src/components/toast/toast-utils";
+
+vi.mock("@stylexjs/stylex", () => ({
+	create: (styles: unknown) => styles,
+	defineConsts: (constants: unknown) => constants,
+	defineMarker: () => ({}),
+	defineVars: (vars: unknown) => vars,
+	keyframes: (frames: unknown) => frames,
+	props: () => ({}),
+	when: { ancestor: () => ":where(*)" },
+}));
 
 type Exact<Actual, Expected> = [Actual] extends [Expected]
 	? [Expected] extends [Actual]

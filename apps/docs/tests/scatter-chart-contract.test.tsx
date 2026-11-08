@@ -3,7 +3,11 @@
 import type { ComponentProps, ComponentType } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
+import {
+	ScatterChart,
+	type ScatterChartProps,
+} from "../../../packages/ui/src/components/scatter-chart/scatter-chart";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(styles: T): T => styles,
@@ -14,11 +18,6 @@ vi.mock("@stylexjs/stylex", () => ({
 	props: () => ({}),
 	when: { ancestor: () => ":where(*)" },
 }));
-
-import {
-	ScatterChart,
-	type ScatterChartProps,
-} from "../../../packages/ui/src/components/scatter-chart/scatter-chart";
 
 type Rejects<T, K extends PropertyKey> = [Extract<keyof T, K>] extends [never]
 	? true

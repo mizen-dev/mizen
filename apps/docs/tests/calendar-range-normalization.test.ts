@@ -1,4 +1,5 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
+import { normalizeCalendarRange } from "../../../packages/ui/src/components/calendar/calendar-utils";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(s: T): T => s,
@@ -11,8 +12,6 @@ vi.mock("@stylexjs/stylex", () => ({
 	props: () => ({}),
 	when: { ancestor: () => ":where(*)" },
 }));
-
-import { normalizeCalendarRange } from "../../../packages/ui/src/components/calendar/calendar-utils";
 
 describe("normalizeCalendarRange", () => {
 	it("normalizes DateRange with missing from to undefined", () => {

@@ -40,7 +40,7 @@ export function frameworkOf(manifest: Manifest): Framework | "unknown" {
 	return "vite" in dependencies && "react" in dependencies ? "vite" : "unknown";
 }
 
-const MANAGER = /^(npm|pnpm|yarn|bun)@/;
+const MANAGER = /^(?<manager>npm|pnpm|yarn|bun)@/u;
 
 interface ManagerDeclaration {
 	manager: string;

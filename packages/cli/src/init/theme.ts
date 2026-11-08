@@ -19,8 +19,8 @@ import {
 } from "./edit.js";
 import { bindingName, importEdit, importedName, specifier } from "./imports.js";
 
-const SELF_CLOSING = /\/\s*>$/;
-const LINE_LEAD = /^\r?\n[ \t]*/;
+const SELF_CLOSING = /\/\s*>$/u;
+const LINE_LEAD = /^\r?\n[ \t]*/u;
 
 function single(elements: SyntaxNode[], tag: string): SyntaxNode {
 	const matches = elements.filter((node) => jsxName(node) === tag);

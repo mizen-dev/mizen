@@ -2,7 +2,7 @@
 
 import { act } from "react";
 import { createRoot } from "react-dom/client";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vite-plus/test";
 import {
 	type CopyStatus,
 	type UseCopyToClipboardOptions,
@@ -10,38 +10,53 @@ import {
 } from "../../../packages/ui/src/use-copy-to-clipboard";
 
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
-
-type Copy = (value: string | Promise<string>) => Promise<boolean>;
-
-function mount(options?: UseCopyToClipboardOptions) {
-	const result: { copy?: Copy; status?: CopyStatus } = {};
-	function Probe() {
-		Object.assign(result, useCopyToClipboard(options));
-		return null;
-	}
-	const root = createRoot(document.createElement("div"));
-	act(() => root.render(<Probe />));
-	return { result, unmount: () => act(() => root.unmount()) };
+function Probe({
+	result,
+	options,
+}: {
+	result: {
+		copy?: Copy;
+		status?: CopyStatus;
+	};
+	options: UseCopyToClipboardOptions | undefined;
+}) {
+	Object.assign(result, useCopyToClipboard(options));
+	return null;
 }
-
+type Copy = (value: string | Promise<string>) => Promise<boolean>;
+function mount(options?: UseCopyToClipboardOptions) {
+	const result: {
+		copy?: Copy;
+		status?: CopyStatus;
+	} = {};
+	const root = createRoot(document.createElement("div"));
+	act(() => root.render(<Probe options={options} result={result} />));
+	return {
+		result,
+		unmount: () => act(() => root.unmount()),
+	};
+}
 function stubClipboard(writeText: (text: string) => Promise<void>) {
 	Object.defineProperty(navigator, "clipboard", {
 		configurable: true,
-		value: { writeText },
+		value: {
+			writeText,
+		},
 	});
 }
-
 afterEach(() => {
 	vi.useRealTimers();
 });
-
 describe("useCopyToClipboard", () => {
 	it("reports copied, then returns to idle after the timeout", async () => {
 		vi.useFakeTimers();
 		const writeText = vi.fn(() => Promise.resolve());
 		stubClipboard(writeText);
 		const onCopy = vi.fn();
-		const { result, unmount } = mount({ onCopy, timeout: 1000 });
+		const { result, unmount } = mount({
+			onCopy,
+			timeout: 1000,
+		});
 		expect(result.status).toBe("idle");
 		await act(async () => {
 			expect(await result.copy?.("hello")).toBe(true);
@@ -53,7 +68,6 @@ describe("useCopyToClipboard", () => {
 		expect(result.status).toBe("idle");
 		unmount();
 	});
-
 	it("reports failed until the next attempt when the browser refuses", async () => {
 		vi.useFakeTimers();
 		stubClipboard(() => Promise.reject(new Error("denied")));
@@ -66,7 +80,6 @@ describe("useCopyToClipboard", () => {
 		expect(result.status).toBe("failed");
 		unmount();
 	});
-
 	it("copies text that is still loading, and fails when it never arrives", async () => {
 		const writeText = vi.fn(() => Promise.resolve());
 		stubClipboard(writeText);
@@ -81,7 +94,6 @@ describe("useCopyToClipboard", () => {
 		expect(result.status).toBe("failed");
 		unmount();
 	});
-
 	it("lets only the latest attempt report", async () => {
 		stubClipboard(() => Promise.resolve());
 		const { result, unmount } = mount();

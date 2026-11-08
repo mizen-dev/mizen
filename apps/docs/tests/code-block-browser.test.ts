@@ -8,7 +8,7 @@ import {
 	describe,
 	expect,
 	it,
-} from "vitest";
+} from "vite-plus/test";
 import { workspaceSettingsSource } from "../app/compositions/code-block-source";
 import {
 	setupTestServer,
@@ -23,7 +23,7 @@ declare global {
 	}
 }
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;

@@ -62,7 +62,7 @@ const notificationDescriptions = {
 	securityAlerts: "Important changes to workspace access and security.",
 	weeklyDigest: "A summary of your team's activity, every Monday.",
 } as const;
-const contactEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const contactEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/u;
 const timezones = [
 	{ label: "Moscow", value: "Europe/Moscow" },
 	{ label: "London", value: "Europe/London" },

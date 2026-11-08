@@ -1,14 +1,14 @@
 import type { GridProps } from "@mizen-labs/ui/grid";
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const WHITESPACE_REGEX = /\s+/;
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const WHITESPACE_REGEX = /\s+/u;
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;

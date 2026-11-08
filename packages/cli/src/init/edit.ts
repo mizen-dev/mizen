@@ -29,7 +29,7 @@ export function position(value: unknown, key: "start" | "end"): number {
 	return value[key];
 }
 
-const TAB_INDENT = /^\t/m;
+const TAB_INDENT = /^\t/mu;
 
 // Wraps the element at start..end in <name>. An element that starts its
 // line is wrapped as a block, one indent deeper; one inline stays inline.

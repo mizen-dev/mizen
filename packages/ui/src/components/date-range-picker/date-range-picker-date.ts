@@ -38,7 +38,7 @@ export function countNights(from: Date, to: Date): number {
 	return Math.max(0, diffDays);
 }
 
-const RANGE_SEPARATOR_REGEX = /\s+[–—-]\s+|[–—]|\/|\s+(?:to)\s+/i;
+const RANGE_SEPARATOR_REGEX = /\s+[–—-]\s+|[–—]|\/|\s+(?:to)\s+/iu;
 
 export function parseIsoRange(text: string): CalendarRangeValue | undefined {
 	const trimmed = text.trim();

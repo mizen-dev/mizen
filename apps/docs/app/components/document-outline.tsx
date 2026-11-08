@@ -99,7 +99,9 @@ export function DocumentOutline({ sections }: { sections: OutlineSection[] }) {
 				return;
 			}
 			const elements = sections.flatMap(({ id }) => {
-				const element = document.getElementById(id);
+				const element = document.querySelector<HTMLElement>(
+					`#${CSS.escape(id)}`
+				);
 				return element ? [element] : [];
 			});
 			let frame = 0;

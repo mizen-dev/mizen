@@ -3,7 +3,7 @@
 import type { ComponentProps, ComponentType } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	CategoryComparison,
 	type CategoryComparisonProps,
@@ -37,18 +37,18 @@ const RuntimeCategoryComparison = CategoryComparison as ComponentType<
 	Record<string, unknown>
 >;
 const BAR_PATHS =
-	/<path\b[^>]*data-ts-key="category-comparison-bars:[^"]*"[^>]*d="([^"]+)"[^>]*\/>/g;
-const BAR_START_Y = /^M[\d.-]+,([\d.-]+)/;
-const BAR_START_X = /^M([\d.-]+),/;
-const BAR_END_X = /H([\d.-]+)/;
-const BAR_ARC_Y = /A[\d.-]+,[\d.-]+ \d+ \d+ \d+ [\d.-]+,([\d.-]+)/g;
-const SHARED_LABELS = />Shared<\/text>/g;
-const NORTH_BAR = /data-ts-key="category-comparison-bars:[^"]*north"/;
-const SOUTH_BAR = /data-ts-key="category-comparison-bars:[^"]*south"/;
-const JAN_BAR = /data-ts-key="category-comparison-bars:[^"]*jan"/;
+	/<path\b[^>]*data-ts-key="category-comparison-bars:[^"]*"[^>]*d="(?<path>[^"]+)"[^>]*\/>/gu;
+const BAR_START_Y = /^M[\d.-]+,(?<y>[\d.-]+)/u;
+const BAR_START_X = /^M(?<x>[\d.-]+),/u;
+const BAR_END_X = /H(?<endX>[\d.-]+)/u;
+const BAR_ARC_Y = /A[\d.-]+,[\d.-]+ \d+ \d+ \d+ [\d.-]+,(?<endY>[\d.-]+)/gu;
+const SHARED_LABELS = />Shared<\/text>/gu;
+const NORTH_BAR = /data-ts-key="category-comparison-bars:[^"]*north"/u;
+const SOUTH_BAR = /data-ts-key="category-comparison-bars:[^"]*south"/u;
+const JAN_BAR = /data-ts-key="category-comparison-bars:[^"]*jan"/u;
 const JAN_COMPARISON_BAR =
-	/data-ts-key="category-comparison-bars:[^"]*jan:comparison"/;
-const ZERO_BAR = /data-ts-key="category-comparison-bars:[^"]*none"/;
+	/data-ts-key="category-comparison-bars:[^"]*jan:comparison"/u;
+const ZERO_BAR = /data-ts-key="category-comparison-bars:[^"]*none"/u;
 
 function barGeometry(path: string) {
 	const yPositions = [

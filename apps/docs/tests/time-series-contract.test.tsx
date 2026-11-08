@@ -3,7 +3,7 @@
 import type { ComponentProps, ComponentType } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	TimeSeries,
 	type TimeSeriesProps,
@@ -19,10 +19,12 @@ vi.mock("@stylexjs/stylex", () => ({
 	when: { ancestor: () => ":where(*)" },
 }));
 
-const LINE_PATH = /class="ts-chart__line"[\s\S]*?<path[^>]* d="([^"]+)"/;
+const LINE_PATH =
+	/class="ts-chart__line"[\s\S]*?<path[^>]* d="(?<path>[^"]+)"/u;
 // Line vertices: the M point and each L or cubic C endpoint (C carries two
 // control points first).
-const LINE_VERTEX = /[MLC](?:[\d.e-]+,[\d.e-]+,){0,2}([\d.]+),([\d.]+)/g;
+const LINE_VERTEX =
+	/[MLC](?:[\d.e-]+,[\d.e-]+,){0,2}(?<x>[\d.]+),(?<y>[\d.]+)/gu;
 type Rejects<T, K extends PropertyKey> = [Extract<keyof T, K>] extends [never]
 	? true
 	: false;
@@ -41,8 +43,8 @@ const commonProps = {
 	seriesLabel: "Response time",
 	timeZone: "America/Los_Angeles",
 };
-const intradayTickPattern = /Dec 31, \d+:\d{2} [AP]M PST/;
-const secondTickPattern = /Dec 31, 4:00:\d{2} PM PST/g;
+const intradayTickPattern = /Dec 31, \d+:\d{2} [AP]M PST/u;
+const secondTickPattern = /Dec 31, 4:00:\d{2} PM PST/gu;
 
 describe("TimeSeries contract", () => {
 	it("renders temporal spacing and an accessible chart surface", () => {
@@ -130,7 +132,7 @@ describe("TimeSeries contract", () => {
 
 		expect(points.map(({ time }) => time)).toEqual([4000, 0, 2000, 6000]);
 		expect(
-			markup.match(/data-ts-key="time-series-line:[^"]+:segment:/g)?.length
+			markup.match(/data-ts-key="time-series-line:[^"]+:segment:/gu)?.length
 		).toBe(2);
 	});
 

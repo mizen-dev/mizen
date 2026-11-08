@@ -1,10 +1,17 @@
 import { type ChildProcess, spawn } from "node:child_process";
 import { createServer } from "node:net";
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import {
+	afterAll,
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+} from "vite-plus/test";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const confirmationPattern = /delete/i;
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const confirmationPattern = /delete/iu;
 let url: string;
 let browser: Browser;
 let page: Page;

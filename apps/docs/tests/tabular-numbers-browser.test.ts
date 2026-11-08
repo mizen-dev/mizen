@@ -1,12 +1,12 @@
 import { type Browser, chromium } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 // Wix lacks tnum glyphs. Verify the requested feature and preserve the owner's font choice.
 const cases = [
 	{ selector: '[data-slot="score-gauge-score"]', slug: "score-gauge" },
@@ -37,8 +37,8 @@ describe("changing numbers", () => {
 		await browser?.close();
 		await teardownTestServer(handle);
 	});
-	for (const theme of ["light", "dark"]) {
-		for (const width of [1280, 375]) {
+	describe.each(["light", "dark"])("%s theme", (theme) => {
+		describe.each([1280, 375])("%s width", (width) => {
 			it(`requests tabular figures without replacing Wix in ${theme} at ${width}px`, async () => {
 				const context = await browser.newContext({
 					reducedMotion: "reduce",
@@ -77,6 +77,6 @@ describe("changing numbers", () => {
 					await context.close();
 				}
 			});
-		}
-	}
+		});
+	});
 });

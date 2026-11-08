@@ -4,12 +4,20 @@ packages:
 minimumReleaseAgeExclude:
   - sugar-high@2.6.4
 permissions:
-  '@tanstack/charts':
+  "@tanstack/charts":
     skills: true
-  '@tanstack/react-table':
+  "@tanstack/react-table":
     skills: true
   ultracite:
     skills: true
 skills:
   dirs:
     - .agents/skills
+
+# Keep Start plugins and the docs test runner on Vite+'s matching toolchain.
+overrides:
+  vite@*: npm:@voidzero-dev/vite-plus-core@1.5.0
+  vitest@*: 5.1.0
+peerDependencyRules:
+  allowedVersions:
+    vite: "*"

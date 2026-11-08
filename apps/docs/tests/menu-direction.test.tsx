@@ -2,8 +2,9 @@
 
 import { createElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { DirectionProvider } from "../../../packages/ui/node_modules/@base-ui/react/direction-provider/index.mjs";
+import { MenuSubTrigger } from "../../../packages/ui/src/components/menu/menu";
 
 vi.mock(
 	"../../../packages/ui/node_modules/@base-ui/react/menu/index.mjs",
@@ -32,8 +33,6 @@ vi.mock("@stylexjs/stylex", () => ({
 	props: () => ({}),
 	when: { ancestor: () => ":where(*)" },
 }));
-
-import { MenuSubTrigger } from "../../../packages/ui/src/components/menu/menu";
 
 const renderTrigger = (direction: "ltr" | "rtl") =>
 	renderToStaticMarkup(

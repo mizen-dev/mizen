@@ -2,7 +2,7 @@ import type { SpacerProps } from "@mizen-labs/ui/spacer";
 import { type Browser, chromium, type Page } from "playwright";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vite-plus/test";
 import { Spacer } from "../../../packages/ui/src/components/spacer/spacer";
 import {
 	setupTestServer,
@@ -17,7 +17,7 @@ vi.mock("@stylexjs/stylex", () => ({
 	when: { ancestor: () => ":where(*)" },
 }));
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;

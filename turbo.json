@@ -3,11 +3,16 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", ".output/**"]
     },
     "dev": {
       "dependsOn": ["^build"],
       "with": ["@mizen-labs/docs#dev", "@mizen-labs/ui#dev"],
+      "cache": false,
+      "persistent": true
+    },
+    "@mizen-labs/ui#dev": {
+      "dependsOn": ["build"],
       "cache": false,
       "persistent": true
     },

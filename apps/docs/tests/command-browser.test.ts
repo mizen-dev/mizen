@@ -1,13 +1,20 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import {
+	afterAll,
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+} from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const OPEN_TRIGGER_NAME_REGEX = /Open Command Palette/i;
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const OPEN_TRIGGER_NAME_REGEX = /Open Command Palette/iu;
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;

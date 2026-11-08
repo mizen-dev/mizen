@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { cleanup } from "../../../scripts/cleanup.mjs";
 import { getComponentGuidance } from "../app/component-guidance";
 import { componentDocs, renderComponentMarkdown } from "../app/docs-registry";
@@ -11,8 +11,8 @@ import {
 	renderExampleMarkdown,
 } from "../app/example-sources";
 
-const themeOnlyTitle = /dark.?theme|local theme/i;
-const themeOnlyName = /DarkThemeComposition|LocallyThemed/;
+const themeOnlyTitle = /dark.?theme|local theme/iu;
+const themeOnlyName = /DarkThemeComposition|LocallyThemed/u;
 
 describe("documentation sources", () => {
 	it("omits dedicated theme previews from public component examples", () => {

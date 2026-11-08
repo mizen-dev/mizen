@@ -3,7 +3,7 @@
 import type { ComponentType } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { BarList } from "../../../packages/ui/src/components/bar-list/bar-list";
 import { Funnel } from "../../../packages/ui/src/components/funnel/funnel";
 

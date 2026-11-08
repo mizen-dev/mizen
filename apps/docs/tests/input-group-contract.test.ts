@@ -9,7 +9,7 @@ import type {
 	InputGroupTextareaProps,
 	InputGroupTextProps,
 } from "@mizen-labs/ui/input-group";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(styles: T): T => styles,

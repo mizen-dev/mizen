@@ -21,7 +21,7 @@ const ESC = String.fromCharCode(27);
 const BEL = String.fromCharCode(7);
 const CSI = `${ESC}\\[([0-9;?]*)([A-Za-z])`;
 const OSC = `${ESC}\\][^${BEL}${ESC}]*(?:${BEL}|${ESC}\\\\)`;
-const ESCAPE = new RegExp(`${CSI}|${OSC}`, "g");
+const ESCAPE = new RegExp(`${CSI}|${OSC}`, "gu");
 
 // Each SGR code sets one part of the style. Hues other than red, and the
 // background colors, keep the text plain: Mizen has text-safe tokens only

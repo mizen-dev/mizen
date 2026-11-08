@@ -1,13 +1,13 @@
 import { type Browser, chromium } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const errors: string[] = [];
 let handle: TestServerHandle;
 let browser: Browser;
@@ -27,7 +27,7 @@ describe("part-to-whole composition", () => {
 		expect(errors).toEqual([]);
 	}, 120_000);
 
-	for (const theme of ["light", "dark"] as const) {
+	describe.each(["light", "dark"] as const)("%s theme", (theme) => {
 		it(`keeps labeled shares and keyboard tooltips in ${theme} mode`, async () => {
 			const context = await browser.newContext({
 				viewport: { height: 900, width: 1280 },
@@ -84,5 +84,5 @@ describe("part-to-whole composition", () => {
 				await context.close();
 			}
 		}, 30_000);
-	}
+	});
 });

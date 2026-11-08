@@ -731,7 +731,7 @@ export function Tree(treeProps: TreeProps) {
 		(id: string) => {
 			setActiveId(id);
 			document
-				.getElementById(getDomId(id))
+				.querySelector(`#${CSS.escape(getDomId(id))}`)
 				?.querySelector('[data-slot="tree-item-row"]')
 				?.scrollIntoView?.({ block: "nearest", inline: "nearest" });
 		},

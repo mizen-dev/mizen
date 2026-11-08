@@ -41,7 +41,6 @@
 	--composer-group-gap: 8px;
 }
 [data-slot="composer-input"] {
-	field-sizing: content;
 	min-height: calc(var(--composer-min-rows, 1) * 1lh + 0.75rem);
 }
 [data-layout="adaptive"] > [data-slot="composer-scroll-area"] {
@@ -71,5 +70,11 @@
 	}
 	&::after {
 		content: "\2060\00a0";
+	}
+}
+
+@supports (field-sizing: content) {
+	[data-slot="composer-input"] {
+		field-sizing: content;
 	}
 }

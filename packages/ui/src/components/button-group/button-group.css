@@ -2,22 +2,10 @@
    such as menu-trigger, so they join the group too. First and last are
    counted among items only: an open popup inserts hidden focus guards. */
 [data-slot="button-group"]
-> :is([data-slot="button"], [data-slot$="-trigger"]) {
+	> :is([data-slot="button"], [data-slot$="-trigger"]) {
 	flex-shrink: 0;
 	align-self: stretch !important;
 	white-space: nowrap;
-}
-
-[data-slot="button-group"]:where([data-orientation="horizontal"])
-	> :is([data-slot="button"], [data-slot$="-trigger"])
-	~ :is([data-slot="button"], [data-slot$="-trigger"]) {
-	margin-inline-start: -1px;
-}
-
-[data-slot="button-group"]:where([data-orientation="vertical"])
-	> :is([data-slot="button"], [data-slot$="-trigger"])
-	~ :is([data-slot="button"], [data-slot$="-trigger"]) {
-	margin-block-start: -1px;
 }
 
 [data-slot="button-group"]
@@ -54,6 +42,7 @@
 [data-slot="button-group"]:where([data-orientation="horizontal"])
 	> :is([data-slot="button"], [data-slot$="-trigger"])
 	~ :is([data-slot="button"], [data-slot$="-trigger"]) {
+	margin-inline-start: -1px;
 	border-inline-start-color: transparent !important;
 	border-start-start-radius: 0 !important;
 	border-end-start-radius: 0 !important;
@@ -71,6 +60,7 @@
 [data-slot="button-group"]:where([data-orientation="vertical"])
 	> :is([data-slot="button"], [data-slot$="-trigger"])
 	~ :is([data-slot="button"], [data-slot$="-trigger"]) {
+	margin-block-start: -1px;
 	border-block-start-color: transparent !important;
 	border-start-start-radius: 0 !important;
 	border-start-end-radius: 0 !important;
@@ -115,7 +105,7 @@
 /* Pressing a joined button contracts only across the group, so the shared
    outline stays continuous along it. */
 [data-slot="button-group"]:where([data-orientation="horizontal"])
-> :is([data-slot="button"], [data-slot$="-trigger"]):active::before {
+	> :is([data-slot="button"], [data-slot$="-trigger"]):active::before {
 	inset-inline: -1px !important;
 }
 

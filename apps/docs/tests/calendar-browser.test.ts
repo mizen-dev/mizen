@@ -1,22 +1,22 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
 
-const TODAY_REGEX = /^Today,/;
-const JUNE_10_REGEX = /June 10/i;
-const JUNE_9_REGEX = /June 9/i;
-const JUNE_11_REGEX = /June 11/i;
-const JUNE_15_REGEX = /June 15/i;
-const JULY_1_REGEX = /July 1(?:st)?(?!\d)/i;
+const TODAY_REGEX = /^Today,/u;
+const JUNE_10_REGEX = /June 10/iu;
+const JUNE_9_REGEX = /June 9/iu;
+const JUNE_11_REGEX = /June 11/iu;
+const JUNE_15_REGEX = /June 15/iu;
+const JULY_1_REGEX = /July 1(?:st)?(?!\d)/iu;
 
 function throwTeardownFailures(
 	results: readonly PromiseSettledResult<unknown>[]

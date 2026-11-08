@@ -51,7 +51,7 @@ function formatRelative(date: Date, now: Date, locale: string) {
 }
 
 const ISO_INSTANT_REGEX =
-	/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
+	/^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})T(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})(?:\.\d+)?(?<timezone>Z|[+-]\d{2}:\d{2})$/u;
 
 function parseInstant(value: string): Date {
 	const match = ISO_INSTANT_REGEX.exec(value);

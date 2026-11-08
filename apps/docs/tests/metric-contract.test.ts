@@ -4,7 +4,7 @@ import type { ComponentPropsWithRef } from "react";
 import { act, createRef, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import {
 	Metric,
 	MetricDescription,
@@ -22,9 +22,9 @@ import { fontSize } from "../../../packages/ui/src/styles/typography.stylex";
 
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
 
-const metricSlotRegex = /^<div[^>]*data-slot="metric"/;
+const metricSlotRegex = /^<div[^>]*data-slot="metric"/u;
 const metricHierarchyRegex =
-	/<div[^>]*><div[^>]*>Revenue<\/div><div[^>]*>\$48,200<\/div><div[^>]*>\+12%<\/div><\/div>/;
+	/<div[^>]*><div[^>]*>Revenue<\/div><div[^>]*>\$48,200<\/div><div[^>]*>\+12%<\/div><\/div>/u;
 
 const propsSpy = vi.fn((..._args: unknown[]) => ({}));
 

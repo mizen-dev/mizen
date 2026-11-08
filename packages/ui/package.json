@@ -718,7 +718,7 @@
   ],
   "scripts": {
     "build": "node -e \"require('node:fs').rmSync('dist',{force:true,recursive:true})\" && babel src --out-dir dist --extensions .ts,.tsx --root-mode upward --copy-files --compact true && tsc -p tsconfig.build.json && node scripts/prune-declarations.mjs && node scripts/build-styles.mjs",
-    "dev": "babel src --out-dir dist --extensions .ts,.tsx --root-mode upward --watch --copy-files",
+    "dev": "babel src --out-dir dist --extensions .ts,.tsx --root-mode upward --watch --skip-initial-build --copy-files",
     "lint": "eslint .",
     "prepack": "pnpm build",
     "typecheck": "tsc --noEmit"
@@ -727,16 +727,16 @@
     "@base-ui/react": "^1.9.0",
     "@daypicker/react": "10.0.2",
     "@stylexjs/stylex": "^0.19.1",
-    "@tabler/icons-react": "3.49.0",
-    "@tanstack/charts": "1.1.0",
+    "@tabler/icons-react": "3.50.0",
+    "@tanstack/charts": "1.4.0",
     "@tanstack/react-form": "1.33.5",
     "@tanstack/react-table": "9.3.1",
-    "@tanstack/react-virtual": "3.14.13",
+    "@tanstack/react-virtual": "3.14.26",
     "@types/d3-scale": "4.0.9",
     "@types/d3-shape": "3.2.0",
-    "d3-scale": "4.0.2",
-    "d3-shape": "3.2.0",
-    "motion": "14.9.1",
+    "d3-scale": "4.0.3",
+    "d3-shape": "3.2.1",
+    "motion": "14.10.1",
     "sugar-high": "2.6.4"
   },
   "devDependencies": {
@@ -744,7 +744,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "pele": "1.13.0",
-    "postcss": "^8.5.31",
+    "postcss": "^8.5.32",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },

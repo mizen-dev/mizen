@@ -69,7 +69,7 @@ interface Draft {
 
 const OTHER = "__other__";
 const EMPTY: Draft = { other: "", selected: [] };
-const DIGIT = /^[1-9]$/;
+const DIGIT = /^[1-9]$/u;
 
 function answerOf(draft: Draft | undefined) {
 	if (!draft) {

@@ -2,7 +2,7 @@
 import type { ComponentType, HTMLAttributes } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	Accordion,
 	AccordionItem,
@@ -27,13 +27,13 @@ vi.mock("@stylexjs/stylex", () => ({
 	props: (...styles: object[]) => propsSpy(...styles),
 	when: { ancestor: () => ":where(*)" },
 }));
-const ROOT_SLOT_REGEX = /^<div[^>]*data-slot="accordion"/;
-const TRIGGER_H3_REGEX = /<h3[^>]*><button[^>]*data-slot="accordion-trigger"/;
-const BUTTON_TYPE_REGEX = /<button[^>]*type="button"/;
-const INDICATOR_REGEX = /T1.*<svg[^>]*data-slot="accordion-indicator"/;
+const ROOT_SLOT_REGEX = /^<div[^>]*data-slot="accordion"/u;
+const TRIGGER_H3_REGEX = /<h3[^>]*><button[^>]*data-slot="accordion-trigger"/u;
+const BUTTON_TYPE_REGEX = /<button[^>]*type="button"/u;
+const INDICATOR_REGEX = /T1.*<svg[^>]*data-slot="accordion-indicator"/u;
 const PANEL_REGEX =
-	/<div[^>]*data-slot="accordion-panel"[^>]*><div[^>]*>P1<\/div><\/div>/;
-const ANCHOR_TYPE_REGEX = /<a[^>]*type="button"/;
+	/<div[^>]*data-slot="accordion-panel"[^>]*><div[^>]*>P1<\/div><\/div>/u;
+const ANCHOR_TYPE_REGEX = /<a[^>]*type="button"/u;
 type Accepts<T, K extends PropertyKey> = K extends keyof T ? true : false;
 type RejectsAll<T, K extends PropertyKey> = [Extract<keyof T, K>] extends [
 	never,

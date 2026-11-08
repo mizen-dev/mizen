@@ -60,7 +60,7 @@ function layoutTop(element: HTMLElement, viewport: HTMLElement) {
 const TEXT = "[data-slot='message-text'], [data-slot='streaming-text']";
 
 function clip(text: string, length: number) {
-	const line = text.replace(/\s+/g, " ").trim();
+	const line = text.replace(/\s+/gu, " ").trim();
 	return line.length > length ? `${line.slice(0, length - 1)}…` : line;
 }
 

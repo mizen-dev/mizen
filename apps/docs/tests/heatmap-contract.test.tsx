@@ -3,7 +3,7 @@
 import type { ComponentProps, ComponentType } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	Heatmap,
 	type HeatmapProps,
@@ -50,7 +50,7 @@ function render(overrides: Record<string, unknown> = {}) {
 	);
 }
 
-const EMPTY_STATUS_REGEX = /<p role="status"[^>]*>No data available\.<\/p>/;
+const EMPTY_STATUS_REGEX = /<p role="status"[^>]*>No data available\.<\/p>/u;
 
 describe("Heatmap contract", () => {
 	it("keeps zero and missing values distinct and exposes an exact data table", () => {

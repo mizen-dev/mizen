@@ -8,7 +8,7 @@ import type {
 import type { HTMLAttributes, RefObject } from "react";
 import { createElement, createRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	Progress,
 	ProgressIndicator,
@@ -104,7 +104,7 @@ const expectedContractChecks = [
 ] as const;
 
 const INDICATOR_INLINE_STYLE_REGEX =
-	/data-slot="progress-indicator"[^>]*style=/;
+	/data-slot="progress-indicator"[^>]*style=/u;
 
 describe("Progress component contract and SSR semantics", () => {
 	it("resolves root and subpath exports with an exact closed prop contract", () => {

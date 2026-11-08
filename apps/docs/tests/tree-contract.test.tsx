@@ -2,7 +2,7 @@
 
 import { act, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vite-plus/test";
 import {
 	Tree,
 	type TreeItemData,
@@ -31,8 +31,8 @@ const items: readonly TreeItemData[] = [
 	},
 	{ id: "reports", label: "Reports" },
 ];
-const UNIQUE_ID_ERROR = /unique and non-empty/;
-const EMPTY_LABEL_ERROR = /labels must not be empty/;
+const UNIQUE_ID_ERROR = /unique and non-empty/u;
+const EMPTY_LABEL_ERROR = /labels must not be empty/u;
 type Rejects<T, K extends PropertyKey> = [Extract<keyof T, K>] extends [never]
 	? true
 	: false;

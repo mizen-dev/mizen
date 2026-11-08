@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import { act, createElement, StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { afterEach, expect, it, vi } from "vitest";
+import { afterEach, expect, it, vi } from "vite-plus/test";
 import type { ComposerValue } from "../../../packages/ui/src/components/composer/composer-document";
 import { useComposerEditor } from "../../../packages/ui/src/components/composer/use-composer-editor";
 

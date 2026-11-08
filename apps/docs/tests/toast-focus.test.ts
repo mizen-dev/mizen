@@ -1,16 +1,5 @@
 // @vitest-environment happy-dom
-import { describe, expect, it, vi } from "vitest";
-
-vi.mock("@stylexjs/stylex", () => ({
-	create: (styles: unknown) => styles,
-	defineConsts: (constants: unknown) => constants,
-	defineMarker: () => ({}),
-	defineVars: (vars: unknown) => vars,
-	keyframes: (frames: unknown) => frames,
-	props: () => ({}),
-	when: { ancestor: () => ":where(*)" },
-}));
-
+import { describe, expect, it, vi } from "vite-plus/test";
 import { toastStyles } from "../../../packages/ui/src/components/toast/toast.styles";
 import { anchoredToastStyles } from "../../../packages/ui/src/components/toast/toast-anchored.styles";
 import { toastStackedStyles } from "../../../packages/ui/src/components/toast/toast-stacked.styles";
@@ -21,6 +10,16 @@ import {
 	focus,
 	focusOutline,
 } from "../../../packages/ui/src/styles/interaction.stylex";
+
+vi.mock("@stylexjs/stylex", () => ({
+	create: (styles: unknown) => styles,
+	defineConsts: (constants: unknown) => constants,
+	defineMarker: () => ({}),
+	defineVars: (vars: unknown) => vars,
+	keyframes: (frames: unknown) => frames,
+	props: () => ({}),
+	when: { ancestor: () => ":where(*)" },
+}));
 
 const outlineStyle = {
 	":focus-visible": "solid",

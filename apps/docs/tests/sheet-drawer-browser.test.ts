@@ -1,12 +1,12 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -80,7 +80,7 @@ describe("Sheet and Drawer package behavior in docs", () => {
 			hasFocus: Boolean(
 				document.activeElement && el.contains(document.activeElement)
 			),
-			inMain: Boolean(document.getElementById("docs-content")?.contains(el)),
+			inMain: Boolean(document.querySelector("#docs-content")?.contains(el)),
 		}));
 		expect(state.inMain).toBe(false);
 		expect(state.hasBody).toBe(true);
@@ -145,7 +145,7 @@ describe("Sheet and Drawer package behavior in docs", () => {
 			hasFocus: Boolean(
 				document.activeElement && el.contains(document.activeElement)
 			),
-			inMain: Boolean(document.getElementById("docs-content")?.contains(el)),
+			inMain: Boolean(document.querySelector("#docs-content")?.contains(el)),
 		}));
 		expect(state.inMain).toBe(false);
 		expect(state.hasBody).toBe(true);

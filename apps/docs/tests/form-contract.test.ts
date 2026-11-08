@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import type { FieldProps } from "../../../packages/ui/src/components/field/field";
 import { Field } from "../../../packages/ui/src/components/field/field";
 import {

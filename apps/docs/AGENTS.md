@@ -1,9 +1,12 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# Docs app
 
-## This is NOT the Next.js you know
+The docs use TanStack Start, Vite+ and Nitro's Node server.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+- `src/routes` owns public routes, metadata, redirects and HTTP endpoints.
+- `app` contains the existing documentation UI and executable examples.
+- Keep source registries on the server; use `src/docs-functions.ts` for page data.
+- Run `pnpm docs:sync` after changing examples. Do not edit generated registries.
+- Next.js remains a development dependency for genuine Next Link examples and consumer checks. It does not build or serve the docs.
+- Keep ESLint's StyleX, React and complexity rules, and the repository's Biome checks.
+- Validate with `pnpm typecheck`, `pnpm lint`, `pnpm test`, and `pnpm build`.
+- `pnpm start` serves `.output/server/index.mjs`; use `PORT` and `HOST` for deployment.

@@ -1,20 +1,5 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { describe, expect, it, vi } from "vitest";
-
-vi.mock("@stylexjs/stylex", () => ({
-	create: <T extends object>(styles: T): T => styles,
-	createTheme: <T extends object>(_v: T, overrides: object): object =>
-		overrides,
-	defaultMarker: () => ({}),
-	defineConsts: <T extends object>(c: T): T => c,
-	defineMarker: () => ({}),
-	defineVars: <T extends object>(v: T): T => v,
-	keyframes: <T extends object>(k: T): T => k,
-	props: () => ({}),
-	when: { ancestor: (selector: string) => selector },
-}));
-
 import type {
 	ComboboxChipProps,
 	ComboboxChipRemoveProps,
@@ -34,6 +19,20 @@ import type {
 	ComboboxStatusProps,
 	ComboboxTriggerProps,
 } from "@mizen-labs/ui/combobox";
+import { describe, expect, it, vi } from "vite-plus/test";
+
+vi.mock("@stylexjs/stylex", () => ({
+	create: <T extends object>(styles: T): T => styles,
+	createTheme: <T extends object>(_v: T, overrides: object): object =>
+		overrides,
+	defaultMarker: () => ({}),
+	defineConsts: <T extends object>(c: T): T => c,
+	defineMarker: () => ({}),
+	defineVars: <T extends object>(v: T): T => v,
+	keyframes: <T extends object>(k: T): T => k,
+	props: () => ({}),
+	when: { ancestor: (selector: string) => selector },
+}));
 
 type AcceptsAll<T, K extends PropertyKey> = [K] extends [keyof T]
 	? true

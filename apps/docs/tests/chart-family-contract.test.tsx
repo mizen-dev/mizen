@@ -3,7 +3,7 @@
 import type { ComponentType } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { CalendarHeatmap } from "../../../packages/ui/src/components/calendar-heatmap/calendar-heatmap";
 import { Funnel } from "../../../packages/ui/src/components/funnel/funnel";
 import { MetricTrend } from "../../../packages/ui/src/components/metric-trend/metric-trend";
@@ -29,7 +29,7 @@ vi.mock("@stylexjs/stylex", () => ({
 type Loose = ComponentType<Record<string, unknown>>;
 const render = (component: unknown, props: Record<string, unknown>) =>
 	renderToStaticMarkup(h(component as Loose, props));
-const ARC = /<path d="M[^"]+A/g;
+const ARC = /<path d="M[^"]+A/gu;
 
 describe("ProgressRings", () => {
 	const rings = [

@@ -1,13 +1,13 @@
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const projectHeader = /Project/;
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const projectHeader = /Project/u;
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -108,7 +108,7 @@ describe("focused documentation interactions", () => {
 		await page.keyboard.press("ArrowDown");
 		await page.keyboard.press("Enter");
 		await expect
-			.poll(() => example.innerText())
+			.poll(() => example.textContent())
 			.toContain("Selected: Field notes");
 	});
 
@@ -137,11 +137,11 @@ describe("focused documentation interactions", () => {
 		const example = page.locator("#SortableProjects");
 		await example.getByRole("button", { name: projectHeader }).click();
 		await expect
-			.poll(() => example.locator("tbody tr").first().innerText())
+			.poll(() => example.locator("tbody tr").first().textContent())
 			.toContain("Design system");
 		await example.getByRole("button", { name: projectHeader }).click();
 		await expect
-			.poll(() => example.locator("tbody tr").first().innerText())
+			.poll(() => example.locator("tbody tr").first().textContent())
 			.toContain("Reference app");
 	});
 
@@ -149,7 +149,7 @@ describe("focused documentation interactions", () => {
 		await page.goto(`${handle.url}/components/date-range-picker`, {
 			waitUntil: "networkidle",
 		});
-		expect(await page.locator("#ReportingDateRange").innerText()).toContain(
+		expect(await page.locator("#ReportingDateRange").textContent()).toContain(
 			"Reports cover Oct 10, 2026 – Oct 14, 2026."
 		);
 	});
@@ -160,13 +160,15 @@ describe("focused documentation interactions", () => {
 		});
 		const example = page.locator("#ContactForm");
 		await example.getByRole("button", { name: "Review details" }).click();
-		await expect.poll(() => example.innerText()).toContain("Enter your name.");
+		await expect
+			.poll(() => example.textContent())
+			.toContain("Enter your name.");
 		const input = example.getByRole("textbox", { exact: true, name: "Name" });
 		expect(await input.getAttribute("aria-invalid")).toBe("true");
 		await input.fill("Maya Chen");
 		await example.getByRole("button", { name: "Review details" }).click();
 		await expect
-			.poll(() => example.innerText())
+			.poll(() => example.textContent())
 			.toContain("Ready to review Maya Chen.");
 		expect(await input.getAttribute("aria-invalid")).not.toBe("true");
 	});

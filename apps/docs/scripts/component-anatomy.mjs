@@ -1,7 +1,7 @@
 // Derives each component's import line and part anatomy from its first usage
 // example, so both always match code that compiles and renders.
 
-const WORD_BREAK = /[^A-Za-z0-9]+/;
+const WORD_BREAK = /[^A-Za-z0-9]+/u;
 
 const pascalCase = (name) =>
 	name

@@ -1,6 +1,7 @@
 // @vitest-environment happy-dom
+import type { ComponentProps } from "react";
 import { act } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	FieldError,
 	FieldLabel,
@@ -23,11 +24,101 @@ vi.mock("@stylexjs/stylex", () => ({
 	defineVars: <T extends object>(v: T): T => v,
 	keyframes: <T extends object>(k: T): T => k,
 	props: () => ({}),
-	when: { ancestor: () => ":where(*)" },
+	when: {
+		ancestor: () => ":where(*)",
+	},
 }));
-
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
-
+function InitialValueForm() {
+	const form = useForm({
+		defaultValues: {
+			bio: "Developer at Mizen",
+		},
+	});
+	return (
+		<form>
+			<form.Field name="bio">
+				{(field) =>
+					renderBoundField(
+						field,
+						<FieldLabel>Bio</FieldLabel>,
+						<InputGroup>
+							<InputGroupTextarea />
+							<InputGroupAddon align="block-end">
+								<InputGroupText>Characters</InputGroupText>
+							</InputGroupAddon>
+						</InputGroup>,
+						<FieldError />
+					)
+				}
+			</form.Field>
+		</form>
+	);
+}
+function ValueChangeForm({
+	onLatestFieldValue,
+	userOnChange,
+}: {
+	onLatestFieldValue: (value: string) => void;
+	userOnChange: NonNullable<
+		ComponentProps<typeof InputGroupTextarea>["onChange"]
+	>;
+}) {
+	const form = useForm({
+		defaultValues: {
+			notes: "Initial note",
+		},
+	});
+	return (
+		<form>
+			<form.Field name="notes">
+				{(field) => {
+					onLatestFieldValue(field.state.value);
+					return renderBoundField(
+						field,
+						<FieldLabel>Notes</FieldLabel>,
+						<InputGroup>
+							<InputGroupTextarea onChange={userOnChange} />
+						</InputGroup>
+					);
+				}}
+			</form.Field>
+		</form>
+	);
+}
+function BlurValidationForm({
+	userOnBlur,
+}: {
+	userOnBlur: NonNullable<ComponentProps<typeof InputGroupTextarea>["onBlur"]>;
+}) {
+	const form = useForm({
+		defaultValues: {
+			feedback: "",
+		},
+	});
+	return (
+		<form>
+			<form.Field
+				name="feedback"
+				validators={{
+					onChange: ({ value }) =>
+						value.length < 5 ? "Feedback must be at least 5 chars" : undefined,
+				}}
+			>
+				{(field) =>
+					renderBoundField(
+						field,
+						<FieldLabel>Feedback</FieldLabel>,
+						<InputGroup>
+							<InputGroupTextarea onBlur={userOnBlur} />
+						</InputGroup>,
+						<FieldError />
+					)
+				}
+			</form.Field>
+		</form>
+	);
+}
 function setTextareaValue(textarea: HTMLTextAreaElement, value: string) {
 	const nativeSetter = Object.getOwnPropertyDescriptor(
 		HTMLTextAreaElement.prototype,
@@ -38,148 +129,71 @@ function setTextareaValue(textarea: HTMLTextAreaElement, value: string) {
 	} else {
 		textarea.value = value;
 	}
-	textarea.dispatchEvent(new Event("input", { bubbles: true }));
-	textarea.dispatchEvent(new Event("change", { bubbles: true }));
+	textarea.dispatchEvent(
+		new Event("input", {
+			bubbles: true,
+		})
+	);
+	textarea.dispatchEvent(
+		new Event("change", {
+			bubbles: true,
+		})
+	);
 }
-
 describe("InputGroupTextarea TanStack Form field binding and propagation", () => {
 	it("binds textarea name and initial value from form field state", () => {
-		function TestForm() {
-			const form = useForm({
-				defaultValues: {
-					bio: "Developer at Mizen",
-				},
-			});
-
-			return (
-				<form>
-					<form.Field name="bio">
-						{(field) =>
-							renderBoundField(
-								field,
-								<FieldLabel>Bio</FieldLabel>,
-								<InputGroup>
-									<InputGroupTextarea />
-									<InputGroupAddon align="block-end">
-										<InputGroupText>Characters</InputGroupText>
-									</InputGroupAddon>
-								</InputGroup>,
-								<FieldError />
-							)
-						}
-					</form.Field>
-				</form>
-			);
-		}
-
-		const { container, unmount } = mount(<TestForm />);
+		const { container, unmount } = mount(<InitialValueForm />);
 		const textarea = container.querySelector("textarea");
 		expect(textarea).not.toBeNull();
 		expect(textarea?.getAttribute("name")).toBe("bio");
 		expect(textarea?.value).toBe("Developer at Mizen");
 		unmount();
 	});
-
 	it("propagates value changes to form state and composes user onChange callback", () => {
 		let latestFieldValue = "";
 		const userOnChange = vi.fn();
-
-		function TestForm() {
-			const form = useForm({
-				defaultValues: {
-					notes: "Initial note",
-				},
-			});
-
-			return (
-				<form>
-					<form.Field name="notes">
-						{(field) => {
-							latestFieldValue = field.state.value;
-							return renderBoundField(
-								field,
-								<FieldLabel>Notes</FieldLabel>,
-								<InputGroup>
-									<InputGroupTextarea onChange={userOnChange} />
-								</InputGroup>
-							);
-						}}
-					</form.Field>
-				</form>
-			);
-		}
-
-		const { container, unmount } = mount(<TestForm />);
+		const onLatestFieldValue: ComponentProps<
+			typeof ValueChangeForm
+		>["onLatestFieldValue"] = (value) => {
+			latestFieldValue = value;
+		};
+		const { container, unmount } = mount(
+			<ValueChangeForm
+				onLatestFieldValue={onLatestFieldValue}
+				userOnChange={userOnChange}
+			/>
+		);
 		const textarea = container.querySelector("textarea");
 		expect(textarea).not.toBeNull();
 		if (!textarea) {
 			throw new Error("Textarea missing");
 		}
-
 		act(() => {
 			setTextareaValue(textarea, "Updated note text");
 		});
-
 		expect(userOnChange).toHaveBeenCalledTimes(1);
 		expect(latestFieldValue).toBe("Updated note text");
 		expect(textarea.value).toBe("Updated note text");
 		unmount();
 	});
-
 	it("handles blur and derives invalid state from touched + invalid field meta", () => {
 		const userOnBlur = vi.fn();
-
-		function TestForm() {
-			const form = useForm({
-				defaultValues: {
-					feedback: "",
-				},
-			});
-
-			return (
-				<form>
-					<form.Field
-						name="feedback"
-						validators={{
-							onChange: ({ value }) =>
-								value.length < 5
-									? "Feedback must be at least 5 chars"
-									: undefined,
-						}}
-					>
-						{(field) =>
-							renderBoundField(
-								field,
-								<FieldLabel>Feedback</FieldLabel>,
-								<InputGroup>
-									<InputGroupTextarea onBlur={userOnBlur} />
-								</InputGroup>,
-								<FieldError />
-							)
-						}
-					</form.Field>
-				</form>
-			);
-		}
-
-		const { container, unmount } = mount(<TestForm />);
+		const { container, unmount } = mount(
+			<BlurValidationForm userOnBlur={userOnBlur} />
+		);
 		const textarea = container.querySelector("textarea");
 		expect(textarea).not.toBeNull();
 		if (!textarea) {
 			throw new Error("Textarea missing");
 		}
-
 		expect(textarea.getAttribute("aria-invalid")).toBeNull();
-
 		act(() => {
 			setTextareaValue(textarea, "Hi");
 			textarea.focus();
 			textarea.blur();
 		});
-
 		expect(userOnBlur).toHaveBeenCalledTimes(1);
 		expect(textarea.getAttribute("aria-invalid")).toBe("true");
-
 		const describedBy = textarea.getAttribute("aria-describedby");
 		const errorEl = describedBy
 			? container.querySelector(`#${describedBy}`)

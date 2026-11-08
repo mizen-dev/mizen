@@ -3,7 +3,7 @@ import { act, createElement, type MouseEvent as ReactMouseEvent } from "react";
 import { createPortal } from "react-dom";
 import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
-import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "vite-plus/test";
 import {
 	Composer,
 	ComposerActionGroup,

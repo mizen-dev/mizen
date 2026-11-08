@@ -1,11 +1,3 @@
-const ERROR_6 = /catalog must match/;
-const ERROR_5 = /Unexpected archive path/;
-const ERROR_4 = /missing LICENSE/;
-const ERROR_3 = /missing export/;
-const ERROR_2 = /Node ranges must match/;
-const ERROR_1 = /publishable/;
-const ERROR_0 = /versions must match/;
-
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
@@ -13,6 +5,14 @@ import {
 	validateEntries,
 	validateVersions,
 } from "../scripts/release/archive.js";
+
+const ERROR_6 = /catalog must match/u;
+const ERROR_5 = /Unexpected archive path/u;
+const ERROR_4 = /missing LICENSE/u;
+const ERROR_3 = /missing export/u;
+const ERROR_2 = /Node ranges must match/u;
+const ERROR_1 = /publishable/u;
+const ERROR_0 = /versions must match/u;
 
 const ui = {
 	exports: { ".": { default: "./dist/index.js", types: "./dist/index.d.ts" } },

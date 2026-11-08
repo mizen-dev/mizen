@@ -1,6 +1,6 @@
 import { type Browser, chromium, type Page } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setDocsTheme,
 	setupTestServer,
@@ -8,8 +8,8 @@ import {
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const STRUCTURE_HASH = /#outline-structure$/;
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const STRUCTURE_HASH = /#outline-structure$/u;
 const LIGHT_SCREENSHOT = "/private/tmp/mizen-outline-light-narrow.png";
 const DARK_SCREENSHOT = "/private/tmp/mizen-outline-dark-narrow.png";
 const LIGHT_STRESS_SCREENSHOT = "/private/tmp/mizen-outline-light-stress.png";

@@ -1,17 +1,17 @@
 import { type Browser, chromium } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const errors: string[] = [];
-const PALETTE_YEAR_TOOLTIP = /^Jan(?:This year38|Last year31)$/;
-const PALETTE_ACTIVITY_TOOLTIP = /^Jan(?:Active24|New12)$/;
-const TEAM_TOOLTIP = /Active teams|New teams/;
+const PALETTE_YEAR_TOOLTIP = /^Jan(?:This year38|Last year31)$/u;
+const PALETTE_ACTIVITY_TOOLTIP = /^Jan(?:Active24|New12)$/u;
+const TEAM_TOOLTIP = /Active teams|New teams/u;
 let handle: TestServerHandle;
 let browser: Browser;
 

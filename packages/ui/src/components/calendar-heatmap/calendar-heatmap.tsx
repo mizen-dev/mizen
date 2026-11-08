@@ -69,7 +69,7 @@ const PITCH = 16;
 const MIN_PITCH = 12;
 const GUTTER = 40;
 const AXIS = 24;
-const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/u;
 
 const styles = create({
 	plot: (minInlineSize: number) => ({ minInlineSize }),

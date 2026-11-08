@@ -1,15 +1,15 @@
 import type { CardProps } from "@mizen-labs/ui/card";
 import { type Browser, chromium, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const DOCS_LINK_NAME = /Component documentation/i;
-const TRANSPARENT_COLOR = /transparent|rgba\(0, 0, 0, 0\)/;
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const DOCS_LINK_NAME = /Component documentation/iu;
+const TRANSPARENT_COLOR = /transparent|rgba\(0, 0, 0, 0\)/u;
 
 let handle: TestServerHandle;
 let browser: Browser;
@@ -107,12 +107,12 @@ describe("Card component browser behavior", () => {
 		const heading = staticCard.getByRole("heading", { level: 3 });
 		expect(await heading.isVisible()).toBe(true);
 		expect(await heading.getAttribute("data-slot")).toBe("card-title");
-		expect(await heading.innerText()).toBe("Deployment pipeline");
+		expect(await heading.textContent()).toBe("Deployment pipeline");
 
 		// And renders CardContent with data-slot="card-panel"
 		const panel = staticCard.locator('[data-slot="card-panel"]');
 		expect(await panel.count()).toBe(1);
-		expect(await panel.innerText()).toContain("Automated integration suites");
+		expect(await panel.textContent()).toContain("Automated integration suites");
 
 		// And renders all exact Card slots across the specimen
 		const requiredSlots = [

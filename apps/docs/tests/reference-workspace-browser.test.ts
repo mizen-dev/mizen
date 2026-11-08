@@ -1,6 +1,13 @@
 import { type Browser, chromium, type Page } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import {
+	afterAll,
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+} from "vite-plus/test";
 
 const BASE_URL = process.env.MIZEN_REFERENCE_TEST_URL ?? "";
 const STORAGE_KEY = "mizen-reference-projects:v1";

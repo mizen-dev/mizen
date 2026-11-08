@@ -3,7 +3,7 @@
 import { act, createRef } from "react";
 import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import type {
 	BreadcrumbEllipsisProps,
 	BreadcrumbItemProps,
@@ -87,7 +87,7 @@ describe("Breadcrumb contract and semantics", () => {
 		);
 		expect(markup).toContain('aria-hidden="true"');
 		expect(markup).toContain('data-slot="breadcrumb-ellipsis"');
-		expect(markup.match(/<svg/g)).toHaveLength(2);
+		expect(markup.match(/<svg/gu)).toHaveLength(2);
 	});
 
 	it("forwards link refs and composes custom-link click handlers", () => {

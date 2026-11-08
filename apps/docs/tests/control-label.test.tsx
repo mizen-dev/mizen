@@ -1,6 +1,6 @@
 import { createElement, Fragment } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "vite-plus/test";
 import { controlLabel } from "../../../packages/ui/src/control-label";
 
 vi.mock("@stylexjs/stylex", () => ({

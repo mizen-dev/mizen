@@ -8,29 +8,29 @@ import {
 } from "@tabler/icons-react";
 import { fileTypeIconStyles } from "./file-type-icon.styles";
 
-const FILE_EXTENSION = /\.([^.]+)$/;
+const FILE_EXTENSION = /\.(?<extension>[^.]+)$/u;
 
 const fileKinds = [
 	{
-		extension: /^(csv|tsv|xls|xlsx|xlsm|ods|numbers)$/,
+		extension: /^(?:csv|tsv|xls|xlsx|xlsm|ods|numbers)$/u,
 		kind: "spreadsheet",
-		mime: /spreadsheet|excel|text\/(csv|tab-separated-values)/,
+		mime: /spreadsheet|excel|text\/(?:csv|tab-separated-values)/u,
 	},
 	{
-		extension: /^(ppt|pptx|pps|ppsx|odp|key)$/,
+		extension: /^(?:ppt|pptx|pps|ppsx|odp|key)$/u,
 		kind: "presentation",
-		mime: /presentation|powerpoint|keynote/,
+		mime: /presentation|powerpoint|keynote/u,
 	},
 	{
 		extension:
-			/^(js|jsx|ts|tsx|mjs|cjs|json|html|css|scss|xml|py|rb|rs|go|java|c|cpp|h|cs|sh|sql|yaml|yml|toml)$/,
+			/^(?:js|jsx|ts|tsx|mjs|cjs|json|html|css|scss|xml|py|rb|rs|go|java|c|cpp|h|cs|sh|sql|yaml|yml|toml)$/u,
 		kind: "code",
-		mime: /^(application|text)\/(x-)?(javascript|typescript|json|xml|html|css|python|shellscript)(;|$)/,
+		mime: /^(?:application|text)\/(?:x-)?(?:javascript|typescript|json|xml|html|css|python|shellscript)(?:;|$)/u,
 	},
 	{
-		extension: /^(mp4|webm|mov|m4v|avi|mkv|mpeg|mpg|ogv)$/,
+		extension: /^(?:mp4|webm|mov|m4v|avi|mkv|mpeg|mpg|ogv)$/u,
 		kind: "video",
-		mime: /^video\//,
+		mime: /^video\//u,
 	},
 ] as const;
 

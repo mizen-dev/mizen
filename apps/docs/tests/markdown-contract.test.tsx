@@ -2,7 +2,7 @@ import { type ComponentType, createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	Markdown,
 	type MarkdownProps,
@@ -19,8 +19,8 @@ vi.mock("@stylexjs/stylex", () => ({
 	when: { ancestor: () => ":where(*)" },
 }));
 
-const MARKDOWN_ROOT = /^<div [^>]*data-slot="markdown"/;
-const NOTES_ROOT = /^<div [^>]*id="notes"/;
+const MARKDOWN_ROOT = /^<div [^>]*data-slot="markdown"/u;
+const NOTES_ROOT = /^<div [^>]*id="notes"/u;
 
 type Rejects<T, K extends PropertyKey> = [Extract<keyof T, K>] extends [never]
 	? true

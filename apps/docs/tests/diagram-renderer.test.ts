@@ -1,5 +1,7 @@
 // @vitest-environment happy-dom
-import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import { mount } from "pele/lazy";
+import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import { mountDiagram } from "../../../packages/ui/src/components/diagram/diagram-renderer";
 
 const mounted = vi.hoisted(() => ({
@@ -11,8 +13,6 @@ vi.mock("pele/lazy", async (importOriginal) => ({
 	...(await importOriginal<typeof import("pele/lazy")>()),
 	mount: vi.fn(() => mounted),
 }));
-
-import { mount } from "pele/lazy";
 
 const examples = [
 	"flowchart LR\n A --> B",

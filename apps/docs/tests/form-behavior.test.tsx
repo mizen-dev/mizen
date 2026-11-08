@@ -1,6 +1,7 @@
 // @vitest-environment happy-dom
+import type { ComponentProps } from "react";
 import { act, useCallback, useState } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import {
 	Field,
 	FieldError,
@@ -18,80 +19,41 @@ vi.mock("@stylexjs/stylex", () => ({
 	defineVars: <T extends object>(v: T): T => v,
 	keyframes: <T extends object>(k: T): T => k,
 	props: () => ({}),
-	when: { ancestor: () => ":where(*)" },
+	when: {
+		ancestor: () => ":where(*)",
+	},
 }));
-
 describe("TanStack Form field binding and propagation behavior", () => {
 	it("binds input name and initial value from real useForm field state", () => {
-		function TestForm() {
-			const form = useForm({
-				defaultValues: {
-					username: "alice",
-				},
-			});
-
-			return (
-				<form>
-					<form.Field name="username">
-						{(field) =>
-							renderBoundField(
-								field,
-								<FieldLabel>Username</FieldLabel>,
-								<Input />,
-								<FieldError />
-							)
-						}
-					</form.Field>
-				</form>
-			);
-		}
-
-		const { container, unmount } = mount(<TestForm />);
+		const { container, unmount } = mount(<InitialValueForm />);
 		const input = container.querySelector("input");
 		expect(input).not.toBeNull();
 		expect(input?.getAttribute("name")).toBe("username");
 		expect(input?.value).toBe("alice");
 		unmount();
 	});
-
 	it("propagates input value changes to TanStack form field state and composes user callbacks", () => {
 		let latestFieldValue = "";
 		const userOnValueChange = vi.fn();
-
-		function TestForm() {
-			const form = useForm({
-				defaultValues: {
-					bio: "developer",
-				},
-			});
-
-			return (
-				<form>
-					<form.Field name="bio">
-						{(field) => {
-							latestFieldValue = field.state.value;
-							return renderBoundField(
-								field,
-								<Input onValueChange={userOnValueChange} />,
-								<FieldError />
-							);
-						}}
-					</form.Field>
-				</form>
-			);
-		}
-
-		const { container, unmount } = mount(<TestForm />);
+		const onLatestFieldValue: ComponentProps<
+			typeof ValueChangeForm
+		>["onLatestFieldValue"] = (value) => {
+			latestFieldValue = value;
+		};
+		const { container, unmount } = mount(
+			<ValueChangeForm
+				onLatestFieldValue={onLatestFieldValue}
+				userOnValueChange={userOnValueChange}
+			/>
+		);
 		const input = container.querySelector("input");
 		expect(input).not.toBeNull();
 		expect(input?.value).toBe("developer");
-
 		act(() => {
 			if (input) {
 				setInputValue(input, "engineer");
 			}
 		});
-
 		expect(latestFieldValue).toBe("engineer");
 		expect(userOnValueChange).toHaveBeenCalledWith(
 			"engineer",
@@ -99,80 +61,43 @@ describe("TanStack Form field binding and propagation behavior", () => {
 		);
 		unmount();
 	});
-
 	it("updates touched state on blur and composes user onBlur", () => {
 		let isFieldTouched = false;
 		const userOnBlur = vi.fn();
-
-		function TestForm() {
-			const form = useForm({
-				defaultValues: {
-					email: "test@example.com",
-				},
-			});
-
-			return (
-				<form>
-					<form.Field name="email">
-						{(field) => {
-							isFieldTouched = field.state.meta.isTouched;
-							return renderBoundField(
-								field,
-								<Input onBlur={userOnBlur} />,
-								<FieldError />
-							);
-						}}
-					</form.Field>
-				</form>
-			);
-		}
-
-		const { container, unmount } = mount(<TestForm />);
+		const onIsFieldTouched: ComponentProps<
+			typeof BlurForm
+		>["onIsFieldTouched"] = (value) => {
+			isFieldTouched = value;
+		};
+		const { container, unmount } = mount(
+			<BlurForm onIsFieldTouched={onIsFieldTouched} userOnBlur={userOnBlur} />
+		);
 		const input = container.querySelector("input");
 		expect(input).not.toBeNull();
 		expect(isFieldTouched).toBe(false);
-
 		act(() => {
 			input?.focus();
 			input?.blur();
 		});
-
 		expect(isFieldTouched).toBe(true);
 		expect(userOnBlur).toHaveBeenCalled();
 		unmount();
 	});
-
 	it("preserves unbound controlled and uncontrolled Field and Input behavior identically", () => {
-		function UnboundControlled() {
-			const [value, setValue] = useState("initial");
-			const handleValueChange = useCallback((next: string) => {
-				setValue(next);
-			}, []);
-			return (
-				<Field invalid name="legacy">
-					<Input onValueChange={handleValueChange} value={value} />
-					<FieldError match>Static error</FieldError>
-				</Field>
-			);
-		}
-
 		const { container, unmount } = mount(<UnboundControlled />);
 		const input = container.querySelector("input");
 		expect(input).not.toBeNull();
 		expect(input?.value).toBe("initial");
 		expect(input?.getAttribute("aria-invalid")).toBe("true");
 		expect(container.textContent).toContain("Static error");
-
 		act(() => {
 			if (input) {
 				setInputValue(input, "updated");
 			}
 		});
-
 		expect(input?.value).toBe("updated");
 		unmount();
 	});
-
 	it("extracts metadata and error messages for structural numeric fields", () => {
 		const numericField = {
 			handleBlur: vi.fn(),
@@ -196,7 +121,6 @@ describe("TanStack Form field binding and propagation behavior", () => {
 		expect(container.textContent).toContain("Age must be at least 18");
 		unmount();
 	});
-
 	it("safely ignores mismatched numeric field binding in Input and Textarea", () => {
 		const handleNumericChange = vi.fn();
 		const numericField = {
@@ -213,7 +137,6 @@ describe("TanStack Form field binding and propagation behavior", () => {
 				value: 42,
 			},
 		};
-
 		const { container: inputEl, unmount: unmountInput } = mount(
 			<Field field={numericField}>
 				<Input />
@@ -228,7 +151,6 @@ describe("TanStack Form field binding and propagation behavior", () => {
 		});
 		expect(handleNumericChange).not.toHaveBeenCalled();
 		unmountInput();
-
 		const { container: textareaEl, unmount: unmountTextarea } = mount(
 			<Field field={numericField}>
 				<Textarea />
@@ -239,10 +161,101 @@ describe("TanStack Form field binding and propagation behavior", () => {
 		act(() => {
 			if (textarea) {
 				textarea.value = "text";
-				textarea.dispatchEvent(new Event("change", { bubbles: true }));
+				textarea.dispatchEvent(
+					new Event("change", {
+						bubbles: true,
+					})
+				);
 			}
 		});
 		expect(handleNumericChange).not.toHaveBeenCalled();
 		unmountTextarea();
 	});
 });
+function InitialValueForm() {
+	const form = useForm({
+		defaultValues: {
+			username: "alice",
+		},
+	});
+	return (
+		<form>
+			<form.Field name="username">
+				{(field) =>
+					renderBoundField(
+						field,
+						<FieldLabel>Username</FieldLabel>,
+						<Input />,
+						<FieldError />
+					)
+				}
+			</form.Field>
+		</form>
+	);
+}
+function ValueChangeForm({
+	onLatestFieldValue,
+	userOnValueChange,
+}: {
+	onLatestFieldValue: (value: string) => void;
+	userOnValueChange: NonNullable<ComponentProps<typeof Input>["onValueChange"]>;
+}) {
+	const form = useForm({
+		defaultValues: {
+			bio: "developer",
+		},
+	});
+	return (
+		<form>
+			<form.Field name="bio">
+				{(field) => {
+					onLatestFieldValue(field.state.value);
+					return renderBoundField(
+						field,
+						<Input onValueChange={userOnValueChange} />,
+						<FieldError />
+					);
+				}}
+			</form.Field>
+		</form>
+	);
+}
+function BlurForm({
+	onIsFieldTouched,
+	userOnBlur,
+}: {
+	onIsFieldTouched: (value: boolean) => void;
+	userOnBlur: NonNullable<ComponentProps<typeof Input>["onBlur"]>;
+}) {
+	const form = useForm({
+		defaultValues: {
+			email: "test@example.com",
+		},
+	});
+	return (
+		<form>
+			<form.Field name="email">
+				{(field) => {
+					onIsFieldTouched(field.state.meta.isTouched);
+					return renderBoundField(
+						field,
+						<Input onBlur={userOnBlur} />,
+						<FieldError />
+					);
+				}}
+			</form.Field>
+		</form>
+	);
+}
+function UnboundControlled() {
+	const [value, setValue] = useState("initial");
+	const handleValueChange = useCallback((next: string) => {
+		setValue(next);
+	}, []);
+	return (
+		<Field invalid name="legacy">
+			<Input onValueChange={handleValueChange} value={value} />
+			<FieldError match>Static error</FieldError>
+		</Field>
+	);
+}

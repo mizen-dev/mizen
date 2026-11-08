@@ -1,5 +1,14 @@
 import { type Browser, chromium, type Locator, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { expect as expectLocator } from "playwright/test";
+import {
+	afterAll,
+	afterEach,
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+} from "vite-plus/test";
 import {
 	setDocsTheme,
 	setupTestServer,
@@ -7,7 +16,7 @@ import {
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -57,6 +66,9 @@ describe("Select component route", () => {
 			executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH,
 			headless: true,
 		});
+	}, 120_000);
+
+	beforeEach(async () => {
 		page = await browser.newPage();
 		// Settled focus rings: the ring grows in over 200ms otherwise.
 		await page.emulateMedia({ reducedMotion: "reduce" });
@@ -65,6 +77,8 @@ describe("Select component route", () => {
 			waitUntil: "networkidle",
 		});
 	}, 120_000);
+
+	afterEach(() => page?.close());
 
 	afterAll(async () => {
 		const results = await Promise.allSettled([
@@ -134,9 +148,11 @@ describe("Select component route", () => {
 		const listbox = page.getByRole("listbox");
 		await listbox.waitFor({ state: "visible" });
 		expect(await listbox.isVisible()).toBe(true);
-		// The popup highlights an option after it opens; navigating before that
-		// lets the late highlight override the keys under load.
-		await page.locator('[role="option"][data-highlighted]').waitFor();
+		// Highlighting precedes focus transfer; wait until the selected option
+		// receives keyboard input before navigating.
+		await expectLocator(
+			listbox.getByRole("option", { exact: true, name: "Personal" })
+		).toBeFocused();
 		await page.keyboard.press("Home");
 		await page
 			.locator('[role="option"][data-highlighted]', { hasText: "Personal" })

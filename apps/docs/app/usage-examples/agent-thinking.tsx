@@ -47,7 +47,7 @@ const reasoning = [
 const answer =
 	"Yes. Size container queries have worked in all stable browsers since February 2023.[2] Give the parent a container-type, then write @container rules for the child.";
 
-const WORD = /(?<= )/;
+const WORD = /(?<= )/u;
 const reasoningWords = reasoning.join("\n\n").split(WORD);
 const answerWords = answer.split(WORD);
 const TICK_MS = 120;

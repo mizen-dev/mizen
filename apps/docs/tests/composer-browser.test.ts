@@ -1,21 +1,21 @@
 import { type Browser, chromium, firefox, type Page, webkit } from "playwright";
 import { expect as expectLocator } from "playwright/test";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 let handle: TestServerHandle;
 let browser: Browser;
 const docsPage = "/docs/components/composer";
 // States the docs no longer show live, kept on an internal page for tests.
 const fixtures = "/internal/composer-fixtures";
-const MODEL = /^Model/;
-const PERMISSIONS = /^Permissions/;
-const DICTATED = /Add a dark/;
+const MODEL = /^Model/u;
+const PERMISSIONS = /^Permissions/u;
+const DICTATED = /Add a dark/u;
 async function openComposer(
 	theme: "light" | "dark",
 	width = 1280,

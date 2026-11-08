@@ -20,7 +20,7 @@ function removeGuardElement(): void {
 		return;
 	}
 	if (typeof document !== "undefined") {
-		const existing = document.getElementById(THEME_GUARD_STYLE_ID);
+		const existing = document.querySelector(`#${THEME_GUARD_STYLE_ID}`);
 		if (existing !== null) {
 			existing.remove();
 		}
@@ -54,7 +54,7 @@ export function applyThemeTransitionGuard(): void {
 
 	let style = currentGuardElement;
 	if (style === null) {
-		const existing = document.getElementById(THEME_GUARD_STYLE_ID);
+		const existing = document.querySelector(`#${THEME_GUARD_STYLE_ID}`);
 		if (existing instanceof HTMLStyleElement) {
 			style = existing;
 		}

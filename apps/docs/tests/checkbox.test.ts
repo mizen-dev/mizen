@@ -1,14 +1,16 @@
 import { type Browser, chromium, type Locator, type Page } from "playwright";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
 } from "./test-helper";
 
-const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const transparentColor = /rgba\(0, 0, 0, 0\)|transparent/;
-const checkboxLiftTransform = /matrix\(1, 0, 0, 1, 0, -1\)/;
+const PERCEPTUAL_COLOR = /^(?:oklch|oklab|lab)\(/u;
+
+const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
+const transparentColor = /rgba\(0, 0, 0, 0\)|transparent/u;
+const checkboxLiftTransform = /matrix\(1, 0, 0, 1, 0, -1\)/u;
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -166,7 +168,7 @@ describe("Checkbox component route", () => {
 		const uncheckedInvalidBorder = await invalid.evaluate(
 			(element) => getComputedStyle(element).borderColor
 		);
-		expect(uncheckedInvalidBorder).toContain("lab(");
+		expect(uncheckedInvalidBorder).toMatch(PERCEPTUAL_COLOR);
 		await invalid.click();
 		await expect.poll(() => invalid.getAttribute("aria-checked")).toBe("true");
 		expect(await invalid.getAttribute("aria-checked")).toBe("true");
@@ -209,7 +211,7 @@ describe("Checkbox component route", () => {
 				const style = getComputedStyle(element);
 				return [style.outlineColor, style.outlineWidth, style.outlineOffset];
 			})
-		).toEqual([expect.stringContaining("lab("), "3px", "0px"]);
+		).toEqual([expect.stringMatching(PERCEPTUAL_COLOR), "3px", "0px"]);
 	});
 	it.each(["light", "dark"] as const)(
 		"uses stronger checked and mixed indicators in %s",

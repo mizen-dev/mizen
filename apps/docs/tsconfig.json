@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES2022",
     "lib": ["dom", "dom.iterable", "esnext"],
     "strict": true,
     "noEmit": true,
@@ -8,25 +8,21 @@
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "skipLibCheck": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
     "allowJs": true,
     "incremental": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "customConditions": ["source"]
+    "customConditions": ["source"],
+    "types": ["vite/client"]
   },
-  "include": [
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/dev/types/**/*.ts",
-    ".next/dev/dev/types/**/*.ts"
-  ],
-  "exclude": ["node_modules"]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".output",
+    "tests/package-consumer",
+    "tests/package-consumer-start",
+    "tests/package-consumer-vite"
+  ]
 }

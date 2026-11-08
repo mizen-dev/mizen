@@ -4,7 +4,7 @@ import { closest } from "./help.js";
 import { indent, row, type Style } from "./output.js";
 
 function normalize(value: string): string {
-	return value.toLowerCase().trim().replaceAll(/\s+/g, " ");
+	return value.toLowerCase().trim().replaceAll(/\s+/gu, " ");
 }
 
 export type ComponentSummary = Pick<

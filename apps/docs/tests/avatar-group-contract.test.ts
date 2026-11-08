@@ -4,7 +4,7 @@ import type { ReactElement, ReactNode } from "react";
 import { act, createRef, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import {
 	Avatar,
 	AvatarFallback,
@@ -29,7 +29,7 @@ vi.mock("@stylexjs/stylex", () => ({
 	when: { ancestor: () => ":where(*)" },
 }));
 
-const avatarGroupDivPattern = /^<div[^>]*data-slot="avatar-group"/;
+const avatarGroupDivPattern = /^<div[^>]*data-slot="avatar-group"/u;
 
 type Exact<Actual, Expected> = [Actual] extends [Expected]
 	? [Expected] extends [Actual]

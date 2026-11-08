@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import { act, createElement as h } from "react";
 import { createRoot } from "react-dom/client";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { Button } from "../../../packages/ui/src/components/button/button";
 import { ButtonGroup } from "../../../packages/ui/src/components/button-group/button-group";
 
@@ -14,11 +14,14 @@ vi.mock("@stylexjs/stylex", () => ({
 	defineVars: <T extends object>(vars: T): T => vars,
 	keyframes: <T extends object>(frames: T): T => frames,
 	props: () => ({}),
-	when: { ancestor: () => ":where(*)" },
+	when: {
+		ancestor: () => ":where(*)",
+	},
 }));
-
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
-
+function MaliciousGroup({ malicious }: { malicious: Record<string, unknown> }) {
+	return Reflect.apply(ButtonGroup, undefined, [malicious]);
+}
 function mount(
 	element: Parameters<ReturnType<typeof createRoot>["render"]>[0]
 ) {
@@ -33,14 +36,19 @@ function mount(
 		},
 	};
 }
-
 describe("ButtonGroup contract", () => {
 	it("wraps existing buttons in a labeled semantic group with orientation", () => {
-		const ref = { current: null as HTMLDivElement | null };
+		const ref = {
+			current: null as HTMLDivElement | null,
+		};
 		const { container, unmount } = mount(
 			h(
 				ButtonGroup,
-				{ "aria-label": "Playback controls", orientation: "vertical", ref },
+				{
+					"aria-label": "Playback controls",
+					orientation: "vertical",
+					ref,
+				},
 				h(Button, null, "Play"),
 				h(Button, null, "Pause")
 			)
@@ -53,19 +61,21 @@ describe("ButtonGroup contract", () => {
 		expect(ref.current).toBe(group);
 		unmount();
 	});
-
 	it("protects its structural attributes and styles at runtime", () => {
 		const malicious = {
 			className: "malicious-class",
 			"data-orientation": "diagonal",
 			"data-slot": "malicious-slot",
 			role: "presentation",
-			style: { display: "none" },
+			style: {
+				display: "none",
+			},
 		};
-		function MaliciousGroup() {
-			return Reflect.apply(ButtonGroup, undefined, [malicious]);
-		}
-		const { container, unmount } = mount(h(MaliciousGroup));
+		const { container, unmount } = mount(
+			h(MaliciousGroup, {
+				malicious,
+			})
+		);
 		expect(
 			container.querySelector('[data-slot="button-group"]')
 		).not.toBeNull();

@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import {
 	DESKTOP_SLOT_SIZE_DEFAULT_PX,
 	DESKTOP_SLOT_SIZE_LG_PX,

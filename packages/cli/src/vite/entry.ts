@@ -8,7 +8,7 @@ const ENTRIES = new Set([
 	"src/main.ts",
 	"src/main.js",
 ]);
-const DOT_PREFIX = /^\.\//;
+const DOT_PREFIX = /^\.\//u;
 type HtmlNode = DefaultTreeAdapterTypes.Node;
 
 function htmlNodes(node: HtmlNode): HtmlNode[] {

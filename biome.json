@@ -1,12 +1,20 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.6.6/schema.json",
   "extends": [
     "ultracite/biome/core",
     "ultracite/biome/react",
     "ultracite/biome/next"
   ],
   "files": {
-    "includes": ["!**/.next", "!**/node_modules", "!**/.turbo", "!**/dist"],
+    "includes": [
+      "!**/.next",
+      "!**/node_modules",
+      "!**/.turbo",
+      "!**/dist",
+      "!**/.output",
+      "!**/.tanstack",
+      "!**/routeTree.gen.ts"
+    ],
     "maxSize": 2097152
   },
   "formatter": {
@@ -84,6 +92,23 @@
         "actions": {
           "source": {
             "useSortedPackageJson": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["apps/docs/src/routes/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": "off"
+          }
+        }
+      },
+      "assist": {
+        "actions": {
+          "source": {
+            "useSortedKeys": "off"
           }
         }
       }
