@@ -13,13 +13,15 @@
   "type": "module",
   "scripts": {
     "build": "vp build",
+    "cf-typegen": "wrangler types",
     "components:capture": "node scripts/capture-component-previews.mjs",
     "components:compare": "node scripts/compare-captures.mjs",
+    "deploy": "pnpm build && wrangler deploy",
+    "deploy:check": "wrangler deploy --dry-run",
     "dev": "vp dev --port 3000",
     "docs:sync": "node scripts/sync-example-sources.mjs && node scripts/sync-example-components.mjs && biome format --write app/example-sources.json app/example-components.gen.ts",
     "lint": "eslint .",
     "preview": "vp preview",
-    "start": "node .output/server/index.mjs",
     "test": "vp test run",
     "typecheck": "tsc --noEmit && tsc -p tests/package-types/tsconfig.json"
   },
@@ -33,7 +35,6 @@
     "@tanstack/react-router": "1.170.46",
     "@tanstack/react-start": "1.169.4",
     "@tanstack/react-table": "9.3.1",
-    "nitro": "3.0.261103-rc",
     "pele": "1.13.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
@@ -44,6 +45,7 @@
   "devDependencies": {
     "@babel/core": "8.1.0",
     "@babel/eslint-parser": "^8.0.7",
+    "@cloudflare/vite-plugin": "1.67.0",
     "@rolldown/plugin-babel": "0.3.0",
     "@stylexjs/postcss-plugin": "^0.19.1",
     "@types/node": "^26.6.6",
@@ -55,7 +57,8 @@
     "playwright": "^1.65.0",
     "postcss-lightningcss": "^1.1.2",
     "vite": "npm:@voidzero-dev/vite-plus-core@1.5.0",
-    "vite-plus": "1.5.0"
+    "vite-plus": "1.5.0",
+    "wrangler": "4.158.0"
   },
   "engines": {
     "node": "^22.22.2 || ^24.15.0 || >=26.0.0"

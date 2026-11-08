@@ -1,8 +1,8 @@
 import { createRequire } from "node:module";
+import { cloudflare } from "@cloudflare/vite-plugin";
 import babel from "@rolldown/plugin-babel";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
-import { nitro } from "nitro/vite";
 import { defineConfig } from "vite-plus";
 
 import { componentDocs } from "./app/docs-registry";
@@ -13,6 +13,7 @@ const babelConfig = require("../../babel.config.js");
 
 export default defineConfig({
 	plugins: [
+		cloudflare({ viteEnvironment: { name: "ssr" } }),
 		tanstackStart({
 			importProtection: { behavior: "error" },
 			pages: [
@@ -29,11 +30,10 @@ export default defineConfig({
 				failOnError: true,
 			},
 		}),
-		nitro({ features: { fastResponse: false }, preset: "node-server" }),
 		react(),
 		babel({ plugins: babelConfig.plugins }),
 	],
 	resolve: { dedupe: ["react", "react-dom"] },
-	server: { port: 3000, watch: { ignored: ["**/.output/**"] } },
+	server: { port: 3000 },
 	ssr: { noExternal: ["@mizen-labs/ui"] },
 });

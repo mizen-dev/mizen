@@ -1,6 +1,6 @@
 # Mizen docs
 
-The docs run on TanStack Start with Vite+ 1.5 and Nitro's Node server.
+The docs run on TanStack Start with Vite+ 1.5 and Cloudflare Workers.
 The setup follows the [Start migration guide](https://tanstack.com/start/latest/docs/framework/react/migrate-from-next-js),
 [hosting guide](https://tanstack.com/start/latest/docs/framework/react/guide/hosting),
 and [Vite+ migration rules](https://viteplus.dev/guide/migrate-rules).
@@ -41,23 +41,34 @@ Next.js is retained only for real Next Link demonstrations and consumer checks.
 A small router context adapter lets these examples navigate within the Start host.
 The separate packed Next consumer still runs on Next itself.
 
-## Production
+## Cloudflare build and preview
 
 ```sh
 pnpm --filter @mizen-labs/ui build
 pnpm --filter @mizen-labs/docs build
-PORT=3000 HOST=0.0.0.0 pnpm --filter @mizen-labs/docs start
+pnpm --filter @mizen-labs/docs preview
+pnpm --filter @mizen-labs/docs deploy:check
 ```
 
-Public documentation pages are prerendered from the component and guide registries.
-Markdown, metadata, redirects, and missing-page responses remain server routes.
+The Cloudflare Vite plugin runs the server in the Workers runtime during both
+development and production preview. It replaces the Nitro Node adapter.
+Public documentation pages remain prerendered from the component and guide
+registries. Markdown, metadata, redirects, and missing-page responses remain
+server routes.
 
-Deploy the complete `apps/docs/.output` directory and run
-`node .output/server/index.mjs` from the docs directory. No Next server or Vite
-preview process is required. Nitro's `node-server` preset supplies static assets
-and the application server. Nitro is pinned to a release candidate; verify the
-production HTTP tests after upgrading it. Its FastResponse optimization is disabled
-so native response status handling matches the reference deployment.
+`wrangler.jsonc` is the source configuration. The Vite plugin produces `dist`
+and `.wrangler/deploy/config.json`. Keep both outputs together when restoring
+build artifacts. Turborepo caches both. Run Wrangler from this app's directory
+without `--config`, so it follows the generated deployment configuration.
+
+`deploy:check` bundles and validates the build without publishing. To publish
+later, authenticate with `pnpm exec wrangler login`, then run `pnpm deploy` from
+this directory. CI can use `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`
+secrets. No deployment runs automatically in the repository's CI workflow.
+The default Worker name is `mizen-docs`; no custom domain is configured.
+
+See Cloudflare's [TanStack Start guide](https://developers.cloudflare.com/workers/framework-guides/web-apps/tanstack-start/)
+and [Vite+ guide](https://developers.cloudflare.com/workers/vite-plugin/vite-plus/).
 
 ESLint, Biome/Ultracite, and Turborepo remain in place. This migration adopts Vite+
 for docs development, builds, and tests without replacing repository lint policy
