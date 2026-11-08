@@ -1,0 +1,72 @@
+[
+  {
+    "name": "type:bug",
+    "color": "1D76DB",
+    "description": "Type: bug"
+  },
+  {
+    "name": "type:improvement",
+    "color": "1D76DB",
+    "description": "Type: improvement"
+  },
+  {
+    "name": "type:missing-component",
+    "color": "1D76DB",
+    "description": "Type: missing component"
+  },
+  {
+    "name": "component:needs-triage",
+    "color": "D4C5F9",
+    "description": "Component: needs triage"
+  },
+  {
+    "name": "severity:needs-triage",
+    "color": "D93F0B",
+    "description": "Severity: needs triage"
+  },
+  {
+    "name": "severity:critical",
+    "color": "D93F0B",
+    "description": "Severity: critical"
+  },
+  {
+    "name": "severity:high",
+    "color": "D93F0B",
+    "description": "Severity: high"
+  },
+  {
+    "name": "severity:medium",
+    "color": "D93F0B",
+    "description": "Severity: medium"
+  },
+  {
+    "name": "severity:low",
+    "color": "D93F0B",
+    "description": "Severity: low"
+  },
+  {
+    "name": "status:triage",
+    "color": "0E8A16",
+    "description": "Status: triage"
+  },
+  {
+    "name": "status:accepted",
+    "color": "0E8A16",
+    "description": "Status: accepted"
+  },
+  {
+    "name": "status:in-progress",
+    "color": "0E8A16",
+    "description": "Status: in progress"
+  },
+  {
+    "name": "status:awaiting-consumer",
+    "color": "0E8A16",
+    "description": "Status: awaiting consumer"
+  },
+  {
+    "name": "status:verified",
+    "color": "0E8A16",
+    "description": "Status: verified"
+  }
+]

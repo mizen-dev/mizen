@@ -1,0 +1,81 @@
+name: Missing component
+description: Report a reusable interaction missing from a real workflow
+title: "[Missing component] "
+labels:
+  - type:missing-component
+  - component:needs-triage
+  - severity:needs-triage
+  - status:triage
+body:
+  - type: markdown
+    attributes:
+      value:
+        Search existing issues before submitting. Link an existing report instead of creating a
+        duplicate. Maintainers confirm component, severity, and status labels during triage.
+  - type: input
+    id: version
+    attributes:
+      label: Installed Mizen version
+      description: Record the installed @mizen-labs/ui version from the app lockfile.
+    validations:
+      required: true
+  - type: input
+    id: component
+    attributes:
+      label: Affected component or composition
+      description: Use component names or slugs. For a new interaction, describe its purpose.
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: Operator task
+      description: Describe the real app workflow and link its reproduction or report. Remove private user data.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Required behavior
+      description: Describe what the operator must be able to do.
+    validations:
+      required: true
+  - type: textarea
+    id: composition
+    attributes:
+      label: Why existing components cannot compose it
+      description: Name the documented components and recipes you checked. Explain the missing capability.
+    validations:
+      required: true
+  - type: textarea
+    id: states
+    attributes:
+      label: Expected states and keyboard behavior
+      description:
+        Cover focus, navigation, validation, loading, errors, dismissal, and disabled states as
+        relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example or screenshot
+      description: Show the interaction or describe an example. Remove private user data.
+    validations:
+      required: false
+  - type: dropdown
+    id: needed-for
+    attributes:
+      label: Needed for
+      options:
+        - Current workflow
+        - Future idea
+    validations:
+      required: true
+  - type: textarea
+    id: existing
+    attributes:
+      label: Existing issue search
+      description: List search terms and relevant issue links. Write “No matching issue found” when appropriate.
+    validations:
+      required: true

@@ -1,0 +1,51 @@
+name: Issue labels
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - .github/issue-labels.json
+      - .github/workflows/issue-labels.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: issue-labels
+  cancel-in-progress: false
+
+jobs:
+  labels:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Create missing report labels
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node --input-type=module <<'JS'
+          import { readFile } from 'node:fs/promises';
+          const labels = JSON.parse(await readFile('.github/issue-labels.json', 'utf8'));
+          const url = `${process.env.GITHUB_API_URL}/repos/${process.env.GITHUB_REPOSITORY}/labels`;
+          for (const label of labels) {
+            const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                authorization: `Bearer ${process.env.GH_TOKEN}`,
+                accept: 'application/vnd.github+json',
+                'content-type': 'application/json',
+              },
+              body: JSON.stringify(label),
+              signal: AbortSignal.timeout(15000),
+            });
+            const result = await response.json();
+            const exists = response.status === 422 && result.errors?.some(error => error.code === 'already_exists');
+            if (!response.ok && !exists) throw new Error(`${label.name}: ${response.status} ${result.message}`);
+            console.log(`${label.name}: ${exists ? 'already exists' : 'created'}`);
+          }
+          JS

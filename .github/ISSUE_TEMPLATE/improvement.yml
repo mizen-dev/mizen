@@ -1,0 +1,63 @@
+name: Improvement
+description: Improve an existing task or component
+title: "[Improvement] "
+labels:
+  - type:improvement
+  - component:needs-triage
+  - severity:needs-triage
+  - status:triage
+body:
+  - type: markdown
+    attributes:
+      value:
+        Search existing issues before submitting. Link an existing report instead of creating a
+        duplicate. Maintainers confirm component, severity, and status labels during triage.
+  - type: input
+    id: version
+    attributes:
+      label: Installed Mizen version
+      description: Record the installed @mizen-labs/ui version from the app lockfile.
+    validations:
+      required: true
+  - type: input
+    id: component
+    attributes:
+      label: Affected component or composition
+      description: Use component names or slugs. For a new interaction, describe its purpose.
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: Operator task
+      description: Describe the real app workflow and link its reproduction or report. Remove private user data.
+    validations:
+      required: true
+  - type: textarea
+    id: limitation
+    attributes:
+      label: Current limitation
+      description: Explain the limitation in the current supported API or composition.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Proposed outcome
+      description: Describe the user-visible result and how you would verify it. Avoid prescribing internals.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshot or example
+      description: Add an example or screenshot when it helps explain the limitation.
+    validations:
+      required: false
+  - type: textarea
+    id: existing
+    attributes:
+      label: Existing issue search
+      description: List search terms and relevant issue links. Write “No matching issue found” when appropriate.
+    validations:
+      required: true

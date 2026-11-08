@@ -20,3 +20,7 @@ pnpm dev
 ## License
 
 [MIT](./LICENSE).
+
+## Contributing
+
+See [the integration workflow and reporting guide](./CONTRIBUTING.md).
