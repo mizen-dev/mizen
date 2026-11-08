@@ -61,7 +61,7 @@ export const guides: Guide[] = [
 			{
 				id: "status",
 				paragraphs: [
-					"The manifest targets @mizen-labs/ui 0.1.0, but no public npm release is available yet. Before 1.0, minor versions can change the API.",
+					"@mizen-labs/ui 0.1.0 is available on npm. Before 1.0, minor versions can change the API.",
 				],
 				title: "Status",
 			},
@@ -71,21 +71,19 @@ export const guides: Guide[] = [
 	},
 	{
 		description:
-			"Use the release-candidate archive and its compiled stylesheet in Next, TanStack Start, or React + Vite.",
+			"Install Mizen from npm and use its compiled stylesheet in Next, TanStack Start, or React + Vite.",
 		sections: [
 			{
 				code: {
-					value: `pnpm --filter @mizen-labs/ui pack --out /tmp/mizen-ui.tgz
-# In your consumer app:
-npm install /tmp/mizen-ui.tgz`,
+					value: "npm install @mizen-labs/ui",
 				},
 				id: "install",
 				links: [{ href: "/docs/cli", label: "CLI setup and diagnostics" }],
 				paragraphs: [
-					"The 0.1.0 release candidate is not yet published on npm. Pack it from the repository, then install the archive in an existing React app. Workspace apps can use workspace:* instead.",
+					"Install @mizen-labs/ui in an existing React app. Apps in the Mizen monorepo can use workspace:* instead.",
 					"React and ReactDOM must satisfy ^19.2.8. Import @mizen-labs/ui/styles.css once at the application root. It contains the compiled atomic styles; components load their own structural CSS. No consumer Babel or PostCSS setup is required.",
 				],
-				title: "Install the release candidate",
+				title: "Install from npm",
 			},
 			{
 				code: {

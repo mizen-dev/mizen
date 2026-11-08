@@ -8,14 +8,10 @@ for styles.
 
 ## Install
 
-The manifest targets version 0.1.0. No public npm release is available yet.
-Pack the candidate from the repository, then install it in your existing app:
+Install the package in your React app:
 
 ```sh
-# Repository:
-pnpm --filter @mizen-labs/ui pack --out /tmp/mizen-ui.tgz
-# Consumer app:
-npm install /tmp/mizen-ui.tgz
+npm install @mizen-labs/ui
 ```
 
 React and ReactDOM must satisfy `^19.2.8`. Import the compiled stylesheet once:

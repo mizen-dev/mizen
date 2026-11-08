@@ -2,6 +2,16 @@
 
 React components for product interfaces, built with Base UI and StyleX.
 
+## Install
+
+```sh
+npm install @mizen-labs/ui
+npm install --save-dev @mizen-labs/cli
+npx --no-install mizen --help
+```
+
+See the installation guide for stylesheet and framework setup.
+
 ## Documentation
 
 - [Live documentation](https://ui.mizen-labs.dev/)

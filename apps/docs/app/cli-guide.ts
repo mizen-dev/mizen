@@ -7,10 +7,10 @@ export const cliGuide: Guide = {
 		{
 			code: {
 				title: "sh",
-				value: `npm install --save-dev ./mizen-cli.tgz
+				value: `npm install --save-dev @mizen-labs/cli
 npx --no-install mizen --help
 # With pnpm:
-# pnpm add --save-dev ./mizen-cli.tgz
+# pnpm add --save-dev @mizen-labs/cli
 # pnpm exec mizen --help`,
 			},
 			id: "install",
@@ -21,10 +21,10 @@ npx --no-install mizen --help
 				},
 			],
 			paragraphs: [
-				"The package is @mizen-labs/cli and its executable is mizen. It is an unpublished 0.1.0 candidate. Use matching CLI and UI archives; public @latest commands are not available yet.",
-				"Obtain the candidate archives and copy mizen-cli.tgz and mizen-ui.tgz into your app. Install the CLI as a development dependency, then use the local executable. Node must satisfy >=22.18.0 <23 or >=24.11.0. npm and pnpm are supported for setup.",
+				"The package is @mizen-labs/cli and its executable is mizen. Install it from npm, or run npx @mizen-labs/cli@latest --help for a one-off command.",
+				"Install the CLI as a development dependency, then use the local executable. Init requires an installed UI version matching the CLI catalog. Node must satisfy >=22.18.0 <23 or >=24.11.0. npm and pnpm are supported for setup.",
 			],
-			title: "Use the release candidate",
+			title: "Install from npm",
 		},
 		{
 			code: {
@@ -34,7 +34,7 @@ pnpm --filter @mizen-labs/ui pack --out ./mizen-ui.tgz`,
 			},
 			id: "pack",
 			paragraphs: [
-				"Maintainers can produce the archives from the Mizen repository. Each command runs inside its selected package: the files land in packages/cli and packages/ui. Copy both archives to your consumer app before following the examples below.",
+				"Maintainers can produce the archives from the Mizen repository. Each command runs inside its selected package: the files land in packages/cli and packages/ui. Use these archives only when testing local changes; normal installation uses npm.",
 			],
 			title: "Pack archives from this repository",
 		},
@@ -84,9 +84,12 @@ npx --no-install mizen doctor --cwd ./apps/web --strict`,
 		{
 			code: {
 				title: "sh",
-				value: `npx --no-install mizen init --cwd ./apps/web --package ./mizen-ui.tgz --dry-run
-npx --no-install mizen init --cwd ./apps/web --package ./mizen-ui.tgz --yes
-npx --no-install mizen doctor --cwd ./apps/web --strict`,
+				value: `cd ./apps/web
+npm install @mizen-labs/ui@0.1.0
+npm install --save-dev @mizen-labs/cli@0.1.0
+npx --no-install mizen init --dry-run
+npx --no-install mizen init --yes
+npx --no-install mizen doctor --strict`,
 			},
 			id: "init",
 			paragraphs: [

@@ -2,7 +2,7 @@
 
 [CLI documentation](https://ui.mizen-labs.dev/docs/cli/).
 
-An unpublished CLI candidate for Mizen. The first commands discover components
+The CLI for Mizen. The first commands discover components
 from a bundled snapshot of the same metadata and guidance used by the docs.
 Discovery works offline without reading the consumer project. Doctor reads local
 project metadata and supported setup files. Discovery and doctor do not modify project files. Init previews changes by default;
@@ -23,16 +23,15 @@ node packages/cli/dist/cli.js info button
 node packages/cli/dist/cli.js info diagram --json
 ```
 
-## Try the archive
+## Install from npm
 
 ```sh
-pnpm --filter @mizen-labs/cli pack --out /tmp/mizen-cli.tgz
-# In a consumer project:
-npm install -D /tmp/mizen-cli.tgz
+npm install --save-dev @mizen-labs/cli
 npx --no-install mizen search forms
 ```
 
-Do not use a public `@latest` command yet. No npm release is available.
+For a one-off command, run `npx @mizen-labs/cli@latest --help`.
+
 Node must satisfy `>=22.18.0 <23 || >=24.11.0`.
 
 ## Commands
@@ -165,12 +164,14 @@ Init configures an existing Next.js App Router, TanStack Start, or plain React +
 Install the framework and matching React/ReactDOM versions first. It does not
 create an application, select a font, or replace existing document defaults.
 
-Until publication, pack a matching UI archive from this repository:
+Install matching UI and CLI versions in the app, then preview setup:
 
 ```sh
-pnpm --filter @mizen-labs/ui pack --out /tmp/mizen-ui.tgz
-node packages/cli/dist/cli.js init --cwd /path/to/app --package /tmp/mizen-ui.tgz --dry-run
-node packages/cli/dist/cli.js init --cwd /path/to/app --package /tmp/mizen-ui.tgz --yes
+cd /path/to/app
+npm install @mizen-labs/ui@0.1.0
+npm install --save-dev @mizen-labs/cli@0.1.0
+npx --no-install mizen init --dry-run
+npx --no-install mizen init --yes
 ```
 
 An installed, declared Mizen package matching the CLI catalog needs no `--package`.
@@ -234,10 +235,12 @@ import, synchronous initializeTheme call, and ThemeProvider to src/main.jsx or s
 application providers, CSS imports, and comments stay intact. A provider already
 covering the mounted tree is reused.
 
+Run from the app after installing matching UI and CLI versions as shown above.
+
 ```sh
-node packages/cli/dist/cli.js init --cwd /path/to/vite-app --package /tmp/mizen-ui.tgz --dry-run
-node packages/cli/dist/cli.js init --cwd /path/to/vite-app --package /tmp/mizen-ui.tgz --yes
-node packages/cli/dist/cli.js doctor --cwd /path/to/vite-app --strict
+npx --no-install mizen init --dry-run
+npx --no-install mizen init --yes
+npx --no-install mizen doctor --strict
 ```
 
 initializeTheme from @mizen-labs/ui/theme/initialize applies the initial theme before
@@ -245,7 +248,7 @@ React mounts. It shares root-theme behavior with ThemeProvider; subsequent chang
 belong to the provider. Custom initialization options (storage, storageKey, defaultTheme)
 must match provider options. Init stops for manual review when existing custom props
 have no explicit bootstrap. A stale UI archive without the initializer is rejected;
-rebuild and pack the current UI candidate.
+install a matching published UI version, or rebuild the archive when testing local changes.
 
 This client-only path adds no SSR ThemeScript or ssr.noExternal setting.
 Vite configuration and index.html source stay unchanged. The plan records
