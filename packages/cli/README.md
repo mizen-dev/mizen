@@ -1,5 +1,7 @@
 # @mizen-labs/cli
 
+[CLI documentation](https://ui.mizen-labs.dev/docs/cli/).
+
 An unpublished CLI candidate for Mizen. The first commands discover components
 from a bundled snapshot of the same metadata and guidance used by the docs.
 Discovery works offline without reading the consumer project. Doctor reads local

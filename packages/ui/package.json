@@ -766,7 +766,7 @@
     "url": "git+https://github.com/mizen-labs/mizen.git",
     "directory": "packages/ui"
   },
-  "homepage": "https://github.com/mizen-labs/mizen/tree/main/packages/ui#readme",
+  "homepage": "https://ui.mizen-labs.dev/",
   "bugs": {
     "url": "https://github.com/mizen-labs/mizen/issues"
   }

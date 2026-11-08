@@ -1,5 +1,7 @@
 # Mizen docs
 
+Live site: [ui.mizen-labs.dev](https://ui.mizen-labs.dev/).
+
 The docs run on TanStack Start with Vite+ 1.5 and Cloudflare Workers.
 The setup follows the [Start migration guide](https://tanstack.com/start/latest/docs/framework/react/migrate-from-next-js),
 [hosting guide](https://tanstack.com/start/latest/docs/framework/react/guide/hosting),

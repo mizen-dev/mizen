@@ -4,6 +4,7 @@ React components for product interfaces, built with Base UI and StyleX.
 
 ## Documentation
 
+- [Live documentation](https://ui.mizen-labs.dev/)
 - [Installation and usage](./packages/ui/README.md)
 - [CLI guide](./packages/cli/README.md)
 

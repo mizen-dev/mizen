@@ -1,5 +1,7 @@
 # @mizen-labs/ui
 
+[Documentation and examples](https://ui.mizen-labs.dev/).
+
 React components for product interfaces: forms, data, charts, overlays, and
 agent workflows. Built on Base UI for behavior and accessibility, and StyleX
 for styles.
