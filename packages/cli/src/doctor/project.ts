@@ -2,6 +2,10 @@ import { stat } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { exists, findProject, type Manifest, manifestAt } from "./files.js";
 import { check, type Diagnostic } from "./report.js";
+import {
+	hasPnpmWorkspacePackages,
+	WorkspaceConfigError,
+} from "./workspace-config.js";
 
 const LOCKFILES: Record<string, string> = {
 	"bun.lock": "bun",
@@ -182,8 +186,7 @@ async function inspectManifest(project: string, allowWorkspaceRoot = false) {
 		}
 		if (
 			!allowWorkspaceRoot &&
-			(manifest.workspaces ||
-				(await exists(join(project, "pnpm-workspace.yaml"))))
+			(manifest.workspaces || (await hasPnpmWorkspacePackages(project)))
 		) {
 			return {
 				diagnostic: check(
@@ -197,7 +200,10 @@ async function inspectManifest(project: string, allowWorkspaceRoot = false) {
 			};
 		}
 		return { manifest, project };
-	} catch {
+	} catch (error) {
+		if (error instanceof WorkspaceConfigError) {
+			return { diagnostic: error.diagnostic, project };
+		}
 		return {
 			diagnostic: check(
 				"project.manifest",

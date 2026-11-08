@@ -70,7 +70,7 @@ function npmPatterns(value: unknown, path: string): string[] {
 	}
 	return patterns(value, path);
 }
-async function yamlPatterns(path: string): Promise<string[]> {
+async function yamlPatterns(path: string): Promise<string[] | null> {
 	const source = await readOptional(path);
 	if (source === null) {
 		return invalid(
@@ -87,12 +87,19 @@ async function yamlPatterns(path: string): Promise<string[]> {
 	}
 	const value: unknown = yamlValue(document, path);
 	if (value === null) {
-		return [];
+		return null;
 	}
 	if (typeof value !== "object" || Array.isArray(value)) {
 		return invalid(path, "The pnpm workspace declaration must be a mapping.");
 	}
-	return "packages" in value ? patterns(value.packages, path) : [];
+	return "packages" in value ? patterns(value.packages, path) : null;
+}
+
+export async function hasPnpmWorkspacePackages(
+	project: string
+): Promise<boolean> {
+	const path = join(project, "pnpm-workspace.yaml");
+	return (await exists(path)) && (await yamlPatterns(path)) !== null;
 }
 function yamlValue(
 	document: ReturnType<typeof parseDocument>,
@@ -113,7 +120,7 @@ async function declaration(project: string): Promise<Workspace | null> {
 	if (await exists(yaml)) {
 		return {
 			kind: "pnpm",
-			patterns: await yamlPatterns(yaml),
+			patterns: (await yamlPatterns(yaml)) ?? [],
 			project,
 			source: yaml,
 		};

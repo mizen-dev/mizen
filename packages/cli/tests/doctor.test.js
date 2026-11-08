@@ -182,6 +182,32 @@ test("computed, spread, mutated, and broken configurations remain unverified and
 	}
 });
 
+test("pnpm settings alone do not make an app a workspace root", (t) => {
+	const root = fixture(t);
+	put(
+		root,
+		"pnpm-workspace.yaml",
+		"minimumReleaseAge: 1440\npermissions:\n  esbuild:\n    build: true\n"
+	);
+	assert.equal(run(root).status, "healthy");
+});
+
+test("pnpm package declarations still require an explicit app", (t) => {
+	const root = fixture(t);
+	for (const source of ["packages: [apps/*]\n", "packages: []\n"]) {
+		put(root, "pnpm-workspace.yaml", source);
+		assert.equal(diagnostic(run(root), "project.target").status, "error");
+	}
+});
+
+test("invalid pnpm package declarations report the YAML file", (t) => {
+	const root = fixture(t);
+	put(root, "pnpm-workspace.yaml", "packages: invalid\n");
+	const result = diagnostic(run(root), "workspace.config");
+	assert.equal(result.status, "error");
+	assert.deepEqual(result.evidence, [join(root, "pnpm-workspace.yaml")]);
+});
+
 test("monorepo roots require an app; nested cwd finds the app and its workspace lockfile", (t) => {
 	const workspace = fixture(t);
 	put(workspace, "package.json", { private: true, workspaces: ["apps/*"] });
