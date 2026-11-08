@@ -29,7 +29,7 @@
     "@mizen-labs/ui": "workspace:*",
     "@stylexjs/stylex": "^0.19.1",
     "@tabler/icons-react": "^3.50.0",
-    "@tanstack/charts": "1.4.0",
+    "@tanstack/charts": "1.5.0",
     "@tanstack/react-router": "1.170.46",
     "@tanstack/react-start": "1.169.4",
     "@tanstack/react-table": "9.3.1",

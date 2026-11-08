@@ -3,6 +3,7 @@ packages:
   - packages/*
 minimumReleaseAgeExclude:
   - sugar-high@2.6.4
+  - "@tanstack/charts@1.5.0"
 permissions:
   "@tanstack/charts":
     skills: true

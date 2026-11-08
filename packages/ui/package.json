@@ -728,7 +728,7 @@
     "@daypicker/react": "10.0.2",
     "@stylexjs/stylex": "^0.19.1",
     "@tabler/icons-react": "3.50.0",
-    "@tanstack/charts": "1.4.0",
+    "@tanstack/charts": "1.5.0",
     "@tanstack/react-form": "1.33.5",
     "@tanstack/react-table": "9.3.1",
     "@tanstack/react-virtual": "3.14.26",
