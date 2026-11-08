@@ -1,6 +1,8 @@
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
-import docs from "../app/docs-registry-data.json" with { type: "json" };
+import docs from "../src/entities/documentation/model/docs-registry-data.json" with {
+	type: "json",
+};
 import { checkPreviewLayout } from "./preview-layout-checks";
 import {
 	setupTestServer,

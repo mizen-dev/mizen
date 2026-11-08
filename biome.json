@@ -97,7 +97,7 @@
       }
     },
     {
-      "includes": ["apps/docs/src/routes/**"],
+      "includes": ["apps/docs/src/app/routes/**"],
       "linter": {
         "rules": {
           "style": {

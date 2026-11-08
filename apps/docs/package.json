@@ -19,7 +19,7 @@
     "deploy": "pnpm build && wrangler deploy",
     "deploy:check": "wrangler deploy --dry-run",
     "dev": "vp dev --port 3000",
-    "docs:sync": "node scripts/sync-example-sources.mjs && node scripts/sync-example-components.mjs && biome format --write app/example-sources.json app/example-components.gen.ts",
+    "docs:sync": "node scripts/sync-example-sources.mjs && node scripts/sync-example-components.mjs && biome format --write src/entities/documentation/model/example-sources.json src/entities/documentation/ui/example-components.gen.ts",
     "lint": "eslint .",
     "preview": "vp preview",
     "test": "vp test run",

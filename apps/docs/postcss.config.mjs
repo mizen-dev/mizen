@@ -6,7 +6,7 @@ import lightningcss from "postcss-lightningcss";
 const require = createRequire(import.meta.url);
 const babelConfig = require("../../babel.config.js");
 const workspaceRoot = path.resolve(import.meta.dirname, "../..");
-const stylexAssets = /\/(?:app\/globals|ui\/dist\/styles)\.css$/u;
+const stylexAssets = /\/(?:src\/app\/styles\/globals|ui\/dist\/styles)\.css$/u;
 const normalize = lightningcss({ lightningcssOptions: { minify: false } });
 
 export default {
@@ -18,7 +18,7 @@ export default {
 				plugins: babelConfig.plugins,
 			},
 			cwd: workspaceRoot,
-			include: ["packages/ui/src/**/*.{ts,tsx}", "apps/docs/app/**/*.{ts,tsx}"],
+			include: ["packages/ui/src/**/*.{ts,tsx}", "apps/docs/src/**/*.{ts,tsx}"],
 		}),
 		{
 			// Match Next and Vite production handling of numeric StyleX lengths.

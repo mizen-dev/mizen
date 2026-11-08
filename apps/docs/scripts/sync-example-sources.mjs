@@ -7,9 +7,15 @@ import { parseForESLint } from "@babel/eslint-parser";
 import { collectAnatomy } from "./component-anatomy.mjs";
 
 const EXPORT_PREFIX = /^export /u;
-const appRoot = fileURLToPath(new URL("../app/", import.meta.url));
-const registryPath = resolve(appRoot, "components/[slug]/specimens/index.ts");
-const outputPath = resolve(appRoot, "example-sources.json");
+const appRoot = fileURLToPath(new URL("../src/", import.meta.url));
+const registryPath = resolve(
+	appRoot,
+	"entities/documentation/ui/specimens/index.ts"
+);
+const outputPath = resolve(
+	appRoot,
+	"entities/documentation/model/example-sources.json"
+);
 
 function parseSource(code) {
 	return parseForESLint(code, {
@@ -115,7 +121,13 @@ function collectExampleSources() {
 	return {
 		components: collectAnatomy({
 			docs: JSON.parse(
-				readFileSync(resolve(appRoot, "docs-registry-data.json"), "utf8")
+				readFileSync(
+					resolve(
+						appRoot,
+						"entities/documentation/model/docs-registry-data.json"
+					),
+					"utf8"
+				)
 			),
 			exports: collectPackageExports(),
 			parse: parseSource,
@@ -129,13 +141,17 @@ function collectExampleSources() {
 
 function collectUsageSources() {
 	const registry = JSON.parse(
-		readFileSync(resolve(appRoot, "usage-examples/registry.json"), "utf8")
+		readFileSync(
+			resolve(appRoot, "entities/documentation/ui/examples/registry.json"),
+			"utf8"
+		)
 	);
 	return Object.fromEntries(
 		Object.entries(registry).map(([slug, examples]) => [
 			slug,
 			examples.map((example) => {
-				const path = example.path ?? `usage-examples/${slug}.tsx`;
+				const path =
+					example.path ?? `entities/documentation/ui/examples/${slug}.tsx`;
 				const { code, statements } = readModule(resolve(appRoot, path));
 				const declaration = statements.find(
 					(node) =>

@@ -25,7 +25,7 @@ const [ui, cli, workspace, registry, fixture] = await Promise.all([
 	json("packages/ui/package.json"),
 	json("packages/cli/package.json"),
 	json("package.json"),
-	json("apps/docs/app/docs-registry-data.json"),
+	json("apps/docs/src/entities/documentation/model/docs-registry-data.json"),
 	json("apps/docs/tests/package-consumer/package.json"),
 ]);
 validateVersions(ui, cli, workspace);

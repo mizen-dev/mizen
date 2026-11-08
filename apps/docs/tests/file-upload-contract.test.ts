@@ -20,7 +20,7 @@ import type {
 	FileRejection,
 	FileRejectionCode,
 } from "../../../packages/ui/src/components/file-upload/file-upload-validation";
-import { getComponentDoc } from "../app/docs-registry";
+import { getComponentDoc } from "../src/entities/documentation/model/docs-registry";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(s: T): T => s,
@@ -193,7 +193,7 @@ describe("FileUpload contract and export manifest", () => {
 	});
 
 	it("exports FileUpload components from root packages/ui", async () => {
-		const rootMod = await import("../../../packages/ui/src/index");
+		const rootMod = await import("../../../packages/ui/src");
 		const mod = await import(
 			"../../../packages/ui/src/components/file-upload/file-upload"
 		);

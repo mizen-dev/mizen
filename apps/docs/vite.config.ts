@@ -5,8 +5,8 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite-plus";
 
-import { componentDocs } from "./app/docs-registry";
-import { guides } from "./app/guides";
+import { componentDocs } from "./src/entities/documentation/model/docs-registry";
+import { guides } from "./src/entities/documentation/model/guides";
 
 const require = createRequire(import.meta.url);
 const babelConfig = require("../../babel.config.js");
@@ -29,11 +29,13 @@ export default defineConfig({
 				enabled: true,
 				failOnError: true,
 			},
+			srcDirectory: "src/app",
 		}),
 		react(),
 		babel({ plugins: babelConfig.plugins }),
 	],
 	resolve: { dedupe: ["react", "react-dom"] },
-	server: { port: 3000 },
+	// Dev and preview must let the docs endpoints answer OPTIONS themselves.
+	server: { cors: { preflightContinue: true }, port: 3000 },
 	ssr: { noExternal: ["@mizen-labs/ui"] },
 });

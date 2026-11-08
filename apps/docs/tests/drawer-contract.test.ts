@@ -208,7 +208,7 @@ describe("Drawer contract and runtime semantics", () => {
 		expect(mod.DrawerPrimitive).toBeDefined();
 		expect(contractChecks.every((c) => c === true)).toBe(true);
 
-		const rootMod = await import("../../../packages/ui/src/index");
+		const rootMod = await import("../../../packages/ui/src");
 		expect(rootMod.Drawer).toBe(mod.Drawer);
 		expect(rootMod.DrawerPopup).toBe(mod.DrawerPopup);
 		expect(rootMod.DrawerContent).toBe(mod.DrawerContent);

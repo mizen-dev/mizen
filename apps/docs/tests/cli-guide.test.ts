@@ -1,8 +1,11 @@
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vite-plus/test";
-import { cliGuide } from "../app/cli-guide";
-import { guides, renderGuideMarkdown } from "../app/guides";
+import { cliGuide } from "../src/entities/documentation/model/cli-guide";
+import {
+	guides,
+	renderGuideMarkdown,
+} from "../src/entities/documentation/model/guides";
 
 const binary = fileURLToPath(
 	new URL("../../../packages/cli/dist/cli.js", import.meta.url)

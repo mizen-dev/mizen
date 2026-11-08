@@ -5,7 +5,7 @@ import {
 	componentDocs,
 	getComponentDoc,
 	groupedComponentDocs,
-} from "../app/docs-registry";
+} from "../src/entities/documentation/model/docs-registry";
 import { EXPECTED_GROUPS } from "./component-navigation-fixtures";
 import {
 	setupTestServer,

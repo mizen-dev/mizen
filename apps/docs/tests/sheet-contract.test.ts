@@ -152,7 +152,7 @@ describe("Sheet contract and runtime semantics", () => {
 		expect(mod.SheetPrimitive).toBeDefined();
 		expect(contractChecks.every((c) => c === true)).toBe(true);
 
-		const rootMod = await import("../../../packages/ui/src/index");
+		const rootMod = await import("../../../packages/ui/src");
 		expect(rootMod.Sheet).toBe(mod.Sheet);
 		expect(rootMod.SheetPopup).toBe(mod.SheetPopup);
 		expect(rootMod.SheetContent).toBe(mod.SheetContent);

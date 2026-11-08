@@ -9,7 +9,7 @@ import {
 	expect,
 	it,
 } from "vite-plus/test";
-import { workspaceSettingsSource } from "../app/compositions/code-block-source";
+import { workspaceSettingsSource } from "../src/entities/documentation/ui/compositions/code-block-source";
 import {
 	setupTestServer,
 	type TestServerHandle,

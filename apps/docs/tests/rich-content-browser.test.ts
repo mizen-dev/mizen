@@ -4,7 +4,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
 	richContentDateTime,
 	richContentImage,
-} from "../app/compositions/rich-content-source";
+} from "../src/entities/documentation/ui/compositions/rich-content-source";
 import {
 	setupTestServer,
 	type TestServerHandle,

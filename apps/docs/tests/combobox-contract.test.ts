@@ -165,7 +165,7 @@ describe("Combobox contract and exports", () => {
 		const mod = await import(
 			"../../../packages/ui/src/components/combobox/combobox"
 		);
-		const rootMod = await import("../../../packages/ui/src/index");
+		const rootMod = await import("../../../packages/ui/src");
 
 		const required = [
 			"Combobox",

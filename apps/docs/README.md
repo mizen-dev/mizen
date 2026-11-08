@@ -28,12 +28,42 @@ normalizes the output in both development and production, matching the previous
 Turbopack handling of numeric StyleX constants. Keep the UI build/watch
 running when changing the component package's compiled exports.
 
-`src/routes` owns routing, metadata, HTTP endpoints, and legacy redirects.
+`src/app/routes` owns routing, metadata, HTTP endpoints, and legacy redirects.
 Its file names follow TanStack conventions. Route option keys retain their order
 because TypeScript infers head metadata from the preceding loader.
-`app` contains documentation UI and executable examples. Page source data stays
-on the server; example components load through a generated dynamic-import registry.
+The source follows FSD dependency direction: `app → pages → widgets → features → entities → shared`.
+
+- `app`: router, route adapters, application layouts, and global styles.
+- `pages`: home, documentation views, and internal fixture pages.
+- `widgets/site-shell`: header, sidebar, and navigation.
+- `features`: theme switching, document copying, and navigation feedback.
+- `entities/documentation`: models, server APIs, examples, specimens, and document UI.
+- `shared`: domain-free UI, styles, and framework adapters.
+
+Imports point downward and stay within a slice at the same layer. Use explicit
+module imports and create segments only when they own real code. Page source data
+stays on the server; example components load through a generated dynamic-import registry.
 Run `pnpm --filter @mizen-labs/docs docs:sync` after editing examples.
+
+The root loader sends only navigation summaries. Full component catalogs and
+guide bodies stay on the server; page loaders fetch the requested document.
+Route metadata lives in route files so reading a title cannot eagerly import
+the homepage dashboard or internal fixtures. Component page data includes only
+the names and URLs needed for adjacent-page links.
+
+Links preload on pointer or keyboard intent. Production documentation loaders
+reuse cached data until reload, explicit invalidation, or Router cache eviction.
+Content is bundled with each deployment, so reload to see a new release while
+browsing cached pages. Development loaders remain immediately stale so navigating
+back to an edited document reads the current content.
+
+Component loaders prepare the requested page's example modules before committing
+navigation. The current document stays visible while data and examples load.
+A top progress indicator appears after 200 ms; the docs shell remains interactive.
+
+The document head preloads the Wix Madefor Text Latin variable font using Vite's
+hashed asset URL. CSS reuses that request. JetBrains Mono and other language
+subsets load on demand; all font faces retain `font-display: swap`.
 
 Routing uses Start's default hash and page-top scrolling. Automatic scroll
 restoration is disabled because it also restores nested carousel and example
@@ -89,3 +119,13 @@ server, set `MIZEN_DOCS_TEST_URL=http://127.0.0.1:3000`. The migration suite che
 all registered component and guide endpoints, legacy redirects, missing pages,
 and public agent documentation. Existing browser suites cover examples,
 navigation, theme hydration, keyboard behavior, and responsive layouts.
+
+Against a running production preview, check JavaScript budgets and preload reuse:
+
+```sh
+MIZEN_DOCS_PERFORMANCE=1 MIZEN_DOCS_TEST_URL=http://127.0.0.1:4173 pnpm --filter @mizen-labs/docs test tests/docs-performance-browser.test.ts
+```
+
+These opt-in checks require the production `/assets/` bundles. They measure decoded
+JavaScript bytes, independent of transport compression, and verify that history
+navigation reuses the document fetched on hover.

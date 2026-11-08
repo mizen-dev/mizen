@@ -2,7 +2,7 @@
 import { type Browser, chromium, type Page } from "playwright";
 import { expect as expectLocator } from "playwright/test";
 import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
-import { guides } from "../app/guides";
+import { guides } from "../src/entities/documentation/model/guides";
 import {
 	setDocsTheme,
 	setupTestServer,

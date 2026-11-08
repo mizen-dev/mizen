@@ -1,0 +1,3147 @@
+{
+  "button": [
+    {
+      "name": "BrandAction",
+      "title": "Action weights",
+      "description": "The brand button leads, an outline button offers a second path, and a ghost button lets people skip."
+    },
+    {
+      "name": "IconAction",
+      "title": "Icon action",
+      "description": "Name the action with aria-label. Hide the decorative SVG from assistive technology."
+    },
+    {
+      "name": "LoadingAction",
+      "title": "Loading",
+      "description": "Keep the action label stable. Loading blocks repeated activation and sets aria-busy."
+    },
+    {
+      "name": "DisabledAction",
+      "title": "Disabled",
+      "description": "Explain unavailable actions near the control. Disabled buttons leave the keyboard tab order."
+    },
+    {
+      "name": "ButtonReleaseReviewExample1",
+      "title": "Release review",
+      "description": "Northstar / Production",
+      "path": "entities/documentation/ui/examples/button-variants.tsx"
+    },
+    {
+      "name": "ButtonActionHierarchyExample2",
+      "title": "Action hierarchy",
+      "description": "Use one strong action. Keep supporting commands quieter.",
+      "path": "entities/documentation/ui/examples/button-variants.tsx"
+    },
+    {
+      "name": "ButtonDestructiveActionsExample3",
+      "title": "Destructive actions",
+      "description": "Give destructive commands their own place, away from the main action.",
+      "path": "entities/documentation/ui/examples/button-variants.tsx"
+    },
+    {
+      "name": "ButtonActionStatesExample4",
+      "title": "Action states",
+      "description": "Loading and unavailable actions keep their dimensions and labels.",
+      "path": "entities/documentation/ui/examples/button-variants.tsx"
+    },
+    {
+      "name": "ButtonControlSizesExample5",
+      "title": "Control sizes",
+      "description": "",
+      "path": "entities/documentation/ui/examples/button-variants.tsx"
+    },
+    {
+      "name": "ButtonIconActionsExample6",
+      "title": "Icon actions",
+      "description": "Use a clear accessible name for each icon-only action.",
+      "path": "entities/documentation/ui/examples/button-variants.tsx"
+    }
+  ],
+  "field": [
+    {
+      "name": "LabeledField",
+      "title": "Label and description",
+      "description": "Field connects the label and description to its control."
+    },
+    {
+      "name": "InvalidField",
+      "title": "Validation error",
+      "description": "This example displays an existing error. The application decides when validation fails and when to clear it."
+    },
+    {
+      "name": "FieldCompactControl",
+      "title": "Compact control",
+      "description": "FieldControl provides a compact input for dense forms."
+    },
+    {
+      "name": "FieldWorkspace",
+      "title": "Workspace",
+      "description": "Disabled fields communicate that the setting is managed elsewhere."
+    },
+    {
+      "name": "FieldReference",
+      "title": "Reference",
+      "description": "Read-only fields remain available for selecting and copying."
+    },
+    {
+      "name": "FieldSmall",
+      "title": "Small",
+      "description": "Use this size to match the density of the surrounding interface."
+    },
+    {
+      "name": "FieldLarge",
+      "title": "Large",
+      "description": "Use this size to match the density of the surrounding interface."
+    }
+  ],
+  "input": [
+    {
+      "name": "ControlledInput",
+      "title": "Controlled value",
+      "description": "Keep value and onValueChange together. The displayed value follows each edit."
+    },
+    {
+      "name": "ReadOnlyInput",
+      "title": "Read-only",
+      "description": "Use readOnly when users should focus, select, and copy an existing value."
+    },
+    {
+      "name": "DisabledInput",
+      "title": "Disabled",
+      "description": "Disabled controls cannot be edited or focused and do not participate in native form submission."
+    },
+    {
+      "name": "InputForm",
+      "title": "Project identity",
+      "description": "A short name makes a project easy to find."
+    },
+    {
+      "name": "InputSmall",
+      "title": "Small",
+      "description": "Use this size to match the density of the surrounding interface."
+    },
+    {
+      "name": "InputDefaultSize",
+      "title": "Default size",
+      "description": "The default size suits general form layouts."
+    },
+    {
+      "name": "InputLarge",
+      "title": "Large",
+      "description": "Use this size to match the density of the surrounding interface."
+    },
+    {
+      "name": "InputInvalid",
+      "title": "Invalid",
+      "description": "Keep values and validation readable in every state."
+    }
+  ],
+  "select": [
+    {
+      "name": "WorkspaceSelect",
+      "title": "Single selection",
+      "description": "Supply items so the trigger can resolve the selected label before the popup opens."
+    },
+    {
+      "name": "MultipleSelect",
+      "title": "Controlled multiple selection",
+      "description": "Use an array value with multiple. Selecting an option toggles its membership."
+    },
+    {
+      "name": "SelectSmallSelect",
+      "title": "Small select",
+      "description": "Use this size to match the density of the surrounding interface."
+    },
+    {
+      "name": "SelectLargeSelect",
+      "title": "Large select",
+      "description": "Use this size to match the density of the surrounding interface."
+    },
+    {
+      "name": "SelectManagedSelect",
+      "title": "Managed select",
+      "description": "Disabled controls cannot be edited or focused."
+    },
+    {
+      "name": "SelectReadonlySelect",
+      "title": "Read-only select",
+      "description": "Read-only controls allow selection and copying without edits."
+    },
+    {
+      "name": "SelectRequiredWorkspace",
+      "title": "Required workspace",
+      "description": "Use an invalid state with a nearby explanation of the error."
+    }
+  ],
+  "dialog": [
+    {
+      "name": "BasicDialog",
+      "title": "Basic dialog",
+      "description": "Compose a named popup and an explicit close action. DialogPopup includes the portal and backdrop."
+    },
+    {
+      "name": "ControlledDialog",
+      "title": "Controlled open state",
+      "description": "Keep open and onOpenChange together so Escape, dismissal, and application actions share one state."
+    },
+    {
+      "name": "DialogNorthstarLaunchExample1",
+      "title": "Northstar launch",
+      "description": "Review and edit the details of this project.",
+      "path": "entities/documentation/ui/examples/dialog-variants.tsx"
+    }
+  ],
+  "button-group": [
+    {
+      "name": "ViewButtonGroup",
+      "title": "Split publish button",
+      "description": "Publish and its menu trigger join into one control, with the other publish options in the menu."
+    },
+    {
+      "name": "ButtonGroupPublishAReleaseExample1",
+      "title": "Publish a release",
+      "description": "Publish now or save the work as a draft.",
+      "path": "entities/documentation/ui/examples/button-group-variants.tsx"
+    },
+    {
+      "name": "ButtonGroupEditHistoryExample2",
+      "title": "Edit history",
+      "description": "",
+      "path": "entities/documentation/ui/examples/button-group-variants.tsx"
+    },
+    {
+      "name": "ButtonGroupFileActionsExample3",
+      "title": "File actions",
+      "description": "",
+      "path": "entities/documentation/ui/examples/button-group-variants.tsx"
+    }
+  ],
+  "toolbar": [
+    {
+      "name": "DocumentToolbar",
+      "title": "Editor toolbar",
+      "description": "Undo and redo sit apart from the draft actions, and arrow keys move focus across the toolbar."
+    },
+    {
+      "name": "DrawingToolbar",
+      "title": "Vertical tools",
+      "description": "Keep drawing tools next to their canvas. Arrow Up and Arrow Down move between tools."
+    },
+    {
+      "name": "ToolbarACalmerWorkspaceExample1",
+      "title": "A calmer workspace",
+      "description": "",
+      "path": "entities/documentation/ui/examples/toolbar-variants.tsx"
+    },
+    {
+      "name": "ToolbarControlStates",
+      "title": "Disabled and loading actions",
+      "description": "Keep unavailable actions discoverable and prevent repeated clicks while saving.",
+      "path": "entities/documentation/ui/examples/toolbar-variants.tsx"
+    },
+    {
+      "name": "ToolbarWithTooltips",
+      "title": "Toggle groups and tooltips",
+      "description": "Compose named formatting controls, action buttons, and links in one keyboard sequence.",
+      "path": "entities/documentation/ui/examples/toolbar-variants.tsx"
+    },
+    {
+      "name": "ToolbarVerticalGroups",
+      "title": "Vertical groups",
+      "description": "Groups inherit the toolbar direction. Separators rotate with the layout.",
+      "path": "entities/documentation/ui/examples/toolbar-variants.tsx"
+    },
+    {
+      "name": "ToolbarWithInput",
+      "title": "With input",
+      "description": "Edit text inside the toolbar without arrow navigation interrupting the caret.",
+      "path": "entities/documentation/ui/examples/toolbar-variants.tsx"
+    }
+  ],
+  "agent-thinking": [
+    {
+      "name": "ThinkingThenAnswer",
+      "title": "Thinking, then answering",
+      "description": "Sources and reasoning stream under the current step, fold into Thought for Ns, and the answer follows."
+    }
+  ],
+  "task-list": [
+    {
+      "name": "AgentPlan",
+      "title": "Plan, approve, run",
+      "description": "The agent asks to run the plan, works through each step, and folds into a summary when done."
+    },
+    {
+      "name": "FailedPlan",
+      "title": "Failed step",
+      "description": "A failed step stops the plan and says why, with Retry from here."
+    }
+  ],
+  "terminal": [
+    {
+      "name": "AgentCommands",
+      "title": "Commands in a turn",
+      "description": "The agent runs lint, tests, and a build in order. Each command appears when it starts, streams its output with the newest line in view, and folds once it passes."
+    },
+    {
+      "name": "FailedCommand",
+      "title": "Failed command",
+      "description": "A non-zero exit opens the output, with terminal red kept for errors, and Retry."
+    }
+  ],
+  "tool-call": [
+    {
+      "name": "AgentToolCalls",
+      "title": "Tool calls in a turn",
+      "description": "A group runs a search and a fetch, then waits for approval before acting."
+    },
+    {
+      "name": "FailedToolCall",
+      "title": "Failed call",
+      "description": "An error opens the call with its message and Retry."
+    }
+  ],
+  "inline-citation": [
+    {
+      "name": "CitedParagraph",
+      "title": "Citations in a paragraph",
+      "description": "A chip per claim, previewing its page on hover or focus. Two sources at one point show as one chip with a count."
+    },
+    {
+      "name": "DocumentCitation",
+      "title": "Document",
+      "description": "A file without a link shows its title, with nothing to open."
+    }
+  ],
+  "approval-card": [
+    {
+      "name": "SendEmailApproval",
+      "title": "Ask before acting",
+      "description": "What the agent will do, why, and the details, with Always allow, Deny, and Approve. Once decided, it folds into one line."
+    },
+    {
+      "name": "AnsweredApprovals",
+      "title": "Answered",
+      "description": "A decision a rule made, and a denial with the person's note for the agent."
+    }
+  ],
+  "message": [
+    {
+      "name": "MessageTurn",
+      "title": "One turn",
+      "description": "The person's question with Copy, Edit, and the time, then the agent's thinking and reply."
+    },
+    {
+      "name": "GroupChat",
+      "title": "Group chat",
+      "description": "Others sit on the left with their name and picture; the reader's own message sits on the right."
+    },
+    {
+      "name": "MessageWithAttachments",
+      "title": "Attachments",
+      "description": "Files the person sent sit above their words. Images open in a lightbox; other files open in a new tab."
+    },
+    {
+      "name": "FailedMessage",
+      "title": "Not sent",
+      "description": "A message that did not go out stays in place with Retry."
+    },
+    {
+      "name": "LongMessage",
+      "title": "Long text",
+      "description": "Pasted text folds after eight lines, with Show more."
+    }
+  ],
+  "question-card": [
+    {
+      "name": "AgentQuestions",
+      "title": "Questions before starting",
+      "description": "One question at a time, with number keys, an answer in your own words, several choices where allowed, and Skip. Once submitted, it folds into one line."
+    },
+    {
+      "name": "AnsweredQuestion",
+      "title": "Answered",
+      "description": "A single question from history folds into the question and its answer."
+    }
+  ],
+  "sources": [
+    {
+      "name": "ReplySources",
+      "title": "Pages behind a reply",
+      "description": "The first favicons and the count; the list opens to a link for each page. A page cited twice shows once."
+    },
+    {
+      "name": "DocumentSources",
+      "title": "Documents",
+      "description": "Files without a link show as text beside the web pages."
+    }
+  ],
+  "streaming-text": [
+    {
+      "name": "StreamingAnswer",
+      "title": "Cited answer",
+      "description": "Words resolve as they stream, with citations to real pages; actions, sources, and follow-ups appear when the answer is complete."
+    },
+    {
+      "name": "InterruptedAnswer",
+      "title": "Interrupted reply",
+      "description": "When the stream fails, the partial reply stays with a stopped note, Copy, and Retry."
+    }
+  ],
+  "composer": [
+    {
+      "name": "ProjectPromptComposer",
+      "title": "Coding agent",
+      "description": "Files, the permission mode and the model in the toolbar; the branch, the project and context left below. Sending starts work, and Stop ends it."
+    },
+    {
+      "name": "ComposerWorkingExample",
+      "title": "While the agent works",
+      "description": "Light travels the rim and Stop replaces Send. The person can keep typing the next message."
+    },
+    {
+      "name": "ComposerAttachmentsExample",
+      "title": "Attachments",
+      "description": "Files keep their tiles while they upload, and Send waits until every upload finishes."
+    },
+    {
+      "name": "ComposerMentionsExample",
+      "title": "Mentions and commands",
+      "description": "@ adds files and people as chips, and / runs a command on the draft.",
+      "path": "entities/documentation/ui/examples/composer-variants.tsx"
+    },
+    {
+      "name": "ComposerAdaptiveExample",
+      "title": "Single line",
+      "description": "One line for a chat sidebar. It grows into a stacked composer once the draft wraps.",
+      "path": "entities/documentation/ui/examples/composer-variants.tsx"
+    }
+  ],
+  "checkbox": [
+    {
+      "name": "ProductUpdatesCheckbox",
+      "title": "Labeled checkbox",
+      "description": "Place the checkbox inside its visible FieldLabel and use a name and value for form submission."
+    },
+    {
+      "name": "CheckboxNotificationPreferencesExample1",
+      "title": "Notification preferences",
+      "description": "Choose which updates you want to receive.",
+      "path": "entities/documentation/ui/examples/checkbox-variants.tsx"
+    },
+    {
+      "name": "CheckboxControlStatesExample2",
+      "title": "Control states",
+      "description": "Compare mixed, unavailable, invalid, and alternate sizes.",
+      "path": "entities/documentation/ui/examples/checkbox-variants.tsx"
+    }
+  ],
+  "checkbox-group": [
+    {
+      "name": "NotificationChannels",
+      "title": "Checkbox group",
+      "description": "Name the group with aria-labelledby and provide allValues when using the parent checkbox."
+    },
+    {
+      "name": "CheckboxGroupDeliveryPreferencesExample1",
+      "title": "Delivery preferences",
+      "description": "Select individual channels or enable them together.",
+      "path": "entities/documentation/ui/examples/checkbox-group-variants.tsx"
+    },
+    {
+      "name": "CheckboxGroupDigestScheduleExample2",
+      "title": "Digest schedule",
+      "description": "",
+      "path": "entities/documentation/ui/examples/checkbox-group-variants.tsx"
+    }
+  ],
+  "combobox": [
+    {
+      "name": "ComboboxDisabled",
+      "title": "Disabled",
+      "description": "Prevents editing and opening the popup.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "ComboboxSmall",
+      "title": "Small Size",
+      "description": "Uses the compact input size.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "ComboboxLarge",
+      "title": "Large Size",
+      "description": "Uses the large input size.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "FrameworkCombobox",
+      "title": "With Label",
+      "description": "Provide items and a visible field label; the empty state explains when filtering finds no option."
+    },
+    {
+      "name": "ComboboxAutoHighlight",
+      "title": "Auto Highlight",
+      "description": "Highlights the first matching item for keyboard selection.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "ComboboxClearExample",
+      "title": "With Clear Button",
+      "description": "Clears the selected value without opening the popup.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "ComboboxGroups",
+      "title": "With Groups",
+      "description": "Filters grouped options and preserves their headings.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "MultipleCombobox",
+      "title": "With Multiple Selection",
+      "description": "Choose the tags that describe this project."
+    },
+    {
+      "name": "ComboboxStartAddon",
+      "title": "With Start Addon",
+      "description": "Places a search icon at the start of the input.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "ComboboxMultipleAddon",
+      "title": "With Start Addon - Multiple",
+      "description": "Places a search icon before removable selection chips.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "ComboboxPopupInput",
+      "title": "With Input Inside Popup",
+      "description": "Opens a searchable list from an outline button.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "ComboboxSelectButtonExample",
+      "title": "With Select-like Button",
+      "description": "Uses SelectButton as the ComboboxTrigger render target.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "ComboboxFormSingle",
+      "title": "Form Integration",
+      "description": "Submits the selected value through native FormData with required validation.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "ComboboxFormMultiple",
+      "title": "Form Integration - Multiple",
+      "description": "Submits repeated native form entries for multiple selections.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "ComboboxPrimitiveValues",
+      "title": "Primitive Values from Objects",
+      "description": "Uses createComboboxItems to display names while storing stable identifiers.",
+      "path": "entities/documentation/ui/examples/combobox-variants.tsx"
+    },
+    {
+      "name": "KeyboardAccessibleCombobox",
+      "title": "Keyboard-accessible actions",
+      "description": "The clear and trigger buttons participate in keyboard navigation."
+    },
+    {
+      "name": "ComboboxReadonlyFramework",
+      "title": "Read-only framework",
+      "description": "Read-only controls allow selection and copying without edits."
+    },
+    {
+      "name": "ComboboxRequiredFramework",
+      "title": "Required framework",
+      "description": "Use an invalid state with a nearby explanation of the error."
+    }
+  ],
+  "fieldset": [
+    {
+      "name": "ContactDetailsFieldset",
+      "title": "Related fields",
+      "description": "Use Fieldset and FieldsetLegend to group related controls under one native legend."
+    },
+    {
+      "name": "FieldsetAccountProfileExample1",
+      "title": "Account profile",
+      "description": "Related personal details belong in one fieldset.",
+      "path": "entities/documentation/ui/examples/fieldset-variants.tsx"
+    },
+    {
+      "name": "FieldsetManagedBillingExample2",
+      "title": "Managed billing",
+      "description": "Keep unavailable settings visible and explain who can edit them.",
+      "path": "entities/documentation/ui/examples/fieldset-variants.tsx"
+    }
+  ],
+  "form": [
+    {
+      "name": "ContactForm",
+      "title": "Validated field binding",
+      "description": "Bind Field to useForm state and display its validation error. Submission updates local demo text only."
+    },
+    {
+      "name": "FormCreateYourProfileExample1",
+      "title": "Create your profile",
+      "description": "",
+      "path": "entities/documentation/ui/examples/form-variants.tsx"
+    }
+  ],
+  "input-group": [
+    {
+      "name": "WebsiteInputGroup",
+      "title": "Prefixed input",
+      "description": "Keep the prefix as descriptive text and give the editable input its own field label."
+    },
+    {
+      "name": "InputGroupPublicProfileExample1",
+      "title": "Public profile",
+      "description": "Prefixes and suffixes stay attached to their field.",
+      "path": "entities/documentation/ui/examples/input-group-variants.tsx"
+    },
+    {
+      "name": "InputGroupWorkspaceSearchExample2",
+      "title": "Workspace search",
+      "description": "",
+      "path": "entities/documentation/ui/examples/input-group-variants.tsx"
+    },
+    {
+      "name": "InputGroupTeamFeedbackExample3",
+      "title": "Team feedback",
+      "description": "",
+      "path": "entities/documentation/ui/examples/input-group-variants.tsx"
+    },
+    {
+      "name": "InputGroupControlSizesExample4",
+      "title": "Control sizes",
+      "description": "",
+      "path": "entities/documentation/ui/examples/input-group-variants.tsx"
+    },
+    {
+      "name": "InputGroupPermissionsAndValidationExample5",
+      "title": "Permissions and validation",
+      "description": "",
+      "path": "entities/documentation/ui/examples/input-group-variants.tsx"
+    }
+  ],
+  "number-field": [
+    {
+      "name": "BoundedQuantity",
+      "title": "Bounded quantity",
+      "description": "Set a meaningful min, max, and step; name the field and label the step buttons."
+    },
+    {
+      "name": "NumberFieldPurchaseDetailsExample1",
+      "title": "Purchase details",
+      "description": "Adjust the transaction amount and quantity.",
+      "path": "entities/documentation/ui/examples/number-field-variants.tsx"
+    },
+    {
+      "name": "NumberFieldCanvasSpacingExample2",
+      "title": "Canvas spacing",
+      "description": "Drag a label to adjust its numeric value.",
+      "path": "entities/documentation/ui/examples/number-field-variants.tsx"
+    },
+    {
+      "name": "NumberFieldControlSizesExample3",
+      "title": "Control sizes",
+      "description": "",
+      "path": "entities/documentation/ui/examples/number-field-variants.tsx"
+    },
+    {
+      "name": "NumberFieldLimitsAndValidationExample4",
+      "title": "Limits and validation",
+      "description": "",
+      "path": "entities/documentation/ui/examples/number-field-variants.tsx"
+    }
+  ],
+  "radio-group": [
+    {
+      "name": "DensityOptions",
+      "title": "Single choice",
+      "description": "Give the radio group one accessible name and a shared form name."
+    },
+    {
+      "name": "RadioGroupReadingPreferencesExample1",
+      "title": "Reading preferences",
+      "description": "Choose one density for the workspace.",
+      "path": "entities/documentation/ui/examples/radio-group-variants.tsx"
+    },
+    {
+      "name": "RadioGroupSubscriptionPlanExample2",
+      "title": "Subscription plan",
+      "description": "",
+      "path": "entities/documentation/ui/examples/radio-group-variants.tsx"
+    }
+  ],
+  "slider": [
+    {
+      "name": "VolumeSlider",
+      "title": "Volume level",
+      "description": "Provide an accessible name, range, and step; arrow keys adjust the value."
+    },
+    {
+      "name": "SliderAudioSettingsExample1",
+      "title": "Audio settings",
+      "description": "Adjust playback volume with the keyboard or pointer.",
+      "path": "entities/documentation/ui/examples/slider-variants.tsx"
+    },
+    {
+      "name": "SliderControlSizesExample2",
+      "title": "Control sizes",
+      "description": "",
+      "path": "entities/documentation/ui/examples/slider-variants.tsx"
+    },
+    {
+      "name": "SliderRangesAndOrientationExample3",
+      "title": "Ranges and orientation",
+      "description": "",
+      "path": "entities/documentation/ui/examples/slider-variants.tsx"
+    },
+    {
+      "name": "SliderPermissionsAndValidationExample4",
+      "title": "Permissions and validation",
+      "description": "",
+      "path": "entities/documentation/ui/examples/slider-variants.tsx"
+    },
+    {
+      "name": "SliderTicksAndValueExample5",
+      "title": "Ticks and thumb values",
+      "description": "Optional ticks follow step. Values can appear inside the thumb or above the track.",
+      "path": "entities/documentation/ui/examples/slider-variants.tsx"
+    }
+  ],
+  "switch": [
+    {
+      "name": "AutomaticUpdatesSwitch",
+      "title": "Labeled switch",
+      "description": "Use a switch for a binary setting and associate its visible label and help text."
+    },
+    {
+      "name": "SwitchWorkspacePreferencesExample1",
+      "title": "Workspace preferences",
+      "description": "Choose how this workspace syncs and displays content.",
+      "path": "entities/documentation/ui/examples/switch-variants.tsx"
+    },
+    {
+      "name": "SwitchPermissionsAndValidationExample2",
+      "title": "Permissions and validation",
+      "description": "",
+      "path": "entities/documentation/ui/examples/switch-variants.tsx"
+    }
+  ],
+  "textarea": [
+    {
+      "name": "ProjectSummaryTextarea",
+      "title": "Project summary",
+      "description": "Use a visible label and native maxLength to set the editing limit."
+    },
+    {
+      "name": "TextareaForm",
+      "title": "Project handoff",
+      "description": "Give teammates the context they need to continue the work."
+    },
+    {
+      "name": "TextareaReadonlyNote",
+      "title": "Read-only note",
+      "description": "Read-only, disabled, and invalid notes retain their labels."
+    },
+    {
+      "name": "TextareaDisabledNote",
+      "title": "Disabled note",
+      "description": "Read-only, disabled, and invalid notes retain their labels."
+    },
+    {
+      "name": "TextareaMessageDetails",
+      "title": "Message details",
+      "description": "Read-only, disabled, and invalid notes retain their labels."
+    }
+  ],
+  "otp-field": [
+    {
+      "name": "VerificationCode",
+      "title": "Verification code",
+      "description": "Set length and an accessible name; the compound inputs share one code value."
+    },
+    {
+      "name": "OtpFieldVerifyYourAccountExample1",
+      "title": "Verify your account",
+      "description": "Enter the code sent to your registered device.",
+      "path": "entities/documentation/ui/examples/otp-field-variants.tsx"
+    },
+    {
+      "name": "OtpFieldControlSizesExample2",
+      "title": "Control sizes",
+      "description": "",
+      "path": "entities/documentation/ui/examples/otp-field-variants.tsx"
+    },
+    {
+      "name": "OtpFieldPrivacyAndValidationExample3",
+      "title": "Privacy and validation",
+      "description": "",
+      "path": "entities/documentation/ui/examples/otp-field-variants.tsx"
+    }
+  ],
+  "file-upload": [
+    {
+      "name": "LocalFileSelection",
+      "title": "Choose local files",
+      "description": "Select multiple files and preview separate card progress through completion. Keep the dropzone available for further selection."
+    },
+    {
+      "name": "FileUploadDragAndDropFilesHereExample1",
+      "title": "Drag and drop files here",
+      "description": "",
+      "path": "entities/documentation/ui/examples/file-upload-variants.tsx"
+    },
+    {
+      "name": "FileUploadRetryExample",
+      "title": "Error and retry",
+      "description": "Simulates a failed upload. Retry the same file without selecting it again.",
+      "path": "entities/documentation/ui/examples/file-upload-variants.tsx"
+    },
+    {
+      "name": "FileUploadDisabledExample",
+      "title": "Disabled upload",
+      "description": "Enable selection, then disable the selected upload to check paused progress and blocked actions.",
+      "path": "entities/documentation/ui/examples/file-upload-variants.tsx"
+    }
+  ],
+  "calendar": [
+    {
+      "name": "AppointmentCalendar",
+      "title": "Select a date",
+      "description": "Use mode=single and control value when the surrounding view needs the selected date."
+    },
+    {
+      "name": "CalendarSingleDateExample1",
+      "title": "Single date",
+      "description": "",
+      "path": "entities/documentation/ui/examples/calendar-variants.tsx"
+    },
+    {
+      "name": "CalendarDateRangeExample2",
+      "title": "Date range",
+      "description": "",
+      "path": "entities/documentation/ui/examples/calendar-variants.tsx"
+    },
+    {
+      "name": "CalendarDropdownNavigation",
+      "title": "Month and year navigation",
+      "description": "Jump directly to a month or year using Mizen Select. Navigation bounds define the available years.",
+      "path": "entities/documentation/ui/examples/calendar.tsx"
+    }
+  ],
+  "date-picker": [
+    {
+      "name": "ControlledDatePicker",
+      "title": "Editable date",
+      "description": "Give the input an accessible name; controlled values support external display or form state."
+    },
+    {
+      "name": "DatePickerUncontrolledExample1",
+      "title": "Uncontrolled",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-picker-variants.tsx"
+    },
+    {
+      "name": "DatePickerControlledExample2",
+      "title": "Controlled",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-picker-variants.tsx"
+    },
+    {
+      "name": "DatePickerBoundedExample3",
+      "title": "Bounded",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-picker-variants.tsx"
+    },
+    {
+      "name": "DatePickerDisabledExample4",
+      "title": "Disabled",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-picker-variants.tsx"
+    },
+    {
+      "name": "DatePickerReadonlyExample5",
+      "title": "Read-only",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-picker-variants.tsx"
+    },
+    {
+      "name": "DatePickerInvalidExample6",
+      "title": "Invalid",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-picker-variants.tsx"
+    },
+    {
+      "name": "DatePickerDropdownNavigation",
+      "title": "Month and year navigation",
+      "description": "Jump directly to a month or year using Mizen Select. Navigation bounds define the available years.",
+      "path": "entities/documentation/ui/examples/date-picker.tsx"
+    }
+  ],
+  "date-range-picker": [
+    {
+      "name": "ReportingDateRange",
+      "title": "Reporting period",
+      "description": "A complete range has a start and end date; announce the current selection nearby."
+    },
+    {
+      "name": "DateRangePickerDefaultRangeExample1",
+      "title": "Default range",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-range-picker-variants.tsx"
+    },
+    {
+      "name": "DateRangePickerControlledWithPresetsExample2",
+      "title": "Controlled with presets",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-range-picker-variants.tsx"
+    },
+    {
+      "name": "DateRangePickerDisabledExample3",
+      "title": "Disabled",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-range-picker-variants.tsx"
+    },
+    {
+      "name": "DateRangePickerReadonlyExample4",
+      "title": "Read-only",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-range-picker-variants.tsx"
+    },
+    {
+      "name": "DateRangePickerNativeFormExample5",
+      "title": "Native form",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-range-picker-variants.tsx"
+    },
+    {
+      "name": "DateRangePickerDropdownNavigation",
+      "title": "Month and year navigation",
+      "description": "Jump directly to a month or year using Mizen Select. Navigation bounds define the available years.",
+      "path": "entities/documentation/ui/examples/date-range-picker.tsx"
+    }
+  ],
+  "time-input": [
+    {
+      "name": "AppointmentTime",
+      "title": "Appointment time",
+      "description": "Use the native time input semantics and an associated field label."
+    },
+    {
+      "name": "TimeInputReviewScheduleExample1",
+      "title": "Review schedule",
+      "description": "Local time for the Product team workspace.",
+      "path": "entities/documentation/ui/examples/time-input-variants.tsx"
+    },
+    {
+      "name": "TimeInputControlStatesExample2",
+      "title": "Control states",
+      "description": "",
+      "path": "entities/documentation/ui/examples/time-input-variants.tsx"
+    }
+  ],
+  "date-time-input": [
+    {
+      "name": "LaunchDateTime",
+      "title": "Launch date and time",
+      "description": "Use the native local date-time control and an associated field label."
+    },
+    {
+      "name": "DateTimeInputReleaseScheduleExample1",
+      "title": "Release schedule",
+      "description": "Local time for the Product team workspace.",
+      "path": "entities/documentation/ui/examples/date-time-input-variants.tsx"
+    },
+    {
+      "name": "DateTimeInputControlStatesExample2",
+      "title": "Control states",
+      "description": "",
+      "path": "entities/documentation/ui/examples/date-time-input-variants.tsx"
+    }
+  ],
+  "tabs": [
+    {
+      "name": "ProjectTabs",
+      "title": "Project sections",
+      "description": "Give TabsList an accessible name and pair every tab value with a panel value."
+    },
+    {
+      "name": "TabsProjectOverviewExample1",
+      "title": "Project overview",
+      "description": "",
+      "path": "entities/documentation/ui/examples/tabs-variants.tsx"
+    },
+    {
+      "name": "TabsRecordDetailsExample2",
+      "title": "Record details",
+      "description": "",
+      "path": "entities/documentation/ui/examples/tabs-variants.tsx"
+    },
+    {
+      "name": "TabsProfileSettingsExample3",
+      "title": "Profile settings",
+      "description": "",
+      "path": "entities/documentation/ui/examples/tabs-variants.tsx"
+    },
+    {
+      "name": "TabsStates",
+      "title": "Sizes, icons, and manual activation",
+      "description": "Tabs share compact sizing with segmented controls. Arrow keys move focus; manual activation waits for Enter or Space.",
+      "path": "entities/documentation/ui/examples/tabs-variants.tsx"
+    }
+  ],
+  "toggle": [
+    {
+      "name": "BoldToggle",
+      "title": "Subscribe and pin",
+      "description": "Each toggle turns on and off on its own. The pressed state shows which one is active."
+    },
+    {
+      "name": "ToggleDocumentToolsExample1",
+      "title": "Document tools",
+      "description": "Toggle formatting and pin actions independently.",
+      "path": "entities/documentation/ui/examples/toggle-variants.tsx"
+    },
+    {
+      "name": "ToggleManagedActionExample2",
+      "title": "Managed action",
+      "description": "Disabled toggles retain their selected or unselected appearance.",
+      "path": "entities/documentation/ui/examples/toggle-variants.tsx"
+    },
+    {
+      "name": "ToggleControlSizesExample3",
+      "title": "Control sizes",
+      "description": "Text and icon toggles share the same small, default, and large heights.",
+      "path": "entities/documentation/ui/examples/toggle-variants.tsx"
+    },
+    {
+      "name": "ToggleControlledState",
+      "title": "Controlled state",
+      "description": "Keep the pressed state in application state and announce the result.",
+      "path": "entities/documentation/ui/examples/toggle-variants.tsx"
+    }
+  ],
+  "toggle-group": [
+    {
+      "name": "TextAlignmentGroup",
+      "title": "Editor formatting",
+      "description": "One group allows several text styles at once. The alignment group allows one choice."
+    },
+    {
+      "name": "ToggleGroupParagraphAlignmentExample1",
+      "title": "Paragraph alignment",
+      "description": "Choose one alignment for the paragraph.",
+      "path": "entities/documentation/ui/examples/toggle-group-variants.tsx"
+    },
+    {
+      "name": "ToggleGroupTextFormattingExample2",
+      "title": "Text formatting",
+      "description": "Combine bold, italic, and underline.",
+      "path": "entities/documentation/ui/examples/toggle-group-variants.tsx"
+    },
+    {
+      "name": "ToggleGroupCanvasLayoutExample3",
+      "title": "Canvas layout",
+      "description": "Use a vertical group when the tools sit beside a canvas.",
+      "path": "entities/documentation/ui/examples/toggle-group-variants.tsx"
+    },
+    {
+      "name": "ToggleGroupIconSizes",
+      "title": "Icon sizes and separators",
+      "description": "Outlined icon toggles share a joined border and inherit their group size.",
+      "path": "entities/documentation/ui/examples/toggle-group-variants.tsx"
+    },
+    {
+      "name": "ToggleGroupDisabledStates",
+      "title": "Disabled groups and items",
+      "description": "Disable a whole group or skip an unavailable item during keyboard navigation.",
+      "path": "entities/documentation/ui/examples/toggle-group-variants.tsx"
+    },
+    {
+      "name": "ToggleGroupWithTooltips",
+      "title": "With tooltips",
+      "description": "Name icon controls and provide the same label on hover and focus.",
+      "path": "entities/documentation/ui/examples/toggle-group-variants.tsx"
+    }
+  ],
+  "segmented-control": [
+    {
+      "name": "BillingInterval",
+      "title": "Billing interval",
+      "description": "Use a named single-choice group for a small set of mutually exclusive options."
+    },
+    {
+      "name": "SegmentedControlProjectViewsExample1",
+      "title": "Project views",
+      "description": "Choose how to browse the workspace.",
+      "path": "entities/documentation/ui/examples/segmented-control-variants.tsx"
+    },
+    {
+      "name": "SegmentedControlReportSettingsExample2",
+      "title": "Report settings",
+      "description": "",
+      "path": "entities/documentation/ui/examples/segmented-control-variants.tsx"
+    },
+    {
+      "name": "SegmentedControlStates",
+      "title": "Sizes, icons, and orientation",
+      "description": "Compact labels and icons stay aligned at every size. Disabled choices retain their selection and skip activation.",
+      "path": "entities/documentation/ui/examples/segmented-control-variants.tsx"
+    }
+  ],
+  "breadcrumb": [
+    {
+      "name": "ProjectBreadcrumb",
+      "title": "Page hierarchy",
+      "description": "Use links for ancestors and BreadcrumbPage for the current location."
+    },
+    {
+      "name": "BreadcrumbWorkspaceResourcesExample1",
+      "title": "Workspace resources",
+      "description": "",
+      "path": "entities/documentation/ui/examples/breadcrumb-variants.tsx"
+    },
+    {
+      "name": "BreadcrumbWithIcons",
+      "title": "With icons",
+      "description": "Compose decorative icons with ancestor links and the current page.",
+      "path": "entities/documentation/ui/examples/breadcrumb-states.tsx"
+    },
+    {
+      "name": "BreadcrumbCollapsed",
+      "title": "Collapsed ancestors",
+      "description": "An accessible menu reveals omitted links.",
+      "path": "entities/documentation/ui/examples/breadcrumb-states.tsx"
+    },
+    {
+      "name": "BreadcrumbCustomSeparator",
+      "title": "Custom separator",
+      "description": "Supply slash separators through children.",
+      "path": "entities/documentation/ui/examples/breadcrumb-states.tsx"
+    },
+    {
+      "name": "BreadcrumbLongLabels",
+      "title": "Long labels",
+      "description": "Resource identifiers wrap within narrow containers.",
+      "path": "entities/documentation/ui/examples/breadcrumb-states.tsx"
+    }
+  ],
+  "pagination": [
+    {
+      "name": "SearchResultsPagination",
+      "title": "Page navigation",
+      "description": "Page 2 is illustrative. Use your route's page parameter to mark the active link and load results."
+    },
+    {
+      "name": "PaginationProjectDocumentsExample1",
+      "title": "Project documents",
+      "description": "Northstar launch / Shared documents",
+      "path": "entities/documentation/ui/examples/pagination-variants.tsx"
+    },
+    {
+      "name": "PaginationFrameworkLinks",
+      "title": "Framework links and RTL",
+      "description": "Next.js links preserve client navigation. Arrows follow reading direction, and unavailable pages skip keyboard focus."
+    }
+  ],
+  "navigation-menu": [
+    {
+      "name": "ProductNavigationMenu",
+      "title": "Product navigation",
+      "description": "Use this for site navigation links with a disclosure panel; preserve real destination URLs."
+    },
+    {
+      "name": "NavigationMenuWorkspaceResourcesExample1",
+      "title": "Workspace resources",
+      "description": "Browse components and guides without leaving the current workspace.",
+      "path": "entities/documentation/ui/examples/navigation-menu-variants.tsx"
+    },
+    {
+      "name": "NavigationMenuStates",
+      "title": "Icons and navigation states",
+      "description": "Controlled panels, a current link, disabled navigation, framework links, and scrolling content.",
+      "path": "entities/documentation/ui/examples/navigation-menu-states.tsx"
+    }
+  ],
+  "stepper": [
+    {
+      "name": "WorkspaceSetupStepper",
+      "title": "Setup progress",
+      "description": "Use a named ordered list and mark one item current with status=current."
+    },
+    {
+      "name": "StepperCreateAProjectExample1",
+      "title": "Create a project",
+      "description": "Set up a shared space for your next release.",
+      "path": "entities/documentation/ui/examples/stepper-variants.tsx"
+    },
+    {
+      "name": "VerticalSetupStepper",
+      "title": "Vertical progress",
+      "description": "A connected rail keeps longer labels and descriptions readable.",
+      "path": "entities/documentation/ui/examples/stepper.tsx"
+    },
+    {
+      "name": "NumberedSetupStepper",
+      "title": "Numbered markers",
+      "description": "Keep the step number visible in every state.",
+      "path": "entities/documentation/ui/examples/stepper.tsx"
+    },
+    {
+      "name": "OnTrackSetupStepper",
+      "title": "Indicators on the track",
+      "description": "A continuous rail connects centered markers, with labels below.",
+      "path": "entities/documentation/ui/examples/stepper.tsx"
+    },
+    {
+      "name": "EditableSetupStepper",
+      "title": "Interactive steps and content",
+      "description": "Revisit an earlier step with a native button. Fields stay outside its clickable heading.",
+      "path": "entities/documentation/ui/examples/stepper-variants.tsx"
+    },
+    {
+      "name": "StepperIndicatorModes",
+      "title": "Indicator modes",
+      "description": "Automatic status markers, persistent numbers, custom icons, and reserved empty marker space.",
+      "path": "entities/documentation/ui/examples/stepper.tsx"
+    },
+    {
+      "name": "AnimatedReleaseStepper",
+      "title": "Progress motion",
+      "description": "Advance one step to animate the connecting rail. Revisit any step without waiting for motion to finish.",
+      "path": "entities/documentation/ui/examples/stepper-variants.tsx"
+    }
+  ],
+  "link": [
+    {
+      "name": "DocumentationLink",
+      "title": "Inline links",
+      "description": "Links sit inside the sentence that gives them meaning."
+    },
+    {
+      "name": "LinkWorkspaceResourcesExample1",
+      "title": "Workspace resources",
+      "description": "",
+      "path": "entities/documentation/ui/examples/link-variants.tsx"
+    },
+    {
+      "name": "LinkNextJs",
+      "title": "Next.js",
+      "description": "Next.js Link owns the destination and client navigation.",
+      "path": "entities/documentation/ui/examples/link-frameworks.tsx"
+    },
+    {
+      "name": "LinkReactRouter",
+      "title": "React Router",
+      "description": "This isolated preview uses MemoryRouter. In your app, use your existing router.",
+      "path": "entities/documentation/ui/examples/link-frameworks.tsx"
+    },
+    {
+      "name": "LinkExternal",
+      "title": "External link",
+      "description": "Native anchor attributes control external navigation.",
+      "path": "entities/documentation/ui/examples/link-frameworks.tsx"
+    },
+    {
+      "name": "LinkLongText",
+      "title": "Long text",
+      "description": "Inline links wrap within narrow text blocks.",
+      "path": "entities/documentation/ui/examples/link-frameworks.tsx"
+    }
+  ],
+  "menubar": [
+    {
+      "name": "EditorMenubar",
+      "title": "Editor commands",
+      "description": "Use Menubar for a horizontal set of application menus and place each trigger inside Menu."
+    },
+    {
+      "name": "MenubarNorthstarLaunchExample1",
+      "title": "Northstar launch",
+      "description": "",
+      "path": "entities/documentation/ui/examples/menubar-variants.tsx"
+    },
+    {
+      "name": "MenubarPanelNavigationExample2",
+      "title": "Panel navigation",
+      "description": "",
+      "path": "entities/documentation/ui/examples/menubar-variants.tsx"
+    },
+    {
+      "name": "MenubarWithOptions",
+      "title": "Icons and preferences",
+      "description": "Icons, shortcuts, disabled actions, nested menus, checkboxes, and radio choices.",
+      "path": "entities/documentation/ui/examples/menubar-states.tsx"
+    },
+    {
+      "name": "MenubarDisabled",
+      "title": "Disabled menubar",
+      "description": "The entire command bar can be disabled.",
+      "path": "entities/documentation/ui/examples/menubar-states.tsx"
+    }
+  ],
+  "frame": [
+    {
+      "name": "AccountFrame",
+      "title": "Team members",
+      "description": "The header names the area, the panel lists the members, and the footer holds seat usage and the invite action."
+    },
+    {
+      "name": "FramePersonalWorkspaceExample1",
+      "title": "Personal workspace",
+      "description": "",
+      "path": "entities/documentation/ui/examples/frame-variants.tsx"
+    }
+  ],
+  "grid": [
+    {
+      "name": "SummaryGrid",
+      "title": "Metric overview",
+      "description": "Four stat cards share two columns and stack into one column on narrow screens."
+    },
+    {
+      "name": "GridYourProjectsExample1",
+      "title": "Your projects",
+      "description": "Four projects, arranged to fit the available space.",
+      "path": "entities/documentation/ui/examples/grid-variants.tsx"
+    }
+  ],
+  "group": [
+    {
+      "name": "ProjectActions",
+      "title": "Tags",
+      "description": "Group keeps the tags together and wraps them when the row runs out of room."
+    },
+    {
+      "name": "GroupWorkspaceChangesExample1",
+      "title": "Workspace changes",
+      "description": "Save the current configuration or review the other available actions.",
+      "path": "entities/documentation/ui/examples/group-variants.tsx"
+    }
+  ],
+  "inline": [
+    {
+      "name": "ReleaseSummary",
+      "title": "Article metadata",
+      "description": "The author, date, read time, and tag share one row, which wraps on narrow screens."
+    },
+    {
+      "name": "InlineProductionReleaseExample1",
+      "title": "Production release",
+      "description": "Preview the release before deploying your changes.",
+      "path": "entities/documentation/ui/examples/inline-variants.tsx"
+    }
+  ],
+  "scroll-area": [
+    {
+      "name": "AuditEntries",
+      "title": "Activity list",
+      "description": "Eight events scroll in a 14rem region, and the fade shows there is more below."
+    },
+    {
+      "name": "ScrollAreaReleaseActivityExample1",
+      "title": "Release activity",
+      "description": "Recent operations stay in one bounded view.",
+      "path": "entities/documentation/ui/examples/scroll-area-variants.tsx"
+    },
+    {
+      "name": "ScrollAreaClusterHealthExample2",
+      "title": "Cluster health",
+      "description": "Compare nodes without losing the table columns.",
+      "path": "entities/documentation/ui/examples/scroll-area-variants.tsx"
+    },
+    {
+      "name": "ScrollAreaDeploymentMatrixExample3",
+      "title": "Deployment matrix",
+      "description": "Review deployments across environments and regions.",
+      "path": "entities/documentation/ui/examples/scroll-area-variants.tsx"
+    },
+    {
+      "name": "ScrollAreaWorkspaceSummaryExample4",
+      "title": "Workspace summary",
+      "description": "Short content lets the page keep scrolling.",
+      "path": "entities/documentation/ui/examples/scroll-area-variants.tsx"
+    },
+    {
+      "name": "ScrollAreaSecurityActivityInRTLExample5",
+      "title": "Security activity in RTL",
+      "description": "The same activity view, with right-to-left reading order.",
+      "path": "entities/documentation/ui/examples/scroll-area-variants.tsx"
+    }
+  ],
+  "section": [
+    {
+      "name": "ProjectSettingsSection",
+      "title": "Notification settings",
+      "description": "The Section is a landmark named by its heading through aria-labelledby."
+    },
+    {
+      "name": "SectionNorthstarLaunchExample1",
+      "title": "Northstar launch",
+      "description": "",
+      "path": "entities/documentation/ui/examples/section-variants.tsx"
+    }
+  ],
+  "separator": [
+    {
+      "name": "AccountDetailsDivider",
+      "title": "Order total",
+      "description": "A rule separates the line items from the total."
+    },
+    {
+      "name": "SeparatorAccountDetailsExample1",
+      "title": "Account details",
+      "description": "",
+      "path": "entities/documentation/ui/examples/separator-variants.tsx"
+    }
+  ],
+  "spacer": [
+    {
+      "name": "SplitActions",
+      "title": "Form footer",
+      "description": "A Spacer pushes Delete to the left. Cancel and Save stay together on the right."
+    },
+    {
+      "name": "SpacerProjectStatusExample1",
+      "title": "Project status",
+      "description": "",
+      "path": "entities/documentation/ui/examples/spacer-variants.tsx"
+    }
+  ],
+  "stack": [
+    {
+      "name": "DeploymentDetails",
+      "title": "Deploy checks",
+      "description": "Stack spaces the check rows at one even gap."
+    },
+    {
+      "name": "StackDeploymentExample1",
+      "title": "Deployment",
+      "description": "",
+      "path": "entities/documentation/ui/examples/stack-variants.tsx"
+    }
+  ],
+  "aspect-ratio": [
+    {
+      "name": "ProjectPreview",
+      "title": "Cover image",
+      "description": "The 4:3 box holds its shape before and after the image loads."
+    },
+    {
+      "name": "AspectRatioMediaProportionsExample1",
+      "title": "Media proportions",
+      "description": "",
+      "path": "entities/documentation/ui/examples/aspect-ratio-variants.tsx"
+    }
+  ],
+  "code-block": [
+    {
+      "name": "SaveButtonSource",
+      "title": "Highlighted source",
+      "description": "A file name, Copy, and TypeScript syntax colors.",
+      "path": "entities/documentation/ui/examples/code-block.tsx"
+    },
+    {
+      "name": "InstallCommand",
+      "title": "Terminal command",
+      "description": "A short shell command with Copy floating in the corner."
+    },
+    {
+      "name": "CodeBlockCodeBlockExample1",
+      "title": "Longer file",
+      "description": "Long code scrolls inside the block.",
+      "path": "entities/documentation/ui/examples/code-block-variants.tsx"
+    }
+  ],
+  "code": [
+    {
+      "name": "InlineCommand",
+      "title": "Setup steps",
+      "description": "Commands and file paths sit inside the sentences that explain them."
+    },
+    {
+      "name": "CodeBeforeTheReviewExample1",
+      "title": "Before the review",
+      "description": "A short handoff note for the project team.",
+      "path": "entities/documentation/ui/examples/code-variants.tsx"
+    }
+  ],
+  "heading": [
+    {
+      "name": "ArticleHeadings",
+      "title": "Guide headings",
+      "description": "An h2 title at the title size leads two h3 sections at the default heading size."
+    },
+    {
+      "name": "HeadingDisplayHeadingH1Example1",
+      "title": "Display heading (h1)",
+      "description": "",
+      "path": "entities/documentation/ui/examples/heading-variants.tsx"
+    },
+    {
+      "name": "HeadingTitleHeadingH2Example2",
+      "title": "Title heading (h2)",
+      "description": "",
+      "path": "entities/documentation/ui/examples/heading-variants.tsx"
+    },
+    {
+      "name": "HeadingSectionHeadingH3Example3",
+      "title": "Section heading (h3)",
+      "description": "",
+      "path": "entities/documentation/ui/examples/heading-variants.tsx"
+    },
+    {
+      "name": "HeadingSubsectionHeadingH4DefaultSizeExample4",
+      "title": "Subsection heading (h4, default size)",
+      "description": "",
+      "path": "entities/documentation/ui/examples/heading-variants.tsx"
+    },
+    {
+      "name": "HeadingMinorHeadingH5DefaultSizeExample5",
+      "title": "Minor heading (h5, default size)",
+      "description": "",
+      "path": "entities/documentation/ui/examples/heading-variants.tsx"
+    },
+    {
+      "name": "HeadingDetailHeadingH6DefaultSizeExample6",
+      "title": "Detail heading (h6, default size)",
+      "description": "",
+      "path": "entities/documentation/ui/examples/heading-variants.tsx"
+    },
+    {
+      "name": "HeadingDefaultHeadingDefaultLevel2DefaultSizeExample7",
+      "title": "Default heading (default level 2, default size)",
+      "description": "",
+      "path": "entities/documentation/ui/examples/heading-variants.tsx"
+    }
+  ],
+  "label": [
+    {
+      "name": "WorkspaceNameField",
+      "title": "Workspace name",
+      "description": "The Label names its input through htmlFor, so a click on the label focuses the field."
+    },
+    {
+      "name": "LabelWorkspaceIdentityExample1",
+      "title": "Workspace identity",
+      "description": "Associate each visible label with its editable field.",
+      "path": "entities/documentation/ui/examples/label-variants.tsx"
+    }
+  ],
+  "text": [
+    {
+      "name": "ReadingText",
+      "title": "Text sizes",
+      "description": "Body text carries the content. Muted ui and caption sizes hold the metadata and the footnote."
+    },
+    {
+      "name": "TextReleaseNotesExample1",
+      "title": "Release notes",
+      "description": "",
+      "path": "entities/documentation/ui/examples/text-variants.tsx"
+    }
+  ],
+  "blockquote": [
+    {
+      "name": "ArchitectureQuote",
+      "title": "Customer quote",
+      "description": "The quote carries the speaker in its attribution."
+    },
+    {
+      "name": "BlockquoteQuotedContentExample1",
+      "title": "Quoted content",
+      "description": "",
+      "path": "entities/documentation/ui/examples/blockquote-variants.tsx"
+    }
+  ],
+  "citation": [
+    {
+      "name": "SourceMention",
+      "title": "Cited sources",
+      "description": "Citation marks the titles of the standards the text relies on."
+    },
+    {
+      "name": "CitationSourceTitlesExample1",
+      "title": "Source titles",
+      "description": "",
+      "path": "entities/documentation/ui/examples/citation-variants.tsx"
+    }
+  ],
+  "visually-hidden": [
+    {
+      "name": "NamedIconAction",
+      "title": "File actions",
+      "description": "Icon-only buttons name their action and file with VisuallyHidden text."
+    },
+    {
+      "name": "VisuallyHiddenInboxExample1",
+      "title": "Inbox",
+      "description": "",
+      "path": "entities/documentation/ui/examples/visually-hidden-variants.tsx"
+    }
+  ],
+  "avatar": [
+    {
+      "name": "MemberAvatar",
+      "title": "Team members",
+      "description": "Profile photos, with a generated character for a member without one."
+    },
+    {
+      "name": "AvatarCharactersExample",
+      "title": "Generated characters",
+      "description": "Simple faces derived from stable identity seeds. Shapes, colors, and expressions stay consistent in both themes.",
+      "path": "entities/documentation/ui/examples/avatar-characters.tsx"
+    },
+    {
+      "name": "AvatarCharacterFallbackExample",
+      "title": "Generated image fallback",
+      "description": "Use a generated character when a profile photo cannot load.",
+      "path": "entities/documentation/ui/examples/avatar-characters.tsx"
+    },
+    {
+      "name": "AvatarProjectOwnerExample1",
+      "title": "Project owner",
+      "description": "",
+      "path": "entities/documentation/ui/examples/avatar-variants.tsx"
+    },
+    {
+      "name": "AvatarSizesExample2",
+      "title": "Sizes",
+      "description": "Avatar scales across small, default, and large dimensions with proportional typography.",
+      "path": "entities/documentation/ui/examples/avatar-variants.tsx"
+    },
+    {
+      "name": "AvatarImageAndFallbackExample3",
+      "title": "Image and fallback",
+      "description": "Avatar displays a loaded user image and falls back to consumer-supplied content on error.",
+      "path": "entities/documentation/ui/examples/avatar-variants.tsx"
+    }
+  ],
+  "avatar-group": [
+    {
+      "name": "ProjectContributors",
+      "title": "Contributor group",
+      "description": "Group avatar fallbacks for contributors."
+    },
+    {
+      "name": "AvatarGroupDesignReviewExample1",
+      "title": "Design review",
+      "description": "",
+      "path": "entities/documentation/ui/examples/avatar-group-variants.tsx"
+    },
+    {
+      "name": "AvatarGroupSizesExample2",
+      "title": "Sizes",
+      "description": "Avatar group clusters overlapping avatars with inherited size and consumer-supplied children.",
+      "path": "entities/documentation/ui/examples/avatar-group-variants.tsx"
+    }
+  ],
+  "badge": [
+    {
+      "name": "ReleaseBadge",
+      "title": "Status badge",
+      "description": "Pair a short category label with visible status text."
+    },
+    {
+      "name": "BadgeSemanticVariantsExample1",
+      "title": "Semantic variants",
+      "description": "Use badges to make compact status and category values scannable.",
+      "path": "entities/documentation/ui/examples/badge-variants.tsx"
+    },
+    {
+      "name": "BadgeSizesExample2",
+      "title": "Sizes",
+      "description": "",
+      "path": "entities/documentation/ui/examples/badge-variants.tsx"
+    },
+    {
+      "name": "BadgePolymorphicLinkExample3",
+      "title": "Polymorphic link",
+      "description": "Render a badge as a link when the status needs a destination.",
+      "path": "entities/documentation/ui/examples/badge-variants.tsx"
+    }
+  ],
+  "card": [
+    {
+      "name": "ProjectCard",
+      "title": "Plan card",
+      "description": "The header holds the title, description, and status, the content shows usage, and the footer holds the actions."
+    },
+    {
+      "name": "CardReleaseHealthExample1",
+      "title": "Release health",
+      "description": "Review production status and the checks required for a release.",
+      "path": "entities/documentation/ui/examples/card-variants.tsx"
+    },
+    {
+      "name": "CardClickableNavigationExample2",
+      "title": "Clickable navigation",
+      "description": "Render Card as a native anchor when the entire surface navigates to a destination.",
+      "path": "entities/documentation/ui/examples/card-variants.tsx"
+    }
+  ],
+  "status-dot": [
+    {
+      "name": "ServiceStatus",
+      "title": "Status with text",
+      "description": "Pair a semantic status dot with visible wording."
+    },
+    {
+      "name": "StatusDotServiceStatesExample1",
+      "title": "Service states",
+      "description": "",
+      "path": "entities/documentation/ui/examples/status-dot-variants.tsx"
+    }
+  ],
+  "spinner": [
+    {
+      "name": "SyncStatus",
+      "title": "Activity status",
+      "description": "Show an ongoing sync beside a status message."
+    },
+    {
+      "name": "SpinnerThinkingExample",
+      "title": "Thinking",
+      "description": "Dots slide through a grid, one at a time, while the model reasons.",
+      "path": "entities/documentation/ui/examples/spinner-variants.tsx"
+    },
+    {
+      "name": "SpinnerTypingExample",
+      "title": "Typing",
+      "description": "Three dots rise in turn while a reply is being written.",
+      "path": "entities/documentation/ui/examples/spinner-variants.tsx"
+    }
+  ],
+  "progress": [
+    {
+      "name": "ExportProgress",
+      "title": "Measured progress",
+      "description": "Show a labeled export with its current measured value."
+    },
+    {
+      "name": "ProgressWorkspaceExportExample1",
+      "title": "Workspace export",
+      "description": "",
+      "path": "entities/documentation/ui/examples/progress-variants.tsx"
+    },
+    {
+      "name": "ProgressBuildProcessingExample2",
+      "title": "Build processing",
+      "description": "",
+      "path": "entities/documentation/ui/examples/progress-variants.tsx"
+    },
+    {
+      "name": "ProgressArchiveTransferExample3",
+      "title": "Archive transfer",
+      "description": "",
+      "path": "entities/documentation/ui/examples/progress-variants.tsx"
+    },
+    {
+      "name": "ProgressRecordSyncExample4",
+      "title": "Record sync",
+      "description": "",
+      "path": "entities/documentation/ui/examples/progress-variants.tsx"
+    }
+  ],
+  "skeleton": [
+    {
+      "name": "LoadingProjectCard",
+      "title": "Loading placeholder",
+      "description": "Represent pending card content with matching placeholders."
+    },
+    {
+      "name": "SkeletonLoadingAProjectExample1",
+      "title": "Loading a project",
+      "description": "The project summary keeps its place while content loads.",
+      "path": "entities/documentation/ui/examples/skeleton-variants.tsx"
+    },
+    {
+      "name": "SkeletonTextBlockExample2",
+      "title": "Text block",
+      "description": "Composes multiple line skeletons to simulate paragraph loading.",
+      "path": "entities/documentation/ui/examples/skeleton-variants.tsx"
+    },
+    {
+      "name": "SkeletonCircleWithMetadataExample3",
+      "title": "Circle with metadata",
+      "description": "Pairs an avatar or icon placeholder with descriptive metadata lines.",
+      "path": "entities/documentation/ui/examples/skeleton-variants.tsx"
+    },
+    {
+      "name": "SkeletonRectangleCardPreviewExample4",
+      "title": "Rectangle card preview",
+      "description": "Provides a block placeholder for media, cards, and container surfaces.",
+      "path": "entities/documentation/ui/examples/skeleton-variants.tsx"
+    }
+  ],
+  "alert": [
+    {
+      "name": "MaintenanceNotice",
+      "title": "Warning message",
+      "description": "Present a scheduled maintenance notice."
+    },
+    {
+      "name": "AlertSemanticVariantsExample1",
+      "title": "Semantic variants",
+      "description": "Presents critical messages across five semantic tones with token-backed colors and contrast.",
+      "path": "entities/documentation/ui/examples/alert-variants.tsx"
+    },
+    {
+      "name": "AlertInteractiveActionExample2",
+      "title": "Interactive action",
+      "description": "Interactive alerts should use role=\"region\" with aria-labelledby to provide polite navigation landmarks.",
+      "path": "entities/documentation/ui/examples/alert-variants.tsx"
+    },
+    {
+      "name": "AlertIconlessAlertExample3",
+      "title": "Iconless alert",
+      "description": "Renders without an icon slot; title and description align flush with container padding.",
+      "path": "entities/documentation/ui/examples/alert-variants.tsx"
+    },
+    {
+      "name": "AlertDescriptiononlyAlertExample4",
+      "title": "Description-only alert",
+      "description": "Renders concise notification copy without a separate heading element.",
+      "path": "entities/documentation/ui/examples/alert-variants.tsx"
+    }
+  ],
+  "empty": [
+    {
+      "name": "NoRepositories",
+      "title": "Empty collection",
+      "description": "Explain why a successful repository list is empty."
+    },
+    {
+      "name": "EmptyCanonicalIconStateExample1",
+      "title": "Canonical icon state",
+      "description": "Standard empty presentation with stacked decorative back cards, title, description, and primary action.",
+      "path": "entities/documentation/ui/examples/empty-variants.tsx"
+    },
+    {
+      "name": "EmptyComposedActionsExample2",
+      "title": "Composed actions",
+      "description": "Presents multiple next steps arranged with layout primitives like Grid.",
+      "path": "entities/documentation/ui/examples/empty-variants.tsx"
+    },
+    {
+      "name": "EmptyDefaultMediaVisualExample3",
+      "title": "Default media visual",
+      "description": "Renders plain non-icon media composed from existing Mizen primitives.",
+      "path": "entities/documentation/ui/examples/empty-variants.tsx"
+    },
+    {
+      "name": "EmptyFramedCompositionExample4",
+      "title": "Framed composition",
+      "description": "Composes inside a Frame panel using Mizen's compound layout components.",
+      "path": "entities/documentation/ui/examples/empty-variants.tsx"
+    },
+    {
+      "name": "EmptySemanticLevelAndDynamicStatusExample5",
+      "title": "Semantic level and dynamic status",
+      "description": "Configures semantic heading levels (such as h4) and dynamic status announcements for filtered search results.",
+      "path": "entities/documentation/ui/examples/empty-variants.tsx"
+    }
+  ],
+  "error-state": [
+    {
+      "name": "DashboardLoadFailure",
+      "title": "Load failure",
+      "description": "Describe a dashboard load failure without a placeholder action."
+    },
+    {
+      "name": "ErrorStateCanonicalRetryExample1",
+      "title": "Canonical retry",
+      "description": "Standard failure presentation with destructive icon, title, description, and primary retry action.",
+      "path": "entities/documentation/ui/examples/error-state-variants.tsx"
+    },
+    {
+      "name": "ErrorStateComposedRecoveryActionsExample2",
+      "title": "Composed recovery actions",
+      "description": "Presents multiple recovery options arranged with responsive Grid layout.",
+      "path": "entities/documentation/ui/examples/error-state-variants.tsx"
+    },
+    {
+      "name": "ErrorStateDiagnosticDetailsExample3",
+      "title": "Diagnostic details",
+      "description": "Presents technical error identifiers and status codes using Badge and Code primitives.",
+      "path": "entities/documentation/ui/examples/error-state-variants.tsx"
+    },
+    {
+      "name": "ErrorStateFramedRegionExample4",
+      "title": "Framed region",
+      "description": "Compose an accessible error region inside a Frame panel.",
+      "path": "entities/documentation/ui/examples/error-state-variants.tsx"
+    },
+    {
+      "name": "ErrorStateSemanticHeadingHierarchyExample5",
+      "title": "Semantic heading hierarchy",
+      "description": "Configures semantic heading levels to maintain a continuous outline under nested subsections.",
+      "path": "entities/documentation/ui/examples/error-state-variants.tsx"
+    }
+  ],
+  "property-list": [
+    {
+      "name": "DeploymentMetadata",
+      "title": "Deployment properties",
+      "description": "Display deployment metadata as label-value pairs."
+    },
+    {
+      "name": "PropertyListDeploymentRecordExample1",
+      "title": "Deployment record",
+      "description": "",
+      "path": "entities/documentation/ui/examples/property-list-variants.tsx"
+    },
+    {
+      "name": "PropertyListServiceHealthExample2",
+      "title": "Service health",
+      "description": "",
+      "path": "entities/documentation/ui/examples/property-list-variants.tsx"
+    },
+    {
+      "name": "PropertyListClusterDetailsExample3",
+      "title": "Cluster details",
+      "description": "",
+      "path": "entities/documentation/ui/examples/property-list-variants.tsx"
+    }
+  ],
+  "metric": [
+    {
+      "name": "ActiveSubscriptions",
+      "title": "Labeled metric",
+      "description": "Present a value with its population and billing period."
+    },
+    {
+      "name": "MetricSubscriptionsExample1",
+      "title": "Subscriptions",
+      "description": "",
+      "path": "entities/documentation/ui/examples/metric-variants.tsx"
+    },
+    {
+      "name": "MetricRevenueAndUptimeExample2",
+      "title": "Revenue and uptime",
+      "description": "",
+      "path": "entities/documentation/ui/examples/metric-variants.tsx"
+    },
+    {
+      "name": "MetricTrafficAndCacheExample3",
+      "title": "Traffic and cache",
+      "description": "",
+      "path": "entities/documentation/ui/examples/metric-variants.tsx"
+    }
+  ],
+  "kbd": [
+    {
+      "name": "SearchShortcut",
+      "title": "Shortcuts list",
+      "description": "Each action sits beside the keys that trigger it, grouped with KbdGroup."
+    },
+    {
+      "name": "KbdStandaloneKeysExample1",
+      "title": "Standalone keys",
+      "description": "Single key caps represent individual keystrokes, modifier keys, and navigation controls.",
+      "path": "entities/documentation/ui/examples/kbd-variants.tsx"
+    },
+    {
+      "name": "KbdGroupedShortcutsExample2",
+      "title": "Grouped shortcuts",
+      "description": "Compose related key sequences with KbdGroup to present multi-key combinations.",
+      "path": "entities/documentation/ui/examples/kbd-variants.tsx"
+    },
+    {
+      "name": "KbdInlineTextCompositionExample3",
+      "title": "Inline text composition",
+      "description": "Keys and shortcut groups sit inline with instructional body text to explain keyboard navigation.",
+      "path": "entities/documentation/ui/examples/kbd-variants.tsx"
+    },
+    {
+      "name": "KbdActionCompositionExample4",
+      "title": "Action composition",
+      "description": "Pair shortcut indicators with action triggers to display available hotkeys directly on controls.",
+      "path": "entities/documentation/ui/examples/kbd-variants.tsx"
+    }
+  ],
+  "meter": [
+    {
+      "name": "StorageCapacity",
+      "title": "Bounded capacity",
+      "description": "Show a labeled storage measurement on a fixed range."
+    },
+    {
+      "name": "MeterStorageUsageExample1",
+      "title": "Storage usage",
+      "description": "",
+      "path": "entities/documentation/ui/examples/meter-variants.tsx"
+    }
+  ],
+  "table": [
+    {
+      "name": "ProjectTable",
+      "title": "Project table",
+      "description": "A semantic table with a caption, row headers, and aligned numeric values."
+    },
+    {
+      "name": "TableMonthlyOperatingBudgetExample1",
+      "title": "Monthly operating budget",
+      "description": "",
+      "path": "entities/documentation/ui/examples/table-variants.tsx"
+    }
+  ],
+  "data-table": [
+    {
+      "name": "SortableProjects",
+      "title": "Sortable data table",
+      "description": "A TanStack table with Mizen's sortable table view."
+    },
+    {
+      "name": "DataTableBudgetRecordsExample1",
+      "title": "Budget records",
+      "description": "",
+      "path": "entities/documentation/ui/examples/data-table-variants.tsx"
+    }
+  ],
+  "list": [
+    {
+      "name": "ProjectList",
+      "title": "Recent project list",
+      "description": "A named list with concise content for each project."
+    },
+    {
+      "name": "ListProjectResourcesExample1",
+      "title": "Project resources",
+      "description": "",
+      "path": "entities/documentation/ui/examples/list-variants.tsx"
+    }
+  ],
+  "token": [
+    {
+      "name": "CategoryTokens",
+      "title": "Category tokens",
+      "description": "Colored metadata using Mizen tokens."
+    },
+    {
+      "name": "TokenColorsExample",
+      "title": "Colors and disabled states",
+      "description": "",
+      "path": "entities/documentation/ui/examples/token-variants.tsx"
+    },
+    {
+      "name": "TokenSizesExample",
+      "title": "Sizes and leading icons",
+      "description": "",
+      "path": "entities/documentation/ui/examples/token-variants.tsx"
+    },
+    {
+      "name": "TokenSelectionExample",
+      "title": "Clickable, linked, and hidden labels",
+      "description": "",
+      "path": "entities/documentation/ui/examples/token-variants.tsx"
+    },
+    {
+      "name": "TokenRemovalExample",
+      "title": "Removal and end content",
+      "description": "",
+      "path": "entities/documentation/ui/examples/token-variants.tsx"
+    }
+  ],
+  "activity-feed": [
+    {
+      "name": "ReleaseActivity",
+      "title": "Release activity",
+      "description": "A grouped activity log with comments, mentions, status changes, tags, downloads, and working filters."
+    },
+    {
+      "name": "ActivityFeedRecentActivityExample1",
+      "title": "Compact activity",
+      "description": "People, actions, and timestamps in aligned rows.",
+      "path": "entities/documentation/ui/examples/activity-feed-variants.tsx"
+    },
+    {
+      "name": "ActivityFeedGroupedExample",
+      "title": "Grouped by day",
+      "description": "Date headings separate chronological event groups.",
+      "path": "entities/documentation/ui/examples/activity-feed-variants.tsx"
+    },
+    {
+      "name": "ActivityFeedWithActionsExample",
+      "title": "Review request",
+      "description": "Rich details and a working acknowledgement action.",
+      "path": "entities/documentation/ui/examples/activity-feed-variants.tsx"
+    },
+    {
+      "name": "ActivityFeedEmptyExample",
+      "title": "Empty activity",
+      "description": "A clear starting point before events arrive.",
+      "path": "entities/documentation/ui/examples/activity-feed-variants.tsx"
+    },
+    {
+      "name": "ActivityFeedLoadingExample",
+      "title": "Loading activity",
+      "description": "A named loading state with hidden placeholder rows.",
+      "path": "entities/documentation/ui/examples/activity-feed-variants.tsx"
+    },
+    {
+      "name": "ActivityFeedErrorExample",
+      "title": "Load failure and recovery",
+      "description": "An application-owned error state with a working retry using sample events.",
+      "path": "entities/documentation/ui/examples/activity-feed-variants.tsx"
+    }
+  ],
+  "overflow-list": [
+    {
+      "name": "Contributors",
+      "title": "Contributor list",
+      "description": "A labeled list that moves extra items into an accessible popover."
+    },
+    {
+      "name": "OverflowListReleaseContributorsExample1",
+      "title": "Release contributors",
+      "description": "",
+      "path": "entities/documentation/ui/examples/overflow-list-variants.tsx"
+    }
+  ],
+  "tree": [
+    {
+      "name": "WorkspaceTree",
+      "title": "Workspace file tree",
+      "description": "A keyboard-operable tree with expanded folders and a selected item."
+    },
+    {
+      "name": "TreeSelectedResourceExample1",
+      "title": "Selected resource",
+      "description": "",
+      "path": "entities/documentation/ui/examples/tree-variants.tsx"
+    }
+  ],
+  "chart-frame": [
+    {
+      "name": "MonthlySignups",
+      "title": "Monthly signups chart",
+      "description": "A chart frame with an accessible name, description, and keyboard focus."
+    },
+    {
+      "name": "ChartFrameTeamActivityExample1",
+      "title": "Team activity",
+      "description": "",
+      "path": "entities/documentation/ui/examples/chart-frame-variants.tsx"
+    }
+  ],
+  "chart-legend": [
+    {
+      "name": "RevenueLegend",
+      "title": "Revenue chart legend",
+      "description": "A labeled legend with stable item ids and semantic chart tones."
+    },
+    {
+      "name": "ChartFrameTeamActivityExample1",
+      "title": "Team activity",
+      "description": "",
+      "path": "entities/documentation/ui/examples/chart-frame-variants.tsx"
+    }
+  ],
+  "chart-tooltip": [
+    {
+      "name": "RevenueTooltip",
+      "title": "Revenue chart tooltip",
+      "description": "A tooltip with a period label and comparable values."
+    },
+    {
+      "name": "ChartTooltipTeamActivityExample1",
+      "title": "Team activity",
+      "description": "",
+      "path": "entities/documentation/ui/examples/chart-tooltip-variants.tsx"
+    }
+  ],
+  "metric-trend": [
+    {
+      "name": "MonthlyRevenueTrend",
+      "title": "Revenue",
+      "description": "A chart card: value with a change chip, a comparison line, a legend, and a smooth area chart against last year."
+    },
+    {
+      "name": "MetricTrendDailySigninsExample1",
+      "title": "Daily sign-ins",
+      "description": "",
+      "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
+    },
+    {
+      "name": "MetricTrendStatCardsExample",
+      "title": "Stat cards",
+      "description": "Without a chart, MetricTrend is a stat card with an icon, value, and change chip.",
+      "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
+    },
+    {
+      "name": "MetricTrendStatCardsFooterExample",
+      "title": "Stat cards with a footer",
+      "description": "deltaPlacement=\"footer\" moves the description and change chip into an inset strip.",
+      "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
+    }
+  ],
+  "time-series": [
+    {
+      "name": "RevenueLineCard",
+      "title": "Revenue card",
+      "description": "A line chart in a dashboard card with period tabs and a change chip.",
+      "path": "entities/documentation/ui/examples/time-series-card.tsx"
+    },
+    {
+      "name": "DailyVisitors",
+      "title": "Daily visitors",
+      "description": "A time series with UTC dates and a gap for a missing observation."
+    },
+    {
+      "name": "TimeSeriesDailySigninsExample1",
+      "title": "Daily sign-ins",
+      "description": "",
+      "path": "entities/documentation/ui/examples/time-series-variants.tsx"
+    }
+  ],
+  "category-comparison": [
+    {
+      "name": "OrdersComparisonCard",
+      "title": "Orders card",
+      "description": "This year against last year by month, with the legend in the card header.",
+      "path": "entities/documentation/ui/examples/category-comparison-card.tsx"
+    },
+    {
+      "name": "EarningsTrackCard",
+      "title": "Earnings card",
+      "description": "Track bars with period tabs.",
+      "path": "entities/documentation/ui/examples/category-comparison-card.tsx"
+    },
+    {
+      "name": "TicketsByTeam",
+      "title": "Tickets by team",
+      "description": "A labeled comparison of numeric values across categories."
+    },
+    {
+      "name": "CategoryComparisonRegionalRevenueVarianceExample1",
+      "title": "Regional revenue variance",
+      "description": "",
+      "path": "entities/documentation/ui/examples/category-comparison-variants.tsx"
+    },
+    {
+      "name": "CategoryComparisonOrdersByMonthExample",
+      "title": "This year against last year",
+      "description": "Vertical bars with a comparison value per month, drawn as a quieter bar beside it.",
+      "path": "entities/documentation/ui/examples/category-comparison-variants.tsx"
+    },
+    {
+      "name": "CategoryComparisonEarningsTrackExample",
+      "title": "Track bars",
+      "description": "A track behind each bar shows the full scale.",
+      "path": "entities/documentation/ui/examples/category-comparison-variants.tsx"
+    }
+  ],
+  "distribution": [
+    {
+      "name": "ResponseTimeDistribution",
+      "title": "Response time distribution",
+      "description": "A histogram with finite observations and an explicit domain."
+    },
+    {
+      "name": "DistributionSupportResolutionTimeExample1",
+      "title": "Support resolution time",
+      "description": "",
+      "path": "entities/documentation/ui/examples/distribution-variants.tsx"
+    }
+  ],
+  "part-to-whole": [
+    {
+      "name": "SupportChannelsCard",
+      "title": "Support requests card",
+      "description": "A donut with its total and legend in a card.",
+      "path": "entities/documentation/ui/examples/part-to-whole-card.tsx"
+    },
+    {
+      "name": "SupportShare",
+      "title": "Support channel share",
+      "description": "A part-to-whole chart with percentage formatting."
+    },
+    {
+      "name": "PartToWholeQuarterlyBudgetMixExample1",
+      "title": "Quarterly budget mix",
+      "description": "",
+      "path": "entities/documentation/ui/examples/part-to-whole-variants.tsx"
+    }
+  ],
+  "heatmap": [
+    {
+      "name": "ActiveUsersCard",
+      "title": "Active users card",
+      "description": "A weekday-by-hour grid in a card.",
+      "path": "entities/documentation/ui/examples/heatmap-card.tsx"
+    },
+    {
+      "name": "WeeklyActivity",
+      "title": "Weekly activity heatmap",
+      "description": "A heatmap with a missing observation and a text table equivalent."
+    },
+    {
+      "name": "HeatmapRequestsByWeekdayAndTimeExample1",
+      "title": "Requests by weekday and time",
+      "description": "",
+      "path": "entities/documentation/ui/examples/heatmap-variants.tsx"
+    },
+    {
+      "name": "HeatmapActiveUsersByHourExample",
+      "title": "Weekday by hour",
+      "description": "Seven days by twelve two-hour buckets in a compact grid.",
+      "path": "entities/documentation/ui/examples/heatmap-variants.tsx"
+    }
+  ],
+  "scatter-chart": [
+    {
+      "name": "RevenuePerAccountCard",
+      "title": "Revenue per account card",
+      "description": "Grouped bubbles in a card with a period select.",
+      "path": "entities/documentation/ui/examples/scatter-chart-card.tsx"
+    },
+    {
+      "name": "StudyOutcomes",
+      "title": "Study outcomes scatter chart",
+      "description": "A labeled scatter chart with finite observations and axis names."
+    },
+    {
+      "name": "ScatterChartStudyTimeAndAssessmentScoreExample1",
+      "title": "Study time and assessment score",
+      "description": "",
+      "path": "entities/documentation/ui/examples/scatter-chart-variants.tsx"
+    },
+    {
+      "name": "ScatterChartAccountTiersExample",
+      "title": "Groups and bubbles",
+      "description": "Up to three groups in palette order; size draws a third measure as bubble area.",
+      "path": "entities/documentation/ui/examples/scatter-chart-variants.tsx"
+    }
+  ],
+  "carousel": [
+    {
+      "name": "ProjectCarousel",
+      "title": "Featured project carousel",
+      "description": "A named carousel with previous and next controls."
+    },
+    {
+      "name": "CarouselExample1",
+      "title": " ",
+      "description": "",
+      "path": "entities/documentation/ui/examples/carousel-variants.tsx"
+    }
+  ],
+  "lightbox": [
+    {
+      "name": "PhotoGallery",
+      "title": "Photo gallery",
+      "description": "Thumbnails open one lightbox that pages through the set."
+    },
+    {
+      "name": "LightboxImagePreviewExample1",
+      "title": "Image preview",
+      "description": "",
+      "path": "entities/documentation/ui/examples/lightbox-variants.tsx"
+    }
+  ],
+  "markdown": [
+    {
+      "name": "ReleaseNotes",
+      "title": "Release notes markdown",
+      "description": "Markdown content rendered through the component parser."
+    },
+    {
+      "name": "MarkdownMarkdownExample1",
+      "title": "Markdown",
+      "description": "",
+      "path": "entities/documentation/ui/examples/markdown-variants.tsx"
+    }
+  ],
+  "thumbnail": [
+    {
+      "name": "PhotoThumbnails",
+      "title": "Photo thumbnails",
+      "description": "Fixed square crops of local photos, each with concise alternative text."
+    },
+    {
+      "name": "ThumbnailDesignAssetsExample1",
+      "title": "Design assets",
+      "description": "",
+      "path": "entities/documentation/ui/examples/thumbnail-variants.tsx"
+    }
+  ],
+  "timestamp": [
+    {
+      "name": "EditedAt",
+      "title": "Relative time",
+      "description": "Reads as \"2 hours ago\" and keeps the exact time on hover and for screen readers."
+    },
+    {
+      "name": "TimestampDocumentHistoryExample1",
+      "title": "Document history",
+      "description": "",
+      "path": "entities/documentation/ui/examples/timestamp-variants.tsx"
+    }
+  ],
+  "attachment": [
+    {
+      "name": "ReportAttachment",
+      "title": "Report attachment",
+      "description": "A structured attachment with media, filename, and file details."
+    },
+    {
+      "name": "AttachmentReleaseFilesExample1",
+      "title": "Release files",
+      "description": "",
+      "path": "entities/documentation/ui/examples/attachment-variants.tsx"
+    }
+  ],
+  "accordion": [
+    {
+      "name": "BasicAccordion",
+      "title": "Separated expansion",
+      "description": "Open rows separate from the closed group with animated spacing and soft corners."
+    },
+    {
+      "name": "ControlledAccordion",
+      "title": "Controlled multiple expansion",
+      "description": "Keep value and onValueChange together. The application can expand every section."
+    },
+    {
+      "name": "AccordionWorkspacePreferencesExample1",
+      "title": "Workspace preferences",
+      "description": "Review how your workspace is organized and where updates are delivered.",
+      "path": "entities/documentation/ui/examples/accordion-variants.tsx"
+    },
+    {
+      "name": "AccordionControlledMultipleExample2",
+      "title": "Controlled multiple",
+      "description": "Coordinates multiple expanded panels through external state and actions.",
+      "path": "entities/documentation/ui/examples/accordion-variants.tsx"
+    },
+    {
+      "name": "AccordionDisabledItemExample3",
+      "title": "Disabled item",
+      "description": "Suppresses user interaction on restricted or unavailable sections.",
+      "path": "entities/documentation/ui/examples/accordion-variants.tsx"
+    },
+    {
+      "name": "AccordionLongWrappingContentExample4",
+      "title": "Long wrapping content",
+      "description": "Preserves layout structure and text wrapping across responsive viewports.",
+      "path": "entities/documentation/ui/examples/accordion-variants.tsx"
+    },
+    {
+      "name": "AccordionRichHeadersExample",
+      "title": "Icons and descriptions",
+      "description": "Use consumer-provided icons and quieter descriptions to distinguish related sections.",
+      "path": "entities/documentation/ui/examples/accordion-variants.tsx"
+    }
+  ],
+  "collapsible": [
+    {
+      "name": "BasicCollapsible",
+      "title": "Retention policy",
+      "description": "The trigger stays visible while the policy is open."
+    },
+    {
+      "name": "CollapsibleDefaultDisclosureExample1",
+      "title": "Default disclosure",
+      "description": "Uncontrolled disclosure panel for secondary configuration details.",
+      "path": "entities/documentation/ui/examples/collapsible-variants.tsx"
+    },
+    {
+      "name": "CollapsibleControlledDisclosureExample2",
+      "title": "Controlled disclosure",
+      "description": "Coordinates disclosure state through external state and event handlers.",
+      "path": "entities/documentation/ui/examples/collapsible-variants.tsx"
+    },
+    {
+      "name": "CollapsibleDisabledStateExample3",
+      "title": "Disabled state",
+      "description": "Suppresses user interaction and preserves the closed panel state.",
+      "path": "entities/documentation/ui/examples/collapsible-variants.tsx"
+    },
+    {
+      "name": "CollapsibleLongWrappingContentExample4",
+      "title": "Long wrapping content",
+      "description": "Preserves layout structure and text wrapping across responsive viewports.",
+      "path": "entities/documentation/ui/examples/collapsible-variants.tsx"
+    }
+  ],
+  "alert-dialog": [
+    {
+      "name": "ConfirmDiscard",
+      "title": "Local confirmation",
+      "description": "This example discards local demo state. Production actions must handle their own persistence and errors."
+    },
+    {
+      "name": "AlertDialogProjectArchiveExample1",
+      "title": "Project archive",
+      "description": "Remove a project only after reviewing the confirmation.",
+      "path": "entities/documentation/ui/examples/alert-dialog-variants.tsx"
+    }
+  ],
+  "menu": [
+    {
+      "name": "WorkspaceMenu",
+      "title": "Commands and checked items",
+      "description": "Use checked items for settings and links for destinations."
+    },
+    {
+      "name": "MenuNorthstarLaunchExample1",
+      "title": "Northstar launch",
+      "description": "Product team · Project actions",
+      "path": "entities/documentation/ui/examples/menu-variants.tsx"
+    },
+    {
+      "name": "MenuOpenOnHover",
+      "title": "Open on hover",
+      "description": "Open using a pointer or the keyboard.",
+      "path": "entities/documentation/ui/examples/menu-states.tsx"
+    },
+    {
+      "name": "MenuWithCheckbox",
+      "title": "With checkbox",
+      "description": "Controlled and uncontrolled selection with a disabled option.",
+      "path": "entities/documentation/ui/examples/menu-states.tsx"
+    },
+    {
+      "name": "MenuWithSwitch",
+      "title": "With switch",
+      "description": "Checkbox behavior with decorative switch indicators.",
+      "path": "entities/documentation/ui/examples/menu-states.tsx"
+    },
+    {
+      "name": "MenuWithRadioGroup",
+      "title": "With radio group",
+      "description": "Controlled selection of one project sort order.",
+      "path": "entities/documentation/ui/examples/menu-states.tsx"
+    },
+    {
+      "name": "MenuWithLink",
+      "title": "With link",
+      "description": "Router links preserve native menu navigation.",
+      "path": "entities/documentation/ui/examples/menu-states.tsx"
+    },
+    {
+      "name": "MenuWithGroupLabel",
+      "title": "With group label",
+      "description": "Separate related actions with labels and a divider.",
+      "path": "entities/documentation/ui/examples/menu-states.tsx"
+    },
+    {
+      "name": "MenuNested",
+      "title": "Nested menu",
+      "description": "Two submenu levels with centered and start alignment.",
+      "path": "entities/documentation/ui/examples/menu-states.tsx"
+    },
+    {
+      "name": "MenuCloseOnClick",
+      "title": "Close on click",
+      "description": "Choose whether an action dismisses the menu.",
+      "path": "entities/documentation/ui/examples/menu-states.tsx"
+    },
+    {
+      "name": "MenuOpenDialog",
+      "title": "Open a dialog",
+      "description": "Transfer focus to a dialog and return to the menu trigger.",
+      "path": "entities/documentation/ui/examples/menu-states.tsx"
+    },
+    {
+      "name": "MenuDisabled",
+      "title": "Disabled",
+      "description": "An unavailable menu trigger.",
+      "path": "entities/documentation/ui/examples/menu-states.tsx"
+    },
+    {
+      "name": "MenuScrollable",
+      "title": "Scrollable content",
+      "description": "Bounded results with a long item label.",
+      "path": "entities/documentation/ui/examples/menu-states.tsx"
+    }
+  ],
+  "context-menu": [
+    {
+      "name": "FileContextMenu",
+      "title": "Context actions",
+      "description": "The same target supports a contextual setting and a real documentation link."
+    },
+    {
+      "name": "ContextMenuFileWorkspaceActionsExample1",
+      "title": "File workspace actions",
+      "description": "",
+      "path": "entities/documentation/ui/examples/context-menu-variants.tsx"
+    },
+    {
+      "name": "ContextMenuWithLink",
+      "title": "With link",
+      "description": "Native anchors and router composition.",
+      "path": "entities/documentation/ui/examples/context-menu-states.tsx"
+    },
+    {
+      "name": "ContextMenuNested",
+      "title": "Nested menu",
+      "description": "Two submenu levels with centered and start alignment.",
+      "path": "entities/documentation/ui/examples/context-menu-states.tsx"
+    },
+    {
+      "name": "ContextMenuWithCheckbox",
+      "title": "With checkbox",
+      "description": "Controlled and uncontrolled selection with a disabled option.",
+      "path": "entities/documentation/ui/examples/context-menu-states.tsx"
+    },
+    {
+      "name": "ContextMenuWithGroupLabel",
+      "title": "With group label",
+      "description": "Group related contextual actions.",
+      "path": "entities/documentation/ui/examples/context-menu-states.tsx"
+    },
+    {
+      "name": "ContextMenuWithRadioGroup",
+      "title": "With radio group",
+      "description": "Choose one file sort order.",
+      "path": "entities/documentation/ui/examples/context-menu-states.tsx"
+    },
+    {
+      "name": "ContextMenuCloseOnClick",
+      "title": "Close on click",
+      "description": "Choose whether an action dismisses the menu.",
+      "path": "entities/documentation/ui/examples/context-menu-states.tsx"
+    },
+    {
+      "name": "ContextMenuOpenDialog",
+      "title": "Open a dialog",
+      "description": "Transfer focus to a dialog and return to the file target.",
+      "path": "entities/documentation/ui/examples/context-menu-states.tsx"
+    },
+    {
+      "name": "ContextMenuWithSwitch",
+      "title": "With switch",
+      "description": "Checkbox behavior with decorative switch indicators.",
+      "path": "entities/documentation/ui/examples/context-menu-states.tsx"
+    },
+    {
+      "name": "ContextMenuScrollable",
+      "title": "Scrollable content",
+      "description": "Render composition in a long, scrollable menu.",
+      "path": "entities/documentation/ui/examples/context-menu-states.tsx"
+    }
+  ],
+  "popover": [
+    {
+      "name": "WorkspacePopover",
+      "title": "Context information",
+      "description": "Give the popup a title and an explicit close action."
+    },
+    {
+      "name": "PopoverProjectIdentityExample1",
+      "title": "Project identity",
+      "description": "Edit the name teammates see in the workspace.",
+      "path": "entities/documentation/ui/examples/popover-variants.tsx"
+    },
+    {
+      "name": "PopoverWithCloseButton",
+      "title": "With close button",
+      "description": "Dismiss from the header or the action.",
+      "path": "entities/documentation/ui/examples/popover-states.tsx"
+    },
+    {
+      "name": "PopoverTooltipStyle",
+      "title": "Tooltip style",
+      "description": "Compact information on hover, focus, or click.",
+      "path": "entities/documentation/ui/examples/popover-states.tsx"
+    },
+    {
+      "name": "PopoverAnimated",
+      "title": "Animated popovers",
+      "description": "Share one popup between detached triggers.",
+      "path": "entities/documentation/ui/examples/popover-states.tsx"
+    },
+    {
+      "name": "PopoverControlled",
+      "title": "Controlled and keep mounted",
+      "description": "Retain a draft across close and reopen.",
+      "path": "entities/documentation/ui/examples/popover-states.tsx"
+    },
+    {
+      "name": "PopoverPositions",
+      "title": "Positions",
+      "description": "Anchor to each side and avoid viewport edges.",
+      "path": "entities/documentation/ui/examples/popover-states.tsx"
+    },
+    {
+      "name": "PopoverDisabled",
+      "title": "Disabled",
+      "description": "Unavailable triggers do not open.",
+      "path": "entities/documentation/ui/examples/popover-states.tsx"
+    }
+  ],
+  "preview-card": [
+    {
+      "name": "DocumentationPreview",
+      "title": "Supplemental link preview",
+      "description": "The link works without opening its preview."
+    },
+    {
+      "name": "PreviewCardAlexMorganExample1",
+      "title": "Alex Morgan",
+      "description": "",
+      "path": "entities/documentation/ui/examples/preview-card-variants.tsx"
+    },
+    {
+      "name": "PreviewCardMizentokensExample2",
+      "title": "mizen-tokens",
+      "description": "",
+      "path": "entities/documentation/ui/examples/preview-card-variants.tsx"
+    },
+    {
+      "name": "PreviewCardControlled",
+      "title": "Controlled and keep mounted",
+      "description": "A custom popup element that stays mounted.",
+      "path": "entities/documentation/ui/examples/preview-card-states.tsx"
+    },
+    {
+      "name": "PreviewCardDelays",
+      "title": "Open and close delays",
+      "description": "Hover intent and pointer travel into the card.",
+      "path": "entities/documentation/ui/examples/preview-card-states.tsx"
+    }
+  ],
+  "tooltip": [
+    {
+      "name": "LinkTooltip",
+      "title": "Link description",
+      "description": "Keep tooltip content brief. The trigger retains its visible link text."
+    },
+    {
+      "name": "TooltipProjectShortcutsExample1",
+      "title": "Project shortcuts",
+      "description": "Hover or focus an action to see its description.",
+      "path": "entities/documentation/ui/examples/tooltip-variants.tsx"
+    },
+    {
+      "name": "TooltipGrouped",
+      "title": "Grouped tooltips",
+      "description": "Adjacent hints open instantly after the first hint.",
+      "path": "entities/documentation/ui/examples/tooltip-states.tsx"
+    },
+    {
+      "name": "TooltipAnimated",
+      "title": "Animated tooltips",
+      "description": "Detached triggers share one popup that changes position, size, and content.",
+      "path": "entities/documentation/ui/examples/tooltip-states.tsx"
+    },
+    {
+      "name": "TooltipPositions",
+      "title": "Positions",
+      "description": "Hints can appear on each side of their trigger.",
+      "path": "entities/documentation/ui/examples/tooltip-states.tsx"
+    },
+    {
+      "name": "TooltipDisabled",
+      "title": "Disabled",
+      "description": "Disable supplementary hints without disabling the action.",
+      "path": "entities/documentation/ui/examples/tooltip-states.tsx"
+    },
+    {
+      "name": "TooltipControlled",
+      "title": "Controlled and long content",
+      "description": "Controlled state, kept-mounted portals, and long identifiers.",
+      "path": "entities/documentation/ui/examples/tooltip-states.tsx"
+    }
+  ],
+  "toast": [
+    {
+      "name": "ExampleToast",
+      "title": "Transient notice",
+      "description": "Transient feedback uses the shared application toaster."
+    },
+    {
+      "name": "ToastInContextExample1",
+      "title": "In context",
+      "description": "",
+      "path": "entities/documentation/ui/examples/toast-variants.tsx"
+    },
+    {
+      "name": "ToastWithStatus",
+      "title": "With status",
+      "description": "Success, error, information, and warning feedback.",
+      "path": "entities/documentation/ui/examples/toast-states.tsx"
+    },
+    {
+      "name": "ToastVaryingHeights",
+      "title": "With varying heights",
+      "description": "Reveal three cards, then hover or focus to expand the stack.",
+      "path": "entities/documentation/ui/examples/toast-states.tsx"
+    },
+    {
+      "name": "ToastPromise",
+      "title": "Promise",
+      "description": "Loading changes into a success or error notice.",
+      "path": "entities/documentation/ui/examples/toast-states.tsx"
+    }
+  ],
+  "drawer": [
+    {
+      "name": "ActivityDrawer",
+      "title": "Bottom drawer",
+      "description": "Compose a named panel and a close action. Dragging is optional."
+    },
+    {
+      "name": "DrawerProductionWorkspaceExample1",
+      "title": "Production workspace",
+      "description": "Review the latest activity without leaving the workspace.",
+      "path": "entities/documentation/ui/examples/drawer-variants.tsx"
+    },
+    {
+      "name": "DrawerInsetPositions",
+      "title": "Inset variant",
+      "description": "Panels from all four edges.",
+      "path": "entities/documentation/ui/examples/drawer-states.tsx"
+    },
+    {
+      "name": "DrawerStraightPositions",
+      "title": "Straight variant",
+      "description": "Square corners with a bare footer.",
+      "path": "entities/documentation/ui/examples/drawer-states.tsx"
+    },
+    {
+      "name": "DrawerScrollableContent",
+      "title": "Scrollable content",
+      "description": "A fixed header and footer around a scrolling panel.",
+      "path": "entities/documentation/ui/examples/drawer-states.tsx"
+    },
+    {
+      "name": "DrawerNestedMenus",
+      "title": "Nested drawers and menus",
+      "description": "Actions, disabled items, checkbox and radio selection, and nested navigation.",
+      "path": "entities/documentation/ui/examples/drawer-states.tsx"
+    },
+    {
+      "name": "DrawerSnapPoints",
+      "title": "Snap points",
+      "description": "Drag between three sequential bottom snap points.",
+      "path": "entities/documentation/ui/examples/drawer-states.tsx"
+    },
+    {
+      "name": "DrawerDisabledTrigger",
+      "title": "Disabled",
+      "description": "An unavailable drawer trigger.",
+      "path": "entities/documentation/ui/examples/drawer-states.tsx"
+    }
+  ],
+  "sheet": [
+    {
+      "name": "ProjectSheet",
+      "title": "Side panel",
+      "description": "Use a side panel for focused supporting information."
+    },
+    {
+      "name": "SheetWorkspacePreferencesExample1",
+      "title": "Workspace preferences",
+      "description": "Open settings while keeping the workspace in view.",
+      "path": "entities/documentation/ui/examples/sheet-variants.tsx"
+    }
+  ],
+  "command": [
+    {
+      "name": "ProjectCommand",
+      "title": "Search and select",
+      "description": "Filter the local list, then choose an item with the keyboard or pointer."
+    },
+    {
+      "name": "CommandModalCommandPaletteExample1",
+      "title": "Modal command palette",
+      "description": "Opens an accessible command palette dialog with backdrop, search input, and keyboard navigation.",
+      "path": "entities/documentation/ui/examples/command-variants.tsx"
+    },
+    {
+      "name": "CommandGroupedPaletteExample2",
+      "title": "Grouped command palette",
+      "description": "Search grouped actions and pages in a dialog. Selecting a result closes the palette.",
+      "path": "entities/documentation/ui/examples/command-variants.tsx"
+    }
+  ],
+  "area-chart": [
+    {
+      "name": "VisitorsAreaCard",
+      "title": "Visitors card",
+      "description": "Stacked areas in a card, with a period select and value tiles for each source.",
+      "path": "entities/documentation/ui/examples/area-chart-card.tsx"
+    },
+    {
+      "name": "VisitorsBySource",
+      "title": "Visitors by source",
+      "description": "Stacked areas read as volume: each band adds to the total."
+    },
+    {
+      "name": "AreaChartOverlapExample",
+      "title": "Overlap",
+      "description": "Each series fills from zero so the series compare against each other.",
+      "path": "entities/documentation/ui/examples/area-chart-variants.tsx"
+    },
+    {
+      "name": "AreaChartPercentExample",
+      "title": "Percent",
+      "description": "Every time normalizes to 100%, so the chart reads as share.",
+      "path": "entities/documentation/ui/examples/area-chart-variants.tsx"
+    },
+    {
+      "name": "AreaChartLoadingExample",
+      "title": "Loading",
+      "description": "While data loads, a placeholder holds the chart's space and keeps the legend. The data that replaces it wipes in.",
+      "path": "entities/documentation/ui/examples/area-chart-variants.tsx"
+    },
+    {
+      "name": "AreaChartVisitorsCardExample",
+      "title": "In a card",
+      "description": "MetricTrend frames the chart; the legend below it carries each series' total.",
+      "path": "entities/documentation/ui/examples/area-chart-variants.tsx"
+    }
+  ],
+  "bar-list": [
+    {
+      "name": "DevicesCard",
+      "title": "Devices card",
+      "description": "Ranked rows in a dashboard card with a period select.",
+      "path": "entities/documentation/ui/examples/bar-list-card.tsx"
+    },
+    {
+      "name": "VisitorsByDevice",
+      "title": "Visitors by device",
+      "description": "Ranked rows with icons; the largest value fills the row."
+    },
+    {
+      "name": "BarListTopSourcesExample",
+      "title": "Top sources",
+      "description": "A longer ranked list without icons, in another palette tone.",
+      "path": "entities/documentation/ui/examples/bar-list-variants.tsx"
+    }
+  ],
+  "funnel": [
+    {
+      "name": "PipelineCard",
+      "title": "Pipeline card",
+      "description": "Stage bars in a card with a headline and period select.",
+      "path": "entities/documentation/ui/examples/funnel-card.tsx"
+    },
+    {
+      "name": "SignupFlowCard",
+      "title": "Sign-up flow card",
+      "description": "The flow presentation in a card.",
+      "path": "entities/documentation/ui/examples/funnel-card.tsx"
+    },
+    {
+      "name": "SignupPipeline",
+      "title": "Signup pipeline",
+      "description": "Stages with icons, values, and each stage's share of the first."
+    },
+    {
+      "name": "FunnelFlowExample",
+      "title": "Flow",
+      "description": "presentation=\"flow\" draws one narrowing band with each stage's share and value tiles.",
+      "path": "entities/documentation/ui/examples/funnel-variants.tsx"
+    }
+  ],
+  "progress-rings": [
+    {
+      "name": "ActivityRingsCard",
+      "title": "Activity card",
+      "description": "Rings with value tiles in a dashboard card.",
+      "path": "entities/documentation/ui/examples/progress-rings-card.tsx"
+    },
+    {
+      "name": "DailyActivityRings",
+      "title": "Daily activity",
+      "description": "Three rings, each toward its own goal, with value tiles."
+    },
+    {
+      "name": "ProgressRingsWeekExample",
+      "title": "Compact week",
+      "description": "size=\"sm\" draws 32px rings for dense grids such as a week or calendar.",
+      "path": "entities/documentation/ui/examples/progress-rings-variants.tsx"
+    }
+  ],
+  "score-gauge": [
+    {
+      "name": "SleepScoreCard",
+      "title": "Sleep score card",
+      "description": "The score's meaning as the headline, with a week select.",
+      "path": "entities/documentation/ui/examples/score-gauge-card.tsx"
+    },
+    {
+      "name": "SleepScore",
+      "title": "Sleep score",
+      "description": "Each part's arc spans its share of the maximum score; the list shows its points."
+    }
+  ],
+  "calendar-heatmap": [
+    {
+      "name": "ContributionsCard",
+      "title": "Contributions card",
+      "description": "Half a year of activity under a headline total.",
+      "path": "entities/documentation/ui/examples/calendar-heatmap-card.tsx"
+    },
+    {
+      "name": "ContributionsThisYear",
+      "title": "Contributions this year",
+      "description": "A year of days, one column per week, shaded in six steps of one hue."
+    },
+    {
+      "name": "CalendarHeatmapHalfYearExample",
+      "title": "Half a year, weeks from Sunday",
+      "description": "A shorter range fits narrow cards; weekStartsOn={0} starts columns on Sunday.",
+      "path": "entities/documentation/ui/examples/calendar-heatmap-variants.tsx"
+    }
+  ],
+  "radar-chart": [
+    {
+      "name": "VendorScoreCard",
+      "title": "Vendor score card",
+      "description": "Two profiles with the legend in the card header.",
+      "path": "entities/documentation/ui/examples/radar-chart-card.tsx"
+    },
+    {
+      "name": "VendorProfiles",
+      "title": "Vendor profiles",
+      "description": "Two series across six scores on one 0–10 scale."
+    }
+  ],
+  "radial-bars": [
+    {
+      "name": "BrowsersCard",
+      "title": "Browsers card",
+      "description": "Radial bars with tiles in a card.",
+      "path": "entities/documentation/ui/examples/radial-bars-card.tsx"
+    },
+    {
+      "name": "VisitorsByBrowser",
+      "title": "Visitors by browser",
+      "description": "Five items as concentric bars, largest outermost, with exact values in tiles."
+    }
+  ],
+  "sankey-chart": [
+    {
+      "name": "TrackedTimeCard",
+      "title": "Tracked time card",
+      "description": "Flows in a card with a period select.",
+      "path": "entities/documentation/ui/examples/sankey-chart-card.tsx"
+    },
+    {
+      "name": "TrackedTime",
+      "title": "Tracked time",
+      "description": "Five activities flowing into seven apps; ribbons wear their source's hue."
+    }
+  ],
+  "diagram": [
+    {
+      "name": "ApprovalWorkflow",
+      "title": "Release pipeline",
+      "description": "A flowchart with a subgraph, a decision, and a loop back.",
+      "path": "entities/documentation/ui/examples/diagram.tsx"
+    },
+    {
+      "name": "DiagramSequenceExample",
+      "title": "Sequence",
+      "description": "Trace messages between an app, agent, and tool.",
+      "path": "entities/documentation/ui/examples/diagram-variants.tsx"
+    },
+    {
+      "name": "DiagramRelationshipsExample",
+      "title": "Entity relationships",
+      "description": "Describe ownership and foreign keys.",
+      "path": "entities/documentation/ui/examples/diagram-variants.tsx"
+    },
+    {
+      "name": "DiagramStateExample",
+      "title": "State transitions",
+      "description": "Explain how an agent run moves between states.",
+      "path": "entities/documentation/ui/examples/diagram-variants.tsx"
+    },
+    {
+      "name": "DiagramClassExample",
+      "title": "Class",
+      "description": "Show classes with their fields, methods, and associations.",
+      "path": "entities/documentation/ui/examples/diagram-variants.tsx"
+    },
+    {
+      "name": "DiagramPieExample",
+      "title": "Pie",
+      "description": "Slices take the chart palette, so they match Mizen's charts.",
+      "path": "entities/documentation/ui/examples/diagram-variants.tsx"
+    },
+    {
+      "name": "DiagramGanttExample",
+      "title": "Gantt",
+      "description": "Plan work in sections, with done, active, and critical tasks and a milestone.",
+      "path": "entities/documentation/ui/examples/diagram-variants.tsx"
+    },
+    {
+      "name": "DiagramTimelineExample",
+      "title": "Timeline",
+      "description": "Group events by period.",
+      "path": "entities/documentation/ui/examples/diagram-variants.tsx"
+    },
+    {
+      "name": "DiagramUpdatingExample",
+      "title": "Changing source",
+      "description": "Replace source text to render an updated workflow.",
+      "path": "entities/documentation/ui/examples/diagram-variants.tsx"
+    },
+    {
+      "name": "DiagramFeedbackExample",
+      "title": "Loading, empty, and errors",
+      "description": "Show caller-owned loading and error states, empty input, and a syntax error.",
+      "path": "entities/documentation/ui/examples/diagram-variants.tsx"
+    }
+  ],
+  "suggestion": [
+    {
+      "name": "SuggestionStarters",
+      "title": "Above the composer",
+      "description": "One click sends the prompt as the message. The row waits while the agent works, and scrolls sideways with faded edges when the pills outrun the space."
+    },
+    {
+      "name": "SuggestionIcons",
+      "title": "With icons",
+      "description": "An icon before each prompt says what kind of task it starts."
+    }
+  ],
+  "conversation": [
+    {
+      "name": "AgentConversation",
+      "title": "Agent thread",
+      "description": "Plays by itself: a prompt is typed and sent, and the agent thinks, plans, reads and edits files, runs the tests, and replies. Each sent turn settles near the top while its reply grows under it. Replay starts it over."
+    },
+    {
+      "name": "ConversationStart",
+      "title": "Empty state",
+      "description": "Before the first turn, a start screen. A starter sends in one click, and the agent thinks, reads a file, and answers.",
+      "path": "entities/documentation/ui/examples/conversation.tsx"
+    },
+    {
+      "name": "ConversationNavigation",
+      "title": "Navigation rail",
+      "description": "A long thread loaded from history, each turn folded. A mark per question runs down the end edge: hover or focus one to preview it, and press it to jump there.",
+      "path": "entities/documentation/ui/examples/conversation.tsx"
+    }
+  ],
+  "message-scroller": [
+    {
+      "name": "TeamChat",
+      "title": "Team chat",
+      "description": "A team channel. New messages rise in, and at the end the view follows them. Scroll up and it holds still while the arrow offers the latest; send a message and the view jumps to it."
+    },
+    {
+      "name": "MessageScrollerHistory",
+      "title": "Loading earlier messages",
+      "description": "Earlier messages load above the ones in view, and the reader's place does not move.",
+      "path": "entities/documentation/ui/examples/message-scroller.tsx"
+    }
+  ]
+}

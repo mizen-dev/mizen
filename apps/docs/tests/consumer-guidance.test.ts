@@ -2,9 +2,9 @@ import { execFileSync } from "node:child_process";
 import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { expect, it } from "vite-plus/test";
-import { GET } from "../app/docs/components/[slug]/metadata/route";
-import { componentDocs } from "../app/docs-registry";
-import { GET as getIndex } from "../app/llms.txt/route";
+import { GET } from "../src/entities/documentation/api/component-metadata";
+import { GET as getIndex } from "../src/entities/documentation/api/llms";
+import { componentDocs } from "../src/entities/documentation/model/docs-registry";
 
 it("publishes reviewed contracts without inventing metadata for other components", async () => {
 	await Promise.all(

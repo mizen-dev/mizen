@@ -1,6 +1,9 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vite-plus/test";
-import { FileTypeIcon, getFileKind } from "../app/compositions/file-type-icon";
+import {
+	FileTypeIcon,
+	getFileKind,
+} from "../src/entities/documentation/ui/compositions/file-type-icon";
 
 const ICON_CLASS = /class="(?<className>[^"]+)"/u;
 

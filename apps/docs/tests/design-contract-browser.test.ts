@@ -1,7 +1,9 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
-import registry from "../app/docs-registry-data.json" with { type: "json" };
+import registry from "../src/entities/documentation/model/docs-registry-data.json" with {
+	type: "json",
+};
 import {
 	setupTestServer,
 	type TestServerHandle,

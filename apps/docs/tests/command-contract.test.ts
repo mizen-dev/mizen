@@ -131,7 +131,7 @@ describe("Command contract and exports", () => {
 		const mod = await import(
 			"../../../packages/ui/src/components/command/command"
 		);
-		const rootMod = await import("../../../packages/ui/src/index");
+		const rootMod = await import("../../../packages/ui/src");
 
 		const required = [
 			"Command",

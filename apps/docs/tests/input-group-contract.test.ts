@@ -84,7 +84,7 @@ describe("InputGroup contract and export manifest", () => {
 		const mod = await import(
 			"../../../packages/ui/src/components/input-group/input-group"
 		);
-		const rootMod = await import("../../../packages/ui/src/index");
+		const rootMod = await import("../../../packages/ui/src");
 
 		expect(Object.keys(mod).sort()).toEqual([
 			"InputGroup",

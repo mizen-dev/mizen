@@ -5,7 +5,10 @@ import { chromium } from "playwright";
 
 const registry = JSON.parse(
 	await readFile(
-		new URL("../app/docs-registry-data.json", import.meta.url),
+		new URL(
+			"../src/entities/documentation/model/docs-registry-data.json",
+			import.meta.url
+		),
 		"utf8"
 	)
 );

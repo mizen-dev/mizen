@@ -3,8 +3,12 @@ import { chmod, readFile, writeFile } from "node:fs/promises";
 const readJson = async (path) =>
 	JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
 const [components, guidance, ui, cli] = await Promise.all([
-	readJson("../../../apps/docs/app/docs-registry-data.json"),
-	readJson("../../../apps/docs/app/component-guidance-data.json"),
+	readJson(
+		"../../../apps/docs/src/entities/documentation/model/docs-registry-data.json"
+	),
+	readJson(
+		"../../../apps/docs/src/entities/documentation/model/component-guidance-data.json"
+	),
 	readJson("../../ui/package.json"),
 	readJson("../package.json"),
 ]);

@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
-import { componentDocs } from "../app/docs-registry";
-import { guides } from "../app/guides";
+import { componentDocs } from "../src/entities/documentation/model/docs-registry";
+import { guides } from "../src/entities/documentation/model/guides";
 import {
 	setupTestServer,
 	type TestServerHandle,

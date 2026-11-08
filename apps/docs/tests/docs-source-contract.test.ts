@@ -3,13 +3,16 @@ import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vite-plus/test";
 import { cleanup } from "../../../scripts/cleanup.mjs";
-import { getComponentGuidance } from "../app/component-guidance";
-import { componentDocs, renderComponentMarkdown } from "../app/docs-registry";
 import {
 	findExampleSource,
 	getUsageExamples,
 	renderExampleMarkdown,
-} from "../app/example-sources";
+} from "../src/entities/documentation/lib/example-sources";
+import { getComponentGuidance } from "../src/entities/documentation/model/component-guidance";
+import {
+	componentDocs,
+	renderComponentMarkdown,
+} from "../src/entities/documentation/model/docs-registry";
 
 const themeOnlyTitle = /dark.?theme|local theme/iu;
 const themeOnlyName = /DarkThemeComposition|LocallyThemed/u;
@@ -86,7 +89,7 @@ describe("documentation sources", () => {
 			const markdown = renderExampleMarkdown(component.slug);
 			for (const usage of getUsageExamples(component.slug)) {
 				const source = readFileSync(
-					new URL(`../app/${usage.path}`, import.meta.url),
+					new URL(`../src/${usage.path}`, import.meta.url),
 					"utf8"
 				);
 				expect(source).toContain(
@@ -98,7 +101,7 @@ describe("documentation sources", () => {
 			}
 			for (const file of example?.files ?? []) {
 				expect(file.code).toBe(
-					readFileSync(new URL(`../app/${file.path}`, import.meta.url), "utf8")
+					readFileSync(new URL(`../src/${file.path}`, import.meta.url), "utf8")
 				);
 				expect(markdown).toContain(file.code.trimEnd());
 			}

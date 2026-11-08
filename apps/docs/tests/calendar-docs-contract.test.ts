@@ -2,7 +2,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it, vi } from "vite-plus/test";
-import { getComponentDoc } from "../app/docs-registry";
+import { getComponentDoc } from "../src/entities/documentation/model/docs-registry";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(styles: T): T => styles,
@@ -40,7 +40,7 @@ describe("Calendar publishing, docs registry, specimen, and roadmap contract", (
 
 	it("exports Calendar component from root packages/ui", async () => {
 		const rootMod: Record<string, unknown> = await import(
-			"../../../packages/ui/src/index"
+			"../../../packages/ui/src"
 		);
 		const mod = await import(
 			"../../../packages/ui/src/components/calendar/calendar"
@@ -102,7 +102,7 @@ describe("Calendar publishing, docs registry, specimen, and roadmap contract", (
 	it("registers Calendar specimen in specimen registry index", () => {
 		const indexPath = resolve(
 			import.meta.dirname,
-			"../app/components/[slug]/specimens/index.ts"
+			"../src/entities/documentation/ui/specimens/index.ts"
 		);
 		const content = readFileSync(indexPath, "utf8");
 

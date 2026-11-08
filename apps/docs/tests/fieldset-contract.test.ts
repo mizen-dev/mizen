@@ -54,7 +54,7 @@ describe("Fieldset contract and export manifest", () => {
 		const mod = await import(
 			"../../../packages/ui/src/components/fieldset/fieldset"
 		);
-		const rootMod = await import("../../../packages/ui/src/index");
+		const rootMod = await import("../../../packages/ui/src");
 		expect(Object.keys(mod).sort()).toEqual([
 			"Fieldset",
 			"FieldsetLegend",

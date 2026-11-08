@@ -2,7 +2,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it, vi } from "vite-plus/test";
-import { getComponentDoc } from "../app/docs-registry";
+import { getComponentDoc } from "../src/entities/documentation/model/docs-registry";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(styles: T): T => styles,
@@ -40,7 +40,7 @@ describe("DatePicker publishing, docs registry, specimen, and roadmap contract",
 
 	it("exports DatePicker component from root packages/ui", async () => {
 		const rootMod: Record<string, unknown> = await import(
-			"../../../packages/ui/src/index"
+			"../../../packages/ui/src"
 		);
 		const mod = await import(
 			"../../../packages/ui/src/components/date-picker/date-picker"
@@ -96,7 +96,7 @@ describe("DatePicker publishing, docs registry, specimen, and roadmap contract",
 	it("registers DatePicker specimen in specimen registry index", () => {
 		const indexPath = resolve(
 			import.meta.dirname,
-			"../app/components/[slug]/specimens/index.ts"
+			"../src/entities/documentation/ui/specimens/index.ts"
 		);
 		const content = readFileSync(indexPath, "utf8");
 
@@ -107,7 +107,7 @@ describe("DatePicker publishing, docs registry, specimen, and roadmap contract",
 	it("declares specimen testids for uncontrolled, controlled, bounded, disabled, readOnly, and invalid states", () => {
 		const specimenPath = resolve(
 			import.meta.dirname,
-			"../app/components/[slug]/specimens/date-picker-specimen.tsx"
+			"../src/entities/documentation/ui/specimens/date-picker-specimen.tsx"
 		);
 		const content = readFileSync(specimenPath, "utf8");
 

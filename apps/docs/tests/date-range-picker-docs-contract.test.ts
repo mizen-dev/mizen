@@ -2,7 +2,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it, vi } from "vite-plus/test";
-import { getComponentDoc } from "../app/docs-registry";
+import { getComponentDoc } from "../src/entities/documentation/model/docs-registry";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(styles: T): T => styles,
@@ -77,7 +77,7 @@ describe("DateRangePicker docs contract", () => {
 
 	it("exports DateRangePicker from the package root", async () => {
 		const rootMod: Record<string, unknown> = await import(
-			"../../../packages/ui/src/index"
+			"../../../packages/ui/src"
 		);
 		const mod = await import(
 			"../../../packages/ui/src/components/date-range-picker/date-range-picker"
@@ -89,7 +89,7 @@ describe("DateRangePicker docs contract", () => {
 	it("registers the specimen for the generic component route", () => {
 		const indexPath = resolve(
 			import.meta.dirname,
-			"../app/components/[slug]/specimens/index.ts"
+			"../src/entities/documentation/ui/specimens/index.ts"
 		);
 		const content = readFileSync(indexPath, "utf8");
 
@@ -100,7 +100,7 @@ describe("DateRangePicker docs contract", () => {
 	it("demonstrates range defaults, presets, states, and native form submission", () => {
 		const specimenPath = resolve(
 			import.meta.dirname,
-			"../app/components/[slug]/specimens/date-range-picker-specimen.tsx"
+			"../src/entities/documentation/ui/specimens/date-range-picker-specimen.tsx"
 		);
 		const content = readFileSync(specimenPath, "utf8");
 

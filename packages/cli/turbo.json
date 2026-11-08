@@ -5,8 +5,8 @@
     "build": {
       "inputs": [
         "$TURBO_DEFAULT$",
-        "$TURBO_ROOT$/apps/docs/app/docs-registry-data.json",
-        "$TURBO_ROOT$/apps/docs/app/component-guidance-data.json",
+        "$TURBO_ROOT$/apps/docs/src/entities/documentation/model/docs-registry-data.json",
+        "$TURBO_ROOT$/apps/docs/src/entities/documentation/model/component-guidance-data.json",
         "$TURBO_ROOT$/packages/ui/package.json"
       ],
       "outputs": ["dist/**"]

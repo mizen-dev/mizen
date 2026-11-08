@@ -1,7 +1,7 @@
 // biome-ignore-all lint/performance/noAwaitInLoops: One browser page and sequential requests keep route checks ordered and resource use bounded.
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
-import { componentDocs } from "../app/docs-registry";
+import { componentDocs } from "../src/entities/documentation/model/docs-registry";
 import {
 	setupTestServer,
 	type TestServerHandle,

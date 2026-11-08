@@ -17,9 +17,11 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 const binary = join(root, "dist/cli.js");
 const readJson = (path) =>
 	JSON.parse(readFileSync(new URL(path, import.meta.url), "utf8"));
-const components = readJson("../../../apps/docs/app/docs-registry-data.json");
+const components = readJson(
+	"../../../apps/docs/src/entities/documentation/model/docs-registry-data.json"
+);
 const guidance = readJson(
-	"../../../apps/docs/app/component-guidance-data.json"
+	"../../../apps/docs/src/entities/documentation/model/component-guidance-data.json"
 );
 const manifest = readJson("../package.json");
 

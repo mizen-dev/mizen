@@ -2,16 +2,16 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it, vi } from "vite-plus/test";
+import {
+	focusFirstInvalidControl as rootFocusFirstInvalidControl,
+	useForm as rootUseForm,
+} from "../../../packages/ui/src";
 import type { FieldProps } from "../../../packages/ui/src/components/field/field";
 import { Field } from "../../../packages/ui/src/components/field/field";
 import {
 	focusFirstInvalidControl,
 	useForm,
 } from "../../../packages/ui/src/form";
-import {
-	focusFirstInvalidControl as rootFocusFirstInvalidControl,
-	useForm as rootUseForm,
-} from "../../../packages/ui/src/index";
 
 vi.mock("@stylexjs/stylex", () => ({
 	create: <T extends object>(styles: T): T => styles,
