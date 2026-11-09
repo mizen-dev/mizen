@@ -21,6 +21,9 @@ import { fakePnpm } from "./helpers/fake-pnpm.js";
 import { parseOutput } from "./helpers/output.js";
 
 const binary = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
+const { version: uiVersion } = JSON.parse(
+	readFileSync(new URL("../../ui/package.json", import.meta.url), "utf8")
+);
 const manifest = {
 	name: "@mizen-labs/ui",
 	peerDependencies: {
@@ -28,7 +31,7 @@ const manifest = {
 		react: "^19.2.8",
 		"react-dom": "^19.2.8",
 	},
-	version: "0.1.0",
+	version: uiVersion,
 };
 const nextRoot = `// Keep my document notes.\nimport "./globals.css";\nexport default function Root({children}) { return <html lang="en"><body><AppProviders>{children}</AppProviders></body></html>; }\n`;
 const startRoot = `import {createRootRoute, HeadContent, Scripts} from "@tanstack/react-router";
@@ -50,7 +53,7 @@ function fixture(t, framework = "next") {
 	t.after(() => cleanup(root));
 	const dependency = framework === "next" ? "next" : "@tanstack/react-start";
 	put(root, "package.json", {
-		dependencies: { [dependency]: "1.0.0", "@mizen-labs/ui": "0.1.0" },
+		dependencies: { [dependency]: "1.0.0", "@mizen-labs/ui": uiVersion },
 		private: true,
 	});
 	put(root, "pnpm-lock.yaml", "keep-lockfile");
@@ -223,7 +226,7 @@ test("archives must match package name and catalog version before installation",
 	const root = fixture(t);
 	put(root, "package/package.json", {
 		name: "wrong-package",
-		version: "0.1.0",
+		version: uiVersion,
 	});
 	const archive = join(root, "wrong.tgz");
 	await create({ cwd: root, file: archive, gzip: true }, ["package"]);

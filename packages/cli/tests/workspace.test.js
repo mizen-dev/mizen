@@ -18,6 +18,9 @@ import { cleanup } from "../../../scripts/cleanup.mjs";
 import { parseOutput } from "./helpers/output.js";
 
 const binary = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
+const { version: uiVersion } = JSON.parse(
+	readFileSync(new URL("../../ui/package.json", import.meta.url), "utf8")
+);
 function put(root, path, value) {
 	const file = join(root, path);
 	mkdirSync(dirname(file), { recursive: true });
@@ -56,7 +59,7 @@ function workspace(t, kind = "pnpm", patterns = ["apps/*", "packages/*"]) {
 		},
 		name: "@mizen-labs/ui",
 		peerDependencies: { react: "^19.2.8", "react-dom": "^19.2.8" },
-		version: "0.1.0",
+		version: uiVersion,
 	});
 	put(
 		root,
@@ -77,7 +80,7 @@ function app(root, path, framework = "next") {
 	put(project, "package.json", {
 		dependencies: {
 			[name]: "1.0.0",
-			"@mizen-labs/ui": "0.1.0",
+			"@mizen-labs/ui": uiVersion,
 			react: "19.3.0",
 			"react-dom": "19.3.0",
 		},

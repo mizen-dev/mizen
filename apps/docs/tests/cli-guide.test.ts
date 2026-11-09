@@ -22,7 +22,7 @@ describe("Getting started CLI guide", () => {
 		expect(markdown).toContain("mizen doctor --workspace");
 		expect(markdown).toContain("@mizen-labs/cli/schema/v1.json");
 		expect(markdown).toContain("npm install --save-dev @mizen-labs/cli");
-		expect(markdown).toContain("npm install @mizen-labs/ui@0.1.0");
+		expect(markdown).toContain("npm install @mizen-labs/ui@0.1.1");
 		expect(markdown).not.toContain("unpublished");
 		for (const section of cliGuide.sections) {
 			expect(markdown).toContain(`## ${section.title}`);

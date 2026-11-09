@@ -17,6 +17,9 @@ import { fakePnpm } from "./helpers/fake-pnpm.js";
 import { parseOutput } from "./helpers/output.js";
 
 const binary = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
+const { version: uiVersion } = JSON.parse(
+	readFileSync(new URL("../../ui/package.json", import.meta.url), "utf8")
+);
 const main = `// Keep the client entry comment.\nimport { StrictMode } from 'react';\nimport {createRoot as mount} from 'react-dom/client';\nimport './index.css';\nimport App from './App';\nmount(document.getElementById('root')).render(<StrictMode><App /></StrictMode>);\n`;
 
 function put(root, path, value) {
@@ -32,7 +35,7 @@ function fixture(t, extension = "tsx") {
 	t.after(() => cleanup(root));
 	put(root, "package.json", {
 		dependencies: {
-			"@mizen-labs/ui": "0.1.0",
+			"@mizen-labs/ui": uiVersion,
 			react: "19.3.0",
 			"react-dom": "19.3.0",
 		},
@@ -47,7 +50,7 @@ function fixture(t, extension = "tsx") {
 		},
 		name: "@mizen-labs/ui",
 		peerDependencies: { react: "^19.2.8", "react-dom": "^19.2.8" },
-		version: "0.1.0",
+		version: uiVersion,
 	});
 	put(
 		root,
@@ -223,7 +226,7 @@ test("a changed HTML entry during dependency installation stops source applicati
 			react: "^19.2.8",
 			"react-dom": "^19.2.8",
 		},
-		version: "0.1.0",
+		version: uiVersion,
 	});
 	const uiPath = join(root, "node_modules/@mizen-labs/ui/package.json");
 	const ui = JSON.parse(readFileSync(uiPath, "utf8"));

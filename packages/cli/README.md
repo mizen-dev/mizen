@@ -50,7 +50,7 @@ go to stdout, with no additional text on stderr. Exit status remains nonzero.
 Success envelope:
 
 ```json
-{"schemaVersion":1,"command":"info","data":{"uiVersion":"0.1.0","component":{}}}
+{"schemaVersion":1,"command":"info","data":{"uiVersion":"0.1.1","component":{}}}
 ```
 
 The empty component above represents the full registry entry. Search data contains
@@ -168,8 +168,8 @@ Install matching UI and CLI versions in the app, then preview setup:
 
 ```sh
 cd /path/to/app
-npm install @mizen-labs/ui@0.1.0
-npm install --save-dev @mizen-labs/cli@0.1.0
+npm install @mizen-labs/ui@0.1.1
+npm install --save-dev @mizen-labs/cli@0.1.1
 npx --no-install mizen init --dry-run
 npx --no-install mizen init --yes
 ```

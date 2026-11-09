@@ -85,8 +85,8 @@ npx --no-install mizen doctor --cwd ./apps/web --strict`,
 			code: {
 				title: "sh",
 				value: `cd ./apps/web
-npm install @mizen-labs/ui@0.1.0
-npm install --save-dev @mizen-labs/cli@0.1.0
+npm install @mizen-labs/ui@0.1.1
+npm install --save-dev @mizen-labs/cli@0.1.1
 npx --no-install mizen init --dry-run
 npx --no-install mizen init --yes
 npx --no-install mizen doctor --strict`,
