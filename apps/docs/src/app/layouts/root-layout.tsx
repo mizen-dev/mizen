@@ -13,12 +13,6 @@ import { props } from "@stylexjs/stylex";
 import { shellStyles } from "../../shared/styles/docs-shell.styles";
 import { docsFonts } from "../../shared/styles/fonts.styles";
 
-export const metadata = {
-	description:
-		"Mizen UI components, documentation, blocks, and application examples.",
-	title: "Mizen UI",
-};
-
 // Lavender for selection, as the palette says, with wine text. The values are
 // the theme's own variables, so the dark theme applies without extra rules.
 const selectionCss = `::selection { background-color: ${colors.brandBackground}; color: ${colors.brandForeground}; }`;

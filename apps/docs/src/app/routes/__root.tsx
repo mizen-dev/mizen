@@ -1,7 +1,7 @@
 import sansFontUrl from "@fontsource-variable/wix-madefor-text/files/wix-madefor-text-latin-wght-normal.woff2?url";
 import { createRootRoute, Link } from "@tanstack/react-router";
 import { loadNavigation } from "../../entities/documentation/api/docs-functions";
-import RootLayout, { metadata } from "../layouts/root-layout";
+import RootLayout from "../layouts/root-layout";
 
 export const Route = createRootRoute({
 	loader: () => loadNavigation(),
@@ -20,8 +20,12 @@ export const Route = createRootRoute({
 		meta: [
 			{ charSet: "utf-8" },
 			{ content: "width=device-width, initial-scale=1", name: "viewport" },
-			{ title: metadata.title },
-			{ content: metadata.description, name: "description" },
+			{ title: "Mizen UI" },
+			{
+				content:
+					"Mizen UI components, documentation, blocks, and application examples.",
+				name: "description",
+			},
 		],
 	}),
 	notFoundComponent: NotFound,
