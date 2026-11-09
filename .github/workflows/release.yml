@@ -90,7 +90,7 @@ jobs:
   consumers:
     needs: [ verify, publish ]
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     permissions:
       actions: read
       contents: read
@@ -108,6 +108,11 @@ jobs:
           runtime: node@24.15.0
           cache: false
           require-lockfile: true
+      - name: Install the same npm used for publication
+        run: |
+          npm install --global --prefix "$RUNNER_TEMP/mizen-npm" npm@11.21.0 --ignore-scripts
+          echo "$RUNNER_TEMP/mizen-npm/bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/mizen-npm/bin/npm" --version
       - name: Download the same candidate
         env:
           GH_TOKEN: ${{ github.token }}
@@ -124,7 +129,7 @@ jobs:
     needs: [ verify, consumers ]
     runs-on: ubuntu-latest
     environment: npm-release
-    timeout-minutes: 15
+    timeout-minutes: 30
     permissions:
       actions: read
       contents: write

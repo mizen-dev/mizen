@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { basename, join } from "node:path";
 import { cleanup } from "../../../../scripts/cleanup.mjs";
 import { execute } from "../process.js";
-import { ensureTag, github } from "./github.js";
+import { ensureTag, findRelease, github } from "./github.js";
 import { digest, REPOSITORY } from "./publication.js";
 
 async function attachAsset(release, path, staging) {
@@ -47,7 +47,7 @@ export async function finishGithubRelease(candidate) {
 	const tag = `v${candidate.version}`;
 	await ensureTag(tag, candidate.commit);
 	const release =
-		(await github(`releases/tags/${tag}`, { missing: true })) ??
+		(await findRelease(tag)) ??
 		(await github("releases", {
 			body: {
 				body: candidate.notes,
@@ -62,13 +62,14 @@ export async function finishGithubRelease(candidate) {
 	try {
 		const notesPath = join(candidate.directory, "release-notes.md");
 		await writeFile(notesPath, `${candidate.notes}\n`);
-		await Promise.all(
-			[
-				...candidate.archives.map((archive) => archive.file),
-				join(candidate.directory, "release-manifest.json"),
-				notesPath,
-			].map((path) => attachAsset(release, path, staging))
-		);
+		for (const path of [
+			...candidate.archives.map((archive) => archive.file),
+			join(candidate.directory, "release-manifest.json"),
+			notesPath,
+		]) {
+			// biome-ignore lint/performance/noAwaitInLoops: Finish each upload before cleanup can remove shared staging files.
+			await attachAsset(release, path, staging);
+		}
 		if (release.draft) {
 			await github(`releases/${release.id}`, {
 				body: { draft: false, make_latest: "true" },

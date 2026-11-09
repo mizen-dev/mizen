@@ -1,6 +1,17 @@
 import assert from "node:assert/strict";
+import {
+	copyFileSync,
+	mkdtempSync,
+	readFileSync,
+	writeFileSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
+import { basename, join } from "node:path";
 import { test } from "node:test";
-import { verifyTag } from "../scripts/release/github.js";
+import spawn from "cross-spawn";
+import { cleanup } from "../../../scripts/cleanup.mjs";
+import { findRelease, verifyTag } from "../scripts/release/github.js";
+import { finishGithubRelease } from "../scripts/release/github-release.js";
 import {
 	digest,
 	PACKAGE_NAMES,
@@ -15,6 +26,8 @@ import {
 } from "../scripts/release/publication.js";
 import { registryVersion } from "../scripts/release/registry.js";
 
+const UPLOAD_FAILURE = /Simulated upload failure/u;
+const ASSET_MISMATCH = /Existing release asset differs/u;
 const commit = "a".repeat(40);
 const version = "0.1.1";
 const bytes = Buffer.from("verified archive");
@@ -181,4 +194,110 @@ test("release requires package changesets to be consumed but permits tooling-onl
 	assert.throws(() =>
 		validateVersionedChanges("Missing frontmatter", "broken.md")
 	);
+});
+
+test("release retries find drafts beyond the first page and preserve published releases", async (context) => {
+	const draft = { draft: true, id: 12, tag_name: "v0.1.1" };
+	const firstPage = Array.from({ length: 100 }, (_, index) => ({
+		tag_name: `v0.0.${index}`,
+	}));
+	const request = context.mock.method(globalThis, "fetch", async (url) =>
+		Response.json(url.endsWith("page=1") ? firstPage : [draft])
+	);
+	const token = process.env.GH_TOKEN;
+	process.env.GH_TOKEN = "test-only";
+	try {
+		assert.deepEqual(await findRelease("v0.1.1"), draft);
+		assert.equal(request.mock.callCount(), 2);
+		assert.equal(await findRelease("v9.0.0"), null);
+		const published = { ...draft, draft: false };
+		request.mock.mockImplementation(async () => Response.json([published]));
+		assert.deepEqual(await findRelease("v0.1.1"), published);
+		request.mock.mockImplementation(
+			async () => new Response("outage", { status: 503 })
+		);
+		await assert.rejects(findRelease("v0.1.1"));
+	} finally {
+		if (token === undefined) {
+			delete process.env.GH_TOKEN;
+		} else {
+			process.env.GH_TOKEN = token;
+		}
+	}
+});
+
+test("finalization resumes a partial draft upload and verifies completed release assets", async (context) => {
+	const directory = mkdtempSync(join(tmpdir(), "mizen-release-retry-"));
+	context.after(() => cleanup(directory));
+	const file = join(directory, "mizen-ui.tgz");
+	writeFileSync(file, bytes);
+	writeFileSync(join(directory, "release-manifest.json"), "{}");
+	const candidate = {
+		archives: [{ file }],
+		commit,
+		directory,
+		notes: "Patch notes",
+		version,
+	};
+	let release;
+	let creates = 0;
+	context.mock.method(globalThis, "fetch", (url, options) => {
+		if (url.includes("git/ref/")) {
+			return Response.json({ object: { sha: "tag", type: "tag" } });
+		}
+		if (url.endsWith("git/tags/tag")) {
+			return Response.json({ object: { sha: commit, type: "commit" } });
+		}
+		if (options.method === "POST") {
+			creates += 1;
+			release = { ...JSON.parse(options.body), assets: [], id: 1 };
+		} else if (options.method === "PATCH") {
+			Object.assign(release, JSON.parse(options.body));
+		}
+		return Response.json(
+			options.method === "GET" ? [release].filter(Boolean) : release
+		);
+	});
+	const failedUploads = new Set(["release-manifest.json"]);
+	const uploaded = new Map();
+	context.mock.method(spawn, "sync", (_command, args) => {
+		if (args[1] === "download") {
+			const name = args[args.indexOf("--pattern") + 1];
+			copyFileSync(
+				uploaded.get(name),
+				join(args[args.indexOf("--dir") + 1], name)
+			);
+			return { status: 0, stdout: "" };
+		}
+		const [, , , path] = args;
+		if (failedUploads.has(basename(path))) {
+			return { status: 1, stderr: "Simulated upload failure" };
+		}
+		const saved = `${path}.uploaded`;
+		copyFileSync(path, saved);
+		uploaded.set(basename(path), saved);
+		release.assets.push({ name: basename(path) });
+		return { status: 0, stdout: "" };
+	});
+	const token = process.env.GH_TOKEN;
+	process.env.GH_TOKEN = "test-only";
+	context.after(() => {
+		if (token === undefined) {
+			delete process.env.GH_TOKEN;
+		} else {
+			process.env.GH_TOKEN = token;
+		}
+	});
+	await assert.rejects(finishGithubRelease(candidate), UPLOAD_FAILURE);
+	assert.equal(release.draft, true);
+	failedUploads.clear();
+	await finishGithubRelease(candidate);
+	assert.equal(release.draft, false);
+	assert.equal(creates, 1);
+	assert.equal(uploaded.size, 3);
+	await finishGithubRelease(candidate);
+	assert.equal(creates, 1);
+	assert.equal(readFileSync(file, "utf8"), bytes.toString());
+	writeFileSync(uploaded.get("mizen-ui.tgz"), "wrong archive");
+	await assert.rejects(finishGithubRelease(candidate), ASSET_MISMATCH);
 });

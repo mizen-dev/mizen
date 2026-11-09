@@ -56,3 +56,13 @@ export async function ensureTag(tag, commit) {
 		method: "POST",
 	});
 }
+
+// The tag endpoint only returns published releases. Include drafts on retries.
+export async function findRelease(tag, page = 1) {
+	const releases = await github(`releases?per_page=100&page=${page}`);
+	const release = releases.find((item) => item.tag_name === tag);
+	if (release || releases.length < 100) {
+		return release ?? null;
+	}
+	return findRelease(tag, page + 1);
+}

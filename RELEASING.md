@@ -138,3 +138,30 @@ verification complete. Follow [the integration workflow](CONTRIBUTING.md#integra
 Do not use this workflow to relabel today's code as 0.1.0. Recover the original
 published archives and source commit before creating any historical tag. The next
 release PR should generate its own version and changelog entries.
+
+
+## Release workflow troubleshooting
+
+The publishing, consumer, and finalization jobs install npm 11.21.0 in a dedicated
+runner directory. They prepend its bin directory to `GITHUB_PATH` so pnpm's
+runtime shims cannot select a different npm version in subsequent steps.
+The publication guard reports the resolved version if this setup fails.
+
+For both npm packages, the trusted publisher must allow `npm publish` and
+`npm dist-tag`. Configure owner `mizen-labs`, repository `mizen`, workflow
+`release.yml`, and environment `npm-release`. Dist-tag permission is separate
+from publishing permission and is required to promote the verified version to
+`latest`. GitHub environment approval does not grant npm permissions.
+
+Finalization searches release listings, including drafts, before creating a
+release. A retry resumes existing asset uploads and checks existing bytes.
+It uploads assets sequentially so cleanup cannot remove files still in use.
+
+The consumer job allows 50 minutes for four separately bounded installation,
+initialization, and build commands plus setup and registry checks. Finalization
+allows 30 minutes for promotion and asset transfer. These are failure ceilings,
+not delays added to successful runs.
+
+After a workflow fix, push the new commit, wait for its CI run, and dispatch a
+new Release run using that CI run ID. Keep the prepared package version if no
+package has been published. An old workflow retry still uses its original code.

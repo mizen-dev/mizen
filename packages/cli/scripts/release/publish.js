@@ -43,12 +43,10 @@ async function guardPublication() {
 	assert.equal(process.env.GITHUB_EVENT_NAME, "workflow_dispatch");
 	assert.equal(process.env.GITHUB_REF, "refs/heads/main");
 	assert.match(process.env.CI_RUN_ID ?? "", RUN_ID_PATTERN);
+	const npmVersion = execute("npm", ["--version"]).trim();
 	assert.ok(
-		semver.satisfies(
-			execute("npm", ["--version"]).trim(),
-			">=11.21.0 <12 || >=12.2.0"
-		),
-		"npm must support OIDC dist-tag management."
+		semver.satisfies(npmVersion, ">=11.21.0 <12 || >=12.2.0"),
+		`npm ${npmVersion} does not support OIDC dist-tag management. Check PATH.`
 	);
 	const commit = validateRun(
 		await github(`actions/runs/${process.env.CI_RUN_ID}`)
