@@ -21,7 +21,8 @@ export async function checkConsumer(
 	manager,
 	version,
 	reactVersion,
-	pnpmDeclaration
+	pnpmDeclaration,
+	published = false
 ) {
 	const declaration =
 		manager === "pnpm"
@@ -34,8 +35,8 @@ export async function checkConsumer(
 		`${JSON.stringify(
 			{
 				dependencies: {
-					"@mizen-labs/cli": "file:../../mizen-cli.tgz",
-					"@mizen-labs/ui": "file:../../mizen-ui.tgz",
+					"@mizen-labs/cli": published ? version : "file:../../mizen-cli.tgz",
+					"@mizen-labs/ui": published ? version : "file:../../mizen-ui.tgz",
 					react: reactVersion,
 					"react-dom": reactVersion,
 				},

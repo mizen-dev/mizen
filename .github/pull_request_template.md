@@ -2,6 +2,10 @@
 
 Describe the problem and resulting behavior.
 
+## Release notes
+
+Include a changeset for a user-visible package change, or explain why none is needed.
+
 ## Verification
 
 List relevant checks and regression tests.

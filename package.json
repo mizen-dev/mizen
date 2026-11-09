@@ -13,13 +13,17 @@
   "scripts": {
     "benchmark:cli": "pnpm --filter @mizen-labs/cli benchmark",
     "build": "turbo run build",
+    "changeset": "changeset",
     "dev": "turbo run dev",
     "format": "biome format --write .",
     "lint": "turbo run lint",
     "lint:check": "ultracite check && turbo run lint",
     "lint:fix": "ultracite fix",
     "release:check": "pnpm --filter @mizen-labs/cli release:check",
-    "typecheck": "turbo run typecheck"
+    "release:test": "node --test packages/cli/tests/publication.test.js",
+    "release:verify": "node packages/cli/scripts/release/publish.js verify",
+    "typecheck": "turbo run typecheck",
+    "version-packages": "changeset version && pnpm install --lockfile-only"
   },
   "devDependencies": {
     "@babel/cli": "^8.1.0",
@@ -29,6 +33,7 @@
     "@babel/plugin-transform-react-jsx": "^8.0.1",
     "@babel/plugin-transform-typescript": "^8.0.6",
     "@biomejs/biome": "2.6.6",
+    "@changesets/cli": "3.0.3",
     "@stylexjs/babel-plugin": "^0.19.1",
     "@stylexjs/eslint-plugin": "^0.19.1",
     "@stylexjs/postcss-plugin": "^0.19.1",

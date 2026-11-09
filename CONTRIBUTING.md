@@ -89,3 +89,9 @@ do not invent results.
 
 Once filed, replace the report body with its canonical issue link. Keep updates
 on the issue. Do not maintain two backlogs or copy app findings into this repo.
+
+## Package releases
+
+Record user-visible package changes with `pnpm changeset`. Prepare a release PR
+with `pnpm version-packages`. Publishing requires a manual Release workflow run.
+Follow [the release guide](RELEASING.md) for CI artifacts, npm setup, tags, and retries.

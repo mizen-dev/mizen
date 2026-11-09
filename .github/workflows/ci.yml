@@ -55,7 +55,7 @@ jobs:
           name: release-${{ matrix.os }}-node-${{ matrix.node }}
           path: artifacts/release/
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 90
 
   consumers:
     name: Production consumer / ${{ matrix.consumer }}

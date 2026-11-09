@@ -1,0 +1,156 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Stable version from the merged release PR, such as 0.1.1
+        required: true
+        type: string
+      ci_run_id:
+        description: Successful main CI run ID for this exact commit
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-release
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.repository == 'mizen-labs/mizen' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      commit: ${{ steps.candidate.outputs.commit }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        with:
+          runtime: node@24.15.0
+          cache: false
+          require-lockfile: true
+      - name: Select successful CI candidate
+        id: candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CI_RUN_ID: ${{ inputs.ci_run_id }}
+        run: node packages/cli/scripts/release/select-run.js
+
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: npm-release
+    timeout-minutes: 30
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+    env:
+      CI_RUN_ID: ${{ inputs.ci_run_id }}
+      RELEASE_VERSION: ${{ inputs.version }}
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.verify.outputs.commit }}
+          persist-credentials: false
+      - uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        with:
+          runtime: node@24.15.0
+          cache: false
+          require-lockfile: true
+      - name: Install npm with OIDC dist-tag support
+        run: npm install --global npm@11.21.0 --ignore-scripts
+      - name: Download verified archives without rebuilding
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh run download "$CI_RUN_ID" --repo "$GITHUB_REPOSITORY"
+          --name release-ubuntu-latest-node-24.11.0
+          --dir "$RUNNER_TEMP/mizen-release"
+      - name: Publish verified archives as release-candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          node packages/cli/scripts/release/publish.js publish
+          "$RUNNER_TEMP/mizen-release" "$RELEASE_VERSION"
+
+  consumers:
+    needs: [ verify, publish ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      actions: read
+      contents: read
+    env:
+      CI_RUN_ID: ${{ inputs.ci_run_id }}
+      RELEASE_VERSION: ${{ inputs.version }}
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.verify.outputs.commit }}
+          persist-credentials: false
+      - uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        with:
+          runtime: node@24.15.0
+          cache: false
+          require-lockfile: true
+      - name: Download the same candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh run download "$CI_RUN_ID" --repo "$GITHUB_REPOSITORY"
+          --name release-ubuntu-latest-node-24.11.0
+          --dir "$RUNNER_TEMP/mizen-release"
+      - name: Verify installed registry packages and production build without publishing permissions
+        run: >-
+          node packages/cli/scripts/release/publish.js smoke
+          "$RUNNER_TEMP/mizen-release" "$RELEASE_VERSION"
+
+  finalize:
+    needs: [ verify, consumers ]
+    runs-on: ubuntu-latest
+    environment: npm-release
+    timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: write
+      id-token: write
+    env:
+      CI_RUN_ID: ${{ inputs.ci_run_id }}
+      RELEASE_VERSION: ${{ inputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.verify.outputs.commit }}
+          persist-credentials: false
+      - uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        with:
+          runtime: node@24.15.0
+          cache: false
+          require-lockfile: true
+      - name: Install npm with OIDC dist-tag support
+        run: npm install --global npm@11.21.0 --ignore-scripts
+      - name: Download the same candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh run download "$CI_RUN_ID" --repo "$GITHUB_REPOSITORY"
+          --name release-ubuntu-latest-node-24.11.0
+          --dir "$RUNNER_TEMP/mizen-release"
+      - name: Promote verified versions and create the release tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          node packages/cli/scripts/release/publish.js finalize
+          "$RUNNER_TEMP/mizen-release" "$RELEASE_VERSION"
