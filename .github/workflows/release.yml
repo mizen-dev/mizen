@@ -69,7 +69,10 @@ jobs:
           cache: false
           require-lockfile: true
       - name: Install npm with OIDC dist-tag support
-        run: npm install --global npm@11.21.0 --ignore-scripts
+        run: |
+          npm install --global --prefix "$RUNNER_TEMP/mizen-npm" npm@11.21.0 --ignore-scripts
+          echo "$RUNNER_TEMP/mizen-npm/bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/mizen-npm/bin/npm" --version
       - name: Download verified archives without rebuilding
         env:
           GH_TOKEN: ${{ github.token }}
@@ -140,7 +143,10 @@ jobs:
           cache: false
           require-lockfile: true
       - name: Install npm with OIDC dist-tag support
-        run: npm install --global npm@11.21.0 --ignore-scripts
+        run: |
+          npm install --global --prefix "$RUNNER_TEMP/mizen-npm" npm@11.21.0 --ignore-scripts
+          echo "$RUNNER_TEMP/mizen-npm/bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/mizen-npm/bin/npm" --version
       - name: Download the same candidate
         env:
           GH_TOKEN: ${{ github.token }}
