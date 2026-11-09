@@ -2,10 +2,12 @@
 
 import {
 	Button,
-	Popover,
-	PopoverPopup,
-	PopoverTitle,
-	PopoverTrigger,
+	Drawer,
+	DrawerHeader,
+	DrawerPanel,
+	DrawerPopup,
+	DrawerTitle,
+	DrawerTrigger,
 } from "@mizen-labs/ui";
 import { props } from "@stylexjs/stylex";
 import { type MouseEvent, useCallback, useState } from "react";
@@ -22,17 +24,23 @@ export function MobileNavigation({ docs = false }: { docs?: boolean }) {
 	}, []);
 	return (
 		<div {...props(shellStyles.mobileNav)} data-slot="mobile-navigation">
-			<Popover onOpenChange={setOpen} open={open}>
-				<PopoverTrigger
+			<Drawer onOpenChange={setOpen} open={open} position="right">
+				<DrawerTrigger
 					render={
 						<Button size="sm" variant="outline">
 							Browse
 						</Button>
 					}
 				/>
-				<PopoverPopup align="end" onClick={closeOnNavigate} sideOffset={6}>
-					<div {...props(shellStyles.mobilePanel)}>
-						<PopoverTitle>{docs ? "Components" : "Navigation"}</PopoverTitle>
+				<DrawerPopup
+					closeProps={{ "aria-label": "Close navigation" }}
+					onClick={closeOnNavigate}
+					showCloseButton
+				>
+					<DrawerHeader>
+						<DrawerTitle>{docs ? "Components" : "Navigation"}</DrawerTitle>
+					</DrawerHeader>
+					<DrawerPanel>
 						<nav
 							aria-label="Site navigation"
 							{...props(shellStyles.mobileSiteLinks)}
@@ -40,9 +48,9 @@ export function MobileNavigation({ docs = false }: { docs?: boolean }) {
 							<SiteLinks />
 						</nav>
 						{docs ? <ActiveComponentNavigation /> : null}
-					</div>
-				</PopoverPopup>
-			</Popover>
+					</DrawerPanel>
+				</DrawerPopup>
+			</Drawer>
 		</div>
 	);
 }

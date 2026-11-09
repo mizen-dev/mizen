@@ -167,10 +167,6 @@ export const shellStyles = create({
 			default: "block",
 		},
 	},
-	mobilePanel: {
-		maxHeight: "min(32rem, calc(100dvh - 5rem))",
-		overflowY: "auto",
-	},
 	mobileSiteLinks: {
 		display: "flex",
 		flexWrap: "wrap",

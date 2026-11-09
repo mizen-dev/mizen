@@ -364,3 +364,47 @@ it("still scrolls new hash links to the requested section", async () => {
 		await page.close();
 	}
 });
+
+it("mobile navigation uses a scrollable drawer and restores focus on dismissal", async () => {
+	const page = await browser.newPage({ viewport: { height: 640, width: 390 } });
+	try {
+		await page.goto(`${handle.url}/docs/components/button`, {
+			waitUntil: "networkidle",
+		});
+		const browse = page.getByRole("button", { exact: true, name: "Browse" });
+		await browse.click();
+		const drawer = page.getByRole("dialog", {
+			exact: true,
+			name: "Components",
+		});
+		await expectLocator(drawer).toBeVisible();
+		const viewport = drawer.locator('[data-slot="scroll-area-viewport"]');
+		await expectLocator(viewport).toHaveCount(1);
+		expect(
+			await viewport.evaluate(
+				(element) => element.scrollHeight > element.clientHeight
+			)
+		).toBe(true);
+		await page.keyboard.press("Escape");
+		await expectLocator(drawer).toBeHidden();
+		await expectLocator(browse).toBeFocused();
+		await browse.press("Enter");
+		await drawer.getByRole("button", { name: "Close navigation" }).click();
+		await expectLocator(drawer).toBeHidden();
+		await expectLocator(browse).toBeFocused();
+		await browse.click();
+		await drawer
+			.getByRole("searchbox", { name: "Find a component" })
+			.fill("Input");
+		await drawer.getByRole("link", { exact: true, name: "Input" }).click();
+		await expectLocator(page).toHaveURL(`${handle.url}/docs/components/input`);
+		await expectLocator(drawer).toBeHidden();
+		expect(
+			await page.evaluate(
+				() => document.documentElement.scrollWidth <= innerWidth
+			)
+		).toBe(true);
+	} finally {
+		await page.close();
+	}
+});
