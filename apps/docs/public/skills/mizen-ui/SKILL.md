@@ -6,9 +6,10 @@ description: Build React interfaces with an existing Mizen UI installation. Use 
 # Build with Mizen UI
 
 Use the application's configured Mizen docs origin. Resolve the paths below
-against that origin. Mizen is currently a private workspace package, not a public
-npm release. If the host app is not configured, read `/docs/installation/markdown`
-before changing its compiler, fonts, or theme setup.
+against that origin. Mizen is published on npm as `@mizen-labs/ui`.
+Install it with `npm install @mizen-labs/ui`. If the host app is not configured,
+read `/docs/installation/markdown` before changing its compiler, fonts, or theme
+setup.
 
 ## Find the existing contract
 
