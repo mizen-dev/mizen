@@ -135,7 +135,7 @@ async function selectedRelease(
 	const ui = archive?.manifest ?? installed?.manifest;
 	if (!ui || ui.version !== version) {
 		return conflict(
-			`Mizen is unpublished. Pass --package /path/to/mizen-ui.tgz for @mizen-labs/ui ${version}.`
+			`Install @mizen-labs/ui@${version} in this app before init, or pass --package with a local archive of that version.`
 		);
 	}
 	await compatiblePeers(project, ui);
@@ -161,7 +161,7 @@ function mizenPackage(
 	}
 	if (!release.archive) {
 		return conflict(
-			"Declare Mizen in the target app with --package /path/to/mizen-ui.tgz."
+			`Add @mizen-labs/ui@${version} to this app's dependencies before init, or pass --package with a local archive of that version.`
 		);
 	}
 	return [release.archive.path];

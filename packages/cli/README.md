@@ -44,8 +44,8 @@ Node must satisfy `>=22.18.0 <23 || >=24.11.0`.
 - `mizen init [--cwd <directory>] [--dry-run] [--yes]`: preview or apply setup.
 - `mizen --help` and `mizen --version`: show command help and CLI version.
 
-`--json` emits one JSON document to stdout. Human errors go to stderr. JSON errors
-go to stdout, with no additional text on stderr. Exit status remains nonzero.
+`--json` emits one JSON document. Results go to stdout. Errors go to stderr, with
+or without `--json`, and stdout stays empty. Exit status remains nonzero.
 
 Success envelope:
 
@@ -271,10 +271,10 @@ counter interaction, and dialogs. TypeScript consumers also compile strictly.
 The CI workflow defines the OS/Node matrix.
 `pnpm release:check` at the repository root packs UI and CLI, verifies isolated npm
 and pnpm consumers, and saves archives with checksums and consumer lockfiles.
-It does not publish. Hosted Linux and Windows evidence remains pending until CI runs.
+It does not publish.
 
 Package-manager commands use cross-spawn to resolve Windows `.cmd` shims. Init
-captures installation output synchronously, within its existing two-minute timeout,
+captures installation output synchronously, within its ten-minute timeout,
 so machine-readable commands still emit one JSON document. No progress events are
 streamed during installation.
 

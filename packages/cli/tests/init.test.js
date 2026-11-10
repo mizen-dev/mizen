@@ -235,6 +235,25 @@ test("archives must match package name and catalog version before installation",
 	assert.equal(result.error.reason, "conflict");
 });
 
+test("a missing or undeclared UI package names the npm version to install", (t) => {
+	const missing = fixture(t);
+	rmSync(join(missing, "node_modules/@mizen-labs"), { recursive: true });
+	const undeclared = fixture(t);
+	put(undeclared, "package.json", {
+		dependencies: { next: "1.0.0" },
+		private: true,
+	});
+	for (const root of [missing, undeclared]) {
+		const { error, exit } = run(root, ["--dry-run"]);
+		assert.equal(exit, 1, JSON.stringify(error));
+		assert.equal(error.reason, "conflict");
+		assert.ok(error.message.includes(`@mizen-labs/ui@${uiVersion}`));
+		assert.ok(!error.message.includes("unpublished"), error.message);
+	}
+	const { usage } = run(missing, ["--help"]).data;
+	assert.ok(!usage.includes("published"), usage);
+});
+
 test("file transactions roll back prior replacements after a later commit fails", async (t) => {
 	const root = fixture(t);
 	put(root, "one.txt", "one");

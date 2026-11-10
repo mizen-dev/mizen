@@ -87,7 +87,7 @@ const commands = {
 		examples: [
 			"mizen init --cwd ./apps/web",
 			"mizen init --cwd ./apps/web --yes",
-			"mizen init --cwd ./apps/web --package ./mizen-ui-0.1.0.tgz --yes",
+			"mizen init --cwd ./apps/web --package ./mizen-ui.tgz --yes",
 		],
 		group: "Setup",
 		notes: [
@@ -95,7 +95,7 @@ const commands = {
 			"Supports Next.js App Router, TanStack Start, and React + Vite apps.",
 			"The package manager must match the app's declaration and lockfile.",
 			"Installs skip lifecycle scripts.",
-			"Until @mizen-labs/ui is published, pass a matching local archive with --package.",
+			"Install @mizen-labs/ui at this CLI's version first, or pass --package <FILE>.",
 			"--yes never overwrites a conflict. If init stops midway,",
 			".mizen-init-journal.json records each edit. Restore or finish them,",
 			"then remove the journal.",
