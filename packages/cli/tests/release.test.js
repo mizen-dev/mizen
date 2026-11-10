@@ -77,6 +77,7 @@ test("release rejects a stale packed catalog even when package versions match", 
 		cliVersion: cli.version,
 		components: [{ slug: "button" }],
 		nodeRange: cli.engines.node,
+		uiPeerDependencies: { react: "^19.2.8" },
 		uiVersion: ui.version,
 	};
 	const packed = {
@@ -87,13 +88,22 @@ test("release rejects a stale packed catalog even when package versions match", 
 		manifest: cli,
 	};
 	const library = {
-		manifest: { ...ui, exports: { "./button": "./dist/button.js" } },
+		manifest: {
+			...ui,
+			exports: { "./button": "./dist/button.js" },
+			peerDependencies: catalog.uiPeerDependencies,
+		},
 	};
 	validateCatalog(library, packed, ["button"]);
 	assert.throws(
 		() => validateCatalog(library, packed, ["button", "dialog"]),
 		ERROR_6
 	);
+	packed.contents.set(
+		"dist/catalog.json",
+		JSON.stringify({ ...catalog, uiPeerDependencies: { react: "^18.0.0" } })
+	);
+	assert.throws(() => validateCatalog(library, packed, ["button"]), ERROR_6);
 	packed.contents.set(
 		"dist/catalog.json",
 		JSON.stringify({ ...catalog, uiVersion: "0.0.1" })

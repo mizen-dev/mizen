@@ -30,6 +30,6 @@ const catalog = components.map((component) => {
 });
 await writeFile(
 	new URL("../dist/catalog.json", import.meta.url),
-	`${JSON.stringify({ cliVersion: cli.version, components: catalog, nodeRange: cli.engines.node, uiVersion: ui.version }, null, 2)}\n`
+	`${JSON.stringify({ cliVersion: cli.version, components: catalog, nodeRange: cli.engines.node, uiPeerDependencies: ui.peerDependencies, uiVersion: ui.version }, null, 2)}\n`
 );
 await chmod(new URL("../dist/cli.js", import.meta.url), 0o755);

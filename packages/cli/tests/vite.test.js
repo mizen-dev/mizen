@@ -5,6 +5,7 @@ import {
 	mkdirSync,
 	mkdtempSync,
 	readFileSync,
+	rmSync,
 	writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
@@ -300,4 +301,19 @@ test("older UI candidates without the initializer stop before source edits", (t)
 	assert.equal(result.exit, 1, JSON.stringify(result));
 	assert.ok(result.error.message.includes("lacks synchronous"));
 	assert.equal(readFileSync(join(root, "src/main.tsx"), "utf8"), main);
+});
+
+test("a Vite app without the UI package plans the published release", (t) => {
+	const root = fixture(t);
+	rmSync(join(root, "node_modules/@mizen-labs"), { recursive: true });
+	put(root, "package.json", {
+		dependencies: { react: "19.3.0", "react-dom": "19.3.0" },
+		devDependencies: { vite: "8.3.5" },
+		private: true,
+	});
+	const result = run(root, "init", ["--dry-run"]);
+	assert.equal(result.exit, 0, JSON.stringify(result));
+	assert.deepEqual(result.data.plan.install.packages, [
+		`@mizen-labs/ui@${uiVersion}`,
+	]);
 });

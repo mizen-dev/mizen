@@ -120,7 +120,7 @@ export async function planInit(
 	const install = await installation(
 		project,
 		manifest,
-		catalog.uiVersion,
+		catalog,
 		options.package,
 		options.feature ?? [],
 		manager

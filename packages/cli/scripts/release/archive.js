@@ -102,6 +102,11 @@ export function validateCatalog(ui, cli, slugs) {
 	assert.equal(catalog.uiVersion, ui.manifest.version);
 	assert.equal(catalog.nodeRange, cli.manifest.engines.node);
 	assert.deepEqual(
+		catalog.uiPeerDependencies,
+		ui.manifest.peerDependencies,
+		"Packed catalog must match the UI peer ranges."
+	);
+	assert.deepEqual(
 		catalog.components.map((item) => item.slug).sort(),
 		[...slugs].sort(),
 		"Packed catalog must match the documentation."

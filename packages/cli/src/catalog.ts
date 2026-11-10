@@ -33,5 +33,6 @@ export interface Catalog {
 	cliVersion: string;
 	components: Component[];
 	nodeRange: string;
+	uiPeerDependencies: Record<string, string>;
 	uiVersion: string;
 }

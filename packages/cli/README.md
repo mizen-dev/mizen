@@ -164,17 +164,23 @@ Init configures an existing Next.js App Router, TanStack Start, or plain React +
 Install the framework and matching React/ReactDOM versions first. It does not
 create an application, select a font, or replace existing document defaults.
 
-Install matching UI and CLI versions in the app, then preview setup:
+Install the CLI in the app, then preview setup:
 
 ```sh
 cd /path/to/app
-npm install @mizen-labs/ui@0.1.1
 npm install --save-dev @mizen-labs/cli@0.1.1
 npx --no-install mizen init --dry-run
 npx --no-install mizen init --yes
 ```
 
-An installed, declared Mizen package matching the CLI catalog needs no `--package`.
+An app without `@mizen-labs/ui` gets the published version matching the CLI catalog,
+pinned exactly. The catalog records that version's peer ranges, so planning needs no
+network request. An installed and declared package at that version needs no install.
+Init stops when the app resolves another version, declares the package without
+installing it, or resolves it without declaring it. Align the versions or the
+declaration, then rerun init.
+
+`--package` installs a local archive instead of the published version.
 Archives must contain `@mizen-labs/ui` at the catalog version. Init inspects the archive
 without extracting it and records its SHA-256 for a check before application.
 The current reader bounds archive size at 50 MB and manifest size at 1 MB.
@@ -193,7 +199,7 @@ development tools even under NODE_ENV=production. Package-manager resolution can
 change package.json, lockfiles, and node_modules; their exact resulting diffs cannot
 be known before installation. Source diffs are determined in advance.
 
-Add `--feature diagram` to install the archive's optional Pele peer. Other optional
+Add `--feature diagram` to install the optional Pele peer. Other optional
 integrations are not installed speculatively. Existing incompatible peers require
 manual resolution; init does not replace React or choose an upgrade policy.
 
@@ -235,7 +241,7 @@ import, synchronous initializeTheme call, and ThemeProvider to src/main.jsx or s
 application providers, CSS imports, and comments stay intact. A provider already
 covering the mounted tree is reused.
 
-Run from the app after installing matching UI and CLI versions as shown above.
+Run from the app after installing the CLI as shown above.
 
 ```sh
 npx --no-install mizen init --dry-run

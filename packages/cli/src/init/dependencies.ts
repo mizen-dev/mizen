@@ -1,4 +1,5 @@
 import semver from "semver";
+import type { Catalog } from "../catalog.js";
 import type { Manifest } from "../doctor/files.js";
 import {
 	type Installed,
@@ -125,21 +126,49 @@ function installCommand(
 	};
 }
 
-async function selectedRelease(
-	project: string,
-	version: string,
-	specifier?: string
-) {
-	const archive = specifier ? await releaseArchive(specifier, version) : null;
-	const installed = await installedFrom(project, "@mizen-labs/ui");
-	const ui = archive?.manifest ?? installed?.manifest;
-	if (!ui || ui.version !== version) {
+const UI = "@mizen-labs/ui";
+type Release = Pick<Catalog, "uiPeerDependencies" | "uiVersion">;
+
+function declaredUi(manifest: Manifest): string | undefined {
+	return { ...manifest.dependencies, ...manifest.devDependencies }[UI];
+}
+
+function alignedCopy(
+	manifest: Manifest,
+	local: Manifest | undefined,
+	version: string
+): Manifest | undefined {
+	if (local && local.version !== version) {
 		return conflict(
-			`Install @mizen-labs/ui@${version} in this app before init, or pass --package with a local archive of that version.`
+			`This app resolves ${UI} ${local.version ?? "without a version"}, but this CLI sets up ${version}. Install matching UI and CLI versions before init.`
 		);
 	}
+	if (!local && declaredUi(manifest)) {
+		return conflict(
+			`${UI} is declared but not installed. Install this app's dependencies before init.`
+		);
+	}
+	return local;
+}
+
+// A local copy is an archive or the installed package. Without one, init
+// installs the published release, whose peer ranges the catalog records.
+async function selectedRelease(
+	project: string,
+	manifest: Manifest,
+	{ uiPeerDependencies, uiVersion }: Release,
+	specifier?: string
+) {
+	const archive = specifier ? await releaseArchive(specifier, uiVersion) : null;
+	const installed = await installedFrom(project, UI);
+	const local = alignedCopy(
+		manifest,
+		archive?.manifest ?? installed?.manifest,
+		uiVersion
+	);
+	const ui = local ?? { peerDependencies: uiPeerDependencies };
 	await compatiblePeers(project, ui);
-	return { archive, installed, ui };
+	return { archive, installed, local, ui };
 }
 
 function mizenPackage(
@@ -147,42 +176,46 @@ function mizenPackage(
 	release: Awaited<ReturnType<typeof selectedRelease>>,
 	version: string
 ): string[] {
-	const declared = { ...manifest.dependencies, ...manifest.devDependencies }[
-		"@mizen-labs/ui"
-	];
-	if (
-		release.installed &&
-		declared &&
-		release.installed.manifest.version === version &&
+	const { archive, installed } = release;
+	const current =
+		installed?.manifest.version === version &&
 		(frameworkOf(manifest) !== "vite" ||
-			supportsInitialization(release.installed.manifest))
-	) {
+			supportsInitialization(installed.manifest));
+	if (current && declaredUi(manifest)) {
 		return [];
 	}
-	if (!release.archive) {
-		return conflict(
-			`Add @mizen-labs/ui@${version} to this app's dependencies before init, or pass --package with a local archive of that version.`
-		);
+	if (archive) {
+		return [archive.path];
 	}
-	return [release.archive.path];
+	if (!installed) {
+		return [`${UI}@${version}`];
+	}
+	return conflict(
+		`Add ${UI}@${version} to this app's dependencies before init, or pass --package with a local archive of that version.`
+	);
 }
 
 export async function installation(
 	project: string,
 	manifest: Manifest,
-	version: string,
+	catalog: Release,
 	specifier: string | undefined,
 	features: string[],
 	manager: Awaited<ReturnType<typeof managerFor>>
 ): Promise<Install | null> {
-	const release = await selectedRelease(project, version, specifier);
-	if (frameworkOf(manifest) === "vite" && !supportsInitialization(release.ui)) {
+	const release = await selectedRelease(project, manifest, catalog, specifier);
+	// Only a local copy can be a stale build without the initializer.
+	if (
+		release.local &&
+		frameworkOf(manifest) === "vite" &&
+		!supportsInitialization(release.local)
+	) {
 		return conflict(
 			"This UI build lacks synchronous client theme initialization. Rebuild and pack @mizen-labs/ui before running Vite init."
 		);
 	}
 	const packages = [
-		...mizenPackage(manifest, release, version),
+		...mizenPackage(manifest, release, catalog.uiVersion),
 		...(await optionalPackages(project, manifest, release.ui, features)),
 	];
 	if (!(packages.length || manager.needsLockfile)) {

@@ -22,7 +22,7 @@ npx --no-install mizen --help
 			],
 			paragraphs: [
 				"The package is @mizen-labs/cli and its executable is mizen. Install it from npm, or run npx @mizen-labs/cli@latest --help for a one-off command.",
-				"Install the CLI as a development dependency, then use the local executable. Init requires an installed UI version matching the CLI catalog. Node must satisfy >=22.18.0 <23 or >=24.11.0. npm and pnpm are supported for setup.",
+				"Install the CLI as a development dependency, then use the local executable. Init installs the UI version matching the CLI catalog when the app has none. Node must satisfy >=22.18.0 <23 or >=24.11.0. npm and pnpm are supported for setup.",
 			],
 			title: "Install from npm",
 		},
@@ -85,7 +85,6 @@ npx --no-install mizen doctor --cwd ./apps/web --strict`,
 			code: {
 				title: "sh",
 				value: `cd ./apps/web
-npm install @mizen-labs/ui@0.1.1
 npm install --save-dev @mizen-labs/cli@0.1.1
 npx --no-install mizen init --dry-run
 npx --no-install mizen init --yes
@@ -93,7 +92,7 @@ npx --no-install mizen doctor --strict`,
 			},
 			id: "init",
 			paragraphs: [
-				"Init returns a plan by default. Review its source diffs and dependency command, then rerun with --yes. --dry-run prevents application even when --yes is present. A matching, installed and declared UI package needs no archive option.",
+				"Init returns a plan by default. Review its source diffs and dependency command, then rerun with --yes. --dry-run prevents application even when --yes is present. The plan installs the matching @mizen-labs/ui version when the app has none, and stops when the app resolves another version.",
 				"The package manager must agree with the app's declaration and lockfiles. For an app without either, select --package-manager npm or pnpm. --feature diagram installs the optional diagram peer when requested. Installation skips lifecycle scripts. Source edits preserve existing providers, comments, and unrelated configuration.",
 			],
 			title: "Preview and apply setup",

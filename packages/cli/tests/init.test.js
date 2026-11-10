@@ -21,7 +21,7 @@ import { fakePnpm } from "./helpers/fake-pnpm.js";
 import { parseOutput } from "./helpers/output.js";
 
 const binary = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
-const { version: uiVersion } = JSON.parse(
+const { peerDependencies: uiPeers, version: uiVersion } = JSON.parse(
 	readFileSync(new URL("../../ui/package.json", import.meta.url), "utf8")
 );
 const manifest = {
@@ -235,23 +235,75 @@ test("archives must match package name and catalog version before installation",
 	assert.equal(result.error.reason, "conflict");
 });
 
-test("a missing or undeclared UI package names the npm version to install", (t) => {
-	const missing = fixture(t);
-	rmSync(join(missing, "node_modules/@mizen-labs"), { recursive: true });
-	const undeclared = fixture(t);
-	put(undeclared, "package.json", {
-		dependencies: { next: "1.0.0" },
-		private: true,
+const undeclared = { dependencies: { next: "1.0.0" }, private: true };
+
+function withoutUi(t) {
+	const root = fixture(t);
+	rmSync(join(root, "node_modules/@mizen-labs"), { recursive: true });
+	put(root, "package.json", undeclared);
+	return root;
+}
+
+test("an app without the UI package installs the published release", (t) => {
+	const root = withoutUi(t);
+	const published = `@mizen-labs/ui@${uiVersion}`;
+	assert.deepEqual(run(root, ["--dry-run"]).data.plan.install, {
+		archive: null,
+		args: ["add", "--ignore-scripts", "--prod=false", published],
+		command: "pnpm",
+		packages: [published],
 	});
-	for (const root of [missing, undeclared]) {
+	assert.deepEqual(
+		run(root, ["--feature", "diagram"]).data.plan.install.packages,
+		[published, `pele@${uiPeers.pele}`]
+	);
+	const env = fakePnpm(
+		root,
+		`const fs = require("node:fs");
+const app = JSON.parse(fs.readFileSync("package.json", "utf8"));
+app.dependencies["@mizen-labs/ui"] = ${JSON.stringify(uiVersion)};
+fs.writeFileSync("package.json", JSON.stringify(app));
+fs.mkdirSync("node_modules/@mizen-labs/ui", { recursive: true });
+fs.writeFileSync(
+	"node_modules/@mizen-labs/ui/package.json",
+	${JSON.stringify(JSON.stringify(manifest))}
+);`
+	);
+	const applied = run(root, ["--yes"], env);
+	assert.equal(applied.exit, 0, JSON.stringify(applied));
+	assert.equal(applied.data.status, "applied");
+	assert.equal(run(root, ["--yes"]).data.status, "unchanged");
+});
+
+test("UI packages that init can't install safely stop with the versions to align", (t) => {
+	const unresolved = fixture(t);
+	rmSync(join(unresolved, "node_modules/@mizen-labs"), { recursive: true });
+	const mismatched = fixture(t);
+	put(mismatched, "node_modules/@mizen-labs/ui/package.json", {
+		...manifest,
+		version: "0.0.1",
+	});
+	const hoisted = fixture(t);
+	put(hoisted, "package.json", undeclared);
+	const outdated = withoutUi(t);
+	put(outdated, "node_modules/react/package.json", {
+		name: "react",
+		version: "18.3.1",
+	});
+	for (const [root, expected] of [
+		[unresolved, "declared but not installed"],
+		[
+			mismatched,
+			`resolves @mizen-labs/ui 0.0.1, but this CLI sets up ${uiVersion}`,
+		],
+		[hoisted, `Add @mizen-labs/ui@${uiVersion} to this app's dependencies`],
+		[outdated, `react: Installed 18.3.1; required ${uiPeers.react}.`],
+	]) {
 		const { error, exit } = run(root, ["--dry-run"]);
 		assert.equal(exit, 1, JSON.stringify(error));
 		assert.equal(error.reason, "conflict");
-		assert.ok(error.message.includes(`@mizen-labs/ui@${uiVersion}`));
-		assert.ok(!error.message.includes("unpublished"), error.message);
+		assert.ok(error.message.includes(expected), error.message);
 	}
-	const { usage } = run(missing, ["--help"]).data;
-	assert.ok(!usage.includes("published"), usage);
 });
 
 test("file transactions roll back prior replacements after a later commit fails", async (t) => {

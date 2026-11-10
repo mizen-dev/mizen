@@ -95,7 +95,7 @@ const commands = {
 			"Supports Next.js App Router, TanStack Start, and React + Vite apps.",
 			"The package manager must match the app's declaration and lockfile.",
 			"Installs skip lifecycle scripts.",
-			"Install @mizen-labs/ui at this CLI's version first, or pass --package <FILE>.",
+			"Installs @mizen-labs/ui at this CLI's version when the app has none.",
 			"--yes never overwrites a conflict. If init stops midway,",
 			".mizen-init-journal.json records each edit. Restore or finish them,",
 			"then remove the journal.",
