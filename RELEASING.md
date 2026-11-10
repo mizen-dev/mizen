@@ -11,8 +11,8 @@ using versions such as `0.2.0-beta.1`.
 
 ## One-time setup
 
-1. Create the `mizen-labs` GitHub organization and transfer the repository to it.
-   Confirm the transfer before updating your local remote:
+1. Confirm the repository is `mizen-labs/mizen`. The organization transfer is
+   complete. Check `git remote -v` and, if needed, update your remote:
    `git remote set-url github https://github.com/mizen-labs/mizen.git`.
 2. Require the `CI result` check on `main`. Protect `v*` tags against updates and
    deletion while allowing the release workflow to create them.
