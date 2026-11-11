@@ -128,6 +128,7 @@ export const codeBlockStyles = create({
 	title: {
 		color: colors.mutedContent,
 		fontFamily: fonts.mono,
+		fontVariantLigatures: "none",
 		minWidth: 0,
 		overflowWrap: "anywhere",
 	},

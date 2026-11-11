@@ -15,6 +15,7 @@ export const codeStyles = create({
 		// eslint-disable-next-line no-restricted-syntax -- inline code scales with its surrounding role.
 		fontSize: "0.9em",
 		fontSizeAdjust: fonts.sizeAdjust,
+		fontVariantLigatures: "none",
 		lineHeight: "inherit",
 		overflowWrap: "anywhere",
 		paddingInline: space["1"],

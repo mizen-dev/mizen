@@ -108,4 +108,18 @@ describe("type role pairing", () => {
 			timestamp: "14px/20px",
 		});
 	});
+
+	// A font with code ligatures would draw `=>` and `===` as other glyphs.
+	it("shows code as typed, without ligatures", async () => {
+		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		const ligatures = await page.evaluate(() =>
+			["code-block-content", "code-block-title", "code"].map((slot) => {
+				const element = document.querySelector(`[data-slot="${slot}"]`);
+				return element
+					? getComputedStyle(element).fontVariantLigatures
+					: `${slot} is missing`;
+			})
+		);
+		expect(ligatures).toEqual(["none", "none", "none"]);
+	});
 });

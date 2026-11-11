@@ -72,6 +72,8 @@ export const typeRoles = create({
 		fontFamily: fonts.mono,
 		fontSize: fontSize["13"],
 		fontSizeAdjust: fonts.sizeAdjust,
+		// Code reads as typed: no font may draw `=>` or `===` as one glyph.
+		fontVariantLigatures: "none",
 		fontWeight: fontWeight.regular,
 		letterSpacing: letterSpacing.normal,
 		lineHeight: lineHeight["20"],
