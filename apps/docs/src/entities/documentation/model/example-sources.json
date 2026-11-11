@@ -4579,6 +4579,13 @@
         "description": "deltaPlacement=\"footer\" moves the description and change chip into an inset strip.",
         "path": "entities/documentation/ui/examples/metric-trend-variants.tsx",
         "code": "\"use client\";\n\nimport { Grid, MetricDelta, MetricTrend } from \"@mizen-labs/ui\";\n\nimport { IconCoin, IconReceiptRefund } from \"@tabler/icons-react\";\n\nexport function MetricTrendStatCardsFooterExample() {\n\treturn (\n\t\t<Grid>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta value={0.16} />}\n\t\t\t\tdeltaPlacement=\"footer\"\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconCoin />}\n\t\t\t\tlabel=\"Total revenue\"\n\t\t\t\tvalue=\"152,313.92\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta good=\"down\" value={0.024} />}\n\t\t\t\tdeltaPlacement=\"footer\"\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconReceiptRefund />}\n\t\t\t\tlabel=\"Refunds\"\n\t\t\t\tvalue=\"4,209.44\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t</Grid>\n\t);\n}\n"
+      },
+      {
+        "name": "MetricTrendLinkedStatCardExample",
+        "title": "Linked stat card",
+        "description": "render makes the whole card a link, with the library's hover and focus states. Leave render out where the reader may not open the destination; the card is then static.",
+        "path": "entities/documentation/ui/examples/metric-trend-variants.tsx",
+        "code": "\"use client\";\n\nimport { Grid, MetricDelta, MetricTrend } from \"@mizen-labs/ui\";\n\nimport { IconReceiptRefund, IconShoppingCart } from \"@tabler/icons-react\";\n\nexport function MetricTrendLinkedStatCardExample() {\n\treturn (\n\t\t<Grid>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta value={0.2} />}\n\t\t\t\tdescription=\"Yesterday: 20,968\"\n\t\t\t\ticon={<IconShoppingCart />}\n\t\t\t\tlabel=\"Orders today\"\n\t\t\t\trender={<a href=\"/docs/components/data-table\" />}\n\t\t\t\tvalue=\"25,162\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta good=\"down\" value={0.024} />}\n\t\t\t\tdescription=\"Yesterday: $4,110.78\"\n\t\t\t\ticon={<IconReceiptRefund />}\n\t\t\t\tlabel=\"Refunds today\"\n\t\t\t\tvalue=\"4,209.44\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t</Grid>\n\t);\n}\n"
       }
     ],
     "time-series": [
@@ -5270,6 +5277,13 @@
         "description": "Controlled state, kept-mounted portals, and long identifiers.",
         "path": "entities/documentation/ui/examples/tooltip-states.tsx",
         "code": "\"use client\";\n\nimport { Button, Tooltip, TooltipPopup, TooltipTrigger } from \"@mizen-labs/ui\";\n\nimport { useState } from \"react\";\n\nexport function TooltipControlled() {\n\tconst [open, setOpen] = useState(false);\n\treturn (\n\t\t<Tooltip onOpenChange={setOpen} open={open}>\n\t\t\t<TooltipTrigger render={<Button variant=\"outline\" />}>\n\t\t\t\tRelease identifier\n\t\t\t</TooltipTrigger>\n\t\t\t<TooltipPopup portalProps={{ keepMounted: true }}>\n\t\t\t\trelease_2026_10_13_production_europe_west_workspace_permissions_revision_1842\n\t\t\t</TooltipPopup>\n\t\t</Tooltip>\n\t);\n}\n"
+      },
+      {
+        "name": "TooltipHint",
+        "title": "Hint beside a heading",
+        "description": "A ghost icon button named after what it explains. It opens on hover and on keyboard focus, and it wraps long text.",
+        "path": "entities/documentation/ui/examples/tooltip-states.tsx",
+        "code": "\"use client\";\n\nimport {\n\tButton,\n\tHeading,\n\tInline,\n\tTooltip,\n\tTooltipPopup,\n\tTooltipTrigger,\n} from \"@mizen-labs/ui\";\n\nimport { IconInfoCircle } from \"@tabler/icons-react\";\n\nexport function TooltipHint() {\n\treturn (\n\t\t<Inline align=\"center\" gap=\"1\">\n\t\t\t<Heading level={4}>Server totals</Heading>\n\t\t\t<Tooltip>\n\t\t\t\t<TooltipTrigger\n\t\t\t\t\trender={\n\t\t\t\t\t\t<Button\n\t\t\t\t\t\t\taria-label=\"About server totals\"\n\t\t\t\t\t\t\tsize=\"icon-xs\"\n\t\t\t\t\t\t\tvariant=\"ghost\"\n\t\t\t\t\t\t/>\n\t\t\t\t\t}\n\t\t\t\t>\n\t\t\t\t\t<IconInfoCircle aria-hidden=\"true\" />\n\t\t\t\t</TooltipTrigger>\n\t\t\t\t<TooltipPopup>\n\t\t\t\t\tToday and yesterday use server totals. Links open their sections\n\t\t\t\t\twithout a date filter.\n\t\t\t\t</TooltipPopup>\n\t\t\t</Tooltip>\n\t\t</Inline>\n\t);\n}\n"
       }
     ],
     "toast": [

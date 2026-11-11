@@ -408,6 +408,7 @@ import { ActiveSubscriptions } from "./metric";
 import { MonthlyRevenueTrend } from "./metric-trend";
 import {
 	MetricTrendDailySigninsExample1,
+	MetricTrendLinkedStatCardExample,
 	MetricTrendStatCardsExample,
 	MetricTrendStatCardsFooterExample,
 } from "./metric-trend-variants";
@@ -659,6 +660,7 @@ import {
 	TooltipControlled,
 	TooltipDisabled,
 	TooltipGrouped,
+	TooltipHint,
 	TooltipPositions,
 } from "./tooltip-states";
 import { TooltipProjectShortcutsExample1 } from "./tooltip-variants";
@@ -981,6 +983,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	MetricSubscriptionsExample1,
 	MetricTrafficAndCacheExample3,
 	MetricTrendDailySigninsExample1,
+	MetricTrendLinkedStatCardExample,
 	MetricTrendStatCardsExample,
 	MetricTrendStatCardsFooterExample,
 	MonthlyRevenueTrend,
@@ -1168,6 +1171,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	TooltipControlled,
 	TooltipDisabled,
 	TooltipGrouped,
+	TooltipHint,
 	TooltipPositions,
 	TooltipProjectShortcutsExample1,
 	TrackedTime,

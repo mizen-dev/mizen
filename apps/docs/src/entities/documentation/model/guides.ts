@@ -595,6 +595,29 @@ export function ContactEmail() {
 				title: "Keep one state owner",
 			},
 			{
+				id: "render",
+				links: [
+					{
+						href: "/docs/components/button#ButtonNavigationLinkExample7",
+						label: "A link that looks like a button",
+					},
+					{
+						href: "/docs/components/metric-trend#MetricTrendLinkedStatCardExample",
+						label: "A stat card that navigates",
+					},
+					{
+						href: "/docs/components/tooltip#TooltipHint",
+						label: "A hint beside a heading",
+					},
+				],
+				paragraphs: [
+					"Use render when a component must become another element: a link that looks like a Button, a card that navigates, a trigger that is a Button. The library keeps its styles and states on that element. The app supplies the destination and the semantics, such as href and role.",
+					"Use an app-owned wrapper only for what the app owns: position in the layout, data, and permissions. A wrapper does not restyle the component inside it. Do not put a link around a component that holds its own controls.",
+					"The exported primitives, such as CollapsiblePrimitive, carry behavior without Mizen's styles. Use one only when no component prop expresses the need, and report the gap.",
+				],
+				title: "Render slots, wrappers, and primitives",
+			},
+			{
 				code: {
 					value: `"use client";
 

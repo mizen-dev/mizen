@@ -7130,6 +7130,12 @@
         "description": "Up to six series. Tones follow the fixed palette order unless set; a seventh series belongs in \"Other\"."
       },
       {
+        "defaultValue": "—",
+        "description": "Makes the whole card a link: pass an anchor or a router link element. The card then shows hover and focus states. A linked card holds no other control, so leave out actions.",
+        "name": "render",
+        "type": "ReactElement"
+      },
+      {
         "name": "layout",
         "type": "\"stacked\" | \"overlap\" | \"percent\"",
         "defaultValue": "\"stacked\"",

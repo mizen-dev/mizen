@@ -610,7 +610,8 @@
     ],
     "recommendations": [
       "State the reporting period and the comparison baseline. Keep the current value readable without interpreting the plot.",
-      "Put the legend in actions and pass legend={false} to the chart. Set good=\"down\" on MetricDelta for metrics where a fall is good, such as refunds."
+      "Put the legend in actions and pass legend={false} to the chart. Set good=\"down\" on MetricDelta for metrics where a fall is good, such as refunds.",
+      "To make a stat card navigate, pass the link to render. Do not wrap the card in a link, and do not put a second link inside a linked card."
     ]
   },
   "navigation-menu": {
@@ -1037,11 +1038,13 @@
   "tooltip": {
     "boundaries": [
       "Do not place interactive content in a tooltip; use Popover.",
-      "Keep required instructions visible rather than available only on hover."
+      "Keep required instructions visible rather than available only on hover.",
+      "A tooltip does not open on touch. Use Popover when touch users need the text."
     ],
     "recommendations": [
       "Use a short explanation for a control whose intent needs clarification.",
-      "Group adjacent hints with TooltipProvider. Use TooltipCreateHandle for one popup that moves between detached triggers."
+      "Group adjacent hints with TooltipProvider. Use TooltipCreateHandle for one popup that moves between detached triggers.",
+      "For a hint beside a heading, use a ghost icon button named after what it explains, such as \"About server totals\". The button gives the hint keyboard focus."
     ]
   },
   "tree": {

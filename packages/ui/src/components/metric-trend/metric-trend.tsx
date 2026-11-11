@@ -1,5 +1,10 @@
 import { props } from "@stylexjs/stylex";
-import type { ComponentPropsWithRef, ReactNode } from "react";
+import type {
+	ComponentPropsWithRef,
+	ElementType,
+	ReactElement,
+	ReactNode,
+} from "react";
 import type { Closed } from "../../closed";
 import {
 	Metric,
@@ -28,6 +33,11 @@ export type MetricTrendProps = Omit<
 	/** A glyph shown in a small brand tile before the label. */
 	icon?: ReactNode;
 	label: ReactNode;
+	/**
+	 * Makes the whole card a link: pass an anchor or a router link. Such a card
+	 * holds no other control, so leave out actions.
+	 */
+	render?: ReactElement;
 	/** The headline number. Omit it when the chart is the headline, such as rings. */
 	value?: ReactNode;
 	/** A currency sign or unit before the value, set smaller and muted: "$". */
@@ -134,6 +144,22 @@ function MetricTrendLead({
 	);
 }
 
+// A rendered link becomes the root: its own props first, then the card's.
+function MetricTrendRoot({
+	render,
+	...rest
+}: ComponentPropsWithRef<"div"> & Pick<MetricTrendProps, "render">) {
+	const Root = (render?.type ?? "div") as ElementType;
+	return (
+		<Root
+			{...(render?.props as object)}
+			{...rest}
+			data-slot="metric-trend"
+			{...props(metricTrendStyles.root, render && metricTrendStyles.linked)}
+		/>
+	);
+}
+
 export function MetricTrend({
 	actions,
 	children,
@@ -143,6 +169,7 @@ export function MetricTrend({
 	icon,
 	label,
 	ref: forwardedRef,
+	render,
 	value,
 	valuePrefix,
 	valueSuffix,
@@ -154,12 +181,7 @@ export function MetricTrend({
 	const inFooter = deltaPlacement === "footer";
 
 	return (
-		<div
-			{...rest}
-			data-slot="metric-trend"
-			ref={forwardedRef}
-			{...props(metricTrendStyles.root)}
-		>
+		<MetricTrendRoot {...rest} ref={forwardedRef} render={render}>
 			<div data-slot="metric-trend-header" {...props(metricTrendStyles.header)}>
 				<MetricTrendLead
 					delta={inFooter ? undefined : delta}
@@ -183,6 +205,6 @@ export function MetricTrend({
 			{inFooter ? (
 				<MetricTrendFooter delta={delta} description={description} />
 			) : null}
-		</div>
+		</MetricTrendRoot>
 	);
 }

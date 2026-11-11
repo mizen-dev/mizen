@@ -131,6 +131,19 @@ describe("Tooltip browser states", { timeout: 20_000 }, () => {
 		}
 	);
 
+	it("opens a hint on keyboard focus of its named button", async () => {
+		const hint = page.getByRole("button", {
+			exact: true,
+			name: "About server totals",
+		});
+		await hint.focus();
+		const popup = page.locator('[data-slot="tooltip-popup"][data-open]');
+		await popup.waitFor({ state: "visible" });
+		expect(await popup.textContent()).toContain("server totals");
+		await page.keyboard.press("Escape");
+		await popup.waitFor({ state: "hidden" });
+	});
+
 	it("centers a wrapped tooltip on its trigger", async () => {
 		await page.setViewportSize({ height: 800, width: 1280 });
 		const trigger = page.getByRole("button", {

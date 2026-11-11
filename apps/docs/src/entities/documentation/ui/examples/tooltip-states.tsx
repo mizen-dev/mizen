@@ -3,13 +3,20 @@
 import {
 	Button,
 	Group,
+	Heading,
+	Inline,
 	Tooltip,
 	TooltipCreateHandle,
 	TooltipPopup,
 	TooltipProvider,
 	TooltipTrigger,
 } from "@mizen-labs/ui";
-import { IconBold, IconItalic, IconUnderline } from "@tabler/icons-react";
+import {
+	IconBold,
+	IconInfoCircle,
+	IconItalic,
+	IconUnderline,
+} from "@tabler/icons-react";
 import { useState } from "react";
 
 const actions = [
@@ -109,5 +116,32 @@ export function TooltipControlled() {
 				release_2026_10_13_production_europe_west_workspace_permissions_revision_1842
 			</TooltipPopup>
 		</Tooltip>
+	);
+}
+
+// A hint explains; it starts no action. The button gives it keyboard focus
+// and a name that says what it explains.
+export function TooltipHint() {
+	return (
+		<Inline align="center" gap="1">
+			<Heading level={4}>Server totals</Heading>
+			<Tooltip>
+				<TooltipTrigger
+					render={
+						<Button
+							aria-label="About server totals"
+							size="icon-xs"
+							variant="ghost"
+						/>
+					}
+				>
+					<IconInfoCircle aria-hidden="true" />
+				</TooltipTrigger>
+				<TooltipPopup>
+					Today and yesterday use server totals. Links open their sections
+					without a date filter.
+				</TooltipPopup>
+			</Tooltip>
+		</Inline>
 	);
 }

@@ -2,6 +2,8 @@ import { create } from "@stylexjs/stylex";
 import { colors } from "../../styles/colors.stylex";
 import { conditions } from "../../styles/conditions.stylex";
 import { controlSize, glyphSize } from "../../styles/dimensions.stylex";
+import { borderWidth, focus } from "../../styles/interaction.stylex";
+import { duration, easing } from "../../styles/motion.stylex";
 import { shape } from "../../styles/shape.stylex";
 import { space } from "../../styles/spacing.stylex";
 import {
@@ -69,9 +71,31 @@ export const metricTrendStyles = create({
 		gap: space["3"],
 		minWidth: 0,
 	},
-	prefix: { marginInlineEnd: space.px },
 	// A dashboard card: tighter corners than page Cards, a roomy gap between the
 	// headline and the chart, and a shorter bottom inset under axis labels.
+	// The whole card is a link: it answers hover and shows the focus ring.
+	linked: {
+		backgroundColor: {
+			[conditions.canHover]: { ":hover": colors.workareaControlSurface },
+			default: colors.workarea,
+		},
+		color: colors.content,
+		outlineColor: {
+			":focus-visible": colors.focusRing,
+			default: "transparent",
+		},
+		outlineOffset: focus.offset,
+		outlineStyle: "solid",
+		outlineWidth: borderWidth.focus,
+		textDecoration: "none",
+		transitionDuration: {
+			[conditions.reducedMotion]: duration.instant,
+			default: duration.fast,
+		},
+		transitionProperty: "background-color, outline-color",
+		transitionTimingFunction: easing.expoOut,
+	},
+	prefix: { marginInlineEnd: space.px },
 	root: {
 		backgroundColor: colors.workarea,
 		borderRadius: shape.controlRadiusLarge,

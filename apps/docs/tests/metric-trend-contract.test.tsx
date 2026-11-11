@@ -95,6 +95,28 @@ describe("MetricTrend contract", () => {
 		expect(markup).toContain("Weekly trend");
 	});
 
+	it("makes the whole card a link with render and keeps its slot", () => {
+		const markup = renderToStaticMarkup(
+			h(MetricTrend, {
+				label: "Orders today",
+				render: h("a", { "data-slot": "custom", href: "/orders" }),
+				value: "25,162",
+			})
+		);
+		const root = markup.slice(0, markup.indexOf(">"));
+		expect(root.startsWith("<a ")).toBe(true);
+		expect(root).toContain('href="/orders"');
+		expect(root).toContain('data-slot="metric-trend"');
+		expect(markup).not.toContain('data-slot="custom"');
+		expect(markup).toContain("Orders today");
+		expect(markup).toContain("25,162");
+		expect(
+			renderToStaticMarkup(
+				h(MetricTrend, { label: "Orders today", value: "25,162" })
+			).startsWith('<div data-slot="metric-trend"')
+		).toBe(true);
+	});
+
 	it("renders a stat card with icon, delta, and actions but no chart", () => {
 		const markup = renderToStaticMarkup(
 			<MetricTrend

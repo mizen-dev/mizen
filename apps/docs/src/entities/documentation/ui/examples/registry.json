@@ -2212,6 +2212,12 @@
       "title": "Stat cards with a footer",
       "description": "deltaPlacement=\"footer\" moves the description and change chip into an inset strip.",
       "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
+    },
+    {
+      "name": "MetricTrendLinkedStatCardExample",
+      "title": "Linked stat card",
+      "description": "render makes the whole card a link, with the library's hover and focus states. Leave render out where the reader may not open the destination; the card is then static.",
+      "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
     }
   ],
   "time-series": [
@@ -2788,6 +2794,12 @@
       "name": "TooltipControlled",
       "title": "Controlled and long content",
       "description": "Controlled state, kept-mounted portals, and long identifiers.",
+      "path": "entities/documentation/ui/examples/tooltip-states.tsx"
+    },
+    {
+      "name": "TooltipHint",
+      "title": "Hint beside a heading",
+      "description": "A ghost icon button named after what it explains. It opens on hover and on keyboard focus, and it wraps long text.",
       "path": "entities/documentation/ui/examples/tooltip-states.tsx"
     }
   ],

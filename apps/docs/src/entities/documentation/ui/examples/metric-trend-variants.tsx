@@ -127,3 +127,27 @@ export function MetricTrendStatCardsFooterExample() {
 		</Grid>
 	);
 }
+
+// render makes the whole card a link. Such a card holds no other control.
+export function MetricTrendLinkedStatCardExample() {
+	return (
+		<Grid>
+			<MetricTrend
+				delta={<MetricDelta value={0.2} />}
+				description="Yesterday: 20,968"
+				icon={<IconShoppingCart />}
+				label="Orders today"
+				render={<a href="/docs/components/data-table" />}
+				value="25,162"
+			/>
+			<MetricTrend
+				delta={<MetricDelta good="down" value={0.024} />}
+				description="Yesterday: $4,110.78"
+				icon={<IconReceiptRefund />}
+				label="Refunds today"
+				value="4,209.44"
+				valuePrefix="$"
+			/>
+		</Grid>
+	);
+}
