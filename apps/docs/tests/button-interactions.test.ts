@@ -212,6 +212,7 @@ describe("Button interactions", () => {
 		expect(prevented).toBe(false);
 		await link.focus();
 		await page.keyboard.press("Enter");
-		await page.waitForURL(`${handle.url}/docs/installation`);
+		// The built site serves the page with a trailing slash.
+		await page.waitForURL(`${handle.url}/docs/installation{,/}`);
 	});
 });

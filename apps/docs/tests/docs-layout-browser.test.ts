@@ -217,6 +217,7 @@ describe("Docs layout resilience", () => {
 			"ButtonActionStatesExample4",
 			"ButtonControlSizesExample5",
 			"ButtonIconActionsExample6",
+			"ButtonNavigationLinkExample7",
 			"recommendations",
 			"boundaries",
 			"api",
