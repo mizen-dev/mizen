@@ -23,7 +23,7 @@ export function ComboboxSpecimen() {
 		<Combobox items={frameworks}>
 			<ComboboxInput
 				aria-label="Framework"
-				placeholder="Select or search framework..."
+				placeholder="Select or search framework…"
 				showClear
 			/>
 			<ComboboxPopup>

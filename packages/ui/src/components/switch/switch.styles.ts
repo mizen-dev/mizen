@@ -88,6 +88,7 @@ export const switchStyles = create({
 		paddingBlock: 2,
 		paddingInline: 2,
 		position: "relative",
+		touchAction: "manipulation",
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
 			default: duration.fast,
@@ -97,6 +98,7 @@ export const switchStyles = create({
 		transitionTimingFunction: easing.expoOut,
 		userSelect: "none",
 		verticalAlign: "middle",
+		WebkitTapHighlightColor: "transparent",
 	},
 	forcedColorsChecked: {
 		"[data-checked]": {

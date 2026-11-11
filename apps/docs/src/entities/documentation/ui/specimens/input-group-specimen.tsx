@@ -53,7 +53,7 @@ export function InputGroupSpecimen() {
 				<Field>
 					<FieldLabel>Search workspace</FieldLabel>
 					<InputGroup>
-						<InputGroupInput placeholder="Search documents..." />
+						<InputGroupInput placeholder="Search documents…" />
 						<InputGroupAddon align="inline-end">
 							<Kbd>⌘K</Kbd>
 							<Button size="sm" type="button">
@@ -68,7 +68,7 @@ export function InputGroupSpecimen() {
 					<FieldLabel>Feedback note</FieldLabel>
 					<InputGroup>
 						<InputGroupTextarea
-							placeholder="Share your suggestions..."
+							placeholder="Share your suggestions…"
 							rows={3}
 						/>
 						<InputGroupAddon align="block-start">
@@ -101,7 +101,7 @@ export function InputGroupSpecimen() {
 					<Field>
 						<FieldLabel>Small size</FieldLabel>
 						<InputGroup>
-							<InputGroupInput placeholder="Filter..." size="sm" />
+							<InputGroupInput placeholder="Filter…" size="sm" />
 							<InputGroupAddon align="inline-start">
 								<InputGroupText>#</InputGroupText>
 							</InputGroupAddon>
@@ -110,7 +110,7 @@ export function InputGroupSpecimen() {
 					<Field>
 						<FieldLabel>Default size</FieldLabel>
 						<InputGroup>
-							<InputGroupInput placeholder="Filter..." size="default" />
+							<InputGroupInput placeholder="Filter…" size="default" />
 							<InputGroupAddon align="inline-start">
 								<InputGroupText>#</InputGroupText>
 							</InputGroupAddon>
@@ -119,7 +119,7 @@ export function InputGroupSpecimen() {
 					<Field>
 						<FieldLabel>Large size</FieldLabel>
 						<InputGroup>
-							<InputGroupInput placeholder="Filter..." size="lg" />
+							<InputGroupInput placeholder="Filter…" size="lg" />
 							<InputGroupAddon align="inline-start">
 								<InputGroupText>#</InputGroupText>
 							</InputGroupAddon>

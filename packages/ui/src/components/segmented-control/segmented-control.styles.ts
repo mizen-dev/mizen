@@ -126,6 +126,7 @@ export const segmentedStyles = create({
 		outlineWidth: borderWidth.focus,
 		paddingBlock: 0,
 		position: "relative",
+		touchAction: "manipulation",
 		transitionDuration: {
 			default: duration.fast,
 			[conditions.reducedMotion]: duration.instant,
@@ -133,6 +134,7 @@ export const segmentedStyles = create({
 		transitionProperty: "background-color, color, outline-color",
 		transitionTimingFunction: easing.expoOut,
 		userSelect: "none",
+		WebkitTapHighlightColor: "transparent",
 		whiteSpace: "nowrap",
 		width: { ":is(*) > svg": "1rem" },
 	},

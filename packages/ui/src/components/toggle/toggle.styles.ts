@@ -123,6 +123,7 @@ export const toggleStyles = create({
 		},
 		overflowWrap: "anywhere",
 		position: "relative",
+		touchAction: "manipulation",
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
 			default: duration.fast,
@@ -130,6 +131,7 @@ export const toggleStyles = create({
 		transitionProperty: "color, opacity, outline-color, outline-offset",
 		transitionTimingFunction: easing.expoOut,
 		userSelect: "none",
+		WebkitTapHighlightColor: "transparent",
 		zIndex: { ":focus-visible": 1, default: 0 },
 	},
 	content: {

@@ -232,6 +232,7 @@ export const tabsStyles = create({
 		},
 		paddingBlock: 0,
 		position: "relative",
+		touchAction: "manipulation",
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
 			default: duration.fast,
@@ -239,6 +240,7 @@ export const tabsStyles = create({
 		transitionProperty: "color, opacity, outline-color",
 		transitionTimingFunction: easing.expoOut,
 		userSelect: "none",
+		WebkitTapHighlightColor: "transparent",
 		whiteSpace: "nowrap",
 		width: { ":is(*) > svg": "1rem" },
 		zIndex: 1,

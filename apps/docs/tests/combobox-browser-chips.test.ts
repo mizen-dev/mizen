@@ -65,7 +65,7 @@ describe("Combobox browser integration - Multiple chips", () => {
 
 	it("anchors multiple popup below the chips container with matching alignment and width", async () => {
 		await page.setViewportSize({ height: 1200, width: 1280 });
-		const chipInput = page.getByPlaceholder("Add tag...");
+		const chipInput = page.getByPlaceholder("Add tag…");
 		// Leave room below the field so this test does not trigger collision flipping.
 		await chipInput.evaluate((input) =>
 			input.scrollIntoView({ block: "center" })
@@ -142,7 +142,7 @@ describe("Combobox browser integration - Multiple chips", () => {
 	});
 
 	it("supports keyboard navigation from chips input to chip with visible focus indicator and deletion", async () => {
-		const chipInput = page.getByPlaceholder("Add tag...");
+		const chipInput = page.getByPlaceholder("Add tag…");
 		await chipInput.click();
 
 		const engineeringChip = page.locator(

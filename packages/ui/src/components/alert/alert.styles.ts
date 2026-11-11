@@ -50,7 +50,12 @@ export const alertStyles = create({
 		gridRowStart: "description",
 		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
-		marginBlockStart: space.px,
+		// A description under a title sits 2px below it; alone, it starts at
+		// the padding.
+		marginBlockStart: {
+			":is([data-slot='alert-title'] ~ *)": space.px,
+			default: 0,
+		},
 		minWidth: 0,
 		textWrap: "pretty",
 	},

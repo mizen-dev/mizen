@@ -112,7 +112,7 @@ export function CommandModalCommandPaletteExample1() {
 					/>
 					<CommandDialogPopup aria-label="Command palette">
 						<Command items={groupedItems}>
-							<CommandInput placeholder="Type a command or search..." />
+							<CommandInput placeholder="Type a command or search…" />
 							<CommandPanel>
 								<CommandEmpty>No results found.</CommandEmpty>
 								<CommandList>
@@ -174,7 +174,7 @@ export function CommandGroupedPaletteExample2() {
 				/>
 				<CommandDialogPopup aria-label="Actions and pages">
 					<Command items={groupedItems}>
-						<CommandInput placeholder="Filter actions and pages..." />
+						<CommandInput placeholder="Filter actions and pages…" />
 						<CommandPanel>
 							<CommandEmpty>No matching results.</CommandEmpty>
 							<CommandList>

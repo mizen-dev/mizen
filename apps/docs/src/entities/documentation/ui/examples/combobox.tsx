@@ -102,7 +102,7 @@ export function MultipleCombobox() {
 								))
 							}
 						</ComboboxValue>
-						<ComboboxChipsInput placeholder="Add tag..." size="sm" />
+						<ComboboxChipsInput placeholder="Add tag…" size="sm" />
 					</ComboboxChips>
 					<ComboboxPopup>
 						<ComboboxEmpty>No tags found.</ComboboxEmpty>

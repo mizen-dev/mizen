@@ -92,7 +92,7 @@ describe("Combobox browser integration - Single select", () => {
 	});
 
 	it("handles typing, filtering, active-descendant navigation, and Enter selection", async () => {
-		const singleInput = page.getByPlaceholder("Select or search framework...");
+		const singleInput = page.getByPlaceholder("Select or search framework…");
 		await singleInput.waitFor({ state: "visible" });
 
 		await singleInput.click();
@@ -133,7 +133,7 @@ describe("Combobox browser integration - Single select", () => {
 	});
 
 	it("anchors single popup below the input group with matching alignment and width", async () => {
-		const singleInput = page.getByPlaceholder("Select or search framework...");
+		const singleInput = page.getByPlaceholder("Select or search framework…");
 		await singleInput.evaluate((element) =>
 			element.scrollIntoView({ behavior: "instant", block: "center" })
 		);
@@ -167,7 +167,7 @@ describe("Combobox browser integration - Single select", () => {
 	});
 
 	it("selects a value and clears it via accessible clear button without trigger collision", async () => {
-		const singleInput = page.getByPlaceholder("Select or search framework...");
+		const singleInput = page.getByPlaceholder("Select or search framework…");
 		await singleInput.waitFor({ state: "visible" });
 
 		const inputGroup = page
@@ -242,7 +242,7 @@ describe("Combobox browser integration - Single select", () => {
 	it("respects prefers-reduced-motion media condition", async () => {
 		await page.emulateMedia({ reducedMotion: "reduce" });
 
-		const singleInput = page.getByPlaceholder("Select or search framework...");
+		const singleInput = page.getByPlaceholder("Select or search framework…");
 		await singleInput.click();
 
 		const popup = page.locator('[data-slot="combobox-popup"]').first();
@@ -258,7 +258,7 @@ describe("Combobox browser integration - Single select", () => {
 	});
 
 	it("supports Escape dismissal while retaining input focus", async () => {
-		const singleInput = page.getByPlaceholder("Select or search framework...");
+		const singleInput = page.getByPlaceholder("Select or search framework…");
 		await singleInput.click();
 
 		const popup = page.locator('[data-slot="combobox-popup"]').first();
@@ -291,7 +291,7 @@ describe("Combobox browser integration - Single select", () => {
 	});
 
 	it("keeps empty live region mounted without creating top whitespace above first option", async () => {
-		const singleInput = page.getByPlaceholder("Select or search framework...");
+		const singleInput = page.getByPlaceholder("Select or search framework…");
 		await singleInput.click();
 
 		const popup = page.locator('[data-slot="combobox-popup"]').first();

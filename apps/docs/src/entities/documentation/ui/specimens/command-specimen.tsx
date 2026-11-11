@@ -78,7 +78,7 @@ export function CommandSpecimen() {
 						/>
 						<CommandDialogPopup aria-label="Command palette">
 							<Command items={groupedItems}>
-								<CommandInput placeholder="Type a command or search..." />
+								<CommandInput placeholder="Type a command or search…" />
 								<CommandPanel>
 									<CommandEmpty>No results found.</CommandEmpty>
 									<CommandList>
@@ -128,7 +128,7 @@ export function CommandSpecimen() {
 			>
 				<Card>
 					<Command items={groupedItems}>
-						<CommandInput placeholder="Filter actions and pages..." />
+						<CommandInput placeholder="Filter actions and pages…" />
 						<CommandPanel>
 							<CommandEmpty>No matching results.</CommandEmpty>
 							<CommandList>

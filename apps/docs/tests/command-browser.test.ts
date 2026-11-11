@@ -344,7 +344,7 @@ describe("Command browser integration", () => {
 			name: "Actions and pages",
 		});
 		const standaloneInput = standaloneContainer.getByPlaceholder(
-			"Filter actions and pages..."
+			"Filter actions and pages…"
 		);
 		await standaloneInput.waitFor({ state: "visible" });
 		await standaloneInput.click();

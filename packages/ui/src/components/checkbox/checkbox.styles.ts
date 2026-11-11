@@ -102,6 +102,7 @@ export const checkboxStyles = create({
 			default: borderWidth.focus,
 		},
 		position: "relative",
+		touchAction: "manipulation",
 		transform: "translateY(-1px)",
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
@@ -112,6 +113,7 @@ export const checkboxStyles = create({
 		transitionTimingFunction: easing.expoOut,
 		userSelect: "none",
 		verticalAlign: "middle",
+		WebkitTapHighlightColor: "transparent",
 	},
 	// Only a mark that appears on a check draws on; one that is checked when
 	// it first renders is already drawn.

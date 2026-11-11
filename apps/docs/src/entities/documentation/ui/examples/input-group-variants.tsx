@@ -51,7 +51,7 @@ export function InputGroupWorkspaceSearchExample2() {
 			<Field>
 				<FieldLabel>Search workspace</FieldLabel>
 				<InputGroup>
-					<InputGroupInput placeholder="Search documents..." />
+					<InputGroupInput placeholder="Search documents…" />
 					<InputGroupAddon align="inline-end">
 						<Kbd>⌘K</Kbd>
 						<Button size="xs" type="button">
@@ -69,10 +69,7 @@ export function InputGroupTeamFeedbackExample3() {
 			<Field>
 				<FieldLabel>Feedback note</FieldLabel>
 				<InputGroup>
-					<InputGroupTextarea
-						placeholder="Share your suggestions..."
-						rows={3}
-					/>
+					<InputGroupTextarea placeholder="Share your suggestions…" rows={3} />
 					<InputGroupAddon align="block-start">
 						<InputGroupText>Markdown note</InputGroupText>
 					</InputGroupAddon>
@@ -104,7 +101,7 @@ export function InputGroupControlSizesExample4() {
 				<Field>
 					<FieldLabel>Small size</FieldLabel>
 					<InputGroup>
-						<InputGroupInput placeholder="Filter..." size="sm" />
+						<InputGroupInput placeholder="Filter…" size="sm" />
 						<InputGroupAddon align="inline-start">
 							<InputGroupText>#</InputGroupText>
 						</InputGroupAddon>
@@ -113,7 +110,7 @@ export function InputGroupControlSizesExample4() {
 				<Field>
 					<FieldLabel>Default size</FieldLabel>
 					<InputGroup>
-						<InputGroupInput placeholder="Filter..." size="default" />
+						<InputGroupInput placeholder="Filter…" size="default" />
 						<InputGroupAddon align="inline-start">
 							<InputGroupText>#</InputGroupText>
 						</InputGroupAddon>
@@ -122,7 +119,7 @@ export function InputGroupControlSizesExample4() {
 				<Field>
 					<FieldLabel>Large size</FieldLabel>
 					<InputGroup>
-						<InputGroupInput placeholder="Filter..." size="lg" />
+						<InputGroupInput placeholder="Filter…" size="lg" />
 						<InputGroupAddon align="inline-start">
 							<InputGroupText>#</InputGroupText>
 						</InputGroupAddon>

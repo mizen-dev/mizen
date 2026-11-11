@@ -8,7 +8,7 @@ export function SpinnerSpecimen() {
 		<SpecimenSection primary title="Workspace sync">
 			<Inline>
 				<Spinner aria-hidden="true" />
-				<Text>Saving workspace...</Text>
+				<Text>Saving workspace…</Text>
 			</Inline>
 		</SpecimenSection>
 	);

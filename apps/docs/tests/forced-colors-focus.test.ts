@@ -342,9 +342,7 @@ describe("forced-colors focus and control states", () => {
 		await page.keyboard.press("Escape");
 
 		await openComponent("combobox");
-		const comboboxInput = page.getByPlaceholder(
-			"Select or search framework..."
-		);
+		const comboboxInput = page.getByPlaceholder("Select or search framework…");
 		await comboboxInput.focus();
 		await page.keyboard.press("ArrowDown");
 		await expectHighlightedItem(

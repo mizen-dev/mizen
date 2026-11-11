@@ -82,7 +82,7 @@ describe("InputGroup browser integration", () => {
 			).toBe("0px");
 			const search = page
 				.locator('[data-slot="input-group"]')
-				.filter({ has: page.getByPlaceholder("Search documents...") });
+				.filter({ has: page.getByPlaceholder("Search documents…") });
 			const group = await search.boundingBox();
 			const button = await search
 				.getByRole("button", { name: "Find" })
@@ -99,7 +99,7 @@ describe("InputGroup browser integration", () => {
 			});
 			await page
 				.locator('[data-slot="input-group"]')
-				.filter({ has: page.getByPlaceholder("Share your suggestions...") })
+				.filter({ has: page.getByPlaceholder("Share your suggestions…") })
 				.screenshot({
 					path: `/private/tmp/mizen-input-group-textarea-${theme}.png`,
 				});
@@ -130,7 +130,7 @@ describe("InputGroup browser integration", () => {
 			await websiteInput.evaluate((el) => document.activeElement === el)
 		).toBe(true);
 
-		const searchInput = page.getByPlaceholder("Search documents...");
+		const searchInput = page.getByPlaceholder("Search documents…");
 		const findButton = page.getByRole("button", { name: "Find" });
 
 		await findButton.click();
@@ -184,7 +184,7 @@ describe("InputGroup browser integration", () => {
 	});
 
 	it("renders full-width textarea block addons without a stray inline prefix", async () => {
-		const textarea = page.getByPlaceholder("Share your suggestions...");
+		const textarea = page.getByPlaceholder("Share your suggestions…");
 		const container = page
 			.locator('[data-slot="input-group"]')
 			.filter({ has: textarea });
@@ -235,7 +235,7 @@ describe("InputGroup browser integration", () => {
 	});
 
 	it("isolates group size from nested addon buttons and enforces disabled visual precedence", async () => {
-		const searchInput = page.getByPlaceholder("Search documents...");
+		const searchInput = page.getByPlaceholder("Search documents…");
 		const searchGroup = page
 			.locator('[data-slot="input-group"]')
 			.filter({ has: searchInput });
@@ -299,7 +299,7 @@ describe("InputGroup browser integration", () => {
 		const readHeights = () =>
 			Promise.all(
 				[0, 1, 2].map((index) => {
-					const input = page.getByPlaceholder("Filter...").nth(index);
+					const input = page.getByPlaceholder("Filter…").nth(index);
 					const group = input.locator("xpath=..");
 					return group.evaluate(
 						(element) => element.getBoundingClientRect().height
@@ -310,7 +310,7 @@ describe("InputGroup browser integration", () => {
 		await page.setViewportSize({ height: 800, width: 1280 });
 		const wideHeights = await readHeights();
 		const smallText = page
-			.getByPlaceholder("Filter...")
+			.getByPlaceholder("Filter…")
 			.first()
 			.locator("..")
 			.locator('[data-slot="input-group-text"]');

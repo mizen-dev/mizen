@@ -95,6 +95,7 @@ export const buttonStyles = create({
 		overflowWrap: "break-word",
 		position: "relative",
 		textDecoration: "none",
+		touchAction: "manipulation",
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
 			default: duration.fast,
@@ -102,6 +103,7 @@ export const buttonStyles = create({
 		transitionProperty: "outline-color, outline-offset",
 		transitionTimingFunction: easing.expoOut,
 		userSelect: "none",
+		WebkitTapHighlightColor: "transparent",
 	},
 	brand: {
 		"::before": {
