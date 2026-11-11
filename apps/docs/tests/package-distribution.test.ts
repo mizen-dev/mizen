@@ -9,6 +9,11 @@ import { cleanup } from "../../../scripts/cleanup.mjs";
 const uiRoot = new URL("../../../packages/ui/", import.meta.url).pathname;
 const execute = promisify(execFile);
 const CLIENT_BOUNDARY = /^"use client";/u;
+// A length needs a unit. Browsers drop `border-width: 1`, and the border
+// falls back to 3px. The docs build repairs such values; the archive must not
+// need the repair.
+const UNITLESS_LENGTH =
+	/(?<![\w-])(?:(?:border|outline|inset|margin|padding|min|max)-[\w-]+|width|height|inset|gap|top|right|bottom|left|flex-basis|outline-offset|border-radius):-?(?:\d*\.)?\d*[1-9]\d*(?=[;}])/gu;
 
 interface PackageExport {
 	default: string;
@@ -56,6 +61,7 @@ it("packs every public export and preserves client boundaries", async () => {
 		expect(css).toContain("oklch(0.55 0.19 5)");
 		expect(css).toContain("oklch(1 0 0)");
 		expect(css).toContain("@media");
+		expect(css.match(UNITLESS_LENGTH) ?? []).toEqual([]);
 		await Promise.all(
 			Object.entries(manifest.exports).map(async ([name, entry]) => {
 				const targets =

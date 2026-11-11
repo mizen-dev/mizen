@@ -57,7 +57,7 @@ export const taskListStyles = create({
 			inlineSize: borderWidth.thin,
 			insetBlockEnd: `calc(-1 * (${space["2"]} + ${space["1"]}))`,
 			insetBlockStart: `calc(${space["1"]} + ${space["6"]})`,
-			insetInlineStart: `calc(${space["4"]} / 2 - ${borderWidth.thin}px / 2)`,
+			insetInlineStart: `calc(${space["4"]} / 2 - ${borderWidth.thin} / 2)`,
 			position: "absolute",
 		},
 	},

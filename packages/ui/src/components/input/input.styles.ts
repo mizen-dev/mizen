@@ -78,15 +78,15 @@ const inputUnstyledStyles = create({
 		width: "auto",
 	},
 	unstyledDefault: {
-		height: `calc(${controlSize.md} - ${borderWidth.thin}px * 2)`,
+		height: `calc(${controlSize.md} - ${borderWidth.thin} * 2)`,
 	},
 	unstyledLg: {
 		fontSize: fontSize["16"],
-		height: `calc(${controlSize.lg} - ${borderWidth.thin}px * 2)`,
+		height: `calc(${controlSize.lg} - ${borderWidth.thin} * 2)`,
 	},
 	unstyledSm: {
 		fontSize: { [conditions.sm]: fontSize["13"], default: fontSize["16"] },
-		height: `calc(${controlSize.sm} - ${borderWidth.thin}px * 2)`,
+		height: `calc(${controlSize.sm} - ${borderWidth.thin} * 2)`,
 	},
 });
 

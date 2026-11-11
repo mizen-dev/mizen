@@ -107,11 +107,11 @@ export const fileUploadStyles = create({
 		},
 		animationTimingFunction: "linear",
 		// The edge covers the border box; the svg would default to 300 by 150.
-		blockSize: `calc(100% + ${borderWidth.thin}px * 2)`,
+		blockSize: `calc(100% + ${borderWidth.thin} * 2)`,
 		fill: "none",
-		inlineSize: `calc(100% + ${borderWidth.thin}px * 2)`,
-		insetBlockStart: `-${borderWidth.thin}px`,
-		insetInlineStart: `-${borderWidth.thin}px`,
+		inlineSize: `calc(100% + ${borderWidth.thin} * 2)`,
+		insetBlockStart: `-${borderWidth.thin}`,
+		insetInlineStart: `-${borderWidth.thin}`,
 		opacity: {
 			":is([data-dragging] > *)": 1,
 			default: 0,
@@ -359,7 +359,7 @@ export const fileUploadStyles = create({
 		width: "4.5rem",
 	},
 	tileContent: {
-		borderRadius: `calc(${shape.controlRadiusLarge} - ${borderWidth.thin}px)`,
+		borderRadius: `calc(${shape.controlRadiusLarge} - ${borderWidth.thin})`,
 		gap: 0,
 		height: "100%",
 		position: "relative",

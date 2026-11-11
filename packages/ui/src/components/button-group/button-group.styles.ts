@@ -16,8 +16,8 @@ export const buttonGroupStyles = create({
 	horizontal: {
 		flexDirection: "row",
 		overflowX: "auto",
-		paddingBlock: `calc(${borderWidth.focus}px + ${focus.offset})`,
-		paddingInline: `calc(${borderWidth.focus}px + ${focus.offset})`,
+		paddingBlock: `calc(${borderWidth.focus} + ${focus.offset})`,
+		paddingInline: `calc(${borderWidth.focus} + ${focus.offset})`,
 		scrollPaddingInline: space["1"],
 	},
 	vertical: { flexDirection: "column" },

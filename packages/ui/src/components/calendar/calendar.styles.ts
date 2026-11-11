@@ -107,7 +107,7 @@ export const calendarStyles = create({
 	months: {
 		"::after": {
 			content: '""',
-			flex: `0 0 calc(${borderWidth.focus}px + ${focus.offset})`,
+			flex: `0 0 calc(${borderWidth.focus} + ${focus.offset})`,
 			marginInlineStart: `calc(-1 * ${space["3"]})`,
 		},
 		display: "flex",
@@ -173,7 +173,7 @@ export const calendarStyles = create({
 		overflowX: "auto",
 		paddingBlock: space["2"],
 		paddingInline: {
-			default: `calc(${borderWidth.focus}px + ${focus.offset})`,
+			default: `calc(${borderWidth.focus} + ${focus.offset})`,
 			[conditions.sm]: space["2"],
 		},
 		scrollPaddingInline: space["1"],

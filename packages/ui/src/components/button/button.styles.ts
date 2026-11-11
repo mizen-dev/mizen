@@ -130,7 +130,7 @@ export const buttonStyles = create({
 		borderStartStartRadius: shape.controlRadiusLarge,
 		lineHeight: lineHeight["20"],
 		minHeight: controlSize.md,
-		paddingBlock: `max(calc((${controlSize.md} - ${lineHeight["20"]}) / 2 - ${borderWidth.thin}px), ${wrapLeading})`,
+		paddingBlock: `max(calc((${controlSize.md} - ${lineHeight["20"]}) / 2 - ${borderWidth.thin}), ${wrapLeading})`,
 		paddingInline: "calc(0.75rem - 1px)",
 	},
 	destructive: {
@@ -336,7 +336,7 @@ export const buttonStyles = create({
 		borderStartStartRadius: shape.controlRadiusLarge,
 		lineHeight: lineHeight["20"],
 		minHeight: controlSize.lg,
-		paddingBlock: `max(calc((${controlSize.lg} - ${lineHeight["20"]}) / 2 - ${borderWidth.thin}px), ${wrapLeading})`,
+		paddingBlock: `max(calc((${controlSize.lg} - ${lineHeight["20"]}) / 2 - ${borderWidth.thin}), ${wrapLeading})`,
 		paddingInline: "calc(1rem - 1px)",
 	},
 	link: {
@@ -400,7 +400,7 @@ export const buttonStyles = create({
 		gap: space["1"],
 		lineHeight: lineHeight["20"],
 		minHeight: controlSize.sm,
-		paddingBlock: `max(calc((${controlSize.sm} - ${lineHeight["20"]}) / 2 - ${borderWidth.thin}px), ${wrapLeading})`,
+		paddingBlock: `max(calc((${controlSize.sm} - ${lineHeight["20"]}) / 2 - ${borderWidth.thin}), ${wrapLeading})`,
 		paddingInline: "calc(0.625rem - 1px)",
 	},
 	xl: {
@@ -411,7 +411,7 @@ export const buttonStyles = create({
 		borderStartStartRadius: shape.controlRadiusLarge,
 		fontSize: fontSize["16"],
 		minHeight: controlSize.xl,
-		paddingBlock: `max(calc((${controlSize.xl} - ${fontSize["16"]}) / 2 - ${borderWidth.thin}px), ${wrapLeading})`,
+		paddingBlock: `max(calc((${controlSize.xl} - ${fontSize["16"]}) / 2 - ${borderWidth.thin}), ${wrapLeading})`,
 		paddingInline: "calc(1rem - 1px)",
 	},
 	xs: {
@@ -425,7 +425,7 @@ export const buttonStyles = create({
 		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
 		minHeight: controlSize.xs,
-		paddingBlock: `max(calc((${controlSize.xs} - ${lineHeight["16"]}) / 2 - ${borderWidth.thin}px), ${wrapLeading})`,
+		paddingBlock: `max(calc((${controlSize.xs} - ${lineHeight["16"]}) / 2 - ${borderWidth.thin}), ${wrapLeading})`,
 		paddingInline: "calc(0.5rem - 1px)",
 	},
 });

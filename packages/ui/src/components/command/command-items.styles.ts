@@ -113,7 +113,7 @@ export const commandItemsStyles = create({
 			"[data-highlighted]:not(:hover)": colors.focusRing,
 			default: "transparent",
 		},
-		outlineOffset: `-${borderWidth.focus}px`,
+		outlineOffset: `-${borderWidth.focus}`,
 		outlineStyle: {
 			"[data-highlighted]:not(:hover)": "solid",
 			default: "none",

@@ -121,7 +121,7 @@ export const segmentedStyles = create({
 			default: "transparent",
 		},
 		// The track clips an outer ring, so the ring sits inside the item.
-		outlineOffset: `-${borderWidth.focus}px`,
+		outlineOffset: `-${borderWidth.focus}`,
 		outlineStyle: { ":focus-visible": "solid", default: "none" },
 		outlineWidth: borderWidth.focus,
 		paddingBlock: 0,

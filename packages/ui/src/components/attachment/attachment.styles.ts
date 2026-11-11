@@ -35,7 +35,7 @@ export const attachmentStyles = create({
 		aspectRatio: 1,
 		backgroundColor: colors.secondary,
 		// Nests inside the card corner: its radius minus the inset and border.
-		borderRadius: `calc(${shape.surfaceRadius} - ${space["4"]} - ${borderWidth.thin}px)`,
+		borderRadius: `calc(${shape.surfaceRadius} - ${space["4"]} - ${borderWidth.thin})`,
 		// A file-type glyph recedes so the name leads.
 		color: colors.mutedContent,
 		display: "grid",

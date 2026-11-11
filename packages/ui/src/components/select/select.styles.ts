@@ -88,7 +88,7 @@ export const selectStyles = create({
 			":focus-visible:not(:hover)": colors.focusRing,
 			default: "transparent",
 		},
-		outlineOffset: `-${borderWidth.focus}px`,
+		outlineOffset: `-${borderWidth.focus}`,
 		outlineStyle: { ":focus-visible:not(:hover)": "solid", default: "none" },
 		outlineWidth: borderWidth.focus,
 		paddingBlock: `calc((2rem - ${lineHeight["20"]}) / 2)`,

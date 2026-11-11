@@ -98,7 +98,7 @@ export const menuStyles = create({
 			":focus-visible:not(:hover)": colors.focusRing,
 			default: "transparent",
 		},
-		outlineOffset: `-${borderWidth.focus}px`,
+		outlineOffset: `-${borderWidth.focus}`,
 		outlineStyle: { ":focus-visible:not(:hover)": "solid", default: "none" },
 		outlineWidth: borderWidth.focus,
 		overflowWrap: "anywhere",

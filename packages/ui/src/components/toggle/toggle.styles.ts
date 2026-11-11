@@ -168,7 +168,7 @@ export const toggleStyles = create({
 		gap: space["1"],
 		maxWidth: "100%",
 		minInlineSize: 0,
-		padding: `calc(${borderWidth.focus}px + ${focus.offset})`,
+		padding: `calc(${borderWidth.focus} + ${focus.offset})`,
 		width: "fit-content",
 	},
 	groupOutline: { gap: 0 },

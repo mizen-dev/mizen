@@ -40,7 +40,7 @@ export const tokenStyles = create({
 		borderWidth: 0,
 		cursor: "pointer",
 		// Covers the token's border: the hit area is the whole visible chip.
-		inset: `calc(-1 * ${borderWidth.thin}px)`,
+		inset: `calc(-1 * ${borderWidth.thin})`,
 		outlineColor: {
 			":focus-visible": colors.focusRing,
 			default: "transparent",

@@ -56,7 +56,7 @@ export const composerPartStyles = create({
 	},
 	// Concentric with the tile: its radius less the 1px edge.
 	attachmentImage: {
-		borderRadius: `calc(${shape.controlRadius} - ${borderWidth.thin}px)`,
+		borderRadius: `calc(${shape.controlRadius} - ${borderWidth.thin})`,
 		display: "block",
 		height: "100%",
 		inset: 0,
@@ -75,7 +75,7 @@ export const composerPartStyles = create({
 	attachmentOpen: {
 		appearance: "none",
 		backgroundColor: "transparent",
-		borderRadius: `calc(${shape.controlRadius} - ${borderWidth.thin}px)`,
+		borderRadius: `calc(${shape.controlRadius} - ${borderWidth.thin})`,
 		borderWidth: 0,
 		cursor: "pointer",
 		inset: 0,
@@ -253,7 +253,7 @@ export const composerPartStyles = create({
 	// A 2px ring just inside the border: the mask cuts out the middle, so only
 	// a thin line of the band shows.
 	glowRing: {
-		borderRadius: `calc(${shape.floatingRadius} - ${borderWidth.thin}px)`,
+		borderRadius: `calc(${shape.floatingRadius} - ${borderWidth.thin})`,
 		inset: 0,
 		maskClip: "content-box, border-box",
 		maskComposite: "exclude",

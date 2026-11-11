@@ -33,7 +33,7 @@ export const codeBlockStyles = create({
 			":focus-visible": focusMotion.ring,
 		},
 		// The focus ring follows the frame's inner corner.
-		borderRadius: `calc(${shape.controlRadiusLarge} - ${borderWidth.thin}px)`,
+		borderRadius: `calc(${shape.controlRadiusLarge} - ${borderWidth.thin})`,
 		boxSizing: "border-box",
 		color: colors.content,
 		// The size adjustment that pairs Mono with the UI font shrinks it, so

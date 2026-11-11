@@ -245,7 +245,7 @@ export const separatedAccordionStyles = create({
 		transitionTimingFunction: easing.spring,
 	},
 	trigger: {
-		borderRadius: `calc(${shape.floatingRadius} - ${borderWidth.thin}px - ${space["1"]})`,
+		borderRadius: `calc(${shape.floatingRadius} - ${borderWidth.thin} - ${space["1"]})`,
 		minHeight: `calc(3.5rem - ${space["1"]} * 2)`,
 		paddingBlock: space["2"],
 		paddingInline: space["3"],

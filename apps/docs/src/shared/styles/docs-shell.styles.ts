@@ -227,7 +227,7 @@ export const shellStyles = create({
 			default: "transparent",
 		},
 		// Drawn inset: the folding panel clips anything outside the row.
-		outlineOffset: `-${borderWidth.focus}px`,
+		outlineOffset: `-${borderWidth.focus}`,
 		outlineStyle: {
 			":focus-visible": "solid",
 			default: focusOutline.restingOutlineStyle,
@@ -294,7 +294,7 @@ export const shellStyles = create({
 			":focus-visible": colors.focusRing,
 			default: "transparent",
 		},
-		outlineOffset: `-${borderWidth.focus}px`,
+		outlineOffset: `-${borderWidth.focus}`,
 		outlineStyle: {
 			":focus-visible": "solid",
 			default: focusOutline.restingOutlineStyle,

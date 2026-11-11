@@ -3,7 +3,8 @@ import { colors } from "./colors.stylex";
 import { conditions } from "./conditions.stylex";
 import { shadows } from "./shadows.stylex";
 
-export const borderWidth = defineConsts({ focus: 2, thin: 1 });
+// Lengths with their unit: a bare number is not a valid CSS width.
+export const borderWidth = defineConsts({ focus: "2px", thin: "1px" });
 export const focus = defineConsts({ offset: "2px" });
 // The focus ring fades in at full width; outline widths snap to device
 // pixels, so growing them steps. Pair `animationName: focusMotion.ring` with

@@ -221,7 +221,7 @@ export const tabsStyles = create({
 			":focus-visible": colors.focusRing,
 			default: "transparent",
 		},
-		outlineOffset: `-${borderWidth.focus}px`,
+		outlineOffset: `-${borderWidth.focus}`,
 		outlineStyle: {
 			":focus-visible": "solid",
 			default: "none",

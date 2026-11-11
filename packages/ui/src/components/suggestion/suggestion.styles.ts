@@ -3,7 +3,7 @@ import { glyphSize } from "../../styles/dimensions.stylex";
 import { borderWidth } from "../../styles/interaction.stylex";
 import { space } from "../../styles/spacing.stylex";
 
-const ring = `${borderWidth.focus}px`;
+const ring = borderWidth.focus;
 // The strip under the pills: a 4px thumb, 2px clear of the pills, in a bar
 // with 1px around it. The focus ring's 3px fits inside it too.
 const bar = `calc(${space["1"]} + 2px)`;

@@ -18,7 +18,7 @@ import {
 	lineHeight,
 } from "../../styles/typography.stylex";
 
-const focusClearance = `calc(${borderWidth.focus}px + ${focus.offset})`;
+const focusClearance = `calc(${borderWidth.focus} + ${focus.offset})`;
 
 export const toolbarStyles = create({
 	group: {
@@ -82,7 +82,7 @@ export const toolbarStyles = create({
 		backgroundColor: colors.surface,
 		borderColor: colors.border,
 		// Concentric with the controls inside: their radius plus the inset.
-		borderRadius: `calc(${shape.controlRadiusLarge} + ${focusClearance} + ${borderWidth.thin}px)`,
+		borderRadius: `calc(${shape.controlRadiusLarge} + ${focusClearance} + ${borderWidth.thin})`,
 		borderStyle: "solid",
 		borderWidth: borderWidth.thin,
 		boxShadow: shadows.surface,

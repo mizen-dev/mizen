@@ -52,7 +52,7 @@ export const tableStyles = create({
 			":focus-visible": colors.focusRing,
 			default: "transparent",
 		},
-		outlineOffset: `-${borderWidth.focus}px`,
+		outlineOffset: `-${borderWidth.focus}`,
 		outlineStyle: { ":focus-visible": "solid", default: "none" },
 		outlineWidth: borderWidth.focus,
 		// Rows are 40px: 10px block around a 20px line, 12px inline. Grid tables
