@@ -91,6 +91,7 @@ import {
 	ButtonControlSizesExample5,
 	ButtonDestructiveActionsExample3,
 	ButtonIconActionsExample6,
+	ButtonNavigationLinkExample7,
 	ButtonReleaseReviewExample1,
 } from "./button-variants";
 import { AppointmentCalendar, CalendarDropdownNavigation } from "./calendar";
@@ -743,6 +744,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	ButtonGroupFileActionsExample3,
 	ButtonGroupPublishAReleaseExample1,
 	ButtonIconActionsExample6,
+	ButtonNavigationLinkExample7,
 	ButtonReleaseReviewExample1,
 	CalendarDateRangeExample2,
 	CalendarDropdownNavigation,

@@ -1937,6 +1937,13 @@
         "description": "Use a clear accessible name for each icon-only action.",
         "path": "entities/documentation/ui/examples/button-variants.tsx",
         "code": "\"use client\";\n\nimport { Button, Inline, Stack } from \"@mizen-labs/ui\";\n\nimport { IconPlus } from \"@tabler/icons-react\";\n\nfunction PlusIcon() {\n\treturn <IconPlus aria-hidden=\"true\" focusable=\"false\" size=\"1em\" />;\n}\n\nexport function ButtonIconActionsExample6() {\n\treturn (\n\t\t<Stack gap=\"4\">\n\t\t\t<Inline>\n\t\t\t\t<Button aria-label=\"Icon\" size=\"icon\">\n\t\t\t\t\t<PlusIcon />\n\t\t\t\t</Button>\n\t\t\t\t<Button aria-label=\"Extra small icon\" size=\"icon-xs\">\n\t\t\t\t\t<PlusIcon />\n\t\t\t\t</Button>\n\t\t\t\t<Button aria-label=\"Small icon\" size=\"icon-sm\">\n\t\t\t\t\t<PlusIcon />\n\t\t\t\t</Button>\n\t\t\t\t<Button aria-label=\"Large icon\" size=\"icon-lg\">\n\t\t\t\t\t<PlusIcon />\n\t\t\t\t</Button>\n\t\t\t\t<Button aria-label=\"Extra large icon\" size=\"icon-xl\">\n\t\t\t\t\t<PlusIcon />\n\t\t\t\t</Button>\n\t\t\t</Inline>\n\t\t</Stack>\n\t);\n}\n"
+      },
+      {
+        "name": "ButtonNavigationLinkExample7",
+        "title": "Navigation link",
+        "description": "A link that looks like a button. Render the anchor or the router link, set nativeButton to false, and set role to link so assistive technology announces a link.",
+        "path": "entities/documentation/ui/examples/button-variants.tsx",
+        "code": "\"use client\";\n\nimport { Button, Inline } from \"@mizen-labs/ui\";\n\nexport function ButtonNavigationLinkExample7() {\n\treturn (\n\t\t<Inline>\n\t\t\t<Button\n\t\t\t\tnativeButton={false}\n\t\t\t\trender={<a href=\"/docs/installation\" />}\n\t\t\t\trole=\"link\"\n\t\t\t\tvariant=\"brand\"\n\t\t\t>\n\t\t\t\tInstall Mizen\n\t\t\t</Button>\n\t\t\t<Button\n\t\t\t\tnativeButton={false}\n\t\t\t\trender={<a href=\"/docs/components/link\" />}\n\t\t\t\trole=\"link\"\n\t\t\t\tvariant=\"outline\"\n\t\t\t>\n\t\t\t\tRead about Link\n\t\t\t</Button>\n\t\t</Inline>\n\t);\n}\n"
       }
     ],
     "field": [

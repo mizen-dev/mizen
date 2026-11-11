@@ -182,4 +182,36 @@ describe("Button interactions", () => {
 		await page.mouse.up();
 		await page.emulateMedia({ reducedMotion: "no-preference" });
 	});
+
+	it("keeps link semantics and native navigation on a link that looks like a button", async () => {
+		const link = page.getByRole("link", { exact: true, name: "Install Mizen" });
+		expect(await link.evaluate((node) => node.tagName)).toBe("A");
+		expect(await link.getAttribute("href")).toBe("/docs/installation");
+		expect(await link.getAttribute("data-button")).toBe("");
+		// A modified click stays with the browser, so it can open a new tab.
+		const prevented = await link.evaluate(
+			(node) =>
+				new Promise<boolean>((resolve) => {
+					document.addEventListener(
+						"click",
+						(event) => {
+							resolve(event.defaultPrevented);
+							event.preventDefault();
+						},
+						{ once: true }
+					);
+					node.dispatchEvent(
+						new MouseEvent("click", {
+							bubbles: true,
+							cancelable: true,
+							metaKey: true,
+						})
+					);
+				})
+		);
+		expect(prevented).toBe(false);
+		await link.focus();
+		await page.keyboard.press("Enter");
+		await page.waitForURL(`${handle.url}/docs/installation`);
+	});
 });

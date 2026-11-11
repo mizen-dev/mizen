@@ -78,6 +78,7 @@ export const usageComponents: Record<string, ReturnType<typeof preloadableExampl
 "ButtonGroupFileActionsExample3": preloadableExample(() => import("./examples/button-group-variants").then((module) => ({ default: module.ButtonGroupFileActionsExample3 }))),
 "ButtonGroupPublishAReleaseExample1": preloadableExample(() => import("./examples/button-group-variants").then((module) => ({ default: module.ButtonGroupPublishAReleaseExample1 }))),
 "ButtonIconActionsExample6": preloadableExample(() => import("./examples/button-variants").then((module) => ({ default: module.ButtonIconActionsExample6 }))),
+"ButtonNavigationLinkExample7": preloadableExample(() => import("./examples/button-variants").then((module) => ({ default: module.ButtonNavigationLinkExample7 }))),
 "ButtonReleaseReviewExample1": preloadableExample(() => import("./examples/button-variants").then((module) => ({ default: module.ButtonReleaseReviewExample1 }))),
 "CalendarDateRangeExample2": preloadableExample(() => import("./examples/calendar-variants").then((module) => ({ default: module.CalendarDateRangeExample2 }))),
 "CalendarDropdownNavigation": preloadableExample(() => import("./examples/calendar").then((module) => ({ default: module.CalendarDropdownNavigation }))),

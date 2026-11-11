@@ -125,7 +125,7 @@
   },
   "button": {
     "boundaries": [
-      "Use a link for navigation, including when composing with render.",
+      "Use a link for navigation. To make it look like a button, pass the anchor or router link to render, with nativeButton false and role link. Without the role, the link is announced as a button.",
       "Use Toggle for a persistent pressed state.",
       "Use Alert Dialog when a destructive action needs confirmation."
     ],

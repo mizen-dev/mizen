@@ -55,6 +55,12 @@
       "title": "Icon actions",
       "description": "Use a clear accessible name for each icon-only action.",
       "path": "entities/documentation/ui/examples/button-variants.tsx"
+    },
+    {
+      "name": "ButtonNavigationLinkExample7",
+      "title": "Navigation link",
+      "description": "A link that looks like a button. Render the anchor or the router link, set nativeButton to false, and set role to link so assistive technology announces a link.",
+      "path": "entities/documentation/ui/examples/button-variants.tsx"
     }
   ],
   "field": [

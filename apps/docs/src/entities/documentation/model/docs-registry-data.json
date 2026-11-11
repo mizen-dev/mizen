@@ -39,7 +39,7 @@
       },
       {
         "defaultValue": "true",
-        "description": "Defaults to true; set false when render produces a non-button element.",
+        "description": "Defaults to true; set false when render produces a non-button element. Such an element gets role button; for a link, also set role to link.",
         "name": "nativeButton",
         "type": "boolean"
       },

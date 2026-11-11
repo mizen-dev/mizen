@@ -111,3 +111,25 @@ export function ButtonIconActionsExample6() {
 		</Stack>
 	);
 }
+export function ButtonNavigationLinkExample7() {
+	return (
+		<Inline>
+			<Button
+				nativeButton={false}
+				render={<a href="/docs/installation" />}
+				role="link"
+				variant="brand"
+			>
+				Install Mizen
+			</Button>
+			<Button
+				nativeButton={false}
+				render={<a href="/docs/components/link" />}
+				role="link"
+				variant="outline"
+			>
+				Read about Link
+			</Button>
+		</Inline>
+	);
+}
