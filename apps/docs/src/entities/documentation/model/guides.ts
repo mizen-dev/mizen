@@ -425,8 +425,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				code: {
 					title: "css",
 					value: `/* In the app stylesheet, loaded after @mizen-labs/ui/styles.css. */
+body {
+  font-family: "Geist Variable", system-ui, sans-serif;
+}
+
 :root {
-  --mizen-font-sans: "Geist Variable", system-ui, sans-serif;
+  --mizen-font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
   --mizen-font-size-adjust: from-font;
   --mizen-letter-spacing-heading: -0.02em;
   --mizen-letter-spacing-title: -0.04em;
@@ -434,6 +438,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				},
 				id: "tracking",
 				paragraphs: [
+					"Set your interface family on body; components inherit it, so no token names it. The --mizen-font-mono variable sets the family for code.",
 					"Letter spacing depends on the font family, so Mizen keeps it in a themeable scale. The letterSpacing tokens are caption for 12px text, ui for 13px to 16px text, then subheading, heading, title, and display. The defaults suit system fonts. If your family is fitted looser or tighter, declare the tokens you need again on :root.",
 					"Type roles set font-size-adjust from fonts.sizeAdjust, which defaults to 0.5. Set it to from-font to keep your family at its set size; fallback fonts then scale to match it while the family loads.",
 				],

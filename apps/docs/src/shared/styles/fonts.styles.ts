@@ -5,7 +5,6 @@ import { createTheme } from "@stylexjs/stylex";
 // The site chooses its fonts; shared components do not require these families.
 export const docsFonts = createTheme(fonts, {
 	mono: '"JetBrains Mono Variable", ui-monospace, monospace',
-	sans: '"Geist Variable", ui-sans-serif, system-ui, sans-serif',
 	// Keep Geist at its set size; only fallbacks scale to its x-height.
 	sizeAdjust: "from-font",
 });

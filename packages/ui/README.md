@@ -39,10 +39,13 @@ token, declare it again on `:root` after the Mizen stylesheet:
 
 ```css
 :root {
-  --mizen-font-sans: "Geist Variable", system-ui, sans-serif;
   --mizen-color-accent: oklch(0.5 0.2 260);
+  --mizen-font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 }
 ```
+
+Set your interface font on `body`; components inherit it. `--mizen-font-mono`
+sets the family for code.
 
 The app needs no StyleX setup.
 
