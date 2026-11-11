@@ -280,6 +280,16 @@ describe("DatePicker component behavior", () => {
 		expect(input.getAttribute("aria-invalid")).toBe("true");
 		unmount();
 	});
+	it("names the calendar button with triggerLabel", () => {
+		const { container, unmount } = mount(
+			h(DatePicker, { triggerLabel: "Открыть календарь" })
+		);
+		const labels = [...container.querySelectorAll("button")].map((button) =>
+			button.getAttribute("aria-label")
+		);
+		expect(labels).toEqual(["Открыть календарь"]);
+		unmount();
+	});
 	it("opens calendar on trigger button click and allows day selection", () => {
 		const onValueChange = vi.fn();
 		const initial = new Date(2026, 5, 1);

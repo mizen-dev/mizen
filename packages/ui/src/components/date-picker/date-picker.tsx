@@ -1,6 +1,5 @@
 "use client";
 
-import { props } from "@stylexjs/stylex";
 import type { ReactElement } from "react";
 import { useCallback, useId, useMemo, useRef, useState } from "react";
 import { assignRef } from "../../ref-utils";
@@ -11,15 +10,14 @@ import {
 	InputGroupAddon,
 	InputGroupInput,
 } from "../input-group/input-group";
-import { Popover, PopoverPopup, PopoverTrigger } from "../popover/popover";
-import { datePickerStyles } from "./date-picker.styles";
+import { Popover, PopoverPopup } from "../popover/popover";
 import type { DatePickerProps } from "./date-picker.types";
 import {
 	formatIsoDate,
 	getDateInputValidationMessage,
 } from "./date-picker-date";
-import { CalendarIcon } from "./date-picker-icon";
 import { useDatePickerDraft } from "./date-picker-state";
+import { CalendarTrigger } from "./date-picker-trigger";
 
 export type { DatePickerProps } from "./date-picker.types";
 
@@ -165,18 +163,10 @@ export function DatePicker(datePickerProps: DatePickerProps): ReactElement {
 						value={displayText}
 					/>
 					<InputGroupAddon align="inline-end">
-						<PopoverTrigger
-							aria-label="Open calendar"
+						<CalendarTrigger
 							disabled={disabled}
-							{...props(
-								datePickerStyles.triggerButton,
-								disabled && datePickerStyles.triggerButtonDisabled
-							)}
-						>
-							<span {...props(datePickerStyles.triggerIcon)}>
-								<CalendarIcon />
-							</span>
-						</PopoverTrigger>
+							label={datePickerProps.triggerLabel}
+						/>
 					</InputGroupAddon>
 				</InputGroup>
 			</BoundFieldProvider>

@@ -4562,9 +4562,15 @@
       },
       {
         "defaultValue": "—",
-        "description": "Locale configuration passed to the calendar grid.",
+        "description": "Locale configuration passed to the calendar grid. It does not translate triggerLabel or aria-label.",
         "name": "locale",
         "type": "CalendarLocale | undefined"
+      },
+      {
+        "defaultValue": "\"Open calendar\"",
+        "description": "Names the calendar button for assistive technology. Translate it together with locale.",
+        "name": "triggerLabel",
+        "type": "string"
       },
       {
         "defaultValue": "—",
@@ -4733,9 +4739,15 @@
       },
       {
         "defaultValue": "—",
-        "description": "Locale configuration for calendar labels and formatting.",
+        "description": "Locale configuration for calendar labels and formatting. It does not translate triggerLabel or aria-label.",
         "name": "locale",
         "type": "CalendarLocale | undefined"
+      },
+      {
+        "defaultValue": "\"Open calendar\"",
+        "description": "Names the calendar button for assistive technology. Translate it together with locale.",
+        "name": "triggerLabel",
+        "type": "string"
       },
       {
         "defaultValue": "—",

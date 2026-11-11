@@ -1,19 +1,17 @@
 "use client";
 
-import { props } from "@stylexjs/stylex";
 import type { ReactElement } from "react";
 import { useCallback, useId, useMemo, useRef, useState } from "react";
 import { assignRef } from "../../ref-utils";
 import type { CalendarRangeValue } from "../calendar/calendar.types";
-import { datePickerStyles } from "../date-picker/date-picker.styles";
-import { CalendarIcon } from "../date-picker/date-picker-icon";
+import { CalendarTrigger } from "../date-picker/date-picker-trigger";
 import { BoundFieldProvider } from "../field/field-context";
 import {
 	InputGroup,
 	InputGroupAddon,
 	InputGroupInput,
 } from "../input-group/input-group";
-import { Popover, PopoverPopup, PopoverTrigger } from "../popover/popover";
+import { Popover, PopoverPopup } from "../popover/popover";
 import type { DateRangePickerProps } from "./date-range-picker.types";
 import {
 	formatIsoRange,
@@ -168,18 +166,10 @@ export function DateRangePicker(
 						value={displayText}
 					/>
 					<InputGroupAddon align="inline-end">
-						<PopoverTrigger
-							aria-label="Open calendar"
+						<CalendarTrigger
 							disabled={resolvedDisabled}
-							{...props(
-								datePickerStyles.triggerButton,
-								resolvedDisabled && datePickerStyles.triggerButtonDisabled
-							)}
-						>
-							<span {...props(datePickerStyles.triggerIcon)}>
-								<CalendarIcon />
-							</span>
-						</PopoverTrigger>
+							label={dateRangePickerProps.triggerLabel}
+						/>
 					</InputGroupAddon>
 				</InputGroup>
 			</BoundFieldProvider>

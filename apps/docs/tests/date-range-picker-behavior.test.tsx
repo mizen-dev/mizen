@@ -22,6 +22,16 @@ vi.mock("@stylexjs/stylex", () => ({
 }));
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);
 describe("DateRangePicker component behavior", () => {
+	it("names the calendar button with triggerLabel", () => {
+		const { container, unmount } = mount(
+			h(DateRangePicker, { triggerLabel: "Открыть календарь" })
+		);
+		const labels = [...container.querySelectorAll("button")].map((button) =>
+			button.getAttribute("aria-label")
+		);
+		expect(labels).toEqual(["Открыть календарь"]);
+		unmount();
+	});
 	it("uses native required validity and blocks invalid range drafts before blur", () => {
 		const onSubmit = vi.fn();
 		const { container, unmount } = mount(

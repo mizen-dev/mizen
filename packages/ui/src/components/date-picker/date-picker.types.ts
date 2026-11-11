@@ -27,6 +27,8 @@ export interface DatePickerProps {
 	required?: boolean | undefined;
 	size?: "default" | "lg" | "sm" | undefined;
 	startMonth?: Date | undefined;
+	/** The accessible name of the calendar button. */
+	triggerLabel?: string | undefined;
 	value?: Date | undefined;
 	weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined;
 }

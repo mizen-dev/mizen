@@ -62,6 +62,7 @@ describe("DateRangePicker docs contract", () => {
 			"aria-labelledby",
 			"aria-describedby",
 			"autoFocus",
+			"triggerLabel",
 			"DateRangePicker",
 		];
 

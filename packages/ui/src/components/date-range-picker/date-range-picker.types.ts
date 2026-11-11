@@ -36,6 +36,8 @@ export interface DateRangePickerProps {
 	required?: boolean | undefined;
 	size?: "default" | "lg" | "sm" | undefined;
 	startMonth?: Date | undefined;
+	/** The accessible name of the calendar button. */
+	triggerLabel?: string | undefined;
 	value?: CalendarRangeValue | undefined;
 	weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined;
 }
