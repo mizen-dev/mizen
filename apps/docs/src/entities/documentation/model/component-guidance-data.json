@@ -766,7 +766,8 @@
     ],
     "recommendations": [
       "Keep scroll regions bounded and their content reachable by keyboard. Preserve visible context around wide content.",
-      "Constrain the parent height when content must scroll."
+      "Constrain the parent height when content must scroll.",
+      "Name the scrolling element through viewportProps, for example with a router's scroll restoration id. The root does not scroll."
     ]
   },
   "section": {

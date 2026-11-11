@@ -7,7 +7,7 @@ import type {
 import { ScrollArea as BaseScrollArea } from "@base-ui/react/scroll-area";
 import { props } from "@stylexjs/stylex";
 import type { ComponentPropsWithRef } from "react";
-import { protectRenderSlot } from "../../render-utils";
+import { omitProps, protectRenderSlot } from "../../render-utils";
 import { scrollAreaStyles } from "./scroll-area.styles";
 
 type BaseRootProps = ComponentPropsWithRef<typeof BaseScrollArea.Root>;
@@ -25,12 +25,19 @@ export type ScrollAreaProps = Omit<
 	ref?: BaseRootProps["ref"];
 	scrollFade?: boolean;
 	scrollbarGutter?: boolean;
+	/**
+	 * Props and ref for the element that scrolls: an id, data attributes, an
+	 * accessible name, or a scroll handler.
+	 */
+	viewportProps?: Omit<ScrollAreaViewportProps, "children" | "render">;
 };
 
 export type ScrollAreaViewportProps = Omit<
 	ComponentPropsWithRef<typeof BaseScrollArea.Viewport>,
 	"className" | "data-slot" | "style"
 >;
+
+const STYLE_PROPS = ["className", "data-slot", "style"];
 export type ScrollAreaThumbProps = Omit<
 	ComponentPropsWithRef<typeof BaseScrollArea.Thumb>,
 	"className" | "data-slot" | "style"
@@ -47,7 +54,7 @@ export type ScrollAreaScrollbarProps = Omit<
 	ref?: BaseScrollbarProps["ref"];
 };
 
-function getViewportProps(
+function getViewportStyles(
 	scrollFade?: boolean,
 	scrollbarGutter?: boolean,
 	overscrollContain?: boolean
@@ -157,13 +164,14 @@ export function ScrollArea({
 	render,
 	scrollFade = false,
 	scrollbarGutter = false,
+	viewportProps = {},
 	...rest
 }: ScrollAreaProps) {
 	Reflect.deleteProperty(rest, "className");
 	Reflect.deleteProperty(rest, "data-slot");
 	Reflect.deleteProperty(rest, "style");
 
-	const viewportProps = getViewportProps(
+	const viewportStyles = getViewportStyles(
 		scrollFade,
 		scrollbarGutter,
 		overscrollContain
@@ -182,8 +190,9 @@ export function ScrollArea({
 			)}
 		>
 			<BaseScrollArea.Viewport
+				{...omitProps(viewportProps, STYLE_PROPS)}
 				data-slot="scroll-area-viewport"
-				{...viewportProps}
+				{...viewportStyles}
 			>
 				<BaseScrollArea.Content
 					data-slot="scroll-area-content"

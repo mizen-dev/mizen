@@ -1,7 +1,8 @@
 // @vitest-environment happy-dom
 
 import type { HTMLAttributes } from "react";
-import { createElement as h } from "react";
+import { act, createRef, createElement as h } from "react";
+import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vite-plus/test";
 import {
@@ -115,6 +116,42 @@ describe("ScrollArea contract and runtime semantics", () => {
 		expect(standalone).toContain('data-slot="scroll-area-scrollbar"');
 		expect(standalone).toContain('data-slot="scroll-area-thumb"');
 		expect(standalone).toContain('data-orientation="vertical"');
+	});
+
+	it("passes viewportProps and their ref to the element that scrolls", () => {
+		const viewportRef = createRef<HTMLDivElement>();
+		const container = document.createElement("div");
+		const root = createRoot(container);
+		act(() => {
+			root.render(
+				h(
+					ScrollArea,
+					{
+						id: "shell",
+						viewportProps: {
+							"aria-label": "Main content",
+							"data-scroll-restoration-id": "main",
+							"data-slot": "custom",
+							id: "main-viewport",
+							ref: viewportRef,
+						} as ScrollAreaProps["viewportProps"],
+					},
+					"Scroll content"
+				)
+			);
+		});
+		const viewport = container.querySelector(
+			'[data-slot="scroll-area-viewport"]'
+		);
+		expect(viewportRef.current).toBe(viewport);
+		expect(viewport?.id).toBe("main-viewport");
+		expect(viewport?.getAttribute("data-scroll-restoration-id")).toBe("main");
+		expect(viewport?.getAttribute("aria-label")).toBe("Main content");
+		expect(container.querySelector('[data-slot="scroll-area"]')?.id).toBe(
+			"shell"
+		);
+		expect(container.querySelector('[data-slot="custom"]')).toBeNull();
+		act(() => root.unmount());
 	});
 
 	it("protects data-slot against direct prop and render overrides across wrappers", () => {

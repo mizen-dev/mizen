@@ -2217,6 +2217,12 @@
       },
       {
         "defaultValue": "—",
+        "description": "Props and ref for the element that scrolls. Use it for an id, a scroll restoration attribute, an accessible name, or a scroll handler. ref on ScrollArea still names the root.",
+        "name": "viewportProps",
+        "type": "Omit<ScrollAreaViewportProps, \"children\" | \"render\">"
+      },
+      {
+        "defaultValue": "—",
         "description": "Scrollable content rendered inside the viewport.",
         "name": "children",
         "type": "ReactNode"
