@@ -5,35 +5,65 @@ description: Build React interfaces with an existing Mizen UI installation. Use 
 
 # Build with Mizen UI
 
-Use the application's configured Mizen docs origin. Resolve the paths below
-against that origin. Mizen is published on npm as `@mizen-labs/ui`.
-Install it with `npm install @mizen-labs/ui`. If the host app is not configured,
-read `/docs/installation/markdown` before changing its compiler, fonts, or theme
-setup.
+Mizen is published on npm as `@mizen-labs/ui`. This skill ships inside that
+package, at `skills/mizen-ui/SKILL.md`, and describes the version it ships
+with. Use the copy in the app's `node_modules/@mizen-labs/ui`. A copy from the
+docs site or another project can describe a newer version.
 
-## Find the existing contract
+## Match the installed version
 
-Start at `/llms.txt`. Read the relevant component Markdown and focused example
-before writing code. Prefer a small focused example for a small task; do not
-copy a whole demo to render one control.
+Read `version` in `node_modules/@mizen-labs/ui/package.json` first. The
+`exports` map in that file lists every import path the installed version has.
 
-Reviewed component contracts are available at
-`/docs/components/<slug>/metadata`. Anatomy, imports, dependencies, client
-boundaries, and state ownership are present only where reviewed. Missing contract
-metadata means consult the component's Markdown and exported TypeScript types;
-do not infer unsupported props from another UI library.
+Read a component's contract from the CLI of the same version. The CLI and the
+package share one version number, and each CLI release carries the catalog of
+its UI release:
 
-Preserve the state-specific props and integration requirements in each component's
-reviewed metadata. Consult `/docs/components/approval-card/metadata` for approval
-callbacks and `/docs/components/data-table/metadata` for table features. Retain
-those requirements when simplifying a copied example.
+```sh
+npx @mizen-labs/cli@<installed version> search <words>
+npx @mizen-labs/cli@<installed version> info <slug>
+npx @mizen-labs/cli@<installed version> info <slug> --json
+```
+
+`info` prints the import path, props with defaults, guidance, boundaries, and
+the reviewed contract where one exists. It works offline once the CLI is
+installed in the app (`npm install --save-dev @mizen-labs/cli@<installed version>`,
+then `npx --no-install mizen info <slug>`). Run it in the app, or pass
+`--cwd <app>`.
+
+When the versions differ, `info` says so. When the installed package lacks the
+component, `info` fails and names both versions. Then:
+
+- Do not upgrade `@mizen-labs/ui` to follow guidance. An upgrade is the
+  user's decision; ask first.
+- Do not write an import that the installed `exports` map lacks.
+- Build with what the installed version has, and report the gap.
+
+A missing contract means: read the component's props from `info` and its
+exported TypeScript types. Do not infer props from another UI library.
+
+Preserve the state-specific props and integration requirements in a reviewed
+contract. `info approval-card` has the approval callbacks and `info data-table`
+the table features. Retain those requirements when simplifying an example.
+
+If the app does not import `@mizen-labs/ui/styles.css` yet, set it up before
+writing screens: `npx @mizen-labs/cli@<installed version> init` prints the
+plan, and `doctor` checks an existing setup. Do not change the compiler, fonts,
+or theme setup by hand.
+
+The docs site, https://ui.mizen-labs.dev, has the guides and the full
+examples: `/llms.txt` is its index, and each page has a Markdown form at
+`/docs/<guide>/markdown` and `/docs/components/<slug>/markdown`. The site
+describes the latest release. When it disagrees with the installed version,
+the installed package and its matching CLI win.
 
 ## Lay out the screen
 
 Lay out every screen with the layout layer. Do not write layout CSS.
 
-Start from the closest screen recipe in `/docs/components/page/markdown`
-(dashboard, record list, record detail, settings form), then change its content.
+Start from the closest screen recipe in `/docs/components/page/markdown` on
+the docs site (dashboard, record list, record detail, settings form), then
+change its content. Check each component of a recipe with `info` before use.
 Read `/docs/layout/markdown` for the rules behind the recipes.
 
 Every screen has the same anatomy:
@@ -87,8 +117,8 @@ Rules:
   a card around every section.
 - One brand button per screen, for the main action. Other actions are
   `outline` or `ghost`.
-- Numbers that people compare use `Metric`, a numeric table column, or
-  `typographyStyles.tabularNums`.
+- Numbers that people compare use `Metric` or a `numeric` table column. On an
+  application-owned element, set `font-variant-numeric: tabular-nums`.
 
 Never do these in application code:
 
@@ -107,8 +137,9 @@ app for this.
 
 ## Compose the interface
 
-- Import only documented exports from `@mizen-labs/ui` or its documented subpaths.
-  Compound parts are named exports, not guessed namespace properties.
+- Import only exports of the installed version, from `@mizen-labs/ui` or the
+  subpath that `info` names. Compound parts are named exports, not guessed
+  namespace properties.
 - Styling contracts are closed. Do not pass `className`, `style`, `sx`, or
   `xstyle` to components that omit them. Use their semantic props.
 - Keep the look: a white canvas, neutral workareas, white fields with a hairline

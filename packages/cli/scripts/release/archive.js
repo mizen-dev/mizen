@@ -5,7 +5,7 @@ import semver from "semver";
 import { list } from "tar";
 
 const ALLOWED_PATH =
-	/^(?:dist\/|src\/|schema\/|package\.json$|LICENSE$|README\.md$|CHANGELOG\.md$)/u;
+	/^(?:dist\/|src\/|schema\/|skills\/|package\.json$|LICENSE$|README\.md$|CHANGELOG\.md$)/u;
 const RELATIVE_PREFIX = /^\.\//u;
 const PACKAGE_PREFIX = /^package\//u;
 

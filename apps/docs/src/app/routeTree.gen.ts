@@ -23,6 +23,7 @@ import { Route as ComponentsSlugMarkdownRouteImport } from './routes/components_
 import { Route as DocsComponentsSlugRouteImport } from './routes/docs.components.$slug'
 import { Route as DocsGuideMarkdownRouteImport } from './routes/docs_.$guide_.markdown'
 import { Route as DocsExamplesNameRouteImport } from './routes/docs_.examples.$name'
+import { Route as SkillsMizenUiSKILLDotmdRouteImport } from './routes/skills.mizen-ui.SKILL[.]md'
 import { Route as DocsComponentsSlugMarkdownRouteImport } from './routes/docs_.components_.$slug_.markdown'
 import { Route as DocsComponentsSlugMetadataRouteImport } from './routes/docs_.components_.$slug_.metadata'
 
@@ -97,6 +98,11 @@ const DocsExamplesNameRoute = DocsExamplesNameRouteImport.update({
   path: '/docs/examples/$name',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SkillsMizenUiSKILLDotmdRoute = SkillsMizenUiSKILLDotmdRouteImport.update({
+  id: '/skills/mizen-ui/SKILL.md',
+  path: '/skills/mizen-ui/SKILL.md',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DocsComponentsSlugMarkdownRoute =
   DocsComponentsSlugMarkdownRouteImport.update({
     id: '/docs_/components_/$slug_/markdown',
@@ -125,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/docs/components/$slug': typeof DocsComponentsSlugRoute
   '/docs/$guide/markdown': typeof DocsGuideMarkdownRoute
   '/docs/examples/$name': typeof DocsExamplesNameRoute
+  '/skills/mizen-ui/SKILL.md': typeof SkillsMizenUiSKILLDotmdRoute
   '/docs/components/$slug/markdown': typeof DocsComponentsSlugMarkdownRoute
   '/docs/components/$slug/metadata': typeof DocsComponentsSlugMetadataRoute
 }
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/docs/components/$slug': typeof DocsComponentsSlugRoute
   '/docs/$guide/markdown': typeof DocsGuideMarkdownRoute
   '/docs/examples/$name': typeof DocsExamplesNameRoute
+  '/skills/mizen-ui/SKILL.md': typeof SkillsMizenUiSKILLDotmdRoute
   '/docs/components/$slug/markdown': typeof DocsComponentsSlugMarkdownRoute
   '/docs/components/$slug/metadata': typeof DocsComponentsSlugMetadataRoute
 }
@@ -161,6 +169,7 @@ export interface FileRoutesById {
   '/docs/components/$slug': typeof DocsComponentsSlugRoute
   '/docs_/$guide_/markdown': typeof DocsGuideMarkdownRoute
   '/docs_/examples/$name': typeof DocsExamplesNameRoute
+  '/skills/mizen-ui/SKILL.md': typeof SkillsMizenUiSKILLDotmdRoute
   '/docs_/components_/$slug_/markdown': typeof DocsComponentsSlugMarkdownRoute
   '/docs_/components_/$slug_/metadata': typeof DocsComponentsSlugMetadataRoute
 }
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/docs/components/$slug'
     | '/docs/$guide/markdown'
     | '/docs/examples/$name'
+    | '/skills/mizen-ui/SKILL.md'
     | '/docs/components/$slug/markdown'
     | '/docs/components/$slug/metadata'
   fileRoutesByTo: FileRoutesByTo
@@ -198,6 +208,7 @@ export interface FileRouteTypes {
     | '/docs/components/$slug'
     | '/docs/$guide/markdown'
     | '/docs/examples/$name'
+    | '/skills/mizen-ui/SKILL.md'
     | '/docs/components/$slug/markdown'
     | '/docs/components/$slug/metadata'
   id:
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/docs/components/$slug'
     | '/docs_/$guide_/markdown'
     | '/docs_/examples/$name'
+    | '/skills/mizen-ui/SKILL.md'
     | '/docs_/components_/$slug_/markdown'
     | '/docs_/components_/$slug_/metadata'
   fileRoutesById: FileRoutesById
@@ -232,6 +244,7 @@ export interface RootRouteChildren {
   ComponentsSlugMarkdownRoute: typeof ComponentsSlugMarkdownRoute
   DocsGuideMarkdownRoute: typeof DocsGuideMarkdownRoute
   DocsExamplesNameRoute: typeof DocsExamplesNameRoute
+  SkillsMizenUiSKILLDotmdRoute: typeof SkillsMizenUiSKILLDotmdRoute
   DocsComponentsSlugMarkdownRoute: typeof DocsComponentsSlugMarkdownRoute
   DocsComponentsSlugMetadataRoute: typeof DocsComponentsSlugMetadataRoute
 }
@@ -336,6 +349,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsExamplesNameRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/skills/mizen-ui/SKILL.md': {
+      id: '/skills/mizen-ui/SKILL.md'
+      path: '/skills/mizen-ui/SKILL.md'
+      fullPath: '/skills/mizen-ui/SKILL.md'
+      preLoaderRoute: typeof SkillsMizenUiSKILLDotmdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/docs_/components_/$slug_/markdown': {
       id: '/docs_/components_/$slug_/markdown'
       path: '/docs/components/$slug/markdown'
@@ -379,6 +399,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsSlugMarkdownRoute: ComponentsSlugMarkdownRoute,
   DocsGuideMarkdownRoute: DocsGuideMarkdownRoute,
   DocsExamplesNameRoute: DocsExamplesNameRoute,
+  SkillsMizenUiSKILLDotmdRoute: SkillsMizenUiSKILLDotmdRoute,
   DocsComponentsSlugMarkdownRoute: DocsComponentsSlugMarkdownRoute,
   DocsComponentsSlugMetadataRoute: DocsComponentsSlugMetadataRoute,
 }

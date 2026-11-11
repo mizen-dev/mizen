@@ -4,9 +4,14 @@
 
 The CLI for Mizen. The first commands discover components
 from a bundled snapshot of the same metadata and guidance used by the docs.
-Discovery works offline without reading the consumer project. Doctor reads local
+Discovery works offline. It reads one project file, the installed
+`@mizen-labs/ui` manifest, to compare versions. Doctor reads local
 project metadata and supported setup files. Discovery and doctor do not modify project files. Init previews changes by default;
 only an explicit --yes applies them.
+
+The CLI and `@mizen-labs/ui` share one version number, and each CLI release
+describes the UI release of that number. Run the CLI version your app has
+installed: `npx @mizen-labs/cli@<installed version> info button`.
 
 ## Run in this workspace
 
@@ -36,10 +41,12 @@ Node must satisfy `>=22.18.0 <23 || >=24.11.0`.
 
 ## Commands
 
-- `mizen search [query]`: match all query words against names, slugs, categories,
-  descriptions, and usage guidance. No query lists every component in slug order.
-- `mizen info <component>`: show the documented API, entry point, status, guidance,
-  and available contracts or usage examples. Accepts a slug or spaced name.
+- `mizen search [query] [--cwd <directory>]`: match all query words against names,
+  slugs, categories, descriptions, and usage guidance. No query lists every
+  component in slug order.
+- `mizen info <component> [--cwd <directory>]`: show the documented API, entry point,
+  status, guidance, and available contracts or usage examples. Accepts a slug or
+  spaced name.
 - `mizen doctor [--cwd <directory>] [--workspace] [--strict]`: inspect a target application.
 - `mizen init [--cwd <directory>] [--dry-run] [--yes]`: preview or apply setup.
 - `mizen --help` and `mizen --version`: show command help and CLI version.
@@ -54,10 +61,19 @@ Success envelope:
 ```
 
 The empty component above represents the full registry entry. Search data contains
-`query`, `uiVersion`, and `components`. Info data contains `uiVersion` and
-`component`. Component records always include the documented subpath and docs
-route. API sections, contracts, and examples are present only when documented.
-The catalog is bundled at CLI build time; it does not inspect your installed UI.
+`query`, `uiVersion`, `installedUiVersion`, and `components`. Info data contains
+`uiVersion`, `installedUiVersion`, and `component`. Component records always include
+the documented subpath and docs route. API sections, contracts, and examples are
+present only when documented.
+
+The catalog is bundled at CLI build time and describes `uiVersion`.
+`installedUiVersion` is the version of `@mizen-labs/ui` that the app at `--cwd`
+(default: the current directory) resolves, or `null` when it has none. When the two
+differ, search and info still answer, and print a warning on stderr with the
+command for the installed version. When the installed package has no export for
+the component, info fails with reason `unavailable` and names both versions. The
+check reads the installed `exports` map, so it also catches a local build that
+reuses a version number.
 
 Results print on stdout. With `--json`, an error prints one line on stderr and
 stdout stays empty:
@@ -73,7 +89,7 @@ suggestion or the doctor diagnostic behind an init conflict.
 | Exit | Meaning | Reasons |
 | --- | --- | --- |
 | 0 | Success, including an empty search, a plan, and no changes needed | — |
-| 1 | A failure: not found, a conflict, a failed check or install, or a bug | `not_found`, `project_not_found`, `conflict`, `recovery_required`, `internal_error`; doctor and init reports |
+| 1 | A failure: not found, not in the installed UI, a conflict, a failed check or install, or a bug | `not_found`, `unavailable`, `project_not_found`, `conflict`, `recovery_required`, `internal_error`; doctor and init reports |
 | 2 | Invalid usage or missing input | `unknown_command`, `unknown_option`, `invalid_arguments`, `missing_name` |
 
 Use fields and reasons for automation; human wording may change. Schema version
@@ -118,6 +134,11 @@ simple unmodified configuration bindings, and Vite defineConfig object arguments
 Custom wrappers, computed settings, indirect stylesheet pipelines, and delegated
 providers can remain unverified. A passing syntax check describes a declaration;
 it does not prove runtime delivery, hydration, or first-paint behavior.
+
+Two checks guard agent and styling setup. `package.skill` passes when the installed
+package ships its agent skill, and names the file. `setup.stylex` is unverified when
+the app imports the compiled stylesheet and also declares a StyleX package: two
+separately compiled StyleX stylesheets do not agree on rule priority.
 
 The report contains `project`, `status`, `summary`, and ordered `diagnostics`.
 Each diagnostic has a stable `id`, `status` (`pass`, `error`, or `unverified`),

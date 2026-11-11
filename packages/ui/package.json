@@ -710,6 +710,7 @@
       "types": "./dist/components/diagram/diagram.d.ts",
       "default": "./dist/components/diagram/diagram.js"
     },
+    "./skills/mizen-ui/SKILL.md": "./skills/mizen-ui/SKILL.md",
     "./styles.css": "./dist/styles.css",
     "./theme/initialize": {
       "source": "./src/theme/initialize.ts",
@@ -719,6 +720,7 @@
   },
   "files": [
     "dist",
+    "skills",
     "src"
   ],
   "scripts": {

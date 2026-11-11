@@ -76,10 +76,14 @@ const commands = {
 		group: "Components",
 		notes: [
 			"Accepts a component slug or name.",
-			"Describes the bundled catalog, which may differ from your installed version.",
-			"Works offline and never reads your project.",
+			"Describes @mizen-labs/ui at this CLI's version. Run the CLI version",
+			"your app has installed: npx @mizen-labs/cli@<version> info <COMPONENT>.",
+			"Reads only the installed @mizen-labs/ui manifest, to compare versions.",
+			"Warns when they differ. Exits 1 when the installed version lacks the",
+			"component.",
+			"Works offline and changes nothing.",
 		],
-		options: [],
+		options: ["cwd"],
 		summary: "Show a component's API, imports, guidance, and examples",
 		usage: "mizen info <COMPONENT> [options]",
 	},
@@ -110,9 +114,11 @@ const commands = {
 		group: "Components",
 		notes: [
 			"Matches every query word, ignoring case. With no query, lists every component.",
-			"Works offline and never reads your project.",
+			"Lists @mizen-labs/ui at this CLI's version, and warns when the app",
+			"has another version installed.",
+			"Works offline and changes nothing.",
 		],
-		options: [],
+		options: ["cwd"],
 		summary: "Find components in the bundled catalog",
 		usage: "mizen search [QUERY] [options]",
 	},
@@ -213,6 +219,10 @@ function rootHelp(style: Style): string {
 			)
 		),
 		...section(style, "Global Options", optionRows(globals)),
+		...section(style, "Agent Skill", [
+			"  node_modules/@mizen-labs/ui/skills/mizen-ui/SKILL.md",
+			"  Ships with the package and describes the installed version.",
+		]),
 		...examples(style, ["mizen search dialog", "mizen init --cwd ./apps/web"]),
 	].join("\n");
 }

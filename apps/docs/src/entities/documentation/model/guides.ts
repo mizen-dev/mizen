@@ -810,7 +810,8 @@ export function ReviewAction() {
 					{ href: "/skills/mizen-ui/SKILL.md", label: "Mizen consumer skill" },
 				],
 				paragraphs: [
-					"The Mizen consumer skill tells an agent how to find components and compose them without inventing APIs. Add it to your agent's skills.",
+					"The Mizen consumer skill tells an agent how to find components and compose them without inventing APIs. It ships inside the package, at node_modules/@mizen-labs/ui/skills/mizen-ui/SKILL.md, and describes the version you have installed. Add that copy to your agent's skills.",
+					"The link below is the copy of the latest release.",
 				],
 				title: "Consumer skill",
 			},

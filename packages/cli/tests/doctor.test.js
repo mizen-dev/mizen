@@ -110,6 +110,44 @@ test("conventional Next and Start setup declarations pass, including aliases and
 	}
 });
 
+test("an app that compiles StyleX beside the compiled stylesheet is reported", (t) => {
+	const root = fixture(t);
+	const manifest = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+	put(root, "package.json", {
+		...manifest,
+		devDependencies: {
+			"@stylexjs/babel-plugin": "0.19.1",
+			"@stylexjs/eslint-plugin": "0.19.1",
+		},
+	});
+	let result = run(root);
+	const finding = diagnostic(result, "setup.stylex");
+	assert.equal(finding.status, "unverified");
+	assert.ok(finding.message.includes("(@stylexjs/babel-plugin)"));
+	assert.deepEqual(finding.evidence, [join(root, "package.json")]);
+	assert.equal(result.exit, 0);
+	assert.equal(run(root, ["--strict"]).exit, 1);
+	// Without the compiled stylesheet the app compiles Mizen itself.
+	put(
+		root,
+		"app/layout.tsx",
+		layout.replace('import "@mizen-labs/ui/styles.css";\n', "")
+	);
+	result = run(root);
+	assert.equal(diagnostic(result, "setup.stylex"), undefined);
+});
+
+test("the installed package's agent skill is named when it ships one", (t) => {
+	const root = fixture(t);
+	assert.equal(diagnostic(run(root), "package.skill"), undefined);
+	const skill = "node_modules/@mizen-labs/ui/skills/mizen-ui/SKILL.md";
+	put(root, skill, "# Build with Mizen UI\n");
+	const found = diagnostic(run(root), "package.skill");
+	assert.equal(found.status, "pass");
+	assert.equal(found.evidence.length, 1);
+	assert.ok(found.evidence[0].endsWith(skill));
+});
+
 test("missing installation, incompatible peers, and duplicate React produce confirmed errors", (t) => {
 	const root = fixture(t);
 	put(root, "node_modules/react/package.json", {

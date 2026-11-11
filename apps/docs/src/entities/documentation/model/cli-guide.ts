@@ -48,7 +48,7 @@ npx --no-install mizen info "Activity Feed" --json`,
 			id: "discover",
 			paragraphs: [
 				"Search matches every query word, ignoring case. With no query it lists the catalog. Info accepts a component slug or name and shows imports, API, guidance, and documented examples.",
-				"Discovery is offline and does not inspect your app. Its bundled catalog describes the UI version shipped with the CLI, which can differ from your installed UI. Use each command's --help for its options and examples.",
+				"Discovery is offline. Each CLI release describes the UI release of the same number, so run the CLI version your app has installed: npx @mizen-labs/cli@<version> info button. Search and info read the installed @mizen-labs/ui manifest and warn when its version differs. Info fails when the installed version lacks the component. Use each command's --help for its options and examples.",
 			],
 			title: "Find and inspect components",
 		},

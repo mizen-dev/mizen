@@ -1,6 +1,6 @@
 import { join } from "node:path";
 import { viteSetupChecks } from "../vite/doctor.js";
-import { readOptional } from "./files.js";
+import { type Manifest, readOptional } from "./files.js";
 import { check, type Diagnostic } from "./report.js";
 import {
 	documentFunction,
@@ -159,6 +159,32 @@ function stylesheetCheck(ast: SyntaxNode, path: string): Diagnostic {
 		[path],
 		"Import @mizen-labs/ui/styles.css at the app root, or verify your equivalent CSS pipeline manually."
 	);
+}
+
+// Two separately compiled StyleX stylesheets do not agree on rule priority.
+export function stylexCheck(
+	project: string,
+	manifest: Manifest,
+	setup: Diagnostic[]
+): Diagnostic[] {
+	const declared = Object.keys({
+		...manifest.dependencies,
+		...manifest.devDependencies,
+	}).filter((name) => name.includes("stylex") && !name.includes("eslint"));
+	const compiled = setup.some(
+		(item) => item.id === "setup.stylesheet" && item.status === "pass"
+	);
+	return declared.length && compiled
+		? [
+				check(
+					"setup.stylex",
+					"unverified",
+					`This app declares StyleX (${declared.join(", ")}) and imports Mizen's compiled stylesheet. Two separately compiled StyleX stylesheets do not agree on rule priority.`,
+					[join(project, "package.json")],
+					"Style app-owned elements in plain CSS with the --mizen-* variables and remove StyleX. To keep StyleX, compile the Mizen source in the same StyleX build and remove the styles.css import."
+				),
+			]
+		: [];
 }
 
 export async function setupChecks(

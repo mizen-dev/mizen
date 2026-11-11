@@ -28,7 +28,7 @@ function run(args, options = {}) {
 
 test("each command has relevant help, examples, and unchanged JSON envelopes", () => {
 	for (const [command, present, absent] of [
-		["search", "[QUERY]", "--cwd"],
+		["search", "[QUERY]", "--yes"],
 		["info", "<COMPONENT>", "--dry-run"],
 		["doctor", "--strict", "--yes"],
 		["init", "--package <FILE>", "--strict"],
@@ -90,12 +90,7 @@ test("invalid commands, missing input, and misplaced flags point to relevant hel
 		[["init", "app"], "invalid_arguments", "--cwd", "mizen init --help"],
 		[["init", "--strict"], "unknown_option", "--strict", "mizen init --help"],
 		[["doctor", "--yes"], "unknown_option", "--yes", "mizen doctor --help"],
-		[
-			["search", "--cwd", "/unused"],
-			"unknown_option",
-			"--cwd",
-			"mizen search --help",
-		],
+		[["search", "--yes"], "unknown_option", "--yes", "mizen search --help"],
 		[
 			["info", "button", "--dry-run"],
 			"unknown_option",

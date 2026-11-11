@@ -533,6 +533,9 @@
                 "$ref": "#/definitions/ComponentSummary"
               }
             },
+            "installedUiVersion": {
+              "type": ["string", "null"]
+            },
             "query": {
               "type": "string"
             },
@@ -560,6 +563,9 @@
           "properties": {
             "component": {
               "$ref": "#/definitions/Component"
+            },
+            "installedUiVersion": {
+              "type": ["string", "null"]
             },
             "uiVersion": {
               "type": "string"
@@ -622,6 +628,7 @@
                 "unknown_command",
                 "missing_name",
                 "not_found",
+                "unavailable",
                 "project_not_found",
                 "conflict",
                 "recovery_required"

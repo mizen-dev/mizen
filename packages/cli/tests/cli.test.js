@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import {
+	mkdirSync,
+	mkdtempSync,
+	readdirSync,
+	readFileSync,
+	writeFileSync,
+} from "node:fs";
 import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -114,6 +120,82 @@ test("invalid commands and options produce structured failures and stable exit c
 	assert.ok(
 		result.stderr.startsWith("✗ Couldn't find component missing-component.")
 	);
+});
+
+// The app has an older UI without Page. Describing Page anyway would send
+// an agent to an import that the app does not have.
+test("info fails for a component the installed UI lacks, and names a differing version", async () => {
+	const cwd = mkdtempSync(join(tmpdir(), "mizen-cli-installed-"));
+	try {
+		const installed = join(cwd, "node_modules/@mizen-labs/ui");
+		mkdirSync(join(installed, "dist"), { recursive: true });
+		writeFileSync(join(installed, "dist/index.js"), "");
+		writeFileSync(join(cwd, "package.json"), '{"private":true}\n');
+		writeFileSync(
+			join(installed, "package.json"),
+			JSON.stringify({
+				exports: { ".": "./dist/index.js", "./button": "./dist/button.js" },
+				name: "@mizen-labs/ui",
+				version: "0.0.9",
+			})
+		);
+		const missing = run(["info", "page", "--cwd", cwd, "--json"]);
+		assert.equal(missing.status, 1);
+		assert.equal(missing.stdout, "");
+		const { error } = parseOutput(missing.stderr);
+		assert.equal(error.reason, "unavailable");
+		assert.deepEqual(error.data, {
+			entryPoint: "@mizen-labs/ui/page",
+			installedUiVersion: "0.0.9",
+			uiVersion: manifest.version,
+		});
+		assert.equal(error.next[0].command, "npx @mizen-labs/cli@0.0.9 search");
+		const text = run(["info", "page"], { cwd });
+		assert.equal(text.status, 1);
+		assert.ok(
+			text.stderr.startsWith(
+				`✗ Page is not in the installed @mizen-labs/ui 0.0.9. This catalog describes ${manifest.version}.`
+			),
+			text.stderr
+		);
+		assert.ok(text.stderr.includes("Upgrade @mizen-labs/ui only when"));
+
+		const present = run(["info", "button", "--cwd", cwd]);
+		assert.equal(present.status, 0);
+		assert.ok(
+			present.stdout.includes(`@mizen-labs/ui ${manifest.version}`),
+			present.stdout
+		);
+		assert.ok(
+			present.stderr.includes(
+				`! This describes @mizen-labs/ui ${manifest.version}. The app has 0.0.9`
+			),
+			present.stderr
+		);
+		assert.ok(present.stderr.includes("npx @mizen-labs/cli@0.0.9 info button"));
+		const listed = run(["search", "button", "--cwd", cwd, "--json"]);
+		assert.equal(parseOutput(listed.stdout).data.installedUiVersion, "0.0.9");
+
+		// The same version without the export is another build of it.
+		writeFileSync(
+			join(installed, "package.json"),
+			JSON.stringify({
+				exports: { ".": "./dist/index.js" },
+				name: "@mizen-labs/ui",
+				version: manifest.version,
+			})
+		);
+		const rebuilt = run(["info", "page", "--cwd", cwd, "--json"]);
+		const other = parseOutput(rebuilt.stderr).error;
+		assert.equal(other.reason, "unavailable");
+		assert.ok(other.message.includes("another build of this version"));
+		assert.equal(other.next, undefined);
+		const matching = run(["search", "--cwd", cwd]);
+		assert.equal(matching.status, 0);
+		assert.equal(matching.stderr, "");
+	} finally {
+		await cleanup(cwd);
+	}
 });
 
 test("discovery preserves project files", async () => {

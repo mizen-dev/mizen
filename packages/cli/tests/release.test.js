@@ -58,6 +58,15 @@ test("release rejects version skew and incompatible publication metadata", () =>
 test("release checks actual archive exports, licenses, and unexpected entries", () => {
 	const files = entries();
 	validateEntries(ui, files);
+	// The UI archive ships its agent skill beside dist.
+	const skill = "skills/mizen-ui/SKILL.md";
+	const shipped = {
+		...ui,
+		exports: { ...ui.exports, [`./${skill}`]: `./${skill}` },
+	};
+	assert.throws(() => validateEntries(shipped, files), ERROR_3);
+	files.set(skill, { path: skill, size: 1, type: "File" });
+	validateEntries(shipped, files);
 	files.delete("dist/index.d.ts");
 	assert.throws(() => validateEntries(ui, files), ERROR_3);
 	files.set("dist/index.d.ts", {

@@ -1,14 +1,14 @@
 import { resolve } from "node:path";
 import { InvalidManifestError } from "./files.js";
+import { PackageResolutionError } from "./installed.js";
 import {
 	frameworkVersionCheck,
-	PackageResolutionError,
 	packageChecks,
 	versionCheck,
 } from "./packages.js";
 import { frameworkOf, packageManagerCheck, targetProject } from "./project.js";
 import { check, report } from "./report.js";
-import { setupChecks } from "./setup.js";
+import { setupChecks, stylexCheck } from "./setup.js";
 
 export async function doctor(
 	cwd: string,
@@ -70,9 +70,11 @@ async function inspectProject(
 		)
 	);
 	if (framework !== "unknown") {
+		const setup = await setupChecks(project, framework);
 		diagnostics.push(
 			await frameworkVersionCheck(project, framework),
-			...(await setupChecks(project, framework))
+			...setup,
+			...stylexCheck(project, manifest, setup)
 		);
 	}
 	return {

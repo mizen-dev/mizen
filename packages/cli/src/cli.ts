@@ -1,8 +1,17 @@
 #!/usr/bin/env node
 import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 import type { Catalog } from "./catalog.js";
-import { formatInfo, formatSearch, info, search } from "./discover.js";
+import {
+	formatInfo,
+	formatSearch,
+	type InstalledUi,
+	info,
+	requireInstalled,
+	search,
+	versionNote,
+} from "./discover.js";
 import {
 	CliError,
 	commandLine,
@@ -38,13 +47,44 @@ interface Result {
 	text: string;
 }
 
-function runSearch(catalog: Catalog, query: string): Result {
+// The app's installed UI, read only to compare it with the catalog. A
+// broken or absent install leaves discovery as it is; doctor reports it.
+async function installedUi(cwd = process.cwd()): Promise<InstalledUi | null> {
+	const { installedFrom } = await import("./doctor/installed.js");
+	const found = await installedFrom(resolve(cwd), "@mizen-labs/ui").catch(
+		() => null
+	);
+	return (
+		found && {
+			exports: found.manifest.exports,
+			path: found.path,
+			version: found.manifest.version ?? null,
+		}
+	);
+}
+
+async function runSearch(
+	catalog: Catalog,
+	query: string,
+	cwd?: string
+): Promise<Result> {
 	const components = search(catalog.components, query);
-	const data = { components, query, uiVersion: catalog.uiVersion };
+	const installed = await installedUi(cwd);
+	const data = {
+		components,
+		installedUiVersion: installed?.version ?? null,
+		query,
+		uiVersion: catalog.uiVersion,
+	};
+	const mismatch = versionNote(err, catalog.uiVersion, installed, [
+		"search",
+		...(query ? [query] : []),
+	]);
 	if (components.length) {
 		return {
 			command: "search",
 			data,
+			...(mismatch ? { note: mismatch } : {}),
 			text: formatSearch(out, components, process.stdout),
 		};
 	}
@@ -55,13 +95,18 @@ function runSearch(catalog: Catalog, query: string): Result {
 			`No components match "${query}".`,
 			"",
 			nextStep(err, "List every component", "mizen search"),
+			...(mismatch ? ["", mismatch] : []),
 		].join("\n"),
 		// A pipe still gets the table header, so a parser sees the columns.
 		text: process.stdout.isTTY ? "" : "Component\tDescription",
 	};
 }
 
-function runInfo(catalog: Catalog, query: string): Result {
+async function runInfo(
+	catalog: Catalog,
+	query: string,
+	cwd?: string
+): Promise<Result> {
 	if (!query.trim()) {
 		throw new CliError(
 			"missing_name",
@@ -73,10 +118,21 @@ function runInfo(catalog: Catalog, query: string): Result {
 		);
 	}
 	const component = info(catalog.components, query);
+	const installed = await installedUi(cwd);
+	requireInstalled(component, catalog.uiVersion, installed);
+	const mismatch = versionNote(err, catalog.uiVersion, installed, [
+		"info",
+		component.slug,
+	]);
 	return {
 		command: "info",
-		data: { component, uiVersion: catalog.uiVersion },
-		text: formatInfo(out, component),
+		data: {
+			component,
+			installedUiVersion: installed?.version ?? null,
+			uiVersion: catalog.uiVersion,
+		},
+		...(mismatch ? { note: mismatch } : {}),
+		text: formatInfo(out, component, catalog.uiVersion),
 	};
 }
 
@@ -206,8 +262,8 @@ function dispatch(
 		return runDoctor(catalog, values);
 	}
 	return command === "search"
-		? runSearch(catalog, args.join(" "))
-		: runInfo(catalog, args.join(" "));
+		? runSearch(catalog, args.join(" "), values.cwd)
+		: runInfo(catalog, args.join(" "), values.cwd);
 }
 
 function json(value: unknown, stream: NodeJS.WriteStream) {

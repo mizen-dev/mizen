@@ -24,7 +24,7 @@ export function GET() {
 		"",
 		"## Getting started",
 		"",
-		"- [Mizen consumer skill](/skills/mizen-ui/SKILL.md): Instructions for composing existing components. Reviewed anatomy and client boundaries: /docs/components/<slug>/metadata. Unreviewed contracts omit those fields.",
+		"- [Mizen consumer skill](/skills/mizen-ui/SKILL.md): Instructions for composing existing components, for the latest release. An app's own version is at node_modules/@mizen-labs/ui/skills/mizen-ui/SKILL.md. Reviewed anatomy and client boundaries: /docs/components/<slug>/metadata. Unreviewed contracts omit those fields.",
 		...guides
 			.filter((guide) => guide.group === undefined)
 			.map(

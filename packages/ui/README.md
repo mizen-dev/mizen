@@ -67,6 +67,19 @@ export function Welcome() {
 Components accept no `className` or `style`. Choose variants and sizes
 through props, and lay out with `Stack`, `Inline`, and `Grid`.
 
+## Agents
+
+The package ships its agent skill at `skills/mizen-ui/SKILL.md`. Point your
+coding agent at the copy in `node_modules/@mizen-labs/ui`: it describes the
+version you have installed, not the latest one.
+
+The CLI of the same version prints each component's import, props, and
+guidance:
+
+```sh
+npx @mizen-labs/cli@<installed version> info button
+```
+
 ## Optional diagrams
 
 Install `pele` alongside Mizen to use `Diagram` from `@mizen-labs/ui/diagram`.

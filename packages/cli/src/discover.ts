@@ -1,7 +1,102 @@
 import type { ApiProperty, Component } from "./catalog.js";
-import { CliError } from "./errors.js";
+import { CliError, commandLine } from "./errors.js";
 import { closest } from "./help.js";
-import { indent, row, type Style } from "./output.js";
+import {
+	indent,
+	nextStep,
+	row,
+	type Style,
+	status as statusLine,
+} from "./output.js";
+
+/** The app's installed UI: its version, and whether it has a component. */
+export interface InstalledUi {
+	exports: unknown;
+	path: string;
+	version: string | null;
+}
+
+const UI = "@mizen-labs/ui";
+
+// Without an exports map there is no evidence either way.
+function lacks(
+	installed: InstalledUi | null,
+	slug: string
+): installed is InstalledUi {
+	const map = installed?.exports;
+	return (
+		typeof map === "object" && map !== null && !Object.hasOwn(map, `./${slug}`)
+	);
+}
+
+/**
+ * Fails when the installed UI lacks the component, so nobody builds on an
+ * import the app does not have.
+ */
+export function requireInstalled(
+	component: Component,
+	uiVersion: string,
+	installed: InstalledUi | null
+): void {
+	if (!lacks(installed, component.slug)) {
+		return;
+	}
+	const { path, version } = installed;
+	const other = version !== null && version !== uiVersion;
+	throw new CliError(
+		"unavailable",
+		`${component.name} is not in the installed ${UI} ${version ?? "(unknown version)"}. ${other ? `This catalog describes ${uiVersion}.` : "The installed package is another build of this version."}`,
+		1,
+		{
+			data: {
+				entryPoint: component.entryPoint,
+				installedUiVersion: version,
+				uiVersion,
+			},
+			...(other
+				? {
+						next: {
+							argv: ["npx", `@mizen-labs/cli@${version}`, "search"],
+							benefit: "List the components of the installed version",
+						},
+					}
+				: {}),
+			rows: [
+				["Evidence", path],
+				[
+					"Next step",
+					`Build with the installed components. Upgrade ${UI} only when the user asks for it.`,
+				],
+			],
+		}
+	);
+}
+
+/** The warning for a catalog of another version than the installed UI. */
+export function versionNote(
+	style: Style,
+	uiVersion: string,
+	installed: InstalledUi | null,
+	args: readonly string[]
+): string | undefined {
+	const version = installed?.version;
+	if (!version || version === uiVersion) {
+		return;
+	}
+	return [
+		statusLine(
+			style,
+			"warn",
+			`This describes ${UI} ${uiVersion}. The app has ${version}; props and examples can differ.`
+		),
+		"",
+		nextStep(
+			style,
+			"See the installed version",
+			commandLine(["npx", `@mizen-labs/cli@${version}`, ...args])
+		),
+	].join("\n");
+}
 
 function normalize(value: string): string {
 	return value.toLowerCase().trim().replaceAll(/\s+/gu, " ");
@@ -110,7 +205,11 @@ function heading(style: Style, title: string, lines: string[]): string[] {
 	return lines.length ? ["", style.bold(title), ...lines] : [];
 }
 
-export function formatInfo(style: Style, component: Component): string {
+export function formatInfo(
+	style: Style,
+	component: Component,
+	uiVersion: string
+): string {
 	const examples = (component.usageSections ?? []).flatMap((section) => [
 		"",
 		style.bold(section.title),
@@ -123,6 +222,7 @@ export function formatInfo(style: Style, component: Component): string {
 		"",
 		row("Category", component.category),
 		row("Import", component.entryPoint),
+		row("Version", `${UI} ${uiVersion}`),
 		row("Docs", component.documentationPath),
 		...heading(
 			style,

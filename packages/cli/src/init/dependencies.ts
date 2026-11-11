@@ -1,11 +1,8 @@
 import semver from "semver";
 import type { Catalog } from "../catalog.js";
 import type { Manifest } from "../doctor/files.js";
-import {
-	type Installed,
-	installedFrom,
-	versionCheck,
-} from "../doctor/packages.js";
+import { type Installed, installedFrom } from "../doctor/installed.js";
+import { versionCheck } from "../doctor/packages.js";
 import { frameworkOf, packageManagerCheck } from "../doctor/project.js";
 import { diagnosticDetail } from "../doctor/report.js";
 import { supportsInitialization } from "../vite/render.js";
