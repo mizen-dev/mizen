@@ -49,7 +49,7 @@ export function OverflowList({
 				data-slot="overflow-list-items"
 				// biome-ignore lint/a11y/noRedundantRoles: list markers are removed, which can hide list semantics in Safari.
 				role="list"
-				{...props(overflowListStyles.items, typeRoles.body)}
+				{...props(overflowListStyles.items, typeRoles.ui)}
 			>
 				{visibleItems}
 				{overflowItems.length > 0 ? (
@@ -70,7 +70,7 @@ export function OverflowList({
 									data-slot="overflow-list-menu"
 									// biome-ignore lint/a11y/noRedundantRoles: list markers are removed, which can hide list semantics in Safari.
 									role="list"
-									{...props(overflowListStyles.menu, typeRoles.body)}
+									{...props(overflowListStyles.menu, typeRoles.ui)}
 								>
 									{overflowItems}
 								</ul>

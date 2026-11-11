@@ -63,7 +63,7 @@ export function ActivityFeedSummary({
 			{...rest}
 			data-slot="activity-feed-summary"
 			ref={ref}
-			{...props(typeRoles.body, activityFeedStyles.summary)}
+			{...props(typeRoles.ui, activityFeedStyles.summary)}
 		/>
 	);
 }
@@ -91,7 +91,7 @@ export function ActivityFeedDetails({
 			{...rest}
 			data-slot="activity-feed-details"
 			ref={ref}
-			{...props(typeRoles.body, activityFeedStyles.details)}
+			{...props(typeRoles.ui, activityFeedStyles.details)}
 		/>
 	);
 }
@@ -153,7 +153,7 @@ export function ActivityFeed({
 			ref={forwardedRef}
 			// biome-ignore lint/a11y/noRedundantRoles: list markers are removed, which can hide list semantics in Safari.
 			role="list"
-			{...props(listStyles.root, typeRoles.body, activityFeedStyles.root)}
+			{...props(listStyles.root, typeRoles.ui, activityFeedStyles.root)}
 		>
 			{children}
 		</ol>

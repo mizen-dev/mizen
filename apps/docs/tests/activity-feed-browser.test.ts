@@ -140,7 +140,7 @@ describe("Activity Feed review", { timeout: 30_000 }, () => {
 				await item
 					.locator('[data-slot="activity-feed-summary"]')
 					.evaluate((el) => getComputedStyle(el).fontSize)
-			).toBe("16px");
+			).toBe("14px");
 			expect(await time.getAttribute("datetime")).toBe("2026-10-13T09:42:00Z");
 			expect(await time.evaluate((el) => getComputedStyle(el).fontSize)).toBe(
 				"14px"

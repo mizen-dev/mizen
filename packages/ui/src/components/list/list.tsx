@@ -40,7 +40,7 @@ export function List({ children, ref: forwardedRef, ...rest }: ListProps) {
 			ref={forwardedRef}
 			// biome-ignore lint/a11y/noRedundantRoles: list markers are removed, which can hide list semantics in Safari.
 			role="list"
-			{...props(listStyles.root, typeRoles.body)}
+			{...props(listStyles.root, typeRoles.ui)}
 		>
 			{children}
 		</ul>

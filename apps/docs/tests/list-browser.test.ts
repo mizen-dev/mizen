@@ -43,6 +43,10 @@ describe("List", () => {
 		const list = page.getByRole("list", { name: "Project resources" });
 		await expectLocator(list).toBeVisible();
 		expect(await list.evaluate((element) => element.tagName)).toBe("UL");
+		// Rows read at the 14px body tier.
+		expect(
+			await list.evaluate((element) => getComputedStyle(element).fontSize)
+		).toBe("14px");
 		expect(await list.getByRole("listitem").count()).toBeGreaterThan(1);
 		await expectLocator(
 			list.getByRole("link", { name: "Action controls" })

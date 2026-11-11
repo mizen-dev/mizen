@@ -53,7 +53,7 @@ export function ListExamples() {
 							<ListItem key={resource.name}>
 								<ListContent>
 									<Stack gap="1">
-										<Text>
+										<Text size="ui">
 											<strong>
 												<Link href={resource.href}>{resource.name}</Link>
 											</strong>

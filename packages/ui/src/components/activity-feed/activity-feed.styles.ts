@@ -126,10 +126,5 @@ export const activityFeedStyles = create({
 		gridRow: { "@container (max-width: 27.999rem)": 2, default: 1 },
 		minWidth: 0,
 		overflowWrap: "anywhere",
-		paddingBlockStart: {
-			":is([data-slot=activity-feed-header] > *)": 0,
-			"@container (max-width: 27.999rem)": 0,
-			default: "0.09375rem",
-		},
 	},
 });
