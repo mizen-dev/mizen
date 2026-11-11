@@ -8,7 +8,7 @@ import {
 	forcedColorAdjust,
 	opacity,
 } from "../../styles/interaction.stylex";
-import { duration, easing } from "../../styles/motion.stylex";
+import { duration, easing, indicatorTravel } from "../../styles/motion.stylex";
 import { shape } from "../../styles/shape.stylex";
 import { space } from "../../styles/spacing.stylex";
 import {
@@ -39,19 +39,27 @@ export const tabsStyles = create({
 			default: "block",
 		},
 	},
+	// The end edges are measured from the list box, not from Base UI's scroll
+	// size, so the indicator stays on its tab when the list scrolls.
 	indicator: {
-		height: "var(--active-tab-height)",
+		bottom: "calc(100% - var(--active-tab-top) - var(--active-tab-height))",
 		left: "var(--active-tab-left)",
 		pointerEvents: "none",
 		position: "absolute",
+		right: "calc(100% - var(--active-tab-left) - var(--active-tab-width))",
 		top: "var(--active-tab-top)",
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
 			default: duration.spring,
 		},
-		transitionProperty: "left, top, width, height",
-		transitionTimingFunction: easing.spring,
-		width: "var(--active-tab-width)",
+		transitionProperty: indicatorTravel.property,
+		transitionTimingFunction: {
+			":is([data-slot='tabs-list']:has(> [data-active]:nth-child(1 of [data-slot='tabs-tab'])) > *)":
+				indicatorTravel.atStart,
+			":is([data-slot='tabs-list']:has(> [data-active]:nth-last-child(1 of [data-slot='tabs-tab'])) > *)":
+				indicatorTravel.atEnd,
+			default: easing.spring,
+		},
 	},
 	indicatorDefault: {
 		backgroundColor: {

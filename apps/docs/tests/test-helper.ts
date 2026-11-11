@@ -1,6 +1,6 @@
 import { type ChildProcess, spawn } from "node:child_process";
 import { createServer } from "node:net";
-import type { Page } from "playwright";
+import type { Locator, Page } from "playwright";
 
 const FETCH_TIMEOUT_MS = 1000;
 const RETRY_DELAY_MS = 250;
@@ -291,4 +291,41 @@ export async function setDocsTheme(
 		.getByRole("button", { exact: true, name: label ?? "" })
 		.waitFor({ state: "detached" });
 	await setDocsTheme(page, theme, clicksLeft - 1);
+}
+
+const INDICATOR_SETTLE_MS = 600;
+
+// Selects `item` and returns how many pixels the indicator left its track, or
+// the track's scroll size grew, while the indicator travelled.
+export async function indicatorOverflow(
+	track: Locator,
+	item: Locator
+): Promise<number> {
+	await track.evaluate((element) => {
+		const indicator = element.querySelector('[data-slot$="-indicator"]');
+		const scrollSize = element.scrollWidth + element.scrollHeight;
+		const state = { frame: 0, worst: 0 };
+		const sample = () => {
+			const outer = element.getBoundingClientRect();
+			const inner = indicator?.getBoundingClientRect() ?? outer;
+			state.worst = Math.max(
+				state.worst,
+				element.scrollWidth + element.scrollHeight - scrollSize,
+				inner.right - outer.right,
+				outer.left - inner.left,
+				inner.bottom - outer.bottom,
+				outer.top - inner.top
+			);
+			state.frame = requestAnimationFrame(sample);
+		};
+		Reflect.set(window, "__indicatorOverflow", state);
+		sample();
+	});
+	await item.click();
+	await item.page().waitForTimeout(INDICATOR_SETTLE_MS);
+	return item.page().evaluate(() => {
+		const state = Reflect.get(window, "__indicatorOverflow");
+		cancelAnimationFrame(state.frame);
+		return state.worst;
+	});
 }

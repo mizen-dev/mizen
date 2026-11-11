@@ -1,6 +1,7 @@
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
+	indicatorOverflow,
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
@@ -115,6 +116,29 @@ describe("Segmented control browser states", { timeout: 20_000 }, () => {
 			});
 		}
 	);
+
+	it.each([
+		["Report period", "Month", "Day"],
+		["Vertical views", "Board", "List"],
+	])("keeps the springing indicator inside %s", async (name, last, first) => {
+		await page.emulateMedia({
+			forcedColors: "none",
+			reducedMotion: "no-preference",
+		});
+		await page.goto(`${handle.url}/components/segmented-control`, {
+			waitUntil: "networkidle",
+		});
+		const group = page.getByRole("group", { exact: true, name });
+		const toLast = await indicatorOverflow(
+			group,
+			group.getByRole("button", { exact: true, name: last })
+		);
+		const toFirst = await indicatorOverflow(
+			group,
+			group.getByRole("button", { exact: true, name: first })
+		);
+		expect(Math.max(toLast, toFirst)).toBeLessThan(0.5);
+	});
 
 	it("distinguishes hover, pressed, and selected states without changing disabled items", async () => {
 		await page.emulateMedia({ forcedColors: "none", reducedMotion: "reduce" });

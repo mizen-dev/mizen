@@ -1,6 +1,7 @@
 import { type Browser, chromium, type Page } from "playwright";
 import { afterAll, beforeAll, describe, expect, it } from "vite-plus/test";
 import {
+	indicatorOverflow,
 	setupTestServer,
 	type TestServerHandle,
 	teardownTestServer,
@@ -80,6 +81,23 @@ describe("Tabs component route", () => {
 				.first()
 				.getAttribute("hidden")
 		).toBeNull();
+	});
+
+	it.each([
+		["Project sections", "Settings", "Overview"],
+		["Account sections", "Security", "Profile"],
+	])("keeps the springing indicator inside %s", async (name, last, first) => {
+		await page.emulateMedia({ reducedMotion: "no-preference" });
+		const list = page.getByRole("tablist", { exact: true, name });
+		const toLast = await indicatorOverflow(
+			list,
+			list.getByRole("tab", { exact: true, name: last })
+		);
+		const toFirst = await indicatorOverflow(
+			list,
+			list.getByRole("tab", { exact: true, name: first })
+		);
+		expect(Math.max(toLast, toFirst)).toBeLessThan(0.5);
 	});
 
 	it("keeps large-text tabs within their host and keyboard scrolls the list", async () => {

@@ -7,7 +7,7 @@ import {
 	focusMotion,
 	opacity,
 } from "../../styles/interaction.stylex";
-import { duration, easing } from "../../styles/motion.stylex";
+import { duration, easing, indicatorTravel } from "../../styles/motion.stylex";
 import { shape } from "../../styles/shape.stylex";
 import { space } from "../../styles/spacing.stylex";
 import {
@@ -51,8 +51,14 @@ export const segmentedStyles = create({
 			[conditions.reducedMotion]: duration.instant,
 			default: duration.spring,
 		},
-		transitionProperty: "top, right, bottom, left",
-		transitionTimingFunction: easing.spring,
+		transitionProperty: indicatorTravel.property,
+		transitionTimingFunction: {
+			":is([data-slot='segmented-control']:has(> [data-pressed]:nth-child(1 of [data-slot='segmented-control-item'])) > *)":
+				indicatorTravel.atStart,
+			":is([data-slot='segmented-control']:has(> [data-pressed]:nth-last-child(1 of [data-slot='segmented-control-item'])) > *)":
+				indicatorTravel.atEnd,
+			default: easing.spring,
+		},
 	},
 	item: {
 		alignItems: "center",
