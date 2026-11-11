@@ -28,8 +28,9 @@ const mizenTheme: Partial<ChartTheme> = {
 // TanStack chart option in px, matching the caption role.
 // eslint-disable-next-line no-restricted-syntax -- a charts API value, not CSS.
 export const mizenAxisLabels = { fontSize: 12, fontWeight: 400, opacity: 1 };
-// Gap between the plot and x tick labels, in px; overlays on a tick reuse it.
-export const mizenTickGap = 4;
+// Gap between the plot and its tick labels, in px; overlays on a tick reuse it.
+// It keeps the first x label clear of the lowest y label where the axes meet.
+export const mizenTickGap = 8;
 const mizenGrid = {
 	stroke: colors.controlSurface,
 	strokeDasharray: "4 4",

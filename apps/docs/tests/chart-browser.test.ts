@@ -262,4 +262,58 @@ describe("chart frame browser behavior", () => {
 			await context.close();
 		}
 	});
+
+	it("keeps tick labels apart where the axes meet", async () => {
+		const context = await browser.newContext({
+			viewport: { height: 900, width: 1280 },
+		});
+		try {
+			const collisions = await Promise.all(
+				["time-series", "area-chart", "distribution"].map(async (slug) => {
+					const page = await context.newPage();
+					await page.goto(`${handle.url}/docs/components/${slug}`, {
+						waitUntil: "networkidle",
+					});
+					const found = await page
+						.locator('[data-slot="chart-frame"] svg')
+						.evaluateAll((charts) =>
+							charts.flatMap((chart) => {
+								// The em box of each label: its line box without the leading.
+								const labels = [...chart.querySelectorAll("text")].map(
+									(text) => {
+										const box = text.getBoundingClientRect();
+										const half =
+											Number.parseFloat(getComputedStyle(text).fontSize) / 2;
+										const middle = box.top + box.height / 2;
+										return {
+											bottom: middle + half,
+											left: box.left,
+											right: box.right,
+											text: text.textContent,
+											top: middle - half,
+										};
+									}
+								);
+								return labels.flatMap((label, index) =>
+									labels
+										.slice(index + 1)
+										.filter(
+											(other) =>
+												label.left < other.right &&
+												other.left < label.right &&
+												label.top < other.bottom &&
+												other.top < label.bottom
+										)
+										.map((other) => `${label.text} on ${other.text}`)
+								);
+							})
+						);
+					return found.map((pair) => `${slug}: ${pair}`);
+				})
+			);
+			expect(collisions.flat()).toEqual([]);
+		} finally {
+			await context.close();
+		}
+	});
 });
