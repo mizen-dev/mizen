@@ -20,19 +20,18 @@ export const metricTrendStyles = create({
 		flexWrap: "wrap",
 		gap: space["2"],
 	},
-	// An inset strip 8px from the card's edges, so its corners are the card's
-	// radius less 8px.
+	// An inset strip 4px from the card's edges, so its corners are the card's
+	// radius less 4px and its text lines up with the card's content.
 	footer: {
 		alignItems: "center",
 		backgroundColor: colors.surface,
-		borderRadius: `calc(${shape.controlRadiusLarge} - ${space["2"]})`,
+		borderRadius: `calc(${shape.controlRadiusLarge} - ${space["1"]})`,
 		display: "flex",
 		gap: space["3"],
 		justifyContent: "space-between",
-		// The card's 12px bottom inset less 4px leaves the strip 8px from the edge.
-		marginBlockEnd: `calc(-1 * ${space["1"]})`,
+		marginBlockEnd: `calc(-1 * ${space["3"]})`,
 		marginBlockStart: "auto",
-		marginInline: `calc(-1 * ${space["2"]})`,
+		marginInline: `calc(-1 * ${space["3"]})`,
 		minWidth: 0,
 		paddingBlock: space["2"],
 		paddingInline: space["3"],

@@ -87,8 +87,13 @@ describe("Nested corners", { timeout: 30_000 }, () => {
 			'[data-slot="combobox-chips"]:has([data-slot="combobox-chip"])',
 			'[data-slot="combobox-chip"]',
 		],
+		[
+			"metric-trend",
+			'[data-slot="metric-trend"]:has([data-slot="metric-trend-footer"])',
+			'[data-slot="metric-trend-footer"]',
+		],
 	])(
-		"keeps the %s inner control concentric with its container",
+		"keeps the %s inner part concentric with its container",
 		async (slug, outer, inner) => {
 			await page.goto(`${handle.url}/components/${slug}`, {
 				waitUntil: "networkidle",

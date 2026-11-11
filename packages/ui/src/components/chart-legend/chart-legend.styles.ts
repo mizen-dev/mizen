@@ -71,11 +71,11 @@ export const chartLegendStyles = create({
 		flexShrink: 0,
 		inlineSize: 6,
 	},
-	// A value tile on the surface inside a workarea card; its corners nest
-	// inside the card's 16px corners.
+	// A value tile on the surface inside a workarea card. It sits further from
+	// the card's edge than the card's radius, so it takes the smallest radius.
 	tile: {
 		backgroundColor: colors.surface,
-		borderRadius: `calc(${shape.controlRadiusLarge} - ${space["2"]})`,
+		borderRadius: shape.controlRadiusSmall,
 		display: "flex",
 		flexDirection: "column",
 		gap: space["1"],
