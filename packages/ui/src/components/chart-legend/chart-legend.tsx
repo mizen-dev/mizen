@@ -20,11 +20,32 @@ export type ChartLegendProps = Omit<
 > & {
 	"aria-label": string;
 	items: readonly ChartLegendItem[];
-	/** tiles shows each item as a tile with its value below the label. */
+	/**
+	 * rows puts each item on its own row with its value at the row's end. tiles
+	 * shows each item as a tile with its value below the label.
+	 */
 	variant?: ChartLegendVariant;
 };
 
-export type ChartLegendVariant = "inline" | "tiles";
+export type ChartLegendVariant = "inline" | "rows" | "tiles";
+
+const layouts = {
+	inline: {
+		item: chartLegendStyles.item,
+		list: chartLegendStyles.list,
+		value: null,
+	},
+	rows: {
+		item: chartLegendStyles.row,
+		list: chartLegendStyles.rows,
+		value: chartLegendStyles.rowValue,
+	},
+	tiles: {
+		item: chartLegendStyles.tile,
+		list: chartLegendStyles.tiles,
+		value: chartLegendStyles.tileValue,
+	},
+};
 
 function protectProps(attributes: Record<string, unknown>) {
 	for (const name of [
@@ -58,6 +79,7 @@ export function ChartLegend({
 	protectProps(rest);
 	assertUniqueIds(items);
 	const tiles = variant === "tiles";
+	const layout = layouts[variant] ?? layouts.inline;
 
 	return (
 		<ul
@@ -65,18 +87,10 @@ export function ChartLegend({
 			aria-label={ariaLabel}
 			data-slot="chart-legend"
 			ref={forwardedRef}
-			{...props(
-				chartLegendStyles.root,
-				tiles ? chartLegendStyles.tiles : chartLegendStyles.list,
-				typeRoles.ui
-			)}
+			{...props(chartLegendStyles.root, layout.list, typeRoles.ui)}
 		>
 			{items.map(({ id, label, tone, value }) => (
-				<li
-					data-slot="chart-legend-item"
-					key={id}
-					{...props(tiles ? chartLegendStyles.tile : chartLegendStyles.item)}
-				>
+				<li data-slot="chart-legend-item" key={id} {...props(layout.item)}>
 					<span {...props(chartLegendStyles.name)}>
 						<span
 							aria-hidden="true"
@@ -90,15 +104,15 @@ export function ChartLegend({
 						{controlLabel(label)}
 					</span>
 					{value === undefined ? null : (
-						<span
-							data-slot="chart-legend-value"
-							{...props(
-								chartLegendStyles.value,
-								tiles && chartLegendStyles.tileValue
-							)}
-						>
-							{value}
-						</span>
+						<>
+							{/* Keeps the label and value apart in copied and read text. */}{" "}
+							<span
+								data-slot="chart-legend-value"
+								{...props(chartLegendStyles.value, layout.value)}
+							>
+								{value}
+							</span>
+						</>
 					)}
 				</li>
 			))}

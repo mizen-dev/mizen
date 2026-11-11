@@ -212,7 +212,7 @@ function PartToWholeChart({
 					<span {...props(typeRoles.numeric)}>
 						{formatNumber(total, formatValue)}
 					</span>
-					<span {...props(typeRoles.caption, partToWholeStyles.share)}>
+					<span {...props(typeRoles.caption, partToWholeStyles.totalLabel)}>
 						{totalLabel}
 					</span>
 				</div>
@@ -221,7 +221,11 @@ function PartToWholeChart({
 				data-slot="part-to-whole-legend"
 				{...props(partToWholeStyles.legend)}
 			>
-				<ChartLegend aria-label={`${ariaLabel} parts`} items={legendItems} />
+				<ChartLegend
+					aria-label={`${ariaLabel} parts`}
+					items={legendItems}
+					variant="rows"
+				/>
 			</div>
 		</div>
 	);
@@ -260,20 +264,16 @@ export function PartToWhole({
 		() =>
 			parts.map(({ id, label, share, tone, value }) => ({
 				id: `part-${id}`,
-				label: (
-					<span {...props(partToWholeStyles.label)}>
-						<span>{label}</span>{" "}
-						<span>
-							<span {...props(partToWholeStyles.value)}>
-								{formatNumber(value, formatValue)}
-							</span>{" "}
-							<span {...props(partToWholeStyles.share)}>
-								{shareFormat.format(share)}
-							</span>
-						</span>
-					</span>
-				),
+				label: <span {...props(partToWholeStyles.label)}>{label}</span>,
 				tone,
+				value: (
+					<>
+						{formatNumber(value, formatValue)}{" "}
+						<span {...props(partToWholeStyles.share)}>
+							{shareFormat.format(share)}
+						</span>
+					</>
+				),
 			})),
 		[formatValue, parts, shareFormat]
 	);
@@ -310,6 +310,7 @@ export function PartToWhole({
 						<ChartLegend
 							aria-label={`${ariaLabel} parts`}
 							items={legendItems}
+							variant="rows"
 						/>
 					) : null}
 				</>

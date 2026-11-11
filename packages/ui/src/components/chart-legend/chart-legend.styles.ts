@@ -1,5 +1,6 @@
 import { create } from "@stylexjs/stylex";
 import { colors } from "../../styles/colors.stylex";
+import { borderWidth } from "../../styles/interaction.stylex";
 import { shape } from "../../styles/shape.stylex";
 import { space } from "../../styles/spacing.stylex";
 import { fontWeight } from "../../styles/typography.stylex";
@@ -43,6 +44,27 @@ export const chartLegendStyles = create({
 		fontWeight: fontWeight.medium,
 		minWidth: 0,
 	},
+	// One item per row, its value at the row's end, for a breakdown that
+	// compares exact numbers.
+	row: {
+		alignItems: "center",
+		borderBlockEndColor: colors.border,
+		borderBlockEndStyle: "solid",
+		borderBlockEndWidth: { ":last-child": 0, default: borderWidth.thin },
+		columnGap: space["3"],
+		display: "flex",
+		justifyContent: "space-between",
+		minWidth: 0,
+		paddingBlock: space["2"],
+	},
+	rows: {
+		display: "flex",
+		flexDirection: "column",
+		listStyle: "none",
+		margin: 0,
+		padding: 0,
+	},
+	rowValue: { flexShrink: 0, marginInlineStart: 0, whiteSpace: "nowrap" },
 	swatch: {
 		blockSize: 6,
 		borderRadius: "999px",

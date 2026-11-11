@@ -14,30 +14,18 @@ export const partToWholeStyles = create({
 		},
 	},
 	empty: { marginBlock: 0 },
-	label: {
-		borderBlockEndColor: colors.border,
-		borderBlockEndStyle: "solid",
-		borderBlockEndWidth: 1,
-		display: "grid",
-		gap: space["3"],
-		gridTemplateColumns: "minmax(0, 1fr) auto",
-		inlineSize: "100%",
-		minInlineSize: 0,
-		overflowWrap: "anywhere",
-		paddingBlock: space["2"],
-		textAlign: "start",
-	},
+	label: { overflowWrap: "anywhere" },
 	legend: { minInlineSize: 0 },
 	plot: { minInlineSize: 0, position: "relative" },
 	root: { containerType: "inline-size", minWidth: 0 },
+	// Shares fill one column, so the values before them line up across rows.
 	share: {
 		color: colors.mutedContent,
 		display: "inline-block",
-		fontVariantNumeric: "tabular-nums",
-		minInlineSize: "2.5rem",
+		fontWeight: fontWeight.regular,
+		minInlineSize: "3rem",
 		textAlign: "end",
 	},
-	// The total sits in the donut hole; pointer events pass to the chart.
 	total: {
 		alignItems: "center",
 		color: colors.content,
@@ -48,9 +36,6 @@ export const partToWholeStyles = create({
 		pointerEvents: "none",
 		position: "absolute",
 	},
-	value: {
-		color: colors.content,
-		fontVariantNumeric: "tabular-nums",
-		fontWeight: fontWeight.medium,
-	},
+	// The total sits in the donut hole; pointer events pass to the chart.
+	totalLabel: { color: colors.mutedContent },
 });

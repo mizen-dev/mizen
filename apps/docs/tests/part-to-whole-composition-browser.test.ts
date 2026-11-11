@@ -59,6 +59,29 @@ describe("part-to-whole composition", () => {
 				await expectLocator(chart).toBeVisible();
 				await expectLocator(legend).toContainText("Payroll");
 				await expectLocator(legend).toContainText("Reserve");
+				// Each part takes a full row, so the values line up, and the
+				// total's label sits under the middle of its number.
+				const layout = await section.evaluate((root) => {
+					const box = (selector: string) =>
+						[...root.querySelectorAll(selector)].map((node) =>
+							node.getBoundingClientRect()
+						);
+					const [number, label] = box('[data-slot="part-to-whole-total"] > *');
+					return {
+						list: box('[data-slot="chart-legend"]')[0].width,
+						rows: box('[data-slot="chart-legend-item"]').map(
+							(row) => row.width
+						),
+						totalOffset:
+							number.left + number.width / 2 - (label.left + label.width / 2),
+						valueEnds: box('[data-slot="chart-legend-value"]').map((value) =>
+							Math.round(value.right)
+						),
+					};
+				});
+				expect(layout.rows).toEqual(layout.rows.map(() => layout.list));
+				expect(new Set(layout.valueEnds).size).toBe(1);
+				expect(Math.abs(layout.totalOffset)).toBeLessThan(0.5);
 				await section.screenshot({
 					caret: "initial",
 					path: `/private/tmp/mizen-part-to-whole-${theme}.png`,

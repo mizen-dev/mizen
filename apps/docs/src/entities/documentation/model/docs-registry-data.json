@@ -7020,9 +7020,9 @@
       },
       {
         "name": "variant",
-        "type": "\"inline\" | \"tiles\"",
+        "type": "\"inline\" | \"rows\" | \"tiles\"",
         "defaultValue": "\"inline\"",
-        "description": "tiles shows each item in a surface tile with its value below the label."
+        "description": "rows puts each item on its own row with its value at the row's end. tiles shows each item in a surface tile with its value below the label."
       },
       {
         "name": "items[].value",
