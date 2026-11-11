@@ -50,7 +50,10 @@ export const inlineCitationStyles = create({
 		backgroundColor: "transparent",
 		borderRadius: `calc(${shape.inlineRadius} + ${space["1"]})`,
 		borderWidth: 0,
-		color: { ":hover": colors.content, default: colors.mutedContent },
+		color: {
+			":hover": { [conditions.canHover]: colors.content },
+			default: colors.mutedContent,
+		},
 		cursor: "pointer",
 		display: "inline-flex",
 		fontFamily: "inherit",

@@ -20,7 +20,7 @@ const inputUnstyledStyles = create({
 		"::-webkit-search-cancel-button": {
 			appearance: "none",
 			backgroundColor: {
-				":hover": colors.content,
+				":hover": { [conditions.canHover]: colors.content },
 				default: colors.mutedContent,
 			},
 			cursor: "pointer",

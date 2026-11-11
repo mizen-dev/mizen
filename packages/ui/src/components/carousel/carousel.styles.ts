@@ -23,8 +23,10 @@ const SCROLL_TIMELINE = "@supports (animation-timeline: view())";
 export const carouselStyles = create({
 	dot: {
 		backgroundColor: {
-			":is(:hover:not([aria-current]) > *)": colors.mutedContent,
 			":is([aria-current] > *)": colors.content,
+			[conditions.canHover]: {
+				":is(:hover:not([aria-current]) > *)": colors.mutedContent,
+			},
 			default: `color-mix(in oklch, ${colors.content} 24%, transparent)`,
 		},
 		blockSize: 6,
