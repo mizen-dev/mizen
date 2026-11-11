@@ -8,17 +8,11 @@ import {
 } from "./test-helper";
 
 const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
-const WHITESPACE_REGEX = /\s+/u;
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
 
 type GridPropsAcceptsRole = "role" extends keyof GridProps ? true : false;
-
-interface Point {
-	readonly x: number;
-	readonly y: number;
-}
 
 function throwTeardownFailures(
 	results: readonly PromiseSettledResult<unknown>[]
@@ -36,26 +30,26 @@ function throwTeardownFailures(
 	}
 }
 
-function expectOneColumnLayout(boxes: readonly Point[]): void {
-	const [c0, c1, c2] = boxes;
-	if (!(c0 && c1 && c2)) {
-		throw new Error("Expected three child bounding boxes");
-	}
-	expect(c1.x).toBeCloseTo(c0.x, 1);
-	expect(c2.x).toBeCloseTo(c0.x, 1);
-	expect(c1.y).toBeGreaterThan(c0.y);
-	expect(c2.y).toBeGreaterThan(c1.y);
+const PREVIEW_GRID = '[data-slot="component-preview"] [data-slot="grid"]';
+
+// The track's computed column widths, in px.
+function readColumns(selector = '[data-slot="grid"]') {
+	return page
+		.locator(`${selector} > [data-slot="grid-track"]`)
+		.first()
+		.evaluate((track) =>
+			getComputedStyle(track)
+				.gridTemplateColumns.split(" ")
+				.map(Number.parseFloat)
+		);
 }
 
-function expectTwoColumnLayout(boxes: readonly Point[]): void {
-	const [c0, c1, c2] = boxes;
-	if (!(c0 && c1 && c2)) {
-		throw new Error("Expected three child bounding boxes");
-	}
-	expect(c0.y).toBeCloseTo(c1.y, 1);
-	expect(c1.x).toBeGreaterThan(c0.x);
-	expect(c2.y).toBeGreaterThan(c0.y);
-	expect(c2.x).toBeCloseTo(c0.x, 1);
+async function openExample(name: string, width: number): Promise<void> {
+	await page.setViewportSize({ height: 900, width });
+	const response = await page.goto(`${handle.url}/docs/examples/${name}`, {
+		waitUntil: "networkidle",
+	});
+	expect(response?.status()).toBe(200);
 }
 
 describe("Grid component and docs specimen", () => {
@@ -100,98 +94,100 @@ describe("Grid component and docs specimen", () => {
 		).toBe(true);
 	});
 
-	it("renders the four-card public Grid preview", async () => {
-		const grid = page.locator(
-			'[data-slot="component-preview"] [data-slot="grid"]'
-		);
+	it("renders a role-free container around one track of four items", async () => {
+		const grid = page.locator(PREVIEW_GRID);
 		expect(await grid.evaluate((node) => node.tagName)).toBe("DIV");
 		expect(await grid.getAttribute("role")).toBeNull();
-		expect(await grid.locator(":scope > *").count()).toBe(4);
+		expect(await grid.getAttribute("data-columns")).toBe("4");
+		expect(await grid.locator(":scope > *").count()).toBe(1);
+		expect(
+			await grid.locator(':scope > [data-slot="grid-track"] > *').count()
+		).toBe(4);
 	});
 
 	it("uses the system-owned grid layout and spacing tokens", async () => {
-		const style = await page
-			.locator('[data-slot="component-preview"] [data-slot="grid"]')
-			.evaluate((node) => {
-				const computed = getComputedStyle(node);
-				return [computed.display, computed.gap, computed.minWidth];
+		const style = await page.locator(PREVIEW_GRID).evaluate((node) => {
+			const container = getComputedStyle(node);
+			const track = getComputedStyle(node.firstElementChild as Element);
+			return [container.containerType, track.display, track.gap];
+		});
+		expect(style).toEqual(["inline-size", "grid", "16px"]);
+	});
+
+	// The docs stage is about 700px wide on a desktop: room for two of the
+	// four columns, not for four.
+	it.each([
+		{ columns: 2, width: 1280 },
+		{ columns: 1, width: 375 },
+	])(
+		"steps the preview to $columns columns at a $width px window",
+		async ({ columns, width }) => {
+			await page.setViewportSize({ height: 900, width });
+			await page.goto(`${handle.url}/components/grid`, {
+				waitUntil: "networkidle",
 			});
-		expect(style).toEqual(["grid", "12px", "0px"]);
+			expect(await readColumns(PREVIEW_GRID)).toHaveLength(columns);
+		}
+	);
+
+	it.each([
+		{ columns: 4, width: 1280 },
+		{ columns: 2, width: 800 },
+		{ columns: 1, width: 375 },
+	])(
+		"steps four columns to $columns in a $width px window",
+		async ({ columns, width }) => {
+			await openExample("SummaryGrid", width);
+			const widths = await readColumns();
+			expect(widths).toHaveLength(columns);
+			expect(new Set(widths.map(Math.round)).size).toBe(1);
+		}
+	);
+
+	it("puts a main column beside a narrower one, and stacks them when narrow", async () => {
+		await openExample("GridMainAsideExample2", 1280);
+		const [main, aside] = await readColumns();
+		expect((main ?? 0) / (aside ?? 1)).toBeGreaterThan(1.8);
+		expect((main ?? 0) / (aside ?? 1)).toBeLessThan(2.2);
+		await openExample("GridMainAsideExample2", 600);
+		expect(await readColumns()).toHaveLength(1);
 	});
 
-	it("renders one-column geometry at 375px viewport", async () => {
-		await page.setViewportSize({ height: 812, width: 375 });
-		await page.goto(`${handle.url}/components/grid`, {
-			waitUntil: "networkidle",
-		});
-		const grid = page.locator(
-			'[data-slot="component-preview"] [data-slot="grid"]'
-		);
-		const templateColumns = await grid.evaluate(
-			(node) => getComputedStyle(node).gridTemplateColumns
-		);
-		const columns = templateColumns.trim().split(WHITESPACE_REGEX);
-		expect(columns).toHaveLength(1);
-
-		const childBoxes = await grid
-			.locator(":scope > *")
-			.evaluateAll((elements) =>
-				elements.map((el) => {
-					const rect = el.getBoundingClientRect();
-					return { x: rect.x, y: rect.y };
-				})
-			);
-		expectOneColumnLayout(childBoxes);
+	it("fits as many 16rem columns as the width allows", async () => {
+		await openExample("GridYourProjectsExample1", 1280);
+		const wide = await readColumns();
+		expect(wide.length).toBeGreaterThan(2);
+		expect(Math.min(...wide)).toBeGreaterThanOrEqual(256);
+		await openExample("GridYourProjectsExample1", 375);
+		expect(await readColumns()).toHaveLength(1);
 	});
 
-	it("renders two-column geometry at 768px viewport", async () => {
-		await page.setViewportSize({ height: 900, width: 768 });
-		await page.goto(`${handle.url}/components/grid`, {
-			waitUntil: "networkidle",
-		});
-		const grid = page.locator(
-			'[data-slot="component-preview"] [data-slot="grid"]'
-		);
-		const templateColumns = await grid.evaluate(
-			(node) => getComputedStyle(node).gridTemplateColumns
-		);
-		const columns = templateColumns.trim().split(WHITESPACE_REGEX);
-		expect(columns).toHaveLength(2);
-
-		const childBoxes = await grid
-			.locator(":scope > *")
-			.evaluateAll((elements) =>
-				elements.map((el) => {
-					const rect = el.getBoundingClientRect();
-					return { x: rect.x, y: rect.y };
-				})
-			);
-		expectTwoColumnLayout(childBoxes);
+	it("follows its own width, not the window's", async () => {
+		await openExample("SummaryGrid", 1280);
+		const columns = await page
+			.locator('[data-slot="grid"]')
+			.evaluate((grid) => {
+				const panel = document.createElement("div");
+				panel.style.width = "20rem";
+				grid.replaceWith(panel);
+				panel.append(grid);
+				return getComputedStyle(
+					grid.firstElementChild as Element
+				).gridTemplateColumns.split(" ").length;
+			});
+		expect(columns).toBe(1);
 	});
 
-	it("renders two-column geometry at 1280px viewport", async () => {
-		await page.setViewportSize({ height: 900, width: 1280 });
-		await page.goto(`${handle.url}/components/grid`, {
-			waitUntil: "networkidle",
+	it("is one 16rem column in a parent that takes its width from its content", async () => {
+		await openExample("SummaryGrid", 1280);
+		const width = await page.locator('[data-slot="grid"]').evaluate((grid) => {
+			const parent = document.createElement("div");
+			parent.style.display = "inline-block";
+			grid.replaceWith(parent);
+			parent.append(grid);
+			return grid.getBoundingClientRect().width;
 		});
-		const grid = page.locator(
-			'[data-slot="component-preview"] [data-slot="grid"]'
-		);
-		const templateColumns = await grid.evaluate(
-			(node) => getComputedStyle(node).gridTemplateColumns
-		);
-		const columns = templateColumns.trim().split(WHITESPACE_REGEX);
-		expect(columns).toHaveLength(2);
-
-		const childBoxes = await grid
-			.locator(":scope > *")
-			.evaluateAll((elements) =>
-				elements.map((el) => {
-					const rect = el.getBoundingClientRect();
-					return { x: rect.x, y: rect.y };
-				})
-			);
-		expectTwoColumnLayout(childBoxes);
+		expect(width).toBe(256);
 	});
 
 	it("fits the mobile viewport without horizontal overflow", async () => {

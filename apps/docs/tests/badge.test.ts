@@ -288,6 +288,23 @@ describe("Badge component contract", () => {
 		expect(layout.badgeHeight).toBeGreaterThan(layout.minHeight);
 	});
 
+	it("keeps a word whole where the parent shrinks to its narrowest", async () => {
+		await gotoBadge(1280, 900);
+		const heights = await page
+			.locator('[data-slot="badge"]')
+			.first()
+			.evaluate((badge) => {
+				const cell = document.createElement("div");
+				cell.style.width = "min-content";
+				const item = badge.cloneNode(true) as HTMLElement;
+				item.textContent = "Active";
+				cell.append(item);
+				document.body.append(cell);
+				return [item.offsetHeight, (badge as HTMLElement).offsetHeight];
+			});
+		expect(heights[0]).toBe(heights[1]);
+	});
+
 	it("keeps destructive text readable against its rendered fill", async () => {
 		await gotoBadge(1280, 900);
 		await page.evaluate(() => localStorage.setItem("mizen-theme", "light"));

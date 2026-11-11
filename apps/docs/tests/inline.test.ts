@@ -98,6 +98,50 @@ describe("Inline component and docs specimen", () => {
 		expect(style).toEqual(["flex", "row", "wrap", "12px", "0px"]);
 	});
 
+	it("pushes two ends apart with justify between", async () => {
+		const row = page
+			.getByRole("region", { name: "Inline: Two ends example" })
+			.locator('[data-slot="inline"]')
+			.first();
+		expect(
+			await row.evaluate((node) => getComputedStyle(node).justifyContent)
+		).toBe("space-between");
+		const boxes = await row
+			.locator(":scope > *")
+			.evaluateAll((items) =>
+				items.map((item) => item.getBoundingClientRect().toJSON())
+			);
+		const container = await row.boundingBox();
+		expect(boxes).toHaveLength(2);
+		expect(boxes[0]?.left).toBeCloseTo(container?.x ?? Number.NaN, 0);
+		expect(boxes[1]?.right).toBeCloseTo(
+			(container?.x ?? Number.NaN) + (container?.width ?? Number.NaN),
+			0
+		);
+	});
+
+	it("aligns text of different sizes on one baseline", async () => {
+		const row = page
+			.getByRole("region", { name: "Inline: Baseline example" })
+			.locator('[data-slot="inline"]');
+		expect(
+			await row.evaluate((node) => getComputedStyle(node).alignItems)
+		).toBe("baseline");
+	});
+
+	it("centers the actions of an empty state", async () => {
+		await page.goto(`${handle.url}/components/empty`, {
+			waitUntil: "networkidle",
+		});
+		const row = page
+			.getByRole("region", { name: "Empty: Composed actions example" })
+			.locator('[data-slot="inline"]');
+		expect(
+			await row.evaluate((node) => getComputedStyle(node).justifyContent)
+		).toBe("center");
+		expect(await row.getByRole("button").count()).toBe(2);
+	});
+
 	it("fits the mobile viewport without horizontal overflow", async () => {
 		await page.setViewportSize({ height: 812, width: 375 });
 		await page.goto(`${handle.url}/components/inline`, {

@@ -16,7 +16,6 @@ import {
 	FrameHeader,
 	FramePanel,
 	FrameTitle,
-	Grid,
 	Heading,
 	Inline,
 	Stack,
@@ -83,10 +82,10 @@ export function ErrorStateSpecimen() {
 						</ErrorStateDescription>
 					</ErrorStateHeader>
 					<ErrorStateContent>
-						<Grid>
+						<Inline justify="center">
 							<Button variant="brand">Reconnect</Button>
 							<Button variant="outline">Network diagnostics</Button>
-						</Grid>
+						</Inline>
 					</ErrorStateContent>
 				</ErrorState>
 			</SpecimenSection>

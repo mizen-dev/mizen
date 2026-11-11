@@ -441,10 +441,14 @@
   },
   "grid": {
     "boundaries": [
-      "Use Table for data with row and column relationships. Visual columns do not establish table semantics."
+      "Use Table for data with row and column relationships. Visual columns do not establish table semantics.",
+      "Use Inline for a few items on one line, such as a pair of buttons, and Stack for blocks that follow each other. Grid columns are sized for cards, so small items stack in a narrow grid.",
+      "A Grid takes the width of its parent. Inside a parent that takes its width from its content, such as a centered item, it is one 16rem column."
     ],
     "recommendations": [
-      "Group peer content and check reading order as columns change. Test long content at narrow widths."
+      "Choose columns by the widest arrangement you want. The grid steps down on its own, by its own width, so it needs no breakpoints beside a sidebar or inside a card.",
+      "Use columns 4 for four peers, auto for many cards of one kind, and 2:1 for a main area beside a narrower one.",
+      "Check reading order as columns stack, and test long content at narrow widths."
     ]
   },
   "group": {
@@ -476,7 +480,9 @@
       "Use Grid when columns need alignment across rows. Inline does not supply group or toolbar semantics."
     ],
     "recommendations": [
-      "Use wrapping rows for related content that can remain understandable across multiple lines."
+      "Use it for a few related items that stay understandable when they wrap.",
+      "Use justify between for two ends of one row, such as a count and its actions. Use justify center for the actions of a centered empty or error state.",
+      "Use align baseline for text of different sizes."
     ]
   },
   "inline-citation": {
@@ -765,10 +771,13 @@
   },
   "section": {
     "boundaries": [
-      "Section provides arrangement. The caller supplies the heading and accessible document structure."
+      "Use Card for an item that stands alone, such as one metric or one record. A Section has no surface of its own.",
+      "Use Fieldset to group form controls under a legend."
     ],
     "recommendations": [
-      "Group one topic or task and give it a heading when it forms a document section."
+      "Group one topic. Give it a SectionTitle and point aria-labelledby at the title's id.",
+      "Set level so the titles follow the document outline: 2 under the page title, 3 inside another section.",
+      "Keep SectionAction to one or two small buttons."
     ]
   },
   "segmented-control": {
@@ -1075,6 +1084,18 @@
     ],
     "recommendations": [
       "Use Conversation for an agent thread; reach for Message Scroller for other transcripts, such as a team chat or a log. Anchor turns the person sends, and load earlier messages above without scrolling yourself."
+    ]
+  },
+  "page": {
+    "boundaries": [
+      "Page is the content area. Use the application shell for navigation, the sidebar, and the top bar; the shell adds no padding around a Page.",
+      "Use Dialog or Sheet for a task that interrupts a screen. They have their own headers."
+    ],
+    "recommendations": [
+      "Use one Page per screen, with one PageTitle.",
+      "Put the main action in PageAction as the brand button. Other actions are outline or ghost.",
+      "Use width narrow for forms and settings. Leave lists, tables, and dashboards at full width.",
+      "Start from the closest example on this page, then change its content."
     ]
   }
 }

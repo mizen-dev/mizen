@@ -13,8 +13,8 @@ import {
 	FrameHeader,
 	FramePanel,
 	FrameTitle,
-	Grid,
 	Heading,
+	Inline,
 	Stack,
 	StatusDot,
 } from "@mizen-labs/ui";
@@ -67,10 +67,10 @@ export function EmptyComposedActionsExample2() {
 					</EmptyDescription>
 				</EmptyHeader>
 				<EmptyContent>
-					<Grid>
+					<Inline justify="center">
 						<Button variant="brand">Create project</Button>
 						<Button variant="outline">Import repository</Button>
-					</Grid>
+					</Inline>
 				</EmptyContent>
 			</Empty>
 		</Stack>

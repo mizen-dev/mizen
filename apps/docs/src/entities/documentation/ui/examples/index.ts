@@ -301,7 +301,10 @@ import { SignupPipeline } from "./funnel";
 import { PipelineCard, SignupFlowCard } from "./funnel-card";
 import { FunnelFlowExample } from "./funnel-variants";
 import { SummaryGrid } from "./grid";
-import { GridYourProjectsExample1 } from "./grid-variants";
+import {
+	GridMainAsideExample2,
+	GridYourProjectsExample1,
+} from "./grid-variants";
 import { ProjectActions } from "./group";
 import { GroupWorkspaceChangesExample1 } from "./group-variants";
 import { ArticleHeadings } from "./heading";
@@ -322,7 +325,11 @@ import {
 } from "./heatmap-variants";
 import { ReleaseSummary } from "./inline";
 import { CitedParagraph, DocumentCitation } from "./inline-citation";
-import { InlineProductionReleaseExample1 } from "./inline-variants";
+import {
+	InlineBaselineExample3,
+	InlineBetweenExample2,
+	InlineProductionReleaseExample1,
+} from "./inline-variants";
 import {
 	ControlledInput,
 	DisabledInput,
@@ -425,6 +432,13 @@ import {
 } from "./otp-field-variants";
 import { Contributors } from "./overflow-list";
 import { OverflowListReleaseContributorsExample1 } from "./overflow-list-variants";
+import { ProjectsPage } from "./page";
+import {
+	PageDashboardExample1,
+	PageRecordDetailExample3,
+	PageRecordListExample2,
+	PageSettingsExample4,
+} from "./page-variants";
 import {
 	PaginationFrameworkLinks,
 	SearchResultsPagination,
@@ -496,8 +510,11 @@ import {
 	ScrollAreaSecurityActivityInRTLExample5,
 	ScrollAreaWorkspaceSummaryExample4,
 } from "./scroll-area-variants";
-import { ProjectSettingsSection } from "./section";
-import { SectionNorthstarLaunchExample1 } from "./section-variants";
+import { UsageSection } from "./section";
+import {
+	SectionNorthstarLaunchExample1,
+	SectionNotificationsExample2,
+} from "./section-variants";
 import { BillingInterval } from "./segmented-control";
 import {
 	SegmentedControlProjectViewsExample1,
@@ -881,6 +898,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	FramePersonalWorkspaceExample1,
 	FrameworkCombobox,
 	FunnelFlowExample,
+	GridMainAsideExample2,
 	GridYourProjectsExample1,
 	GroupChat,
 	GroupWorkspaceChangesExample1,
@@ -894,6 +912,8 @@ export const usageComponents: Record<string, ComponentType> = {
 	HeatmapActiveUsersByHourExample,
 	HeatmapRequestsByWeekdayAndTimeExample1,
 	IconAction,
+	InlineBaselineExample3,
+	InlineBetweenExample2,
 	InlineCommand,
 	InlineProductionReleaseExample1,
 	InputDefaultSize,
@@ -979,6 +999,10 @@ export const usageComponents: Record<string, ComponentType> = {
 	OtpFieldPrivacyAndValidationExample3,
 	OtpFieldVerifyYourAccountExample1,
 	OverflowListReleaseContributorsExample1,
+	PageDashboardExample1,
+	PageRecordDetailExample3,
+	PageRecordListExample2,
+	PageSettingsExample4,
 	PaginationFrameworkLinks,
 	PaginationProjectDocumentsExample1,
 	PartToWholeQuarterlyBudgetMixExample1,
@@ -1012,9 +1036,9 @@ export const usageComponents: Record<string, ComponentType> = {
 	ProjectList,
 	ProjectPreview,
 	ProjectPromptComposer,
-	ProjectSettingsSection,
 	ProjectSheet,
 	ProjectSummaryTextarea,
+	ProjectsPage,
 	ProjectTable,
 	ProjectTabs,
 	PropertyListClusterDetailsExample3,
@@ -1047,6 +1071,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	SearchResultsPagination,
 	SearchShortcut,
 	SectionNorthstarLaunchExample1,
+	SectionNotificationsExample2,
 	SegmentedControlProjectViewsExample1,
 	SegmentedControlReportSettingsExample2,
 	SegmentedControlStates,
@@ -1144,6 +1169,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	TrackedTime,
 	TrackedTimeCard,
 	TreeSelectedResourceExample1,
+	UsageSection,
 	VendorProfiles,
 	VendorScoreCard,
 	VerificationCode,

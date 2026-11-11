@@ -22,6 +22,7 @@ import { Route as InternalThemeFixturesRouteImport } from './routes/internal.the
 import { Route as ComponentsSlugMarkdownRouteImport } from './routes/components_.$slug_.markdown'
 import { Route as DocsComponentsSlugRouteImport } from './routes/docs.components.$slug'
 import { Route as DocsGuideMarkdownRouteImport } from './routes/docs_.$guide_.markdown'
+import { Route as DocsExamplesNameRouteImport } from './routes/docs_.examples.$name'
 import { Route as DocsComponentsSlugMarkdownRouteImport } from './routes/docs_.components_.$slug_.markdown'
 import { Route as DocsComponentsSlugMetadataRouteImport } from './routes/docs_.components_.$slug_.metadata'
 
@@ -91,6 +92,11 @@ const DocsGuideMarkdownRoute = DocsGuideMarkdownRouteImport.update({
   path: '/docs/$guide/markdown',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocsExamplesNameRoute = DocsExamplesNameRouteImport.update({
+  id: '/docs_/examples/$name',
+  path: '/docs/examples/$name',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DocsComponentsSlugMarkdownRoute =
   DocsComponentsSlugMarkdownRouteImport.update({
     id: '/docs_/components_/$slug_/markdown',
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/components/$slug/markdown': typeof ComponentsSlugMarkdownRoute
   '/docs/components/$slug': typeof DocsComponentsSlugRoute
   '/docs/$guide/markdown': typeof DocsGuideMarkdownRoute
+  '/docs/examples/$name': typeof DocsExamplesNameRoute
   '/docs/components/$slug/markdown': typeof DocsComponentsSlugMarkdownRoute
   '/docs/components/$slug/metadata': typeof DocsComponentsSlugMetadataRoute
 }
@@ -134,6 +141,7 @@ export interface FileRoutesByTo {
   '/components/$slug/markdown': typeof ComponentsSlugMarkdownRoute
   '/docs/components/$slug': typeof DocsComponentsSlugRoute
   '/docs/$guide/markdown': typeof DocsGuideMarkdownRoute
+  '/docs/examples/$name': typeof DocsExamplesNameRoute
   '/docs/components/$slug/markdown': typeof DocsComponentsSlugMarkdownRoute
   '/docs/components/$slug/metadata': typeof DocsComponentsSlugMetadataRoute
 }
@@ -152,6 +160,7 @@ export interface FileRoutesById {
   '/components_/$slug_/markdown': typeof ComponentsSlugMarkdownRoute
   '/docs/components/$slug': typeof DocsComponentsSlugRoute
   '/docs_/$guide_/markdown': typeof DocsGuideMarkdownRoute
+  '/docs_/examples/$name': typeof DocsExamplesNameRoute
   '/docs_/components_/$slug_/markdown': typeof DocsComponentsSlugMarkdownRoute
   '/docs_/components_/$slug_/metadata': typeof DocsComponentsSlugMetadataRoute
 }
@@ -171,6 +180,7 @@ export interface FileRouteTypes {
     | '/components/$slug/markdown'
     | '/docs/components/$slug'
     | '/docs/$guide/markdown'
+    | '/docs/examples/$name'
     | '/docs/components/$slug/markdown'
     | '/docs/components/$slug/metadata'
   fileRoutesByTo: FileRoutesByTo
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/components/$slug/markdown'
     | '/docs/components/$slug'
     | '/docs/$guide/markdown'
+    | '/docs/examples/$name'
     | '/docs/components/$slug/markdown'
     | '/docs/components/$slug/metadata'
   id:
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/components_/$slug_/markdown'
     | '/docs/components/$slug'
     | '/docs_/$guide_/markdown'
+    | '/docs_/examples/$name'
     | '/docs_/components_/$slug_/markdown'
     | '/docs_/components_/$slug_/metadata'
   fileRoutesById: FileRoutesById
@@ -219,6 +231,7 @@ export interface RootRouteChildren {
   InternalThemeFixturesRoute: typeof InternalThemeFixturesRoute
   ComponentsSlugMarkdownRoute: typeof ComponentsSlugMarkdownRoute
   DocsGuideMarkdownRoute: typeof DocsGuideMarkdownRoute
+  DocsExamplesNameRoute: typeof DocsExamplesNameRoute
   DocsComponentsSlugMarkdownRoute: typeof DocsComponentsSlugMarkdownRoute
   DocsComponentsSlugMetadataRoute: typeof DocsComponentsSlugMetadataRoute
 }
@@ -316,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsGuideMarkdownRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs_/examples/$name': {
+      id: '/docs_/examples/$name'
+      path: '/docs/examples/$name'
+      fullPath: '/docs/examples/$name'
+      preLoaderRoute: typeof DocsExamplesNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/docs_/components_/$slug_/markdown': {
       id: '/docs_/components_/$slug_/markdown'
       path: '/docs/components/$slug/markdown'
@@ -358,6 +378,7 @@ const rootRouteChildren: RootRouteChildren = {
   InternalThemeFixturesRoute: InternalThemeFixturesRoute,
   ComponentsSlugMarkdownRoute: ComponentsSlugMarkdownRoute,
   DocsGuideMarkdownRoute: DocsGuideMarkdownRoute,
+  DocsExamplesNameRoute: DocsExamplesNameRoute,
   DocsComponentsSlugMarkdownRoute: DocsComponentsSlugMarkdownRoute,
   DocsComponentsSlugMetadataRoute: DocsComponentsSlugMetadataRoute,
 }

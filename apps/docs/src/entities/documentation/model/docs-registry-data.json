@@ -1409,13 +1409,25 @@
     "api": [
       {
         "defaultValue": "—",
-        "description": "Content arranged in the system grid rhythm.",
+        "description": "The items. Each one fills a column.",
         "name": "children",
         "type": "ReactNode"
+      },
+      {
+        "defaultValue": "\"2\"",
+        "description": "Sets the widest arrangement. \"2\", \"3\", and \"4\" are equal columns; \"4\" steps down to two, never to three and one. \"auto\" fits as many equal columns of at least 16rem as there is room for. \"2:1\" and \"1:2\" put a main column beside a narrower one. Columns stack when the grid is too narrow for them: two columns need 30rem, three columns and the ratios need 45rem, four need 60rem.",
+        "name": "columns",
+        "type": "\"1\" | \"2\" | \"3\" | \"4\" | \"auto\" | \"2:1\" | \"1:2\""
+      },
+      {
+        "defaultValue": "\"3\" (12px)",
+        "description": "Sets the gap between items on the 4px scale: step × 4 = px. Use 4 between cards and 8 between sections that sit side by side.",
+        "name": "gap",
+        "type": "\"0\" | \"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | \"8\" | \"10\" | \"12\" | \"16\""
       }
     ],
     "category": "Layout",
-    "description": "Arranges related content in a responsive grid with system-owned spacing.",
+    "description": "Arranges peer content in columns that follow the grid's own width.",
     "name": "Grid",
     "slug": "grid",
     "status": "stable"
@@ -1686,13 +1698,37 @@
     "api": [
       {
         "defaultValue": "—",
-        "description": "Content arranged in the system horizontal rhythm.",
+        "description": "The items, in reading order.",
         "name": "children",
         "type": "ReactNode"
+      },
+      {
+        "defaultValue": "\"3\" (12px)",
+        "description": "Sets the gap between items on the 4px scale: step × 4 = px. Use 2 between buttons.",
+        "name": "gap",
+        "type": "\"0\" | \"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | \"8\" | \"10\" | \"12\" | \"16\""
+      },
+      {
+        "defaultValue": "\"center\"",
+        "description": "Aligns items across the line. Use baseline for text of different sizes.",
+        "name": "align",
+        "type": "\"start\" | \"center\" | \"end\" | \"baseline\""
+      },
+      {
+        "defaultValue": "\"start\"",
+        "description": "Places items along the line. between pushes the first and last items to opposite edges. center suits the actions of an empty or error state.",
+        "name": "justify",
+        "type": "\"start\" | \"center\" | \"between\" | \"end\""
+      },
+      {
+        "defaultValue": "true",
+        "description": "Lets items continue on a new line when they do not fit.",
+        "name": "wrap",
+        "type": "boolean"
       }
     ],
     "category": "Layout",
-    "description": "Arranges related content horizontally with wrapping and system-owned spacing.",
+    "description": "Arranges a few items on one line, with wrapping and system-owned spacing.",
     "name": "Inline",
     "slug": "inline",
     "status": "stable"
@@ -2220,16 +2256,179 @@
     "api": [
       {
         "defaultValue": "—",
-        "description": "Content arranged in the system section rhythm.",
+        "description": "A PageHeader, then sections.",
+        "name": "children",
+        "type": "ReactNode"
+      },
+      {
+        "defaultValue": "\"full\"",
+        "description": "narrow keeps a form or settings page in one 42rem column.",
+        "name": "width",
+        "type": "\"full\" | \"narrow\""
+      }
+    ],
+    "apiSections": [
+      {
+        "name": "Page",
+        "description": "The content area of one screen. It owns the inset around the content and the 32px between its children.",
+        "properties": [
+          {
+            "defaultValue": "—",
+            "description": "A PageHeader, then sections.",
+            "name": "children",
+            "type": "ReactNode"
+          },
+          {
+            "defaultValue": "\"full\"",
+            "description": "narrow keeps a form or settings page in one 42rem column.",
+            "name": "width",
+            "type": "\"full\" | \"narrow\""
+          }
+        ]
+      },
+      {
+        "name": "PageHeader",
+        "description": "Holds the title, the description, and the page actions.",
+        "properties": [
+          {
+            "defaultValue": "—",
+            "description": "PageTitle, then PageDescription and PageAction when needed.",
+            "name": "children",
+            "type": "ReactNode"
+          }
+        ]
+      },
+      {
+        "name": "PageTitle",
+        "description": "The screen's only h1, 20px semibold.",
+        "properties": [
+          {
+            "defaultValue": "—",
+            "description": "The name of the screen.",
+            "name": "children",
+            "type": "ReactNode"
+          }
+        ]
+      },
+      {
+        "name": "PageDescription",
+        "description": "One muted line under the title.",
+        "properties": [
+          {
+            "defaultValue": "—",
+            "description": "A short sentence about the screen.",
+            "name": "children",
+            "type": "ReactNode"
+          }
+        ]
+      },
+      {
+        "name": "PageAction",
+        "description": "Holds the page's buttons. It sits beside the title when the header is at least 30rem wide, and under the text when it is narrower.",
+        "properties": [
+          {
+            "defaultValue": "—",
+            "description": "The main action, and at most two more.",
+            "name": "children",
+            "type": "ReactNode"
+          }
+        ]
+      }
+    ],
+    "category": "Layout",
+    "description": "Lays out one screen: a header with a title and actions, then sections in a steady rhythm.",
+    "name": "Page",
+    "slug": "page",
+    "status": "preview"
+  },
+  {
+    "api": [
+      {
+        "defaultValue": "—",
+        "description": "A SectionHeader, then the content.",
         "name": "children",
         "type": "ReactNode"
       }
     ],
     "category": "Layout",
-    "description": "Arranges related content in a section with system-owned spacing.",
+    "description": "Groups one topic under a title, with an optional description and action.",
     "name": "Section",
     "slug": "section",
-    "status": "stable"
+    "status": "stable",
+    "apiSections": [
+      {
+        "name": "Section",
+        "description": "A native section that spaces its header and content 16px apart. Name it with aria-labelledby.",
+        "properties": [
+          {
+            "defaultValue": "—",
+            "description": "A SectionHeader, then the content.",
+            "name": "children",
+            "type": "ReactNode"
+          },
+          {
+            "defaultValue": "—",
+            "description": "The id of the SectionTitle. It names the region.",
+            "name": "aria-labelledby",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "name": "SectionHeader",
+        "description": "Holds the title, the description, and the action.",
+        "properties": [
+          {
+            "defaultValue": "—",
+            "description": "SectionTitle, then SectionDescription and SectionAction when needed.",
+            "name": "children",
+            "type": "ReactNode"
+          }
+        ]
+      },
+      {
+        "name": "SectionTitle",
+        "description": "The section heading, 16px semibold.",
+        "properties": [
+          {
+            "defaultValue": "2",
+            "description": "Sets the heading level in the document outline. The look stays the same.",
+            "name": "level",
+            "type": "2 | 3 | 4 | 5 | 6"
+          },
+          {
+            "defaultValue": "—",
+            "description": "Referenced by the Section's aria-labelledby.",
+            "name": "id",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "name": "SectionDescription",
+        "description": "One muted line under the title.",
+        "properties": [
+          {
+            "defaultValue": "—",
+            "description": "A short sentence about the section.",
+            "name": "children",
+            "type": "ReactNode"
+          }
+        ]
+      },
+      {
+        "name": "SectionAction",
+        "description": "Holds the section's buttons. It sits beside the title when the header is at least 30rem wide, and under the text when it is narrower.",
+        "properties": [
+          {
+            "defaultValue": "—",
+            "description": "One or two small buttons.",
+            "name": "children",
+            "type": "ReactNode"
+          }
+        ]
+      }
+    ]
   },
   {
     "api": [

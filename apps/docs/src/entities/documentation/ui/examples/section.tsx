@@ -1,40 +1,38 @@
 import {
-	Field,
-	FieldLabel,
-	Heading,
+	Button,
+	Grid,
+	MetricTrend,
 	Section,
-	Stack,
-	Switch,
-	Text,
+	SectionAction,
+	SectionDescription,
+	SectionHeader,
+	SectionTitle,
 } from "@mizen-labs/ui";
 
-const notifications = [
-	["mentions", "Mentions and replies", true],
-	["weekly", "Weekly summary", true],
-	["product", "Product news", false],
+const usage = [
+	["Requests", "1.2M"],
+	["Bandwidth", "84 GB"],
+	["Build minutes", "312"],
+	["Seats", "8 of 10"],
 ] as const;
 
-export function ProjectSettingsSection() {
+export function UsageSection() {
 	return (
-		<Section aria-labelledby="notifications-heading">
-			<Stack gap="1">
-				<Heading id="notifications-heading" level={3}>
-					Notifications
-				</Heading>
-				<Text size="ui" tone="muted">
-					Choose what reaches your inbox.
-				</Text>
-			</Stack>
-			<Stack gap="3">
-				{notifications.map(([name, label, checked]) => (
-					<Field key={name}>
-						<FieldLabel>
-							<Switch defaultChecked={checked} name={name} />
-							{label}
-						</FieldLabel>
-					</Field>
+		<Section aria-labelledby="usage-title">
+			<SectionHeader>
+				<SectionTitle id="usage-title">Usage</SectionTitle>
+				<SectionDescription>This billing period.</SectionDescription>
+				<SectionAction>
+					<Button size="sm" variant="outline">
+						Export
+					</Button>
+				</SectionAction>
+			</SectionHeader>
+			<Grid columns="4" gap="4">
+				{usage.map(([label, value]) => (
+					<MetricTrend key={label} label={label} value={value} />
 				))}
-			</Stack>
+			</Grid>
 		</Section>
 	);
 }

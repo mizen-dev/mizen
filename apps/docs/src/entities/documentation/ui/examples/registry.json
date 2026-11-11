@@ -1305,12 +1305,18 @@
     {
       "name": "SummaryGrid",
       "title": "Metric overview",
-      "description": "Four stat cards share two columns and stack into one column on narrow screens."
+      "description": "Four metrics sit in four columns, step down to two by two, and stack in a narrow grid."
     },
     {
       "name": "GridYourProjectsExample1",
-      "title": "Your projects",
-      "description": "Four projects, arranged to fit the available space.",
+      "title": "As many as fit",
+      "description": "columns auto fits as many equal cards as there is room for.",
+      "path": "entities/documentation/ui/examples/grid-variants.tsx"
+    },
+    {
+      "name": "GridMainAsideExample2",
+      "title": "Main and aside",
+      "description": "columns 2:1 puts the main content beside a narrower column. The two stack when the grid is narrow.",
       "path": "entities/documentation/ui/examples/grid-variants.tsx"
     }
   ],
@@ -1337,6 +1343,18 @@
       "name": "InlineProductionReleaseExample1",
       "title": "Production release",
       "description": "Preview the release before deploying your changes.",
+      "path": "entities/documentation/ui/examples/inline-variants.tsx"
+    },
+    {
+      "name": "InlineBetweenExample2",
+      "title": "Two ends",
+      "description": "justify between puts the count at the start and its actions at the end.",
+      "path": "entities/documentation/ui/examples/inline-variants.tsx"
+    },
+    {
+      "name": "InlineBaselineExample3",
+      "title": "Baseline",
+      "description": "align baseline lines up text of different sizes.",
       "path": "entities/documentation/ui/examples/inline-variants.tsx"
     }
   ],
@@ -1379,14 +1397,20 @@
   ],
   "section": [
     {
-      "name": "ProjectSettingsSection",
-      "title": "Notification settings",
-      "description": "The Section is a landmark named by its heading through aria-labelledby."
+      "name": "UsageSection",
+      "title": "Usage",
+      "description": "The header holds the title, the description, and one action. The content follows 16px below."
     },
     {
       "name": "SectionNorthstarLaunchExample1",
-      "title": "Northstar launch",
-      "description": "",
+      "title": "Title and description",
+      "description": "A section without an action.",
+      "path": "entities/documentation/ui/examples/section-variants.tsx"
+    },
+    {
+      "name": "SectionNotificationsExample2",
+      "title": "Inside another section",
+      "description": "level 3 keeps the document outline in order. The look stays the same.",
       "path": "entities/documentation/ui/examples/section-variants.tsx"
     }
   ],
@@ -3142,6 +3166,37 @@
       "title": "Loading earlier messages",
       "description": "Earlier messages load above the ones in view, and the reader's place does not move.",
       "path": "entities/documentation/ui/examples/message-scroller.tsx"
+    }
+  ],
+  "page": [
+    {
+      "name": "ProjectsPage",
+      "title": "Projects",
+      "description": "A header with the main action, then one section of cards in two columns."
+    },
+    {
+      "name": "PageDashboardExample1",
+      "title": "Dashboard",
+      "description": "Four metrics, then recent payments and a chart. On a wide screen the metrics sit in one row and the chart sits beside the table.",
+      "path": "entities/documentation/ui/examples/page-variants.tsx"
+    },
+    {
+      "name": "PageRecordListExample2",
+      "title": "Record list",
+      "description": "The search field sits in the section header, the table follows, and paging comes last.",
+      "path": "entities/documentation/ui/examples/page-variants.tsx"
+    },
+    {
+      "name": "PageRecordDetailExample3",
+      "title": "Record detail",
+      "description": "The record's history, then its details. On a wide screen the details sit in a narrower column beside the history.",
+      "path": "entities/documentation/ui/examples/page-variants.tsx"
+    },
+    {
+      "name": "PageSettingsExample4",
+      "title": "Settings form",
+      "description": "width narrow keeps the form in one readable column.",
+      "path": "entities/documentation/ui/examples/page-variants.tsx"
     }
   ]
 }

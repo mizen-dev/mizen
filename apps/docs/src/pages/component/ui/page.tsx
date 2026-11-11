@@ -59,6 +59,7 @@ const widePreviews = new Set([
 	"alert",
 	"button",
 	"date-time-input",
+	"time-input",
 	"lightbox",
 	"pagination",
 	"overflow-list",
@@ -88,6 +89,7 @@ const widePreviews = new Set([
 	"bar-list",
 	"category-comparison",
 	"funnel",
+	"metric",
 	"metric-trend",
 	"distribution",
 	"heatmap",
@@ -111,6 +113,7 @@ const fillPreviews = new Set([
 	"diagram",
 	"slider",
 	"grid",
+	"section",
 	"progress-rings",
 	"aspect-ratio",
 	"lightbox",
@@ -137,11 +140,33 @@ const fillPreviews = new Set([
 	"time-series",
 ]);
 
+// A screen fills the stage edge to edge, as it fills an app's content area.
+const screenPreviews = new Set(["page"]);
+
 function getDemoProps(slug: string) {
 	return props(
 		docsStyles.controlDemo,
 		widePreviews.has(slug) && docsStyles.wideDemo,
-		fillPreviews.has(slug) && docsStyles.fillDemo
+		fillPreviews.has(slug) && docsStyles.fillDemo,
+		screenPreviews.has(slug) && docsStyles.screenDemo
+	);
+}
+
+// A layout changes with the width of the window, and the stage is narrower
+// than a screen. These examples also open on their own.
+const fullScreenPreviews = new Set(["grid", "page"]);
+
+function getFullScreenHref(slug: string, name: string | undefined) {
+	return name && fullScreenPreviews.has(slug)
+		? `/docs/examples/${name}`
+		: undefined;
+}
+
+function getStageProps(slug: string) {
+	return props(
+		docsStyles.previewFrame,
+		docsStyles.usageStage,
+		screenPreviews.has(slug) && docsStyles.screenStage
 	);
 }
 
@@ -317,6 +342,7 @@ export default function ComponentPage({
 									))}
 								</div>
 							}
+							fullScreenHref={getFullScreenHref(slug, presentation?.name)}
 							label={`${component.name} presentation`}
 						>
 							<section
@@ -324,7 +350,7 @@ export default function ComponentPage({
 								data-slot="component-preview"
 								// biome-ignore lint/a11y/noNoninteractiveTabindex: keyboard focus enables scrolling oversized demonstrations.
 								tabIndex={0}
-								{...props(docsStyles.previewFrame, docsStyles.usageStage)}
+								{...getStageProps(slug)}
 							>
 								<div id={presentation?.name} {...getDemoProps(slug)}>
 									{/* eslint-disable-next-line react-hooks/static-components -- A registry lookup: each slug maps to a module-level component, so its identity never changes. */}
@@ -391,6 +417,7 @@ export default function ComponentPage({
 												label={`${component.name} usage: ${title}`}
 											/>
 										}
+										fullScreenHref={getFullScreenHref(slug, name)}
 										label={`${component.name}: ${title}`}
 									>
 										<section
@@ -398,7 +425,7 @@ export default function ComponentPage({
 											data-slot="usage-preview"
 											// biome-ignore lint/a11y/noNoninteractiveTabindex: keyboard focus enables scrolling oversized demonstrations.
 											tabIndex={0}
-											{...props(docsStyles.previewFrame, docsStyles.usageStage)}
+											{...getStageProps(slug)}
 										>
 											<div {...getDemoProps(slug)}>
 												<Example />

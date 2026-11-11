@@ -14,7 +14,6 @@ import {
 	FrameHeader,
 	FramePanel,
 	FrameTitle,
-	Grid,
 	Heading,
 	Inline,
 	Stack,
@@ -72,10 +71,10 @@ export function ErrorStateComposedRecoveryActionsExample2() {
 					</ErrorStateDescription>
 				</ErrorStateHeader>
 				<ErrorStateContent>
-					<Grid>
+					<Inline justify="center">
 						<Button variant="brand">Reconnect</Button>
 						<Button variant="outline">Network diagnostics</Button>
-					</Grid>
+					</Inline>
 				</ErrorStateContent>
 			</ErrorState>
 		</Stack>

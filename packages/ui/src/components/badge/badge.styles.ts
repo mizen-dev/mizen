@@ -67,7 +67,9 @@ export const badgeStyles = create({
 			":focus-visible": borderWidth.focus,
 			default: borderWidth.focus,
 		},
-		overflowWrap: "anywhere",
+		// break-word, not anywhere: a long label still wraps, but a table column
+		// cannot shrink the badge to one letter per line.
+		overflowWrap: "break-word",
 		whiteSpace: "normal",
 	},
 	brand: {

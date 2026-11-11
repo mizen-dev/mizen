@@ -45,7 +45,7 @@ export function GridSpecimen() {
 			primary
 			title="Your projects"
 		>
-			<Grid>
+			<Grid columns="auto" gap="4">
 				{projects.map((project) => (
 					<Card key={project.name}>
 						<CardHeader>

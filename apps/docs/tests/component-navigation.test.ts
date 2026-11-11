@@ -77,7 +77,7 @@ describe("Component navigation", () => {
 	}, 120_000);
 
 	it("preserves flat registry and exports derived groups in taxonomy order", () => {
-		expect(componentDocs.length).toBe(127);
+		expect(componentDocs.length).toBe(128);
 		expect(
 			componentDocs.some((component) => component.slug === "side-navigation")
 		).toBe(false);

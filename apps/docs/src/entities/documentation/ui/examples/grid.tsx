@@ -8,7 +8,7 @@ import {
 
 export function SummaryGrid() {
 	return (
-		<Grid>
+		<Grid columns="4" gap="4">
 			<MetricTrend
 				delta={<MetricDelta value={0.12} />}
 				deltaPlacement="footer"

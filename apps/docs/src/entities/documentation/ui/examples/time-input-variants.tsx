@@ -24,33 +24,31 @@ export function TimeInputReviewScheduleExample1() {
 }
 export function TimeInputControlStatesExample2() {
 	return (
-		<Stack gap="4">
-			<Grid>
-				<Field>
-					<FieldLabel>Small time input</FieldLabel>
-					<TimeInput defaultValue="09:30" size="sm" />
-				</Field>
-				<Field>
-					<FieldLabel>Large time input</FieldLabel>
-					<TimeInput defaultValue="14:45" size="lg" />
-				</Field>
-				<Field>
-					<FieldLabel>Time with seconds</FieldLabel>
-					<TimeInput defaultValue="09:30:15" step={1} />
-					<FieldDescription>
-						Use a seconds-based step for finer precision.
-					</FieldDescription>
-				</Field>
-				<Field>
-					<FieldLabel>Managed time</FieldLabel>
-					<TimeInput defaultValue="09:00" disabled />
-					<FieldDescription>Managed by your workspace.</FieldDescription>
-				</Field>
-				<Field>
-					<FieldLabel>Read-only time</FieldLabel>
-					<TimeInput defaultValue="17:00" readOnly />
-				</Field>
-			</Grid>
-		</Stack>
+		<Grid>
+			<Field>
+				<FieldLabel>Small time input</FieldLabel>
+				<TimeInput defaultValue="09:30" size="sm" />
+			</Field>
+			<Field>
+				<FieldLabel>Large time input</FieldLabel>
+				<TimeInput defaultValue="14:45" size="lg" />
+			</Field>
+			<Field>
+				<FieldLabel>Time with seconds</FieldLabel>
+				<TimeInput defaultValue="09:30:15" step={1} />
+				<FieldDescription>
+					Use a seconds-based step for finer precision.
+				</FieldDescription>
+			</Field>
+			<Field>
+				<FieldLabel>Managed time</FieldLabel>
+				<TimeInput defaultValue="09:00" disabled />
+				<FieldDescription>Managed by your workspace.</FieldDescription>
+			</Field>
+			<Field>
+				<FieldLabel>Read-only time</FieldLabel>
+				<TimeInput defaultValue="17:00" readOnly />
+			</Field>
+		</Grid>
 	);
 }

@@ -1,6 +1,7 @@
 import { cliGuide } from "./cli-guide";
 import { componentCategories, componentDocs } from "./docs-registry";
 import { hookGuides } from "./hook-guides";
+import { layoutGuide } from "./layout-guide";
 
 interface GuideSection {
 	code?: { title?: string; value: string };
@@ -233,12 +234,12 @@ function RootDocument({ children }) {
 			{
 				id: "layout",
 				links: [
-					{ href: "/docs/components/stack", label: "Stack" },
-					{ href: "/docs/components/inline", label: "Inline" },
+					{ href: "/docs/layout", label: "Layout" },
+					{ href: "/docs/components/page", label: "Page" },
 					{ href: "/docs/components/grid", label: "Grid" },
 				],
 				paragraphs: [
-					"Arrange components with Stack for vertical rhythm, Inline for rows, and Grid for columns. Group, Section, Frame, and Card group related content. Spacer adds space between items.",
+					"Lay out a screen with Page and Section. Arrange content with Stack for vertical rhythm, Inline for rows, and Grid for columns. Group, Frame, and Card group related content.",
 					"These primitives use the spacing scale, so layouts keep one rhythm without custom margins.",
 				],
 				title: "Lay out with primitives",
@@ -503,6 +504,7 @@ export function SystemThemeAction() {
 		slug: "theming",
 		title: "Theming",
 	},
+	layoutGuide,
 	{
 		description:
 			"Build tasks from existing components with explicit state, labels, and client boundaries.",

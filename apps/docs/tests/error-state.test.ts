@@ -174,12 +174,12 @@ describe("ErrorState component browser behavior", () => {
 
 	it("preserves layout bounds across viewports with responsive actions", async () => {
 		await gotoErrorState(1280, 900);
-		const grid = page
+		const actions = page
 			.locator(
-				`${EXAMPLES} [data-slot="error-state-content"] [data-slot="grid"]`
+				`${EXAMPLES} [data-slot="error-state-content"] [data-slot="inline"]`
 			)
 			.first();
-		const buttons = grid.locator("button");
+		const buttons = actions.locator("button");
 		expect(await buttons.count()).toBe(2);
 
 		const [d1, d2] = await Promise.all([

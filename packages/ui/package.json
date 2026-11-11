@@ -474,6 +474,11 @@
       "types": "./dist/components/breadcrumb/breadcrumb.d.ts",
       "default": "./dist/components/breadcrumb/breadcrumb.js"
     },
+    "./page": {
+      "source": "./src/components/page/page.tsx",
+      "types": "./dist/components/page/page.d.ts",
+      "default": "./dist/components/page/page.js"
+    },
     "./pagination": {
       "source": "./src/components/pagination/pagination.tsx",
       "types": "./dist/components/pagination/pagination.d.ts",

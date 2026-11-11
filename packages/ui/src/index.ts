@@ -517,7 +517,11 @@ export {
 	FramePanel,
 	FrameTitle,
 } from "./components/frame/frame";
-export type { GridProps } from "./components/grid/grid";
+export type {
+	GridColumns,
+	GridGap,
+	GridProps,
+} from "./components/grid/grid";
 export { Grid } from "./components/grid/grid";
 export type { GroupProps } from "./components/group/group";
 export { Group } from "./components/group/group";
@@ -529,7 +533,12 @@ export type {
 export { Heading } from "./components/heading/heading";
 export type { HeatmapProps, HeatmapRow } from "./components/heatmap/heatmap";
 export { Heatmap } from "./components/heatmap/heatmap";
-export type { InlineProps } from "./components/inline/inline";
+export type {
+	InlineAlign,
+	InlineGap,
+	InlineJustify,
+	InlineProps,
+} from "./components/inline/inline";
 export { Inline } from "./components/inline/inline";
 export type {
 	InlineCitationProps,
@@ -681,6 +690,21 @@ export {
 	OTPFieldPrimitive,
 	OTPFieldSeparator,
 } from "./components/otp-field/otp-field";
+export type {
+	PageActionProps,
+	PageDescriptionProps,
+	PageHeaderProps,
+	PageProps,
+	PageTitleProps,
+	PageWidth,
+} from "./components/page/page";
+export {
+	Page,
+	PageAction,
+	PageDescription,
+	PageHeader,
+	PageTitle,
+} from "./components/page/page";
 export {
 	Pagination,
 	PaginationContent,
@@ -787,8 +811,21 @@ export {
 	ScrollAreaThumb,
 	ScrollAreaViewport,
 } from "./components/scroll-area/scroll-area";
-export type { SectionProps } from "./components/section/section";
-export { Section } from "./components/section/section";
+export type {
+	SectionActionProps,
+	SectionDescriptionProps,
+	SectionHeaderProps,
+	SectionProps,
+	SectionTitleLevel,
+	SectionTitleProps,
+} from "./components/section/section";
+export {
+	Section,
+	SectionAction,
+	SectionDescription,
+	SectionHeader,
+	SectionTitle,
+} from "./components/section/section";
 export {
 	SegmentedControl,
 	SegmentedControlItem,

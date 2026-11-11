@@ -10,6 +10,7 @@ export const EXPECTED_GROUPS = [
 			"Grid",
 			"Group",
 			"Inline",
+			"Page",
 			"Scroll Area",
 			"Section",
 			"Separator",

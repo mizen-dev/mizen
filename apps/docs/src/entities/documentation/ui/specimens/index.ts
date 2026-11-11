@@ -105,6 +105,7 @@ import { MenuSpecimen } from "./menu-specimen";
 import { MetricSpecimen } from "./metric-specimen";
 import { NumberFieldSpecimen } from "./number-field-specimen";
 import { OtpFieldSpecimen } from "./otp-field-specimen";
+import { PageSpecimen } from "./page-specimen";
 import { PopoverSpecimen } from "./popover-specimen";
 import { PreviewCardSpecimen } from "./preview-card-specimen";
 import { ProgressSpecimen } from "./progress-specimen";
@@ -202,6 +203,7 @@ export const specimenRegistry: Record<string, ComponentType> = {
 	"number-field": NumberFieldSpecimen,
 	"otp-field": OtpFieldSpecimen,
 	"overflow-list": OverflowListExamples,
+	page: PageSpecimen,
 	pagination: PaginationExamples,
 	"part-to-whole": PartToWholeExamples,
 	popover: PopoverSpecimen,

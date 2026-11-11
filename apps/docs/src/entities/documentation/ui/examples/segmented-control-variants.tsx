@@ -1,8 +1,8 @@
 "use client";
 import {
 	Badge,
-	Grid,
 	Heading,
+	Inline,
 	SegmentedControl,
 	SegmentedControlItem,
 	Stack,
@@ -27,7 +27,7 @@ export function SegmentedControlProjectViewsExample1() {
 				</SegmentedControlItem>
 			</SegmentedControl>
 			{view.includes("board") ? (
-				<Grid>
+				<Inline align="start" gap="8">
 					<Stack gap="2">
 						<Badge variant="outline">In progress</Badge>
 						<Text>Northstar launch</Text>
@@ -42,7 +42,7 @@ export function SegmentedControlProjectViewsExample1() {
 							Sam Lee
 						</Text>
 					</Stack>
-				</Grid>
+				</Inline>
 			) : (
 				<Stack gap="3">
 					<Text>Northstar launch · In progress</Text>

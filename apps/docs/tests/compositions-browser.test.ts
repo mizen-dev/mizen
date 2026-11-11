@@ -220,7 +220,7 @@ describe("main page compositions", { timeout: 30_000 }, () => {
 		).toHaveCount(1);
 		const canvas = comparison.getByTestId("settings-surface-canvas");
 		const cardFields = comparison.getByTestId("settings-surface-card-fields");
-		const surfaceGrid = comparison.locator('[data-slot="grid"]');
+		const surfaceGrid = comparison.locator('[data-slot="grid-track"]');
 		expect(
 			await surfaceGrid.evaluate(
 				(element) =>

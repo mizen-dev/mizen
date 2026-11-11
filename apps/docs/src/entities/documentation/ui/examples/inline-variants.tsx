@@ -40,3 +40,32 @@ export function InlineProductionReleaseExample1() {
 		</Stack>
 	);
 }
+
+export function InlineBetweenExample2() {
+	return (
+		<Inline justify="between">
+			<Text size="ui" tone="muted">
+				3 of 12 members selected
+			</Text>
+			<Inline gap="2">
+				<Button size="sm" variant="outline">
+					Change role
+				</Button>
+				<Button size="sm" variant="destructive-outline">
+					Remove
+				</Button>
+			</Inline>
+		</Inline>
+	);
+}
+
+export function InlineBaselineExample3() {
+	return (
+		<Inline align="baseline" gap="2">
+			<Heading level={3}>$48,290</Heading>
+			<Text size="ui" tone="muted">
+				this month
+			</Text>
+		</Inline>
+	);
+}

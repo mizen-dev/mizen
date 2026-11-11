@@ -21,32 +21,30 @@ export function MetricSubscriptionsExample1() {
 }
 export function MetricRevenueAndUptimeExample2() {
 	return (
-		<Stack gap="4">
-			<Grid data-testid="metric-grid">
-				<Card data-testid="metric-card-revenue">
-					<CardContent>
-						<Metric data-testid="metric-revenue">
-							<MetricLabel>Monthly recurring revenue</MetricLabel>
-							<MetricValue>$84,250</MetricValue>
-							<MetricDescription>
-								Total invoiced revenue across all subscription tiers.
-							</MetricDescription>
-						</Metric>
-					</CardContent>
-				</Card>
-				<Card data-testid="metric-card-uptime">
-					<CardContent>
-						<Metric data-testid="metric-uptime">
-							<MetricLabel>Service availability</MetricLabel>
-							<MetricValue>99.98%</MetricValue>
-							<MetricDescription>
-								Rolling 90-day system uptime across production clusters.
-							</MetricDescription>
-						</Metric>
-					</CardContent>
-				</Card>
-			</Grid>
-		</Stack>
+		<Grid data-testid="metric-grid">
+			<Card data-testid="metric-card-revenue">
+				<CardContent>
+					<Metric data-testid="metric-revenue">
+						<MetricLabel>Monthly recurring revenue</MetricLabel>
+						<MetricValue>$84,250</MetricValue>
+						<MetricDescription>
+							Total invoiced revenue across all subscription tiers.
+						</MetricDescription>
+					</Metric>
+				</CardContent>
+			</Card>
+			<Card data-testid="metric-card-uptime">
+				<CardContent>
+					<Metric data-testid="metric-uptime">
+						<MetricLabel>Service availability</MetricLabel>
+						<MetricValue>99.98%</MetricValue>
+						<MetricDescription>
+							Rolling 90-day system uptime across production clusters.
+						</MetricDescription>
+					</Metric>
+				</CardContent>
+			</Card>
+		</Grid>
 	);
 }
 export function MetricTrafficAndCacheExample3() {

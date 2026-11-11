@@ -331,6 +331,12 @@ export const docsStyles = create({
 		overflowX: "auto",
 		padding: { default: space["3"], [conditions.sm]: space["5"] },
 	},
+	screenDemo: {
+		gridTemplateColumns: "minmax(0, 1fr)",
+		justifyItems: "stretch",
+		maxInlineSize: "none",
+	},
+	screenStage: { alignItems: "stretch", padding: 0 },
 	sectionTitle: {
 		fontSize: fontSize["28"],
 		fontWeight: fontWeight.semibold,
