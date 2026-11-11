@@ -192,6 +192,9 @@ export const tableStyles = create({
 		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		minWidth: "100%",
+		// A container may break words anywhere, which lets columns shrink below
+		// a word. Here a word breaks only when it cannot fit its column.
+		overflowWrap: "break-word",
 		textAlign: "start",
 	},
 });

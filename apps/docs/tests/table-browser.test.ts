@@ -177,6 +177,34 @@ describe("Table", { timeout: 30_000 }, () => {
 		}
 	);
 
+	it("keeps words whole inside a container that breaks words anywhere", async () => {
+		await page.goto(`${handle.url}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
+		const table = page
+			.locator('[data-slot="table"]', { hasText: "BUD-00001" })
+			.first();
+		await table.scrollIntoViewIfNeeded();
+		const found = await table.evaluate((element) => {
+			const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+			const broken: string[] = [];
+			for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+				const text = node.textContent?.trim() ?? "";
+				const range = document.createRange();
+				range.selectNodeContents(node);
+				if (text && !text.includes(" ") && range.getClientRects().length > 1) {
+					broken.push(text);
+				}
+			}
+			return {
+				broken: [...new Set(broken)],
+				inherited: getComputedStyle(element.parentElement ?? element)
+					.overflowWrap,
+			};
+		});
+		expect(found).toEqual({ broken: [], inherited: "anywhere" });
+	});
+
 	it("freezes the logical start column in right-to-left layouts", async () => {
 		await page.goto(`${handle.url}/internal/specimens`, {
 			waitUntil: "networkidle",
