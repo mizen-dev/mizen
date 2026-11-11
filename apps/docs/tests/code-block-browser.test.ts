@@ -64,7 +64,9 @@ describe("Code Block browser behavior", () => {
 	beforeEach(async () => {
 		browserErrors.length = 0;
 		await page.setViewportSize({ height: 900, width: 1280 });
-		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${handle.url}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 	});
 
 	afterEach(() => {
@@ -132,7 +134,7 @@ describe("Code Block browser behavior", () => {
 			await page.evaluate((nextTheme) => {
 				localStorage.setItem("mizen-theme", nextTheme);
 			}, theme);
-			await page.reload({ waitUntil: "load" });
+			await page.reload({ waitUntil: "networkidle" });
 			await expectLocator(surface).toBeVisible();
 			await expectLocator(page.locator("html")).toHaveAttribute(
 				"data-theme",

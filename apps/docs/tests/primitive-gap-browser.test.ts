@@ -54,7 +54,9 @@ describe("small primitive browser behavior", () => {
 				errors.push(message.text());
 			}
 		});
-		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${handle.url}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		await expectLocator(page.locator("html")).toHaveAttribute(
 			"data-theme",
 			theme
@@ -131,7 +133,7 @@ describe("small primitive browser behavior", () => {
 			await expectLocator(page).toHaveURL(DOCS_URL);
 
 			await page.goto(`${handle.url}/internal/specimens`, {
-				waitUntil: "load",
+				waitUntil: "networkidle",
 			});
 			await expectLocator(page.locator("html")).toHaveAttribute(
 				"data-theme",

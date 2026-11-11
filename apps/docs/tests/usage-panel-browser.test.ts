@@ -34,7 +34,7 @@ describe("usage panel recipe", () => {
 
 		try {
 			await page.goto(`${handle.url}/internal/specimens`, {
-				waitUntil: "load",
+				waitUntil: "networkidle",
 			});
 			const section = page.getByTestId("usage-panel-example");
 			await expectLocator(
@@ -93,7 +93,7 @@ describe("usage panel recipe", () => {
 
 		try {
 			await page.goto(`${handle.url}/internal/specimens`, {
-				waitUntil: "load",
+				waitUntil: "networkidle",
 			});
 			const section = page.getByTestId("usage-panel-example");
 			await expectLocator(section.getByRole("meter")).toHaveCount(3);

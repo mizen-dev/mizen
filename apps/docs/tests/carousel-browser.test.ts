@@ -37,7 +37,9 @@ describe("Carousel browser behavior", () => {
 	});
 
 	it("updates the named carousel controls at each boundary", async () => {
-		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${handle.url}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		const section = page.getByTestId("carousel-example");
 		const carousel = section.getByRole("region", { name: "Project studies" });
 		const previous = carousel.getByRole("button", { name: "Previous slide" });
@@ -71,7 +73,9 @@ describe("Carousel browser behavior", () => {
 
 	it("keeps controls accurate after native scrolling and viewport resize", async () => {
 		await page.setViewportSize({ height: 900, width: 1280 });
-		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${handle.url}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		const section = page.getByTestId("carousel-example");
 		const carousel = section.getByRole("region", { name: "Project studies" });
 		const previous = carousel.getByRole("button", { name: "Previous slide" });
@@ -94,7 +98,9 @@ describe("Carousel browser behavior", () => {
 	});
 
 	it("moves through slides in right-to-left direction", async () => {
-		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${handle.url}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		const section = page.getByTestId("carousel-example");
 		const carousel = section.getByRole("region", { name: "Project studies" });
 		const previous = carousel.getByRole("button", { name: "Previous slide" });

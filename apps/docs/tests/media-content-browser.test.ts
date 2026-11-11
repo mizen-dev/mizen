@@ -36,7 +36,9 @@ describe("Media and quoted content", () => {
 	});
 
 	it("reserves image proportions and keeps attribution outside the quotation", async () => {
-		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${handle.url}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		await page.getByTestId("code-block-example").screenshot({
 			caret: "initial",
 			path: "/private/tmp/mizen-current-review/code-block.png",
@@ -127,7 +129,7 @@ describe("Media and quoted content", () => {
 				theme
 			);
 			await page.goto(`${handle.url}/internal/specimens`, {
-				waitUntil: "load",
+				waitUntil: "networkidle",
 			});
 			await expectLocator(
 				page

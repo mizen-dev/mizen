@@ -91,7 +91,8 @@ describe("compound actions", { timeout: 30_000 }, () => {
 				(value) => localStorage.setItem("mizen-theme", value),
 				theme
 			);
-			await page.reload();
+			// A press before the page hydrates misses the button.
+			await page.reload({ waitUntil: "networkidle" });
 			const joined = page
 				.getByRole("group", { exact: true, name: "History actions" })
 				.getByRole("button", { exact: true, name: "Undo" });

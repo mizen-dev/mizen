@@ -36,7 +36,9 @@ describe("Data systems compositions", () => {
 	});
 
 	it("keeps metadata pairs and event timestamps native", async () => {
-		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${handle.url}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		const metadata = page.getByTestId("metadata-example").locator("dl");
 		await expectLocator(metadata.locator("dt")).toHaveCount(3);
 		await expectLocator(metadata.locator("dd")).toHaveCount(3);
@@ -55,7 +57,9 @@ describe("Data systems compositions", () => {
 	});
 
 	it("reveals overflow items and restores keyboard focus on dismissal", async () => {
-		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		await page.goto(`${handle.url}/internal/specimens`, {
+			waitUntil: "networkidle",
+		});
 		const section = page.getByTestId("overflow-example");
 		await expectLocator(section.getByText("Sam Jordan")).toHaveCount(0);
 		const trigger = section.getByRole("button", {
@@ -79,7 +83,7 @@ describe("Data systems compositions", () => {
 				theme
 			);
 			await page.goto(`${handle.url}/internal/specimens`, {
-				waitUntil: "load",
+				waitUntil: "networkidle",
 			});
 			await page.getByTestId("activity-example").screenshot({
 				caret: "initial",

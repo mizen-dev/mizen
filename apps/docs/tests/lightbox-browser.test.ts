@@ -58,7 +58,7 @@ describe("Lightbox browser behavior", { timeout: 30_000 }, () => {
 
 	it("pages a gallery with buttons and arrow keys, wrapping at the ends", async () => {
 		await page.goto(`${docsUrl}/docs/components/lightbox`, {
-			waitUntil: "load",
+			waitUntil: "networkidle",
 		});
 		const gallery = page.getByRole("list", { name: "Lavender study" });
 		const thumbnail = gallery.getByRole("button", {
