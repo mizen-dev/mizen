@@ -54,9 +54,9 @@ export const metricTrendStyles = create({
 		color: colors.brandForeground,
 		display: "inline-flex",
 		flexShrink: 0,
-		height: { ":is(*) > svg": glyphSize.xs, default: controlSize["2xs"] },
+		height: { ":is(*) > svg": glyphSize.xs, default: controlSize.xs },
 		justifyContent: "center",
-		width: { ":is(*) > svg": glyphSize.xs, default: controlSize["2xs"] },
+		width: { ":is(*) > svg": glyphSize.xs, default: controlSize.xs },
 	},
 	labelRow: {
 		alignItems: "center",

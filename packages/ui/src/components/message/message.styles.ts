@@ -122,7 +122,7 @@ export const messageStyles = create({
 		display: { ":is([data-long] > *)": "inline-flex", default: "none" },
 		marginBlockStart: space["1"],
 		// The smallest control height: a 24px target around one line of text.
-		minBlockSize: controlSize["2xs"],
+		minBlockSize: controlSize.xs,
 		outlineColor: {
 			":focus-visible": colors.focusRing,
 			default: "transparent",

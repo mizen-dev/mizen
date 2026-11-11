@@ -308,7 +308,7 @@ export function SliderIndicator({
 	const thumbSize = {
 		default: controlSize.xs,
 		lg: controlSize.sm,
-		sm: controlSize["2xs"],
+		sm: controlSize.xs,
 	}[size];
 	const extent =
 		thumbValue && orientation === "horizontal"

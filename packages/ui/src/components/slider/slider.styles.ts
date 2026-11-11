@@ -25,7 +25,7 @@ type SliderSize = "default" | "sm" | "lg";
 const thumbExtent: Record<SliderSize, string> = {
 	default: controlSize.xs,
 	lg: controlSize.sm,
-	sm: controlSize["2xs"],
+	sm: controlSize.xs,
 };
 
 function indicatorLeadingEdge(extent: string, range: boolean) {
@@ -159,8 +159,8 @@ export const sliderStyles = create({
 			content: "''",
 			height: "100%",
 			left: "50%",
-			minHeight: controlSize["2xs"],
-			minWidth: controlSize["2xs"],
+			minHeight: controlSize.xs,
+			minWidth: controlSize.xs,
 			position: "absolute",
 			top: "50%",
 			transform: "translate(-50%, -50%)",
@@ -247,8 +247,8 @@ export const sliderStyles = create({
 	thumbLg: { height: controlSize.sm, width: controlSize.sm },
 	thumbSm: {
 		borderRadius: `calc(${shape.controlRadius} - ${space["1"]})`,
-		height: controlSize["2xs"],
-		width: controlSize["2xs"],
+		height: controlSize.xs,
+		width: controlSize.xs,
 	},
 	thumbValue: {
 		fontFamily: "inherit",

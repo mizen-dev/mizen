@@ -46,7 +46,7 @@ export const skeletonStyles = create({
 	rectangle: {
 		aspectRatio: "16 / 9",
 		borderRadius: shape.controlRadius,
-		minHeight: controlSize["2xs"],
+		minHeight: controlSize.xs,
 		width: "100%",
 	},
 });

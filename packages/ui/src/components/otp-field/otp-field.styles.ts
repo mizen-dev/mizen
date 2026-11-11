@@ -80,7 +80,7 @@ export const otpFieldStyles = create({
 			[conditions.sm]: lineHeight["20"],
 			default: lineHeight["24"],
 		},
-		minWidth: controlSize["2xs"],
+		minWidth: controlSize.xs,
 		outlineColor: {
 			":focus-visible": "var(--mizen-field-focus-edge)",
 			default: "transparent",

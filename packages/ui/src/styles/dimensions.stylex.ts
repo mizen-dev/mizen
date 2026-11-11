@@ -1,9 +1,8 @@
 import { defineConsts } from "@stylexjs/stylex";
 
-// md is the default control height. 2xs and xs share 24px, the smallest hit
-// area a control may have (WCAG 2.5.8).
+// md is the default control height. xs is 24px, the smallest hit area a
+// control may have (WCAG 2.5.8).
 export const controlSize = defineConsts({
-	"2xs": "1.5rem",
 	lg: "2.5rem",
 	md: "2rem",
 	sm: "1.75rem",

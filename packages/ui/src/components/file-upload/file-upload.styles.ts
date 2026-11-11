@@ -254,7 +254,7 @@ export const fileUploadStyles = create({
 		cursor: { ":disabled": "not-allowed", default: "pointer" },
 		display: "inline-flex",
 		flexShrink: 0,
-		height: { [conditions.sm]: controlSize["2xs"], default: controlSize.xs },
+		height: { [conditions.sm]: controlSize.xs, default: controlSize.xs },
 		justifyContent: "center",
 		lineHeight: lineHeight.none,
 		opacity: { ":disabled": opacity.disabled, default: 1 },
@@ -274,7 +274,7 @@ export const fileUploadStyles = create({
 		},
 		transitionProperty: "background-color, border-color, color, outline-color",
 		userSelect: "none",
-		width: { [conditions.sm]: controlSize["2xs"], default: controlSize.xs },
+		width: { [conditions.sm]: controlSize.xs, default: controlSize.xs },
 	},
 	root: {
 		display: "flex",

@@ -54,7 +54,7 @@ export const avatarStyles = create({
 	},
 	groupOverlapSm: {
 		marginInlineStart: {
-			":not(:first-child)": `calc(-0.125 * ${controlSize["2xs"]})`,
+			":not(:first-child)": `calc(-0.125 * ${controlSize.xs})`,
 			default: space["0"],
 		},
 	},
@@ -96,9 +96,9 @@ export const avatarStyles = create({
 	},
 	sm: {
 		fontSize: fontSize["12"],
-		height: controlSize["2xs"],
+		height: controlSize.xs,
 		letterSpacing: letterSpacing.caption,
-		width: controlSize["2xs"],
+		width: controlSize.xs,
 	},
 });
 

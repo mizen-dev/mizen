@@ -210,7 +210,7 @@ describe("AvatarGroup contract and runtime semantics", () => {
 		});
 		expect(avatarStyles.groupOverlapSm).toMatchObject({
 			marginInlineStart: {
-				":not(:first-child)": `calc(-0.125 * ${controlSize["2xs"]})`,
+				":not(:first-child)": `calc(-0.125 * ${controlSize.xs})`,
 				default: space["0"],
 			},
 		});

@@ -112,7 +112,7 @@ export const agentThinkingStyles = create({
 		margin: 0,
 		marginInlineStart: `calc(-1 * ${space["1"]})`,
 		// The smallest control height: a 24px target around one line of text.
-		minBlockSize: controlSize["2xs"],
+		minBlockSize: controlSize.xs,
 		outlineColor: {
 			":focus-visible": colors.focusRing,
 			default: "transparent",
