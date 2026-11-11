@@ -246,20 +246,13 @@ function RootDocument({ children }) {
 			},
 			{
 				code: {
-					value: `import { colors } from "@mizen-labs/ui/colors.stylex";
-import { space } from "@mizen-labs/ui/spacing.stylex";
-import { create, props } from "@stylexjs/stylex";
-
-const styles = create({
-  workarea: {
-    backgroundColor: colors.workarea,
-    color: colors.content,
-    padding: space["4"],
-  },
-});
-
-export function Workarea() {
-  return <section {...props(styles.workarea)}>Project overview</section>;
+					title: "css",
+					value: `/* An element the app owns, in the app's own stylesheet. */
+.store-map {
+  block-size: calc(var(--mizen-space-16) * 5);
+  border-radius: var(--mizen-shape-surface-radius);
+  background-color: var(--mizen-color-workarea);
+  color: var(--mizen-color-content);
 }`,
 				},
 				id: "tokens",
@@ -271,7 +264,8 @@ export function Workarea() {
 				],
 				paragraphs: [
 					"Components have closed styling contracts. Use their supported props and composition. Do not pass className, style, sx, or xstyle to reopen their internals.",
-					"When an app-owned host needs StyleX styling, configure the StyleX Babel and PostCSS plugins for that app first, then use the exported tokens. Keep static values in defineConsts, themed values in defineVars, and finite themes in createTheme. Avoid generated class selectors and descendant overrides.",
+					"An element that the app owns takes the app's own CSS, written with any tool. Every token is a CSS variable in @mizen-labs/ui/styles.css, so the app needs no compiler setup. The variables follow light and dark mode.",
+					"Do not target generated classes or data-slot hooks, and do not write descendant overrides of a component.",
 				],
 				title: "Style app-owned elements",
 			},
@@ -282,10 +276,12 @@ export function Workarea() {
 					{ href: "/docs/foundations", label: "Foundations" },
 				],
 				paragraphs: [
-					"Tokens are StyleX variables, imported from subpaths: colors, spacing, shape, typography, motion, interaction, shadows, dimensions, fonts, palette, and conditions, each as @mizen-labs/ui/<name>.stylex. Type roles live in @mizen-labs/ui/typography.styles.",
-					"Themes swap the variables, so styles written with tokens follow light and dark mode automatically.",
+					"A token variable is named --mizen-<group>-<name>, with the name in lower case and hyphens: --mizen-color-control-surface-hover, --mizen-space-4, --mizen-space-1-5, --mizen-font-size-14.",
+					'The themed groups are color, field-color, font, shape, and letter-spacing. To change one, declare it again on :root after the Mizen stylesheet; add a [data-theme="dark"] rule for a separate dark value. Components follow it.',
+					"The scales are fixed: space, control-size, glyph-size, font-size, font-weight, line-height, border-width, shadow, palette, duration, and easing. Read them; declaring one again does not change the components.",
+					"The same tokens are StyleX modules at @mizen-labs/ui/<name>.stylex. An app needs them only when it compiles StyleX itself. Such an app compiles the Mizen source in the same StyleX build and does not import styles.css: two separately compiled StyleX stylesheets do not agree on rule priority.",
 				],
-				title: "Token subpaths",
+				title: "Token variables",
 			},
 		],
 		slug: "styling",
@@ -421,31 +417,25 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				id: "bootstrap",
 				paragraphs: [
 					"Import the theme helpers from @mizen-labs/ui/theme. Emit ThemeScript synchronously in the server or static document head before body content. Wrap the app in ThemeProvider. Both default to system and the mizen-theme storage key.",
-					"The app owns the fonts. This example uses system fonts. Load custom families only when needed and apply your interface font to body. The package stylesheet supplies the default light and dark themes. Custom createTheme overrides require your own StyleX compiler setup.",
+					"The app owns the fonts. This example uses system fonts. Load custom families only when needed and apply your interface font to body. The package stylesheet supplies the default light and dark themes.",
 				],
 				title: "Theme and font layout",
 			},
 			{
 				code: {
-					title: "src/fonts.styles.ts",
-					value: `import { fonts } from "@mizen-labs/ui/fonts.stylex";
-import { letterSpacing } from "@mizen-labs/ui/typography.stylex";
-import { createTheme } from "@stylexjs/stylex";
-
-export const appFonts = createTheme(fonts, {
-  sans: '"Geist Variable", system-ui, sans-serif',
-  sizeAdjust: "from-font",
-});
-
-export const appTracking = createTheme(letterSpacing, {
-  heading: "-0.02em",
-  title: "-0.04em",
-});`,
+					title: "css",
+					value: `/* In the app stylesheet, loaded after @mizen-labs/ui/styles.css. */
+:root {
+  --mizen-font-sans: "Geist Variable", system-ui, sans-serif;
+  --mizen-font-size-adjust: from-font;
+  --mizen-letter-spacing-heading: -0.02em;
+  --mizen-letter-spacing-title: -0.04em;
+}`,
 				},
 				id: "tracking",
 				paragraphs: [
-					"Letter spacing depends on the font family, so Mizen keeps it in a themeable scale. The letterSpacing tokens are caption for 12px text, ui for 13px to 16px text, then subheading, heading, title, and display. The defaults suit system fonts. If your family is fitted looser or tighter, override the tokens you need with createTheme and apply the theme on body.",
-					"Type roles set font-size-adjust from fonts.sizeAdjust, which defaults to 0.5. Set it to from-font to keep your family at its set size; fallback fonts then scale to match it while the family loads. Both overrides need your own StyleX compiler setup.",
+					"Letter spacing depends on the font family, so Mizen keeps it in a themeable scale. The letterSpacing tokens are caption for 12px text, ui for 13px to 16px text, then subheading, heading, title, and display. The defaults suit system fonts. If your family is fitted looser or tighter, declare the tokens you need again on :root.",
+					"Type roles set font-size-adjust from fonts.sizeAdjust, which defaults to 0.5. Set it to from-font to keep your family at its set size; fallback fonts then scale to match it while the family loads.",
 				],
 				title: "Fonts and tracking",
 			},
@@ -654,7 +644,7 @@ export function ReviewAction() {
 				],
 				paragraphs: [
 					"Check keyboard order, focus return after overlays close, labels, and error associations. Exercise long content, narrow widths, both themes, and reduced motion. Keep numeric and date formatting deterministic during server rendering.",
-					"Do not style internal data-slot hooks or generated classes. Use supported props. For a custom app-owned host, use StyleX and semantic tokens. Build consumer CSS at a real integration checkpoint.",
+					"Do not style internal data-slot hooks or generated classes. Use supported props. For an app-owned element, use your own CSS with the token variables.",
 				],
 				title: "Verify the whole task",
 			},

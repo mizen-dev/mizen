@@ -99,9 +99,11 @@ Never do these in application code:
 - A private stylesheet per page.
 
 If the layout layer cannot express what the screen needs, say so and name the
-missing capability. StyleX on an application-owned host element is for geometry
-only the app knows, such as the height of a chart or a map. Use Mizen tokens
-there, never literal values.
+missing capability. CSS on an application-owned element is for geometry only
+the app knows, such as the height of a chart or a map. Use the Mizen token
+variables there, such as `var(--mizen-space-4)` and
+`var(--mizen-color-content)`, never literal values. Do not set up StyleX in the
+app for this.
 
 ## Compose the interface
 

@@ -62,6 +62,20 @@ it("packs every public export and preserves client boundaries", async () => {
 		expect(css).toContain("oklch(1 0 0)");
 		expect(css).toContain("@media");
 		expect(css.match(UNITLESS_LENGTH) ?? []).toEqual([]);
+		// Every public token has a stable variable in the tokens layer. A themed
+		// one holds the light and the dark value, and its hashed variable reads it.
+		expect(css.startsWith("@layer mizen-tokens{")).toBe(true);
+		expect(css.split("--mizen-color-content:oklch(").length - 1).toBe(2);
+		expect(css.split(":var(--mizen-color-content)").length - 1).toBe(2);
+		for (const constant of [
+			"--mizen-space-4:1rem",
+			"--mizen-space-1-5:0.375rem",
+			"--mizen-border-width-thin:1px",
+			"--mizen-palette-green500:oklch(0.63 0.14 150)",
+			"--mizen-font-size-14:0.875rem",
+		]) {
+			expect(css).toContain(constant);
+		}
 		await Promise.all(
 			Object.entries(manifest.exports).map(async ([name, entry]) => {
 				const targets =

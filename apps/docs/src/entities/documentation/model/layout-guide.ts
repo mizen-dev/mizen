@@ -115,25 +115,17 @@ export function Overview() {
 		},
 		{
 			code: {
-				title: "tsx",
-				value: `import { space } from "@mizen-labs/ui/spacing.stylex";
-import { create, props } from "@stylexjs/stylex";
-import type { ReactNode } from "react";
-
-const styles = create({
-  // Geometry only the app knows: how tall the map is.
-  map: { blockSize: \`calc(\${space["16"]} * 5)\` },
-});
-
-export function StoreMap({ children }: { children: ReactNode }) {
-  return <div {...props(styles.map)}>{children}</div>;
+				title: "css",
+				value: `/* Geometry only the app knows: how tall the map is. */
+.store-map {
+  block-size: calc(var(--mizen-space-16) * 5);
 }`,
 			},
 			id: "limits",
 			links: [{ href: "/docs/styling", label: "Styling" }],
 			paragraphs: [
 				"Application code has no display grid or flex, no widths, margins, or paddings for layout, and no stylesheet per page. Type sizes, colors, shadows, and radii come from components.",
-				"StyleX on an application-owned element is for geometry only the app knows, such as the height of a chart or a map. Use tokens there, never literal values.",
+				"CSS on an application-owned element is for geometry only the app knows, such as the height of a chart or a map. Use the token variables there, never literal values.",
 				"If the layout layer cannot express what a screen needs, report the missing capability. Do not work around it with CSS.",
 			],
 			title: "What the application does not write",

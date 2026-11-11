@@ -32,8 +32,19 @@ and TanStack Start each need one setting:
 
 For Next and Start, render `ThemeScript` in the document head and wrap the app in `ThemeProvider`,
 both from `@mizen-labs/ui/theme`. The app owns its global defaults and fonts.
-App-owned StyleX styles or custom `createTheme` overrides need a separate StyleX
-compiler setup. The package stylesheet includes the default light and dark themes.
+The package stylesheet includes the default light and dark themes, and every
+token as a CSS variable such as `--mizen-color-content` and `--mizen-space-4`.
+Style your own elements with those variables in plain CSS. To change a themed
+token, declare it again on `:root` after the Mizen stylesheet:
+
+```css
+:root {
+  --mizen-font-sans: "Geist Variable", system-ui, sans-serif;
+  --mizen-color-accent: oklch(0.5 0.2 260);
+}
+```
+
+The app needs no StyleX setup.
 
 ## Use
 

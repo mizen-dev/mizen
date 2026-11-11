@@ -3,6 +3,7 @@ import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import stylex from "@stylexjs/postcss-plugin";
 import postcss from "postcss";
+import { publicTokens } from "./public-tokens.mjs";
 
 const require = createRequire(import.meta.url);
 const workspaceRoot = fileURLToPath(new URL("../../../", import.meta.url));
@@ -19,6 +20,7 @@ const result = await postcss([
 		cwd: workspaceRoot,
 		include: ["packages/ui/src/**/*.{ts,tsx}"],
 	}),
+	await publicTokens(new URL("../dist/styles/", import.meta.url)),
 ]).process("@stylex;", {
 	from: fileURLToPath(new URL("../src/styles.css", import.meta.url)),
 });
