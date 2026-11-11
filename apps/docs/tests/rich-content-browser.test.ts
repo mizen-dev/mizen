@@ -133,6 +133,34 @@ describe("Rich content browser behavior", () => {
 		}
 	);
 
+	it("puts a task's checkbox in place of the list marker", async () => {
+		const { context, page } = await openWithTheme("dark");
+		try {
+			const task = page
+				.getByTestId("markdown-example")
+				.locator('[data-slot="markdown-task"]')
+				.first();
+			const fit = await task.evaluate((box) => {
+				const item = box.closest("li") ?? box;
+				const paragraph = item
+					.closest('[data-slot="markdown"]')
+					?.querySelector("p")
+					?.getBoundingClientRect();
+				return {
+					boxInset: box.getBoundingClientRect().left - (paragraph?.left ?? 0),
+					marker: getComputedStyle(item).listStyleType,
+					textInset: item.getBoundingClientRect().left - (paragraph?.left ?? 0),
+				};
+			});
+			expect(fit.marker).toBe("none");
+			// The box starts at the text edge; the label keeps the list indent.
+			expect(Math.abs(fit.boxInset)).toBeLessThan(1);
+			expect(fit.textInset).toBe(16);
+		} finally {
+			await context.close();
+		}
+	});
+
 	it("contains Markdown, Thumbnail, and Timestamp at 390px with enlarged text spacing", async () => {
 		const { context, page } = await openWithTheme("light", 390);
 		try {

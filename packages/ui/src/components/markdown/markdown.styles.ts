@@ -25,6 +25,8 @@ export const markdownStyles = create({
 	checkbox: {
 		accentColor: colors.primary,
 		marginInlineEnd: space["2"],
+		// Stands where the list marker was, at the text edge.
+		marginInlineStart: `calc(-1 * (${space["4"]} + ${space["1"]}))`,
 	},
 	heading: {
 		color: colors.content,
@@ -84,7 +86,15 @@ export const markdownStyles = create({
 		marginBlockEnd: { ":last-child": 0, default: space["3"] },
 		paddingInlineStart: space["4"],
 	},
-	listItem: { paddingInlineStart: space["1"] },
+	listItem: {
+		// A task shows its checkbox instead of a marker.
+		listStyleType: {
+			":has(> [data-slot=markdown-task], > p > [data-slot=markdown-task])":
+				"none",
+			default: null,
+		},
+		paddingInlineStart: space["1"],
+	},
 	paragraph: {
 		marginBlock: 0,
 		marginBlockEnd: { ":last-child": 0, default: space["3"] },
