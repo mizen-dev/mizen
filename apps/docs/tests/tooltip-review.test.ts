@@ -131,6 +131,32 @@ describe("Tooltip browser states", { timeout: 20_000 }, () => {
 		}
 	);
 
+	it("centers a wrapped tooltip on its trigger", async () => {
+		await page.setViewportSize({ height: 800, width: 1280 });
+		const trigger = page.getByRole("button", {
+			exact: true,
+			name: "Release identifier",
+		});
+		await trigger.focus();
+		const popup = page.locator('[data-slot="tooltip-popup"][data-open]');
+		await popup.waitFor({ state: "visible" });
+		const [anchor, box, positioner] = await Promise.all([
+			trigger.boundingBox(),
+			popup.boundingBox(),
+			popup.locator("xpath=..").boundingBox(),
+		]);
+		if (!(anchor && box && positioner)) {
+			throw new Error("Expected the trigger and the tooltip to be rendered");
+		}
+		// The text wraps at the 20rem cap; the positioner has the same box.
+		expect(box.width).toBe(320);
+		expect(positioner.width).toBe(box.width);
+		expect(positioner.height).toBe(box.height);
+		expect(box.x + box.width / 2).toBeCloseTo(anchor.x + anchor.width / 2, 0);
+		await page.keyboard.press("Escape");
+		await popup.waitFor({ state: "hidden" });
+	});
+
 	it("wraps long content on mobile and respects reduced motion and keepMounted", async () => {
 		await page.setViewportSize({ height: 800, width: 320 });
 		await page.emulateMedia({ reducedMotion: "reduce" });

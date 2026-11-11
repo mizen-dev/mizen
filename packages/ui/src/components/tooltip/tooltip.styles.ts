@@ -32,8 +32,11 @@ export const tooltipStyles = create({
 		height: "var(--popup-height, auto)",
 		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
-		// Wide enough that one-sentence tooltips stay on one line.
-		maxWidth: "min(20rem, var(--available-width), calc(100vw - 2rem))",
+		// Wide enough that one-sentence tooltips stay on one line. The cap holds
+		// no --available-width: Base UI sets that to max-content while it
+		// measures, which min() rejects, so the popup measured as one long line.
+		// The positioner applies the available width.
+		maxWidth: "min(20rem, calc(100vw - 2rem))",
 		opacity: {
 			"[data-ending-style]": 0,
 			"[data-starting-style]": 0,
