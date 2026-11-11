@@ -100,6 +100,7 @@ export const usageComponents: Record<string, ReturnType<typeof preloadableExampl
 "CitedParagraph": preloadableExample(() => import("./examples/inline-citation").then((module) => ({ default: module.CitedParagraph }))),
 "CodeBeforeTheReviewExample1": preloadableExample(() => import("./examples/code-variants").then((module) => ({ default: module.CodeBeforeTheReviewExample1 }))),
 "CodeBlockCodeBlockExample1": preloadableExample(() => import("./examples/code-block-variants").then((module) => ({ default: module.CodeBlockCodeBlockExample1 }))),
+"CollapsibleCompactNavigationExample5": preloadableExample(() => import("./examples/collapsible-variants").then((module) => ({ default: module.CollapsibleCompactNavigationExample5 }))),
 "CollapsibleControlledDisclosureExample2": preloadableExample(() => import("./examples/collapsible-variants").then((module) => ({ default: module.CollapsibleControlledDisclosureExample2 }))),
 "CollapsibleDefaultDisclosureExample1": preloadableExample(() => import("./examples/collapsible-variants").then((module) => ({ default: module.CollapsibleDefaultDisclosureExample1 }))),
 "CollapsibleDisabledStateExample3": preloadableExample(() => import("./examples/collapsible-variants").then((module) => ({ default: module.CollapsibleDisabledStateExample3 }))),

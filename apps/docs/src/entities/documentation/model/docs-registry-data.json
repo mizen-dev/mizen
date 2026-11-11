@@ -384,9 +384,15 @@
       },
       {
         "defaultValue": "\"div\"",
-        "description": "Animated disclosure panel with measured transitions; supports keepMounted and hiddenUntilFound. Place spacing on an inner container.",
+        "description": "Animated disclosure panel with measured transitions; supports keepMounted and hiddenUntilFound. The content starts 8px under the trigger; set gap to remove that space.",
         "name": "CollapsiblePanel",
         "type": "CollapsiblePanelProps"
+      },
+      {
+        "defaultValue": "\"2\" (8px)",
+        "description": "On CollapsiblePanel: sets the space above the content. Use \"0\" where the content must start directly under the trigger, such as compact navigation.",
+        "name": "gap",
+        "type": "\"0\" | \"2\""
       },
       {
         "defaultValue": "—",

@@ -123,4 +123,40 @@ describe("Collapsible layout and states", () => {
 		},
 		30_000
 	);
+
+	it("starts the content under the trigger with gap 0 and keeps the height transition", async () => {
+		const page = await browser.newPage({
+			viewport: { height: 1000, width: 1440 },
+		});
+		try {
+			await page.goto(`${handle.url}/components/collapsible`, {
+				waitUntil: "networkidle",
+			});
+			const example = page.locator("#CollapsibleCompactNavigationExample5");
+			await example.scrollIntoViewIfNeeded();
+			expect(
+				await example.evaluate((element) => {
+					const button = element.querySelector(
+						'[data-slot="collapsible-trigger"]'
+					);
+					const panel = element.querySelector(
+						'[data-slot="collapsible-panel"]'
+					);
+					const content = element.querySelector(
+						'[data-slot="collapsible-content"] > *'
+					);
+					if (!(button && panel && content)) {
+						throw new Error("Missing disclosure content");
+					}
+					return [
+						content.getBoundingClientRect().top -
+							button.getBoundingClientRect().bottom,
+						getComputedStyle(panel).transitionProperty,
+					];
+				})
+			).toEqual([0, "height"]);
+		} finally {
+			await page.close();
+		}
+	});
 });

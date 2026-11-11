@@ -35,6 +35,8 @@ export type CollapsiblePanelProps = Omit<
 	BaseCollapsiblePanelProps,
 	"className" | "data-slot" | "style"
 > & {
+	/** The space above the content, on the 4px scale. */
+	gap?: "0" | "2";
 	ref?: BaseCollapsiblePanelProps["ref"];
 };
 
@@ -81,6 +83,7 @@ export function CollapsibleTrigger({
 
 export function CollapsiblePanel({
 	children,
+	gap = "2",
 	ref: forwardedRef,
 	render,
 	...rest
@@ -99,7 +102,7 @@ export function CollapsiblePanel({
 		>
 			<div
 				data-slot="collapsible-content"
-				{...props(collapsibleStyles.content)}
+				{...props(gap === "2" && collapsibleStyles.content)}
 			>
 				{children}
 			</div>

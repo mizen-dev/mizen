@@ -141,6 +141,7 @@ import { CodeBlockCodeBlockExample1 } from "./code-block-variants";
 import { CodeBeforeTheReviewExample1 } from "./code-variants";
 import { BasicCollapsible } from "./collapsible";
 import {
+	CollapsibleCompactNavigationExample5,
 	CollapsibleControlledDisclosureExample2,
 	CollapsibleDefaultDisclosureExample1,
 	CollapsibleDisabledStateExample3,
@@ -764,6 +765,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	CitedParagraph,
 	CodeBeforeTheReviewExample1,
 	CodeBlockCodeBlockExample1,
+	CollapsibleCompactNavigationExample5,
 	CollapsibleControlledDisclosureExample2,
 	CollapsibleDefaultDisclosureExample1,
 	CollapsibleDisabledStateExample3,

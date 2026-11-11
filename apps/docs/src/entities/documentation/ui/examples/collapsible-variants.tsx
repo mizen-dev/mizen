@@ -138,3 +138,25 @@ export function CollapsibleLongWrappingContentExample4() {
 		</Stack>
 	);
 }
+export function CollapsibleCompactNavigationExample5() {
+	return (
+		<Collapsible defaultOpen>
+			<CollapsibleTrigger
+				render={<DisclosureButton closedLabel="Projects" size="sm" />}
+			/>
+			<CollapsiblePanel gap="0">
+				<Stack gap="0">
+					{["Northstar launch", "Field notes", "Website refresh"].map(
+						(project) => (
+							<Inline key={project}>
+								<Button size="sm" variant="ghost">
+									{project}
+								</Button>
+							</Inline>
+						)
+					)}
+				</Stack>
+			</CollapsiblePanel>
+		</Collapsible>
+	);
+}

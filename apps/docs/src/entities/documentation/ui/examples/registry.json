@@ -2495,6 +2495,12 @@
       "title": "Long wrapping content",
       "description": "Preserves layout structure and text wrapping across responsive viewports.",
       "path": "entities/documentation/ui/examples/collapsible-variants.tsx"
+    },
+    {
+      "name": "CollapsibleCompactNavigationExample5",
+      "title": "Compact navigation",
+      "description": "Removes the space above the content with gap, so the first item sits directly under the trigger.",
+      "path": "entities/documentation/ui/examples/collapsible-variants.tsx"
     }
   ],
   "alert-dialog": [
