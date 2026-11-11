@@ -28,6 +28,7 @@ import { space } from "@mizen-labs/ui/spacing.stylex";
 import { fontSize } from "@mizen-labs/ui/typography.stylex";
 import { create, props } from "@stylexjs/stylex";
 import { areaY, barY, defineChart, group, lineY } from "@tanstack/charts";
+import { decorative } from "@tanstack/charts/mark/decorative";
 import type { ChartTooltipBodyRenderContext } from "@tanstack/charts/react/tooltip";
 import { scaleBand } from "@tanstack/charts/scales/band";
 import { scaleLinear } from "@tanstack/charts/scales/linear";
@@ -329,9 +330,18 @@ const activityChart = defineChart({
 
 const growthChart = defineChart({
 	marks: [
-		areaY(paletteAreaData, {
-			fill: chartColors.series5,
-			fillOpacity: 0.12,
+		// The fill is decorative: the line owns the points, so focus visits
+		// each month once.
+		decorative(
+			areaY(paletteAreaData, {
+				fill: chartColors.series5,
+				fillOpacity: 0.12,
+				x: "month",
+				y: "value",
+			})
+		),
+		// A stroke on the area would also outline its baseline and sides.
+		lineY(paletteAreaData, {
 			stroke: chartColors.series5,
 			strokeWidth: 2,
 			x: "month",
