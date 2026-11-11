@@ -70,6 +70,7 @@ export function Field(fieldProps: FieldProps) {
 			<BoundFieldProvider value={field}>
 				<BaseField.Root
 					{...rest}
+					data-slot="field"
 					dirty={field.state.meta.isDirty}
 					invalid={isInvalid}
 					name={field.name}
@@ -84,7 +85,7 @@ export function Field(fieldProps: FieldProps) {
 
 	const { children, ...rest } = fieldProps;
 	return (
-		<BaseField.Root {...rest} {...props(fieldStyles.root)}>
+		<BaseField.Root {...rest} data-slot="field" {...props(fieldStyles.root)}>
 			{children}
 		</BaseField.Root>
 	);

@@ -110,7 +110,7 @@ describe("Skeleton component browser behavior", () => {
 			};
 		});
 		expect(desktopRect.backgroundColor).not.toMatch(transparentColor);
-		expect(Number.parseFloat(desktopRect.borderRadius)).toBeCloseTo(12, 0);
+		expect(Number.parseFloat(desktopRect.borderRadius)).toBeCloseTo(8, 0);
 		expect(desktopRect.width).toBeGreaterThan(0);
 		expect(desktopRect.height).toBeGreaterThan(100);
 		expect(desktopRect.width / desktopRect.height).toBeCloseTo(16 / 9, 1);

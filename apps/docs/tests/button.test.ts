@@ -8,7 +8,6 @@ import {
 
 const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 const noAnimation = /^none$/u;
-const translucentRing = /(?:oklch|oklab|lab)\(.* \/ 0\.6\)$/u;
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -71,13 +70,13 @@ describe("Button component route", () => {
 			await page
 				.getByRole("button", { exact: true, name: "Default" })
 				.evaluate((e) => e.getBoundingClientRect().height)
-		).toBe(36);
+		).toBe(32);
 		const icon = page.getByRole("button", { exact: true, name: "Add" });
 		expect(await icon.evaluate((e) => e.getBoundingClientRect().height)).toBe(
-			32
+			28
 		);
 		expect(await icon.evaluate((e) => e.getBoundingClientRect().width)).toBe(
-			32
+			28
 		);
 		await page.setViewportSize({ height: 800, width: 1024 });
 		// Then desktop keeps the same named sizes as mobile
@@ -85,12 +84,12 @@ describe("Button component route", () => {
 			await page
 				.getByRole("button", { exact: true, name: "Default" })
 				.evaluate((e) => e.getBoundingClientRect().height)
-		).toBe(36);
+		).toBe(32);
 		expect(await icon.evaluate((e) => e.getBoundingClientRect().height)).toBe(
-			32
+			28
 		);
 		expect(await icon.evaluate((e) => e.getBoundingClientRect().width)).toBe(
-			32
+			28
 		);
 	});
 
@@ -184,7 +183,7 @@ describe("Button component route", () => {
 					return [style.outlineWidth, style.outlineOffset, style.outlineColor];
 				})
 			)
-			.toEqual(["3px", "0px", expect.stringMatching(translucentRing)]);
+			.toEqual(["2px", "2px", "oklch(0.48 0.19 3)"]);
 		expect(
 			await primary.evaluate(
 				(element) => getComputedStyle(element).transitionTimingFunction

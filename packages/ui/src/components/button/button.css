@@ -1,8 +1,9 @@
 :is([data-slot="button"], [data-slot="toolbar-button"])
 	> svg:not([data-slot="button-loading-indicator"]) {
 	flex-shrink: 0;
-	width: 1em;
-	height: 1em;
+	/* Text buttons set the glyph for their text size; icon buttons size it by font size. */
+	width: var(--mizen-button-glyph, 1em);
+	height: var(--mizen-button-glyph, 1em);
 }
 
 :is([data-slot="button"], [data-slot="toolbar-button"])[data-loading]

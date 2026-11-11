@@ -6,14 +6,16 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
 export const avatarStyles = create({
 	defaultSize: {
 		fontSize: fontSize["12"],
-		height: controlSize.sm,
-		width: controlSize.sm,
+		height: controlSize.md,
+		letterSpacing: letterSpacing.caption,
+		width: controlSize.md,
 	},
 	fallback: {
 		alignItems: "center",
@@ -40,7 +42,7 @@ export const avatarStyles = create({
 	// initials stay readable beside the 2px separating ring.
 	groupOverlapDefault: {
 		marginInlineStart: {
-			":not(:first-child)": `calc(-0.125 * ${controlSize.sm})`,
+			":not(:first-child)": `calc(-0.125 * ${controlSize.md})`,
 			default: space["0"],
 		},
 	},
@@ -73,6 +75,7 @@ export const avatarStyles = create({
 	lg: {
 		fontSize: fontSize["14"],
 		height: controlSize.lg,
+		letterSpacing: letterSpacing.ui,
 		width: controlSize.lg,
 	},
 	root: {
@@ -94,6 +97,7 @@ export const avatarStyles = create({
 	sm: {
 		fontSize: fontSize["12"],
 		height: controlSize["2xs"],
+		letterSpacing: letterSpacing.caption,
 		width: controlSize["2xs"],
 	},
 });

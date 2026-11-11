@@ -11,6 +11,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -19,14 +20,12 @@ export const tableStyles = create({
 	caption: {
 		captionSide: "bottom",
 		color: colors.mutedContent,
-		fontSize: fontSize["14"],
+		fontSize: fontSize["13"],
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		paddingBlock: space["2"],
-		// Aligns with the cells' inline padding: 16px, or 12px in grid tables.
-		paddingInline: {
-			":is([data-slot='table'][data-grid] *)": space["3"],
-			default: space["4"],
-		},
+		// Aligns with the cells' inline padding.
+		paddingInline: space["3"],
 		textAlign: "start",
 	},
 	cell: {
@@ -56,16 +55,13 @@ export const tableStyles = create({
 		outlineOffset: `-${borderWidth.focus}px`,
 		outlineStyle: { ":focus-visible": "solid", default: "none" },
 		outlineWidth: borderWidth.focus,
-		// Table rows: 12px block, 16px inline (DESIGN_DIRECTION spacing). Grid
-		// tables are compact: 8px block, 12px inline.
+		// Rows are 40px: 10px block around a 20px line, 12px inline. Grid tables
+		// are compact: 8px block.
 		paddingBlock: {
 			":is([data-slot='table'][data-grid] *)": space["2"],
-			default: space["3"],
+			default: "0.625rem",
 		},
-		paddingInline: {
-			":is([data-slot='table'][data-grid] *)": space["3"],
-			default: space["4"],
-		},
+		paddingInline: space["3"],
 		textAlign: "start",
 		verticalAlign: "middle",
 	},
@@ -82,13 +78,10 @@ export const tableStyles = create({
 		animationName: {
 			":focus-visible": focusMotion.ring,
 		},
+		// Frameless: hairlines between rows are the only rules. The table paints
+		// the surface color so sticky cells cover the rows that scroll under them.
 		backgroundColor: colors.surface,
-		borderColor: colors.border,
-		// Tables use the 16px large-control corners: crisper than card corners
-		// around dense rows.
 		borderRadius: shape.controlRadiusLarge,
-		borderStyle: "solid",
-		borderWidth: borderWidth.thin,
 		maxWidth: "100%",
 		outlineColor: {
 			":focus-visible": colors.focusRing,
@@ -115,16 +108,21 @@ export const tableStyles = create({
 		width,
 	}),
 	footer: {
-		backgroundColor: colors.secondary,
+		backgroundColor: "inherit",
 		fontWeight: fontWeight.medium,
 	},
 	head: {
 		backgroundColor: "inherit",
-		// Column headers recede so the data leads; row headers keep full ink.
+		// Column headers recede to 12px muted meta so the data leads; row headers
+		// keep full ink at the cell size.
 		color: { ":is(thead *)": colors.mutedContent, default: colors.content },
-		fontSize: fontSize["14"],
+		fontSize: { ":is(thead *)": fontSize["12"], default: fontSize["14"] },
 		fontWeight: fontWeight.medium,
-		lineHeight: lineHeight["20"],
+		letterSpacing: {
+			":is(thead *)": letterSpacing.caption,
+			default: letterSpacing.ui,
+		},
+		lineHeight: { ":is(thead *)": lineHeight["16"], default: lineHeight["20"] },
 		minInlineSize: {
 			':is([scope="row"], [scope="rowgroup"])': "8rem",
 			[conditions.sm]: {
@@ -137,8 +135,8 @@ export const tableStyles = create({
 		textAlign: "start",
 	},
 	header: {
-		backgroundColor: colors.secondary,
-		color: colors.content,
+		backgroundColor: "inherit",
+		color: colors.mutedContent,
 		fontWeight: fontWeight.medium,
 	},
 	headSticky: {
@@ -152,7 +150,7 @@ export const tableStyles = create({
 	rowHover: {
 		backgroundColor: {
 			":hover": {
-				[conditions.canHover]: colors.controlSurfaceHover,
+				[conditions.canHover]: colors.secondary,
 			},
 			"[aria-disabled='true']:hover": {
 				[conditions.canHover]: "inherit",
@@ -163,12 +161,12 @@ export const tableStyles = create({
 	rowSelected: {
 		backgroundColor: {
 			":hover": {
-				[conditions.canHover]: colors.brandBackground,
+				[conditions.canHover]: colors.selected,
 			},
 			"[aria-disabled='true']:hover": {
-				[conditions.canHover]: colors.brandBackground,
+				[conditions.canHover]: colors.selected,
 			},
-			default: colors.brandBackground,
+			default: colors.selected,
 		},
 		color: colors.content,
 	},
@@ -191,6 +189,7 @@ export const tableStyles = create({
 		// Tabular data uses the ui role, the same size as headers.
 		fontSize: fontSize["14"],
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		minWidth: "100%",
 		textAlign: "start",

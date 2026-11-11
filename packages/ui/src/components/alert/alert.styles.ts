@@ -8,6 +8,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 import { alertVars } from "./alert.stylex";
@@ -37,32 +38,25 @@ export const alertStyles = create({
 		},
 		minWidth: 0,
 	},
-	default: {
-		backgroundColor: colors.surface,
-		borderColor: colors.border,
-		color: colors.content,
-		[alertVars.iconColor]: colors.content,
-	},
+	default: { [alertVars.iconColor]: colors.mutedContent },
 	description: {
 		boxSizing: "border-box",
-		color: "inherit",
-		fontSize: fontSize["14"],
+		color: colors.mutedContent,
+		fontSize: fontSize["13"],
 		fontWeight: fontWeight.regular,
 		gridColumnEnd: "description",
 		gridColumnStart: "description",
 		gridRowEnd: "description",
 		gridRowStart: "description",
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
+		marginBlockStart: space.px,
 		minWidth: 0,
+		textWrap: "pretty",
 	},
-	// Status borders are a quiet edge mixed into the fill; the fill and icon
-	// carry the status.
-	error: {
-		backgroundColor: colors.destructiveSubtle,
-		borderColor: `color-mix(in oklch, ${colors.destructive} 32%, ${colors.destructiveSubtle})`,
-		color: colors.content,
-		[alertVars.iconColor]: colors.destructive,
-	},
+	// Every alert sits on the surface behind a hairline; the icon alone
+	// carries the status color.
+	error: { [alertVars.iconColor]: colors.destructive },
 	icon: {
 		alignItems: "center",
 		alignSelf: "start",
@@ -73,25 +67,23 @@ export const alertStyles = create({
 		gridColumnStart: "icon",
 		gridRowEnd: "icon",
 		gridRowStart: "icon",
-		height: glyphSize.md,
+		height: glyphSize.sm,
 		justifyContent: "center",
 		// Centers the glyph on the 20px title line.
-		marginBlockStart: `calc((${lineHeight["20"]} - ${glyphSize.md}) / 2)`,
+		marginBlockStart: `calc((${lineHeight["20"]} - ${glyphSize.sm}) / 2)`,
 		marginInlineEnd: space["2"],
-		width: glyphSize.md,
+		width: glyphSize.sm,
 	},
-	info: {
-		backgroundColor: colors.info,
-		borderColor: `color-mix(in oklch, ${colors.infoContent} 24%, ${colors.info})`,
-		color: colors.infoContent,
-		[alertVars.iconColor]: colors.infoContent,
-	},
+	info: { [alertVars.iconColor]: colors.infoSolid },
 	root: {
 		alignItems: "start",
+		backgroundColor: colors.surface,
+		borderColor: colors.border,
 		borderRadius: shape.controlRadiusLarge,
 		borderStyle: "solid",
 		borderWidth: borderWidth.thin,
 		boxSizing: "border-box",
+		color: colors.content,
 		display: "grid",
 		gridTemplateAreas: {
 			default: '"icon title" "icon description" "action action"',
@@ -102,17 +94,12 @@ export const alertStyles = create({
 			[conditions.sm]: "max-content 1fr auto",
 		},
 		minWidth: 0,
-		paddingBlock: space["4"],
-		paddingInline: space["4"],
+		paddingBlock: space["3"],
+		paddingInline: space["3"],
 		position: "relative",
 		width: "100%",
 	},
-	success: {
-		backgroundColor: colors.success,
-		borderColor: `color-mix(in oklch, ${colors.successContent} 24%, ${colors.success})`,
-		color: colors.successContent,
-		[alertVars.iconColor]: colors.successContent,
-	},
+	success: { [alertVars.iconColor]: colors.successSolid },
 	title: {
 		boxSizing: "border-box",
 		color: "inherit",
@@ -122,14 +109,10 @@ export const alertStyles = create({
 		gridColumnStart: "title",
 		gridRowEnd: "title",
 		gridRowStart: "title",
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
-		marginBlockEnd: space["1"],
 		minWidth: 0,
+		textWrap: "balance",
 	},
-	warning: {
-		backgroundColor: colors.warning,
-		borderColor: `color-mix(in oklch, ${colors.warningContent} 24%, ${colors.warning})`,
-		color: colors.warningContent,
-		[alertVars.iconColor]: colors.warningContent,
-	},
+	warning: { [alertVars.iconColor]: colors.warningSolid },
 });

@@ -104,19 +104,19 @@ describe("Button semantic colors and styles", () => {
 			exact: true,
 			name: "Outline",
 		});
-		const restBorder = await outline.evaluate(
-			(element) => getComputedStyle(element, "::before").borderColor
+		const outlineRestBackground = await outline.evaluate(
+			(element) => getComputedStyle(element, "::before").backgroundColor
 		);
 		await outline.hover();
-		const hoverBorder = await outline.evaluate(
-			(element) => getComputedStyle(element, "::before").borderColor
+		const outlineHoverBackground = await outline.evaluate(
+			(element) => getComputedStyle(element, "::before").backgroundColor
 		);
-		expect(hoverBorder).not.toBe(restBorder);
+		expect(outlineHoverBackground).not.toBe(outlineRestBackground);
 		await page.mouse.down();
-		const activeBorder = await outline.evaluate(
-			(element) => getComputedStyle(element, "::before").borderColor
+		const outlineActiveBackground = await outline.evaluate(
+			(element) => getComputedStyle(element, "::before").backgroundColor
 		);
-		expect(activeBorder).not.toBe(restBorder);
+		expect(outlineActiveBackground).not.toBe(outlineRestBackground);
 		await page.mouse.up();
 		await page.reload({ waitUntil: "networkidle" });
 		const assertShadowStates = async (name: string) => {
@@ -162,10 +162,10 @@ describe("Button semantic colors and styles", () => {
 			await expect
 				.poll(() =>
 					button.evaluate(
-						(element) => getComputedStyle(element, "::before").boxShadow
+						(element) => getComputedStyle(element, "::before").top
 					)
 				)
-				.not.toBe(restShadow);
+				.toBe("0px");
 			await page.mouse.up();
 		};
 		await assertShadowStates("Default");

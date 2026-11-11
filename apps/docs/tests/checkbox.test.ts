@@ -9,7 +9,6 @@ import {
 const PERCEPTUAL_COLOR = /^(?:oklch|oklab|lab)\(/u;
 
 const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
-const transparentColor = /rgba\(0, 0, 0, 0\)|transparent/u;
 const checkboxLiftTransform = /matrix\(1, 0, 0, 1, 0, -1\)/u;
 let handle: TestServerHandle;
 let browser: Browser;
@@ -84,7 +83,7 @@ describe("Checkbox component route", () => {
 			await checked
 				.locator("span")
 				.evaluate((element) => getComputedStyle(element).transitionProperty)
-		).toContain("transform");
+		).toContain("opacity");
 
 		await checked.evaluate((element) => element.blur());
 		await page.mouse.move(0, 0);
@@ -153,7 +152,7 @@ describe("Checkbox component route", () => {
 			const style = getComputedStyle(element);
 			return [style.borderColor, style.boxShadow];
 		});
-		expect(disabledInvalid[0]).toMatch(transparentColor);
+		expect(disabledInvalid[0]).toMatch(PERCEPTUAL_COLOR);
 		expect(disabledInvalid[1]).not.toContain("0px 0px 0px 1px");
 
 		const invalid = page.getByRole("checkbox", {
@@ -180,12 +179,12 @@ describe("Checkbox component route", () => {
 			await page
 				.getByRole("checkbox", { exact: true, name: "Small option" })
 				.evaluate((element) => element.getBoundingClientRect().width)
-		).toBe(16);
+		).toBe(14);
 		expect(
 			await page
 				.getByRole("checkbox", { exact: true, name: "Large option" })
 				.evaluate((element) => element.getBoundingClientRect().width)
-		).toBe(20);
+		).toBe(18);
 		const readOnly = page.getByRole("checkbox", {
 			exact: true,
 			name: "Read-only option",
@@ -211,7 +210,7 @@ describe("Checkbox component route", () => {
 				const style = getComputedStyle(element);
 				return [style.outlineColor, style.outlineWidth, style.outlineOffset];
 			})
-		).toEqual([expect.stringMatching(PERCEPTUAL_COLOR), "3px", "0px"]);
+		).toEqual([expect.stringMatching(PERCEPTUAL_COLOR), "2px", "2px"]);
 	});
 	it.each(["light", "dark"] as const)(
 		"uses stronger checked and mixed indicators in %s",

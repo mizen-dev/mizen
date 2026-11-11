@@ -201,7 +201,7 @@ describe("Card component browser behavior", () => {
 			};
 		});
 		expect(outlineStyle.style).toBe("solid");
-		expect(outlineStyle.width).toBe("3px");
+		expect(outlineStyle.width).toBe("2px");
 		expect(outlineStyle.color).not.toMatch(TRANSPARENT_COLOR);
 	});
 

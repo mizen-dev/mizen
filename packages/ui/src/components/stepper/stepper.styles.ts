@@ -13,6 +13,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 export const stepperStyles = create({
@@ -85,6 +86,7 @@ export const stepperStyles = create({
 				":is([data-slot='stepper'][data-orientation='horizontal'] *)": 1,
 			},
 		},
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
 		marginBlock: 0,
 		overflowWrap: "anywhere",
@@ -181,6 +183,7 @@ export const stepperStyles = create({
 			},
 		},
 		justifyContent: "center",
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight.none,
 		marginBlockStart: {
 			"@container (max-width: 27.999rem)": {
@@ -390,6 +393,7 @@ export const stepperStyles = create({
 		flexShrink: 0,
 		fontSize: fontSize["12"],
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
 		marginInlineStart: space["2"],
 	},
@@ -469,6 +473,7 @@ export const stepperStyles = create({
 					"center",
 			},
 		},
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		minBlockSize: "1.25rem",
 		minInlineSize: 0,

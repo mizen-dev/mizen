@@ -169,7 +169,7 @@ function Notice({
 				</p>
 				{onRetry ? (
 					<Button onClick={onRetry} size="sm" variant="outline">
-						<IconRefresh aria-hidden="true" size="1em" />
+						<IconRefresh aria-hidden="true" />
 						Retry
 					</Button>
 				) : null}

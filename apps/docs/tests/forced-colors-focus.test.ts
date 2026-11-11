@@ -26,7 +26,7 @@ async function expectFocusOutline(element: ReturnType<Page["locator"]>) {
 	).toBe("solid");
 	expect(
 		await element.evaluate((node) => getComputedStyle(node).outlineWidth)
-	).toBe("3px");
+	).toBe("2px");
 }
 
 async function expectSystemColorAdjustment(

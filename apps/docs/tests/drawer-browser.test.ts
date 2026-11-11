@@ -78,7 +78,7 @@ describe("Drawer states", () => {
 							title: getComputedStyle(title).fontSize,
 						};
 					});
-					expect(styles.title).toBe("20px");
+					expect(styles.title).toBe("16px");
 					expect(styles.description).toBe("14px");
 					if (variant === "Straight") {
 						expect(styles.radius).toBe("0px");

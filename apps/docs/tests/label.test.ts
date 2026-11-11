@@ -111,6 +111,6 @@ describe("Label component and docs specimen", () => {
 				const computed = getComputedStyle(node);
 				return [computed.fontSize, computed.fontWeight, computed.lineHeight];
 			});
-		expect(style).toEqual(["14px", "500", "20px"]);
+		expect(style).toEqual(["13px", "500", "20px"]);
 	});
 });

@@ -6,6 +6,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -34,7 +35,7 @@ export const textareaStyles = create({
 		borderEndStartRadius: shape.controlRadius,
 		borderStartEndRadius: shape.controlRadius,
 		borderStartStartRadius: shape.controlRadius,
-		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
+		fontSize: { [conditions.sm]: fontSize["13"], default: fontSize["16"] },
 		lineHeight: {
 			[conditions.sm]: lineHeight["20"],
 			default: lineHeight["24"],
@@ -57,9 +58,13 @@ export const textareaStyles = create({
 		flexGrow: 1,
 		flexShrink: 1,
 		fontFamily: "inherit",
-		fontSize: fontSize["16"],
+		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
 		fontWeight: fontWeight.regular,
-		lineHeight: lineHeight["24"],
+		letterSpacing: letterSpacing.ui,
+		lineHeight: {
+			[conditions.sm]: lineHeight["20"],
+			default: lineHeight["24"],
+		},
 		minWidth: 0,
 		opacity: 1,
 		outlineColor: "transparent",
@@ -79,7 +84,7 @@ export const textareaStyles = create({
 		minHeight: "8rem",
 	},
 	unstyledSm: {
-		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
+		fontSize: { [conditions.sm]: fontSize["13"], default: fontSize["16"] },
 		minHeight: "4rem",
 	},
 });

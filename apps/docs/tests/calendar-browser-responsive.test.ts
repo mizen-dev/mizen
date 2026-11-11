@@ -69,7 +69,7 @@ describe("Calendar 320px responsive browser regression", {
 		expect(overflowCheck.scrollWidth).toBeLessThanOrEqual(320);
 	});
 
-	it("proves calendar fits inside specimen panel and date targets are at least 36x36px", async () => {
+	it("proves calendar fits inside specimen panel and date targets are at least 32x32px", async () => {
 		await page.setViewportSize({ height: 640, width: 320 });
 		await page.goto(`${handle.url}/components/calendar`, {
 			waitUntil: "networkidle",
@@ -109,8 +109,8 @@ describe("Calendar 320px responsive browser regression", {
 
 		expect(targetDimensions.length).toBeGreaterThan(0);
 		for (const dim of targetDimensions) {
-			expect(dim.width).toBeGreaterThanOrEqual(36);
-			expect(dim.height).toBeGreaterThanOrEqual(36);
+			expect(dim.width).toBeGreaterThanOrEqual(32);
+			expect(dim.height).toBeGreaterThanOrEqual(32);
 		}
 	});
 

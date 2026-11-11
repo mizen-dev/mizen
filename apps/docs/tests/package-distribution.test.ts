@@ -53,7 +53,7 @@ it("packs every public export and preserves client boundaries", async () => {
 		const css = await readFile(join(uiRoot, cssExport as string), "utf8");
 		expect(css).not.toContain("@stylex;");
 		// Both the default tokens and dark overrides must ship in the archive.
-		expect(css).toContain("oklch(0.93 0.006 285)");
+		expect(css).toContain("oklch(0.55 0.19 5)");
 		expect(css).toContain("oklch(1 0 0)");
 		expect(css).toContain("@media");
 		await Promise.all(

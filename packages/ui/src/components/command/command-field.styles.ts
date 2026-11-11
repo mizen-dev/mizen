@@ -6,6 +6,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -26,6 +27,7 @@ export const commandFieldStyles = create({
 		fontSize: fontSize["16"],
 		fontWeight: fontWeight.regular,
 		height: controlSize.xl,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["24"],
 		minWidth: 0,
 		outline: "none",

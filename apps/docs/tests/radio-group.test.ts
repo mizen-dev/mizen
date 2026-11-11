@@ -53,7 +53,7 @@ describe("RadioGroup component route", () => {
 	}, 120_000);
 
 	it.each(["light", "dark"] as const)(
-		"centers controls and restores press feedback in %s",
+		"centers controls in %s",
 		async (theme) => {
 			await page.emulateMedia({
 				colorScheme: theme,
@@ -106,24 +106,6 @@ describe("RadioGroup component route", () => {
 					)
 				)
 				.not.toBe(restingFill);
-			await page.mouse.down();
-			await expect
-				.poll(() =>
-					selected.evaluate(
-						(element) => new DOMMatrix(getComputedStyle(element).transform).a
-					)
-				)
-				.toBeLessThan(1);
-			await page.mouse.up();
-			await page.emulateMedia({ reducedMotion: "reduce" });
-			await selected.hover();
-			await page.mouse.down();
-			expect(
-				await selected.evaluate(
-					(element) => getComputedStyle(element).transform
-				)
-			).toBe("none");
-			await page.mouse.up();
 			await page
 				.locator("#RadioGroupReadingPreferencesExample1")
 				.screenshot({ path: `/private/tmp/radio-${theme}.png` });
@@ -220,7 +202,7 @@ describe("RadioGroup component route", () => {
 					radio.evaluate((element) => element.getBoundingClientRect().width)
 				)
 			)
-		).toEqual([16, 18, 20]);
+		).toEqual([14, 16, 18]);
 		await compact.click();
 		expect(await compact.getAttribute("aria-checked")).toBe("true");
 		expect(await comfortable.getAttribute("aria-checked")).toBe("false");

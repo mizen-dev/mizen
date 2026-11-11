@@ -16,6 +16,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -185,6 +186,7 @@ export const fileUploadStyles = create({
 		color: colors.content,
 		fontSize: fontSize["14"],
 		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		minWidth: 0,
 		overflow: "hidden",
@@ -307,6 +309,7 @@ export const fileUploadStyles = create({
 		fontSize: fontSize["12"],
 		fontVariantNumeric: "tabular-nums",
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
 		whiteSpace: "nowrap",
 	},
@@ -322,6 +325,7 @@ export const fileUploadStyles = create({
 		fontSize: fontSize["12"],
 		fontWeight: fontWeight.medium,
 		gap: space["1"],
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
 		whiteSpace: "nowrap",
 	},
@@ -370,6 +374,7 @@ export const fileUploadStyles = create({
 		color: colors.secondaryContent,
 		fontSize: fontSize["12"],
 		insetInline: space["2"],
+		letterSpacing: letterSpacing.caption,
 		position: "absolute",
 	},
 	tileRemove: {

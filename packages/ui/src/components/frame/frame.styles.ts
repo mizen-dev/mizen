@@ -7,6 +7,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -16,6 +17,7 @@ export const frameStyles = create({
 		color: colors.secondaryContent,
 		fontSize: fontSize["14"],
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 	},
 	footer: {
@@ -61,6 +63,7 @@ export const frameStyles = create({
 		color: colors.content,
 		fontSize: fontSize["14"],
 		fontWeight: fontWeight.semibold,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 	},
 });

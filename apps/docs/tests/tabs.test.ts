@@ -116,16 +116,18 @@ describe("Tabs component route", () => {
 		expect(
 			await list.evaluate((element) => element.scrollLeft)
 		).toBeGreaterThan(0);
-		await page.waitForTimeout(160);
-		const activeBox = await activity.boundingBox();
-		const indicatorBox = await root
-			.locator('[data-slot="tabs-indicator"]:visible')
-			.boundingBox();
-		expect(activeBox).not.toBeNull();
-		expect(indicatorBox).not.toBeNull();
-		expect(Math.abs((activeBox?.x ?? 0) - (indicatorBox?.x ?? 0))).toBeLessThan(
-			4
-		);
+		await expect
+			.poll(async () => {
+				const activeBox = await activity.boundingBox();
+				const indicatorBox = await root
+					.locator('[data-slot="tabs-indicator"]:visible')
+					.boundingBox();
+				if (!(activeBox && indicatorBox)) {
+					return 999;
+				}
+				return Math.abs(activeBox.x - indicatorBox.x);
+			})
+			.toBeLessThan(4);
 	});
 
 	it("keeps the underline tab focus ring visible while its list scrolls", async () => {
@@ -166,12 +168,6 @@ describe("Tabs component route", () => {
 				tabRect.bottom + focusExtent <= listRect.bottom
 			);
 		});
-		await page.waitForTimeout(250);
-		const activeBox = await comments.boundingBox();
-		const indicatorBox = await root
-			.locator('[data-slot="tabs-indicator"]:visible')
-			.boundingBox();
-
 		expect(await comments.getAttribute("aria-selected")).toBe("true");
 		expect(visibleFocus).toBe(true);
 		expect(
@@ -182,12 +178,18 @@ describe("Tabs component route", () => {
 		expect(
 			await list.evaluate((element) => element.scrollLeft)
 		).toBeGreaterThan(0);
-		expect(activeBox).not.toBeNull();
-		expect(indicatorBox).not.toBeNull();
-		if (!(activeBox && indicatorBox)) {
-			throw new Error("Active tab and indicator bounds are required");
-		}
-		expect(Math.abs(activeBox.x - indicatorBox.x)).toBeLessThan(4);
+		await expect
+			.poll(async () => {
+				const activeBox = await comments.boundingBox();
+				const indicatorBox = await root
+					.locator('[data-slot="tabs-indicator"]:visible')
+					.boundingBox();
+				if (!(activeBox && indicatorBox)) {
+					return 999;
+				}
+				return Math.abs(activeBox.x - indicatorBox.x);
+			})
+			.toBeLessThan(4);
 		await expect
 			.poll(() =>
 				root.evaluate((element) => {

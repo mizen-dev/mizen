@@ -58,7 +58,7 @@ describe("Navigation Menu browser states", { timeout: 20_000 }, () => {
 				exact: true,
 				name: "Resources",
 			});
-			expect((await trigger.boundingBox())?.height).toBe(32);
+			expect((await trigger.boundingBox())?.height).toBe(28);
 			expect(
 				await trigger.evaluate((el) => getComputedStyle(el).fontSize)
 			).toBe("14px");

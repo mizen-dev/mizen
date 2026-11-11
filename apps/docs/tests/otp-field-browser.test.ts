@@ -149,7 +149,7 @@ describe("OTPField browser documentation route and interaction contracts", {
 			await inputs
 				.first()
 				.evaluate((element) => getComputedStyle(element).fontSize)
-		).toBe("14px");
+		).toBe("13px");
 		await page.setViewportSize({ height: 800, width: 320 });
 		expect(
 			await inputs

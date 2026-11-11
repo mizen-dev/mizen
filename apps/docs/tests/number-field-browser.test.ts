@@ -121,7 +121,7 @@ describe("NumberField browser interaction contracts", {
 			.locator('[data-slot="number-field-input"]');
 		expect(
 			await input.evaluate((element) => getComputedStyle(element).fontSize)
-		).toBe("14px");
+		).toBe("13px");
 		await page.setViewportSize({ height: 800, width: 320 });
 		expect(
 			await input.evaluate((element) => getComputedStyle(element).fontSize)
@@ -305,7 +305,7 @@ describe("NumberField browser interaction contracts", {
 		);
 		expect(
 			await group.evaluate((el) => getComputedStyle(el).outlineWidth)
-		).toBe("3px");
+		).toBe("1px");
 
 		expect(await input.getAttribute("type")).toBe("text");
 		expect(await input.getAttribute("inputmode")).toBe("numeric");

@@ -1,4 +1,5 @@
 import { create } from "@stylexjs/stylex";
+import { glyphSize } from "../../styles/dimensions.stylex";
 import { borderWidth } from "../../styles/interaction.stylex";
 import { space } from "../../styles/spacing.stylex";
 
@@ -12,7 +13,13 @@ export const suggestionStyles = create({
 	// One row tall: a scroll area fills its parent by default, but a row of
 	// pills sizes to its content.
 	fit: { height: "auto" },
-	glyph: { display: "inline-flex", flexShrink: 0 },
+	// A 14px glyph beside 13px text, whatever size the icon asks for.
+	glyph: {
+		display: "inline-flex",
+		flexShrink: 0,
+		height: { ":is(*) > svg": glyphSize.xs, default: glyphSize.xs },
+		width: { ":is(*) > svg": glyphSize.xs, default: glyphSize.xs },
+	},
 	// The press surface on ::before inherits this radius, so it is a pill too.
 	pill: {
 		borderEndEndRadius: 9999,

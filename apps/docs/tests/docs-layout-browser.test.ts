@@ -134,7 +134,7 @@ describe("Docs layout resilience", () => {
 			await page.locator('[data-slot="desktop-sidebar"]').isVisible()
 		).toBe(false);
 		const browse = page.getByRole("button", { exact: true, name: "Browse" });
-		const popup = page.locator('[data-slot="popover-popup"]');
+		const popup = page.locator('[data-slot="drawer-popup"]');
 		await browse.click();
 		await popup.getByRole("link", { exact: true, name: "Button" }).click();
 		await popup.waitFor({ state: "hidden" });
@@ -423,7 +423,7 @@ describe("Docs layout resilience", () => {
 			.evaluate((input) => {
 				const stage = document.querySelector('[data-slot="component-preview"]');
 				return {
-					input: getComputedStyle(input).backgroundColor,
+					input: getComputedStyle(input).borderColor,
 					stage: stage ? getComputedStyle(stage).backgroundColor : null,
 				};
 			});

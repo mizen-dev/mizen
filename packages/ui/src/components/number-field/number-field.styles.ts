@@ -4,8 +4,8 @@ import { conditions } from "../../styles/conditions.stylex";
 import { controlSize } from "../../styles/dimensions.stylex";
 import {
 	borderWidth,
-	focus,
 	focusMotion,
+	focusOutline,
 } from "../../styles/interaction.stylex";
 import { duration, easing } from "../../styles/motion.stylex";
 import { shadows } from "../../styles/shadows.stylex";
@@ -14,11 +14,18 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
 export const numberFieldStyles = create({
 	group: {
+		// The focused edge takes the focus color; an invalid field keeps its
+		// error color.
+		"--mizen-field-focus-edge": {
+			":is([data-invalid])": colors.destructive,
+			default: colors.focusRing,
+		},
 		alignItems: "center",
 		animationDuration: {
 			":has(> [data-slot='number-field-input']:focus-visible)":
@@ -37,15 +44,17 @@ export const numberFieldStyles = create({
 			":is([data-invalid]):not([data-disabled])": `color-mix(in oklch, ${colors.destructive} 54%, ${fieldColors.surface})`,
 			"[data-slot='number-field-group']:hover:not([data-disabled], [data-readonly], [data-invalid])":
 				{
-					[conditions.canHover]: colors.border,
+					[conditions.canHover]: colors.controlBorderStrong,
 				},
-			default: "transparent",
+			default: colors.controlBorder,
 		},
 		borderStyle: "solid",
 		borderWidth: borderWidth.thin,
 		boxShadow: {
+			":has(> [data-slot='number-field-input']:focus-visible)":
+				focusOutline.fieldHalo,
 			":is([data-disabled])": "none",
-			default: shadows.recessedRest,
+			default: shadows.fieldRest,
 		},
 		boxSizing: "border-box",
 		color: {
@@ -55,20 +64,14 @@ export const numberFieldStyles = create({
 		display: "flex",
 		outlineColor: {
 			":has(> [data-slot='number-field-input']:focus-visible)":
-				colors.focusRing,
+				"var(--mizen-field-focus-edge)",
 			default: "transparent",
 		},
-		outlineOffset: {
-			":has(> [data-slot='number-field-input']:focus-visible)": focus.offset,
-			default: focus.offset,
-		},
-		outlineStyle: {
-			":has(> [data-slot='number-field-input']:focus-visible)": "solid",
-			default: "solid",
-		},
+		outlineOffset: focusOutline.fieldOffset,
+		outlineStyle: "solid",
 		outlineWidth: {
 			":has(> [data-slot='number-field-input']:focus-visible)":
-				borderWidth.focus,
+				focusOutline.fieldWidth,
 			default: 0,
 		},
 		overflow: "hidden",
@@ -84,6 +87,8 @@ export const numberFieldStyles = create({
 	},
 	input: {
 		"::placeholder": { color: colors.mutedContent, opacity: 1 },
+		// The input fills the group height, so the whole field takes text focus.
+		alignSelf: "stretch",
 		appearance: "none",
 		backgroundColor: "transparent",
 		borderColor: "transparent",
@@ -98,10 +103,14 @@ export const numberFieldStyles = create({
 		flexGrow: 1,
 		flexShrink: 1,
 		fontFamily: "inherit",
-		fontSize: fontSize["16"],
+		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
 		fontVariantNumeric: "tabular-nums",
 		fontWeight: fontWeight.regular,
-		lineHeight: lineHeight["24"],
+		letterSpacing: letterSpacing.ui,
+		lineHeight: {
+			[conditions.sm]: lineHeight["20"],
+			default: lineHeight["24"],
+		},
 		minWidth: 0,
 		opacity: 1,
 		outlineColor: "transparent",
@@ -113,13 +122,13 @@ export const numberFieldStyles = create({
 		width: "auto",
 	},
 	inputDefault: {
-		fontSize: fontSize["16"],
+		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
 	},
 	inputLg: {
 		fontSize: fontSize["16"],
 	},
 	inputSm: {
-		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
+		fontSize: { [conditions.sm]: fontSize["13"], default: fontSize["16"] },
 	},
 	root: {
 		display: "flex",
@@ -166,9 +175,13 @@ export const numberFieldStyles = create({
 	scrubLabel: {
 		color: colors.content,
 		cursor: "inherit",
-		fontSize: fontSize["16"],
+		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
 		fontWeight: fontWeight.regular,
-		lineHeight: lineHeight["24"],
+		letterSpacing: letterSpacing.ui,
+		lineHeight: {
+			[conditions.sm]: lineHeight["20"],
+			default: lineHeight["24"],
+		},
 		userSelect: "none",
 	},
 	sizeDefault: {

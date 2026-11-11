@@ -62,13 +62,13 @@ describe("site route boundaries", () => {
 		await page.setViewportSize({ height: 900, width: 320 });
 		await page.getByRole("button", { exact: true, name: "Browse" }).click();
 		await page
-			.locator('[data-slot="popover-popup"]')
+			.locator('[data-slot="drawer-popup"]')
 			.getByRole("link", { exact: true, name: "Docs" })
 			.click();
 		await page.waitForURL(`${handle.url}/docs`);
-		// The popover closes with an exit animation after the route changes.
+		// The drawer closes after navigation.
 		await page
-			.locator('[data-slot="popover-popup"]')
+			.locator('[data-slot="drawer-popup"]')
 			.waitFor({ state: "detached" });
 	}, 60_000);
 });

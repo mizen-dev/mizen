@@ -74,7 +74,7 @@ describe("Alert Dialog design and states", () => {
 				});
 				await expectLocator(cancel).toBeFocused();
 				await expectLocator(dialog).toHaveAccessibleName("Discard this draft?");
-				expect(await style(title, "font-size")).toBe("20px");
+				expect(await style(title, "font-size")).toBe("16px");
 				expect(await style(title, "font-weight")).toBe("600");
 				expect(await style(description, "font-size")).toBe("14px");
 				expect(await style(description, "line-height")).toBe("20px");

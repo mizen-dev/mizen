@@ -91,9 +91,7 @@ describe.skipIf(process.env.MIZEN_DOCS_PERFORMANCE !== "1")(
 						return {
 							count: preloads.length,
 							crossOrigin: preload?.crossOrigin,
-							loaded: document.fonts.check(
-								'400 16px "Wix Madefor Text Variable"'
-							),
+							loaded: document.fonts.check('400 16px "Geist Variable"'),
 							requests: performance
 								.getEntriesByName(preload?.href ?? "")
 								.map(

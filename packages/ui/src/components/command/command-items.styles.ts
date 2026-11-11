@@ -13,6 +13,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -21,6 +22,7 @@ export const commandItemsStyles = create({
 		boxSizing: "border-box",
 		color: colors.mutedContent,
 		fontSize: fontSize["14"],
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		paddingBlock: {
 			":empty": space["0"],
@@ -43,6 +45,7 @@ export const commandItemsStyles = create({
 		fontSize: fontSize["12"],
 		gap: space["2"],
 		justifyContent: "space-between",
+		letterSpacing: letterSpacing.caption,
 		paddingBlock: space["3"],
 		// Row labels sit 16px in: the list's 8px inset plus the row's 8px.
 		paddingInline: space["4"],
@@ -68,6 +71,7 @@ export const commandItemsStyles = create({
 		color: colors.mutedContent,
 		fontSize: fontSize["12"],
 		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.caption,
 		paddingBlock: space["1"],
 		paddingInline: space["2"],
 		userSelect: "none",
@@ -96,6 +100,7 @@ export const commandItemsStyles = create({
 			"[data-highlighted]": forcedColorAdjust.selectedState,
 		},
 		gap: space["2"],
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		minHeight: "2rem",
 		opacity: {

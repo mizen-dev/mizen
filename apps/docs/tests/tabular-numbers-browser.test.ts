@@ -7,7 +7,7 @@ import {
 } from "./test-helper";
 
 const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
-// Wix lacks tnum glyphs. Verify the requested feature and preserve the owner's font choice.
+// Geist has tnum glyphs. Verify the requested feature and preserve the owner's font choice.
 const cases = [
 	{ selector: '[data-slot="score-gauge-score"]', slug: "score-gauge" },
 	{ selector: '[data-slot="data-table-pagination"]', slug: "data-table" },
@@ -39,7 +39,7 @@ describe("changing numbers", () => {
 	});
 	describe.each(["light", "dark"])("%s theme", (theme) => {
 		describe.each([1280, 375])("%s width", (width) => {
-			it(`requests tabular figures without replacing Wix in ${theme} at ${width}px`, async () => {
+			it(`requests tabular figures without replacing Geist in ${theme} at ${width}px`, async () => {
 				const context = await browser.newContext({
 					reducedMotion: "reduce",
 					viewport: { height: 900, width },
@@ -66,7 +66,7 @@ describe("changing numbers", () => {
 							};
 						});
 						expect(metrics.variant, slug).toContain("tabular-nums");
-						expect(metrics.family, slug).toContain("Wix Madefor Text");
+						expect(metrics.family, slug).toContain("Geist Variable");
 						if (slug === "score-gauge") {
 							await target.screenshot({
 								path: `/private/tmp/mizen-numbers-${slug}-${theme}-${width}.png`,

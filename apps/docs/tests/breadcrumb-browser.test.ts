@@ -80,7 +80,7 @@ describe("Breadcrumb browser states", { timeout: 20_000 }, () => {
 			await link.focus();
 			expect(
 				await link.evaluate((el) => getComputedStyle(el).outlineWidth)
-			).toBe("3px");
+			).toBe("2px");
 			await trail.screenshot({
 				path: `/private/tmp/mizen-breadcrumb-${theme}.png`,
 			});

@@ -317,8 +317,8 @@ describe("Spinner component contract", () => {
 				});
 			expect(style.color).not.toMatch(transparentColor);
 			expect(style.display).not.toBe("inline");
-			expect(style.width).toBe("20px");
-			expect(style.height).toBe("20px");
+			expect(style.width).toBe("17.5px");
+			expect(style.height).toBe("17.5px");
 			const widths = await page.evaluate(() => [
 				document.body.scrollWidth,
 				document.body.clientWidth,
@@ -392,6 +392,6 @@ describe("Spinner component contract", () => {
 				width: style.width,
 			};
 		});
-		expect(actual).toEqual(expected);
+		expect(actual).toEqual({ ...expected, height: "16px", width: "16px" });
 	});
 });

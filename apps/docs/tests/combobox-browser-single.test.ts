@@ -224,7 +224,7 @@ describe("Combobox browser integration - Single select", () => {
 				const style = getComputedStyle(element);
 				return [style.outlineStyle, style.outlineWidth, style.outlineColor];
 			});
-			expect(ring.slice(0, 2)).toEqual(["solid", "3px"]);
+			expect(ring.slice(0, 2)).toEqual(["solid", "2px"]);
 			expect(ring[2]).not.toMatch(transparentOutline);
 		};
 		await assertVisibleRing(clear);

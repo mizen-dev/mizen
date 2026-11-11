@@ -22,7 +22,6 @@ import type {
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useRef } from "react";
 import { IconArrowDown, IconArrowUp } from "../../icons";
-import { typographyStyles } from "../../styles/typography.styles";
 import { Button } from "../button/button";
 import {
 	Table,
@@ -556,19 +555,17 @@ function HeaderContent<
 	const sorted = column.getIsSorted();
 	const SortIcon = sorted ? sortIcons[sorted] : null;
 	return column.getCanSort() ? (
-		<span {...props(dataTableStyles.sortButton)}>
-			<Button
-				onClick={column.getToggleSortingHandler()}
-				size="sm"
-				variant="ghost"
-			>
-				{/* Rendered header labels skip Button's string trim, so trim here. */}
-				<span {...props(typographyStyles.controlLabel)}>{label}</span>
-				{SortIcon ? (
-					<SortIcon aria-hidden="true" focusable="false" size="1em" />
-				) : null}
-			</Button>
-		</span>
+		<button
+			data-slot="data-table-sort"
+			onClick={column.getToggleSortingHandler()}
+			type="button"
+			{...props(dataTableStyles.sortButton)}
+		>
+			{label}
+			{SortIcon ? (
+				<SortIcon aria-hidden="true" focusable="false" size="1em" />
+			) : null}
+		</button>
 	) : (
 		label
 	);

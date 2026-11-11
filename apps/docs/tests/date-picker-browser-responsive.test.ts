@@ -43,15 +43,14 @@ describe("DatePicker 320px responsive browser regression", {
 	timeout: 120_000,
 }, () => {
 	it.each(
-		['"Wix Madefor Text Variable"', "Arial", "Georgia", "monospace"].flatMap(
-			(family) =>
-				(["light", "dark"] as const).flatMap((theme) =>
-					["date-picker", "date-range-picker"].map((slug) => ({
-						family,
-						slug,
-						theme,
-					}))
-				)
+		['"Geist Variable"', "Arial", "Georgia", "monospace"].flatMap((family) =>
+			(["light", "dark"] as const).flatMap((theme) =>
+				["date-picker", "date-range-picker"].map((slug) => ({
+					family,
+					slug,
+					theme,
+				}))
+			)
 		)
 	)(
 		"keeps $slug inside its frame with $family in $theme",

@@ -9,6 +9,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -29,6 +30,7 @@ export const tooltipStyles = create({
 		fontSize: fontSize["12"],
 		fontWeight: fontWeight.regular,
 		height: "var(--popup-height, auto)",
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
 		// Wide enough that one-sentence tooltips stay on one line.
 		maxWidth: "min(20rem, var(--available-width), calc(100vw - 2rem))",

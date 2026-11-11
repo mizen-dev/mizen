@@ -5,6 +5,7 @@ import { ScrollArea as BaseScrollArea } from "@base-ui/react/scroll-area";
 import { props } from "@stylexjs/stylex";
 import { type ComponentPropsWithRef, type ReactNode, useCallback } from "react";
 import type { Closed } from "../../closed";
+import { controlLabel } from "../../control-label";
 import { buttonStyles } from "../button/button.styles";
 import { scrollAreaStyles } from "../scroll-area/scroll-area.styles";
 import { suggestionStyles as styles } from "./suggestion.styles";
@@ -119,7 +120,7 @@ export function Suggestion({
 					{icon}
 				</span>
 			) : null}
-			{suggestion}
+			{controlLabel(suggestion)}
 		</BaseButton>
 	);
 }

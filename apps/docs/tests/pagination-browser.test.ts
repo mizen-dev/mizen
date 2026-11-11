@@ -66,9 +66,9 @@ describe("Pagination browser states", { timeout: 30_000 }, () => {
 				};
 			});
 			const pageBox = await first.boundingBox();
-			expect(pageBox?.width).toBe(36);
-			expect(pageBox?.height).toBe(36);
-			expect(geometry.height).toBe(36);
+			expect(pageBox?.width).toBe(32);
+			expect(pageBox?.height).toBe(32);
+			expect(geometry.height).toBe(32);
 			expect(geometry.icon).toBe(16);
 			expect(geometry.gap).toBe(8);
 			expect(geometry.offset).toBeLessThan(1);
@@ -95,7 +95,7 @@ describe("Pagination browser states", { timeout: 30_000 }, () => {
 				await second.evaluate(
 					(el) =>
 						el === document.activeElement &&
-						getComputedStyle(el).outlineWidth === "3px"
+						getComputedStyle(el).outlineWidth === "2px"
 				)
 			).toBe(true);
 			await page.keyboard.press("Enter");

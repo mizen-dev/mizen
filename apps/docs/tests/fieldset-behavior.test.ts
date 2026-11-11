@@ -11,6 +11,7 @@ import {
 import { fieldsetStyles } from "../../../packages/ui/src/components/fieldset/fieldset.styles";
 import { colors } from "../../../packages/ui/src/styles/colors.stylex";
 import { fonts } from "../../../packages/ui/src/styles/fonts.stylex";
+import { space } from "../../../packages/ui/src/styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
@@ -212,11 +213,15 @@ describe("Fieldset DOM semantics, slot protection, and StyleX integration", () =
 		});
 		expect(fieldsetStyles.legend).toEqual({
 			color: colors.content,
-			fontSize: fontSize["16"],
+			fontSize: fontSize["14"],
 			fontSizeAdjust: fonts.sizeAdjust,
 			fontWeight: fontWeight.semibold,
-			letterSpacing: letterSpacing.subheading,
-			lineHeight: lineHeight["24"],
+			letterSpacing: letterSpacing.ui,
+			lineHeight: lineHeight["20"],
+			marginBlockEnd: {
+				":is([role='group'] > *, [role='radiogroup'] > *)": space["1"],
+				default: 0,
+			},
 		});
 	});
 });

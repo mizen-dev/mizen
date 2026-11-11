@@ -12,6 +12,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -21,6 +22,7 @@ export const breadcrumbStyles = create({
 		display: "inline-flex",
 		fontSize: fontSize["12"],
 		justifyContent: "center",
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight.none,
 		userSelect: "none",
 	},
@@ -91,6 +93,7 @@ export const breadcrumbStyles = create({
 	root: {
 		color: colors.mutedContent,
 		fontSize: fontSize["14"],
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 	},
 	separator: {

@@ -126,13 +126,13 @@ describe("Textarea component route", () => {
 				const style = getComputedStyle(element);
 				return [style.outlineColor, style.outlineWidth, style.outlineOffset];
 			})
-		).toEqual([expect.stringMatching(PERCEPTUAL_COLOR), "3px", "0px"]);
+		).toEqual([expect.stringMatching(PERCEPTUAL_COLOR), "1px", "-1px"]);
 
 		const readOnly = textareaExample("Read-only note").getByRole("textbox");
 		expect(await readOnly.isEditable()).toBe(false);
 		expect(
 			await readOnly.evaluate((element) => getComputedStyle(element).fontSize)
-		).toBe("14px");
+		).toBe("13px");
 		await page.setViewportSize({ height: 800, width: 320 });
 		expect(
 			await readOnly.evaluate((element) => getComputedStyle(element).fontSize)
@@ -156,9 +156,7 @@ describe("Textarea component route", () => {
 		});
 		expect(invalidState[0]).toBe("160px");
 		expect(invalidState[1]).not.toMatch(transparentColor);
-		expect(invalidState[2]).toBe(
-			await message.evaluate((element) => getComputedStyle(element).boxShadow)
-		);
+		expect(invalidState[2]).toBe(rest[2]);
 		await invalid.hover();
 		await invalid.evaluate(async (element) => {
 			await Promise.allSettled(

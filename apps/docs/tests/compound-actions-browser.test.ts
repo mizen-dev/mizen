@@ -105,7 +105,7 @@ describe("compound actions", { timeout: 30_000 }, () => {
 						return [surface.insetBlockStart, surface.insetInlineStart];
 					})
 				)
-				.toEqual(["1px", "-1px"]);
+				.toEqual(["0px", "-1px"]);
 			await page.mouse.up();
 			await Promise.all(
 				[

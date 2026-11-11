@@ -6,7 +6,6 @@ import { floatingItemColors } from "../../styles/floating-item-colors.stylex";
 import { fonts } from "../../styles/fonts.stylex";
 import {
 	borderWidth,
-	focus,
 	focusMotion,
 	focusOutline,
 	forcedColorAdjust,
@@ -59,9 +58,6 @@ export const selectStyles = create({
 		alignItems: "center",
 		backgroundColor: {
 			"[data-highlighted]": floatingItemColors.highlightBackground,
-			"[data-selected]": colors.brandBackground,
-			"[data-selected][data-highlighted]":
-				floatingItemColors.highlightBackground,
 			default: "transparent",
 		},
 		// Concentric with the 24px popup: its radius minus the 8px row inset.
@@ -69,9 +65,6 @@ export const selectStyles = create({
 		boxSizing: "border-box",
 		color: {
 			"[data-highlighted]": floatingItemColors.highlightForeground,
-			"[data-selected]": colors.brandForeground,
-			"[data-selected][data-highlighted]":
-				floatingItemColors.highlightForeground,
 			default: colors.content,
 		},
 		cursor: { "[data-disabled]": "not-allowed", default: "pointer" },
@@ -86,6 +79,7 @@ export const selectStyles = create({
 			"[data-highlighted]": forcedColorAdjust.selectedState,
 		},
 		gap: space["2"],
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		minHeight: controlSize.sm,
 		opacity: { "[data-disabled]": opacity.disabled, default: 1 },
@@ -144,14 +138,20 @@ export const selectStyles = create({
 		minWidth: 0,
 	},
 	// Label role, matching FieldLabel: 4px margin plus the Field's 4px gap.
+	// Label role, as FieldLabel: 13/20 medium, 6px above the trigger. Inside a
+	// Field the root gap already supplies the 6px.
 	label: {
 		color: colors.content,
 		display: "block",
-		fontSize: fontSize["14"],
+		fontSize: fontSize["13"],
 		fontSizeAdjust: fonts.sizeAdjust,
 		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
-		marginBlockEnd: space["1"],
+		marginBlockEnd: {
+			":is([data-slot='field'] > *)": space["0"],
+			default: space["1.5"],
+		},
 	},
 	// A hairline gap keeps neighboring selected rows apart.
 	list: { display: "flex", flexDirection: "column", gap: space.px },
@@ -204,11 +204,17 @@ export const selectStyles = create({
 		borderEndStartRadius: shape.controlRadius,
 		borderStartEndRadius: shape.controlRadius,
 		borderStartStartRadius: shape.controlRadius,
-		fontSize: fontSize["14"],
+		fontSize: fontSize["13"],
 		height: controlSize.sm,
 		lineHeight: lineHeight["20"],
 	},
 	trigger: {
+		// The focused edge takes the focus color; an invalid field keeps its
+		// error color.
+		"--mizen-field-focus-edge": {
+			":is([aria-invalid='true'], [data-invalid])": colors.destructive,
+			default: colors.focusRing,
+		},
 		alignItems: "center",
 		animationDuration: {
 			":focus-visible": focusMotion.duration,
@@ -224,16 +230,17 @@ export const selectStyles = create({
 		borderColor: {
 			":is([aria-invalid='true'], [data-invalid]):not([data-disabled])": `color-mix(in oklch, ${colors.destructive} 54%, ${fieldColors.surface})`,
 			"[aria-haspopup='listbox']:hover:not([data-disabled], [data-readonly], [aria-invalid='true'], [data-invalid])":
-				{ [conditions.canHover]: colors.border },
-			"[data-disabled]": "transparent",
-			default: "transparent",
+				{ [conditions.canHover]: colors.controlBorderStrong },
+			"[data-disabled]": colors.border,
+			default: colors.controlBorder,
 		},
 		borderRadius: shape.controlRadiusLarge,
 		borderStyle: "solid",
 		borderWidth: borderWidth.thin,
 		boxShadow: {
+			":focus-visible": focusOutline.fieldHalo,
 			"[data-disabled]": "none",
-			default: shadows.recessedRest,
+			default: shadows.fieldRest,
 		},
 		boxSizing: "border-box",
 		color: { "[data-disabled]": colors.mutedContent, default: colors.content },
@@ -244,26 +251,24 @@ export const selectStyles = create({
 		},
 		display: "flex",
 		fontFamily: "inherit",
-		fontSize: fontSize["16"],
+		fontSize: fontSize["14"],
 		fontSizeAdjust: fonts.sizeAdjust,
 		fontWeight: fontWeight.regular,
 		gap: space["2"],
 		justifyContent: "space-between",
-		lineHeight: lineHeight["24"],
+		letterSpacing: letterSpacing.ui,
+		lineHeight: lineHeight["20"],
 		minWidth: 0,
 		outlineColor: {
-			":focus-visible": colors.focusRing,
+			":focus-visible": "var(--mizen-field-focus-edge)",
 			default: "transparent",
 		},
-		outlineOffset: { ":focus-visible": focus.offset, default: focus.offset },
+		outlineOffset: focusOutline.fieldOffset,
 		outlineStyle: {
 			":focus-visible": "solid",
 			default: focusOutline.restingOutlineStyle,
 		},
-		outlineWidth: {
-			":focus-visible": borderWidth.focus,
-			default: borderWidth.focus,
-		},
+		outlineWidth: focusOutline.fieldWidth,
 		paddingBlock: 0,
 		paddingInline: space["3"],
 		transitionDuration: {

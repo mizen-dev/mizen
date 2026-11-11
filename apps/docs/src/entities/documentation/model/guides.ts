@@ -166,7 +166,7 @@ export default defineConfig({
 				code: {
 					title: "src/routes/__root.jsx",
 					value: `import mizenCss from "@mizen-labs/ui/styles.css?url";
-import fontCss from "@fontsource-variable/wix-madefor-text/wght.css?url";
+import fontCss from "@fontsource-variable/geist/wght.css?url";
 import { ThemeProvider, ThemeScript } from "@mizen-labs/ui/theme";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import appCss from "../styles.css?url";
@@ -311,8 +311,8 @@ export function Workarea() {
 					},
 				],
 				paragraphs: [
-					"Components inherit your interface font. Code uses the configurable mono font token. This site chooses Wix Madefor Text and JetBrains Mono. Default body and control text use 1rem at weight 400. Use Heading for titles and Text for paragraphs. Text sizes are body for prose, ui for dense interface text, and caption for metadata; the muted tone quiets supporting text without changing its size.",
-					"The shared type scale runs from 0.6875rem to 2.25rem. Use hierarchy to separate tasks before introducing another panel. Group related controls with Stack and Inline. Keep labels close to controls, and separate unrelated sections with larger gaps.",
+					"Components inherit your interface font. Code uses the configurable mono font token. This site chooses Geist and JetBrains Mono. Interface text uses 0.875rem at weight 400, labels and supporting text use 0.8125rem, and prose uses 1rem. Use Heading for titles and Text for paragraphs. Text sizes are body for prose, ui for dense interface text, and caption for metadata; the muted tone quiets supporting text without changing its size.",
+					"The shared type scale runs from 0.75rem to 2.5rem. Use hierarchy to separate tasks before introducing another panel. Group related controls with Stack and Inline. Keep labels close to controls, and separate unrelated sections with larger gaps.",
 				],
 				title: "Typography and rhythm",
 			},
@@ -387,8 +387,8 @@ export function Workarea() {
 					},
 				],
 				paragraphs: [
-					"Standard controls keep the established 12px radius. Content surfaces use the shared 20px and 24px radii. Named control sizes preserve their existing geometry; do not resize controls with external CSS.",
-					"Feedback should be fast and local. Shared press feedback uses scale 0.98 where supported. Preserve dimensions between states. Respect reduced motion and forced colors. Use labels, focus, borders, and indicators alongside color.",
+					"Standard controls use a 10px radius and compact controls 8px. Floating surfaces use 12px, cards 16px, and large surfaces 20px. The default control is 32px high. Named control sizes keep their geometry; do not resize controls with external CSS.",
+					"Feedback should be fast and local. Pressing a button or toggle moves its surface edges 1px inward while the label stays still. Preserve dimensions between states. Respect reduced motion and forced colors. Use labels, focus, borders, and indicators alongside color.",
 				],
 				title: "Geometry and feedback",
 			},
@@ -423,6 +423,30 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 					"The app owns the fonts. This example uses system fonts. Load custom families only when needed and apply your interface font to body. The package stylesheet supplies the default light and dark themes. Custom createTheme overrides require your own StyleX compiler setup.",
 				],
 				title: "Theme and font layout",
+			},
+			{
+				code: {
+					title: "src/fonts.styles.ts",
+					value: `import { fonts } from "@mizen-labs/ui/fonts.stylex";
+import { letterSpacing } from "@mizen-labs/ui/typography.stylex";
+import { createTheme } from "@stylexjs/stylex";
+
+export const appFonts = createTheme(fonts, {
+  sans: '"Geist Variable", system-ui, sans-serif',
+  sizeAdjust: "from-font",
+});
+
+export const appTracking = createTheme(letterSpacing, {
+  heading: "-0.02em",
+  title: "-0.04em",
+});`,
+				},
+				id: "tracking",
+				paragraphs: [
+					"Letter spacing depends on the font family, so Mizen keeps it in a themeable scale. The letterSpacing tokens are caption for 12px text, ui for 13px to 16px text, then subheading, heading, title, and display. The defaults suit system fonts. If your family is fitted looser or tighter, override the tokens you need with createTheme and apply the theme on body.",
+					"Type roles set font-size-adjust from fonts.sizeAdjust, which defaults to 0.5. Set it to from-font to keep your family at its set size; fallback fonts then scale to match it while the family loads. Both overrides need your own StyleX compiler setup.",
+				],
+				title: "Fonts and tracking",
 			},
 			{
 				code: {

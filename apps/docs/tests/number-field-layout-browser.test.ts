@@ -119,7 +119,7 @@ describe("NumberField browser layout and responsiveness", {
 		await checkViewport(320);
 	});
 
-	it("gives steppers at least 32px width and stretches them to the field height", async () => {
+	it("gives steppers at least 28px width and stretches them to the field height", async () => {
 		const steppers = page.locator(
 			'[data-slot="number-field-increment"], [data-slot="number-field-decrement"]'
 		);
@@ -135,7 +135,7 @@ describe("NumberField browser layout and responsiveness", {
 		);
 		expect(dimensions.length).toBeGreaterThan(0);
 		for (const dim of dimensions) {
-			expect(dim.width).toBeGreaterThanOrEqual(32);
+			expect(dim.width).toBeGreaterThanOrEqual(28);
 			expect(dim.height).toBe((dim.groupHeight ?? 0) - 2);
 		}
 	});

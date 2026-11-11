@@ -7,7 +7,6 @@ import {
 	focusMotion,
 	focusOutline,
 	opacity,
-	scale,
 } from "../../styles/interaction.stylex";
 import { duration, easing } from "../../styles/motion.stylex";
 import { shape } from "../../styles/shape.stylex";
@@ -21,6 +20,12 @@ const draw = keyframes({
 
 export const checkboxStyles = create({
 	base: {
+		// The box is smaller than the smallest hit area; this extends it.
+		"::after": {
+			content: '""',
+			inset: "min(0px, calc((100% - 1.5rem) / 2))",
+			position: "absolute",
+		},
 		alignItems: "center",
 		animationDuration: {
 			":focus-visible": focusMotion.duration,
@@ -51,7 +56,8 @@ export const checkboxStyles = create({
 			"[aria-invalid='true'][data-indeterminate]:not([data-disabled])":
 				colors.destructive,
 			"[data-checked]:not([data-disabled])": colors.accent,
-			"[data-disabled]": "transparent",
+			"[data-disabled]": colors.controlBorder,
+			"[data-disabled]:is([data-checked], [data-indeterminate])": colors.accent,
 			"[data-indeterminate]:not([data-disabled])": colors.accent,
 			"[data-invalid][data-checked]:not([data-disabled])": colors.destructive,
 			"[data-invalid][data-indeterminate]:not([data-disabled])":
@@ -96,20 +102,13 @@ export const checkboxStyles = create({
 			default: borderWidth.focus,
 		},
 		position: "relative",
-		transform: {
-			[conditions.reducedMotion]: {
-				":active:not([data-disabled]):not([data-readonly])": "translateY(-1px)",
-				default: "translateY(-1px)",
-			},
-			":active:not([data-disabled]):not([data-readonly])": `translateY(-1px) scale(${scale.pressed})`,
-			default: "translateY(-1px)",
-		},
+		transform: "translateY(-1px)",
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
 			default: duration.fast,
 		},
 		transitionProperty:
-			"background-color, border-color, box-shadow, color, outline-color, outline-offset, transform",
+			"background-color, border-color, box-shadow, color, outline-color, outline-offset",
 		transitionTimingFunction: easing.expoOut,
 		userSelect: "none",
 		verticalAlign: "middle",
@@ -117,13 +116,17 @@ export const checkboxStyles = create({
 	// Only a mark that appears on a check draws on; one that is checked when
 	// it first renders is already drawn.
 	draw: {
+		animationDelay: {
+			[conditions.reducedMotion]: duration.instant,
+			default: "60ms",
+		},
 		animationDuration: {
 			[conditions.reducedMotion]: duration.instant,
-			default: "200ms",
+			default: "300ms",
 		},
 		animationFillMode: "both",
 		animationName: draw,
-		animationTimingFunction: easing.easeOut,
+		animationTimingFunction: easing.expoOut,
 	},
 	forcedColorsSelected: {
 		"[data-checked]": {
@@ -155,17 +158,12 @@ export const checkboxStyles = create({
 			default: 1,
 		},
 		pointerEvents: "none",
-		transform: {
-			"[data-ending-style]": "rotate(-8deg) scale(0.78)",
-			"[data-starting-style]": "rotate(-8deg) scale(0.78)",
-			default: "rotate(0deg) scale(1)",
-		},
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
 			default: duration.fast,
 		},
-		transitionProperty: "opacity, transform",
-		transitionTimingFunction: easing.spring,
+		transitionProperty: "opacity",
+		transitionTimingFunction: easing.expoOut,
 		width: "100%",
 	},
 	mark: {
@@ -177,23 +175,23 @@ export const checkboxStyles = create({
 		borderEndStartRadius: shape.checkboxRadius,
 		borderStartEndRadius: shape.checkboxRadius,
 		borderStartStartRadius: shape.checkboxRadius,
-		height: "1.125rem",
-		width: "1.125rem",
+		height: "1rem",
+		width: "1rem",
 	},
 	sizeLg: {
 		borderEndEndRadius: shape.checkboxRadius,
 		borderEndStartRadius: shape.checkboxRadius,
 		borderStartEndRadius: shape.checkboxRadius,
 		borderStartStartRadius: shape.checkboxRadius,
-		height: "1.25rem",
-		width: "1.25rem",
+		height: "1.125rem",
+		width: "1.125rem",
 	},
 	sizeSm: {
 		borderEndEndRadius: shape.checkboxRadius,
 		borderEndStartRadius: shape.checkboxRadius,
 		borderStartEndRadius: shape.checkboxRadius,
 		borderStartStartRadius: shape.checkboxRadius,
-		height: "1rem",
-		width: "1rem",
+		height: "0.875rem",
+		width: "0.875rem",
 	},
 });

@@ -26,7 +26,7 @@ export function ProjectSheet() {
 					</SheetDescription>
 				</SheetHeader>
 				<SheetPanel>
-					<Text>Owner: Mara Chen. Status: Active.</Text>
+					<Text size="ui">Owner: Mara Chen. Status: Active.</Text>
 				</SheetPanel>
 				<SheetFooter>
 					<SheetClose

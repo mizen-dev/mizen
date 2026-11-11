@@ -27,15 +27,16 @@ export const TESTID_READ_ONLY =
 export const TESTID_INVALID = '[data-testid="otp-field-invalid"]';
 
 export const SLOT_INDICES_SIX = [0, 1, 2, 3, 4, 5];
-export const DESKTOP_SLOT_SIZE_SM_PX = 32;
-export const DESKTOP_SLOT_SIZE_DEFAULT_PX = 36;
+export const DESKTOP_SLOT_SIZE_SM_PX = 28;
+export const DESKTOP_SLOT_SIZE_DEFAULT_PX = 32;
 export const DESKTOP_SLOT_SIZE_LG_PX = 40;
-export const MOBILE_SLOT_SIZE_SM_PX = 32;
-export const MOBILE_SLOT_SIZE_DEFAULT_PX = 36;
+export const MOBILE_SLOT_SIZE_SM_PX = 28;
+export const MOBILE_SLOT_SIZE_DEFAULT_PX = 32;
 export const MOBILE_SLOT_SIZE_LG_PX = 40;
 export const DESKTOP_VIEWPORT = { height: 800, width: 1280 };
 export const MOBILE_VIEWPORT = { height: 800, width: 375 };
-export const MIN_FOCUS_OUTLINE_WIDTH_PX = 2;
+// A focused slot colors its 1px edge and adds a halo.
+export const MIN_FOCUS_OUTLINE_WIDTH_PX = 1;
 export const ELEMENT_TIMEOUT_MS = 3000;
 
 const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");

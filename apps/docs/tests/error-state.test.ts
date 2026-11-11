@@ -95,7 +95,7 @@ describe("ErrorState component browser behavior", () => {
 		expect(titleColor).not.toMatch(transparentColor);
 	});
 
-	it("renders single destructive 36x36 media without card stack or data-variant", async () => {
+	it("renders single destructive 32x32 media without card stack or data-variant", async () => {
 		await gotoErrorState(1280, 900);
 		const medias = page.locator(`${EXAMPLES} [data-slot="error-state-media"]`);
 		expect(await medias.count()).toBe(5);
@@ -112,8 +112,8 @@ describe("ErrorState component browser behavior", () => {
 		const style = await firstMedia.evaluate((el) => getComputedStyle(el));
 		expect(style.borderStyle).toBe("solid");
 		expect(Number.parseFloat(style.borderWidth)).toBeGreaterThanOrEqual(1);
-		expect(Number.parseFloat(style.width)).toBeCloseTo(36, 0);
-		expect(Number.parseFloat(style.height)).toBeCloseTo(36, 0);
+		expect(Number.parseFloat(style.width)).toBeCloseTo(32, 0);
+		expect(Number.parseFloat(style.height)).toBeCloseTo(32, 0);
 		expect(style.backgroundColor).not.toMatch(transparentColor);
 		expect(style.borderColor).not.toMatch(transparentColor);
 	});

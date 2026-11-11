@@ -32,12 +32,6 @@ const sizeStyles = {
 	sm: switchStyles.sizeSm,
 };
 
-const thumbSizeStyles = {
-	default: switchStyles.thumbDefault,
-	lg: switchStyles.thumbLg,
-	sm: switchStyles.thumbSm,
-};
-
 export function Switch({
 	disabled = false,
 	invalid = false,
@@ -62,7 +56,7 @@ export function Switch({
 		>
 			<BaseSwitch.Thumb
 				data-slot="switch-thumb"
-				{...props(switchStyles.thumb, thumbSizeStyles[size])}
+				{...props(switchStyles.thumb)}
 			/>
 		</BaseSwitch.Root>
 	);

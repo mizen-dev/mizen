@@ -242,9 +242,12 @@ describe("Alert component browser behavior", () => {
 			}
 			const dRect = dEl.getBoundingClientRect();
 			const c = getComputedStyle(el);
+			const dStyle = getComputedStyle(dEl);
 			return {
 				expected:
-					Number.parseFloat(c.paddingTop) + Number.parseFloat(c.borderTopWidth),
+					Number.parseFloat(c.paddingTop) +
+					Number.parseFloat(c.borderTopWidth) +
+					Number.parseFloat(dStyle.marginTop),
 				relative: dRect.top - aRect.top,
 			};
 		});

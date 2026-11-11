@@ -17,6 +17,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 import { toggleColors } from "./toggle-colors.stylex";
@@ -24,14 +25,14 @@ import { toggleColors } from "./toggle-colors.stylex";
 export const toggleStyles = create({
 	base: {
 		// The surface lives on ::before (see Button): press moves its edges by a
-		// fixed 2px while the label and focus ring stay still. Border widths are
+		// fixed 1px while the label and focus ring stay still. Border widths are
 		// inherited so joined groups keep their zero-width inner edges.
 		"::before": {
 			backgroundColor: {
-				":active:not([data-disabled])": colors.controlSurface,
+				":active:not([data-disabled])": colors.controlSurfaceHover,
 				[conditions.canHover]: {
 					":hover:not([data-disabled]):not([data-pressed]):not(:active)":
-						colors.controlSurfaceHover,
+						colors.controlSurface,
 				},
 				"[data-pressed]": toggleColors.pressedBackground,
 				"[data-pressed]:active:not([data-disabled])":
@@ -39,7 +40,7 @@ export const toggleStyles = create({
 				"[data-pressed]:not([data-disabled]):not(:active):hover": {
 					[conditions.canHover]: toggleColors.pressedHoverBackground,
 				},
-				default: "transparent",
+				default: "var(--mizen-toggle-rest, transparent)",
 			},
 			borderColor: {
 				"[data-pressed]": toggleColors.pressedBorder,
@@ -51,18 +52,10 @@ export const toggleStyles = create({
 			borderStartStartRadius: "inherit",
 			borderStyle: "solid",
 			borderWidth: "inherit",
-			boxShadow: {
-				":active:not([data-disabled])": shadows.pressed,
-				"[data-pressed]": `${shadows.filledRest}, inset 0 1px 0 oklch(1 0 0 / 0.16)`,
-				"[data-pressed]:active:not([data-disabled])": shadows.pressed,
-				"[data-pressed]:not([data-disabled]):not(:active):hover": {
-					[conditions.canHover]: `${shadows.filledHover}, inset 0 1px 0 oklch(1 0 0 / 0.16)`,
-				},
-				default: "none",
-			},
+			boxShadow: "none",
 			boxSizing: "border-box",
 			content: '""',
-			inset: { ":active:not([data-disabled])": "1px", default: "-1px" },
+			inset: { ":active:not([data-disabled])": "0px", default: "-1px" },
 			pointerEvents: "none",
 			position: "absolute",
 			transitionDuration: {
@@ -99,14 +92,15 @@ export const toggleStyles = create({
 		display: "inline-flex",
 		flexShrink: 0,
 		fontFamily: "inherit",
-		fontSize: fontSize["16"],
-		fontWeight: fontWeight.regular,
+		fontSize: fontSize["14"],
+		fontWeight: fontWeight.medium,
 		forcedColorAdjust: {
 			"[data-pressed]": forcedColorAdjust.selectedState,
 		},
 		gap: space["2"],
 		isolation: "isolate",
 		justifyContent: "center",
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight.none,
 		maxInlineSize: "100%",
 		minInlineSize: 0,
@@ -139,7 +133,6 @@ export const toggleStyles = create({
 		zIndex: { ":focus-visible": 1, default: 0 },
 	},
 	content: {
-		fontWeight: fontWeight.regular,
 		minInlineSize: {
 			":has(> svg:only-child)": controlSize.md,
 			":is([data-size='lg'], [data-size='icon-lg']):has(> svg:only-child)":
@@ -216,26 +209,20 @@ export const toggleStyles = create({
 		borderStartStartRadius: { ":first-child": "inherit", default: 0 },
 	},
 	outline: {
+		// An outline toggle rests on the surface color, like an outline button.
+		"--mizen-toggle-rest": colors.outlineSurface,
 		"::before": {
 			borderColor: {
-				[conditions.canHover]: {
-					":hover:not([data-disabled]):not([data-pressed])":
-						colors.controlBorderStrong,
-				},
 				"[data-pressed]": toggleColors.pressedBorder,
 				default: colors.border,
 			},
+			// Raised when off; a pressed toggle sits flat in its fill.
 			boxShadow: {
-				":active:not([data-disabled])": shadows.pressed,
 				[conditions.canHover]: {
 					":hover:not([data-disabled]):not([data-pressed]):not(:active)":
 						shadows.outlineHover,
 				},
-				"[data-pressed]": `${shadows.filledRest}, inset 0 1px 0 oklch(1 0 0 / 0.16)`,
-				"[data-pressed]:active:not([data-disabled])": shadows.pressed,
-				"[data-pressed]:not([data-disabled]):not(:active):hover": {
-					[conditions.canHover]: `${shadows.filledHover}, inset 0 1px 0 oklch(1 0 0 / 0.16)`,
-				},
+				"[data-pressed]": "none",
 				default: shadows.outlineRest,
 			},
 		},

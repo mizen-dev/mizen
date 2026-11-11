@@ -16,6 +16,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -101,6 +102,7 @@ export const sliderStyles = create({
 		boxSizing: "border-box",
 		display: "block",
 		fontSize: fontSize["12"],
+		letterSpacing: letterSpacing.caption,
 		position: "absolute",
 	},
 	indicatorExtent: (
@@ -123,11 +125,13 @@ export const sliderStyles = create({
 				orientation === "horizontal" ? indicatorLeadingEdge(extent, range) : 0,
 		},
 	}),
+	// Label role, as FieldLabel: 13/20 medium.
 	label: {
 		color: colors.content,
-		fontSize: fontSize["16"],
-		fontWeight: fontWeight.regular,
-		lineHeight: lineHeight["24"],
+		fontSize: fontSize["13"],
+		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.ui,
+		lineHeight: lineHeight["20"],
 	},
 	root: {
 		boxSizing: "border-box",
@@ -206,6 +210,7 @@ export const sliderStyles = create({
 		display: "flex",
 		fontSize: fontSize["12"],
 		justifyContent: "center",
+		letterSpacing: letterSpacing.caption,
 		outlineColor: {
 			":is(:focus-visible, :has(:focus-visible))": colors.focusRing,
 			default: "transparent",
@@ -249,6 +254,7 @@ export const sliderStyles = create({
 		fontFamily: "inherit",
 		fontSize: fontSize["12"],
 		fontVariantNumeric: "tabular-nums",
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight.none,
 		pointerEvents: "none",
 		whiteSpace: "nowrap",
@@ -295,6 +301,7 @@ export const sliderStyles = create({
 	}),
 	ticks: {
 		fontSize: fontSize["12"],
+		letterSpacing: letterSpacing.caption,
 		pointerEvents: "none",
 		position: "absolute",
 		zIndex: 1,
@@ -315,7 +322,6 @@ export const sliderStyles = create({
 			borderRadius: shape.controlRadiusLarge,
 			borderStyle: "solid",
 			borderWidth: borderWidth.thin,
-			boxShadow: shadows.recessedRest,
 			content: '""',
 			insetBlock: 0,
 			insetInline: `calc(-1 * ${space["1"]})`,
@@ -356,13 +362,14 @@ export const sliderStyles = create({
 		height: "100%",
 		minHeight: "10rem",
 	},
-	// The `ui` role, so values line up with 14/20 field labels.
+	// Supporting text at 13/20, so values line up with field labels.
 	value: {
 		color: colors.mutedContent,
-		fontSize: fontSize["14"],
+		fontSize: fontSize["13"],
 		fontSizeAdjust: fonts.sizeAdjust,
 		fontVariantNumeric: "tabular-nums",
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 	},
 });

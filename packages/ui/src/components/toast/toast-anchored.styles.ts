@@ -13,6 +13,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -123,6 +124,7 @@ export const anchoredToastStyles = create({
 		color: colors.content,
 		fontSize: fontSize["12"],
 		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
 		margin: space["0"],
 		overflowWrap: "anywhere",

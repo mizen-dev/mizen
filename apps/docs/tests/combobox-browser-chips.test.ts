@@ -160,7 +160,7 @@ describe("Combobox browser integration - Multiple chips", () => {
 		const outlineWidth = await engineeringChip.evaluate(
 			(el) => getComputedStyle(el).outlineWidth
 		);
-		expect(outlineWidth).toBe("3px");
+		expect(outlineWidth).toBe("2px");
 
 		await page.keyboard.press("Backspace");
 
@@ -185,7 +185,7 @@ describe("Combobox browser integration - Multiple chips", () => {
 		);
 		expect(
 			await input.evaluate((element) => getComputedStyle(element).fontSize)
-		).toBe("14px");
+		).toBe("13px");
 		await page.setViewportSize({ height: 800, width: 320 });
 		expect(
 			await input.evaluate((element) => getComputedStyle(element).fontSize)

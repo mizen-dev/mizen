@@ -120,36 +120,36 @@ describe("Button size contract", () => {
 		};
 
 		const radii = [
-			["Default size", "16px"],
-			["Extra small", "12px"],
-			["Small", "12px"],
-			["Large", "16px"],
-			["Extra large", "16px"],
-			["Icon", "16px"],
-			["Extra small icon", "12px"],
-			["Small icon", "12px"],
-			["Large icon", "16px"],
-			["Extra large icon", "16px"],
+			["Default size", "10px"],
+			["Extra small", "6px"],
+			["Small", "8px"],
+			["Large", "10px"],
+			["Extra large", "10px"],
+			["Icon", "10px"],
+			["Extra small icon", "6px"],
+			["Small icon", "8px"],
+			["Large icon", "10px"],
+			["Extra large icon", "10px"],
 		] as const;
 
 		await page.setViewportSize({ height: 800, width: 375 });
 		await assertSizes(
 			[
-				["Default size", 36],
-				["Extra small", 28],
-				["Small", 32],
+				["Default size", 32],
+				["Extra small", 24],
+				["Small", 28],
 				["Large", 40],
 				["Extra large", 44],
 			],
 			[
-				["Icon", 36],
-				["Extra small icon", 28],
-				["Small icon", 32],
+				["Icon", 32],
+				["Extra small icon", 24],
+				["Small icon", 28],
 				["Large icon", 40],
 				["Extra large icon", 44],
 			]
 		);
-		await assertIconGlyph("Icon", "18px");
+		await assertIconGlyph("Icon", "16px");
 		await assertIconGlyph("Extra small icon", "14px");
 		await assertIconGlyph("Small icon", "16px");
 		await assertIconGlyph("Large icon", "18px");
@@ -161,21 +161,21 @@ describe("Button size contract", () => {
 		await page.setViewportSize({ height: 800, width: 1024 });
 		await assertSizes(
 			[
-				["Default size", 36],
-				["Extra small", 28],
-				["Small", 32],
+				["Default size", 32],
+				["Extra small", 24],
+				["Small", 28],
 				["Large", 40],
 				["Extra large", 44],
 			],
 			[
-				["Icon", 36],
-				["Extra small icon", 28],
-				["Small icon", 32],
+				["Icon", 32],
+				["Extra small icon", 24],
+				["Small icon", 28],
 				["Large icon", 40],
 				["Extra large icon", 44],
 			]
 		);
-		await assertIconGlyph("Icon", "18px");
+		await assertIconGlyph("Icon", "16px");
 		await assertIconGlyph("Extra small icon", "14px");
 		await assertIconGlyph("Small icon", "16px");
 		await assertIconGlyph("Large icon", "18px");
@@ -200,7 +200,7 @@ describe("Button size contract", () => {
 
 		await paddingAndGap("Default size", "11px", "8px");
 		await paddingAndGap("Extra small", "7px", "4px");
-		await paddingAndGap("Small", "11px", "4px");
+		await paddingAndGap("Small", "9px", "4px");
 		await paddingAndGap("Large", "15px", "8px");
 		await paddingAndGap("Extra large", "15px", "8px");
 	});

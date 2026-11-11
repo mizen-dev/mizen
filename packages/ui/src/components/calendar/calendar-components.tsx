@@ -135,18 +135,13 @@ function getDaySurfaceStyle(selected: boolean) {
 	return selected ? calendarStyles.selectedDay : buttonStyles.ghost;
 }
 
-function getDayInteractionStyles(
-	interactive: boolean,
-	selected: boolean,
-	today: boolean
-) {
-	const quietInteraction = today
-		? calendarStyles.todayInteraction
-		: buttonStyles.interactionGhost;
+function getDayInteractionStyles(interactive: boolean, selected: boolean) {
 	return interactive
 		? [
 				buttonStyles.press,
-				selected ? buttonStyles.interactionBrand : quietInteraction,
+				selected
+					? buttonStyles.interactionBrand
+					: buttonStyles.interactionGhost,
 			]
 		: [];
 }
@@ -171,11 +166,7 @@ function CalendarDayButton({
 				calendarStyles.dayButton,
 				modifiers.today && calendarStyles.todayButton,
 				selected && buttonStyles.brand,
-				...getDayInteractionStyles(
-					interactive,
-					Boolean(selected),
-					Boolean(modifiers.today)
-				),
+				...getDayInteractionStyles(interactive, Boolean(selected)),
 				modifiers.today && calendarStyles.todayIndicator,
 				modifiers.today && selected && calendarStyles.todayIndicatorSelected,
 				readOnly && calendarStyles.readOnly

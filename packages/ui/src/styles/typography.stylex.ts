@@ -1,4 +1,4 @@
-import { defineConsts } from "@stylexjs/stylex";
+import { defineConsts, defineVars } from "@stylexjs/stylex";
 
 export const fontSize = defineConsts({
 	"12": "0.75rem",
@@ -32,13 +32,18 @@ export const lineHeight = defineConsts({
 	none: 1,
 });
 
-// Role tracking follows one size curve in em, small enough for any family.
-export const letterSpacing = defineConsts({
+// Role tracking follows one size curve in em. Letterfit belongs to the
+// family, so the curve is themable: these defaults suit system fonts, and a
+// loosely fitted family overrides them with createTheme. `caption` is 12px
+// text, `ui` is 13–16px text, and the rest follow the heading sizes.
+export const letterSpacing = defineVars({
 	caption: "0.01em",
 	display: "-0.025em",
 	heading: "-0.012em",
 	normal: "0",
+	numeric: "-0.03em",
 	subheading: "-0.006em",
 	title: "-0.02em",
+	ui: "0",
 	wide: "0.02em",
 });

@@ -1,6 +1,5 @@
 import { create } from "@stylexjs/stylex";
 import { conditions } from "../../styles/conditions.stylex";
-import { scale } from "../../styles/interaction.stylex";
 import { duration, easing } from "../../styles/motion.stylex";
 
 export const radioStyles = create({
@@ -8,7 +7,7 @@ export const radioStyles = create({
 		backgroundColor: "currentColor",
 		borderRadius: "9999px",
 		display: "block",
-		height: "0.5rem",
+		height: "0.375rem",
 		opacity: {
 			"[data-ending-style]": 0,
 			"[data-starting-style]": 0,
@@ -16,8 +15,8 @@ export const radioStyles = create({
 		},
 		pointerEvents: "none",
 		transform: {
-			"[data-ending-style]": "scale(0)",
-			"[data-starting-style]": "scale(0)",
+			"[data-ending-style]": "scale(0.5)",
+			"[data-starting-style]": "scale(0.5)",
 			default: "scale(1)",
 		},
 		transitionDuration: {
@@ -25,33 +24,26 @@ export const radioStyles = create({
 			default: duration.fast,
 		},
 		transitionProperty: "opacity, transform",
-		transitionTimingFunction: {
-			"[data-ending-style]": easing.easeOut,
-			default: easing.spring,
-		},
-		width: "0.5rem",
+		transitionTimingFunction: easing.expoOut,
+		width: "0.375rem",
 	},
 	root: {
 		borderEndEndRadius: "9999px",
 		borderEndStartRadius: "9999px",
 		borderStartEndRadius: "9999px",
 		borderStartStartRadius: "9999px",
-		transform: {
-			[conditions.reducedMotion]: "none",
-			":active:not([data-disabled]):not([data-readonly])": `scale(${scale.pressed})`,
-			default: "none",
-		},
+		transform: "none",
 	},
 	sizeDefault: {
+		height: "1rem",
+		width: "1rem",
+	},
+	sizeLg: {
 		height: "1.125rem",
 		width: "1.125rem",
 	},
-	sizeLg: {
-		height: "1.25rem",
-		width: "1.25rem",
-	},
 	sizeSm: {
-		height: "1rem",
-		width: "1rem",
+		height: "0.875rem",
+		width: "0.875rem",
 	},
 });

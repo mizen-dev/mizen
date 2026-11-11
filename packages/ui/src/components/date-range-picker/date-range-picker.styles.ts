@@ -13,6 +13,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -48,9 +49,10 @@ export const dateRangePickerStyles = create({
 		color: colors.content,
 		cursor: "pointer",
 		display: "inline-flex",
-		fontSize: fontSize["16"],
-		fontWeight: fontWeight.regular,
-		lineHeight: lineHeight["24"],
+		fontSize: fontSize["13"],
+		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.ui,
+		lineHeight: lineHeight["20"],
 		outlineColor: {
 			":focus-visible": colors.focusRing,
 			default: "transparent",

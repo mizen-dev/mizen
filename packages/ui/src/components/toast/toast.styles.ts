@@ -15,6 +15,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -48,6 +49,7 @@ export const toastStyles = create({
 		fontWeight: fontWeight.medium,
 		gap: space["1"],
 		justifyContent: "center",
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight.none,
 		marginInlineStart: space["1"],
 		minHeight: "1.75rem",
@@ -117,8 +119,10 @@ export const toastStyles = create({
 		color: colors.mutedContent,
 		fontSize: fontSize["14"],
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		margin: space["0"],
+		textWrap: "pretty",
 		wordBreak: "break-word",
 	},
 	icon: {
@@ -130,10 +134,10 @@ export const toastStyles = create({
 		width: "1rem",
 	},
 	iconError: { color: colors.destructive },
-	iconInfo: { color: colors.infoContent },
+	iconInfo: { color: colors.infoSolid },
 	iconLoading: { color: colors.content },
-	iconSuccess: { color: colors.successContent },
-	iconWarning: { color: colors.warningContent },
+	iconSuccess: { color: colors.successSolid },
+	iconWarning: { color: colors.warningSolid },
 	surface: {
 		backgroundColor: colors.floatingSurface,
 		borderColor: {
@@ -151,8 +155,10 @@ export const toastStyles = create({
 		color: colors.content,
 		fontSize: fontSize["14"],
 		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		margin: space["0"],
+		textWrap: "balance",
 		wordBreak: "break-word",
 	},
 	topCenter: {

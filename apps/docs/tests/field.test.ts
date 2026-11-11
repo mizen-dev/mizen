@@ -76,7 +76,7 @@ describe("Field component route", () => {
 				const style = getComputedStyle(element);
 				return [style.fontSize, style.fontWeight, style.lineHeight];
 			})
-		).toEqual(["14px", "500", "20px"]);
+		).toEqual(["13px", "500", "20px"]);
 		expect(
 			await page.getByText("We only use this for account updates.").count()
 		).toBe(1);
@@ -118,7 +118,7 @@ describe("Field component route", () => {
 			const style = getComputedStyle(element);
 			return [style.outlineWidth, style.outlineOffset];
 		});
-		expect(invalidFocus).toEqual(["3px", "0px"]);
+		expect(invalidFocus).toEqual(["1px", "-1px"]);
 		expect(await page.getByText("Enter a project name.").count()).toBe(1);
 
 		const compact = page.getByRole("textbox", { name: "Compact control" });
@@ -126,7 +126,7 @@ describe("Field component route", () => {
 		expect(await compact.isEditable()).toBe(false);
 		expect(
 			await compact.evaluate((element) => getComputedStyle(element).height)
-		).toBe("32px");
+		).toBe("28px");
 
 		const workspace = page.getByRole("textbox", { name: "Workspace" });
 		expect(await workspace.isDisabled()).toBe(true);

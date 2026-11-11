@@ -10,7 +10,7 @@ import {
 export function ContactDetailsFieldset() {
 	return (
 		<Fieldset>
-			<Stack gap="3">
+			<Stack gap="4">
 				<FieldsetLegend>Contact details</FieldsetLegend>
 				<Field>
 					<FieldLabel>Full name</FieldLabel>

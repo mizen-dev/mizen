@@ -59,7 +59,7 @@
     },
     "checkbox-group": {
       "anatomy": null,
-      "imports": ["CheckboxGroup"]
+      "imports": ["CheckboxGroupProps"]
     },
     "code": {
       "anatomy": null,
@@ -200,7 +200,7 @@
     },
     "radio-group": {
       "anatomy": null,
-      "imports": ["RadioGroup"]
+      "imports": ["RadioGroupProps"]
     },
     "scroll-area": {
       "anatomy": null,
@@ -2416,7 +2416,7 @@
         "name": "NotificationChannels",
         "title": "Checkbox group",
         "description": "Name the group with aria-labelledby and provide allValues when using the parent checkbox.",
-        "code": "import {\n\tCheckbox,\n\tCheckboxGroup,\n\tField,\n\tFieldLabel,\n\tHeading,\n\tStack,\n} from \"@mizen-labs/ui\";\n\nexport function NotificationChannels() {\n\treturn (\n\t\t<Stack gap=\"3\">\n\t\t\t<Heading id=\"notification-channel-options\" level={3}>\n\t\t\t\tNotification channels\n\t\t\t</Heading>\n\t\t\t<CheckboxGroup\n\t\t\t\tallValues={[\"email\", \"push\"]}\n\t\t\t\taria-labelledby=\"notification-channel-options\"\n\t\t\t\tdefaultValue={[\"email\"]}\n\t\t\t>\n\t\t\t\t<Field>\n\t\t\t\t\t<FieldLabel>\n\t\t\t\t\t\t<Checkbox parent />\n\t\t\t\t\t\tAll channels\n\t\t\t\t\t</FieldLabel>\n\t\t\t\t</Field>\n\t\t\t\t<Field>\n\t\t\t\t\t<FieldLabel>\n\t\t\t\t\t\t<Checkbox name=\"notifications\" value=\"email\" />\n\t\t\t\t\t\tEmail\n\t\t\t\t\t</FieldLabel>\n\t\t\t\t</Field>\n\t\t\t\t<Field>\n\t\t\t\t\t<FieldLabel>\n\t\t\t\t\t\t<Checkbox name=\"notifications\" value=\"push\" />\n\t\t\t\t\t\tPush\n\t\t\t\t\t</FieldLabel>\n\t\t\t\t</Field>\n\t\t\t</CheckboxGroup>\n\t\t</Stack>\n\t);\n}\n",
+        "code": "import {\n\tCheckbox,\n\tCheckboxGroup,\n\tField,\n\tFieldLabel,\n\tFieldset,\n\tFieldsetLegend,\n} from \"@mizen-labs/ui\";\n\nexport function NotificationChannels() {\n\treturn (\n\t\t<Fieldset\n\t\t\trender={\n\t\t\t\t<CheckboxGroup allValues={[\"email\", \"push\"]} defaultValue={[\"email\"]} />\n\t\t\t}\n\t\t>\n\t\t\t<FieldsetLegend>Notification channels</FieldsetLegend>\n\t\t\t<Field>\n\t\t\t\t<FieldLabel>\n\t\t\t\t\t<Checkbox parent />\n\t\t\t\t\tAll channels\n\t\t\t\t</FieldLabel>\n\t\t\t</Field>\n\t\t\t<Field>\n\t\t\t\t<FieldLabel>\n\t\t\t\t\t<Checkbox name=\"notifications\" value=\"email\" />\n\t\t\t\t\tEmail\n\t\t\t\t</FieldLabel>\n\t\t\t</Field>\n\t\t\t<Field>\n\t\t\t\t<FieldLabel>\n\t\t\t\t\t<Checkbox name=\"notifications\" value=\"push\" />\n\t\t\t\t\tPush\n\t\t\t\t</FieldLabel>\n\t\t\t</Field>\n\t\t</Fieldset>\n\t);\n}\n",
         "path": "entities/documentation/ui/examples/checkbox-group.tsx"
       },
       {
@@ -2567,7 +2567,7 @@
         "name": "ContactDetailsFieldset",
         "title": "Related fields",
         "description": "Use Fieldset and FieldsetLegend to group related controls under one native legend.",
-        "code": "import {\n\tField,\n\tFieldDescription,\n\tFieldLabel,\n\tFieldset,\n\tFieldsetLegend,\n\tInput,\n\tStack,\n} from \"@mizen-labs/ui\";\n\nexport function ContactDetailsFieldset() {\n\treturn (\n\t\t<Fieldset>\n\t\t\t<Stack gap=\"3\">\n\t\t\t\t<FieldsetLegend>Contact details</FieldsetLegend>\n\t\t\t\t<Field>\n\t\t\t\t\t<FieldLabel>Full name</FieldLabel>\n\t\t\t\t\t<Input autoComplete=\"name\" defaultValue=\"Maya Chen\" name=\"name\" />\n\t\t\t\t</Field>\n\t\t\t\t<Field>\n\t\t\t\t\t<FieldLabel>Email address</FieldLabel>\n\t\t\t\t\t<Input\n\t\t\t\t\t\tautoComplete=\"email\"\n\t\t\t\t\t\tdefaultValue=\"maya@northstar.dev\"\n\t\t\t\t\t\tname=\"email\"\n\t\t\t\t\t\ttype=\"email\"\n\t\t\t\t\t/>\n\t\t\t\t\t<FieldDescription>Used for account notifications.</FieldDescription>\n\t\t\t\t</Field>\n\t\t\t</Stack>\n\t\t</Fieldset>\n\t);\n}\n",
+        "code": "import {\n\tField,\n\tFieldDescription,\n\tFieldLabel,\n\tFieldset,\n\tFieldsetLegend,\n\tInput,\n\tStack,\n} from \"@mizen-labs/ui\";\n\nexport function ContactDetailsFieldset() {\n\treturn (\n\t\t<Fieldset>\n\t\t\t<Stack gap=\"4\">\n\t\t\t\t<FieldsetLegend>Contact details</FieldsetLegend>\n\t\t\t\t<Field>\n\t\t\t\t\t<FieldLabel>Full name</FieldLabel>\n\t\t\t\t\t<Input autoComplete=\"name\" defaultValue=\"Maya Chen\" name=\"name\" />\n\t\t\t\t</Field>\n\t\t\t\t<Field>\n\t\t\t\t\t<FieldLabel>Email address</FieldLabel>\n\t\t\t\t\t<Input\n\t\t\t\t\t\tautoComplete=\"email\"\n\t\t\t\t\t\tdefaultValue=\"maya@northstar.dev\"\n\t\t\t\t\t\tname=\"email\"\n\t\t\t\t\t\ttype=\"email\"\n\t\t\t\t\t/>\n\t\t\t\t\t<FieldDescription>Used for account notifications.</FieldDescription>\n\t\t\t\t</Field>\n\t\t\t</Stack>\n\t\t</Fieldset>\n\t);\n}\n",
         "path": "entities/documentation/ui/examples/fieldset.tsx"
       },
       {
@@ -2687,7 +2687,7 @@
         "name": "DensityOptions",
         "title": "Single choice",
         "description": "Give the radio group one accessible name and a shared form name.",
-        "code": "import {\n\tField,\n\tFieldLabel,\n\tHeading,\n\tRadio,\n\tRadioGroup,\n\tStack,\n} from \"@mizen-labs/ui\";\n\nexport function DensityOptions() {\n\treturn (\n\t\t<Stack gap=\"3\">\n\t\t\t<Heading id=\"density-options\" level={3}>\n\t\t\t\tInterface density\n\t\t\t</Heading>\n\t\t\t<RadioGroup\n\t\t\t\taria-labelledby=\"density-options\"\n\t\t\t\tdefaultValue=\"comfortable\"\n\t\t\t\tname=\"density\"\n\t\t\t>\n\t\t\t\t<Field>\n\t\t\t\t\t<FieldLabel>\n\t\t\t\t\t\t<Radio value=\"compact\" />\n\t\t\t\t\t\tCompact\n\t\t\t\t\t</FieldLabel>\n\t\t\t\t</Field>\n\t\t\t\t<Field>\n\t\t\t\t\t<FieldLabel>\n\t\t\t\t\t\t<Radio value=\"comfortable\" />\n\t\t\t\t\t\tComfortable\n\t\t\t\t\t</FieldLabel>\n\t\t\t\t</Field>\n\t\t\t\t<Field>\n\t\t\t\t\t<FieldLabel>\n\t\t\t\t\t\t<Radio value=\"spacious\" />\n\t\t\t\t\t\tSpacious\n\t\t\t\t\t</FieldLabel>\n\t\t\t\t</Field>\n\t\t\t</RadioGroup>\n\t\t</Stack>\n\t);\n}\n",
+        "code": "import {\n\tField,\n\tFieldLabel,\n\tFieldset,\n\tFieldsetLegend,\n\tRadio,\n\tRadioGroup,\n} from \"@mizen-labs/ui\";\n\nexport function DensityOptions() {\n\treturn (\n\t\t<Fieldset render={<RadioGroup defaultValue=\"comfortable\" name=\"density\" />}>\n\t\t\t<FieldsetLegend>Interface density</FieldsetLegend>\n\t\t\t<Field>\n\t\t\t\t<FieldLabel>\n\t\t\t\t\t<Radio value=\"compact\" />\n\t\t\t\t\tCompact\n\t\t\t\t</FieldLabel>\n\t\t\t</Field>\n\t\t\t<Field>\n\t\t\t\t<FieldLabel>\n\t\t\t\t\t<Radio value=\"comfortable\" />\n\t\t\t\t\tComfortable\n\t\t\t\t</FieldLabel>\n\t\t\t</Field>\n\t\t\t<Field>\n\t\t\t\t<FieldLabel>\n\t\t\t\t\t<Radio value=\"spacious\" />\n\t\t\t\t\tSpacious\n\t\t\t\t</FieldLabel>\n\t\t\t</Field>\n\t\t</Fieldset>\n\t);\n}\n",
         "path": "entities/documentation/ui/examples/radio-group.tsx"
       },
       {
@@ -3905,7 +3905,7 @@
         "name": "ProjectCard",
         "title": "Plan card",
         "description": "The header holds the title, description, and status, the content shows usage, and the footer holds the actions.",
-        "code": "import {\n\tBadge,\n\tButton,\n\tCard,\n\tCardAction,\n\tCardContent,\n\tCardDescription,\n\tCardFooter,\n\tCardHeader,\n\tCardTitle,\n\tText,\n} from \"@mizen-labs/ui\";\n\nexport function ProjectCard() {\n\treturn (\n\t\t<Card>\n\t\t\t<CardHeader>\n\t\t\t\t{/* biome-ignore lint/a11y/useHeadingContent: CardTitle supplies the rendered heading text. */}\n\t\t\t\t<CardTitle render={<h3 />}>Pro plan</CardTitle>\n\t\t\t\t<CardDescription>$24 per seat, billed monthly</CardDescription>\n\t\t\t\t<CardAction>\n\t\t\t\t\t<Badge variant=\"success\">Active</Badge>\n\t\t\t\t</CardAction>\n\t\t\t</CardHeader>\n\t\t\t<CardContent>\n\t\t\t\t<Text size=\"ui\" tone=\"muted\">\n\t\t\t\t\t8 of 10 seats used · Renews Nov 30\n\t\t\t\t</Text>\n\t\t\t</CardContent>\n\t\t\t<CardFooter>\n\t\t\t\t<Button size=\"sm\">Manage plan</Button>\n\t\t\t\t<Button size=\"sm\" variant=\"ghost\">\n\t\t\t\t\tAdd seats\n\t\t\t\t</Button>\n\t\t\t</CardFooter>\n\t\t</Card>\n\t);\n}\n",
+        "code": "import {\n\tBadge,\n\tButton,\n\tCard,\n\tCardAction,\n\tCardContent,\n\tCardDescription,\n\tCardFooter,\n\tCardHeader,\n\tCardTitle,\n\tText,\n} from \"@mizen-labs/ui\";\n\nexport function ProjectCard() {\n\treturn (\n\t\t<Card>\n\t\t\t<CardHeader>\n\t\t\t\t{/* biome-ignore lint/a11y/useHeadingContent: CardTitle supplies the rendered heading text. */}\n\t\t\t\t<CardTitle render={<h3 />}>Pro plan</CardTitle>\n\t\t\t\t<CardDescription>$24 per seat, billed monthly</CardDescription>\n\t\t\t\t<CardAction>\n\t\t\t\t\t<Badge variant=\"success\">Active</Badge>\n\t\t\t\t</CardAction>\n\t\t\t</CardHeader>\n\t\t\t<CardContent>\n\t\t\t\t<Text size=\"ui\">8 of 10 seats used · Renews Nov 30</Text>\n\t\t\t</CardContent>\n\t\t\t<CardFooter>\n\t\t\t\t<Button size=\"sm\">Manage plan</Button>\n\t\t\t\t<Button size=\"sm\" variant=\"ghost\">\n\t\t\t\t\tAdd seats\n\t\t\t\t</Button>\n\t\t\t</CardFooter>\n\t\t</Card>\n\t);\n}\n",
         "path": "entities/documentation/ui/examples/card.tsx"
       },
       {
@@ -5304,7 +5304,7 @@
         "name": "ProjectSheet",
         "title": "Side panel",
         "description": "Use a side panel for focused supporting information.",
-        "code": "import {\n\tButton,\n\tSheet,\n\tSheetClose,\n\tSheetDescription,\n\tSheetFooter,\n\tSheetHeader,\n\tSheetPanel,\n\tSheetPopup,\n\tSheetTitle,\n\tSheetTrigger,\n\tText,\n} from \"@mizen-labs/ui\";\n\nexport function ProjectSheet() {\n\treturn (\n\t\t<Sheet>\n\t\t\t<SheetTrigger\n\t\t\t\trender={<Button variant=\"outline\">Review project details</Button>}\n\t\t\t/>\n\t\t\t<SheetPopup side=\"right\" variant=\"inset\">\n\t\t\t\t<SheetHeader>\n\t\t\t\t\t<SheetTitle>Northstar launch</SheetTitle>\n\t\t\t\t\t<SheetDescription>\n\t\t\t\t\t\tProject details remain beside the current page.\n\t\t\t\t\t</SheetDescription>\n\t\t\t\t</SheetHeader>\n\t\t\t\t<SheetPanel>\n\t\t\t\t\t<Text>Owner: Mara Chen. Status: Active.</Text>\n\t\t\t\t</SheetPanel>\n\t\t\t\t<SheetFooter>\n\t\t\t\t\t<SheetClose\n\t\t\t\t\t\trender={<Button variant=\"outline\">Close details</Button>}\n\t\t\t\t\t/>\n\t\t\t\t</SheetFooter>\n\t\t\t</SheetPopup>\n\t\t</Sheet>\n\t);\n}\n",
+        "code": "import {\n\tButton,\n\tSheet,\n\tSheetClose,\n\tSheetDescription,\n\tSheetFooter,\n\tSheetHeader,\n\tSheetPanel,\n\tSheetPopup,\n\tSheetTitle,\n\tSheetTrigger,\n\tText,\n} from \"@mizen-labs/ui\";\n\nexport function ProjectSheet() {\n\treturn (\n\t\t<Sheet>\n\t\t\t<SheetTrigger\n\t\t\t\trender={<Button variant=\"outline\">Review project details</Button>}\n\t\t\t/>\n\t\t\t<SheetPopup side=\"right\" variant=\"inset\">\n\t\t\t\t<SheetHeader>\n\t\t\t\t\t<SheetTitle>Northstar launch</SheetTitle>\n\t\t\t\t\t<SheetDescription>\n\t\t\t\t\t\tProject details remain beside the current page.\n\t\t\t\t\t</SheetDescription>\n\t\t\t\t</SheetHeader>\n\t\t\t\t<SheetPanel>\n\t\t\t\t\t<Text size=\"ui\">Owner: Mara Chen. Status: Active.</Text>\n\t\t\t\t</SheetPanel>\n\t\t\t\t<SheetFooter>\n\t\t\t\t\t<SheetClose\n\t\t\t\t\t\trender={<Button variant=\"outline\">Close details</Button>}\n\t\t\t\t\t/>\n\t\t\t\t</SheetFooter>\n\t\t\t</SheetPopup>\n\t\t</Sheet>\n\t);\n}\n",
         "path": "entities/documentation/ui/examples/sheet.tsx"
       },
       {

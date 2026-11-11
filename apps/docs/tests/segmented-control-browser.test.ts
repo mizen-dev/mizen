@@ -37,8 +37,8 @@ describe("Segmented control browser states", { timeout: 20_000 }, () => {
 				waitUntil: "networkidle",
 			});
 			for (const [size, height] of [
-				["sm", 28],
-				["default", 32],
+				["sm", 24],
+				["default", 28],
 				["lg", 36],
 			] as const) {
 				const group = page.getByRole("group", {
@@ -67,7 +67,7 @@ describe("Segmented control browser states", { timeout: 20_000 }, () => {
 				});
 				expect(geometry).toMatchObject({ gap: 4, height, width: 16 });
 				expect(geometry.offset).toBeLessThan(1);
-				expect((await group.boundingBox())?.height).toBe(height + 8);
+				expect((await group.boundingBox())?.height).toBe(height + 4);
 				expect(await chart.isDisabled()).toBe(true);
 				await list.focus();
 				await page.keyboard.press("ArrowRight");
@@ -76,7 +76,7 @@ describe("Segmented control browser states", { timeout: 20_000 }, () => {
 				).toBe(true);
 				expect(
 					await board.evaluate((el) => getComputedStyle(el).outlineWidth)
-				).toBe("3px");
+				).toBe("2px");
 				await page.keyboard.press("Space");
 				expect(await board.getAttribute("aria-pressed")).toBe("true");
 				await page.keyboard.press("ArrowRight");

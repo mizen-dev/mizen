@@ -104,8 +104,8 @@ describe("Empty component browser behavior", () => {
 		const card = await cards.last().evaluate((el) => getComputedStyle(el));
 		expect(card.borderStyle).toBe("solid");
 		expect(Number.parseFloat(card.borderWidth)).toBeGreaterThanOrEqual(1);
-		expect(Number.parseFloat(card.width)).toBeCloseTo(36, 0);
-		expect(Number.parseFloat(card.height)).toBeCloseTo(36, 0);
+		expect(Number.parseFloat(card.width)).toBeCloseTo(32, 0);
+		expect(Number.parseFloat(card.height)).toBeCloseTo(32, 0);
 
 		const defaultMedia = page
 			.locator('[data-slot="empty-media"][data-variant="default"]')

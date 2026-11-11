@@ -14,6 +14,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -37,7 +38,7 @@ export const toolbarStyles = create({
 			":focus-visible": focusMotion.ring,
 		},
 		backgroundColor: {
-			":hover": { [conditions.canHover]: colors.controlSurfaceHover },
+			":hover": { [conditions.canHover]: colors.controlSurface },
 			default: "transparent",
 		},
 		borderRadius: shape.controlRadius,
@@ -45,10 +46,11 @@ export const toolbarStyles = create({
 		color: colors.content,
 		display: "inline-flex",
 		flexShrink: 0,
-		fontSize: fontSize["16"],
-		fontWeight: fontWeight.regular,
+		fontSize: fontSize["14"],
+		fontWeight: fontWeight.medium,
 		gap: space["2"],
 		justifyContent: "center",
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight.none,
 		minHeight: controlSize.md,
 		outline: "none",
@@ -79,7 +81,8 @@ export const toolbarStyles = create({
 		alignItems: "center",
 		backgroundColor: colors.surface,
 		borderColor: colors.border,
-		borderRadius: shape.floatingRadius,
+		// Concentric with the controls inside: their radius plus the inset.
+		borderRadius: `calc(${shape.controlRadiusLarge} + ${focusClearance} + ${borderWidth.thin}px)`,
 		borderStyle: "solid",
 		borderWidth: borderWidth.thin,
 		boxShadow: shadows.surface,

@@ -23,9 +23,7 @@ export function ProjectCard() {
 				</CardAction>
 			</CardHeader>
 			<CardContent>
-				<Text size="ui" tone="muted">
-					8 of 10 seats used · Renews Nov 30
-				</Text>
+				<Text size="ui">8 of 10 seats used · Renews Nov 30</Text>
 			</CardContent>
 			<CardFooter>
 				<Button size="sm">Manage plan</Button>

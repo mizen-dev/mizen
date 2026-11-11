@@ -23,13 +23,11 @@ import {
 import { buttonColors } from "./button-colors.stylex";
 
 const HL = "inset 0 1px 0 oklch(1 0 0 / 0.16)";
-const HLB = "inset 0 1px 0 oklch(1 0 0 / 0.2)";
 
 // Labels trim to their cap box. A wrapped label needs the trimmed leading
 // back as padding; a single line keeps the size padding.
 const wrapLeading = "calc((1lh - 1cap) / 2)";
 
-const ghostInset = { hover: "2px", press: "-1px", rest: "4px" };
 export const buttonStyles = create({
 	base: {
 		// The visible surface lives on ::before so press feedback can move its
@@ -72,12 +70,13 @@ export const buttonStyles = create({
 		// breaking one letter per line.
 		flexWrap: "wrap",
 		fontFamily: "inherit",
-		fontSize: fontSize["16"],
+		fontSize: fontSize["14"],
 		fontSizeAdjust: fonts.sizeAdjust,
-		fontWeight: fontWeight.regular,
+		fontWeight: fontWeight.medium,
 		gap: space["2"],
 		isolation: "isolate",
 		justifyContent: "center",
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight.none,
 		maxWidth: "100%",
 		outlineColor: {
@@ -108,7 +107,7 @@ export const buttonStyles = create({
 		"::before": {
 			backgroundColor: colors.accent,
 			borderColor: colors.accent,
-			boxShadow: `${shadows.filledRest}, ${HLB}`,
+			boxShadow: `${shadows.filledRest}, ${HL}`,
 		},
 		color: colors.accentContent,
 	},
@@ -122,14 +121,14 @@ export const buttonStyles = create({
 		opacity: 1,
 	},
 	defaultSize: {
+		"--mizen-button-glyph": glyphSize.sm,
 		borderEndEndRadius: shape.controlRadiusLarge,
 		borderEndStartRadius: shape.controlRadiusLarge,
 		borderStartEndRadius: shape.controlRadiusLarge,
 		borderStartStartRadius: shape.controlRadiusLarge,
-		fontSize: fontSize["16"],
-		fontWeight: fontWeight.regular,
+		lineHeight: lineHeight["20"],
 		minHeight: controlSize.md,
-		paddingBlock: `max(calc((${controlSize.md} - ${fontSize["16"]}) / 2 - ${borderWidth.thin}px), ${wrapLeading})`,
+		paddingBlock: `max(calc((${controlSize.md} - ${lineHeight["20"]}) / 2 - ${borderWidth.thin}px), ${wrapLeading})`,
 		paddingInline: "calc(0.75rem - 1px)",
 	},
 	destructive: {
@@ -151,12 +150,11 @@ export const buttonStyles = create({
 		opacity: 1,
 	},
 	disabled: { cursor: "not-allowed", opacity: opacity.disabled },
-	// Ghost surfaces start hidden and slightly inset, grow in on hover, and
-	// fill the control on press.
+	// A ghost surface is hidden at rest and fades in at full size on hover or
+	// press. It presses like every other surface.
 	ghost: {
 		"::before": {
-			backgroundColor: colors.controlSurfaceHover,
-			inset: ghostInset.rest,
+			backgroundColor: colors.controlSurface,
 			opacity: 0,
 		},
 		color: colors.content,
@@ -166,7 +164,7 @@ export const buttonStyles = create({
 		borderEndStartRadius: shape.controlRadiusLarge,
 		borderStartEndRadius: shape.controlRadiusLarge,
 		borderStartStartRadius: shape.controlRadiusLarge,
-		fontSize: glyphSize.md,
+		fontSize: glyphSize.sm,
 		height: controlSize.md,
 		minHeight: 0,
 		minWidth: 0,
@@ -210,10 +208,10 @@ export const buttonStyles = create({
 		width: controlSize.xl,
 	},
 	"icon-xs": {
-		borderEndEndRadius: shape.controlRadius,
-		borderEndStartRadius: shape.controlRadius,
-		borderStartEndRadius: shape.controlRadius,
-		borderStartStartRadius: shape.controlRadius,
+		borderEndEndRadius: shape.controlRadiusSmall,
+		borderEndStartRadius: shape.controlRadiusSmall,
+		borderStartEndRadius: shape.controlRadiusSmall,
+		borderStartStartRadius: shape.controlRadiusSmall,
 		fontSize: glyphSize.xs,
 		height: controlSize.xs,
 		minHeight: 0,
@@ -231,11 +229,10 @@ export const buttonStyles = create({
 				default: colors.accent,
 			},
 			boxShadow: {
-				":active": shadows.pressed,
 				[conditions.canHover]: {
-					":hover:not(:active)": `${shadows.filledHover}, ${HLB}`,
+					":hover:not(:active)": `${shadows.filledHover}, ${HL}`,
 				},
-				default: `${shadows.filledRest}, ${HLB}`,
+				default: `${shadows.filledRest}, ${HL}`,
 			},
 		},
 	},
@@ -249,7 +246,6 @@ export const buttonStyles = create({
 				default: colors.destructive,
 			},
 			boxShadow: {
-				":active": shadows.pressed,
 				[conditions.canHover]: {
 					":hover:not(:active)": `${shadows.filledHover}, ${HL}`,
 				},
@@ -267,7 +263,6 @@ export const buttonStyles = create({
 				default: "transparent",
 			},
 			boxShadow: {
-				":active": shadows.pressed,
 				[conditions.canHover]: { ":hover:not(:active)": shadows.outlineHover },
 				default: shadows.outlineRest,
 			},
@@ -283,7 +278,6 @@ export const buttonStyles = create({
 				default: colors.primary,
 			},
 			boxShadow: {
-				":active": shadows.pressed,
 				[conditions.canHover]: {
 					":hover:not(:active)": `${shadows.filledHover}, ${HL}`,
 				},
@@ -293,25 +287,10 @@ export const buttonStyles = create({
 	},
 	interactionGhost: {
 		"::before": {
-			inset: {
-				":active": ghostInset.press,
-				[conditions.canHover]: { ":hover:not(:active)": ghostInset.hover },
-				default: ghostInset.rest,
-			},
 			opacity: {
 				":active": 1,
 				[conditions.canHover]: { ":hover:not(:active)": 1 },
 				default: 0,
-			},
-			// While held, the surface moves quickly; reduced motion applies at once.
-			transitionDuration: {
-				":active": duration.press,
-				[conditions.reducedMotion]: duration.instant,
-				default: pressSurface.restDuration,
-			},
-			transitionTimingFunction: {
-				":active": easing.expoOut,
-				default: pressSurface.restEasing,
 			},
 		},
 	},
@@ -326,19 +305,11 @@ export const buttonStyles = create({
 			backgroundColor: {
 				":active": colors.controlSurface,
 				[conditions.canHover]: {
-					":hover:not(:active)": colors.controlSurfaceHover,
+					":hover:not(:active)": colors.secondary,
 				},
-				default: "transparent",
-			},
-			borderColor: {
-				":active": colors.controlBorderStrong,
-				[conditions.canHover]: {
-					":hover:not(:active)": colors.controlBorderStrong,
-				},
-				default: colors.border,
+				default: colors.outlineSurface,
 			},
 			boxShadow: {
-				":active": shadows.pressed,
 				[conditions.canHover]: { ":hover:not(:active)": shadows.outlineHover },
 				default: shadows.outlineRest,
 			},
@@ -347,23 +318,23 @@ export const buttonStyles = create({
 	interactionSecondary: {
 		"::before": {
 			backgroundColor: {
-				":active": colors.controlSurface,
+				":active": colors.controlSurfaceHover,
 				[conditions.canHover]: {
-					":hover:not(:active)": colors.controlSurfaceHover,
+					":hover:not(:active)": colors.controlSurface,
 				},
 				default: colors.secondary,
 			},
 		},
 	},
 	lg: {
+		"--mizen-button-glyph": glyphSize.sm,
 		borderEndEndRadius: shape.controlRadiusLarge,
 		borderEndStartRadius: shape.controlRadiusLarge,
 		borderStartEndRadius: shape.controlRadiusLarge,
 		borderStartStartRadius: shape.controlRadiusLarge,
-		fontSize: fontSize["16"],
-		fontWeight: fontWeight.regular,
+		lineHeight: lineHeight["20"],
 		minHeight: controlSize.lg,
-		paddingBlock: `max(calc((${controlSize.lg} - ${fontSize["16"]}) / 2 - ${borderWidth.thin}px), ${wrapLeading})`,
+		paddingBlock: `max(calc((${controlSize.lg} - ${lineHeight["20"]}) / 2 - ${borderWidth.thin}px), ${wrapLeading})`,
 		paddingInline: "calc(1rem - 1px)",
 	},
 	link: {
@@ -390,16 +361,17 @@ export const buttonStyles = create({
 	loadingIndicatorSecondary: { color: colors.secondaryContent },
 	outline: {
 		"::before": {
-			backgroundColor: "transparent",
+			backgroundColor: colors.outlineSurface,
 			borderColor: colors.border,
 			boxShadow: shadows.outlineRest,
 		},
 		color: colors.content,
 	},
-	// Pressing moves every surface edge 2px inward, the same on any size.
+	// Pressing moves every surface edge 1px inward, the same on any size.
+	// Disabled buttons never take this style.
 	press: {
 		"::before": {
-			inset: { ":active": "1px", default: "-1px" },
+			inset: { ":active": "0px", default: "-1px" },
 			// While held, the surface moves quickly; reduced motion applies at once.
 			transitionDuration: {
 				":active": duration.press,
@@ -417,36 +389,36 @@ export const buttonStyles = create({
 		color: colors.secondaryContent,
 	},
 	sm: {
+		"--mizen-button-glyph": glyphSize.xs,
 		borderEndEndRadius: shape.controlRadius,
 		borderEndStartRadius: shape.controlRadius,
 		borderStartEndRadius: shape.controlRadius,
 		borderStartStartRadius: shape.controlRadius,
-		fontSize: fontSize["14"],
-		fontWeight: fontWeight.medium,
+		fontSize: fontSize["13"],
 		gap: space["1"],
 		lineHeight: lineHeight["20"],
 		minHeight: controlSize.sm,
 		paddingBlock: `max(calc((${controlSize.sm} - ${lineHeight["20"]}) / 2 - ${borderWidth.thin}px), ${wrapLeading})`,
-		paddingInline: "calc(0.75rem - 1px)",
+		paddingInline: "calc(0.625rem - 1px)",
 	},
 	xl: {
+		"--mizen-button-glyph": glyphSize.sm,
 		borderEndEndRadius: shape.controlRadiusLarge,
 		borderEndStartRadius: shape.controlRadiusLarge,
 		borderStartEndRadius: shape.controlRadiusLarge,
 		borderStartStartRadius: shape.controlRadiusLarge,
 		fontSize: fontSize["16"],
-		fontWeight: fontWeight.regular,
 		minHeight: controlSize.xl,
 		paddingBlock: `max(calc((${controlSize.xl} - ${fontSize["16"]}) / 2 - ${borderWidth.thin}px), ${wrapLeading})`,
 		paddingInline: "calc(1rem - 1px)",
 	},
 	xs: {
-		borderEndEndRadius: shape.controlRadius,
-		borderEndStartRadius: shape.controlRadius,
-		borderStartEndRadius: shape.controlRadius,
-		borderStartStartRadius: shape.controlRadius,
+		"--mizen-button-glyph": glyphSize.xs,
+		borderEndEndRadius: shape.controlRadiusSmall,
+		borderEndStartRadius: shape.controlRadiusSmall,
+		borderStartEndRadius: shape.controlRadiusSmall,
+		borderStartStartRadius: shape.controlRadiusSmall,
 		fontSize: fontSize["12"],
-		fontWeight: fontWeight.medium,
 		gap: space["1"],
 		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],

@@ -82,7 +82,7 @@ describe("Link browser states", { timeout: 20_000 }, () => {
 			await page.keyboard.press("Shift+Tab");
 			expect(
 				await link.evaluate((el) => getComputedStyle(el).outlineWidth)
-			).toBe("3px");
+			).toBe("2px");
 			expect(
 				await link.evaluate((el) => getComputedStyle(el).outlineColor)
 			).not.toBe("rgba(0, 0, 0, 0)");

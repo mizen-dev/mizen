@@ -4,14 +4,18 @@ import { conditions } from "../../styles/conditions.stylex";
 import { controlSize } from "../../styles/dimensions.stylex";
 import {
 	borderWidth,
-	focus,
 	focusMotion,
+	focusOutline,
 } from "../../styles/interaction.stylex";
 import { duration, easing } from "../../styles/motion.stylex";
 import { shadows } from "../../styles/shadows.stylex";
 import { shape } from "../../styles/shape.stylex";
 import { space } from "../../styles/spacing.stylex";
-import { fontSize, lineHeight } from "../../styles/typography.stylex";
+import {
+	fontSize,
+	letterSpacing,
+	lineHeight,
+} from "../../styles/typography.stylex";
 
 export const inputGroupStyles = create({
 	addon: {
@@ -70,6 +74,13 @@ export const inputGroupStyles = create({
 		paddingInlineStart: space["2"],
 	},
 	root: {
+		// The focused edge takes the focus color; an invalid field keeps its
+		// error color.
+		"--mizen-field-focus-edge": {
+			":has(> [data-slot='input-group-input']:is([aria-invalid='true'], [data-invalid]), > [data-slot='input-group-textarea']:is([aria-invalid='true'], [data-invalid]))":
+				colors.destructive,
+			default: colors.focusRing,
+		},
 		alignItems: "center",
 		animationDuration: {
 			":has(> [data-slot='input-group-input']:focus-visible, > [data-slot='input-group-textarea']:focus-visible)":
@@ -90,9 +101,9 @@ export const inputGroupStyles = create({
 			":has(> [data-slot='input-group-input']:is([aria-invalid='true'], [data-invalid]):not(:disabled), > [data-slot='input-group-textarea']:is([aria-invalid='true'], [data-invalid]):not(:disabled))": `color-mix(in oklch, ${colors.destructive} 54%, ${fieldColors.surface})`,
 			"[data-slot='input-group']:hover:has(> :is([data-slot='input-group-input'], [data-slot='input-group-textarea']):not(:disabled, [data-disabled], [readonly], [aria-invalid='true'], [data-invalid]))":
 				{
-					[conditions.canHover]: colors.border,
+					[conditions.canHover]: colors.controlBorderStrong,
 				},
-			default: "transparent",
+			default: colors.controlBorder,
 		},
 		borderRadius: {
 			":has(> [data-slot='input-group-input'][data-size='sm'], > [data-slot='input-group-textarea'][data-size='sm'])":
@@ -104,7 +115,9 @@ export const inputGroupStyles = create({
 		boxShadow: {
 			":has(> [data-slot='input-group-input']:disabled, > [data-slot='input-group-textarea']:disabled)":
 				"none",
-			default: shadows.recessedRest,
+			":has(> [data-slot='input-group-input']:focus-visible, > [data-slot='input-group-textarea']:focus-visible)":
+				focusOutline.fieldHalo,
+			default: shadows.fieldRest,
 		},
 		boxSizing: "border-box",
 		color: {
@@ -115,19 +128,16 @@ export const inputGroupStyles = create({
 		display: "flex",
 		flexWrap: "wrap",
 		fontSize: {
-			"[data-slot='input-group']:has(> [data-slot='input-group-input'][data-size='sm'], > [data-slot='input-group-textarea'][data-size='sm'])":
-				{
-					[conditions.sm]: fontSize["14"],
-					default: fontSize["16"],
-				},
+			[conditions.sm]: {
+				"[data-slot='input-group']:has(> [data-slot='input-group-input'][data-size='sm'], > [data-slot='input-group-textarea'][data-size='sm'])":
+					fontSize["13"],
+				default: fontSize["14"],
+			},
 			default: fontSize["16"],
 		},
+		letterSpacing: letterSpacing.ui,
 		lineHeight: {
-			"[data-slot='input-group']:has(> [data-slot='input-group-input'][data-size='sm'], > [data-slot='input-group-textarea'][data-size='sm'])":
-				{
-					[conditions.sm]: lineHeight["20"],
-					default: lineHeight["24"],
-				},
+			[conditions.sm]: lineHeight["20"],
 			default: lineHeight["24"],
 		},
 		minHeight: {
@@ -141,22 +151,14 @@ export const inputGroupStyles = create({
 		},
 		outlineColor: {
 			":has(> [data-slot='input-group-input']:focus-visible, > [data-slot='input-group-textarea']:focus-visible)":
-				colors.focusRing,
+				"var(--mizen-field-focus-edge)",
 			default: "transparent",
 		},
-		outlineOffset: {
-			":has(> [data-slot='input-group-input']:focus-visible, > [data-slot='input-group-textarea']:focus-visible)":
-				focus.offset,
-			default: focus.offset,
-		},
-		outlineStyle: {
-			":has(> [data-slot='input-group-input']:focus-visible, > [data-slot='input-group-textarea']:focus-visible)":
-				"solid",
-			default: "solid",
-		},
+		outlineOffset: focusOutline.fieldOffset,
+		outlineStyle: "solid",
 		outlineWidth: {
 			":has(> [data-slot='input-group-input']:focus-visible, > [data-slot='input-group-textarea']:focus-visible)":
-				borderWidth.focus,
+				focusOutline.fieldWidth,
 			default: 0,
 		},
 		position: "relative",

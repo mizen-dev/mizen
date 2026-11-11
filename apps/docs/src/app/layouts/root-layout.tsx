@@ -5,13 +5,13 @@ import { useDocumentScroll } from "../lib/use-document-scroll";
 import "@mizen-labs/ui/styles.css";
 import "../styles/globals.css";
 import "@fontsource-variable/jetbrains-mono/wght.css";
-import "@fontsource-variable/wix-madefor-text/wght.css";
+import "@fontsource-variable/geist/wght.css";
 import { colors } from "@mizen-labs/ui/colors.stylex";
 import { ThemeProvider, ThemeScript } from "@mizen-labs/ui/theme";
 import { AnchoredToastProvider, ToastProvider } from "@mizen-labs/ui/toast";
 import { props } from "@stylexjs/stylex";
 import { shellStyles } from "../../shared/styles/docs-shell.styles";
-import { docsFonts } from "../../shared/styles/fonts.styles";
+import { docsFonts, docsTracking } from "../../shared/styles/fonts.styles";
 
 // Lavender for selection, as the palette says, with wine text. The values are
 // the theme's own variables, so the dark theme applies without extra rules.
@@ -28,7 +28,10 @@ export default function RootLayout({
 				<HeadContent />
 				<style>{selectionCss}</style>
 			</head>
-			<body ref={documentScroll} {...props(docsFonts, shellStyles.canvas)}>
+			<body
+				ref={documentScroll}
+				{...props(docsFonts, docsTracking, shellStyles.canvas)}
+			>
 				<ThemeProvider>
 					<AnchoredToastProvider>
 						<ToastProvider>

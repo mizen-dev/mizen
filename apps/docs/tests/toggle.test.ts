@@ -86,6 +86,6 @@ describe("Toggle component route", () => {
 				const style = getComputedStyle(element);
 				return [style.outlineWidth, style.outlineOffset];
 			})
-		).toEqual(["3px", "0px"]);
+		).toEqual(["2px", "2px"]);
 	});
 });

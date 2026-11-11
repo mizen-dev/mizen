@@ -167,7 +167,7 @@ describe("Field readability and selection press feedback", () => {
 		await page.emulateMedia({ reducedMotion: "no-preference" });
 	}, 30_000);
 
-	it("squishes an enabled switch from the whole track without moving its center", async () => {
+	it("stretches an enabled switch thumb without squishing", async () => {
 		await page.emulateMedia({ reducedMotion: "no-preference" });
 		await page.goto(`${handle.url}/docs/components/switch`, {
 			waitUntil: "networkidle",
@@ -180,16 +180,17 @@ describe("Field readability and selection press feedback", () => {
 		const thumb = control.locator('[data-slot="switch-thumb"]');
 		const geometry = (element: Element) => {
 			const rect = element.getBoundingClientRect();
-			return { center: rect.y + rect.height / 2, height: rect.height };
+			return { height: rect.height, width: rect.width };
 		};
 		await control.scrollIntoViewIfNeeded();
 		await control.hover({ position: { x: 3, y: 10 } });
 		const before = await thumb.evaluate(geometry);
 		await page.mouse.down();
-		await page.waitForTimeout(180);
+		await expect
+			.poll(async () => (await thumb.evaluate(geometry)).width)
+			.toBeCloseTo(before.width + 5, 0);
 		const after = await thumb.evaluate(geometry);
-		expect(after.height).toBeCloseTo(before.height * 0.82, 1);
-		expect(after.center).toBeCloseTo(before.center, 1);
+		expect(after.height).toBeCloseTo(before.height, 1);
 		await page.mouse.up();
 	});
 

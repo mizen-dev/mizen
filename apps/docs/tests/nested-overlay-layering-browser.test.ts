@@ -82,7 +82,7 @@ describe("nested popup layering", () => {
 			const title = parent.locator('[data-slot="dialog-header"] h2');
 			expect(
 				await title.evaluate((element) => getComputedStyle(element).fontSize)
-			).toBe("20px");
+			).toBe("16px");
 			expect(
 				await parent
 					.locator('[data-slot="dialog-header"] p')

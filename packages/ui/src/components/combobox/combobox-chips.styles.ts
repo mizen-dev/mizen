@@ -6,6 +6,7 @@ import {
 	borderWidth,
 	focus,
 	focusMotion,
+	focusOutline,
 } from "../../styles/interaction.stylex";
 import { duration, easing } from "../../styles/motion.stylex";
 import { shadows } from "../../styles/shadows.stylex";
@@ -14,6 +15,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -33,6 +35,7 @@ export const comboboxChipsStyles = create({
 		display: "inline-flex",
 		fontSize: fontSize["14"],
 		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		minHeight: "1.5rem",
 		outlineColor: {
@@ -79,6 +82,13 @@ export const comboboxChipsStyles = create({
 		transitionTimingFunction: easing.expoOut,
 	},
 	chips: {
+		// The focused edge takes the focus color; an invalid field keeps its
+		// error color.
+		"--mizen-field-focus-edge": {
+			":is([aria-invalid='true'], [data-invalid], :has([data-slot='combobox-chips-input']:is([aria-invalid='true'], [data-invalid])))":
+				colors.destructive,
+			default: colors.focusRing,
+		},
 		alignItems: "center",
 
 		animationDuration: {
@@ -93,14 +103,15 @@ export const comboboxChipsStyles = create({
 		},
 		borderColor: {
 			":is([aria-invalid='true'], [data-invalid], :has([data-slot='combobox-chips-input']:is([aria-invalid='true'], [data-invalid]))):not(:has([data-slot='combobox-chips-input']:disabled))": `color-mix(in oklch, ${colors.destructive} 54%, ${fieldColors.surface})`,
-			default: "transparent",
+			default: colors.controlBorder,
 		},
 		borderRadius: shape.controlRadiusLarge,
 		borderStyle: "solid",
 		borderWidth: borderWidth.thin,
 		boxShadow: {
+			":focus-within": focusOutline.fieldHalo,
 			":has([data-slot='combobox-chips-input']:disabled)": "none",
-			default: shadows.recessedRest,
+			default: shadows.fieldRest,
 		},
 		boxSizing: "border-box",
 		color: {
@@ -116,19 +127,13 @@ export const comboboxChipsStyles = create({
 			default: controlSize.md,
 		},
 		outlineColor: {
-			":focus-within": colors.focusRing,
+			":focus-within": "var(--mizen-field-focus-edge)",
 			default: "transparent",
 		},
-		outlineOffset: {
-			":focus-within": focus.offset,
-			default: focus.offset,
-		},
-		outlineStyle: {
-			":focus-within": "solid",
-			default: "solid",
-		},
+		outlineOffset: focusOutline.fieldOffset,
+		outlineStyle: "solid",
 		outlineWidth: {
-			":focus-within": borderWidth.focus,
+			":focus-within": focusOutline.fieldWidth,
 			default: 0,
 		},
 		padding: space["1"],
@@ -151,15 +156,19 @@ export const comboboxChipsStyles = create({
 		flexGrow: 1,
 		flexShrink: 1,
 		fontFamily: "inherit",
-		fontSize: fontSize["16"],
-		lineHeight: lineHeight["24"],
+		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
+		letterSpacing: letterSpacing.ui,
+		lineHeight: {
+			[conditions.sm]: lineHeight["20"],
+			default: lineHeight["24"],
+		},
 		minWidth: "3rem",
 		outline: "none",
 		paddingBlock: space["0"],
 		paddingInline: space["1"],
 	},
 	chipsInputDefault: {
-		fontSize: fontSize["16"],
+		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
 		minHeight: "1.75rem",
 	},
 	chipsInputLg: {
@@ -167,7 +176,7 @@ export const comboboxChipsStyles = create({
 		minHeight: "2rem",
 	},
 	chipsInputSm: {
-		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
+		fontSize: { [conditions.sm]: fontSize["13"], default: fontSize["16"] },
 		minHeight: "1.5rem",
 	},
 	startAddon: {

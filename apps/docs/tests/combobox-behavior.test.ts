@@ -14,7 +14,10 @@ import { fieldStyles } from "../../../packages/ui/src/components/field/field.sty
 import { colors } from "../../../packages/ui/src/styles/colors.stylex";
 import { conditions } from "../../../packages/ui/src/styles/conditions.stylex";
 import { controlSize } from "../../../packages/ui/src/styles/dimensions.stylex";
-import { borderWidth } from "../../../packages/ui/src/styles/interaction.stylex";
+import {
+	borderWidth,
+	focusOutline,
+} from "../../../packages/ui/src/styles/interaction.stylex";
 import { fontSize } from "../../../packages/ui/src/styles/typography.stylex";
 
 vi.mock("@stylexjs/stylex", () => ({
@@ -218,7 +221,7 @@ describe("Combobox behavior - Chips sizing and flow startAddon", () => {
 		expect(comboboxChipsStyles.chipsInputDefault).toBeDefined();
 		expect(comboboxChipsStyles.chipsInputLg).toBeDefined();
 		expect(comboboxChipsStyles.chipsInputSm.fontSize).toEqual({
-			[conditions.sm]: fontSize["14"],
+			[conditions.sm]: fontSize["13"],
 			default: fontSize["16"],
 		});
 		expect(comboboxChipsStyles.chipsInputSm.minHeight).toBe("1.5rem");
@@ -241,13 +244,10 @@ describe("Combobox behavior - Placeholder contrast and forced-colors outline", (
 	});
 
 	it("keeps shared input and chip focus geometry", () => {
-		expect(fieldStyles.input.outlineWidth).toEqual({
-			":focus-visible": borderWidth.focus,
-			default: borderWidth.focus,
-		});
+		expect(fieldStyles.input.outlineWidth).toEqual(focusOutline.fieldWidth);
 
 		expect(comboboxChipsStyles.chips.outlineWidth).toEqual({
-			":focus-within": borderWidth.focus,
+			":focus-within": focusOutline.fieldWidth,
 			default: 0,
 		});
 

@@ -60,7 +60,7 @@ describe("navigation and progress", { timeout: 30_000 }, () => {
 			await components.evaluate(
 				(element) => getComputedStyle(element).outlineWidth
 			)
-		).toBe("3px");
+		).toBe("2px");
 		await components.click();
 		await expectLocator(page).toHaveURL(`${handle.url}/docs`);
 	});

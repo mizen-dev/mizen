@@ -9,6 +9,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 import { attachmentMarker } from "./attachment-marker.stylex";
@@ -67,6 +68,7 @@ export const composerPartStyles = create({
 		fontSize: fontSize["12"],
 		fontVariantNumeric: "tabular-nums",
 		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
 	},
 	// Covers the tile; the focus ring follows its corners.
@@ -354,6 +356,7 @@ export const composerPartStyles = create({
 		},
 		cursor: "pointer",
 		fontSize: fontSize["12"],
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
 		outlineColor: {
 			":focus-visible": colors.focusRing,
@@ -393,6 +396,7 @@ export const composerPartStyles = create({
 		color: colors.mutedContent,
 		fontSize: fontSize["12"],
 		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
 	},
 	pickerTriggerEffort: { color: colors.mutedContent },

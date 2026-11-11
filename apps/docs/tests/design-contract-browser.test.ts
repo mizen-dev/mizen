@@ -70,12 +70,19 @@ function measureContract(previewSelector: string): string[] {
 		return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
 	}
 
-	// Press surfaces paint on ::before, so it counts as the element's fill.
+	// Press surfaces paint on ::before, so it counts as the element's fill. A
+	// smaller ::before, such as a badge's status dot, is a mark, not a fill.
 	function fillOf(node: Element) {
 		const own = rgb(getComputedStyle(node).backgroundColor);
-		return own[3] > 0.9
-			? own
-			: rgb(getComputedStyle(node, "::before").backgroundColor);
+		if (own[3] > 0.9) {
+			return own;
+		}
+		const before = getComputedStyle(node, "::before");
+		const box = node.getBoundingClientRect();
+		const covers =
+			Number.parseFloat(before.width) >= box.width * 0.8 &&
+			Number.parseFloat(before.height) >= box.height * 0.8;
+		return covers ? rgb(before.backgroundColor) : own;
 	}
 
 	function backgroundOf(element: Element) {

@@ -55,6 +55,8 @@ export const shellStyles = create({
 			":has([data-slot='docs-shell'])": colors.workarea,
 			default: colors.surface,
 		},
+		// Text without a role of its own inherits the interface tracking.
+		letterSpacing: letterSpacing.ui,
 	},
 	// Flat on the workspace, like Linear: the content card carries the frame,
 	// so the aside needs no surface or border of its own.
@@ -240,10 +242,10 @@ export const shellStyles = create({
 		transitionProperty: "background-color, color",
 		transitionTimingFunction: easing.easeOut,
 	},
-	// The current page wears the brand lavender, like the page outline.
+	// The current page holds the neutral selection fill, like the page outline.
 	navLinkCurrent: {
-		backgroundColor: colors.brandBackground,
-		color: colors.brandForeground,
+		backgroundColor: colors.selected,
+		color: colors.content,
 		fontWeight: fontWeight.medium,
 	},
 	navTreeChevron: {

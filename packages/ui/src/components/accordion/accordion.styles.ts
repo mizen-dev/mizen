@@ -15,6 +15,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -22,6 +23,7 @@ export const accordionStyles = create({
 	content: {
 		color: colors.mutedContent,
 		fontSize: fontSize["14"],
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		overflowWrap: "anywhere",
 		paddingBottom: space["4"],
@@ -30,8 +32,9 @@ export const accordionStyles = create({
 	},
 	description: {
 		color: colors.mutedContent,
-		fontSize: fontSize["14"],
+		fontSize: fontSize["13"],
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		overflowWrap: "anywhere",
 	},
@@ -49,9 +52,9 @@ export const accordionStyles = create({
 		color: colors.mutedContent,
 		display: "inline-flex",
 		flexShrink: 0,
-		height: "2.25rem",
+		height: "2rem",
 		justifyContent: "center",
-		width: "2.25rem",
+		width: "2rem",
 	},
 	indicator: {
 		color: colors.content,
@@ -100,9 +103,10 @@ export const accordionStyles = create({
 	title: {
 		color: colors.content,
 		display: "block",
-		fontSize: fontSize["16"],
+		fontSize: fontSize["14"],
 		fontWeight: fontWeight.medium,
-		lineHeight: lineHeight["24"],
+		letterSpacing: letterSpacing.ui,
+		lineHeight: lineHeight["20"],
 		overflowWrap: "anywhere",
 	},
 	trigger: {
@@ -114,7 +118,9 @@ export const accordionStyles = create({
 			":focus-visible": focusMotion.ring,
 		},
 		backgroundColor: {
-			":hover:not([data-disabled])": colors.controlSurfaceHover,
+			[conditions.canHover]: {
+				":hover:not([data-disabled])": colors.controlSurface,
+			},
 			default: "transparent",
 		},
 		borderRadius: shape.controlRadius,
@@ -129,12 +135,13 @@ export const accordionStyles = create({
 		display: "flex",
 		flex: "1",
 		fontFamily: "inherit",
-		fontSize: fontSize["16"],
+		fontSize: fontSize["14"],
 		fontWeight: fontWeight.medium,
 		gap: space["3"],
 		justifyContent: "space-between",
-		lineHeight: lineHeight["24"],
-		minHeight: "3.5rem",
+		letterSpacing: letterSpacing.ui,
+		lineHeight: lineHeight["20"],
+		minHeight: "3rem",
 		opacity: {
 			"[data-disabled]": opacity.disabled,
 			default: 1,
@@ -239,7 +246,7 @@ export const separatedAccordionStyles = create({
 	},
 	trigger: {
 		borderRadius: `calc(${shape.floatingRadius} - ${borderWidth.thin}px - ${space["1"]})`,
-		minHeight: `calc(4rem - ${space["1"]} * 2)`,
+		minHeight: `calc(3.5rem - ${space["1"]} * 2)`,
 		paddingBlock: space["2"],
 		paddingInline: space["3"],
 	},

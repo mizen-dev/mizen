@@ -9,7 +9,11 @@ import {
 } from "../../styles/interaction.stylex";
 import { shape } from "../../styles/shape.stylex";
 import { space } from "../../styles/spacing.stylex";
-import { fontSize, lineHeight } from "../../styles/typography.stylex";
+import {
+	fontSize,
+	letterSpacing,
+	lineHeight,
+} from "../../styles/typography.stylex";
 
 const FLOATING = ":is([data-slot='code-block'] > *)";
 
@@ -34,6 +38,7 @@ export const codeBlockStyles = create({
 		color: colors.content,
 		// The size adjustment that pairs Mono with the UI font shrinks it, so
 		fontSize: fontSize["14"],
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		margin: 0,
 		maxInlineSize: "100%",

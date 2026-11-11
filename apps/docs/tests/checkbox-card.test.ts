@@ -76,7 +76,7 @@ describe("Checkbox labels and card contract", () => {
 		]);
 		expect(
 			await smallText.evaluate((element) => getComputedStyle(element).fontSize)
-		).toBe("14px");
+		).toBe("13px");
 		expect(
 			await small.evaluate(
 				(element) => getComputedStyle(element).borderStartStartRadius
@@ -159,7 +159,7 @@ describe("Checkbox labels and card contract", () => {
 			.filter({ hasText: "Daily digest" });
 		expect(
 			await cardLabel.evaluate((element) => getComputedStyle(element).fontSize)
-		).toBe("16px");
+		).toBe("14px");
 		await cardLabel.getByText("A concise summary each morning.").click();
 		expect(await card.getAttribute("aria-checked")).toBe("false");
 		expect(
@@ -171,7 +171,7 @@ describe("Checkbox labels and card contract", () => {
 		).toBe(true);
 		expect(
 			await card.evaluate((element) => getComputedStyle(element).outlineWidth)
-		).toBe("3px");
+		).toBe("2px");
 
 		const disabledCard = example.getByRole("checkbox", {
 			exact: true,

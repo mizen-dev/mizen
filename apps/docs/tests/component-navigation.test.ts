@@ -131,7 +131,7 @@ describe("Component navigation", () => {
 			await page.locator('[data-slot="desktop-sidebar"]').isVisible()
 		).toBe(false);
 		await page.getByRole("button", { name: "Browse" }).click();
-		const mobilePopup = page.locator('[data-slot="popover-popup"]');
+		const mobilePopup = page.locator('[data-slot="drawer-popup"]');
 		await mobilePopup.waitFor({ state: "visible" });
 		const mobileNav = mobilePopup.getByRole("navigation", {
 			name: "Component index",

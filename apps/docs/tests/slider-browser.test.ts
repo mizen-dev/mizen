@@ -270,10 +270,10 @@ describe("Slider browser integration", {
 			throw new Error("Missing track or thumb bounding box");
 		}
 
-		expect(trackBox.height).toBeGreaterThanOrEqual(34);
-		expect(trackBox.height).toBeLessThanOrEqual(38);
-		expect(thumbBox.height).toBe(28);
-		expect(thumbBox.width).toBe(28);
+		expect(trackBox.height).toBeGreaterThanOrEqual(30);
+		expect(trackBox.height).toBeLessThanOrEqual(34);
+		expect(thumbBox.height).toBe(24);
+		expect(thumbBox.width).toBe(24);
 
 		const trackBg = await track.evaluate(
 			(el) => getComputedStyle(el, "::before").backgroundColor
@@ -303,11 +303,11 @@ describe("Slider browser integration", {
 			throw new Error("Missing vertical track or thumb bounding box");
 		}
 
-		expect(vTrackBox.width).toBeGreaterThanOrEqual(34);
-		expect(vTrackBox.width).toBeLessThanOrEqual(38);
+		expect(vTrackBox.width).toBeGreaterThanOrEqual(30);
+		expect(vTrackBox.width).toBeLessThanOrEqual(34);
 		expect(vTrackBox.height).toBeGreaterThan(vTrackBox.width);
-		expect(vThumbBox.width).toBe(28);
-		expect(vThumbBox.height).toBe(28);
+		expect(vThumbBox.width).toBe(24);
+		expect(vThumbBox.height).toBe(24);
 	});
 
 	it("changes scalar value with ArrowRight and prevents changes when disabled", async () => {

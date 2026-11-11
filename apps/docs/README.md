@@ -67,7 +67,7 @@ a full reload for failed JavaScript imports, without exposing raw errors.
 Public page routes define canonical URLs from the package homepage; component
 and guide metadata comes from their loader data.
 
-The document head preloads the Wix Madefor Text Latin variable font using Vite's
+The document head preloads the Geist Latin variable font using Vite's
 hashed asset URL. CSS reuses that request. JetBrains Mono and other language
 subsets load on demand; all font faces retain `font-display: swap`.
 

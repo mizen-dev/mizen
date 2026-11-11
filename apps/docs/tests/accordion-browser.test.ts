@@ -80,7 +80,7 @@ describe("Accordion design and interaction", () => {
 					await closedItem.evaluate(
 						(element) => getComputedStyle(element).borderTopLeftRadius
 					)
-				).toBe("24px");
+				).toBe("12px");
 				const panel = openItem.locator('[data-slot="accordion-content"]');
 				const title = notifications.locator('[data-slot="accordion-title"]');
 				expect(
@@ -97,7 +97,7 @@ describe("Accordion design and interaction", () => {
 					await notifications.evaluate(
 						(element) => getComputedStyle(element).borderTopLeftRadius
 					)
-				).toBe("19px");
+				).toBe("7px");
 				const itemBounds = await bounds(openItem);
 				const triggerBounds = await bounds(notifications);
 				expect(triggerBounds.x - itemBounds.x).toBe(5);

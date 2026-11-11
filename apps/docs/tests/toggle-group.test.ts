@@ -92,7 +92,7 @@ describe("ToggleGroup component route", () => {
 		});
 		expect(
 			await rows.evaluate((element) => getComputedStyle(element).height)
-		).toBe("32px");
+		).toBe("28px");
 	});
 
 	it("scrolls horizontal groups within a large-text host and preserves keyboard toggling", async () => {

@@ -208,8 +208,8 @@ describe("Metric contract and semantics", () => {
 	});
 
 	it("keeps label and supporting context readable beneath the value", () => {
-		expect(metricStyles.label.fontSize).toBe(fontSize["14"]);
-		expect(metricStyles.description.fontSize).toBe(fontSize["14"]);
+		expect(metricStyles.label.fontSize).toBe(fontSize["13"]);
+		expect(metricStyles.description.fontSize).toBe(fontSize["13"]);
 		expect(metricStyles.description.color).toBe(colors.mutedContent);
 	});
 });

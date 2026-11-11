@@ -206,7 +206,7 @@ function Failure({ onRetry }: { onRetry: (() => void) | undefined }) {
 				The command failed.
 			</p>
 			<Button onClick={onRetry} size="sm" variant="outline">
-				<IconRefresh aria-hidden="true" size="1em" />
+				<IconRefresh aria-hidden="true" />
 				Retry
 			</Button>
 		</div>

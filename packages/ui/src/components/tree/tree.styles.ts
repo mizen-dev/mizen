@@ -96,17 +96,16 @@ export const treeStyles = create({
 	row: {
 		alignItems: "center",
 		backgroundColor: {
-			":is([data-selected])": colors.brandBackground,
-			":not([data-selected]):not([data-disabled]):hover":
-				colors.controlSurfaceHover,
+			":is([data-selected])": colors.selected,
+			[conditions.canHover]: {
+				":not([data-selected]):not([data-disabled]):hover":
+					colors.controlSurface,
+			},
 			default: "transparent",
 		},
 		borderRadius: shape.controlRadius,
 		boxSizing: "border-box",
-		color: {
-			":is([data-selected])": colors.brandForeground,
-			default: colors.content,
-		},
+		color: colors.content,
 		cursor: { ":is([data-disabled])": "not-allowed", default: "pointer" },
 		display: "flex",
 		gap: space["2"],

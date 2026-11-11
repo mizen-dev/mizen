@@ -16,17 +16,19 @@ import {
 export const popoverStyles = create({
 	description: {
 		color: colors.mutedContent,
-		fontSize: fontSize["14"],
+		fontSize: fontSize["13"],
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		marginBlockEnd: 0,
-		// A description right after its title sits 4px below it, not at the
+		// A description right after its title sits 2px below it, not at the
 		// 16px content gap.
 		marginBlockStart: {
-			":is([data-slot='popover-title'] + *)": `calc(${space["1"]} - ${space["4"]})`,
+			":is([data-slot='popover-title'] + *)": `calc(${space.px} - ${space["4"]})`,
 			default: 0,
 		},
 		overflowWrap: "anywhere",
+		textWrap: "pretty",
 	},
 	popup: {
 		backgroundColor: colors.floatingSurface,
@@ -100,6 +102,7 @@ export const popoverStyles = create({
 	popupTooltip: {
 		borderRadius: shape.controlRadius,
 		fontSize: fontSize["12"],
+		letterSpacing: letterSpacing.caption,
 		width: "var(--popup-width, max-content)",
 	},
 	positioner: {
@@ -120,12 +123,13 @@ export const popoverStyles = create({
 	},
 	title: {
 		color: colors.content,
-		fontSize: fontSize["16"],
+		fontSize: fontSize["14"],
 		fontWeight: fontWeight.semibold,
-		letterSpacing: letterSpacing.subheading,
-		lineHeight: lineHeight["24"],
+		letterSpacing: letterSpacing.ui,
+		lineHeight: lineHeight["20"],
 		marginBlock: 0,
 		overflowWrap: "anywhere",
+		textWrap: "balance",
 	},
 	viewport: {
 		boxSizing: "border-box",

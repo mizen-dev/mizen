@@ -82,7 +82,7 @@ describe("Toast real browser F6 and hover focus indicator", () => {
 		);
 
 		expect(focusedStyle).toBe("solid");
-		expect(focusedWidth).toBe("3px");
+		expect(focusedWidth).toBe("2px");
 		expect(focusedColor).not.toBe("transparent");
 		expect(focusedColor).not.toBe("rgba(0, 0, 0, 0)");
 	});
@@ -118,7 +118,7 @@ describe("Toast real browser F6 and hover focus indicator", () => {
 		);
 
 		expect(focusedStyle).toBe("solid");
-		expect(focusedWidth).toBe("3px");
+		expect(focusedWidth).toBe("2px");
 		expect(focusedColor).not.toBe("transparent");
 		expect(focusedColor).not.toBe("rgba(0, 0, 0, 0)");
 	});

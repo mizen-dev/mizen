@@ -6,6 +6,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -32,6 +33,7 @@ export const kbdStyles = create({
 		gap: space["1"],
 		height: "1.25rem",
 		justifyContent: "center",
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
 		minWidth: "1.25rem",
 		paddingInline: space["1"],

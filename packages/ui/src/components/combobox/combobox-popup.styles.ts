@@ -24,6 +24,7 @@ export const comboboxPopupStyles = create({
 		color: colors.mutedContent,
 		fontSize: fontSize["14"],
 		fontSizeAdjust: fonts.sizeAdjust,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		paddingBlock: {
 			":empty": space["0"],
@@ -52,9 +53,6 @@ export const comboboxPopupStyles = create({
 		alignItems: "center",
 		backgroundColor: {
 			"[data-highlighted]": floatingItemColors.highlightBackground,
-			"[data-selected]": colors.brandBackground,
-			"[data-selected][data-highlighted]":
-				floatingItemColors.highlightBackground,
 			default: "transparent",
 		},
 		// Concentric with the 24px popup: its radius minus the 8px row inset.
@@ -62,9 +60,6 @@ export const comboboxPopupStyles = create({
 		boxSizing: "border-box",
 		color: {
 			"[data-highlighted]": floatingItemColors.highlightForeground,
-			"[data-selected]": colors.brandForeground,
-			"[data-selected][data-highlighted]":
-				floatingItemColors.highlightForeground,
 			default: colors.content,
 		},
 		cursor: { "[data-disabled]": "not-allowed", default: "pointer" },
@@ -80,6 +75,7 @@ export const comboboxPopupStyles = create({
 		},
 		gap: space["2"],
 		gridTemplateColumns: "1rem minmax(0, 1fr)",
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		minHeight: "2rem",
 		opacity: { "[data-disabled]": opacity.disabled, default: 1 },

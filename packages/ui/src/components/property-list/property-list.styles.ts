@@ -5,6 +5,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -22,6 +23,7 @@ export const propertyListStyles = create({
 		color: colors.mutedContent,
 		fontSize: fontSize["14"],
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		margin: 0,
 		minWidth: 0,
@@ -40,6 +42,7 @@ export const propertyListStyles = create({
 		color: colors.content,
 		fontSize: fontSize["16"],
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["24"],
 		margin: 0,
 		minWidth: 0,

@@ -6,6 +6,5 @@ export const checkboxGroupStyles = create({
 		display: "flex",
 		flexDirection: "column",
 		gap: space["2"],
-		width: "100%",
 	},
 });

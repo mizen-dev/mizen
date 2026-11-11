@@ -187,8 +187,8 @@ describe("chart frame browser behavior", () => {
 				await chart.press("ArrowRight");
 				await expectLocator(keyboardTooltip).toBeVisible();
 				await expectLocator(chart).toHaveCSS("outline-style", "solid");
-				await expectLocator(chart).toHaveCSS("outline-width", "3px");
-				await expectLocator(chart).toHaveCSS("outline-offset", "0px");
+				await expectLocator(chart).toHaveCSS("outline-width", "2px");
+				await expectLocator(chart).toHaveCSS("outline-offset", "2px");
 				const tooltipFrame = section.locator(".ts-chart-tooltip");
 				await expectLocator(tooltipFrame).toHaveCSS("border-width", "0px");
 				await expectLocator(tooltipFrame).toHaveCSS("padding", "0px");
@@ -223,7 +223,7 @@ describe("chart frame browser behavior", () => {
 				getComputedStyle(frame.querySelector("svg text") as SVGTextElement)
 					.fontFamily,
 			]);
-			expect(frameFont).toContain("Wix Madefor Text Variable");
+			expect(frameFont).toContain("Geist Variable");
 			expect(svgTextFont).toBe(frameFont);
 			const bounds = await Promise.all(
 				[

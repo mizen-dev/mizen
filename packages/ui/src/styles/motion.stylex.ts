@@ -7,7 +7,10 @@ export const easing = defineConsts({
 	easeOut: "cubic-bezier(0, 0, 0.2, 1)",
 	expoOut: "cubic-bezier(0.16, 1, 0.3, 1)",
 	linear: "linear",
-	spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+	// One overshoot, then settle: for a part that travels, such as a switch
+	// thumb or a selection indicator. Pair with duration.spring.
+	spring:
+		"linear(0, 0.35 8%, 0.86 19%, 1.07 29%, 1.11 37%, 1.06 49%, 1.01 67%, 1)",
 });
 
 export const duration = defineConsts({
@@ -17,6 +20,7 @@ export const duration = defineConsts({
 	overlayEnter: "280ms",
 	overlayExit: "200ms",
 	press: "100ms",
+	spring: "450ms",
 });
 
 // Press surfaces (Button, Toggle): edges, colors, and shadows ease out together;

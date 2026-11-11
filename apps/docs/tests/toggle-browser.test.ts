@@ -76,7 +76,7 @@ describe("Toggle and Toggle Group", { timeout: 30_000 }, () => {
 					),
 				};
 			});
-			expect(geometry.height).toBe(36);
+			expect(geometry.height).toBe(32);
 			expect(geometry.offset).toBeLessThan(1);
 			expect(await bold.getAttribute("aria-pressed")).toBe("true");
 			const selected = await bold.evaluate(
@@ -93,7 +93,7 @@ describe("Toggle and Toggle Group", { timeout: 30_000 }, () => {
 			expect(await bold.getAttribute("aria-pressed")).toBe("true");
 			expect(
 				await bold.evaluate((el) => getComputedStyle(el).outlineWidth)
-			).toBe("3px");
+			).toBe("2px");
 			const disabled = page
 				.locator("#ToggleManagedActionExample2")
 				.getByRole("button", { exact: true, name: "Selected" });
@@ -116,8 +116,8 @@ describe("Toggle and Toggle Group", { timeout: 30_000 }, () => {
 					})
 				);
 			expect(dimensions).toEqual([
+				[28, 28],
 				[32, 32],
-				[36, 36],
 				[40, 40],
 			]);
 			await page
@@ -166,9 +166,9 @@ describe("Toggle and Toggle Group", { timeout: 30_000 }, () => {
 				})
 			);
 			expect(joins).toEqual([
-				["16px", "0px"],
+				["10px", "0px"],
 				["0px", "0px"],
-				["0px", "16px"],
+				["0px", "10px"],
 			]);
 			expect(
 				await multiple.locator('[data-slot="toggle-group-separator"]').count()
@@ -300,12 +300,12 @@ describe("Toggle and Toggle Group", { timeout: 30_000 }, () => {
 			.getByRole("button", { exact: true, name: "Bold text" });
 		await toggle.hover();
 		await page.mouse.down();
-		// The surface insets 2px per edge with the fast press transition.
+		// The surface insets 1px per edge with the fast press transition.
 		await expect
 			.poll(() =>
 				toggle.evaluate((el) => getComputedStyle(el, "::before").inset)
 			)
-			.toBe("1px");
+			.toBe("0px");
 		expect(
 			await toggle.evaluate(
 				(el) => getComputedStyle(el, "::before").transitionDuration
@@ -325,7 +325,7 @@ describe("Toggle and Toggle Group", { timeout: 30_000 }, () => {
 			.poll(() =>
 				joined.evaluate((el) => getComputedStyle(el, "::before").inset)
 			)
-			.toBe("1px -1px");
+			.toBe("0px -1px");
 		await page.mouse.up();
 	});
 

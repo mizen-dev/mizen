@@ -222,7 +222,7 @@ describe("Frame compound component and docs specimen", () => {
 			});
 		expect(styles.frame).toEqual([
 			expect.not.stringMatching(NON_TRANSPARENT_REGEX),
-			"32px",
+			"20px",
 			"flex",
 			"column",
 			"4px",
@@ -235,7 +235,7 @@ describe("Frame compound component and docs specimen", () => {
 			"padding-box",
 			"solid",
 			"1px",
-			"28px",
+			"16px",
 			expect.not.stringMatching(NONE_REGEX),
 			"0px",
 			"20px",

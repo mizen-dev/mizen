@@ -143,7 +143,7 @@ describe("Select component route", () => {
 					return [style.outlineWidth, style.outlineOffset];
 				})
 			)
-			.toEqual(["3px", "0px"]);
+			.toEqual(["1px", "-1px"]);
 		await workspace.press("Enter");
 		const listbox = page.getByRole("listbox");
 		await listbox.waitFor({ state: "visible" });
@@ -182,7 +182,7 @@ describe("Select component route", () => {
 		const narrowSizes = await readSizes();
 		await page.setViewportSize({ height: 800, width: 1024 });
 		const wideSizes = await readSizes();
-		expect(narrowSizes).toEqual([36, 32, 40]);
+		expect(narrowSizes).toEqual([32, 28, 40]);
 		expect(wideSizes).toEqual(narrowSizes);
 		expect(
 			await page

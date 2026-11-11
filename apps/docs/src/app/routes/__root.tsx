@@ -1,4 +1,4 @@
-import sansFontUrl from "@fontsource-variable/wix-madefor-text/files/wix-madefor-text-latin-wght-normal.woff2?url";
+import sansFontUrl from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";
 import { createRootRoute, Link } from "@tanstack/react-router";
 import { loadNavigation } from "../../entities/documentation/api/docs-functions";
 import RootLayout from "../layouts/root-layout";

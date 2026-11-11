@@ -117,7 +117,11 @@ describe("Switch component route", () => {
 			const label = page.locator("label").filter({ has: control });
 			const read = (element: Element) => {
 				const rect = element.getBoundingClientRect();
-				return { center: rect.y + rect.height / 2, height: rect.height };
+				return {
+					center: rect.y + rect.height / 2,
+					height: rect.height,
+					width: rect.width,
+				};
 			};
 			await control.scrollIntoViewIfNeeded();
 			const resting = await thumb.evaluate(read);
@@ -128,11 +132,11 @@ describe("Switch component route", () => {
 			try {
 				await expect
 					.poll(() =>
-						thumb.evaluate((element) => element.getBoundingClientRect().height)
+						thumb.evaluate((element) => element.getBoundingClientRect().width)
 					)
-					.toBeCloseTo(resting.height * 0.82, 1);
-				expect((await thumb.evaluate(read)).center).toBeCloseTo(
-					resting.center,
+					.toBeCloseTo(resting.width + 5, 1);
+				expect((await thumb.evaluate(read)).height).toBeCloseTo(
+					resting.height,
 					1
 				);
 			} finally {
@@ -143,9 +147,9 @@ describe("Switch component route", () => {
 				.toBe("false");
 			await expect
 				.poll(() =>
-					thumb.evaluate((element) => element.getBoundingClientRect().height)
+					thumb.evaluate((element) => element.getBoundingClientRect().width)
 				)
-				.toBeCloseTo(resting.height, 1);
+				.toBeCloseTo(resting.width, 1);
 			await label.click({
 				position: { x: (await requireBox(label)).width - 4, y: 10 },
 			});
@@ -217,7 +221,7 @@ describe("Switch component route", () => {
 			await page.mouse.down();
 			expect(
 				await thumb.evaluate((element) => getComputedStyle(element).transform)
-			).toBe("matrix(1, 0, 0, 1, 0, 0)");
+			).toBe("none");
 			await page.mouse.up();
 			expect(await control.getAttribute("aria-checked")).toBe("false");
 			await page
@@ -240,7 +244,7 @@ describe("Switch component route", () => {
 		const sizes = await Promise.all(
 			(
 				[
-					["Compact mode", 32, 18],
+					["Compact mode", 28, 16],
 					["Sync changes", 36, 20],
 					["Managed setting", 44, 24],
 				] as const
@@ -313,7 +317,7 @@ describe("Switch component route", () => {
 					return [style.outlineWidth, style.outlineOffset];
 				})
 			)
-			.toEqual(["3px", "0px"]);
+			.toEqual(["2px", "2px"]);
 		expect(
 			await thumb.evaluate(
 				(element) => getComputedStyle(element).transitionProperty

@@ -116,11 +116,24 @@ function measureTextContrast(locator: Locator): Promise<number> {
 				0.0722 * linearize(color[2])
 			);
 		};
-		const computed = getComputedStyle(
-			node.closest('[data-slot="badge"]') ?? node
-		);
+		const badge = node.closest('[data-slot="badge"]') ?? node;
+		const computed = getComputedStyle(badge);
+		let bgElement: Element | null = badge.parentElement;
+		let bg = "rgb(255, 255, 255)";
+		while (bgElement) {
+			const bgStyle = getComputedStyle(bgElement).backgroundColor;
+			if (
+				bgStyle &&
+				bgStyle !== "transparent" &&
+				bgStyle !== "rgba(0, 0, 0, 0)"
+			) {
+				bg = bgStyle;
+				break;
+			}
+			bgElement = bgElement.parentElement;
+		}
 		const foreground = luminance(readColor(computed.color));
-		const background = luminance(readColor(computed.backgroundColor));
+		const background = luminance(readColor(bg));
 		return (
 			(Math.max(foreground, background) + 0.05) /
 			(Math.min(foreground, background) + 0.05)
@@ -238,7 +251,7 @@ describe("Badge component contract", () => {
 			);
 		expect(styles.length).toBeGreaterThanOrEqual(3);
 		expect(styles[0]).toMatchObject({
-			backgroundColor: expect.not.stringMatching(transparentColor),
+			backgroundColor: expect.stringMatching(transparentColor),
 			color: expect.not.stringMatching(transparentColor),
 		});
 		expect(Number.parseFloat(styles[0]?.borderRadius ?? "0")).toBeGreaterThan(

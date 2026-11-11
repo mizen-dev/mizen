@@ -99,24 +99,24 @@ describe("Input component contracts", () => {
 		};
 		await page.setViewportSize({ height: 800, width: 320 });
 		await assertSizes([
-			["Small", "32px", "12px", "16px"],
-			["Default", "36px", "16px", "16px"],
-			["Large", "40px", "16px", "16px"],
+			["Small", "28px", "8px", "16px"],
+			["Default", "32px", "10px", "16px"],
+			["Large", "40px", "10px", "16px"],
 		]);
 		await page.setViewportSize({ height: 800, width: 1024 });
 		await assertSizes([
-			["Small", "32px", "12px", "14px"],
-			["Default", "36px", "16px", "16px"],
-			["Large", "40px", "16px", "16px"],
+			["Small", "28px", "8px", "13px"],
+			["Default", "32px", "10px", "14px"],
+			["Large", "40px", "10px", "16px"],
 		]);
 		const email = fieldPreview().getByRole("textbox", { name: "Email" });
 		await focusWithKeyboard(email);
 		expect(
 			await email.evaluate((element) => getComputedStyle(element).outlineWidth)
-		).toBe("3px");
+		).toBe("1px");
 		expect(
 			await email.evaluate((element) => getComputedStyle(element).outlineOffset)
-		).toBe("0px");
+		).toBe("-1px");
 	});
 
 	it("gives inputs quiet surface and state feedback", async () => {
@@ -128,7 +128,7 @@ describe("Input component contracts", () => {
 			const style = getComputedStyle(element);
 			return [style.backgroundColor, style.borderColor, style.boxShadow];
 		});
-		expect(rest[1]).toMatch(transparentColor);
+		expect(rest[1]).not.toMatch(transparentColor);
 		expect(rest[2]).not.toBe("none");
 		await email.hover();
 		await email.and(page.locator("[data-hovered='true']")).waitFor();

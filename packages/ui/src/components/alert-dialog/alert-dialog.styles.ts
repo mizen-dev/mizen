@@ -1,11 +1,16 @@
 import { create } from "@stylexjs/stylex";
 import { colors } from "../../styles/colors.stylex";
 import { space } from "../../styles/spacing.stylex";
-import { fontSize, lineHeight } from "../../styles/typography.stylex";
+import {
+	fontSize,
+	letterSpacing,
+	lineHeight,
+} from "../../styles/typography.stylex";
 
 export const alertDialogStyles = create({
 	description: {
 		fontSize: fontSize["14"],
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		overflowWrap: "anywhere",
 		textWrap: "pretty",
@@ -25,5 +30,5 @@ export const alertDialogStyles = create({
 		paddingInline: space["6"],
 	},
 	popup: { maxWidth: "32rem" },
-	title: { fontSize: fontSize["20"], overflowWrap: "anywhere" },
+	title: { overflowWrap: "anywhere" },
 });

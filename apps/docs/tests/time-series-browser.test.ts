@@ -272,7 +272,7 @@ describe("time series browser behavior", () => {
 				getComputedStyle(frame.querySelector("svg text") as SVGTextElement)
 					.fontFamily,
 			]);
-			expect(frameFont).toContain("Wix Madefor Text Variable");
+			expect(frameFont).toContain("Geist Variable");
 			expect(svgTextFont).toBe(frameFont);
 			const boxes = await Promise.all(
 				[page.getByTestId("metric-trend-example"), section, chart].map(

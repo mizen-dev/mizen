@@ -37,8 +37,8 @@ describe("Tabs visual states", { timeout: 25_000 }, () => {
 				waitUntil: "networkidle",
 			});
 			for (const [size, height] of [
-				["sm", 28],
-				["default", 32],
+				["sm", 24],
+				["default", 28],
 				["lg", 36],
 			] as const) {
 				const list = page.getByRole("tablist", {
@@ -70,7 +70,7 @@ describe("Tabs visual states", { timeout: 25_000 }, () => {
 				expect(geometry.height).toBe(height);
 				expect(geometry.icon).toBe(16);
 				expect(geometry.offset).toBeLessThan(1);
-				expect((await list.boundingBox())?.height).toBe(height + 8);
+				expect((await list.boundingBox())?.height).toBe(height + 4);
 				expect(
 					await list.locator('[data-slot="tabs-indicator"]:visible').count()
 				).toBe(1);
@@ -94,22 +94,28 @@ describe("Tabs visual states", { timeout: 25_000 }, () => {
 					await second.evaluate(
 						(el) =>
 							el === document.activeElement &&
-							getComputedStyle(el).outlineWidth === "3px"
+							getComputedStyle(el).outlineWidth === "2px"
 					)
 				).toBe(true);
 				await page.keyboard.press("Enter");
 				expect(await second.getAttribute("aria-selected")).toBe("true");
 				expect((await second.boundingBox())?.width).toBe(before?.width);
 				expect(await disabled.isDisabled()).toBe(true);
-				const indicator = await list
-					.locator('[data-slot="tabs-indicator"]:visible')
-					.boundingBox();
-				const selected = await second.boundingBox();
-				if (!(indicator && selected)) {
-					throw new Error("Missing indicator geometry");
-				}
-				expect(Math.abs(indicator.width - selected.width)).toBeLessThan(1);
-				expect(Math.abs(indicator.x - selected.x)).toBeLessThan(1);
+				await expect
+					.poll(async () => {
+						const indicator = await list
+							.locator('[data-slot="tabs-indicator"]:visible')
+							.boundingBox();
+						const selected = await second.boundingBox();
+						if (!(indicator && selected)) {
+							return 999;
+						}
+						return Math.max(
+							Math.abs(indicator.width - selected.width),
+							Math.abs(indicator.x - selected.x)
+						);
+					})
+					.toBeLessThan(1);
 				await page.keyboard.press("ArrowRight");
 				await page.keyboard.press("Enter");
 				expect(await disabled.getAttribute("aria-selected")).toBe("false");

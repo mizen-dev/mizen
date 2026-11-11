@@ -113,7 +113,7 @@ describe("Slider endpoint browser integration", {
 						);
 					})
 				);
-			expect(corners).toEqual([4, 4, 4]);
+			expect(corners).toEqual([4, 2, 2]);
 			const slider = page.getByTestId("slider-thumb-value");
 			const input = slider.locator("input");
 			await slider.scrollIntoViewIfNeeded();
@@ -228,7 +228,7 @@ describe("Slider endpoint browser integration", {
 			.poll(async () =>
 				thumb.evaluate((el) => getComputedStyle(el).outlineWidth)
 			)
-			.toBe("3px");
+			.toBe("2px");
 		await thumb.click();
 
 		// When: navigating to maximum endpoint
@@ -250,7 +250,7 @@ describe("Slider endpoint browser integration", {
 			.poll(async () =>
 				thumb.evaluate((el) => getComputedStyle(el).outlineWidth)
 			)
-			.toBe("3px");
+			.toBe("2px");
 		await thumb.click();
 	});
 });

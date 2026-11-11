@@ -170,15 +170,15 @@ describe("Foundational documentation", () => {
 			waitUntil: "networkidle",
 		});
 		await page.getByRole("button", { exact: true, name: "Browse" }).click();
-		const popup = page.locator('[data-slot="popover-popup"]');
+		const popup = page.locator('[data-slot="drawer-popup"]');
 		await popup
 			.getByRole("navigation", { name: "Documentation guides" })
 			.getByRole("link", { exact: true, name: "CLI" })
 			.click();
 		await page.waitForURL("**/docs/cli");
-		await expectLocator(
-			page.locator('[data-slot="popover-popup"]')
-		).toHaveCount(0);
+		await expectLocator(page.locator('[data-slot="drawer-popup"]')).toHaveCount(
+			0
+		);
 		await page.setViewportSize({ height: 900, width: 1440 });
 		const sidebar = page.locator('[data-slot="desktop-sidebar"]');
 		await expectLocator(

@@ -13,6 +13,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 import { buttonColors } from "../button/button-colors.stylex";
@@ -20,9 +21,10 @@ import { buttonColors } from "../button/button-colors.stylex";
 export const calendarStyles = create({
 	captionLabel: {
 		color: colors.content,
-		fontSize: fontSize["16"],
+		fontSize: fontSize["14"],
 		fontVariantNumeric: "tabular-nums",
-		fontWeight: fontWeight.regular,
+		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.ui,
 	},
 	chevron: {
 		display: "inline-block",
@@ -31,14 +33,14 @@ export const calendarStyles = create({
 	day: {
 		fontVariantNumeric: "tabular-nums",
 		height: {
-			default: "2.25rem",
-			[conditions.sm]: "2.5rem",
+			default: "2rem",
+			[conditions.sm]: "2.25rem",
 		},
 		padding: 0,
 		textAlign: "center",
 		width: {
-			default: "2.25rem",
-			[conditions.sm]: "2.5rem",
+			default: "2rem",
+			[conditions.sm]: "2.25rem",
 		},
 	},
 	// Matches range ends, and nests inside the floating corner.
@@ -48,11 +50,12 @@ export const calendarStyles = create({
 		borderStartEndRadius: shape.controlRadius,
 		borderStartStartRadius: shape.controlRadius,
 		color: "inherit",
-		fontSize: fontSize["16"],
+		fontSize: fontSize["14"],
 		fontWeight: fontWeight.regular,
-		height: "2.25rem",
+		height: "2rem",
+		letterSpacing: letterSpacing.ui,
 		position: "relative",
-		width: "2.25rem",
+		width: "2rem",
 	},
 	dayButtonReadOnly: {
 		backgroundColor: {
@@ -93,7 +96,7 @@ export const calendarStyles = create({
 	monthCaption: {
 		alignItems: "center",
 		display: "flex",
-		height: "2.25rem",
+		height: "2rem",
 		justifyContent: "center",
 		position: "relative",
 	},
@@ -133,11 +136,11 @@ export const calendarStyles = create({
 			default: shape.controlRadius,
 			[conditions.sm]: `calc(${shape.controlRadius} + ${space.px})`,
 		},
-		color: colors.brandForeground,
+		color: colors.content,
 		forcedColorAdjust: forcedColorAdjust.selectedState,
 	},
 	rangeMiddle: {
-		backgroundColor: colors.brandBackground,
+		backgroundColor: colors.selected,
 		color: colors.content,
 		forcedColorAdjust: forcedColorAdjust.selectedState,
 	},
@@ -150,7 +153,7 @@ export const calendarStyles = create({
 			default: shape.controlRadius,
 			[conditions.sm]: `calc(${shape.controlRadius} + ${space.px})`,
 		},
-		color: colors.brandForeground,
+		color: colors.content,
 		forcedColorAdjust: forcedColorAdjust.selectedState,
 	},
 	readOnly: {
@@ -202,7 +205,7 @@ export const calendarStyles = create({
 	selectedRange: {
 		backgroundColor: {
 			[conditions.forcedColors]: "Highlight",
-			default: colors.brandBackground,
+			default: colors.selected,
 		},
 		color: {
 			[conditions.forcedColors]: "HighlightText",
@@ -214,11 +217,8 @@ export const calendarStyles = create({
 	today: {
 		fontWeight: fontWeight.bold,
 	},
-	todayButton: {
-		backgroundColor: colors.brandBackground,
-		color: colors.brandForeground,
-		fontWeight: fontWeight.medium,
-	},
+	// Today carries a dot and medium weight; fills stay with selection.
+	todayButton: { fontWeight: fontWeight.medium },
 	todayIndicator: {
 		"::after": {
 			backgroundColor: colors.accent,
@@ -235,28 +235,20 @@ export const calendarStyles = create({
 	todayIndicatorSelected: {
 		"::after": { backgroundColor: colors.accentContent },
 	},
-	todayInteraction: {
-		backgroundColor: {
-			":active": `color-mix(in oklch, ${colors.brandBackground} 75%, ${colors.accent})`,
-			":hover": {
-				[conditions.canHover]: `color-mix(in oklch, ${colors.brandBackground} 85%, ${colors.accent})`,
-			},
-			default: colors.brandBackground,
-		},
-	},
 	week: {
 		display: "table-row",
 	},
 	weekday: {
 		color: colors.mutedContent,
-		fontSize: fontSize["14"],
-		fontWeight: fontWeight.regular,
+		fontSize: fontSize["12"],
+		fontWeight: fontWeight.medium,
 		height: "2rem",
-		lineHeight: lineHeight["20"],
+		letterSpacing: letterSpacing.caption,
+		lineHeight: lineHeight["16"],
 		textAlign: "center",
 		width: {
-			default: "2.25rem",
-			[conditions.sm]: "2.5rem",
+			default: "2rem",
+			[conditions.sm]: "2.25rem",
 		},
 	},
 	weekdays: {

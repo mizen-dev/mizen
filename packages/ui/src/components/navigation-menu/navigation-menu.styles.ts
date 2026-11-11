@@ -15,13 +15,14 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
 export const navigationMenuStyles = create({
 	active: {
-		backgroundColor: colors.brandBackground,
-		color: colors.brandForeground,
+		backgroundColor: colors.selected,
+		color: colors.content,
 	},
 	content: {
 		display: "flex",
@@ -65,7 +66,7 @@ export const navigationMenuStyles = create({
 	interactive: {
 		backgroundColor: {
 			[conditions.canHover]: {
-				":hover:not([data-disabled])": colors.controlSurfaceHover,
+				":hover:not([data-disabled])": colors.controlSurface,
 			},
 			":active:not([data-disabled])": colors.controlSurfaceHover,
 			"[data-popup-open]:not([data-disabled])": colors.controlSurfaceHover,
@@ -97,6 +98,7 @@ export const navigationMenuStyles = create({
 		gap: space["1"],
 		height: { ":is(*) > svg": "1rem" },
 		justifyContent: "flex-start",
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		maxWidth: "100%",
 		minHeight: controlSize.sm,
@@ -127,6 +129,7 @@ export const navigationMenuStyles = create({
 	linkDescription: {
 		color: colors.mutedContent,
 		fontSize: fontSize["14"],
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 	},
 	linkTitle: {

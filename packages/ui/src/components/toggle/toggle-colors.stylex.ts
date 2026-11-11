@@ -2,26 +2,28 @@ import { defineVars } from "@stylexjs/stylex";
 import { colors } from "../../styles/colors.stylex";
 import { conditions } from "../../styles/conditions.stylex";
 
-// Forced colors keep pressed fills solid system colors in every state.
+// A pressed toggle holds a neutral fill and ink text; the accent stays with
+// actions and checked controls. Forced colors keep pressed fills solid system
+// colors in every state.
 export const toggleColors = defineVars({
 	pressedActiveBackground: {
 		[conditions.forcedColors]: "Highlight",
-		default: `color-mix(in oklch, ${colors.brandBackground} 84%, ${colors.brandForeground})`,
+		default: `color-mix(in oklch, ${colors.selected} 88%, ${colors.content})`,
 	},
 	pressedBackground: {
 		[conditions.forcedColors]: "Highlight",
-		default: colors.brandBackground,
+		default: colors.selected,
 	},
 	pressedBorder: {
 		[conditions.forcedColors]: "Highlight",
-		default: colors.brandForeground,
+		default: colors.border,
 	},
 	pressedForeground: {
 		[conditions.forcedColors]: "HighlightText",
-		default: colors.brandForeground,
+		default: colors.content,
 	},
 	pressedHoverBackground: {
 		[conditions.forcedColors]: "Highlight",
-		default: `color-mix(in oklch, ${colors.brandBackground} 92%, ${colors.brandForeground})`,
+		default: `color-mix(in oklch, ${colors.selected} 94%, ${colors.content})`,
 	},
 });

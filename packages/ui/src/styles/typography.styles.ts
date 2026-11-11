@@ -30,7 +30,7 @@ export const typeRoles = create({
 		fontSize: fontSize["16"],
 		fontSizeAdjust: fonts.sizeAdjust,
 		fontWeight: fontWeight.regular,
-		letterSpacing: letterSpacing.normal,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["24"],
 		textWrap: "pretty",
 	},
@@ -62,10 +62,10 @@ export const typeRoles = create({
 		textWrap: "balance",
 	},
 	label: {
-		fontSize: fontSize["14"],
+		fontSize: fontSize["13"],
 		fontSizeAdjust: fonts.sizeAdjust,
 		fontWeight: fontWeight.medium,
-		letterSpacing: letterSpacing.normal,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 	},
 	mono: {
@@ -76,14 +76,13 @@ export const typeRoles = create({
 		letterSpacing: letterSpacing.normal,
 		lineHeight: lineHeight["20"],
 	},
-	// Narrow screens step down so values and units stay on one line. Medium
-	// weight keeps large figures crisp rather than heavy.
+	// Narrow screens step down so values and units stay on one line.
 	numeric: {
 		fontSize: { [conditions.sm]: fontSize["28"], default: fontSize["20"] },
 		fontSizeAdjust: fonts.sizeAdjust,
 		fontVariantNumeric: "tabular-nums",
-		fontWeight: fontWeight.medium,
-		letterSpacing: letterSpacing.title,
+		fontWeight: fontWeight.semibold,
+		letterSpacing: letterSpacing.numeric,
 		lineHeight: {
 			[conditions.sm]: lineHeight["32"],
 			default: lineHeight["28"],
@@ -109,7 +108,7 @@ export const typeRoles = create({
 		fontSize: fontSize["14"],
 		fontSizeAdjust: fonts.sizeAdjust,
 		fontWeight: fontWeight.regular,
-		letterSpacing: letterSpacing.normal,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 		textWrap: "pretty",
 	},

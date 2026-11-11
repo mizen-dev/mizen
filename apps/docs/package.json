@@ -26,8 +26,8 @@
     "typecheck": "tsc --noEmit && tsc -p tests/package-types/tsconfig.json"
   },
   "dependencies": {
+    "@fontsource-variable/geist": "5.3.0",
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
-    "@fontsource-variable/wix-madefor-text": "5.3.0",
     "@mizen-labs/ui": "workspace:*",
     "@stylexjs/stylex": "^0.19.1",
     "@tabler/icons-react": "^3.50.0",

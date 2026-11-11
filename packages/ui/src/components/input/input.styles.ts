@@ -9,6 +9,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 import { fieldStyles } from "../field/field.styles";
@@ -52,10 +53,14 @@ const inputUnstyledStyles = create({
 		flexGrow: 1,
 		flexShrink: 1,
 		fontFamily: "inherit",
-		fontSize: fontSize["16"],
+		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
 		fontSizeAdjust: fonts.sizeAdjust,
 		fontWeight: fontWeight.regular,
-		lineHeight: lineHeight["24"],
+		letterSpacing: letterSpacing.ui,
+		lineHeight: {
+			[conditions.sm]: lineHeight["20"],
+			default: lineHeight["24"],
+		},
 		minWidth: 0,
 		opacity: 1,
 		outlineColor: "transparent",
@@ -80,7 +85,7 @@ const inputUnstyledStyles = create({
 		height: `calc(${controlSize.lg} - ${borderWidth.thin}px * 2)`,
 	},
 	unstyledSm: {
-		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
+		fontSize: { [conditions.sm]: fontSize["13"], default: fontSize["16"] },
 		height: `calc(${controlSize.sm} - ${borderWidth.thin}px * 2)`,
 	},
 });

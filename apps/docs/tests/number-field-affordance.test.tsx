@@ -138,7 +138,7 @@ describe("NumberField affordances, directions, and typography", () => {
 	it("applies size typography contract to input preserving mobile 16px floor", () => {
 		expect(numberFieldStyles.inputSm).toMatchObject({
 			fontSize: {
-				[conditions.sm]: fontSize["14"],
+				[conditions.sm]: fontSize["13"],
 				default: fontSize["16"],
 			},
 		});

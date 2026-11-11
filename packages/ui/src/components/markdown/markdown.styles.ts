@@ -35,7 +35,7 @@ export const markdownStyles = create({
 	headingFive: {
 		fontSize: fontSize["14"],
 		fontWeight: fontWeight.semibold,
-		letterSpacing: letterSpacing.normal,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 	},
 	headingFour: {
@@ -47,7 +47,7 @@ export const markdownStyles = create({
 	headingSix: {
 		fontSize: fontSize["14"],
 		fontWeight: fontWeight.semibold,
-		letterSpacing: letterSpacing.normal,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 	},
 	headingThree: {

@@ -6,6 +6,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -54,6 +55,7 @@ export const progressStyles = create({
 		color: colors.content,
 		fontSize: fontSize["14"],
 		fontWeight: fontWeight.medium,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 	},
 	root: {
@@ -77,6 +79,7 @@ export const progressStyles = create({
 		fontSize: fontSize["14"],
 		fontVariantNumeric: "tabular-nums",
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["20"],
 	},
 });

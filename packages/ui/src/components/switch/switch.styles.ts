@@ -13,25 +13,18 @@ import { shadows } from "../../styles/shadows.stylex";
 
 export const switchStyles = create({
 	base: {
-		"--mizen-switch-thumb-radius": {
-			[conditions.reducedMotion]: {
-				":is(:active, label:active [data-slot='switch']):not([data-disabled]):not([data-readonly])":
-					"50%",
-				default: "50%",
-			},
+		// A held thumb stretches toward the other side.
+		"--mizen-switch-thumb-stretch": {
 			":is(:active, label:active [data-slot='switch']):not([data-disabled]):not([data-readonly])":
-				"0.375rem",
-			default: "50%",
+				"0.3125rem",
+			default: "0rem",
 		},
-		"--mizen-switch-thumb-scale-y": {
-			[conditions.reducedMotion]: {
-				":is(:active, label:active [data-slot='switch']):not([data-disabled]):not([data-readonly])":
-					"1",
-				default: "1",
-			},
-			":is(:active, label:active [data-slot='switch']):not([data-disabled]):not([data-readonly])":
-				"0.82",
-			default: "1",
+		// The track is shorter than the smallest hit area; this extends it.
+		"::after": {
+			content: '""',
+			insetBlock: "min(0px, calc((100% - 1.5rem) / 2))",
+			insetInline: 0,
+			position: "absolute",
 		},
 		alignItems: "center",
 		animationDuration: {
@@ -43,44 +36,31 @@ export const switchStyles = create({
 		appearance: "none",
 		backgroundColor: {
 			"[data-checked]": colors.accent,
-			"[data-checked]:not([data-disabled], [data-readonly]):is(:hover, label:hover [data-slot='switch']):not(:active, label:active [data-slot='switch'])":
+			"[data-checked]:not([data-disabled], [data-readonly]):is(:hover, label:hover [data-slot='switch'])":
 				{
-					[conditions.canHover]: `color-mix(in oklch, ${colors.accent} 94%, white)`,
+					[conditions.canHover]: `color-mix(in oklch, ${colors.accent} 90%, white)`,
 				},
 			"[data-disabled]": fieldColors.disabled,
 			"[data-disabled][data-checked]": colors.accent,
 			"[data-slot='switch']:is(:hover, label:hover [data-slot='switch']):not([data-checked], [data-disabled], [data-readonly])":
 				{
-					[conditions.canHover]: `color-mix(in oklch, ${colors.content} 26%, ${colors.surface})`,
+					[conditions.canHover]: colors.controlSurfaceHover,
 				},
-			// Mixed from the text color so the off track reads on any surface.
-			default: `color-mix(in oklch, ${colors.content} 18%, ${colors.surface})`,
+			default: colors.controlSurface,
 		},
 		borderColor: {
 			":is([aria-invalid='true'], [data-invalid]):not([data-disabled])": `color-mix(in oklch, ${colors.destructive} 54%, ${fieldColors.surface})`,
-			"[data-checked]:not([data-disabled], [aria-invalid='true'], [data-invalid])":
+			"[data-checked]:not([aria-invalid='true'], [data-invalid])":
 				colors.accent,
-			// The off track has no outline: its fill and the thumb carry the shape.
-			default: "transparent",
+			"[data-disabled]:not([data-checked])": colors.border,
+			// A light track with a thin edge: quiet when off, below 3:1 by design.
+			default: colors.controlBorder,
 		},
 		borderStyle: "solid",
 		borderWidth: borderWidth.thin,
 		boxShadow: {
-			":is(:active, label:active [data-slot='switch']):not([data-disabled]):not([data-readonly])":
-				shadows.pressed,
-			":is([aria-invalid='true'], [data-invalid]):not([data-disabled])": `0 0 0 1px color-mix(in oklch, ${colors.destructive} 12%, transparent), ${shadows.outlineRest}`,
-			":is([aria-invalid='true'], [data-invalid])[data-checked]:not([data-disabled])": `0 0 0 1px color-mix(in oklch, ${colors.destructive} 12%, transparent), ${shadows.filledRest}`,
-			"[data-checked]": shadows.filledRest,
-			"[data-checked]:not([data-disabled], [data-readonly]):is(:hover, label:hover [data-slot='switch']):not(:active, label:active [data-slot='switch'])":
-				{
-					[conditions.canHover]: shadows.filledHover,
-				},
-			"[data-disabled]": "none",
-			"[data-disabled]:hover": "none",
-			"[data-disabled][data-checked]": "none",
-			"[data-readonly]:not([data-disabled])": shadows.recessedRest,
-			"[data-readonly][data-checked]:not([data-disabled])": shadows.filledRest,
-			default: shadows.recessedRest,
+			":is([aria-invalid='true'], [data-invalid]):not([data-disabled])": `0 0 0 1px color-mix(in oklch, ${colors.destructive} 12%, transparent)`,
+			default: "none",
 		},
 		boxSizing: "border-box",
 		cursor: {
@@ -105,8 +85,8 @@ export const switchStyles = create({
 			":focus-visible": borderWidth.focus,
 			default: borderWidth.focus,
 		},
-		paddingBlock: 1,
-		paddingInline: 1,
+		paddingBlock: 2,
+		paddingInline: 2,
 		position: "relative",
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
@@ -125,6 +105,8 @@ export const switchStyles = create({
 		},
 	},
 	sizeDefault: {
+		"--mizen-switch-thumb-size": "0.875rem",
+		"--mizen-switch-thumb-travel": "1rem",
 		borderEndEndRadius: "9999px",
 		borderEndStartRadius: "9999px",
 		borderStartEndRadius: "9999px",
@@ -133,6 +115,8 @@ export const switchStyles = create({
 		width: "2.25rem",
 	},
 	sizeLg: {
+		"--mizen-switch-thumb-size": "1.125rem",
+		"--mizen-switch-thumb-travel": "1.25rem",
 		borderEndEndRadius: "9999px",
 		borderEndStartRadius: "9999px",
 		borderStartEndRadius: "9999px",
@@ -141,55 +125,42 @@ export const switchStyles = create({
 		width: "2.75rem",
 	},
 	sizeSm: {
+		"--mizen-switch-thumb-size": "0.625rem",
+		"--mizen-switch-thumb-travel": "0.75rem",
 		borderEndEndRadius: "9999px",
 		borderEndStartRadius: "9999px",
 		borderStartEndRadius: "9999px",
 		borderStartStartRadius: "9999px",
-		height: "1.125rem",
-		width: "2rem",
+		height: "1rem",
+		width: "1.75rem",
 	},
 	thumb: {
 		backgroundColor: {
 			[conditions.forcedColors]: "ButtonText",
-			// One white thumb for both states; position and track color show state.
+			// One thumb for both states; position and track color show state.
 			default: colors.controlThumb,
 		},
-		borderColor: {
-			[conditions.forcedColors]: "ButtonText",
-			default: "oklch(0 0 0 / 0.06)",
-		},
-		borderRadius: "var(--mizen-switch-thumb-radius)",
-		borderStyle: "solid",
-		borderWidth: 1,
+		borderRadius: "9999px",
 		boxShadow: {
 			[conditions.forcedColors]: "none",
-			default: shadows.filledRest,
+			default: `0 0 0 1px oklch(0 0 0 / 0.06), ${shadows.filledRest}`,
 		},
 		boxSizing: "border-box",
 		display: "block",
-		transform: "scaleY(var(--mizen-switch-thumb-scale-y))",
-		transformOrigin: "center",
+		height: "var(--mizen-switch-thumb-size)",
+		marginInlineStart: {
+			"[data-checked]":
+				"calc(var(--mizen-switch-thumb-travel) - var(--mizen-switch-thumb-stretch))",
+			default: 0,
+		},
+		// Travel springs; the stretch and color changes ease out.
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
-			default: duration.fast,
+			default: `${duration.fast}, ${duration.spring}, 200ms`,
 		},
-		transitionProperty:
-			"background-color, border-radius, margin-inline-start, transform",
-		transitionTimingFunction: easing.expoOut,
-	},
-	thumbDefault: {
-		height: "1rem",
-		marginInlineStart: { "[data-checked]": "1rem", default: 0 },
-		width: "1rem",
-	},
-	thumbLg: {
-		height: "1.25rem",
-		marginInlineStart: { "[data-checked]": "1.25rem", default: 0 },
-		width: "1.25rem",
-	},
-	thumbSm: {
-		height: "0.875rem",
-		marginInlineStart: { "[data-checked]": "0.875rem", default: 0 },
-		width: "0.875rem",
+		transitionProperty: "background-color, margin-inline-start, width",
+		transitionTimingFunction: `${easing.expoOut}, ${easing.spring}, ${easing.expoOut}`,
+		width:
+			"calc(var(--mizen-switch-thumb-size) + var(--mizen-switch-thumb-stretch))",
 	},
 });

@@ -89,7 +89,7 @@ export const comboboxFieldStyles = create({
 	},
 	sizeSm: {
 		borderRadius: shape.controlRadius,
-		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
+		fontSize: { [conditions.sm]: fontSize["13"], default: fontSize["16"] },
 		height: controlSize.sm,
 	},
 	startAddon: {

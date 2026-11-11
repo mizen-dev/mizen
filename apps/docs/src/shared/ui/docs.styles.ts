@@ -215,13 +215,13 @@ export const docsStyles = create({
 		animationName: { ":focus-visible": focusMotion.ring },
 		backgroundColor: {
 			":hover": colors.controlSurface,
-			'[aria-current="location"]': colors.brandBackground,
+			'[aria-current="location"]': colors.selected,
 			default: "transparent",
 		},
 		borderRadius: shape.controlRadius,
 		color: {
 			":hover": colors.content,
-			'[aria-current="location"]': colors.brandForeground,
+			'[aria-current="location"]': colors.content,
 			default: colors.mutedContent,
 		},
 		display: "block",

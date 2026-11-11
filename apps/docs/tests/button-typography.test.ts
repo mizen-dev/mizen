@@ -31,7 +31,7 @@ function throwTeardownFailures(
 }
 
 describe("Button typography contract", () => {
-	it.each(['"Wix Madefor Text Variable"', "Arial", "Georgia", "monospace"])(
+	it.each(['"Geist Variable"', "Arial", "Georgia", "monospace"])(
 		"centers visible capitals with %s without changing the control height",
 		async (fontFamily) => {
 			await page.goto(`${handle.url}/components/button`, {
@@ -104,8 +104,8 @@ describe("Button typography contract", () => {
 		};
 
 		await page.setViewportSize({ height: 800, width: 375 });
-		await typography("Default size", "16px", "400");
-		await typography("Secondary", "16px", "400");
+		await typography("Default size", "14px", "500");
+		await typography("Secondary", "14px", "500");
 		await typography("Extra small", "12px", "500");
 		expect(
 			await page
@@ -117,12 +117,12 @@ describe("Button typography contract", () => {
 				.getByRole("button", { exact: true, name: "Small" })
 				.evaluate((element) => getComputedStyle(element).lineHeight)
 		).toBe("20px");
-		await typography("Large", "16px", "400");
-		await typography("Extra large", "16px", "400");
+		await typography("Large", "14px", "500");
+		await typography("Extra large", "16px", "500");
 
 		await page.setViewportSize({ height: 800, width: 1024 });
-		await typography("Default size", "16px", "400");
-		await typography("Secondary", "16px", "400");
+		await typography("Default size", "14px", "500");
+		await typography("Secondary", "14px", "500");
 		await typography("Extra small", "12px", "500");
 		expect(
 			await page
@@ -134,7 +134,7 @@ describe("Button typography contract", () => {
 				.getByRole("button", { exact: true, name: "Small" })
 				.evaluate((element) => getComputedStyle(element).lineHeight)
 		).toBe("20px");
-		await typography("Large", "16px", "400");
-		await typography("Extra large", "16px", "400");
+		await typography("Large", "14px", "500");
+		await typography("Extra large", "16px", "500");
 	});
 });

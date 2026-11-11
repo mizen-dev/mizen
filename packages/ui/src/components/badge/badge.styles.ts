@@ -7,13 +7,32 @@ import {
 	focusMotion,
 	focusOutline,
 } from "../../styles/interaction.stylex";
-import { shape } from "../../styles/shape.stylex";
 import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
+
+// A status badge is a hairline pill with ink text; a dot carries the status
+// color, so the label never depends on color alone. An icon replaces the dot.
+const status = (dot: string) =>
+	({
+		"::before": {
+			backgroundColor: dot,
+			borderRadius: "9999px",
+			content: '""',
+			display: { ":has(svg)": "none", default: "block" },
+			flexShrink: 0,
+			height: "0.375rem",
+			width: "0.375rem",
+		},
+		backgroundColor: "transparent",
+		borderColor: colors.border,
+		color: colors.content,
+		gap: "0.375rem",
+	}) as const;
 
 export const badgeStyles = create({
 	base: {
@@ -62,29 +81,25 @@ export const badgeStyles = create({
 		borderColor: "transparent",
 		color: colors.secondaryContent,
 	},
+	// Each radius is half the one-line height: a pill that stays a rounded
+	// rectangle when the label wraps.
 	defaultSize: {
-		borderRadius: shape.controlRadius,
-		fontSize: fontSize["14"],
-		lineHeight: lineHeight["20"],
-		minHeight: controlSize.xs,
+		borderRadius: "0.6875rem",
+		fontSize: fontSize["12"],
+		letterSpacing: letterSpacing.caption,
+		lineHeight: lineHeight["16"],
+		minHeight: "1.375rem",
 		paddingInline: space["2"],
 	},
-	destructive: {
-		backgroundColor: colors.destructiveSubtle,
-		borderColor: "transparent",
-		color: colors.content,
-	},
-	info: {
-		backgroundColor: colors.info,
-		borderColor: "transparent",
-		color: colors.infoContent,
-	},
+	destructive: status(colors.destructive),
+	info: status(colors.infoSolid),
 	lg: {
-		borderRadius: shape.controlRadiusLarge,
-		fontSize: fontSize["16"],
-		lineHeight: lineHeight["24"],
-		minHeight: controlSize.sm,
-		paddingInline: space["3"],
+		borderRadius: "0.75rem",
+		fontSize: fontSize["13"],
+		letterSpacing: letterSpacing.ui,
+		lineHeight: lineHeight["20"],
+		minHeight: controlSize.xs,
+		paddingInline: "0.625rem",
 	},
 	outline: {
 		backgroundColor: "transparent",
@@ -97,20 +112,13 @@ export const badgeStyles = create({
 		color: colors.secondaryContent,
 	},
 	sm: {
-		borderRadius: shape.controlRadius,
+		borderRadius: "0.625rem",
 		fontSize: fontSize["12"],
+		letterSpacing: letterSpacing.caption,
 		lineHeight: lineHeight["16"],
-		minHeight: controlSize["2xs"],
-		paddingInline: space["2"],
+		minHeight: "1.25rem",
+		paddingInline: "0.375rem",
 	},
-	success: {
-		backgroundColor: colors.success,
-		borderColor: "transparent",
-		color: colors.successContent,
-	},
-	warning: {
-		backgroundColor: colors.warning,
-		borderColor: "transparent",
-		color: colors.warningContent,
-	},
+	success: status(colors.successSolid),
+	warning: status(colors.warningSolid),
 });

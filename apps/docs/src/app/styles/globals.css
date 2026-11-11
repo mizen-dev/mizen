@@ -19,7 +19,9 @@ html[data-theme="dark"] {
 
 body {
 	margin: 0;
-	font-family: "Wix Madefor Text Variable", system-ui, sans-serif;
+	font-family: "Geist Variable", system-ui, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 button,

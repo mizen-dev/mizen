@@ -4,7 +4,6 @@ import { conditions } from "../../styles/conditions.stylex";
 import { controlSize } from "../../styles/dimensions.stylex";
 import {
 	borderWidth,
-	focus,
 	focusMotion,
 	focusOutline,
 } from "../../styles/interaction.stylex";
@@ -15,11 +14,18 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
 export const otpFieldStyles = create({
 	input: {
+		// The focused edge takes the focus color; an invalid field keeps its
+		// error color.
+		"--mizen-field-focus-edge": {
+			":is([aria-invalid='true'], [data-invalid])": colors.destructive,
+			default: colors.focusRing,
+		},
 		"::placeholder": { color: colors.mutedContent, opacity: 1 },
 		animationDuration: {
 			":focus-visible": focusMotion.duration,
@@ -44,15 +50,16 @@ export const otpFieldStyles = create({
 			":is([aria-invalid='true'], [data-invalid]):not(:disabled):not([data-disabled])": `color-mix(in oklch, ${colors.destructive} 54%, ${fieldColors.surface})`,
 			"[data-slot='otp-field-input']:hover:not(:disabled, [data-disabled], [readonly], [data-readonly], [aria-invalid='true'], [data-invalid])":
 				{
-					[conditions.canHover]: colors.border,
+					[conditions.canHover]: colors.controlBorderStrong,
 				},
-			default: "transparent",
+			default: colors.controlBorder,
 		},
 		borderStyle: "solid",
 		borderWidth: borderWidth.thin,
 		boxShadow: {
+			":focus-visible": focusOutline.fieldHalo,
 			":is(:disabled, [data-disabled])": "none",
-			default: shadows.recessedRest,
+			default: shadows.fieldRest,
 		},
 		boxSizing: "border-box",
 		color: {
@@ -65,27 +72,25 @@ export const otpFieldStyles = create({
 		},
 		display: "block",
 		fontFamily: "inherit",
-		fontSize: fontSize["16"],
+		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
 		fontVariantNumeric: "tabular-nums",
 		fontWeight: fontWeight.regular,
-		lineHeight: lineHeight["24"],
+		letterSpacing: letterSpacing.ui,
+		lineHeight: {
+			[conditions.sm]: lineHeight["20"],
+			default: lineHeight["24"],
+		},
 		minWidth: controlSize["2xs"],
 		outlineColor: {
-			":focus-visible": colors.focusRing,
+			":focus-visible": "var(--mizen-field-focus-edge)",
 			default: "transparent",
 		},
-		outlineOffset: {
-			":focus-visible": focus.offset,
-			default: focus.offset,
-		},
+		outlineOffset: focusOutline.fieldOffset,
 		outlineStyle: {
 			":focus-visible": "solid",
 			default: focusOutline.restingOutlineStyle,
 		},
-		outlineWidth: {
-			":focus-visible": borderWidth.focus,
-			default: borderWidth.focus,
-		},
+		outlineWidth: focusOutline.fieldWidth,
 		paddingBlock: space["0"],
 		paddingInline: space["0"],
 		textAlign: "center",
@@ -99,7 +104,7 @@ export const otpFieldStyles = create({
 	},
 	inputDefault: {
 		borderRadius: shape.controlRadiusLarge,
-		fontSize: fontSize["16"],
+		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
 		height: "auto",
 		width: controlSize.md,
 	},
@@ -111,7 +116,7 @@ export const otpFieldStyles = create({
 	},
 	inputSm: {
 		borderRadius: shape.controlRadius,
-		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
+		fontSize: { [conditions.sm]: fontSize["13"], default: fontSize["16"] },
 		height: "auto",
 		width: controlSize.sm,
 	},
@@ -123,15 +128,17 @@ export const otpFieldStyles = create({
 		maxWidth: "100%",
 		minWidth: 0,
 		overflowX: "auto",
-		padding: `calc(${borderWidth.focus}px + ${focus.offset})`,
+		// Room for the focus halo, which the scroller would clip.
+		padding: space["1"],
 		scrollPaddingInline: space["1"],
 	},
 	separator: {
 		alignItems: "center",
 		color: colors.secondaryContent,
 		display: "inline-flex",
-		fontSize: fontSize["16"],
+		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
 		justifyContent: "center",
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight.none,
 		userSelect: "none",
 	},

@@ -9,6 +9,7 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -109,6 +110,7 @@ const slots = create({
 		fontFamily: "inherit",
 		fontSize: fontSize["16"],
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["24"],
 		minWidth: 0,
 		outline: "none",
@@ -124,15 +126,12 @@ const slots = create({
 	item: {
 		alignItems: "center",
 		backgroundColor: {
-			"[data-highlighted]": colors.brandBackground,
+			"[data-highlighted]": colors.floatingHighlight,
 			default: "transparent",
 		},
 		borderRadius: shape.controlRadius,
 		borderWidth: 0,
-		color: {
-			"[data-highlighted]": colors.brandForeground,
-			default: colors.content,
-		},
+		color: colors.content,
 		cursor: "default",
 		display: "flex",
 		fontFamily: "inherit",
@@ -195,6 +194,7 @@ const slots = create({
 		fontSize: fontSize["14"],
 		gap: space["2"],
 		justifyContent: "space-between",
+		letterSpacing: letterSpacing.ui,
 		paddingBlock: space["2"],
 		paddingInline: space["3"],
 	},

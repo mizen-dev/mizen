@@ -62,6 +62,11 @@ export function SegmentedControl<Value extends string = string>({
 					orientation === "vertical" && segmentedStyles.vertical
 				)}
 			>
+				<span
+					aria-hidden="true"
+					data-slot="segmented-control-indicator"
+					{...props(segmentedStyles.indicator)}
+				/>
 				{children}
 			</BaseToggleGroup>
 		</SizeContext>

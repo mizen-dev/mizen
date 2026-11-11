@@ -126,7 +126,7 @@ describe("Calendar browser regression", {
 			style: getComputedStyle(element).outlineStyle,
 			width: getComputedStyle(element).outlineWidth,
 		}));
-		expect(outline.width).toBe("3px");
+		expect(outline.width).toBe("2px");
 		expect(outline.style).toBe("solid");
 		await nextButton.click();
 
@@ -273,7 +273,7 @@ describe("Calendar browser regression", {
 					.outlineStyle,
 			}));
 		expect(focus.buttonRadius).not.toBe("0px");
-		expect(focus.buttonOutline).toBe("3px");
+		expect(focus.buttonOutline).toBe("2px");
 		expect(focus.cellOutline).toBe("none");
 	});
 	it("shows brand selection, a visible today dot, and outline navigation in both themes", async () => {
@@ -320,22 +320,27 @@ describe("Calendar browser regression", {
 				.locator('[data-slot="component-preview"]')
 				.first()
 				.getByRole("button", { name: TODAY_REGEX });
-			const dot = await today.evaluate((element) => ({
-				background: getComputedStyle(element).backgroundColor,
-				color: getComputedStyle(element, "::after").backgroundColor,
-				colorText: getComputedStyle(element).color,
-				content: getComputedStyle(element, "::after").content,
-				size: getComputedStyle(element, "::after").width,
-			}));
+			const dot = await today.evaluate((element) => {
+				const calendar = element.closest('[data-slot="calendar"]');
+				return {
+					background: getComputedStyle(element).backgroundColor,
+					color: getComputedStyle(element, "::after").backgroundColor,
+					colorText: getComputedStyle(element).color,
+					content: getComputedStyle(element, "::after").content,
+					size: getComputedStyle(element, "::after").width,
+					surface: calendar
+						? getComputedStyle(calendar).backgroundColor
+						: getComputedStyle(document.body).backgroundColor,
+				};
+			});
 			expect(dot.size).toBe("4px");
 			expect(dot.content).toBe('""');
 			expect(dot.color).toBe(appearance.background);
-			expect(dot.background).not.toBe("rgba(0, 0, 0, 0)");
-			expect(dot.background).not.toBe(appearance.background);
+			expect(dot.background).toBe("rgba(0, 0, 0, 0)");
 			const [todayText, todayBackground] = await convertCssColorsToRgb(
 				page,
 				dot.colorText,
-				dot.background
+				dot.surface
 			);
 			expect(
 				calculateContrastRatio(todayText, todayBackground)
@@ -347,17 +352,17 @@ describe("Calendar browser regression", {
 			}));
 			expect(selectedToday.dot).toBe(selectedToday.color);
 			const next = single.locator('[data-slot="calendar-next"]');
-			const restingBorder = await next.evaluate(
-				(element) => getComputedStyle(element, "::before").borderColor
+			const restingBackground = await next.evaluate(
+				(element) => getComputedStyle(element, "::before").backgroundColor
 			);
 			await next.hover();
 			await expect
 				.poll(() =>
 					next.evaluate(
-						(element) => getComputedStyle(element, "::before").borderColor
+						(element) => getComputedStyle(element, "::before").backgroundColor
 					)
 				)
-				.not.toBe(restingBorder);
+				.not.toBe(restingBackground);
 			await page.mouse.down();
 			await expect
 				.poll(() =>
@@ -365,7 +370,7 @@ describe("Calendar browser regression", {
 						(element) => getComputedStyle(element, "::before").inset
 					)
 				)
-				.toBe("1px");
+				.toBe("0px");
 			await page.mouse.up();
 		};
 		await verifyTheme("light");

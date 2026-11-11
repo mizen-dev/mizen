@@ -9,12 +9,12 @@ import {
 	opacity,
 } from "../../styles/interaction.stylex";
 import { duration, easing } from "../../styles/motion.stylex";
-import { shadows } from "../../styles/shadows.stylex";
 import { shape } from "../../styles/shape.stylex";
 import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
@@ -47,28 +47,28 @@ export const tabsStyles = create({
 		top: "var(--active-tab-top)",
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
-			default: duration.overlayEnter,
+			default: duration.spring,
 		},
 		transitionProperty: "left, top, width, height",
-		transitionTimingFunction: easing.expoOut,
+		transitionTimingFunction: easing.spring,
 		width: "var(--active-tab-width)",
 	},
 	indicatorDefault: {
 		backgroundColor: {
 			[conditions.forcedColors]: "Highlight",
-			default: colors.brandBackground,
+			default: colors.controlIndicator,
 		},
 		borderEndEndRadius: shape.controlRadius,
 		borderEndStartRadius: shape.controlRadius,
 		borderStartEndRadius: shape.controlRadius,
 		borderStartStartRadius: shape.controlRadius,
-		boxShadow: shadows.filledRest,
+		boxShadow: `0 0 0 1px ${colors.border}, 0 1px 2px oklch(0 0 0 / 0.1)`,
 	},
 	indicatorUnderline: {
 		"::after": {
 			backgroundColor: {
 				[conditions.forcedColors]: "Highlight",
-				default: colors.brandForeground,
+				default: colors.accent,
 			},
 			borderRadius: "9999px",
 			content: '""',
@@ -117,12 +117,13 @@ export const tabsStyles = create({
 		scrollPaddingInline: space["2"],
 		width: "fit-content",
 	},
+	// The track pads its tabs by 2px, so the list matches the height of a
+	// button of the same size and the tab corners stay concentric.
 	listDefault: {
+		"--mizen-tabs-inset": space.px,
 		backgroundColor: colors.controlSurface,
 		borderRadius: shape.controlRadiusLarge,
-		boxShadow: shadows.recessedRest,
-		gap: space["1"],
-		padding: space["1"],
+		padding: space.px,
 	},
 	listUnderline: {
 		boxShadow: {
@@ -142,8 +143,9 @@ export const tabsStyles = create({
 	},
 	panel: {
 		color: colors.content,
-		fontSize: fontSize["16"],
-		lineHeight: lineHeight["24"],
+		fontSize: fontSize["14"],
+		letterSpacing: letterSpacing.ui,
+		lineHeight: lineHeight["20"],
 		minWidth: 0,
 		paddingBlockStart: {
 			"[data-orientation='vertical']": 0,
@@ -161,18 +163,15 @@ export const tabsStyles = create({
 		rowGap: space["4"],
 	},
 	sizeDefault: {
-		fontSize: fontSize["14"],
-		minHeight: controlSize.sm,
+		minHeight: `calc(${controlSize.md} - var(--mizen-tabs-inset, 0px) * 2)`,
 		paddingInline: space["3"],
 	},
 	sizeLg: {
-		fontSize: fontSize["14"],
-		minHeight: controlSize.md,
+		minHeight: `calc(${controlSize.lg} - var(--mizen-tabs-inset, 0px) * 2)`,
 		paddingInline: space["3"],
 	},
 	sizeSm: {
-		fontSize: fontSize["14"],
-		minHeight: controlSize.xs,
+		minHeight: `calc(${controlSize.sm} - var(--mizen-tabs-inset, 0px) * 2)`,
 		paddingInline: space["2"],
 	},
 	tab: {
@@ -195,7 +194,7 @@ export const tabsStyles = create({
 		borderWidth: borderWidth.thin,
 		boxSizing: "border-box",
 		color: {
-			"[data-active]": colors.brandForeground,
+			"[data-active]": colors.content,
 			"[data-slot='tabs-tab']:hover:not([data-disabled], [data-active])": {
 				[conditions.canHover]: colors.content,
 			},
@@ -206,9 +205,11 @@ export const tabsStyles = create({
 		display: "inline-flex",
 		flexShrink: 0,
 		fontFamily: "inherit",
+		fontSize: fontSize["13"],
 		fontWeight: fontWeight.medium,
 		height: { ":is(*) > svg": "1rem" },
 		justifyContent: "center",
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight.none,
 		maxWidth: "100%",
 		minWidth: 0,

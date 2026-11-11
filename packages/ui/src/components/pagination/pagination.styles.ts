@@ -1,6 +1,7 @@
 import { create } from "@stylexjs/stylex";
 import { colors } from "../../styles/colors.stylex";
 import { conditions } from "../../styles/conditions.stylex";
+import { controlSize } from "../../styles/dimensions.stylex";
 import {
 	borderWidth,
 	focus,
@@ -11,17 +12,18 @@ import { space } from "../../styles/spacing.stylex";
 import {
 	fontSize,
 	fontWeight,
+	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
 
 export const paginationStyles = create({
 	active: {
 		backgroundColor: {
-			default: colors.brandBackground,
+			default: colors.selected,
 			[conditions.forcedColors]: "Highlight",
 		},
 		color: {
-			default: colors.brandForeground,
+			default: colors.content,
 			[conditions.forcedColors]: "HighlightText",
 		},
 		forcedColorAdjust: { default: "auto", [conditions.forcedColors]: "none" },
@@ -51,8 +53,8 @@ export const paginationStyles = create({
 		alignItems: "center",
 		display: "inline-flex",
 		justifyContent: "center",
-		minBlockSize: "2.25rem",
-		minInlineSize: "2.25rem",
+		minBlockSize: controlSize.md,
+		minInlineSize: controlSize.md,
 		userSelect: "none",
 	},
 	icon: {
@@ -66,8 +68,8 @@ export const paginationStyles = create({
 		width: "1rem",
 	},
 	iconSize: {
-		blockSize: "2.25rem",
-		inlineSize: "2.25rem",
+		blockSize: controlSize.md,
+		inlineSize: controlSize.md,
 		padding: 0,
 	},
 	interactive: {
@@ -97,12 +99,12 @@ export const paginationStyles = create({
 		fontSize: "inherit",
 		fontVariantNumeric: "tabular-nums",
 		fontWeight: fontWeight.medium,
-		// Matches Button's icon gap at the same 36px control size.
+		// Matches Button's icon gap at the same control size.
 		gap: space["2"],
 		justifyContent: "center",
 		maxWidth: "100%",
-		minBlockSize: "2.25rem",
-		minInlineSize: "2.25rem",
+		minBlockSize: controlSize.md,
+		minInlineSize: controlSize.md,
 		minWidth: 0,
 		outlineColor: {
 			":focus-visible": colors.focusRing,
@@ -119,9 +121,10 @@ export const paginationStyles = create({
 	},
 	root: {
 		color: colors.mutedContent,
-		// Control role: 36px links carry 16/24 text, like Button md.
-		fontSize: fontSize["16"],
-		lineHeight: lineHeight["24"],
+		// Control role: links carry 14/20 text, like Button md.
+		fontSize: fontSize["14"],
+		letterSpacing: letterSpacing.ui,
+		lineHeight: lineHeight["20"],
 		maxWidth: "100%",
 	},
 	srOnly: {

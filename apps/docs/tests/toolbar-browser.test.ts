@@ -47,7 +47,7 @@ describe("Toolbar review", { timeout: 30_000 }, () => {
 				})
 			);
 			expect(controls.map((control) => control.height)).toEqual([
-				36, 36, 36, 36,
+				32, 32, 32, 32,
 			]);
 			expect(
 				Math.max(...controls.map((control) => control.center)) -
@@ -92,7 +92,7 @@ describe("Toolbar review", { timeout: 30_000 }, () => {
 			);
 			expect(
 				await link.evaluate((el) => getComputedStyle(el).outlineOffset)
-			).toBe("0px");
+			).toBe("2px");
 			await page.keyboard.press("ArrowRight");
 			expect(await bold.evaluate((el) => el === document.activeElement)).toBe(
 				true
@@ -191,7 +191,7 @@ describe("Toolbar review", { timeout: 30_000 }, () => {
 			expect(await separator.getAttribute("aria-orientation")).toBe(
 				"horizontal"
 			);
-			expect((await separator.boundingBox())?.width).toBe(28);
+			expect((await separator.boundingBox())?.width).toBe(24);
 		}
 	);
 
@@ -251,7 +251,7 @@ describe("Toolbar review", { timeout: 30_000 }, () => {
 			await input.evaluate((el) => (el as HTMLInputElement).selectionStart)
 		).toBe(15);
 		expect(await input.evaluate((el) => getComputedStyle(el).height)).toBe(
-			"36px"
+			"32px"
 		);
 	});
 });

@@ -157,7 +157,7 @@ describe("OTPField browser layout, focus, and variant contracts", {
 		expect(mobile.lgRect.height).toBeCloseTo(mobile.lgRect.width, 1);
 	});
 
-	it("displays visible focus outline with minimum 2px width on keyboard navigation", async () => {
+	it("displays visible focus outline on keyboard navigation", async () => {
 		const page = suite.getPage();
 		const firstInput = page
 			.locator(TESTID_DEFAULT)

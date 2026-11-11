@@ -30,6 +30,7 @@ export const emptyStyles = create({
 		color: colors.secondaryContent,
 		fontSize: fontSize["16"],
 		fontWeight: fontWeight.regular,
+		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight["24"],
 		marginBlock: 0,
 		minWidth: 0,

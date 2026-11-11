@@ -14,7 +14,6 @@ import {
 } from "./test-helper";
 
 const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
-const transparentColor = /rgba\(0, 0, 0, 0\)|transparent/u;
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -91,7 +90,7 @@ describe("InputGroup browser integration", () => {
 			if (!(group && button)) {
 				throw new Error("Missing search controls");
 			}
-			expect(button.height).toBe(28);
+			expect(button.height).toBe(24);
 			expect(
 				Math.abs(group.y + group.height / 2 - button.y - button.height / 2)
 			).toBeLessThan(0.5);
@@ -161,7 +160,7 @@ describe("InputGroup browser integration", () => {
 		const focusOutline = await container.evaluate(
 			(el) => getComputedStyle(el).outlineWidth
 		);
-		expect(focusOutline).toBe("3px");
+		expect(focusOutline).toBe("1px");
 	});
 
 	it("correctly renders disabled, read-only, and invalid states", async () => {
@@ -244,7 +243,7 @@ describe("InputGroup browser integration", () => {
 		const searchHeight = await searchGroup.evaluate(
 			(el) => getComputedStyle(el).minHeight
 		);
-		expect(searchHeight).toBe("36px");
+		expect(searchHeight).toBe("32px");
 
 		const readOnlyInput = page.getByRole("textbox", {
 			name: "Read-only endpoint",
@@ -262,6 +261,9 @@ describe("InputGroup browser integration", () => {
 		const disabledGroup = page
 			.locator('[data-slot="input-group"]')
 			.filter({ has: disabledInput });
+		const disabledBorder = await disabledGroup.evaluate(
+			(el) => getComputedStyle(el).borderColor
+		);
 		const disabledBg = await disabledGroup.evaluate(
 			(el) => getComputedStyle(el).backgroundColor
 		);
@@ -282,7 +284,7 @@ describe("InputGroup browser integration", () => {
 			};
 		});
 
-		expect(styles.borderColor).toMatch(transparentColor);
+		expect(styles.borderColor).toBe(disabledBorder);
 		expect(styles.opacity).toBe("1");
 		expect(readOnlyBg).not.toBe(disabledBg);
 		expect(styles.backgroundColor).toBe(disabledBg);
@@ -314,14 +316,14 @@ describe("InputGroup browser integration", () => {
 			.locator('[data-slot="input-group-text"]');
 		expect(
 			await smallText.evaluate((el) => getComputedStyle(el).fontSize)
-		).toBe("14px");
+		).toBe("13px");
 		await page.setViewportSize({ height: 800, width: 320 });
 		const narrowHeights = await readHeights();
 		expect(
 			await smallText.evaluate((el) => getComputedStyle(el).fontSize)
 		).toBe("16px");
 
-		expect(wideHeights).toEqual([32, 36, 40]);
+		expect(wideHeights).toEqual([28, 32, 40]);
 		expect(narrowHeights).toEqual(wideHeights);
 	});
 
