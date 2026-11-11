@@ -76,8 +76,7 @@ describe("Timestamp contract", () => {
 		expect(markup).toContain(expectedDateTime(dateTime, "en-US", "UTC"));
 		expect(markup).toContain("UTC");
 		expect(propsSpy).toHaveBeenCalledWith(
-			expect.objectContaining({ color: expect.any(String) }),
-			expect.anything()
+			expect.objectContaining({ color: expect.any(String) })
 		);
 		expect(contract.every(Boolean)).toBe(true);
 	});

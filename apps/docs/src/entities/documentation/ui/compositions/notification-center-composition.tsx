@@ -93,7 +93,9 @@ function NotificationItem({
 					<p {...props(compositionStyles.sectionDescription)}>
 						{notification.message}
 					</p>
-					<Timestamp dateTime={notification.time} />
+					<Text size="ui">
+						<Timestamp dateTime={notification.time} />
+					</Text>
 				</Stack>
 			</ActivityFeedContent>
 			{notification.read ? null : (

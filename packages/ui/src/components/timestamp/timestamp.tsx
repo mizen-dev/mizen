@@ -1,7 +1,6 @@
 import { props } from "@stylexjs/stylex";
 import type { ComponentPropsWithRef } from "react";
 import type { Closed } from "../../closed";
-import { typeRoles } from "../../styles/typography.styles";
 import { visuallyHiddenStyles } from "../visually-hidden/visually-hidden.styles";
 import { timestampStyles } from "./timestamp.styles";
 
@@ -151,7 +150,7 @@ export function Timestamp({
 			// Server and client render moments apart, so relative text may differ.
 			suppressHydrationWarning={relative}
 			title={relative ? exact : undefined}
-			{...props(timestampStyles.root, typeRoles.body)}
+			{...props(timestampStyles.root)}
 		>
 			{label}
 			{relative ? (

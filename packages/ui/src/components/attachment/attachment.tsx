@@ -34,7 +34,7 @@ export function Attachment({
 			{...rest}
 			data-slot="attachment"
 			ref={forwardedRef}
-			{...props(attachmentStyles.root, typeRoles.body)}
+			{...props(attachmentStyles.root, typeRoles.ui)}
 		>
 			{children}
 		</div>
@@ -88,7 +88,7 @@ export function AttachmentName({
 			{...rest}
 			data-slot="attachment-name"
 			ref={forwardedRef}
-			{...props(typeRoles.body, attachmentStyles.name)}
+			{...props(typeRoles.ui, attachmentStyles.name)}
 		>
 			{children}
 		</span>
@@ -106,7 +106,7 @@ export function AttachmentDescription({
 			{...rest}
 			data-slot="attachment-description"
 			ref={forwardedRef}
-			{...props(attachmentStyles.description, typeRoles.body)}
+			{...props(typeRoles.ui, attachmentStyles.description)}
 		>
 			{children}
 		</span>

@@ -6778,7 +6778,7 @@
     "slug": "timestamp",
     "category": "Content",
     "status": "stable",
-    "description": "Formats a timezone-bearing instant while preserving native time semantics.",
+    "description": "Formats a timezone-bearing instant while preserving native time semantics. It takes the size of the text around it.",
     "api": [
       {
         "name": "Timestamp.dateTime",

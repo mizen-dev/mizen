@@ -224,9 +224,9 @@ describe("PropertyList contract and semantics", () => {
 			},
 			value: {
 				color: colors.content,
-				fontSize: fontSize["16"],
+				fontSize: fontSize["14"],
 				fontWeight: fontWeight.regular,
-				lineHeight: lineHeight["24"],
+				lineHeight: lineHeight["20"],
 				margin: 0,
 				minWidth: 0,
 				overflowWrap: "anywhere",

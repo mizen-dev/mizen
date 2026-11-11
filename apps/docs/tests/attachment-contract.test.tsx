@@ -112,8 +112,8 @@ describe("Attachment contract", () => {
 			)
 		).toBe(true);
 		expect(propsSpy).toHaveBeenCalledWith(
-			expect.objectContaining({ overflowWrap: "anywhere" }),
-			expect.anything()
+			expect.anything(),
+			expect.objectContaining({ overflowWrap: "anywhere" })
 		);
 		expect(contract.every(Boolean)).toBe(true);
 	});

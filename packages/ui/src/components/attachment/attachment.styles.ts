@@ -4,7 +4,7 @@ import { borderWidth } from "../../styles/interaction.stylex";
 import { shadows } from "../../styles/shadows.stylex";
 import { shape } from "../../styles/shape.stylex";
 import { space } from "../../styles/spacing.stylex";
-import { fontWeight } from "../../styles/typography.stylex";
+import { fontSize, fontWeight } from "../../styles/typography.stylex";
 
 export const attachmentStyles = create({
 	actions: {
@@ -27,6 +27,7 @@ export const attachmentStyles = create({
 	description: {
 		color: colors.mutedContent,
 		display: "block",
+		fontSize: fontSize["13"],
 		minWidth: 0,
 		overflowWrap: "anywhere",
 	},
@@ -47,7 +48,7 @@ export const attachmentStyles = create({
 	},
 	name: {
 		display: "block",
-		fontWeight: fontWeight.semibold,
+		fontWeight: fontWeight.medium,
 		minWidth: 0,
 		overflowWrap: "anywhere",
 	},

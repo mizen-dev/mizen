@@ -78,4 +78,34 @@ describe("type role pairing", () => {
 		}
 		expect(mismatches).toEqual([]);
 	}, 300_000);
+
+	// Interface content is 14px and supporting text 13px; only prose is 16px.
+	it("sets interface content at 14px and lets a timestamp take its text's size", async () => {
+		await page.goto(`${handle.url}/internal/specimens`, { waitUntil: "load" });
+		const sizes = await page.evaluate(() => {
+			const read = (selector: string) => {
+				const element = document.querySelector(selector);
+				const style = element ? getComputedStyle(element) : null;
+				return style ? `${style.fontSize}/${style.lineHeight}` : "missing";
+			};
+			return {
+				attachmentDescription: read('[data-slot="attachment-description"]'),
+				attachmentName: read('[data-slot="attachment-name"]'),
+				meterLabel: read('[data-slot="meter-label"]'),
+				meterValue: read('[data-slot="meter-value"]'),
+				propertyValue: read('[data-slot="property-list-value"]'),
+				timestamp: read(
+					'[data-testid="notification-center-example"] [data-slot="timestamp"]'
+				),
+			};
+		});
+		expect(sizes).toEqual({
+			attachmentDescription: "13px/20px",
+			attachmentName: "14px/20px",
+			meterLabel: "14px/20px",
+			meterValue: "14px/20px",
+			propertyValue: "14px/20px",
+			timestamp: "14px/20px",
+		});
+	});
 });

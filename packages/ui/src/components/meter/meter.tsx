@@ -84,7 +84,7 @@ export function Meter({
 			ref={forwardedRef}
 			render={protectRenderSlot("meter", render, { role: "meter" })}
 			value={value}
-			{...props(meterStyles.root, typeRoles.body)}
+			{...props(meterStyles.root, typeRoles.ui)}
 		>
 			{children ?? (
 				<MeterTrack>

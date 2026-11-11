@@ -7,19 +7,23 @@ export function TimestampDocumentHistoryExample1() {
 			<Stack gap="3">
 				<Stack gap="1">
 					<Text>Published</Text>
-					<Timestamp
-						dateTime={richContentDateTime}
-						format="date"
-						locale="en-US"
-						timeZone="UTC"
-					/>
+					<Text>
+						<Timestamp
+							dateTime={richContentDateTime}
+							format="date"
+							locale="en-US"
+							timeZone="UTC"
+						/>
+					</Text>
 					<Text>Updated</Text>
-					<Timestamp
-						dateTime={richContentDateTime}
-						format="date-time"
-						locale="en-US"
-						timeZone="UTC"
-					/>
+					<Text>
+						<Timestamp
+							dateTime={richContentDateTime}
+							format="date-time"
+							locale="en-US"
+							timeZone="UTC"
+						/>
+					</Text>
 				</Stack>
 			</Stack>
 		</Stack>
