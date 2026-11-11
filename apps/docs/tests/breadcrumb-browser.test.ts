@@ -118,6 +118,36 @@ describe("Breadcrumb browser states", { timeout: 20_000 }, () => {
 		}
 	);
 
+	it("gives a text link a 24px hit area without moving the trail", async () => {
+		const trail = page.getByRole("navigation", { name: "Project location" });
+		await trail.scrollIntoViewIfNeeded();
+		const link = trail.getByRole("link").first();
+		const fit = await link.evaluate((el) => {
+			const box = el.getBoundingClientRect();
+			const label = el.querySelector("span")?.getBoundingClientRect() ?? box;
+			const list = el.closest("ol")?.getBoundingClientRect() ?? box;
+			const current = el
+				.closest("nav")
+				?.querySelector('[aria-current="page"]')
+				?.getBoundingClientRect();
+			const middle = label.left + label.width / 2;
+			return {
+				above: el.contains(document.elementFromPoint(middle, label.top - 6)),
+				// The link's label and the current page share one baseline.
+				baselineShift: Math.abs((current?.bottom ?? 0) - label.bottom),
+				below: el.contains(document.elementFromPoint(middle, label.bottom + 6)),
+				clearance: Math.min(label.top - box.top, box.bottom - label.bottom),
+				height: box.height,
+				trail: list.height,
+			};
+		});
+		expect(fit.height).toBeGreaterThanOrEqual(23.5);
+		expect(fit.clearance).toBeGreaterThanOrEqual(6);
+		expect(fit.above && fit.below).toBe(true);
+		expect(fit.baselineShift).toBeLessThan(0.5);
+		expect(fit.trail).toBeLessThanOrEqual(16);
+	});
+
 	it("wraps long labels on mobile and mirrors separators in RTL", async () => {
 		await page.setViewportSize({ height: 800, width: 320 });
 		const trail = page.getByRole("navigation", { name: "Long resource trail" });

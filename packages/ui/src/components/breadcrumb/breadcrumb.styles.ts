@@ -1,11 +1,8 @@
 import { create } from "@stylexjs/stylex";
 import { colors } from "../../styles/colors.stylex";
 import { conditions } from "../../styles/conditions.stylex";
-import {
-	borderWidth,
-	focus,
-	focusMotion,
-} from "../../styles/interaction.stylex";
+import { controlSize } from "../../styles/dimensions.stylex";
+import { borderWidth, focusMotion } from "../../styles/interaction.stylex";
 import { duration } from "../../styles/motion.stylex";
 import { shape } from "../../styles/shape.stylex";
 import { space } from "../../styles/spacing.stylex";
@@ -15,6 +12,13 @@ import {
 	letterSpacing,
 	lineHeight,
 } from "../../styles/typography.stylex";
+
+// A link's label is trimmed to its cap height, about 10px. Padding grows the
+// link to the 24px hit area and an equal negative margin keeps the trail in
+// place. Without text trim the label keeps its line height.
+const TRIMMED = "@supports (text-box: trim-both cap alphabetic)";
+const hitInset = (edge: "1cap" | "1lh") =>
+	`calc((${controlSize.xs} - ${edge}) / 2)`;
 
 export const breadcrumbStyles = create({
 	ellipsis: {
@@ -45,25 +49,35 @@ export const breadcrumbStyles = create({
 		animationName: {
 			":focus-visible": focusMotion.ring,
 		},
-		borderRadius: `calc(${shape.controlRadius} / 3)`,
+		borderRadius: shape.inlineRadius,
 		color: {
 			[conditions.canHover]: { ":hover": colors.content },
 			default: "inherit",
 		},
 		display: "inline-flex",
 		gap: space["1"],
+		marginBlock: {
+			[TRIMMED]: `calc(-1 * ${hitInset("1cap")})`,
+			default: `calc(-1 * ${hitInset("1lh")})`,
+		},
+		marginInline: `calc(-1 * ${space["1"]})`,
 		minWidth: 0,
 		outlineColor: {
 			":focus-visible": colors.focusRing,
 			default: "transparent",
 		},
-		outlineOffset: focus.offset,
+		outlineOffset: 0,
 		outlineStyle: "solid",
 		outlineWidth: {
 			":focus-visible": borderWidth.focus,
 			default: 0,
 		},
 		overflowWrap: "anywhere",
+		paddingBlock: {
+			[TRIMMED]: hitInset("1cap"),
+			default: hitInset("1lh"),
+		},
+		paddingInline: space["1"],
 		textDecoration: "none",
 		transitionDuration: {
 			[conditions.reducedMotion]: duration.instant,
