@@ -67,10 +67,12 @@ export const paginationStyles = create({
 		},
 		width: "1rem",
 	},
+	// A page number: square up to two digits, wider past that, never broken.
 	iconSize: {
 		blockSize: controlSize.md,
-		inlineSize: controlSize.md,
-		padding: 0,
+		minWidth: controlSize.md,
+		paddingInline: space["1"],
+		whiteSpace: "nowrap",
 	},
 	interactive: {
 		backgroundColor: {

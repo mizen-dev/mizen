@@ -133,6 +133,23 @@ describe("Pagination browser states", { timeout: 30_000 }, () => {
 		}
 	);
 
+	it("keeps a two-digit page number square and on one line", async () => {
+		await page.goto(`${handle.url}/components/pagination`, {
+			waitUntil: "networkidle",
+		});
+		const link = page.getByRole("link", { exact: true, name: "Page 10" });
+		const lines = await link.evaluate((el) => {
+			const range = document.createRange();
+			// The text node alone: its wrapper adds a box of its own.
+			range.selectNodeContents(
+				document.createTreeWalker(el, NodeFilter.SHOW_TEXT).nextNode() ?? el
+			);
+			return range.getClientRects().length;
+		});
+		expect(lines).toBe(1);
+		expect(await link.boundingBox()).toMatchObject({ height: 32, width: 32 });
+	});
+
 	it("keeps the current page visible in forced colors", async () => {
 		await page.emulateMedia({ forcedColors: "active" });
 		await page.goto(`${handle.url}/components/pagination`, {
