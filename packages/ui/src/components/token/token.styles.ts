@@ -1,6 +1,7 @@
 import { create } from "@stylexjs/stylex";
 import { colors } from "../../styles/colors.stylex";
 import { conditions } from "../../styles/conditions.stylex";
+import { controlSize } from "../../styles/dimensions.stylex";
 import {
 	borderWidth,
 	focus,
@@ -68,8 +69,20 @@ export const tokenStyles = create({
 		textOverflow: "ellipsis",
 		whiteSpace: "nowrap",
 	},
-	lg: { fontSize: fontSize["16"], minHeight: "2rem" },
-	md: { fontSize: fontSize["14"], minHeight: "1.75rem" },
+	lg: {
+		"--mizen-token-remove-inset": "0px",
+		"--mizen-token-size": controlSize.md,
+		borderRadius: shape.controlRadiusLarge,
+		fontSize: fontSize["16"],
+	},
+	md: {
+		"--mizen-token-remove-inset": "0px",
+		"--mizen-token-size": controlSize.sm,
+		borderRadius: shape.controlRadius,
+		fontSize: fontSize["14"],
+	},
+	// A 24px target whose gap to the token's end edge equals its gap to the
+	// top and bottom edges, so its corners stay concentric with the token's.
 	remove: {
 		alignItems: "center",
 		animationDuration: {
@@ -78,6 +91,7 @@ export const tokenStyles = create({
 		animationName: {
 			":focus-visible": focusMotion.ring,
 		},
+		backgroundClip: "content-box",
 		backgroundColor: {
 			":hover": {
 				[conditions.canHover]:
@@ -85,15 +99,17 @@ export const tokenStyles = create({
 			},
 			default: "transparent",
 		},
-		borderRadius: shape.controlRadius,
+		borderRadius: shape.controlRadiusSmall,
 		borderWidth: 0,
+		boxSizing: "border-box",
 		color: "inherit",
 		cursor: "pointer",
 		display: "inline-flex",
 		flexShrink: 0,
-		height: "1.5rem",
+		height: controlSize.xs,
 		justifyContent: "center",
-		marginInlineEnd: "-0.25rem",
+		marginBlock: `calc(-1 * ${borderWidth.thin})`,
+		marginInlineEnd: `calc((var(--mizen-token-size) - ${controlSize.xs}) / 2 - ${space["1"]} - ${borderWidth.thin})`,
 		outlineColor: {
 			":focus-visible": colors.focusRing,
 			default: "transparent",
@@ -101,16 +117,15 @@ export const tokenStyles = create({
 		outlineOffset: focus.offset,
 		outlineStyle: "solid",
 		outlineWidth: borderWidth.focus,
-		padding: 0,
+		padding: "var(--mizen-token-remove-inset)",
 		position: "relative",
-		width: "1.5rem",
+		width: controlSize.xs,
 		zIndex: 1,
 	},
 	root: {
 		alignItems: "center",
 		backgroundColor: colors.controlSurface,
 		borderColor: "transparent",
-		borderRadius: shape.controlRadius,
 		borderStyle: "solid",
 		borderWidth: borderWidth.thin,
 		boxSizing: "border-box",
@@ -121,12 +136,20 @@ export const tokenStyles = create({
 		gap: space["1"],
 		lineHeight: lineHeight.none,
 		maxWidth: "100%",
+		minHeight: "var(--mizen-token-size)",
 		minWidth: 0,
 		paddingInline: space["1"],
 		position: "relative",
 		verticalAlign: "middle",
 	},
-	sm: { fontSize: fontSize["12"], minHeight: "1.5rem" },
+	// The small token is as tall as its remove button. The button paints 2px
+	// inside its own box, so its hover surface keeps the same gap to the edge.
+	sm: {
+		"--mizen-token-remove-inset": "2px",
+		"--mizen-token-size": controlSize.xs,
+		borderRadius: shape.controlRadiusSmall,
+		fontSize: fontSize["12"],
+	},
 	tint: (tone: string) => ({
 		backgroundColor: `color-mix(in oklch, ${tone} 18%, ${colors.surface})`,
 		borderColor: `color-mix(in oklch, ${tone} 28%, ${colors.surface})`,

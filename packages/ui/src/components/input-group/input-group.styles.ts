@@ -62,8 +62,9 @@ export const inputGroupStyles = create({
 	},
 	alignInlineEnd: {
 		order: 1,
+		// A button sits as far from the end edge as from the top and bottom.
 		paddingInlineEnd: {
-			":has(> [data-button])": space["1"],
+			":has(> [data-button])": `calc(${space["1"]} - ${borderWidth.thin})`,
 			default: space["2"],
 		},
 		paddingInlineStart: space["1"],

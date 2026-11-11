@@ -13,6 +13,12 @@ import { shape } from "../../styles/shape.stylex";
 import { space } from "../../styles/spacing.stylex";
 import { fontSize } from "../../styles/typography.stylex";
 
+// The 28px action centres its 16px glyph 12px inside the field border, where
+// Select puts its chevron.
+const actionInset = `calc(${space["3"]} + ${borderWidth.thin} - 0.375rem)`;
+// A leading glyph sits 8px inside the field border, as in InputGroup.
+const addonInset = `calc(${space["2"]} + ${borderWidth.thin})`;
+
 export const comboboxFieldStyles = create({
 	clear: {
 		alignItems: "center",
@@ -31,7 +37,7 @@ export const comboboxFieldStyles = create({
 		display: "inline-flex",
 		height: "1.75rem",
 		insetBlockStart: "50%",
-		insetInlineEnd: space["1"],
+		insetInlineEnd: actionInset,
 		justifyContent: "center",
 		opacity: {
 			":hover": { [conditions.canHover]: 1 },
@@ -76,7 +82,7 @@ export const comboboxFieldStyles = create({
 		paddingInlineEnd: "2.25rem",
 	},
 	inputWithStartAddon: {
-		paddingInlineStart: "2.5rem",
+		paddingInlineStart: "2rem",
 	},
 	sizeDefault: {
 		borderRadius: shape.controlRadiusLarge,
@@ -97,7 +103,7 @@ export const comboboxFieldStyles = create({
 		color: colors.content,
 		display: "flex",
 		insetBlock: 0,
-		insetInlineStart: space["3"],
+		insetInlineStart: addonInset,
 		opacity: 0.8,
 		pointerEvents: "none",
 		position: "absolute",
@@ -123,7 +129,7 @@ export const comboboxFieldStyles = create({
 		},
 		height: "1.75rem",
 		insetBlockStart: "50%",
-		insetInlineEnd: space["1"],
+		insetInlineEnd: actionInset,
 		justifyContent: "center",
 		opacity: {
 			":hover": { [conditions.canHover]: 1 },

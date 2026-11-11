@@ -37,7 +37,7 @@ export function DrawingToolbar() {
 						aria-label="Select object"
 						aria-pressed={tool === "select"}
 						onClick={selectObject}
-						size="icon-sm"
+						size="icon"
 						variant={tool === "select" ? "secondary" : "ghost"}
 					>
 						<IconPointer aria-hidden="true" size="1em" />
@@ -46,7 +46,7 @@ export function DrawingToolbar() {
 						aria-label="Draw shape"
 						aria-pressed={tool === "shape"}
 						onClick={drawShape}
-						size="icon-sm"
+						size="icon"
 						variant={tool === "shape" ? "secondary" : "ghost"}
 					>
 						<IconSquare aria-hidden="true" size="1em" />
@@ -70,26 +70,22 @@ export function DocumentToolbar() {
 	return (
 		<Toolbar aria-label="Editor">
 			<ToolbarGroup>
-				<ToolbarButton aria-label="Undo" size="icon-sm" variant="ghost">
+				<ToolbarButton aria-label="Undo" size="icon" variant="ghost">
 					<IconArrowBackUp aria-hidden="true" size={16} />
 				</ToolbarButton>
-				<ToolbarButton aria-label="Redo" size="icon-sm" variant="ghost">
+				<ToolbarButton aria-label="Redo" size="icon" variant="ghost">
 					<IconArrowForwardUp aria-hidden="true" size={16} />
 				</ToolbarButton>
 			</ToolbarGroup>
 			<ToolbarSeparator />
 			<ToolbarGroup>
-				<ToolbarButton
-					aria-label="Preview draft"
-					size="icon-sm"
-					variant="ghost"
-				>
+				<ToolbarButton aria-label="Preview draft" size="icon" variant="ghost">
 					<IconEye aria-hidden="true" size={16} />
 				</ToolbarButton>
-				<ToolbarButton aria-label="Add comment" size="icon-sm" variant="ghost">
+				<ToolbarButton aria-label="Add comment" size="icon" variant="ghost">
 					<IconMessagePlus aria-hidden="true" size={16} />
 				</ToolbarButton>
-				<ToolbarButton aria-label="Share draft" size="icon-sm" variant="ghost">
+				<ToolbarButton aria-label="Share draft" size="icon" variant="ghost">
 					<IconShare aria-hidden="true" size={16} />
 				</ToolbarButton>
 			</ToolbarGroup>

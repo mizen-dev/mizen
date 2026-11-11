@@ -121,20 +121,20 @@ export function ToolbarExamples() {
 			</div>
 			<Toolbar aria-label="Draft tools">
 				<ToolbarGroup aria-label="Draft actions">
-					<ToolbarButton aria-label="Undo edit" disabled size="icon-sm">
+					<ToolbarButton aria-label="Undo edit" disabled size="icon">
 						<IconArrowBackUp aria-hidden="true" size="1em" />
 					</ToolbarButton>
 					<ToolbarButton
 						aria-label="Add draft block"
 						onClick={handleAddBlock}
-						size="icon-sm"
+						size="icon"
 					>
 						<IconPlus aria-hidden="true" size="1em" />
 					</ToolbarButton>
 					<ToolbarButton
 						aria-label="Duplicate draft"
 						onClick={handleDuplicate}
-						size="icon-sm"
+						size="icon"
 					>
 						<IconCopy aria-hidden="true" size="1em" />
 					</ToolbarButton>
@@ -170,7 +170,7 @@ export function ToolbarExamples() {
 								render={
 									<Button
 										aria-label="More draft actions"
-										size="icon-sm"
+										size="icon"
 										variant="ghost"
 									/>
 								}

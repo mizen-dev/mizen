@@ -29,7 +29,7 @@ export const comboboxChipsStyles = create({
 			":focus-visible": focusMotion.ring,
 		},
 		backgroundColor: colors.secondary,
-		borderRadius: shape.controlRadius,
+		borderRadius: shape.controlRadiusSmall,
 		boxSizing: "border-box",
 		color: colors.content,
 		display: "inline-flex",

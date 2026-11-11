@@ -41,7 +41,7 @@ export const toolbarStyles = create({
 			":hover": { [conditions.canHover]: colors.controlSurface },
 			default: "transparent",
 		},
-		borderRadius: shape.controlRadius,
+		borderRadius: shape.controlRadiusLarge,
 		boxSizing: "border-box",
 		color: colors.content,
 		display: "inline-flex",

@@ -24,7 +24,7 @@ export const datePickerStyles = create({
 			default: "transparent",
 		},
 		borderColor: "transparent",
-		borderRadius: shape.controlRadius,
+		borderRadius: shape.controlRadiusSmall,
 		borderStyle: "none",
 		color: colors.content,
 		cursor: "pointer",
