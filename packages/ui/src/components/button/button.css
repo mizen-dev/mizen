@@ -1,4 +1,4 @@
-:is([data-slot="button"], [data-slot="toolbar-button"])
+:is([data-button], [data-slot="toolbar-button"])
 	> svg:not([data-slot="button-loading-indicator"]) {
 	flex-shrink: 0;
 	/* Text buttons set the glyph for their text size; icon buttons size it by font size. */
@@ -6,7 +6,7 @@
 	height: var(--mizen-button-glyph, 1em);
 }
 
-:is([data-slot="button"], [data-slot="toolbar-button"])[data-loading]
+:is([data-button], [data-slot="toolbar-button"])[data-loading]
 	> :not([data-slot="button-loading-indicator"]) {
 	opacity: 0;
 }

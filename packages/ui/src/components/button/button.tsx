@@ -135,6 +135,9 @@ export function Button(buttonProps: ButtonProps) {
 			data-slot="button"
 			{...nativeProps}
 			aria-busy={isLoading || undefined}
+			// A trigger that renders this button replaces data-slot. This marker
+			// stays, so the button's own CSS still applies.
+			data-button=""
 			data-loading={isLoading ? "" : undefined}
 			disabled={isDisabled}
 			focusableWhenDisabled={buttonProps.focusableWhenDisabled ?? isLoading}

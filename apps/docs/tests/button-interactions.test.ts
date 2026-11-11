@@ -135,6 +135,7 @@ describe("Button interactions", () => {
 				const button = document.createElement("a");
 				button.className = source.className;
 				button.dataset.slot = "button";
+				button.dataset.button = "";
 				button.href = "#loading";
 				button.setAttribute("aria-label", "Loading product mark");
 				button.setAttribute("aria-busy", "true");

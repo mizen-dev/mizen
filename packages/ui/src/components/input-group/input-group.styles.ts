@@ -63,7 +63,7 @@ export const inputGroupStyles = create({
 	alignInlineEnd: {
 		order: 1,
 		paddingInlineEnd: {
-			":has(> [data-slot='button'])": space["1"],
+			":has(> [data-button])": space["1"],
 			default: space["2"],
 		},
 		paddingInlineStart: space["1"],

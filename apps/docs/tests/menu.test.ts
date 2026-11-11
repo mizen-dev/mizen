@@ -49,6 +49,33 @@ describe("Menu component route", () => {
 		throwTeardownFailures(results);
 	}, 120_000);
 
+	it("keeps the Button icon size on a trigger that renders a Button", async () => {
+		const trigger = page.locator('[data-slot="menu-trigger"]').first();
+		expect(await trigger.getAttribute("data-button")).toBe("");
+		// The same button under its own slot name, with the same 24px icon.
+		const sizes = await trigger.evaluate((node) => {
+			const plain = node.cloneNode(true) as HTMLElement;
+			plain.dataset.slot = "button";
+			node.after(plain);
+			const widths = [node, plain].map((button) => {
+				const icon = document.createElementNS(
+					"http://www.w3.org/2000/svg",
+					"svg"
+				);
+				icon.setAttribute("width", "24");
+				icon.setAttribute("height", "24");
+				button.prepend(icon);
+				const { width } = getComputedStyle(icon);
+				icon.remove();
+				return width;
+			});
+			plain.remove();
+			return widths;
+		});
+		expect(sizes[0]).toBe(sizes[1]);
+		expect(sizes[0]).not.toBe("24px");
+	});
+
 	it("supports Menu navigation, selection, and submenus", async () => {
 		const trigger = page.getByRole("button", {
 			exact: true,
