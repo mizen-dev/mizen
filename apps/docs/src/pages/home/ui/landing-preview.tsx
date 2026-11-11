@@ -5,6 +5,7 @@ import {
 	Avatar,
 	AvatarFallback,
 	Badge,
+	Button,
 	CategoryComparison,
 	MetricDelta,
 	MetricTrend,
@@ -146,17 +147,23 @@ export function LandingPreview() {
 					))}
 				</section>
 				<div {...props(s.charts)}>
-					<div {...props(s.revenue)}>
+					<div {...props(s.column, s.wide)}>
 						<MetricTrend
 							actions={
-								<Link
+								<Button
 									aria-label="Explore Area Chart"
-									params={{ slug: "area-chart" }}
-									to="/docs/components/$slug"
-									{...props(s.textLink)}
+									nativeButton={false}
+									render={
+										<Link
+											params={{ slug: "area-chart" }}
+											to="/docs/components/$slug"
+										/>
+									}
+									size="icon-sm"
+									variant="ghost"
 								>
-									<IconArrowUpRight aria-hidden="true" size={18} />
-								</Link>
+									<IconArrowUpRight aria-hidden="true" />
+								</Button>
 							}
 							description={`Monthly revenue in USD · January–June ${period}`}
 							icon={<IconChartLine />}
@@ -172,35 +179,39 @@ export function LandingPreview() {
 								timeZone="UTC"
 							/>
 						</MetricTrend>
+						<div {...props(s.grow)}>
+							<AccountsPreview />
+						</div>
 					</div>
-					<MetricTrend
-						description={`Active customers by plan · June ${period}`}
-						icon={<IconChartDonut />}
-						label="A plan for every team"
-					>
-						<PartToWhole
-							aria-label={`Customers by plan, June ${period}`}
-							parts={data.plans}
-							totalLabel="Customers"
-						/>
-					</MetricTrend>
-					<MetricTrend
-						description={`New customers by channel · January–June ${period}`}
-						icon={<IconChartBar />}
-						label="Where growth starts"
-						value={number(data.newCustomers)}
-					>
-						<CategoryComparison
-							aria-label={`New customers by acquisition channel, ${period}`}
-							categories={data.channels}
-							legend={false}
-							seriesLabel="New customers"
-							tone="series2"
-							track
-						/>
-					</MetricTrend>
-					<div {...props(s.accounts)}>
-						<AccountsPreview />
+					<div {...props(s.column)}>
+						<MetricTrend
+							description={`Active customers by plan · June ${period}`}
+							icon={<IconChartDonut />}
+							label="A plan for every team"
+						>
+							<PartToWhole
+								aria-label={`Customers by plan, June ${period}`}
+								parts={data.plans}
+								totalLabel="Customers"
+							/>
+						</MetricTrend>
+						<div {...props(s.grow)}>
+							<MetricTrend
+								description={`New customers by channel · January–June ${period}`}
+								icon={<IconChartBar />}
+								label="Where growth starts"
+								value={number(data.newCustomers)}
+							>
+								<CategoryComparison
+									aria-label={`New customers by acquisition channel, ${period}`}
+									categories={data.channels}
+									legend={false}
+									seriesLabel="New customers"
+									tone="series2"
+									track
+								/>
+							</MetricTrend>
+						</div>
 					</div>
 				</div>
 			</div>

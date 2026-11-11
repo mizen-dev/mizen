@@ -28,7 +28,13 @@ export const money = (value: number) =>
 		maximumFractionDigits: 0,
 		style: "currency",
 	}).format(value);
-export const compactMoney = (value: number) => `$${value / 1000}k`;
+export const compactMoney = (value: number) =>
+	new Intl.NumberFormat("en-US", {
+		currency: "USD",
+		maximumFractionDigits: 1,
+		notation: "compact",
+		style: "currency",
+	}).format(value);
 export const number = (value: number) =>
 	new Intl.NumberFormat("en-US").format(value);
 const sum = (values: readonly number[]) =>
@@ -136,4 +142,13 @@ export const accounts = [
 	},
 	{ initials: "FF", name: "Forma Foundry", plan: "Pro", status: "Trial" },
 	{ initials: "AL", name: "Arc Labs", plan: "Team", status: "Active" },
+	{ initials: "NP", name: "Nimbus Press", plan: "Pro", status: "Active" },
+	{
+		initials: "HW",
+		name: "Harbor Works",
+		plan: "Enterprise",
+		status: "Active",
+	},
+	{ initials: "QK", name: "Quill Kitchen", plan: "Pro", status: "Trial" },
+	{ initials: "TM", name: "Tidal Maps", plan: "Team", status: "Active" },
 ];

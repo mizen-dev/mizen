@@ -16,11 +16,6 @@ import { create } from "@stylexjs/stylex";
 export const landingStyles = create({
 	accent: { color: colors.brandForeground },
 	account: { alignItems: "center", display: "flex", gap: space["3"] },
-	accounts: {
-		display: "grid",
-		gridColumn: { "@media (min-width: 64rem)": "span 2", default: "auto" },
-		minInlineSize: 0,
-	},
 	actions: {
 		alignItems: "center",
 		display: "flex",
@@ -36,6 +31,14 @@ export const landingStyles = create({
 			"@media (min-width: 64rem)": "repeat(3, minmax(0, 1fr))",
 			default: "minmax(0, 1fr)",
 		},
+	},
+	// Charts keep their own height, so cards stack in two columns and the last
+	// card of the shorter column takes the spare height.
+	column: {
+		display: "flex",
+		flexDirection: "column",
+		gap: space["4"],
+		minInlineSize: 0,
 	},
 	container: {
 		marginInline: "auto",
@@ -91,6 +94,7 @@ export const landingStyles = create({
 		paddingBlock: space["8"],
 	},
 	footerLinks: { display: "flex", flexWrap: "wrap", gap: space["6"] },
+	grow: { display: "grid", flexGrow: 1 },
 	hero: {
 		alignItems: "center",
 		display: "flex",
@@ -133,11 +137,6 @@ export const landingStyles = create({
 		marginBlockStart: space["6"],
 		textAlign: "center",
 	},
-	revenue: {
-		display: "grid",
-		gridColumn: { "@media (min-width: 64rem)": "span 2", default: "auto" },
-		minInlineSize: 0,
-	},
 	supporting: { color: colors.mutedContent, marginBlockStart: space["2"] },
 	textLink: {
 		animationDuration: { ":focus-visible": focusMotion.duration },
@@ -160,6 +159,9 @@ export const landingStyles = create({
 		maxInlineSize: "100%",
 		overflowWrap: "anywhere",
 		textWrap: "balance",
+	},
+	wide: {
+		gridColumn: { "@media (min-width: 64rem)": "span 2", default: "auto" },
 	},
 	workspace: {
 		alignItems: "center",
