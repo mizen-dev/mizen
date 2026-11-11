@@ -71,6 +71,8 @@ export const badgeStyles = create({
 		// cannot shrink the badge to one letter per line.
 		overflowWrap: "break-word",
 		whiteSpace: "normal",
+		// A Stack or grid cell would stretch it to a full-width bar.
+		width: "fit-content",
 	},
 	brand: {
 		backgroundColor: colors.brandBackground,
