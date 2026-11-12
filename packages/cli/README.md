@@ -48,7 +48,7 @@ Node must satisfy `>=22.18.0 <23 || >=24.11.0`.
   status, guidance, and available contracts or usage examples. Accepts a slug or
   spaced name.
 - `mizen doctor [--cwd <directory>] [--workspace] [--strict]`: inspect a target application.
-- `mizen init [--cwd <directory>] [--dry-run] [--yes]`: preview or apply setup.
+- `mizen init [--cwd <directory>] [--preset <name>] [--dry-run] [--yes]`: preview or apply setup.
 - `mizen --help` and `mizen --version`: show command help and CLI version.
 
 `--json` emits one JSON document. Results go to stdout. Errors go to stderr, with
@@ -200,6 +200,11 @@ network request. An installed and declared package at that version needs no inst
 Init stops when the app resolves another version, declares the package without
 installing it, or resolves it without declaring it. Align the versions or the
 declaration, then rerun init.
+
+`--preset vivid` writes `mizen-theme.css` beside the app root and imports it after
+the Mizen stylesheet. The file sets `--mizen-*` token variables and belongs to the
+app. It also works on an app already set up. Init stops when the file exists and
+differs from the preset.
 
 `--package` installs a local archive instead of the published version.
 Archives must contain `@mizen-labs/ui` at the catalog version. Init inspects the archive

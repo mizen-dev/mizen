@@ -16,11 +16,12 @@ import {
 	importedName,
 	specifier,
 } from "../init/imports.js";
+import { themeImport } from "../init/preset.js";
 import { bootstrapEdits } from "./bootstrap.js";
 import { viteEntry } from "./entry.js";
 import { hasProvider, providerCovers, renderArgument } from "./render.js";
 
-export async function viteRootEdit(project: string) {
+export async function viteRootEdit(project: string, theme = false) {
 	const entry = await viteEntry(project);
 	if (!entry) {
 		return conflict(
@@ -34,7 +35,8 @@ export async function viteRootEdit(project: string) {
 		);
 	}
 	const file = await sourceFile(project, [entry.path]);
-	return fileEdit(file.path, file.before, clientTheme(file.source));
+	const after = clientTheme(file.source);
+	return fileEdit(file.path, file.before, theme ? themeImport(after) : after);
 }
 
 function clientTheme(source: string): string {

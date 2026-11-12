@@ -33,6 +33,8 @@ export interface Catalog {
 	cliVersion: string;
 	components: Component[];
 	nodeRange: string;
+	/** Theme files by preset name, as init writes them into an app. */
+	presets: Record<string, string>;
 	uiPeerDependencies: Record<string, string>;
 	uiVersion: string;
 }

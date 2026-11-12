@@ -93,7 +93,7 @@ npx --no-install mizen doctor --strict`,
 			id: "init",
 			paragraphs: [
 				"Init returns a plan by default. Review its source diffs and dependency command, then rerun with --yes. --dry-run prevents application even when --yes is present. The plan installs the matching @mizen-labs/ui version when the app has none, and stops when the app resolves another version.",
-				"The package manager must agree with the app's declaration and lockfiles. For an app without either, select --package-manager npm or pnpm. --feature diagram installs the optional diagram peer when requested. Installation skips lifecycle scripts. Source edits preserve existing providers, comments, and unrelated configuration.",
+				"The package manager must agree with the app's declaration and lockfiles. For an app without either, select --package-manager npm or pnpm. --feature diagram installs the optional diagram peer when requested. --preset vivid writes mizen-theme.css, a theme file the app owns, and imports it after the Mizen stylesheet; it also works on an app already set up, and never replaces a file that differs. Installation skips lifecycle scripts. Source edits preserve existing providers, comments, and unrelated configuration.",
 			],
 			title: "Preview and apply setup",
 		},

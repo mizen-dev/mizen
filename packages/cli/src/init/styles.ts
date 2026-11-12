@@ -1,3 +1,4 @@
+import { posix } from "node:path";
 import {
 	imports,
 	isNode,
@@ -15,11 +16,13 @@ import {
 	type Change,
 	changes,
 	conflict,
+	type FileEdit,
 	fileEdit,
 	position,
 	sourceFile,
 } from "./edit.js";
 import { defaultImport, importEdit, uniqueName } from "./imports.js";
+import { THEME_FILE, themeFile, themeImport } from "./preset.js";
 import { themeSource } from "./theme.js";
 
 function startRoute(ast: SyntaxNode): SyntaxNode {
@@ -134,12 +137,44 @@ function nextStyles(source: string): string {
 	]);
 }
 
+// A root route links the app's theme file from the head, after Mizen's
+// stylesheet, so the app's own CSS still comes later.
+function startTheme(source: string): string {
+	const ast = parseSource(source);
+	const from = `../${THEME_FILE}?url`;
+	if (defaultImport(ast, from)) {
+		return source;
+	}
+	const styles = defaultImport(ast, "@mizen-labs/ui/styles.css?url");
+	const links = property(
+		headObject(property(startRoute(ast), "head")),
+		"links"
+	);
+	const elements =
+		isNode(links) && Array.isArray(links.elements) ? links.elements : [];
+	const link = elements.find(
+		(node) => nameOf(property(node, "href")) === styles
+	);
+	const binding = uniqueName(ast, "mizenTheme");
+	const at = position(link, "end");
+	return changes(source, [
+		importEdit(ast, `import ${binding} from "${from}";`, source),
+		{ end: at, start: at, text: `, { href: ${binding}, rel: "stylesheet" }` },
+	]);
+}
+
 export async function rootEdit(
 	project: string,
-	framework: "next" | "start" | "vite"
-) {
+	framework: "next" | "start" | "vite",
+	preset?: string
+): Promise<(FileEdit | null)[]> {
 	if (framework === "vite") {
-		return viteRootEdit(project);
+		return [
+			...(preset
+				? [await themeFile(project, `src/${THEME_FILE}`, preset)]
+				: []),
+			await viteRootEdit(project, Boolean(preset)),
+		];
 	}
 	const roots =
 		framework === "next"
@@ -152,6 +187,18 @@ export async function rootEdit(
 		)
 	);
 	const themed = themeSource(file.source, framework);
-	const after = framework === "next" ? nextStyles(themed) : startStyles(themed);
-	return fileEdit(file.path, file.before, after);
+	const styled =
+		framework === "next" ? nextStyles(themed) : startStyles(themed);
+	if (!preset) {
+		return [fileEdit(file.path, file.before, styled)];
+	}
+	const next = framework === "next";
+	const after = next ? themeImport(styled) : startTheme(styled);
+	// A root route sits in the routes directory; its theme sits one level up.
+	const directory = posix.dirname(next ? file.path : posix.dirname(file.path));
+	// The theme file comes first, so the root never imports a missing file.
+	return [
+		await themeFile(project, posix.join(directory, THEME_FILE), preset),
+		fileEdit(file.path, file.before, after),
+	];
 }

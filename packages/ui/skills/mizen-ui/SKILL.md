@@ -51,6 +51,12 @@ writing screens: `npx @mizen-labs/cli@<installed version> init` prints the
 plan, and `doctor` checks an existing setup. Do not change the compiler, fonts,
 or theme setup by hand.
 
+The app's theme is one file, `mizen-theme.css`, when it has one. It declares
+`--mizen-*` token variables on `:root`, with dark values under
+`[data-theme="dark"]`. Change the look there and nowhere else: never per page
+or per component. `init --preset vivid` writes a starting file. Read
+`/docs/theming/markdown` before changing it.
+
 The docs site, https://ui.mizen-labs.dev, has the guides and the full
 examples: `/llms.txt` is its index, and each page has a Markdown form at
 `/docs/<guide>/markdown` and `/docs/components/<slug>/markdown`. The site
@@ -142,8 +148,9 @@ app for this.
   namespace properties.
 - Styling contracts are closed. Do not pass `className`, `style`, `sx`, or
   `xstyle` to components that omit them. Use their semantic props.
-- Keep the look: a white canvas, neutral workareas, white fields with a hairline
-  edge, neutral ink, wine actions, and neutral selection. Typography and
+- Keep the look the tokens give: by default a white canvas, neutral workareas,
+  white fields with a hairline edge, neutral ink, wine actions, and neutral
+  selection. A theme file may change those values; screens never do. Typography and
   spacing provide hierarchy. Read `/docs/foundations/markdown` and
   `/docs/composition/markdown` when composing a larger view.
 - Add `"use client"` to the consumer component that uses hooks, browser APIs,

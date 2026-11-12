@@ -142,6 +142,73 @@ test("Next and Start setup preserves caller content and reruns without changes",
 	}
 });
 
+const vivid = readFileSync(
+	new URL("../presets/vivid.css", import.meta.url),
+	"utf8"
+);
+const themes = [
+	{
+		framework: "next",
+		imported:
+			'import "@mizen-labs/ui/styles.css";\nimport "./mizen-theme.css";',
+		path: "app/mizen-theme.css",
+	},
+	{
+		framework: "start",
+		imported:
+			'links:[{ href: mizenStylesheet, rel: "stylesheet" }, { href: mizenTheme, rel: "stylesheet" }, {href:appCss,rel:"stylesheet"}]',
+		path: "src/mizen-theme.css",
+	},
+];
+
+test("--preset writes the app's theme file once and loads it after the stylesheet", (t) => {
+	for (const { framework, imported, path } of themes) {
+		const root = fixture(t, framework);
+		const planned = run(root, ["--preset", "vivid"]);
+		assert.equal(planned.data.status, "planned", JSON.stringify(planned));
+		assert.equal(existsSync(join(root, path)), false);
+		const applied = run(root, ["--preset", "vivid", "--yes"]);
+		assert.equal(applied.exit, 0, JSON.stringify(applied));
+		assert.equal(applied.data.verification.status, "healthy");
+		assert.equal(readFileSync(join(root, path), "utf8"), vivid);
+		const source = readFileSync(join(root, sourcePath(framework)), "utf8");
+		assert.ok(source.includes(imported), source);
+		const again = run(root, ["--preset", "vivid", "--yes"]);
+		assert.equal(again.data.status, "unchanged", JSON.stringify(again));
+	}
+});
+
+test("--preset adds a theme to an app already set up and never replaces an edited one", (t) => {
+	for (const { framework, path } of themes) {
+		const root = fixture(t, framework);
+		assert.equal(run(root, ["--yes"]).data.status, "applied");
+		const applied = run(root, ["--preset", "vivid", "--yes"]);
+		assert.equal(applied.data.status, "applied", JSON.stringify(applied));
+		assert.deepEqual(
+			applied.data.plan.edits.map((edit) => edit.path),
+			[path, sourcePath(framework)]
+		);
+		const edited = `${vivid}:root { --mizen-color-accent: blue; }\n`;
+		put(root, path, edited);
+		assert.equal(run(root, ["--yes"]).data.status, "unchanged");
+		const refused = run(root, ["--preset", "vivid", "--yes"]);
+		assert.equal(refused.exit, 1, JSON.stringify(refused));
+		assert.equal(refused.error.reason, "conflict");
+		assert.ok(refused.error.message.includes(path));
+		assert.equal(readFileSync(join(root, path), "utf8"), edited);
+	}
+});
+
+test("an unknown preset stops before any change and names the supported ones", (t) => {
+	const root = fixture(t);
+	const before = readFileSync(join(root, "app/layout.tsx"), "utf8");
+	const result = run(root, ["--preset", "neon", "--yes"]);
+	assert.equal(result.exit, 1, JSON.stringify(result));
+	assert.equal(result.error.reason, "conflict");
+	assert.ok(result.error.message.includes("vivid"));
+	assert.equal(readFileSync(join(root, "app/layout.tsx"), "utf8"), before);
+});
+
 test("source directives, comments, existing themes, and unrelated config survive", (t) => {
 	const root = fixture(t);
 	put(root, "app/layout.tsx", `"use client";\n${nextRoot}`);

@@ -34,8 +34,9 @@ For Next and Start, render `ThemeScript` in the document head and wrap the app i
 both from `@mizen-labs/ui/theme`. The app owns its global defaults and fonts.
 The package stylesheet includes the default light and dark themes, and every
 token as a CSS variable such as `--mizen-color-content` and `--mizen-space-4`.
-Style your own elements with those variables in plain CSS. To change a themed
-token, declare it again on `:root` after the Mizen stylesheet:
+Style your own elements with those variables in plain CSS. To change a color,
+font, radius, space, control size, shadow, duration or easing token, declare it
+again on `:root`:
 
 ```css
 :root {
@@ -46,6 +47,9 @@ token, declare it again on `:root` after the Mizen stylesheet:
 
 Set your interface font on `body`; components inherit it. `--mizen-font-mono`
 sets the family for code.
+
+`npx @mizen-labs/cli@<installed version> init --preset vivid` writes a starting
+theme, `mizen-theme.css`, into the app and imports it. The file is yours to edit.
 
 The app needs no StyleX setup.
 

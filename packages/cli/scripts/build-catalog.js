@@ -1,4 +1,4 @@
-import { chmod, readFile, writeFile } from "node:fs/promises";
+import { chmod, readdir, readFile, writeFile } from "node:fs/promises";
 
 const readJson = async (path) =>
 	JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
@@ -28,8 +28,20 @@ const catalog = components.map((component) => {
 		guidance: guidance[slug],
 	};
 });
+// A preset is a theme file init writes into an app, named after its file.
+const presetDirectory = new URL("../presets/", import.meta.url);
+const presets = Object.fromEntries(
+	await Promise.all(
+		(await readdir(presetDirectory))
+			.sort()
+			.map(async (file) => [
+				file.replace(".css", ""),
+				await readFile(new URL(file, presetDirectory), "utf8"),
+			])
+	)
+);
 await writeFile(
 	new URL("../dist/catalog.json", import.meta.url),
-	`${JSON.stringify({ cliVersion: cli.version, components: catalog, nodeRange: cli.engines.node, uiPeerDependencies: ui.peerDependencies, uiVersion: ui.version }, null, 2)}\n`
+	`${JSON.stringify({ cliVersion: cli.version, components: catalog, nodeRange: cli.engines.node, presets, uiPeerDependencies: ui.peerDependencies, uiVersion: ui.version }, null, 2)}\n`
 );
 await chmod(new URL("../dist/cli.js", import.meta.url), 0o755);

@@ -142,6 +142,7 @@ interface CommandOptions {
 	feature?: string[];
 	package?: string;
 	"package-manager"?: string;
+	preset?: string;
 	strict?: boolean;
 	workspace?: boolean;
 	yes?: boolean;
@@ -192,6 +193,7 @@ function initNext(values: CommandOptions, project: string, state: string) {
 				? ["--package-manager", values["package-manager"]]
 				: []),
 			...(values.feature ?? []).flatMap((feature) => ["--feature", feature]),
+			...(values.preset ? ["--preset", values.preset] : []),
 			"--yes",
 		];
 		return { argv, benefit: "Apply the plan" };
@@ -217,6 +219,7 @@ async function runInit(
 			feature: values.feature,
 			package: values.package,
 			packageManager: values["package-manager"],
+			preset: values.preset,
 			yes: values.yes,
 		},
 		catalog

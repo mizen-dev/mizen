@@ -147,6 +147,26 @@ test("JSX and TSX defaults initialize without SSR configuration and rerun unchan
 	}
 });
 
+test("--preset writes the theme beside the entry and imports it after the stylesheet", (t) => {
+	const root = fixture(t);
+	const result = run(root, "init", ["--preset", "vivid", "--yes"]);
+	assert.equal(result.exit, 0, JSON.stringify(result));
+	assert.equal(result.data.verification.status, "healthy");
+	assert.equal(
+		readFileSync(join(root, "src/mizen-theme.css"), "utf8"),
+		readFileSync(new URL("../presets/vivid.css", import.meta.url), "utf8")
+	);
+	assert.ok(
+		readFileSync(join(root, "src/main.tsx"), "utf8").includes(
+			'import "@mizen-labs/ui/styles.css";\nimport "./mizen-theme.css";'
+		)
+	);
+	assert.equal(
+		run(root, "init", ["--preset", "vivid", "--yes"]).data.status,
+		"unchanged"
+	);
+});
+
 test("aliased providers inside StrictMode are reused and ReactDOM namespace mounting works", (t) => {
 	const root = fixture(t);
 	put(

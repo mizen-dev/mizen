@@ -17,6 +17,7 @@ export interface InitOptions {
 	feature?: string[];
 	package?: string;
 	packageManager?: string;
+	preset?: string;
 	yes?: boolean;
 }
 export interface InitPlan {
@@ -90,6 +91,17 @@ async function validateProjectFiles(project: string): Promise<void> {
 	}
 }
 
+function presetSource(name: string | undefined, catalog: Catalog) {
+	if (name === undefined) {
+		return;
+	}
+	const names = Object.keys(catalog.presets);
+	if (!names.includes(name)) {
+		return conflict(`The supported presets are: ${names.join(", ")}.`);
+	}
+	return catalog.presets[name];
+}
+
 export async function planInit(
 	options: InitOptions,
 	catalog: Catalog
@@ -111,9 +123,9 @@ export async function planInit(
 	const manager = await managerFor(project, options.packageManager);
 	const [config, root] = await Promise.all([
 		configEdit(project, framework),
-		rootEdit(project, framework),
+		rootEdit(project, framework, presetSource(options.preset, catalog)),
 	]);
-	const edits = [config, root].filter(
+	const edits = [config, ...root].filter(
 		(edit): edit is FileEdit => edit !== null
 	);
 	await Promise.all(edits.map((edit) => safePath(project, edit)));

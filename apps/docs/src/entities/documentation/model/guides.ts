@@ -277,8 +277,8 @@ function RootDocument({ children }) {
 				],
 				paragraphs: [
 					"A token variable is named --mizen-<group>-<name>, with the name in lower case and hyphens: --mizen-color-control-surface-hover, --mizen-space-4, --mizen-space-1-5, --mizen-font-size-14.",
-					'The themed groups are color, field-color, font, shape, and letter-spacing. To change one, declare it again on :root after the Mizen stylesheet; add a [data-theme="dark"] rule for a separate dark value. Components follow it.',
-					"The scales are fixed: space, control-size, glyph-size, font-size, font-weight, line-height, border-width, shadow, palette, duration, and easing. Read them; declaring one again does not change the components.",
+					'The app can replace these groups: color, field-color, font, shape, letter-spacing, space, control-size, glyph-size, shadow, duration, and easing. To change a token, declare it again on :root; add a [data-theme="dark"] rule for a separate dark value. Components follow it.',
+					"These scales are fixed: font-size, font-weight, line-height, border-width, and palette. Read them; declaring one again does not change the components.",
 					"The same tokens are StyleX modules at @mizen-labs/ui/<name>.stylex. An app needs them only when it compiles StyleX itself. Such an app compiles the Mizen source in the same StyleX build and does not import styles.css: two separately compiled StyleX stylesheets do not agree on rule priority.",
 				],
 				title: "Token variables",
@@ -443,6 +443,38 @@ body {
 					"Type roles set font-size-adjust from fonts.sizeAdjust, which defaults to 0.5. Set it to from-font to keep your family at its set size; fallback fonts then scale to match it while the family loads.",
 				],
 				title: "Fonts and tracking",
+			},
+			{
+				code: {
+					title: "mizen-theme.css",
+					value: `:root {
+  /* Color: the accent fills the primary action. */
+  --mizen-color-primary: var(--mizen-color-accent);
+  --mizen-color-primary-content: var(--mizen-color-accent-content);
+
+  /* Shape, density, depth and motion. */
+  --mizen-shape-control-radius: 0.375rem;
+  --mizen-control-size-md: 2.25rem;
+  --mizen-shadow-floating: 0 12px 32px -8px oklch(0 0 0 / 0.2);
+  --mizen-duration-fast: 100ms;
+}
+
+[data-theme="dark"] {
+  --mizen-color-selected: oklch(0.29 0.055 350);
+}`,
+				},
+				id: "theme-file",
+				links: [
+					{ href: "/docs/styling#token-subpaths", label: "Token variables" },
+					{ href: "/docs/cli#init", label: "CLI init" },
+				],
+				paragraphs: [
+					"A theme is one CSS file in the app that declares token variables. Mizen keeps its own values in a cascade layer, so a plain :root rule replaces them wherever the file loads. Tokens the file leaves out keep their defaults.",
+					"mizen init --preset vivid writes mizen-theme.css beside the app root and imports it after the Mizen stylesheet. Vivid fills the primary action with the accent, tints the selection, and deepens the status colors. The file belongs to the app: change its values, and init never replaces it.",
+					"A theme changes color, shape, density, depth, and motion. It does not change structure or behavior. Mizen checks contrast for its own values and presets only: check text against each fill you change, in both themes. Keep the smallest control at 24px or more, and leave --mizen-space-0 at zero.",
+					"The press return, the focus ring fade, and the tab indicator keep part of their own timing. Font sizes, weights, line heights, and border widths are fixed.",
+				],
+				title: "Theme file",
 			},
 			{
 				code: {

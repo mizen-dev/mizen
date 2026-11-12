@@ -1,0 +1,38 @@
+/*
+ * Mizen theme: Vivid.
+ * This file is yours. Change a value, or set any other --mizen-* variable
+ * here. A rule in [data-theme="dark"] applies to the dark theme only.
+ */
+
+:root {
+	/* The accent fills the primary action. To change the hue, set
+	   --mizen-color-accent and --mizen-color-accent-content. */
+	--mizen-color-primary: var(--mizen-color-accent);
+	--mizen-color-primary-content: var(--mizen-color-accent-content);
+
+	/* A selected row, day or page carries a tint of the accent. */
+	--mizen-color-selected: oklch(0.95 0.028 350);
+
+	/* Status fills and their text, as a soft Badge shows them. */
+	--mizen-color-success: oklch(0.93 0.085 150);
+	--mizen-color-success-content: oklch(0.36 0.1 150);
+	--mizen-color-warning: oklch(0.94 0.085 92);
+	--mizen-color-warning-content: oklch(0.4 0.085 70);
+	--mizen-color-info: oklch(0.94 0.045 245);
+	--mizen-color-info-content: oklch(0.42 0.13 252);
+	--mizen-color-destructive-subtle: oklch(0.94 0.05 15);
+	--mizen-color-destructive-text: oklch(0.45 0.17 22);
+}
+
+[data-theme="dark"] {
+	--mizen-color-selected: oklch(0.29 0.055 350);
+
+	--mizen-color-success: oklch(0.31 0.07 150);
+	--mizen-color-success-content: oklch(0.88 0.11 150);
+	--mizen-color-warning: oklch(0.33 0.065 85);
+	--mizen-color-warning-content: oklch(0.89 0.1 90);
+	--mizen-color-info: oklch(0.31 0.07 250);
+	--mizen-color-info-content: oklch(0.87 0.08 245);
+	--mizen-color-destructive-subtle: oklch(0.31 0.08 20);
+	--mizen-color-destructive-text: oklch(0.86 0.09 20);
+}
