@@ -316,7 +316,7 @@ export const sliderStyles = create({
 			},
 			borderColor: {
 				":is([data-disabled])": "transparent",
-				":is([data-invalid]):not([data-disabled])": `color-mix(in oklch, ${colors.destructive} 62%, ${colors.controlSurface})`,
+				":is([data-invalid]):not([data-disabled])": `color-mix(in oklab, ${colors.destructive} 62%, ${colors.controlSurface})`,
 				default: "transparent",
 			},
 			borderRadius: shape.controlRadiusLarge,

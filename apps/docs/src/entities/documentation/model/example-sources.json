@@ -3906,6 +3906,13 @@
         "description": "Avatar displays a loaded user image and falls back to consumer-supplied content on error.",
         "path": "entities/documentation/ui/examples/avatar-variants.tsx",
         "code": "import { Inline, Stack } from \"@mizen-labs/ui\";\n\nimport { Avatar, AvatarFallback, AvatarImage } from \"@mizen-labs/ui/avatar\";\n\nconst MAYA_PORTRAIT = \"/media/portrait-maya.jpg\";\n\nexport function AvatarImageAndFallbackExample3() {\n\treturn (\n\t\t<Stack gap=\"4\">\n\t\t\t<Inline>\n\t\t\t\t<Avatar data-testid=\"avatar-loaded\">\n\t\t\t\t\t<AvatarImage alt=\"Maya Chen\" src={MAYA_PORTRAIT} />\n\t\t\t\t\t<AvatarFallback>MC</AvatarFallback>\n\t\t\t\t</Avatar>\n\t\t\t\t<Avatar data-testid=\"avatar-broken\">\n\t\t\t\t\t<AvatarImage\n\t\t\t\t\t\talt=\"Profile photo for Jordan Lee\"\n\t\t\t\t\t\tsrc=\"data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cbroken%3E\"\n\t\t\t\t\t/>\n\t\t\t\t\t<AvatarFallback aria-label=\"Jordan Lee\" role=\"img\">\n\t\t\t\t\t\tJL\n\t\t\t\t\t</AvatarFallback>\n\t\t\t\t</Avatar>\n\t\t\t</Inline>\n\t\t</Stack>\n\t);\n}\n"
+      },
+      {
+        "name": "AvatarIdentityColorsExample4",
+        "title": "Identity colors",
+        "description": "A fallback color tells people apart in a list without photos. Derive it from a stable key, so each person keeps one color.",
+        "path": "entities/documentation/ui/examples/avatar-variants.tsx",
+        "code": "import { Inline } from \"@mizen-labs/ui\";\n\nimport { Avatar, AvatarFallback } from \"@mizen-labs/ui/avatar\";\n\nconst people = [\n\t{ color: \"blue\", initials: \"JC\", name: \"John Clarkson\" },\n\t{ color: \"purple\", initials: \"AL\", name: \"Aspen Lubin\" },\n\t{ color: \"green\", initials: \"ME\", name: \"Michael Ekstrom\" },\n\t{ color: \"orange\", initials: \"KV\", name: \"Kianna Vaccaro\" },\n] as const;\n\nexport function AvatarIdentityColorsExample4() {\n\treturn (\n\t\t<Inline>\n\t\t\t{people.map((person) => (\n\t\t\t\t<Avatar key={person.name}>\n\t\t\t\t\t<AvatarFallback\n\t\t\t\t\t\taria-label={person.name}\n\t\t\t\t\t\tcolor={person.color}\n\t\t\t\t\t\tdata-testid={`avatar-color-${person.color}`}\n\t\t\t\t\t\trole=\"img\"\n\t\t\t\t\t>\n\t\t\t\t\t\t{person.initials}\n\t\t\t\t\t</AvatarFallback>\n\t\t\t\t</Avatar>\n\t\t\t))}\n\t\t</Inline>\n\t);\n}\n"
       }
     ],
     "avatar-group": [

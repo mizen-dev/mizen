@@ -228,7 +228,7 @@ export const selectStyles = create({
 			default: fieldColors.surface,
 		},
 		borderColor: {
-			":is([aria-invalid='true'], [data-invalid]):not([data-disabled])": `color-mix(in oklch, ${colors.destructive} 54%, ${fieldColors.surface})`,
+			":is([aria-invalid='true'], [data-invalid]):not([data-disabled])": `color-mix(in oklab, ${colors.destructive} 54%, ${fieldColors.surface})`,
 			"[aria-haspopup='listbox']:hover:not([data-disabled], [data-readonly], [aria-invalid='true'], [data-invalid])":
 				{ [conditions.canHover]: colors.controlBorderStrong },
 			"[data-disabled]": colors.border,

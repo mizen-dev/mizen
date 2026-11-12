@@ -102,7 +102,7 @@ export const comboboxChipsStyles = create({
 			default: fieldColors.surface,
 		},
 		borderColor: {
-			":is([aria-invalid='true'], [data-invalid], :has([data-slot='combobox-chips-input']:is([aria-invalid='true'], [data-invalid]))):not(:has([data-slot='combobox-chips-input']:disabled))": `color-mix(in oklch, ${colors.destructive} 54%, ${fieldColors.surface})`,
+			":is([aria-invalid='true'], [data-invalid], :has([data-slot='combobox-chips-input']:is([aria-invalid='true'], [data-invalid]))):not(:has([data-slot='combobox-chips-input']:disabled))": `color-mix(in oklab, ${colors.destructive} 54%, ${fieldColors.surface})`,
 			default: colors.controlBorder,
 		},
 		borderRadius: shape.controlRadiusLarge,

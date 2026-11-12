@@ -151,8 +151,8 @@ export const tokenStyles = create({
 		fontSize: fontSize["12"],
 	},
 	tint: (tone: string) => ({
-		backgroundColor: `color-mix(in oklch, ${tone} 18%, ${colors.surface})`,
-		borderColor: `color-mix(in oklch, ${tone} 28%, ${colors.surface})`,
-		color: `color-mix(in oklch, ${tone} 45%, ${colors.content})`,
+		backgroundColor: `color-mix(in oklab, ${tone} 18%, ${colors.surface})`,
+		borderColor: `color-mix(in oklab, ${tone} 28%, ${colors.surface})`,
+		color: `color-mix(in oklab, ${tone} 45%, ${colors.content})`,
 	}),
 });

@@ -99,7 +99,7 @@ export const inputGroupStyles = create({
 			default: fieldColors.surface,
 		},
 		borderColor: {
-			":has(> [data-slot='input-group-input']:is([aria-invalid='true'], [data-invalid]):not(:disabled), > [data-slot='input-group-textarea']:is([aria-invalid='true'], [data-invalid]):not(:disabled))": `color-mix(in oklch, ${colors.destructive} 54%, ${fieldColors.surface})`,
+			":has(> [data-slot='input-group-input']:is([aria-invalid='true'], [data-invalid]):not(:disabled), > [data-slot='input-group-textarea']:is([aria-invalid='true'], [data-invalid]):not(:disabled))": `color-mix(in oklab, ${colors.destructive} 54%, ${fieldColors.surface})`,
 			"[data-slot='input-group']:hover:has(> :is([data-slot='input-group-input'], [data-slot='input-group-textarea']):not(:disabled, [data-disabled], [readonly], [aria-invalid='true'], [data-invalid]))":
 				{
 					[conditions.canHover]: colors.controlBorderStrong,

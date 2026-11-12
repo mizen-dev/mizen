@@ -8,7 +8,7 @@ import { conditions } from "../../styles/conditions.stylex";
 export const toggleColors = defineVars({
 	pressedActiveBackground: {
 		[conditions.forcedColors]: "Highlight",
-		default: `color-mix(in oklch, ${colors.selected} 88%, ${colors.content})`,
+		default: `color-mix(in oklab, ${colors.selected} 88%, ${colors.content})`,
 	},
 	pressedBackground: {
 		[conditions.forcedColors]: "Highlight",
@@ -24,6 +24,6 @@ export const toggleColors = defineVars({
 	},
 	pressedHoverBackground: {
 		[conditions.forcedColors]: "Highlight",
-		default: `color-mix(in oklch, ${colors.selected} 94%, ${colors.content})`,
+		default: `color-mix(in oklab, ${colors.selected} 94%, ${colors.content})`,
 	},
 });

@@ -49,7 +49,7 @@ export const switchStyles = create({
 			default: colors.controlSurface,
 		},
 		borderColor: {
-			":is([aria-invalid='true'], [data-invalid]):not([data-disabled])": `color-mix(in oklch, ${colors.destructive} 54%, ${fieldColors.surface})`,
+			":is([aria-invalid='true'], [data-invalid]):not([data-disabled])": `color-mix(in oklab, ${colors.destructive} 54%, ${fieldColors.surface})`,
 			"[data-checked]:not([aria-invalid='true'], [data-invalid])":
 				colors.accent,
 			"[data-disabled]:not([data-checked])": colors.border,

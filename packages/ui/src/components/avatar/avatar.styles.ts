@@ -104,19 +104,19 @@ export const avatarStyles = create({
 
 export const avatarFallbackColors = create({
 	blue: {
-		backgroundColor: `color-mix(in oklch, ${palette.blue700} 18%, ${colors.surface})`,
-		color: `color-mix(in oklch, ${palette.blue700} 45%, ${colors.content})`,
+		backgroundColor: `color-mix(in oklab, ${palette.blue700} 18%, ${colors.surface})`,
+		color: `color-mix(in oklab, ${palette.blue700} 45%, ${colors.content})`,
 	},
 	green: {
-		backgroundColor: `color-mix(in oklch, ${palette.green700} 18%, ${colors.surface})`,
-		color: `color-mix(in oklch, ${palette.green700} 45%, ${colors.content})`,
+		backgroundColor: `color-mix(in oklab, ${palette.green700} 18%, ${colors.surface})`,
+		color: `color-mix(in oklab, ${palette.green700} 45%, ${colors.content})`,
 	},
 	orange: {
-		backgroundColor: `color-mix(in oklch, ${palette.orange700} 18%, ${colors.surface})`,
-		color: `color-mix(in oklch, ${palette.orange700} 45%, ${colors.content})`,
+		backgroundColor: `color-mix(in oklab, ${palette.orange700} 18%, ${colors.surface})`,
+		color: `color-mix(in oklab, ${palette.orange700} 45%, ${colors.content})`,
 	},
 	purple: {
-		backgroundColor: `color-mix(in oklch, ${palette.violet700} 18%, ${colors.surface})`,
-		color: `color-mix(in oklch, ${palette.violet700} 45%, ${colors.content})`,
+		backgroundColor: `color-mix(in oklab, ${palette.violet700} 18%, ${colors.surface})`,
+		color: `color-mix(in oklab, ${palette.violet700} 45%, ${colors.content})`,
 	},
 });

@@ -124,7 +124,7 @@ export const calendarStyles = create({
 	},
 	navigationButton: { pointerEvents: "auto" },
 	outside: {
-		color: `color-mix(in oklch, ${colors.mutedContent} 90%, ${colors.floatingSurface})`,
+		color: `color-mix(in oklab, ${colors.mutedContent} 90%, ${colors.floatingSurface})`,
 	},
 	// Caps wrap the day button: its radius plus the 2px gap of a wider cell.
 	rangeEnd: {

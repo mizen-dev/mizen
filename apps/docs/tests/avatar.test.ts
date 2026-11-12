@@ -8,6 +8,17 @@ import {
 
 const docsRoot = new URL("..", import.meta.url).pathname.replace(/\/$/u, "");
 
+// The palette hue behind each AvatarFallback color.
+const identityHues = { blue: 250, green: 150, orange: 32, purple: 285 };
+const oklabColor = /^oklab\((?<l>[\d.]+) (?<a>-?[\d.e-]+) (?<b>-?[\d.e-]+)\)$/u;
+
+// A tint mixed in oklab reports as oklab(L a b); its hue is the angle of (a, b).
+function oklabHue(color: string): number {
+	const { a = "0", b = "0" } = oklabColor.exec(color)?.groups ?? {};
+	const degrees = (Math.atan2(Number(b), Number(a)) * 180) / Math.PI;
+	return (degrees + 360) % 360;
+}
+
 let handle: TestServerHandle;
 let browser: Browser;
 let page: Page;
@@ -200,6 +211,34 @@ describe("Avatar component browser behavior", () => {
 
 		expect(darkColors.bg).not.toBe(lightColors.bg);
 		expect(darkColors.color).not.toBe(lightColors.color);
+	});
+
+	it("keeps each identity color on its own hue in both themes", async () => {
+		await gotoAvatar();
+		const hues = async (theme: "dark" | "light") => {
+			await page.evaluate(
+				(value) => localStorage.setItem("mizen-theme", value),
+				theme
+			);
+			await page.reload({ waitUntil: "networkidle" });
+			return Promise.all(
+				Object.keys(identityHues).map((color) =>
+					page.getByTestId(`avatar-color-${color}`).evaluate((element) => {
+						const style = getComputedStyle(element);
+						return [style.backgroundColor, style.color];
+					})
+				)
+			);
+		};
+		const expected = Object.values(identityHues).flatMap((hue) => [hue, hue]);
+		for (const theme of ["light", "dark"] as const) {
+			// biome-ignore lint/performance/noAwaitInLoops: each theme needs its own reload.
+			const measured = (await hues(theme)).flat().map(oklabHue);
+			measured.forEach((hue, index) => {
+				const offset = Math.abs(hue - (expected[index] ?? 0));
+				expect(Math.min(offset, 360 - offset)).toBeLessThan(2);
+			});
+		}
 	});
 
 	it("fits 375px, 768px, and 1280px viewports without horizontal overflow", async () => {

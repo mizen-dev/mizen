@@ -20,7 +20,7 @@ const FLOATING = ":is([data-slot='code-block'] > *)";
 // Syntax colors take the chart hues mixed toward the text color, so each stays
 // recognizable and still reads at 4.5:1 on the code surface in both themes.
 const syntax = (hue: string) => ({
-	color: `color-mix(in oklch, ${hue} 62%, ${colors.content})`,
+	color: `color-mix(in oklab, ${hue} 62%, ${colors.content})`,
 });
 
 export const codeBlockStyles = create({

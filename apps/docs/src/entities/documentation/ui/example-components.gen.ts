@@ -49,6 +49,7 @@ export const usageComponents: Record<string, ReturnType<typeof preloadableExampl
 "AvatarCharactersExample": preloadableExample(() => import("./examples/avatar-characters").then((module) => ({ default: module.AvatarCharactersExample }))),
 "AvatarGroupDesignReviewExample1": preloadableExample(() => import("./examples/avatar-group-variants").then((module) => ({ default: module.AvatarGroupDesignReviewExample1 }))),
 "AvatarGroupSizesExample2": preloadableExample(() => import("./examples/avatar-group-variants").then((module) => ({ default: module.AvatarGroupSizesExample2 }))),
+"AvatarIdentityColorsExample4": preloadableExample(() => import("./examples/avatar-variants").then((module) => ({ default: module.AvatarIdentityColorsExample4 }))),
 "AvatarImageAndFallbackExample3": preloadableExample(() => import("./examples/avatar-variants").then((module) => ({ default: module.AvatarImageAndFallbackExample3 }))),
 "AvatarProjectOwnerExample1": preloadableExample(() => import("./examples/avatar-variants").then((module) => ({ default: module.AvatarProjectOwnerExample1 }))),
 "AvatarSizesExample2": preloadableExample(() => import("./examples/avatar-variants").then((module) => ({ default: module.AvatarSizesExample2 }))),

@@ -41,7 +41,7 @@ export const numberFieldStyles = create({
 			default: fieldColors.surface,
 		},
 		borderColor: {
-			":is([data-invalid]):not([data-disabled])": `color-mix(in oklch, ${colors.destructive} 54%, ${fieldColors.surface})`,
+			":is([data-invalid]):not([data-disabled])": `color-mix(in oklab, ${colors.destructive} 54%, ${fieldColors.surface})`,
 			"[data-slot='number-field-group']:hover:not([data-disabled], [data-readonly], [data-invalid])":
 				{
 					[conditions.canHover]: colors.controlBorderStrong,

@@ -224,9 +224,9 @@ export const buttonStyles = create({
 	interactionBrand: {
 		"::before": {
 			backgroundColor: {
-				":active": `color-mix(in oklch, ${colors.accent} 90%, ${buttonColors.brandShade})`,
+				":active": `color-mix(in oklab, ${colors.accent} 90%, ${buttonColors.brandShade})`,
 				[conditions.canHover]: {
-					":hover:not(:active)": `color-mix(in oklch, ${colors.accent} 94%, ${buttonColors.brandShade})`,
+					":hover:not(:active)": `color-mix(in oklab, ${colors.accent} 94%, ${buttonColors.brandShade})`,
 				},
 				default: colors.accent,
 			},
@@ -241,9 +241,9 @@ export const buttonStyles = create({
 	interactionDestructive: {
 		"::before": {
 			backgroundColor: {
-				":active": `color-mix(in oklch, ${colors.destructive} 80%, ${colors.destructiveContent})`,
+				":active": `color-mix(in oklab, ${colors.destructive} 80%, ${colors.destructiveContent})`,
 				[conditions.canHover]: {
-					":hover:not(:active)": `color-mix(in oklch, ${colors.destructive} 90%, ${colors.destructiveContent})`,
+					":hover:not(:active)": `color-mix(in oklab, ${colors.destructive} 90%, ${colors.destructiveContent})`,
 				},
 				default: colors.destructive,
 			},
@@ -273,9 +273,9 @@ export const buttonStyles = create({
 	interactionFilled: {
 		"::before": {
 			backgroundColor: {
-				":active": `color-mix(in oklch, ${colors.primary} 80%, ${colors.primaryContent})`,
+				":active": `color-mix(in oklab, ${colors.primary} 80%, ${colors.primaryContent})`,
 				[conditions.canHover]: {
-					":hover:not(:active)": `color-mix(in oklch, ${colors.primary} 90%, ${colors.primaryContent})`,
+					":hover:not(:active)": `color-mix(in oklab, ${colors.primary} 90%, ${colors.primaryContent})`,
 				},
 				default: colors.primary,
 			},

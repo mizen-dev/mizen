@@ -79,7 +79,8 @@
       "Use Thumbnail for general media. An avatar should not be the only visible identifier for a person."
     ],
     "recommendations": [
-      "Provide recognizable fallback content and useful image descriptions. Keep sizes consistent within the same context."
+      "Provide recognizable fallback content and useful image descriptions. Keep sizes consistent within the same context.",
+      "Where a list shows many people without photos, give each fallback a `color` from a stable key such as the person's id. The same person then keeps the same color."
     ]
   },
   "avatar-group": {

@@ -47,7 +47,7 @@ export const fileUploadStyles = create({
 		},
 		borderColor: {
 			":is(:disabled, [data-disabled])": colors.border,
-			":is([aria-invalid='true'], [data-invalid]):not(:disabled):not([data-disabled])": `color-mix(in oklch, ${colors.destructive} 62%, ${fieldColors.surface})`,
+			":is([aria-invalid='true'], [data-invalid]):not(:disabled):not([data-disabled])": `color-mix(in oklab, ${colors.destructive} 62%, ${fieldColors.surface})`,
 			// The marching dashes draw the edge while files hover.
 			"[data-dragging]": "transparent",
 			"[data-slot='file-upload-dropzone']:hover:not([data-disabled], [data-dragging], [data-invalid], [aria-invalid='true'])":

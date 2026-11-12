@@ -62,3 +62,29 @@ export function AvatarImageAndFallbackExample3() {
 		</Stack>
 	);
 }
+
+const people = [
+	{ color: "blue", initials: "JC", name: "John Clarkson" },
+	{ color: "purple", initials: "AL", name: "Aspen Lubin" },
+	{ color: "green", initials: "ME", name: "Michael Ekstrom" },
+	{ color: "orange", initials: "KV", name: "Kianna Vaccaro" },
+] as const;
+
+export function AvatarIdentityColorsExample4() {
+	return (
+		<Inline>
+			{people.map((person) => (
+				<Avatar key={person.name}>
+					<AvatarFallback
+						aria-label={person.name}
+						color={person.color}
+						data-testid={`avatar-color-${person.color}`}
+						role="img"
+					>
+						{person.initials}
+					</AvatarFallback>
+				</Avatar>
+			))}
+		</Inline>
+	);
+}

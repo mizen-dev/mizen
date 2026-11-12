@@ -50,6 +50,7 @@ import {
 	AvatarGroupSizesExample2,
 } from "./avatar-group-variants";
 import {
+	AvatarIdentityColorsExample4,
 	AvatarImageAndFallbackExample3,
 	AvatarProjectOwnerExample1,
 	AvatarSizesExample2,
@@ -718,6 +719,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	AvatarCharactersExample,
 	AvatarGroupDesignReviewExample1,
 	AvatarGroupSizesExample2,
+	AvatarIdentityColorsExample4,
 	AvatarImageAndFallbackExample3,
 	AvatarProjectOwnerExample1,
 	AvatarSizesExample2,
