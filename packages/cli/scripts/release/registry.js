@@ -40,10 +40,11 @@ export async function waitForPackage(candidate, attempt = 0) {
 		await verifyPublished(record, candidate);
 		return;
 	}
+	// npm can take several minutes to list a version it has accepted.
 	assert.ok(
-		attempt < 5,
-		"Published version is not visible yet. Retry this release with the same CI run."
+		attempt < 60,
+		"Published version is not visible yet. Wait until npm view lists it, then re-run the failed jobs."
 	);
-	await delay(5000);
+	await delay(10_000);
 	return waitForPackage(candidate, attempt + 1);
 }
