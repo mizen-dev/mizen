@@ -160,12 +160,19 @@ describe("Table", { timeout: 30_000 }, () => {
 					expect(surface).not.toBe("rgba(0, 0, 0, 0)");
 				})
 			);
+			// The cells paint the hover band, so the sticky cell stays opaque.
 			const row = container.locator("tbody tr").nth(4);
-			await row.locator("th").hover();
-			const hoverSurface = await row.evaluate(
-				(element) => getComputedStyle(element).backgroundColor
+			const sticky = row.locator("th");
+			const fill = (element: Element) =>
+				getComputedStyle(element).backgroundColor;
+			const restSurface = await sticky.evaluate(fill);
+			await sticky.hover();
+			await expectLocator(sticky).not.toHaveCSS(
+				"background-color",
+				restSurface
 			);
-			await expectLocator(row.locator("th")).toHaveCSS(
+			const hoverSurface = await sticky.evaluate(fill);
+			await expectLocator(row.locator("td").first()).toHaveCSS(
 				"background-color",
 				hoverSurface
 			);
@@ -176,6 +183,70 @@ describe("Table", { timeout: 30_000 }, () => {
 			});
 		}
 	);
+
+	it("paints selected rows that touch as one band with rounded ends", async () => {
+		await page.setViewportSize({ height: 900, width: 1280 });
+		await page.goto(`${handle.url}/components/table`, {
+			waitUntil: "networkidle",
+		});
+		const region = page.getByRole("region", {
+			exact: true,
+			name: "Open invoices",
+		});
+		await region.scrollIntoViewIfNeeded();
+		await page.mouse.move(0, 0);
+		const rows = region.locator("tbody tr");
+		// Reads the look of every body row; the result returns one row by index.
+		const band = async () => {
+			const looks = await rows.evaluateAll((elements) =>
+				elements.map((element) => {
+					const first = getComputedStyle(element.firstElementChild as Element);
+					const last = getComputedStyle(element.lastElementChild as Element);
+					return {
+						bottom: [first.borderEndStartRadius, last.borderEndEndRadius],
+						fill: first.backgroundColor,
+						rule: first.borderBlockEndColor,
+						top: [first.borderStartStartRadius, last.borderStartEndRadius],
+					};
+				})
+			);
+			return (index: number) => {
+				const look = looks[index];
+				if (!look) {
+					throw new Error(`The table has no row ${index}`);
+				}
+				return look;
+			};
+		};
+		const square = ["0px", "0px"];
+		const clear = "rgba(0, 0, 0, 0)";
+
+		const rest = await band();
+		const round = rest(1).top;
+		expect(round).not.toEqual(square);
+		expect(rest(1).fill).toBe(rest(2).fill);
+		expect(rest(1).fill).not.toBe(rest(3).fill);
+		expect(rest(1).bottom).toEqual(square);
+		expect(rest(2).top).toEqual(square);
+		expect(rest(2).bottom).toEqual(round);
+		expect(rest(3).top).toEqual(square);
+		// The band's edge replaces the rules above and below it.
+		expect([rest(0).rule, rest(2).rule]).toEqual([clear, clear]);
+		expect(rest(1).rule).not.toBe(clear);
+
+		await rows.nth(4).hover();
+		const hovered = (await band())(4);
+		expect([hovered.top, hovered.bottom]).toEqual([round, round]);
+		expect([rest(3).fill, rest(1).fill]).not.toContain(hovered.fill);
+
+		await page.mouse.move(0, 0);
+		await region.getByRole("checkbox", { name: "Select INV-1045" }).click();
+		await page.mouse.move(0, 0);
+		const grown = await band();
+		expect(grown(2).bottom).toEqual(square);
+		expect(grown(3).fill).toBe(rest(1).fill);
+		expect(grown(3).bottom).toEqual(round);
+	});
 
 	it("keeps words whole inside a container that breaks words anywhere", async () => {
 		await page.goto(`${handle.url}/internal/specimens`, {

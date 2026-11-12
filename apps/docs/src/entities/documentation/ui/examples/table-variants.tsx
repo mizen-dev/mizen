@@ -1,4 +1,6 @@
+"use client";
 import {
+	Checkbox,
 	Heading,
 	Stack,
 	Table,
@@ -12,6 +14,7 @@ import {
 	TableRow,
 	Text,
 } from "@mizen-labs/ui";
+import { useCallback, useState } from "react";
 
 const months = [
 	"Jan",
@@ -117,5 +120,81 @@ export function TableMonthlyOperatingBudgetExample1() {
 				</Table>
 			</TableContainer>
 		</Stack>
+	);
+}
+
+const invoices = [
+	{ amount: 1200, customer: "Northwind Traders", id: "INV-1042" },
+	{ amount: 480, customer: "Fabrikam Foods", id: "INV-1043" },
+	{ amount: 2650, customer: "Contoso Freight", id: "INV-1044" },
+	{ amount: 315, customer: "Adatum Clinics", id: "INV-1045" },
+	{ amount: 940, customer: "Tailspin Toys", id: "INV-1046" },
+] as const;
+
+function InvoiceCheckbox({
+	checked,
+	id,
+	onToggle,
+}: {
+	checked: boolean;
+	id: string;
+	onToggle: (id: string) => void;
+}) {
+	const onCheckedChange = useCallback(() => onToggle(id), [id, onToggle]);
+	return (
+		<Checkbox
+			aria-label={`Select ${id}`}
+			checked={checked}
+			onCheckedChange={onCheckedChange}
+		/>
+	);
+}
+
+export function TableSelectedRowsExample2() {
+	const [selected, setSelected] = useState<readonly string[]>([
+		"INV-1043",
+		"INV-1044",
+	]);
+	const toggle = useCallback(
+		(id: string) =>
+			setSelected((current) =>
+				current.includes(id)
+					? current.filter((entry) => entry !== id)
+					: [...current, id]
+			),
+		[]
+	);
+	return (
+		<TableContainer aria-label="Open invoices">
+			<Table>
+				<TableCaption>
+					{selected.length} of {invoices.length} invoices selected.
+				</TableCaption>
+				<TableHeader>
+					<TableRow>
+						<TableHead aria-label="Select" />
+						<TableHead>Invoice</TableHead>
+						<TableHead>Customer</TableHead>
+						<TableHead numeric>Amount</TableHead>
+					</TableRow>
+				</TableHeader>
+				<TableBody>
+					{invoices.map((invoice) => (
+						<TableRow key={invoice.id} selected={selected.includes(invoice.id)}>
+							<TableCell>
+								<InvoiceCheckbox
+									checked={selected.includes(invoice.id)}
+									id={invoice.id}
+									onToggle={toggle}
+								/>
+							</TableCell>
+							<TableHead scope="row">{invoice.id}</TableHead>
+							<TableCell>{invoice.customer}</TableCell>
+							<TableCell numeric>${formatAmount(invoice.amount)}</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
+		</TableContainer>
 	);
 }

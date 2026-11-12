@@ -571,6 +571,12 @@ function HeaderContent<
 	);
 }
 
+// Row selection is an optional TanStack feature, so the row may not have it.
+const isSelected = (row: object) =>
+	"getIsSelected" in row &&
+	typeof row.getIsSelected === "function" &&
+	row.getIsSelected() === true;
+
 function DataTableBodyRow<
 	TFeatures extends DataTableFeatureMap,
 	TData extends RowData,
@@ -594,6 +600,7 @@ function DataTableBodyRow<
 			aria-rowindex={virtualized ? index + headerCount + 1 : undefined}
 			data-index={virtualized ? index : undefined}
 			ref={measureElement}
+			selected={isSelected(row)}
 		>
 			{(
 				row as Row<TFeatures, TData> & {

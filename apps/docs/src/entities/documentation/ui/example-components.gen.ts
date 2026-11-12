@@ -457,6 +457,7 @@ export const usageComponents: Record<string, ReturnType<typeof preloadableExampl
 "SwitchWorkspacePreferencesExample1": preloadableExample(() => import("./examples/switch-variants").then((module) => ({ default: module.SwitchWorkspacePreferencesExample1 }))),
 "SyncStatus": preloadableExample(() => import("./examples/spinner").then((module) => ({ default: module.SyncStatus }))),
 "TableMonthlyOperatingBudgetExample1": preloadableExample(() => import("./examples/table-variants").then((module) => ({ default: module.TableMonthlyOperatingBudgetExample1 }))),
+"TableSelectedRowsExample2": preloadableExample(() => import("./examples/table-variants").then((module) => ({ default: module.TableSelectedRowsExample2 }))),
 "TabsProfileSettingsExample3": preloadableExample(() => import("./examples/tabs-variants").then((module) => ({ default: module.TabsProfileSettingsExample3 }))),
 "TabsProjectOverviewExample1": preloadableExample(() => import("./examples/tabs-variants").then((module) => ({ default: module.TabsProjectOverviewExample1 }))),
 "TabsRecordDetailsExample2": preloadableExample(() => import("./examples/tabs-variants").then((module) => ({ default: module.TabsRecordDetailsExample2 }))),

@@ -15,6 +15,34 @@ import {
 	lineHeight,
 } from "../../styles/typography.stylex";
 
+// A hovered or selected row is a band its cells paint, so the band can round
+// its outer corners. Selected rows that touch form one band. A sheet keeps
+// square bands, because its column rules meet the row edges.
+const HOVERABLE =
+	"tr:not([data-selected], [aria-disabled='true'], [aria-hidden='true'])";
+const HOVER_ROW = `tbody > ${HOVERABLE}:hover`;
+const ROUND = "[data-slot='table']:not([data-grid]) > ";
+const HOVER_BAND = `${ROUND}${HOVER_ROW}`;
+const BAND_START = `${ROUND}* > tr[data-selected]:not(tr[data-selected] + tr)`;
+const BAND_END = `${ROUND}* > tr[data-selected]:not(:has(+ tr[data-selected]))`;
+const ABOVE_BAND = `${ROUND}* > tr:not([data-selected]):has(+ tr[data-selected])`;
+const ABOVE_HOVER = `${ROUND}tbody > tr:has(+ ${HOVERABLE}:hover)`;
+const HOVER_CELL = `:is(${HOVER_ROW} > *)`;
+// The cells whose rule a band's edge replaces: its last row and the row above.
+const BAND_EDGE = `:is(${ABOVE_BAND} > *, ${BAND_END} > *)`;
+const HOVER_EDGE = `:is(${ABOVE_HOVER} > *, ${HOVER_BAND} > *)`;
+// Half a secondary fill, so a secondary control or a neutral avatar keeps its
+// shape inside a hovered row.
+const HOVER_FILL = `color-mix(in oklab, ${colors.secondary} 50%, ${colors.surface})`;
+const corner = (band: string, cell: ":first-child" | ":last-child") =>
+	({
+		[conditions.canHover]: {
+			[`:is(${HOVER_BAND} > ${cell})`]: shape.controlRadius,
+		},
+		[`:is(${band} > ${cell})`]: shape.controlRadius,
+		default: null,
+	}) as const;
+
 export const tableStyles = create({
 	body: { backgroundColor: colors.surface },
 	caption: {
@@ -31,13 +59,25 @@ export const tableStyles = create({
 	cell: {
 		animationDuration: { ":focus-visible": focusMotion.duration },
 		animationName: { ":focus-visible": focusMotion.ring },
-		backgroundColor: "inherit",
+		backgroundColor: {
+			[conditions.canHover]: { [HOVER_CELL]: HOVER_FILL },
+			":is(tr[data-selected] > *)": colors.selected,
+			default: "inherit",
+		},
+		// A band's own edge closes it, so the rules above and below it go.
+		borderBlockEndColor: {
+			[BAND_EDGE]: "transparent",
+			[conditions.canHover]: { [HOVER_EDGE]: "transparent" },
+			default: colors.border,
+		},
 		borderBlockEndWidth: {
 			":is(tbody:last-child > tr:last-child > *, tfoot > tr:last-child > *)": 0,
 			default: borderWidth.thin,
 		},
 		borderBlockStartWidth: 0,
 		borderColor: colors.border,
+		borderEndEndRadius: corner(BAND_END, ":last-child"),
+		borderEndStartRadius: corner(BAND_END, ":first-child"),
 		// Grid tables rule every column except the last, like a sheet.
 		borderInlineEndWidth: {
 			":is([data-slot='table'][data-grid] > * > tr > :not(:last-child))":
@@ -45,6 +85,8 @@ export const tableStyles = create({
 			default: 0,
 		},
 		borderInlineStartWidth: 0,
+		borderStartEndRadius: corner(BAND_START, ":last-child"),
+		borderStartStartRadius: corner(BAND_START, ":first-child"),
 		borderStyle: "solid",
 		// Interactive grids focus cells; the ring sits inside so neighboring
 		// cells and the scroll container never clip it.
@@ -112,7 +154,6 @@ export const tableStyles = create({
 		fontWeight: fontWeight.medium,
 	},
 	head: {
-		backgroundColor: "inherit",
 		// Column headers recede to 12px muted meta so the data leads; row headers
 		// keep full ink at the cell size.
 		color: { ":is(thead *)": colors.mutedContent, default: colors.content },
@@ -147,29 +188,7 @@ export const tableStyles = create({
 	row: {
 		backgroundColor: "inherit",
 	},
-	rowHover: {
-		backgroundColor: {
-			":hover": {
-				[conditions.canHover]: colors.secondary,
-			},
-			"[aria-disabled='true']:hover": {
-				[conditions.canHover]: "inherit",
-			},
-			default: "inherit",
-		},
-	},
-	rowSelected: {
-		backgroundColor: {
-			":hover": {
-				[conditions.canHover]: colors.selected,
-			},
-			"[aria-disabled='true']:hover": {
-				[conditions.canHover]: colors.selected,
-			},
-			default: colors.selected,
-		},
-		color: colors.content,
-	},
+	rowSelected: { color: colors.content },
 	stickyStart: {
 		borderInlineEndColor: colors.border,
 		borderInlineEndStyle: "solid",

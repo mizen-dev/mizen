@@ -130,6 +130,10 @@ describe("Data Table search and bulk selection recipes", {
 			name: "Select BUD-00001",
 		});
 		await firstRowCheckbox.click();
+		// A selected record carries the Table selection band.
+		await expectLocator(
+			example.locator('tbody tr[data-selected="true"]')
+		).toHaveCount(1);
 		const pageCheckbox = example.getByRole("checkbox", {
 			name: "Select all rows on this page",
 		});

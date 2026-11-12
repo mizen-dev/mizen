@@ -2034,6 +2034,12 @@
       "title": "Monthly operating budget",
       "description": "",
       "path": "entities/documentation/ui/examples/table-variants.tsx"
+    },
+    {
+      "name": "TableSelectedRowsExample2",
+      "title": "Selected rows",
+      "description": "The application owns the selection and marks each selected row. Selected rows that touch form one band.",
+      "path": "entities/documentation/ui/examples/table-variants.tsx"
     }
   ],
   "data-table": [

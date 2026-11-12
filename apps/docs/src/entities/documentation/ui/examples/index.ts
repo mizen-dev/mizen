@@ -586,7 +586,10 @@ import {
 	SwitchWorkspacePreferencesExample1,
 } from "./switch-variants";
 import { ProjectTable } from "./table";
-import { TableMonthlyOperatingBudgetExample1 } from "./table-variants";
+import {
+	TableMonthlyOperatingBudgetExample1,
+	TableSelectedRowsExample2,
+} from "./table-variants";
 import { ProjectTabs } from "./tabs";
 import {
 	TabsProfileSettingsExample3,
@@ -1130,6 +1133,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	SwitchWorkspacePreferencesExample1,
 	SyncStatus,
 	TableMonthlyOperatingBudgetExample1,
+	TableSelectedRowsExample2,
 	TabsProfileSettingsExample3,
 	TabsProjectOverviewExample1,
 	TabsRecordDetailsExample2,

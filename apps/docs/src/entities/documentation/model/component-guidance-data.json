@@ -908,7 +908,8 @@
     ],
     "recommendations": [
       "Use row headers for identifying columns and align numeric values consistently.",
-      "Keep wide records inside the named TableContainer scroll region."
+      "Keep wide records inside the named TableContainer scroll region.",
+      "Set `selected` on each selected TableRow. Selected rows that touch form one band, so do not add a background or border of your own."
     ]
   },
   "tabs": {

@@ -194,11 +194,7 @@ export function TableRow({
 			data-selected={selected ? "true" : undefined}
 			data-slot="table-row"
 			ref={forwardedRef}
-			{...props(
-				tableStyles.row,
-				tableStyles.rowHover,
-				selected && tableStyles.rowSelected
-			)}
+			{...props(tableStyles.row, selected && tableStyles.rowSelected)}
 		>
 			{children}
 		</tr>
