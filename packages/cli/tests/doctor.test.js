@@ -10,7 +10,7 @@ import {
 	writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
+import { dirname, join, normalize } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { cleanup } from "../../../scripts/cleanup.mjs";
@@ -145,7 +145,8 @@ test("the installed package's agent skill is named when it ships one", (t) => {
 	const found = diagnostic(run(root), "package.skill");
 	assert.equal(found.status, "pass");
 	assert.equal(found.evidence.length, 1);
-	assert.ok(found.evidence[0].endsWith(skill));
+	// Evidence is a native path: backslashes on Windows.
+	assert.ok(found.evidence[0].endsWith(normalize(skill)), found.evidence[0]);
 });
 
 test("missing installation, incompatible peers, and duplicate React produce confirmed errors", (t) => {
