@@ -613,6 +613,7 @@
     "recommendations": [
       "State the reporting period and the comparison baseline. Keep the current value readable without interpreting the plot.",
       "Put the legend in actions and pass legend={false} to the chart. Set good=\"down\" on MetricDelta for metrics where a fall is good, such as refunds.",
+      "Set `appearance=\"soft\"` on MetricDelta where the view also uses soft status badges. Use one appearance per view.",
       "To make a stat card navigate, pass the link to render. Do not wrap the card in a link, and do not put a second link inside a linked card."
     ]
   },

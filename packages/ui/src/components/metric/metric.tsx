@@ -91,6 +91,8 @@ export type MetricDeltaProps = Omit<
 	ComponentPropsWithRef<"span">,
 	"children" | "className" | "data-slot" | "style"
 > & {
+	/** How the chip shows its tone: a dot beside ink text, or a soft fill. */
+	appearance?: "dot" | "soft";
 	/** Which direction is good: "up" by default, "down" for costs or errors. */
 	good?: "down" | "up";
 	locale?: string;
@@ -100,14 +102,22 @@ export type MetricDeltaProps = Omit<
 
 // Keyed by direction relative to the good direction: worse, flat, better.
 const deltaTones = {
-	"-1": metricStyles.deltaWorse,
-	"0": metricStyles.deltaFlat,
-	"1": metricStyles.deltaBetter,
+	dot: {
+		"-1": metricStyles.deltaWorse,
+		"0": metricStyles.deltaFlat,
+		"1": metricStyles.deltaBetter,
+	},
+	soft: {
+		"-1": metricStyles.deltaSoftWorse,
+		"0": metricStyles.deltaSoftFlat,
+		"1": metricStyles.deltaSoftBetter,
+	},
 } as const;
 
 // A compact change chip. The sign carries the direction; the tint says whether
 // that direction is good.
 export function MetricDelta({
+	appearance = "dot",
 	good = "up",
 	locale = "en-US",
 	value,
@@ -122,7 +132,12 @@ export function MetricDelta({
 		<span
 			{...rest}
 			data-slot="metric-delta"
-			{...props(typeRoles.label, metricStyles.delta, deltaTones[tone])}
+			{...props(
+				typeRoles.label,
+				metricStyles.delta,
+				appearance === "dot" && metricStyles.deltaDot,
+				deltaTones[appearance][tone]
+			)}
 		>
 			{new Intl.NumberFormat(locale, {
 				maximumFractionDigits: 1,

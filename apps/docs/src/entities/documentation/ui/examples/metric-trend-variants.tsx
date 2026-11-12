@@ -128,6 +128,38 @@ export function MetricTrendStatCardsFooterExample() {
 	);
 }
 
+// appearance="soft" fills the chip with its tone. Use it where the dashboard
+// also uses soft status badges.
+export function MetricTrendSoftChangeChipExample() {
+	return (
+		<Grid>
+			<MetricTrend
+				delta={<MetricDelta appearance="soft" value={0.16} />}
+				description="From last month"
+				icon={<IconCoin />}
+				label="Total revenue"
+				value="152,313.92"
+				valuePrefix="$"
+			/>
+			<MetricTrend
+				delta={<MetricDelta appearance="soft" value={0} />}
+				description="From last month"
+				icon={<IconUsers />}
+				label="New customers"
+				value="3,847"
+			/>
+			<MetricTrend
+				delta={<MetricDelta appearance="soft" good="down" value={0.024} />}
+				description="From last month"
+				icon={<IconReceiptRefund />}
+				label="Refunds"
+				value="4,209.44"
+				valuePrefix="$"
+			/>
+		</Grid>
+	);
+}
+
 // render makes the whole card a link. Such a card holds no other control.
 export function MetricTrendLinkedStatCardExample() {
 	return (

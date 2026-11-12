@@ -4602,6 +4602,13 @@
         "code": "\"use client\";\n\nimport { Grid, MetricDelta, MetricTrend } from \"@mizen-labs/ui\";\n\nimport { IconCoin, IconReceiptRefund } from \"@tabler/icons-react\";\n\nexport function MetricTrendStatCardsFooterExample() {\n\treturn (\n\t\t<Grid>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta value={0.16} />}\n\t\t\t\tdeltaPlacement=\"footer\"\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconCoin />}\n\t\t\t\tlabel=\"Total revenue\"\n\t\t\t\tvalue=\"152,313.92\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta good=\"down\" value={0.024} />}\n\t\t\t\tdeltaPlacement=\"footer\"\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconReceiptRefund />}\n\t\t\t\tlabel=\"Refunds\"\n\t\t\t\tvalue=\"4,209.44\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t</Grid>\n\t);\n}\n"
       },
       {
+        "name": "MetricTrendSoftChangeChipExample",
+        "title": "Soft change chip",
+        "description": "appearance=\"soft\" fills the change chip with its tone. Use it where the dashboard also uses soft status badges.",
+        "path": "entities/documentation/ui/examples/metric-trend-variants.tsx",
+        "code": "\"use client\";\n\nimport { Grid, MetricDelta, MetricTrend } from \"@mizen-labs/ui\";\n\nimport { IconCoin, IconReceiptRefund, IconUsers } from \"@tabler/icons-react\";\n\nexport function MetricTrendSoftChangeChipExample() {\n\treturn (\n\t\t<Grid>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta appearance=\"soft\" value={0.16} />}\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconCoin />}\n\t\t\t\tlabel=\"Total revenue\"\n\t\t\t\tvalue=\"152,313.92\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta appearance=\"soft\" value={0} />}\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconUsers />}\n\t\t\t\tlabel=\"New customers\"\n\t\t\t\tvalue=\"3,847\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta appearance=\"soft\" good=\"down\" value={0.024} />}\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconReceiptRefund />}\n\t\t\t\tlabel=\"Refunds\"\n\t\t\t\tvalue=\"4,209.44\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t</Grid>\n\t);\n}\n"
+      },
+      {
         "name": "MetricTrendLinkedStatCardExample",
         "title": "Linked stat card",
         "description": "render makes the whole card a link, with the library's hover and focus states. Leave render out where the reader may not open the destination; the card is then static.",

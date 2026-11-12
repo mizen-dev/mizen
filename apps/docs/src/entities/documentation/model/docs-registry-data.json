@@ -4066,8 +4066,8 @@
         "type": "MetricDescriptionProps"
       },
       {
-        "defaultValue": "good: \"up\", locale: \"en-US\"",
-        "description": "Change chip for a fractional value (0.16 is +16%). Green when the change moves in the good direction, red when it moves against it, neutral at zero.",
+        "defaultValue": "appearance: \"dot\", good: \"up\", locale: \"en-US\"",
+        "description": "Change chip for a fractional value (0.16 is +16%). Green when the change moves in the good direction, red when it moves against it, neutral at zero. appearance=\"soft\" fills the chip with its tone instead of showing a dot.",
         "name": "MetricDelta",
         "type": "MetricDeltaProps"
       }

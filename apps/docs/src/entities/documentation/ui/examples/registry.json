@@ -2232,6 +2232,12 @@
       "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
     },
     {
+      "name": "MetricTrendSoftChangeChipExample",
+      "title": "Soft change chip",
+      "description": "appearance=\"soft\" fills the change chip with its tone. Use it where the dashboard also uses soft status badges.",
+      "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
+    },
+    {
       "name": "MetricTrendLinkedStatCardExample",
       "title": "Linked stat card",
       "description": "render makes the whole card a link, with the library's hover and focus states. Leave render out where the reader may not open the destination; the card is then static.",

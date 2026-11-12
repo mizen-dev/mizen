@@ -9,18 +9,19 @@ import {
 	lineHeight,
 } from "../../styles/typography.stylex";
 
+// A soft change chip fills with the tint of its tone, like a soft Badge. The
+// sign carries the direction, so it needs no dot.
+const soft = (fill: string, text: string) =>
+	({
+		backgroundColor: fill,
+		borderColor: "transparent",
+		color: text,
+	}) as const;
+
 export const metricStyles = create({
 	// A hairline pill with ink text, like a status badge; the dot says whether
 	// the change is good.
 	delta: {
-		"::before": {
-			backgroundColor: "var(--mizen-metric-delta)",
-			borderRadius: "9999px",
-			content: '""',
-			flexShrink: 0,
-			height: "0.375rem",
-			width: "0.375rem",
-		},
 		alignItems: "center",
 		borderColor: colors.border,
 		borderRadius: "0.625rem",
@@ -42,7 +43,20 @@ export const metricStyles = create({
 		width: "fit-content",
 	},
 	deltaBetter: { "--mizen-metric-delta": colors.successSolid },
+	deltaDot: {
+		"::before": {
+			backgroundColor: "var(--mizen-metric-delta)",
+			borderRadius: "9999px",
+			content: '""',
+			flexShrink: 0,
+			height: "0.375rem",
+			width: "0.375rem",
+		},
+	},
 	deltaFlat: { "--mizen-metric-delta": colors.controlBorderStrong },
+	deltaSoftBetter: soft(colors.success, colors.successContent),
+	deltaSoftFlat: soft(colors.secondary, colors.secondaryContent),
+	deltaSoftWorse: soft(colors.destructiveSubtle, colors.destructiveText),
 	deltaWorse: { "--mizen-metric-delta": colors.destructive },
 	description: {
 		color: colors.mutedContent,

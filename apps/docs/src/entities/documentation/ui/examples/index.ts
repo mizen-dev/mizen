@@ -411,6 +411,7 @@ import { MonthlyRevenueTrend } from "./metric-trend";
 import {
 	MetricTrendDailySigninsExample1,
 	MetricTrendLinkedStatCardExample,
+	MetricTrendSoftChangeChipExample,
 	MetricTrendStatCardsExample,
 	MetricTrendStatCardsFooterExample,
 } from "./metric-trend-variants";
@@ -991,6 +992,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	MetricTrafficAndCacheExample3,
 	MetricTrendDailySigninsExample1,
 	MetricTrendLinkedStatCardExample,
+	MetricTrendSoftChangeChipExample,
 	MetricTrendStatCardsExample,
 	MetricTrendStatCardsFooterExample,
 	MonthlyRevenueTrend,
