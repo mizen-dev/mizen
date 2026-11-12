@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import { mkdtemp, readFile } from "node:fs/promises";
+import { mkdtemp, readdir, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { promisify } from "node:util";
@@ -9,6 +9,29 @@ import { cleanup } from "../../../scripts/cleanup.mjs";
 const uiRoot = new URL("../../../packages/ui/", import.meta.url).pathname;
 const execute = promisify(execFile);
 const CLIENT_BOUNDARY = /^"use client";/u;
+const CSS_COMMENT = /\/\*[\s\S]*?\*\//gu;
+const COMPILED = /\.(?:css|js)$/u;
+
+// The prelude of each rule outside any block, such as "@layer mizen-reset".
+function topLevelRules(css: string): string[] {
+	const rules: string[] = [];
+	let depth = 0;
+	let prelude = "";
+	for (const character of css.replace(CSS_COMMENT, "")) {
+		if (character === "{") {
+			if (depth === 0) {
+				rules.push(prelude.trim());
+			}
+			depth += 1;
+		} else if (character === "}") {
+			depth -= 1;
+			prelude = "";
+		} else if (depth === 0) {
+			prelude += character;
+		}
+	}
+	return rules;
+}
 // A length needs a unit. Browsers drop `border-width: 1`, and the border
 // falls back to 3px. The docs build repairs such values; the archive must not
 // need the repair.
@@ -86,6 +109,21 @@ it("packs every public export and preserves client boundaries", async () => {
 		]) {
 			expect(css).toContain(constant);
 		}
+		// The reset is opt-in: it ships as its own file, and neither the
+		// stylesheet nor any compiled module pulls it in.
+		expect(manifest.exports["./reset.css"]).toBe("./dist/reset.css");
+		const reset = await readFile(join(uiRoot, "dist/reset.css"), "utf8");
+		expect(topLevelRules(reset)).toEqual(["@layer mizen-reset"]);
+		expect(css).not.toContain("mizen-reset");
+		const built = (
+			await readdir(join(uiRoot, "dist"), { recursive: true })
+		).filter((path) => COMPILED.test(path) && path !== "reset.css");
+		const sources = await Promise.all(
+			built.map((path) => readFile(join(uiRoot, "dist", path), "utf8"))
+		);
+		expect(
+			built.filter((_, index) => sources[index]?.includes("reset.css"))
+		).toEqual([]);
 		await Promise.all(
 			Object.entries(manifest.exports).map(async ([name, entry]) => {
 				const targets =

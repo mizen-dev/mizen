@@ -104,20 +104,31 @@ export const guides: Guide[] = [
 				code: {
 					title: "app/globals.css",
 					value: `body {
-  margin: 0;
   font-family: system-ui, sans-serif;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
 }`,
 				},
 				id: "stylesheet",
 				paragraphs: [
 					"Import @mizen-labs/ui/styles.css before your app stylesheet in the root layout. The theming guide shows the complete Next layout; the root route below shows TanStack Start.",
-					"Your app owns its document defaults. Set your interface font on body; Mizen controls inherit it.",
+					"Your app owns its document defaults. Set your interface font on body; Mizen controls inherit it. Mizen components do not need a reset. For your own markup, write the defaults yourself or import the optional reset.",
 				],
 				title: "Global stylesheet",
+			},
+			{
+				code: {
+					title: "app/layout.tsx",
+					value: `import "@mizen-labs/ui/reset.css";
+import "@mizen-labs/ui/styles.css";
+import "./globals.css";`,
+				},
+				id: "reset",
+				paragraphs: [
+					"@mizen-labs/ui/reset.css is a small reset that you opt in to. No component and no other Mizen stylesheet imports it, and every component renders the same with it and without it.",
+					"It sets three defaults. Every element and its ::before and ::after use box-sizing: border-box. The body has no margin. A button, input, optgroup, select and textarea inherit font and letter-spacing. It leaves list markers, heading sizes, link styles, focus rings and the native look of controls alone.",
+					"Its rules sit in the mizen-reset cascade layer. A rule outside a layer wins over it, whatever its specificity: your own CSS, a third-party widget and Mizen components. Import it first, so that the layers your app declares come later and also win. In TanStack Start, link it from the root route head, before the Mizen stylesheet.",
+					"In a new app, import it and write no defaults of your own. In an existing app, import it first and change nothing else: your global rules still win where they overlap, so you can remove them one at a time. An app that already has a reset, such as Tailwind preflight, does not need this one.",
+				],
+				title: "Optional reset",
 			},
 			{
 				code: {

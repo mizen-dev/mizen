@@ -1,0 +1,30 @@
+/*
+ * The Mizen reset. It is opt-in: no component and no other stylesheet imports
+ * it. Every rule sits in the mizen-reset cascade layer, so any rule outside a
+ * layer wins: your own CSS, a third-party widget, and Mizen's components.
+ *
+ * It leaves list markers, heading sizes, link styles and focus rings alone.
+ */
+@layer mizen-reset {
+	/* Width and height include padding and border. */
+	*,
+	::before,
+	::after {
+		box-sizing: border-box;
+	}
+
+	/* The page starts at the edge of the viewport. */
+	body {
+		margin: 0;
+	}
+
+	/* A control uses the font of the text around it. */
+	button,
+	input,
+	optgroup,
+	select,
+	textarea {
+		font: inherit;
+		letter-spacing: inherit;
+	}
+}

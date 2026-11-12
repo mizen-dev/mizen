@@ -1,3 +1,6 @@
+// The page, not the layout, imports the application's CSS. The reset probes
+// then render without it.
+import "./globals.css";
 import { Card, Heatmap, Inline, ScatterChart, Stack } from "@mizen-labs/ui";
 import { ThemeSelect } from "./theme-select";
 import { WorkspaceControls } from "./workspace-controls";

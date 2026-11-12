@@ -1,5 +1,4 @@
 import "@mizen-labs/ui/styles.css";
-import "./globals.css";
 import "@fontsource-variable/wix-madefor-text/wght.css";
 import { ThemeProvider, ThemeScript } from "@mizen-labs/ui/theme";
 

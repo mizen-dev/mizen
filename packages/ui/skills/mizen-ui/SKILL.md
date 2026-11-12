@@ -51,6 +51,10 @@ writing screens: `npx @mizen-labs/cli@<installed version> init` prints the
 plan, and `doctor` checks an existing setup. Do not change the compiler, fonts,
 or theme setup by hand.
 
+The app owns its global defaults. `@mizen-labs/ui/reset.css` is an opt-in
+reset: `box-sizing`, the `body` margin and font inheritance on form controls.
+Components do not need it. Add or remove it only when the user asks.
+
 The app's theme is one file, `mizen-theme.css`, when it has one. It declares
 `--mizen-*` token variables on `:root`, with dark values under
 `[data-theme="dark"]`. Change the look there and nowhere else: never per page

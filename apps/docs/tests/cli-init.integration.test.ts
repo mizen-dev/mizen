@@ -10,6 +10,7 @@ import { expect, it, onTestFinished } from "vite-plus/test";
 import { INSTALL_TIMEOUT_MS } from "../../../packages/cli/scripts/process.js";
 import { stopProcess } from "../../../packages/cli/scripts/stop-process.js";
 import { cleanup } from "../../../scripts/cleanup.mjs";
+import { verifyReset } from "./reset-probe";
 
 const execute = promisify(execFile);
 const repository = new URL("../../../", import.meta.url).pathname;
@@ -331,6 +332,10 @@ for (const start of [false, true]) {
 			await command(manager, ["run", "build"], app);
 			server = await productionServer(app, start);
 			await browserChecks(server.origin);
+			// Only the Next fixture has the reset routes.
+			if (!start) {
+				await verifyReset(server.origin);
+			}
 		},
 		2_700_000
 	);

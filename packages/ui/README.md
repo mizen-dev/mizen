@@ -32,6 +32,11 @@ and TanStack Start each need one setting:
 
 For Next and Start, render `ThemeScript` in the document head and wrap the app in `ThemeProvider`,
 both from `@mizen-labs/ui/theme`. The app owns its global defaults and fonts.
+For those defaults you can import `@mizen-labs/ui/reset.css` before the
+stylesheet. It is opt-in and sets three things: `box-sizing: border-box`, no
+`body` margin, and font inheritance on form controls. Its rules sit in the
+`mizen-reset` cascade layer, so any CSS outside a layer wins over them.
+Components render the same with it and without it.
 The package stylesheet includes the default light and dark themes, and every
 token as a CSS variable such as `--mizen-color-content` and `--mizen-space-4`.
 Style your own elements with those variables in plain CSS. To change a color,
