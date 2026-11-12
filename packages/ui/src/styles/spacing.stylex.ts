@@ -1,9 +1,9 @@
-import { defineConsts } from "@stylexjs/stylex";
+import { defineVars } from "@stylexjs/stylex";
 
 // Numeric keys follow the 4px grid: step × 4 = px. `1.5` (6px) joins a control
 // to its label and help text; `px` (2px) joins a title to its description and
 // makes optical corrections.
-export const space = defineConsts({
+export const space = defineVars({
 	"0": "0",
 	"1": "0.25rem",
 	"1.5": "0.375rem",

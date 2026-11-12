@@ -41,6 +41,17 @@ function brandBackground() {
 		.evaluate((button) => getComputedStyle(button, "::before").backgroundColor);
 }
 
+function brandLook() {
+	return page
+		.getByRole("button", { exact: true, name: "Brand" })
+		.first()
+		.evaluate((button) => ({
+			height: getComputedStyle(button).height,
+			shadow: getComputedStyle(button, "::before").boxShadow,
+			transition: getComputedStyle(button).transitionDuration,
+		}));
+}
+
 describe("Public token variables", () => {
 	beforeAll(async () => {
 		handle = await setupTestServer(docsRoot);
@@ -72,6 +83,31 @@ describe("Public token variables", () => {
 	it("gives application CSS the scales", async () => {
 		expect((await readToken("--mizen-space-4")).width).toBe("16px");
 		expect((await readToken("--mizen-control-size-md")).width).toBe("32px");
+	});
+
+	it("lets application CSS change density, depth and motion", async () => {
+		await openButtonPage("light");
+		expect(await brandLook()).toMatchObject({
+			height: "32px",
+			transition: "0.14s",
+		});
+		await page.addStyleTag({
+			content: `:root {
+	--mizen-control-size-md: 40px;
+	--mizen-shadow-filled-rest: 0 0 0 4px rgb(0, 128, 0);
+}`,
+		});
+		// The shadow follows after its transition.
+		await expect
+			.poll(async () => (await brandLook()).shadow)
+			.toContain("rgb(0, 128, 0) 0px 0px 0px 4px");
+		await page.addStyleTag({
+			content: ":root { --mizen-duration-fast: 1s; }",
+		});
+		expect(await brandLook()).toMatchObject({
+			height: "40px",
+			transition: "1s",
+		});
 	});
 
 	it.each(["light", "dark"] as const)(

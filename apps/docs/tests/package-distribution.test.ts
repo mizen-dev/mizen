@@ -67,9 +67,19 @@ it("packs every public export and preserves client boundaries", async () => {
 		expect(css.startsWith("@layer mizen-tokens{")).toBe(true);
 		expect(css.split("--mizen-color-content:oklch(").length - 1).toBe(2);
 		expect(css.split(":var(--mizen-color-content)").length - 1).toBe(2);
+		// Spacing, sizes, shadows and motion have one value for both themes.
+		for (const scale of [
+			"--mizen-space-1-5",
+			"--mizen-control-size-md",
+			"--mizen-shadow-floating",
+			"--mizen-duration-fast",
+			"--mizen-easing-spring",
+		]) {
+			expect(css.split(`${scale}:`).length - 1).toBe(1);
+			expect(css.split(`:var(${scale})`).length - 1).toBe(1);
+		}
+		expect(css).toContain("--mizen-space-4:1rem");
 		for (const constant of [
-			"--mizen-space-4:1rem",
-			"--mizen-space-1-5:0.375rem",
 			"--mizen-border-width-thin:1px",
 			"--mizen-palette-green500:oklch(0.63 0.14 150)",
 			"--mizen-font-size-14:0.875rem",

@@ -1,6 +1,6 @@
-import { defineConsts } from "@stylexjs/stylex";
+import { defineVars } from "@stylexjs/stylex";
 
-export const shadows = defineConsts({
+export const shadows = defineVars({
 	// Fields sit on the surface: a faint drop under a real edge, never inset.
 	fieldRest: "0 1px 2px oklch(0 0 0 / 0.04)",
 	filledHover: "0 1px 2px oklch(0 0 0 / 0.16), 0 2px 4px oklch(0 0 0 / 0.08)",

@@ -1,6 +1,6 @@
-import { defineConsts } from "@stylexjs/stylex";
+import { defineConsts, defineVars } from "@stylexjs/stylex";
 
-export const easing = defineConsts({
+export const easing = defineVars({
 	back: "cubic-bezier(0.34, 1.4, 0.64, 1)",
 	easeIn: "cubic-bezier(0.4, 0, 1, 1)",
 	easeInOut: "cubic-bezier(0.4, 0, 0.2, 1)",
@@ -13,7 +13,7 @@ export const easing = defineConsts({
 		"linear(0, 0.35 8%, 0.86 19%, 1.07 29%, 1.11 37%, 1.06 49%, 1.01 67%, 1)",
 });
 
-export const duration = defineConsts({
+export const duration = defineVars({
 	disclosure: "320ms",
 	fast: "140ms",
 	instant: "0ms",
@@ -42,6 +42,6 @@ export const indicatorTravel = defineConsts({
 // the surface returns a little slower than colors. Lists follow `property`.
 export const pressSurface = defineConsts({
 	property: "inset, background-color, border-color, box-shadow, opacity",
-	restDuration: "200ms, 140ms, 140ms, 140ms, 140ms",
-	restEasing: "cubic-bezier(0.16, 1, 0.3, 1)",
+	restDuration: `200ms, ${duration.fast}, ${duration.fast}, ${duration.fast}, ${duration.fast}`,
+	restEasing: easing.expoOut,
 });
