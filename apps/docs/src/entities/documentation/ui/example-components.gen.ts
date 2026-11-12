@@ -55,6 +55,7 @@ export const usageComponents: Record<string, ReturnType<typeof preloadableExampl
 "BadgePolymorphicLinkExample3": preloadableExample(() => import("./examples/badge-variants").then((module) => ({ default: module.BadgePolymorphicLinkExample3 }))),
 "BadgeSemanticVariantsExample1": preloadableExample(() => import("./examples/badge-variants").then((module) => ({ default: module.BadgeSemanticVariantsExample1 }))),
 "BadgeSizesExample2": preloadableExample(() => import("./examples/badge-variants").then((module) => ({ default: module.BadgeSizesExample2 }))),
+"BadgeSoftStatusExample4": preloadableExample(() => import("./examples/badge-variants").then((module) => ({ default: module.BadgeSoftStatusExample4 }))),
 "BarListTopSourcesExample": preloadableExample(() => import("./examples/bar-list-variants").then((module) => ({ default: module.BarListTopSourcesExample }))),
 "BasicAccordion": preloadableExample(() => import("./examples/accordion").then((module) => ({ default: module.BasicAccordion }))),
 "BasicCollapsible": preloadableExample(() => import("./examples/collapsible").then((module) => ({ default: module.BasicCollapsible }))),

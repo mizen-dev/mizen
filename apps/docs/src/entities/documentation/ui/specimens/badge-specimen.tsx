@@ -21,6 +21,13 @@ const variantSamples = [
 	{ label: "Featured", variant: "brand" },
 ] as const;
 
+const statusSamples = [
+	{ label: "Delivery failed", variant: "destructive" },
+	{ label: "Processing", variant: "info" },
+	{ label: "Delivered", variant: "success" },
+	{ label: "Waiting", variant: "warning" },
+] as const;
+
 const sizeSamples = [
 	{ label: "Unread", size: "sm" },
 	{ label: "In progress", size: "default" },
@@ -46,6 +53,18 @@ export function BadgeSpecimen() {
 				<Inline>
 					{variantSamples.map(({ label, variant }) => (
 						<Badge key={variant} variant={variant}>
+							{label}
+						</Badge>
+					))}
+				</Inline>
+			</SpecimenSection>
+			<SpecimenSection
+				description="Fill a status badge with its color where statuses must stand out in a dense table or list."
+				title="Soft status"
+			>
+				<Inline>
+					{statusSamples.map(({ label, variant }) => (
+						<Badge appearance="soft" key={variant} variant={variant}>
 							{label}
 						</Badge>
 					))}

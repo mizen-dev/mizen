@@ -1687,6 +1687,12 @@
       "path": "entities/documentation/ui/examples/badge-variants.tsx"
     },
     {
+      "name": "BadgeSoftStatusExample4",
+      "title": "Soft status",
+      "description": "Fill a status badge with its color where statuses must stand out in a dense table or list.",
+      "path": "entities/documentation/ui/examples/badge-variants.tsx"
+    },
+    {
       "name": "BadgeSizesExample2",
       "title": "Sizes",
       "description": "",

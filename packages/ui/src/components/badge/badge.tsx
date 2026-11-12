@@ -1,7 +1,7 @@
 "use client";
 
 import { useRender } from "@base-ui/react/use-render";
-import { props } from "@stylexjs/stylex";
+import { props, type StyleXStyles } from "@stylexjs/stylex";
 import { controlLabel } from "../../control-label";
 import { protectRenderSlot } from "../../render-utils";
 import { badgeStyles } from "./badge.styles";
@@ -16,11 +16,14 @@ export type BadgeVariant =
 	| "warning"
 	| "brand";
 export type BadgeSize = "default" | "sm" | "lg";
+export type BadgeAppearance = "dot" | "soft";
 
 export type BadgeProps = Omit<
 	useRender.ComponentProps<"span">,
 	"className" | "data-slot" | "style"
 > & {
+	/** How a status variant shows its color: a dot beside ink text, or a soft fill. Other variants ignore it. */
+	appearance?: BadgeAppearance;
 	size?: BadgeSize;
 	variant?: BadgeVariant;
 };
@@ -36,6 +39,13 @@ const variantStyles = {
 	warning: badgeStyles.warning,
 };
 
+const softStyles: Partial<Record<BadgeVariant, StyleXStyles>> = {
+	destructive: badgeStyles.softDestructive,
+	info: badgeStyles.softInfo,
+	success: badgeStyles.softSuccess,
+	warning: badgeStyles.softWarning,
+};
+
 const sizeStyles = {
 	default: badgeStyles.defaultSize,
 	lg: badgeStyles.lg,
@@ -43,6 +53,7 @@ const sizeStyles = {
 };
 
 export function Badge({
+	appearance = "dot",
 	children,
 	ref: forwardedRef,
 	render,
@@ -51,6 +62,7 @@ export function Badge({
 	...rest
 }: BadgeProps) {
 	const normalizedRender = protectRenderSlot("badge", render);
+	const soft = appearance === "soft" ? softStyles[variant] : undefined;
 
 	return useRender({
 		defaultTagName: "span",
@@ -58,7 +70,11 @@ export function Badge({
 			...rest,
 			children: controlLabel(children),
 			"data-slot": "badge",
-			...props(badgeStyles.base, variantStyles[variant], sizeStyles[size]),
+			...props(
+				badgeStyles.base,
+				soft ?? variantStyles[variant],
+				sizeStyles[size]
+			),
 		},
 		ref: forwardedRef,
 		render: normalizedRender,

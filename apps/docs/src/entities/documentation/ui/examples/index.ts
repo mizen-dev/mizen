@@ -59,6 +59,7 @@ import {
 	BadgePolymorphicLinkExample3,
 	BadgeSemanticVariantsExample1,
 	BadgeSizesExample2,
+	BadgeSoftStatusExample4,
 } from "./badge-variants";
 import { VisitorsByDevice } from "./bar-list";
 import { DevicesCard } from "./bar-list-card";
@@ -723,6 +724,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	BadgePolymorphicLinkExample3,
 	BadgeSemanticVariantsExample1,
 	BadgeSizesExample2,
+	BadgeSoftStatusExample4,
 	BarListTopSourcesExample,
 	BasicAccordion,
 	BasicCollapsible,

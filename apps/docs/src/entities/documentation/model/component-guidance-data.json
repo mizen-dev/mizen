@@ -95,7 +95,8 @@
       "Use Button or Link for explicit actions. A badge must not be the only indication of a critical state."
     ],
     "recommendations": [
-      "Use short labels for status or category. Pair semantic color with text that carries the meaning."
+      "Use short labels for status or category. Pair semantic color with text that carries the meaning.",
+      "Keep the dot for status in sparse rows and running text. Set `appearance=\"soft\"` where statuses must stand out in a dense table or list. Use one appearance per view."
     ]
   },
   "bar-list": {

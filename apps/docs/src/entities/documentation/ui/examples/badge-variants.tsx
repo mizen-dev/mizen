@@ -12,6 +12,12 @@ const variantSamples = [
 	{ label: "Needs review", variant: "warning" },
 	{ label: "Featured", variant: "brand" },
 ] as const;
+const statusSamples = [
+	{ label: "Delivery failed", variant: "destructive" },
+	{ label: "Processing", variant: "info" },
+	{ label: "Delivered", variant: "success" },
+	{ label: "Waiting", variant: "warning" },
+] as const;
 const sizeSamples = [
 	{ label: "Unread", size: "sm" },
 	{ label: "In progress", size: "default" },
@@ -23,6 +29,19 @@ export function BadgeSemanticVariantsExample1() {
 			<Inline>
 				{variantSamples.map(({ label, variant }) => (
 					<Badge key={variant} variant={variant}>
+						{label}
+					</Badge>
+				))}
+			</Inline>
+		</Stack>
+	);
+}
+export function BadgeSoftStatusExample4() {
+	return (
+		<Stack gap="4">
+			<Inline>
+				{statusSamples.map(({ label, variant }) => (
+					<Badge appearance="soft" key={variant} variant={variant}>
 						{label}
 					</Badge>
 				))}

@@ -3629,9 +3629,15 @@
     "api": [
       {
         "defaultValue": "\"default\"",
-        "description": "Sets the semantic appearance of the badge.",
+        "description": "Sets the meaning of the badge: a category or a status.",
         "name": "variant",
         "type": "\"default\" | \"destructive\" | \"info\" | \"outline\" | \"secondary\" | \"success\" | \"warning\" | \"brand\""
+      },
+      {
+        "defaultValue": "\"dot\"",
+        "description": "Sets how a status variant (destructive, info, success, warning) shows its color: a dot beside ink text, or a soft fill. Other variants ignore it.",
+        "name": "appearance",
+        "type": "\"dot\" | \"soft\""
       },
       {
         "defaultValue": "\"default\"",

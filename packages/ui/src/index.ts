@@ -72,6 +72,7 @@ export {
 	AvatarImage,
 } from "./components/avatar/avatar";
 export type {
+	BadgeAppearance,
 	BadgeProps,
 	BadgeSize,
 	BadgeVariant,

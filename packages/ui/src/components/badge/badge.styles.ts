@@ -34,6 +34,15 @@ const status = (dot: string) =>
 		gap: "0.375rem",
 	}) as const;
 
+// A soft status badge fills with the status tint. The label names the
+// status, so it needs no dot.
+const soft = (fill: string, text: string) =>
+	({
+		backgroundColor: fill,
+		borderColor: "transparent",
+		color: text,
+	}) as const;
+
 export const badgeStyles = create({
 	base: {
 		alignItems: "center",
@@ -123,6 +132,10 @@ export const badgeStyles = create({
 		minHeight: "1.25rem",
 		paddingInline: "0.375rem",
 	},
+	softDestructive: soft(colors.destructiveSubtle, colors.destructiveText),
+	softInfo: soft(colors.info, colors.infoContent),
+	softSuccess: soft(colors.success, colors.successContent),
+	softWarning: soft(colors.warning, colors.warningContent),
 	success: status(colors.successSolid),
 	warning: status(colors.warningSolid),
 });

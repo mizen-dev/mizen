@@ -45,6 +45,7 @@ const variants = [
 	"brand",
 ] as const;
 const sizes = ["default", "sm", "lg"] as const;
+const softLabels = ["Delivery failed", "Processing", "Delivered", "Waiting"];
 const transparentColor = /transparent|rgba\(0, 0, 0, 0\)/u;
 
 const contractChecks = [
@@ -54,6 +55,7 @@ const contractChecks = [
 	true satisfies Accepts<BadgeProps, "children">,
 	true satisfies Accepts<BadgeProps, "variant">,
 	true satisfies Accepts<BadgeProps, "size">,
+	true satisfies Accepts<BadgeProps, "appearance">,
 	true satisfies Accepts<BadgeProps, "render">,
 	true satisfies Accepts<BadgeProps, "ref">,
 ] as const;
@@ -118,7 +120,7 @@ function measureTextContrast(locator: Locator): Promise<number> {
 		};
 		const badge = node.closest('[data-slot="badge"]') ?? node;
 		const computed = getComputedStyle(badge);
-		let bgElement: Element | null = badge.parentElement;
+		let bgElement: Element | null = badge;
 		let bg = "rgb(255, 255, 255)";
 		while (bgElement) {
 			const bgStyle = getComputedStyle(bgElement).backgroundColor;
@@ -139,6 +141,27 @@ function measureTextContrast(locator: Locator): Promise<number> {
 			(Math.min(foreground, background) + 0.05)
 		);
 	});
+}
+
+async function softReadings(theme: "dark" | "light") {
+	await page.evaluate(
+		(value) => localStorage.setItem("mizen-theme", value),
+		theme
+	);
+	await page.reload({ waitUntil: "networkidle" });
+	return Promise.all(
+		softLabels.map(async (label) => {
+			const badge = page.getByText(label, { exact: true }).first();
+			const look = await badge.evaluate((node) => {
+				const root = node.closest('[data-slot="badge"]') ?? node;
+				return {
+					dot: getComputedStyle(root, "::before").content,
+					fill: getComputedStyle(root).backgroundColor,
+				};
+			});
+			return { ...look, contrast: await measureTextContrast(badge) };
+		})
+	);
 }
 
 describe("Badge component contract", () => {
@@ -171,6 +194,7 @@ describe("Badge component contract", () => {
 			true,
 			false,
 			false,
+			true,
 			true,
 			true,
 			true,
@@ -318,6 +342,19 @@ describe("Badge component contract", () => {
 		destructive = page.getByText("Failed", { exact: true });
 		expect(await destructive.count()).toBe(1);
 		expect(await measureTextContrast(destructive)).toBeGreaterThanOrEqual(4.5);
+	});
+
+	it("fills a soft status badge and keeps its label readable in both themes", async () => {
+		await gotoBadge(1280, 900);
+		const light = await softReadings("light");
+		const dark = await softReadings("dark");
+		for (const reading of [...light, ...dark]) {
+			expect(reading.dot).toBe("none");
+			expect(reading.fill).not.toMatch(transparentColor);
+			expect(reading.contrast).toBeGreaterThanOrEqual(4.5);
+		}
+		expect(light).toHaveLength(softLabels.length);
+		expect(dark).toHaveLength(softLabels.length);
 	});
 
 	it("fits a narrow viewport without horizontal overflow", async () => {
