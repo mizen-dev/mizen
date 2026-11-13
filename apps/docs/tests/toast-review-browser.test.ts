@@ -168,6 +168,34 @@ describe("Toast visual and interaction states", { timeout: 20_000 }, () => {
 		}
 	);
 
+	it.each([
+		["Report lost connection", "Connection lost"],
+		["Deploy production release", "Release deployed"],
+	])(
+		"centers the action on the title line after %s",
+		async (trigger, title) => {
+			await page.getByRole("button", { exact: true, name: trigger }).click();
+			const toast = page.locator('[data-slot="toast-root"]').filter({
+				has: page.locator('[data-slot="toast-title"]', { hasText: title }),
+			});
+			await settled(toast);
+			const [icon, line, action, content] = await Promise.all(
+				["toast-icon", "toast-title", "toast-action", "toast-content"].map(
+					(slot) => toast.locator(`[data-slot="${slot}"]`).boundingBox()
+				)
+			);
+			const center = (box: typeof icon) => (box ? box.y + box.height / 2 : -1);
+			expect(center(action)).toBeCloseTo(center(line), 0);
+			expect(center(icon)).toBeCloseTo(center(line), 0);
+			// The 28px action adds no height: the text alone sets it, inside
+			// the 16px inset.
+			const text = await toast
+				.locator('[data-slot="toast-title"]')
+				.evaluate((element) => element.parentElement?.offsetHeight);
+			expect(content?.height).toBe((text ?? 0) + 32);
+		}
+	);
+
 	it.each(["light", "dark"] as const)(
 		"shares a toaster across demos and keeps actions and anchored feedback aligned in %s",
 		async (theme) => {

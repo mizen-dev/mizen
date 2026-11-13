@@ -4,6 +4,7 @@ import { anchoredToastManager, toastManager } from "@mizen-labs/ui/toast";
 import type { MouseEvent } from "react";
 import { useCallback, useRef } from "react";
 
+const CONNECTION_ID = "workspace-connection-lost";
 const DEPLOY_ID = "workspace-release-deploy";
 const FAILURE_ID = "workspace-build-failure";
 const MANIFEST_ID = "workspace-manifest-verify";
@@ -61,6 +62,17 @@ function handleBuildFailure() {
 		priority: "high",
 		title: "Release build failed",
 		type: "error",
+	});
+}
+function handleLostConnection() {
+	toastManager.add({
+		actionProps: {
+			children: "Dismiss",
+			onClick: () => toastManager.close(CONNECTION_ID),
+		},
+		id: CONNECTION_ID,
+		title: "Connection lost",
+		type: "warning",
 	});
 }
 const STACK_NOTICES = [
@@ -142,6 +154,9 @@ export function ToastInContextExample1() {
 				</Button>
 				<Button onClick={handleAddStackNotice} variant="outline">
 					Add stack notice
+				</Button>
+				<Button onClick={handleLostConnection} variant="outline">
+					Report lost connection
 				</Button>
 			</Group>
 			<Group>

@@ -22,7 +22,8 @@ import {
 export const toastStyles = create({
 	action: {
 		alignItems: "center",
-		alignSelf: "center",
+		// Sits on the first line of the title, like the icon.
+		alignSelf: "flex-start",
 		animationDuration: {
 			":focus-visible": focusMotion.duration,
 		},
@@ -51,6 +52,9 @@ export const toastStyles = create({
 		justifyContent: "center",
 		letterSpacing: letterSpacing.ui,
 		lineHeight: lineHeight.none,
+		// Taller than the title line: the margin centers it on that line and
+		// keeps it from adding height to the toast.
+		marginBlock: `calc((${lineHeight["20"]} - 1.75rem) / 2)`,
 		marginInlineStart: space["1"],
 		minHeight: "1.75rem",
 		opacity: { ":disabled": opacity.disabled, default: 1 },
