@@ -4067,7 +4067,7 @@
       },
       {
         "defaultValue": "appearance: \"dot\", good: \"up\", locale: \"en-US\"",
-        "description": "Change chip for a fractional value (0.16 is +16%). Green when the change moves in the good direction, red when it moves against it, neutral at zero. appearance=\"soft\" fills the chip with its tone instead of showing a dot.",
+        "description": "Change chip for a fractional value (0.16 is +16%). Green when the change moves in the good direction, red when it moves against it, neutral at zero. good=\"down\" suits costs and errors; good=\"none\" keeps the neutral tone for any sign. appearance=\"soft\" fills the chip with its tone instead of showing a dot.",
         "name": "MetricDelta",
         "type": "MetricDeltaProps"
       }
@@ -6794,9 +6794,9 @@
       },
       {
         "name": "Timestamp.format",
-        "type": "\"date\" | \"date-time\"",
+        "type": "\"date\" | \"date-time\" | \"time\" | \"relative\"",
         "defaultValue": "\"date-time\"",
-        "description": "Formats the visible date, optionally with time and timezone."
+        "description": "date shows the day, date-time adds the time and timezone, and time shows only the hour and minute. relative counts from now and keeps the exact time in its title."
       },
       {
         "name": "Timestamp.locale / Timestamp.timeZone",
@@ -7119,6 +7119,12 @@
         "type": "\"value\" | \"footer\"",
         "defaultValue": "\"value\"",
         "description": "footer moves the description and change chip into an inset strip at the bottom of the card."
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "Holds the card's shape while its data loads and sets aria-busy. The value renders as a placeholder, and so do the description and delta when passed. The label stays readable."
       }
     ],
     "category": "Charts",

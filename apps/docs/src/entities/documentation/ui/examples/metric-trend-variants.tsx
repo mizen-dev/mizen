@@ -1,7 +1,9 @@
 "use client";
 import {
+	Button,
 	Grid,
 	Heading,
+	Inline,
 	MetricDelta,
 	MetricTrend,
 	Stack,
@@ -15,6 +17,7 @@ import {
 	IconShoppingCart,
 	IconUsers,
 } from "@tabler/icons-react";
+import { useCallback, useState } from "react";
 
 const signInPoints = [
 	{ time: Date.parse("2026-03-01T08:00:00Z"), value: 8 },
@@ -157,6 +160,75 @@ export function MetricTrendSoftChangeChipExample() {
 				valuePrefix="$"
 			/>
 		</Grid>
+	);
+}
+
+// good="none" keeps the flat tone: the change is a fact, not good or bad news.
+export function MetricTrendNeutralChangeExample() {
+	return (
+		<Grid>
+			<MetricTrend
+				delta={<MetricDelta value={0.12} />}
+				description="From yesterday"
+				label="Deposits"
+				value="1,284"
+			/>
+			<MetricTrend
+				delta={<MetricDelta good="none" value={1} />}
+				description="From yesterday"
+				label="Withdrawals"
+				value="200"
+			/>
+			<MetricTrend
+				delta={<MetricDelta good="none" value={-0.031} />}
+				description="From yesterday"
+				label="Inventory value"
+				value="84,250"
+				valuePrefix="$"
+			/>
+		</Grid>
+	);
+}
+
+// loading holds the card's shape while its data loads. Pass the description
+// and delta the loaded card will have, so each keeps its line.
+export function MetricTrendLoadingExample() {
+	const [loading, setLoading] = useState(true);
+	const toggle = useCallback(() => setLoading((current) => !current), []);
+	return (
+		<Stack gap="4">
+			<Inline>
+				<Button onClick={toggle} variant="outline">
+					{loading ? "Show the data" : "Show loading"}
+				</Button>
+			</Inline>
+			<Grid>
+				<MetricTrend
+					delta={<MetricDelta value={0.08} />}
+					description="From yesterday"
+					label="Income"
+					loading={loading}
+					value="18,420"
+					valuePrefix="$"
+				/>
+				<MetricTrend
+					delta={<MetricDelta good="down" value={0.021} />}
+					description="From yesterday"
+					label="Expense"
+					loading={loading}
+					value="6,310"
+					valuePrefix="$"
+				/>
+				<MetricTrend
+					deltaPlacement="footer"
+					description="Income minus expense"
+					label="Difference"
+					loading={loading}
+					value="12,110"
+					valuePrefix="$"
+				/>
+			</Grid>
+		</Stack>
 	);
 }
 

@@ -614,6 +614,8 @@
       "State the reporting period and the comparison baseline. Keep the current value readable without interpreting the plot.",
       "Put the legend in actions and pass legend={false} to the chart. Set good=\"down\" on MetricDelta for metrics where a fall is good, such as refunds.",
       "Set `appearance=\"soft\"` on MetricDelta where the view also uses soft status badges. Use one appearance per view.",
+      "Set good=\"none\" on MetricDelta when a change is neither good nor bad, such as withdrawals or inventory value.",
+      "While data loads, set loading and pass the description and delta the loaded card will have. Do not hide the cards or put Skeleton in their slots.",
       "To make a stat card navigate, pass the link to render. Do not wrap the card in a link, and do not put a second link inside a linked card."
     ]
   },
@@ -985,7 +987,8 @@
       "Use date inputs for editable local values. A timestamp represents an instant, not an unresolved local appointment."
     ],
     "recommendations": [
-      "Provide a timezone-bearing instant and choose locale and timezone explicitly for consistent output."
+      "Provide a timezone-bearing instant and choose locale and timezone explicitly for consistent output.",
+      "Use format=\"time\" only where the surrounding text already states the day."
     ]
   },
   "toast": {

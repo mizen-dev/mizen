@@ -94,6 +94,26 @@ export const metricTrendStyles = create({
 		transitionProperty: "background-color, outline-color",
 		transitionTimingFunction: easing.expoOut,
 	},
+	// A loading card draws a bar in each line of text it will hold. The box is
+	// one line tall and sits in that line, so the card keeps the height of its
+	// loaded state.
+	placeholder: {
+		alignItems: "center",
+		blockSize: "1lh",
+		display: "inline-flex",
+		maxInlineSize: "100%",
+		verticalAlign: "top",
+	},
+	placeholderBar: {
+		blockSize: "0.75em",
+		borderRadius: shape.checkboxRadius,
+		inlineSize: "100%",
+	},
+	// The change chip keeps its own height and pill shape.
+	placeholderDelta: { blockSize: "1.25rem", inlineSize: "3rem" },
+	placeholderDeltaBar: { blockSize: "100%", borderRadius: "0.625rem" },
+	placeholderDescription: { inlineSize: "8em" },
+	placeholderValue: { inlineSize: "4em" },
 	prefix: { marginInlineEnd: space.px },
 	root: {
 		backgroundColor: colors.workarea,
@@ -115,6 +135,15 @@ export const metricTrendStyles = create({
 			[conditions.sm]: lineHeight["28"],
 			default: lineHeight["24"],
 		},
+	},
+	// A loading card keeps its units in the line, hidden and without width, so
+	// the line keeps the height of the loaded value.
+	unitLoading: {
+		display: "inline-block",
+		inlineSize: 0,
+		marginInlineEnd: 0,
+		marginInlineStart: 0,
+		visibility: "hidden",
 	},
 	valueRow: {
 		alignItems: "center",

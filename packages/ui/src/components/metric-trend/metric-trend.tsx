@@ -12,6 +12,7 @@ import {
 	MetricLabel,
 	MetricValue,
 } from "../metric/metric";
+import { skeletonStyles } from "../skeleton/skeleton.styles";
 import { metricTrendStyles } from "./metric-trend.styles";
 
 export type MetricTrendProps = Omit<
@@ -34,6 +35,12 @@ export type MetricTrendProps = Omit<
 	icon?: ReactNode;
 	label: ReactNode;
 	/**
+	 * Holds the card's shape while its data loads. The value renders as a
+	 * placeholder, and so do the description and delta when they are passed.
+	 * Pass the props the loaded card will have; the label stays readable.
+	 */
+	loading?: boolean;
+	/**
 	 * Makes the whole card a link: pass an anchor or a router link. Such a card
 	 * holds no other control, so leave out actions.
 	 */
@@ -46,23 +53,75 @@ export type MetricTrendProps = Omit<
 	valueSuffix?: string;
 };
 
+type Slot = "delta" | "description" | "value";
+
+const placeholderSizes = {
+	delta: metricTrendStyles.placeholderDelta,
+	description: metricTrendStyles.placeholderDescription,
+	value: metricTrendStyles.placeholderValue,
+} as const;
+
+function Placeholder({ slot }: { slot: Slot }) {
+	return (
+		<span
+			aria-hidden="true"
+			data-slot={`metric-trend-${slot}-placeholder`}
+			{...props(metricTrendStyles.placeholder, placeholderSizes[slot])}
+		>
+			<span
+				{...props(
+					skeletonStyles.base,
+					metricTrendStyles.placeholderBar,
+					slot === "delta" && metricTrendStyles.placeholderDeltaBar
+				)}
+			/>
+		</span>
+	);
+}
+
+const present = (node: ReactNode) => node !== undefined && node !== null;
+
+// What a loading card shows in place of its data: a bar for the value, and a
+// bar for each of the description and delta the card was given.
+function loadingSlots({
+	delta,
+	description,
+}: Pick<MetricTrendProps, "delta" | "description">) {
+	return {
+		delta: present(delta) ? <Placeholder slot="delta" /> : undefined,
+		description: present(description) ? (
+			<Placeholder slot="description" />
+		) : undefined,
+		value: <Placeholder slot="value" />,
+	};
+}
+
 // The numeral leads; currency signs and units step back so the number reads
 // first.
 function HeadlineValue({
+	loading,
 	value,
 	valuePrefix,
 	valueSuffix,
-}: Pick<MetricTrendProps, "value" | "valuePrefix" | "valueSuffix">) {
+}: Pick<
+	MetricTrendProps,
+	"loading" | "value" | "valuePrefix" | "valueSuffix"
+>) {
+	const hidden = loading && metricTrendStyles.unitLoading;
 	return (
 		<MetricValue>
 			{valuePrefix ? (
-				<span {...props(metricTrendStyles.unit, metricTrendStyles.prefix)}>
+				<span
+					{...props(metricTrendStyles.unit, metricTrendStyles.prefix, hidden)}
+				>
 					{valuePrefix}
 				</span>
 			) : null}
 			{value}
 			{valueSuffix ? (
-				<span {...props(metricTrendStyles.unit, metricTrendStyles.suffix)}>
+				<span
+					{...props(metricTrendStyles.unit, metricTrendStyles.suffix, hidden)}
+				>
 					{valueSuffix}
 				</span>
 			) : null}
@@ -94,6 +153,7 @@ function MetricTrendLead({
 	description,
 	icon,
 	label,
+	loading,
 	value,
 	valuePrefix,
 	valueSuffix,
@@ -103,6 +163,7 @@ function MetricTrendLead({
 	| "description"
 	| "icon"
 	| "label"
+	| "loading"
 	| "value"
 	| "valuePrefix"
 	| "valueSuffix"
@@ -129,6 +190,7 @@ function MetricTrendLead({
 				{value === undefined || value === null ? null : (
 					<div {...props(metricTrendStyles.valueRow)}>
 						<HeadlineValue
+							loading={loading}
 							value={value}
 							valuePrefix={valuePrefix}
 							valueSuffix={valueSuffix}
@@ -168,6 +230,7 @@ export function MetricTrend({
 	description,
 	icon,
 	label,
+	loading = false,
 	ref: forwardedRef,
 	render,
 	value,
@@ -179,16 +242,25 @@ export function MetricTrend({
 		Reflect.deleteProperty(rest, name);
 	}
 	const inFooter = deltaPlacement === "footer";
+	const shown = loading
+		? loadingSlots({ delta, description })
+		: { delta, description, value };
 
 	return (
-		<MetricTrendRoot {...rest} ref={forwardedRef} render={render}>
+		<MetricTrendRoot
+			{...rest}
+			aria-busy={loading || undefined}
+			ref={forwardedRef}
+			render={render}
+		>
 			<div data-slot="metric-trend-header" {...props(metricTrendStyles.header)}>
 				<MetricTrendLead
-					delta={inFooter ? undefined : delta}
-					description={inFooter ? undefined : description}
+					{...shown}
+					delta={inFooter ? undefined : shown.delta}
+					description={inFooter ? undefined : shown.description}
 					icon={icon}
 					label={label}
-					value={value}
+					loading={loading}
 					valuePrefix={valuePrefix}
 					valueSuffix={valueSuffix}
 				/>
@@ -203,7 +275,10 @@ export function MetricTrend({
 			</div>
 			{children}
 			{inFooter ? (
-				<MetricTrendFooter delta={delta} description={description} />
+				<MetricTrendFooter
+					delta={shown.delta}
+					description={shown.description}
+				/>
 			) : null}
 		</MetricTrendRoot>
 	);

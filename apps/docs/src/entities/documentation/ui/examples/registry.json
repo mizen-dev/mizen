@@ -2238,6 +2238,18 @@
       "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
     },
     {
+      "name": "MetricTrendNeutralChangeExample",
+      "title": "Neutral change",
+      "description": "good=\"none\" keeps the flat tone for a change that is neither good nor bad. The sign still shows the direction.",
+      "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
+    },
+    {
+      "name": "MetricTrendLoadingExample",
+      "title": "Loading",
+      "description": "loading holds the height of the loaded card and marks it busy. Pass the description and delta the loaded card will have.",
+      "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
+    },
+    {
       "name": "MetricTrendLinkedStatCardExample",
       "title": "Linked stat card",
       "description": "render makes the whole card a link, with the library's hover and focus states. Leave render out where the reader may not open the destination; the card is then static.",
@@ -2445,6 +2457,12 @@
       "title": "Document history",
       "description": "",
       "path": "entities/documentation/ui/examples/timestamp-variants.tsx"
+    },
+    {
+      "name": "TimestampTimeOnlyExample2",
+      "title": "Time only",
+      "description": "format=\"time\" shows the hour and minute where the surrounding text already states the day.",
+      "path": "entities/documentation/ui/examples/timestamp-variants.tsx"
     }
   ],
   "attachment": [
@@ -2457,12 +2475,6 @@
       "name": "AttachmentReleaseFilesExample1",
       "title": "Release files",
       "description": "",
-    },
-    {
-      "name": "TimestampTimeOnlyExample2",
-      "title": "Time only",
-      "description": "format=\"time\" shows the hour and minute where the surrounding text already states the day.",
-      "path": "entities/documentation/ui/examples/timestamp-variants.tsx"
       "path": "entities/documentation/ui/examples/attachment-variants.tsx"
     }
   ],
@@ -2717,6 +2729,12 @@
       "path": "entities/documentation/ui/examples/popover-variants.tsx"
     },
     {
+      "name": "PopoverHelpTextExample2",
+      "title": "Help text",
+      "description": "Text alone wraps at the default width of the popup.",
+      "path": "entities/documentation/ui/examples/popover-variants.tsx"
+    },
+    {
       "name": "PopoverWithCloseButton",
       "title": "With close button",
       "description": "Dismiss from the header or the action.",
@@ -2733,12 +2751,6 @@
       "title": "Animated popovers",
       "description": "Share one popup between detached triggers.",
       "path": "entities/documentation/ui/examples/popover-states.tsx"
-    },
-    {
-      "name": "PopoverHelpTextExample2",
-      "title": "Help text",
-      "description": "Text alone wraps at the default width of the popup.",
-      "path": "entities/documentation/ui/examples/popover-variants.tsx"
     },
     {
       "name": "PopoverControlled",

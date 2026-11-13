@@ -4609,6 +4609,20 @@
         "code": "\"use client\";\n\nimport { Grid, MetricDelta, MetricTrend } from \"@mizen-labs/ui\";\n\nimport { IconCoin, IconReceiptRefund, IconUsers } from \"@tabler/icons-react\";\n\nexport function MetricTrendSoftChangeChipExample() {\n\treturn (\n\t\t<Grid>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta appearance=\"soft\" value={0.16} />}\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconCoin />}\n\t\t\t\tlabel=\"Total revenue\"\n\t\t\t\tvalue=\"152,313.92\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta appearance=\"soft\" value={0} />}\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconUsers />}\n\t\t\t\tlabel=\"New customers\"\n\t\t\t\tvalue=\"3,847\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta appearance=\"soft\" good=\"down\" value={0.024} />}\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconReceiptRefund />}\n\t\t\t\tlabel=\"Refunds\"\n\t\t\t\tvalue=\"4,209.44\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t</Grid>\n\t);\n}\n"
       },
       {
+        "name": "MetricTrendNeutralChangeExample",
+        "title": "Neutral change",
+        "description": "good=\"none\" keeps the flat tone for a change that is neither good nor bad. The sign still shows the direction.",
+        "path": "entities/documentation/ui/examples/metric-trend-variants.tsx",
+        "code": "\"use client\";\n\nimport { Grid, MetricDelta, MetricTrend } from \"@mizen-labs/ui\";\n\nexport function MetricTrendNeutralChangeExample() {\n\treturn (\n\t\t<Grid>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta value={0.12} />}\n\t\t\t\tdescription=\"From yesterday\"\n\t\t\t\tlabel=\"Deposits\"\n\t\t\t\tvalue=\"1,284\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta good=\"none\" value={1} />}\n\t\t\t\tdescription=\"From yesterday\"\n\t\t\t\tlabel=\"Withdrawals\"\n\t\t\t\tvalue=\"200\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta good=\"none\" value={-0.031} />}\n\t\t\t\tdescription=\"From yesterday\"\n\t\t\t\tlabel=\"Inventory value\"\n\t\t\t\tvalue=\"84,250\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t</Grid>\n\t);\n}\n"
+      },
+      {
+        "name": "MetricTrendLoadingExample",
+        "title": "Loading",
+        "description": "loading holds the height of the loaded card and marks it busy. Pass the description and delta the loaded card will have.",
+        "path": "entities/documentation/ui/examples/metric-trend-variants.tsx",
+        "code": "\"use client\";\n\nimport {\n\tButton,\n\tGrid,\n\tInline,\n\tMetricDelta,\n\tMetricTrend,\n\tStack,\n} from \"@mizen-labs/ui\";\n\nimport { useCallback, useState } from \"react\";\n\nexport function MetricTrendLoadingExample() {\n\tconst [loading, setLoading] = useState(true);\n\tconst toggle = useCallback(() => setLoading((current) => !current), []);\n\treturn (\n\t\t<Stack gap=\"4\">\n\t\t\t<Inline>\n\t\t\t\t<Button onClick={toggle} variant=\"outline\">\n\t\t\t\t\t{loading ? \"Show the data\" : \"Show loading\"}\n\t\t\t\t</Button>\n\t\t\t</Inline>\n\t\t\t<Grid>\n\t\t\t\t<MetricTrend\n\t\t\t\t\tdelta={<MetricDelta value={0.08} />}\n\t\t\t\t\tdescription=\"From yesterday\"\n\t\t\t\t\tlabel=\"Income\"\n\t\t\t\t\tloading={loading}\n\t\t\t\t\tvalue=\"18,420\"\n\t\t\t\t\tvaluePrefix=\"$\"\n\t\t\t\t/>\n\t\t\t\t<MetricTrend\n\t\t\t\t\tdelta={<MetricDelta good=\"down\" value={0.021} />}\n\t\t\t\t\tdescription=\"From yesterday\"\n\t\t\t\t\tlabel=\"Expense\"\n\t\t\t\t\tloading={loading}\n\t\t\t\t\tvalue=\"6,310\"\n\t\t\t\t\tvaluePrefix=\"$\"\n\t\t\t\t/>\n\t\t\t\t<MetricTrend\n\t\t\t\t\tdeltaPlacement=\"footer\"\n\t\t\t\t\tdescription=\"Income minus expense\"\n\t\t\t\t\tlabel=\"Difference\"\n\t\t\t\t\tloading={loading}\n\t\t\t\t\tvalue=\"12,110\"\n\t\t\t\t\tvaluePrefix=\"$\"\n\t\t\t\t/>\n\t\t\t</Grid>\n\t\t</Stack>\n\t);\n}\n"
+      },
+      {
         "name": "MetricTrendLinkedStatCardExample",
         "title": "Linked stat card",
         "description": "render makes the whole card a link, with the library's hover and focus states. Leave render out where the reader may not open the destination; the card is then static.",
@@ -4860,6 +4874,13 @@
         "description": "",
         "path": "entities/documentation/ui/examples/timestamp-variants.tsx",
         "code": "import { Stack, Text, Timestamp } from \"@mizen-labs/ui\";\n\nconst richContentDateTime = \"2026-10-07T09:00:00Z\";\n\nexport function TimestampDocumentHistoryExample1() {\n\treturn (\n\t\t<Stack gap=\"4\">\n\t\t\t<Stack gap=\"3\">\n\t\t\t\t<Stack gap=\"1\">\n\t\t\t\t\t<Text>Published</Text>\n\t\t\t\t\t<Text>\n\t\t\t\t\t\t<Timestamp\n\t\t\t\t\t\t\tdateTime={richContentDateTime}\n\t\t\t\t\t\t\tformat=\"date\"\n\t\t\t\t\t\t\tlocale=\"en-US\"\n\t\t\t\t\t\t\ttimeZone=\"UTC\"\n\t\t\t\t\t\t/>\n\t\t\t\t\t</Text>\n\t\t\t\t\t<Text>Updated</Text>\n\t\t\t\t\t<Text>\n\t\t\t\t\t\t<Timestamp\n\t\t\t\t\t\t\tdateTime={richContentDateTime}\n\t\t\t\t\t\t\tformat=\"date-time\"\n\t\t\t\t\t\t\tlocale=\"en-US\"\n\t\t\t\t\t\t\ttimeZone=\"UTC\"\n\t\t\t\t\t\t/>\n\t\t\t\t\t</Text>\n\t\t\t\t</Stack>\n\t\t\t</Stack>\n\t\t</Stack>\n\t);\n}\n"
+      },
+      {
+        "name": "TimestampTimeOnlyExample2",
+        "title": "Time only",
+        "description": "format=\"time\" shows the hour and minute where the surrounding text already states the day.",
+        "path": "entities/documentation/ui/examples/timestamp-variants.tsx",
+        "code": "import { Stack, Text, Timestamp } from \"@mizen-labs/ui\";\n\nconst richContentDateTime = \"2026-10-07T09:00:00Z\";\n\nexport function TimestampTimeOnlyExample2() {\n\treturn (\n\t\t<Stack gap=\"1\">\n\t\t\t<Text>Today</Text>\n\t\t\t<Text tone=\"muted\">\n\t\t\t\tReceived{\" \"}\n\t\t\t\t<Timestamp\n\t\t\t\t\tdateTime={richContentDateTime}\n\t\t\t\t\tformat=\"time\"\n\t\t\t\t\tlocale=\"en-US\"\n\t\t\t\t\ttimeZone=\"UTC\"\n\t\t\t\t/>\n\t\t\t</Text>\n\t\t</Stack>\n\t);\n}\n"
       }
     ],
     "attachment": [
@@ -4874,13 +4895,6 @@
         "name": "AttachmentReleaseFilesExample1",
         "title": "Release files",
         "description": "",
-      },
-      {
-        "name": "TimestampTimeOnlyExample2",
-        "title": "Time only",
-        "description": "format=\"time\" shows the hour and minute where the surrounding text already states the day.",
-        "path": "entities/documentation/ui/examples/timestamp-variants.tsx",
-        "code": "import { Stack, Text, Timestamp } from \"@mizen-labs/ui\";\n\nconst richContentDateTime = \"2026-10-07T09:00:00Z\";\n\nexport function TimestampTimeOnlyExample2() {\n\treturn (\n\t\t<Stack gap=\"1\">\n\t\t\t<Text>Today</Text>\n\t\t\t<Text tone=\"muted\">\n\t\t\t\tReceived{\" \"}\n\t\t\t\t<Timestamp\n\t\t\t\t\tdateTime={richContentDateTime}\n\t\t\t\t\tformat=\"time\"\n\t\t\t\t\tlocale=\"en-US\"\n\t\t\t\t\ttimeZone=\"UTC\"\n\t\t\t\t/>\n\t\t\t</Text>\n\t\t</Stack>\n\t);\n}\n"
         "path": "entities/documentation/ui/examples/attachment-variants.tsx",
         "code": "\"use client\";\n\nimport {\n\tAttachment,\n\tAttachmentActions,\n\tAttachmentContent,\n\tAttachmentDescription,\n\tAttachmentMedia,\n\tAttachmentName,\n\tLink,\n\tStack,\n\tThumbnail,\n} from \"@mizen-labs/ui\";\n\nexport function AttachmentReleaseFilesExample1() {\n\treturn (\n\t\t<Stack gap=\"4\">\n\t\t\t<Stack gap=\"3\">\n\t\t\t\t<Attachment>\n\t\t\t\t\t<AttachmentMedia>\n\t\t\t\t\t\t<Thumbnail\n\t\t\t\t\t\t\talt=\"Rows of lavender under a pink evening sky\"\n\t\t\t\t\t\t\tsize=\"default\"\n\t\t\t\t\t\t\tsrc=\"/media/lavender-valensole.jpg\"\n\t\t\t\t\t\t/>\n\t\t\t\t\t</AttachmentMedia>\n\t\t\t\t\t<AttachmentContent>\n\t\t\t\t\t\t<AttachmentName>lavender-valensole.jpg</AttachmentName>\n\t\t\t\t\t\t<AttachmentDescription>JPEG image · 271 KB</AttachmentDescription>\n\t\t\t\t\t</AttachmentContent>\n\t\t\t\t\t<AttachmentActions>\n\t\t\t\t\t\t<Link href=\"/components/attachment\">View file details</Link>\n\t\t\t\t\t</AttachmentActions>\n\t\t\t\t</Attachment>\n\t\t\t</Stack>\n\t\t</Stack>\n\t);\n}\n"
       }
@@ -5184,6 +5198,13 @@
         "code": "import {\n\tButton,\n\tField,\n\tFieldLabel,\n\tGroup,\n\tInput,\n\tPopover,\n\tPopoverClose,\n\tPopoverDescription,\n\tPopoverPopup,\n\tPopoverTitle,\n\tPopoverTrigger,\n\tStack,\n} from \"@mizen-labs/ui\";\n\nexport function PopoverProjectIdentityExample1() {\n\treturn (\n\t\t<Stack gap=\"4\">\n\t\t\t<Popover>\n\t\t\t\t<PopoverTrigger\n\t\t\t\t\trender={<Button variant=\"outline\">Edit project</Button>}\n\t\t\t\t/>\n\t\t\t\t<PopoverPopup>\n\t\t\t\t\t<Stack gap=\"1\">\n\t\t\t\t\t\t<PopoverTitle>Edit project</PopoverTitle>\n\t\t\t\t\t\t<PopoverDescription>\n\t\t\t\t\t\t\tChoose a short name that is easy to recognize.\n\t\t\t\t\t\t</PopoverDescription>\n\t\t\t\t\t</Stack>\n\t\t\t\t\t<Field>\n\t\t\t\t\t\t<FieldLabel>Project name</FieldLabel>\n\t\t\t\t\t\t<Input defaultValue=\"Mizen\" />\n\t\t\t\t\t</Field>\n\t\t\t\t\t<Group>\n\t\t\t\t\t\t<PopoverClose render={<Button size=\"sm\">Done</Button>} />\n\t\t\t\t\t</Group>\n\t\t\t\t</PopoverPopup>\n\t\t\t</Popover>\n\t\t</Stack>\n\t);\n}\n"
       },
       {
+        "name": "PopoverHelpTextExample2",
+        "title": "Help text",
+        "description": "Text alone wraps at the default width of the popup.",
+        "path": "entities/documentation/ui/examples/popover-variants.tsx",
+        "code": "import {\n\tButton,\n\tPopover,\n\tPopoverDescription,\n\tPopoverPopup,\n\tPopoverTrigger,\n} from \"@mizen-labs/ui\";\n\nimport { IconInfoCircle } from \"@tabler/icons-react\";\n\nexport function PopoverHelpTextExample2() {\n\treturn (\n\t\t<Popover>\n\t\t\t<PopoverTrigger\n\t\t\t\topenOnHover\n\t\t\t\trender={\n\t\t\t\t\t<Button\n\t\t\t\t\t\taria-label=\"About the shared bank\"\n\t\t\t\t\t\tsize=\"icon-sm\"\n\t\t\t\t\t\tvariant=\"ghost\"\n\t\t\t\t\t/>\n\t\t\t\t}\n\t\t\t>\n\t\t\t\t<IconInfoCircle aria-hidden size={16} />\n\t\t\t</PopoverTrigger>\n\t\t\t<PopoverPopup align=\"start\">\n\t\t\t\t<PopoverDescription>\n\t\t\t\t\tIncome and expense of the shared bank for the selected day. The\n\t\t\t\t\tdifference is income minus expense. Data arrives with a delay of up to\n\t\t\t\t\ta few minutes.\n\t\t\t\t</PopoverDescription>\n\t\t\t</PopoverPopup>\n\t\t</Popover>\n\t);\n}\n"
+      },
+      {
         "name": "PopoverWithCloseButton",
         "title": "With close button",
         "description": "Dismiss from the header or the action.",
@@ -5203,13 +5224,6 @@
         "description": "Share one popup between detached triggers.",
         "path": "entities/documentation/ui/examples/popover-states.tsx",
         "code": "\"use client\";\n\nimport {\n\tButton,\n\tGroup,\n\tPopover,\n\tPopoverClose,\n\tPopoverCreateHandle,\n\tPopoverDescription,\n\tPopoverPopup,\n\tPopoverTitle,\n\tPopoverTrigger,\n} from \"@mizen-labs/ui\";\n\nimport { IconBell, IconUser } from \"@tabler/icons-react\";\n\nconst handle = PopoverCreateHandle<\"notifications\" | \"profile\">();\n\nexport function PopoverAnimated() {\n\treturn (\n\t\t<Group>\n\t\t\t<PopoverTrigger\n\t\t\t\thandle={handle}\n\t\t\t\tpayload=\"notifications\"\n\t\t\t\trender={\n\t\t\t\t\t<Button\n\t\t\t\t\t\taria-label=\"Shared notifications\"\n\t\t\t\t\t\tsize=\"icon-sm\"\n\t\t\t\t\t\tvariant=\"outline\"\n\t\t\t\t\t/>\n\t\t\t\t}\n\t\t\t>\n\t\t\t\t<IconBell aria-hidden size={16} />\n\t\t\t</PopoverTrigger>\n\t\t\t<PopoverTrigger\n\t\t\t\thandle={handle}\n\t\t\t\tpayload=\"profile\"\n\t\t\t\trender={\n\t\t\t\t\t<Button\n\t\t\t\t\t\taria-label=\"Shared profile\"\n\t\t\t\t\t\tsize=\"icon-sm\"\n\t\t\t\t\t\tvariant=\"outline\"\n\t\t\t\t\t/>\n\t\t\t\t}\n\t\t\t>\n\t\t\t\t<IconUser aria-hidden size={16} />\n\t\t\t</PopoverTrigger>\n\t\t\t<Popover handle={handle}>\n\t\t\t\t{({ payload }) => (\n\t\t\t\t\t<PopoverPopup>\n\t\t\t\t\t\t<PopoverTitle>\n\t\t\t\t\t\t\t{payload === \"profile\" ? \"Maya Chen\" : \"Notifications\"}\n\t\t\t\t\t\t</PopoverTitle>\n\t\t\t\t\t\t<PopoverDescription>\n\t\t\t\t\t\t\t{payload === \"profile\"\n\t\t\t\t\t\t\t\t? \"Product designer in the Northstar workspace.\"\n\t\t\t\t\t\t\t\t: \"You have no new notifications.\"}\n\t\t\t\t\t\t</PopoverDescription>\n\t\t\t\t\t\t{payload === \"profile\" && (\n\t\t\t\t\t\t\t<PopoverClose render={<Button size=\"sm\" variant=\"outline\" />}>\n\t\t\t\t\t\t\t\tView profile\n\t\t\t\t\t\t\t</PopoverClose>\n\t\t\t\t\t\t)}\n\t\t\t\t\t</PopoverPopup>\n\t\t\t\t)}\n\t\t\t</Popover>\n\t\t</Group>\n\t);\n}\n"
-      },
-      {
-        "name": "PopoverHelpTextExample2",
-        "title": "Help text",
-        "description": "Text alone wraps at the default width of the popup.",
-        "path": "entities/documentation/ui/examples/popover-variants.tsx",
-        "code": "import {\n\tButton,\n\tPopover,\n\tPopoverDescription,\n\tPopoverPopup,\n\tPopoverTrigger,\n} from \"@mizen-labs/ui\";\n\nimport { IconInfoCircle } from \"@tabler/icons-react\";\n\nexport function PopoverHelpTextExample2() {\n\treturn (\n\t\t<Popover>\n\t\t\t<PopoverTrigger\n\t\t\t\topenOnHover\n\t\t\t\trender={\n\t\t\t\t\t<Button\n\t\t\t\t\t\taria-label=\"About the shared bank\"\n\t\t\t\t\t\tsize=\"icon-sm\"\n\t\t\t\t\t\tvariant=\"ghost\"\n\t\t\t\t\t/>\n\t\t\t\t}\n\t\t\t>\n\t\t\t\t<IconInfoCircle aria-hidden size={16} />\n\t\t\t</PopoverTrigger>\n\t\t\t<PopoverPopup align=\"start\">\n\t\t\t\t<PopoverDescription>\n\t\t\t\t\tIncome and expense of the shared bank for the selected day. The\n\t\t\t\t\tdifference is income minus expense. Data arrives with a delay of up to\n\t\t\t\t\ta few minutes.\n\t\t\t\t</PopoverDescription>\n\t\t\t</PopoverPopup>\n\t\t</Popover>\n\t);\n}\n"
       },
       {
         "name": "PopoverControlled",

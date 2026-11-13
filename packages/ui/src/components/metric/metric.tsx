@@ -93,14 +93,19 @@ export type MetricDeltaProps = Omit<
 > & {
 	/** How the chip shows its tone: a dot beside ink text, or a soft fill. */
 	appearance?: "dot" | "soft";
-	/** Which direction is good: "up" by default, "down" for costs or errors. */
-	good?: "down" | "up";
+	/**
+	 * Which direction is good: "up" by default, "down" for costs or errors.
+	 * "none" keeps the flat tone for a change that is neither good nor bad.
+	 */
+	good?: "down" | "none" | "up";
 	locale?: string;
 	/** Fractional change: 0.16 renders "+16%". */
 	value: number;
 };
 
-// Keyed by direction relative to the good direction: worse, flat, better.
+// The tone of a change, by the direction that is good: worse, flat, better.
+const goodSign = { down: -1, none: 0, up: 1 } as const;
+
 const deltaTones = {
 	dot: {
 		"-1": metricStyles.deltaWorse,
@@ -123,8 +128,7 @@ export function MetricDelta({
 	value,
 	...rest
 }: MetricDeltaProps) {
-	const direction = Math.sign(value) as -1 | 0 | 1;
-	const tone = (good === "up" ? direction : -direction) as -1 | 0 | 1;
+	const tone = (Math.sign(value) * goodSign[good]) as -1 | 0 | 1;
 	for (const name of ["className", "data-slot", "style"]) {
 		Reflect.deleteProperty(rest, name);
 	}

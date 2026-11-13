@@ -104,4 +104,25 @@ describe("MetricDelta", { timeout: 30_000 }, () => {
 		// Better, flat and worse each have their own fill.
 		expect(new Set(light.map((chip) => chip.fill)).size).toBe(3);
 	});
+
+	it("keeps the flat tone for any sign when no direction is good", async () => {
+		const neutral = await page
+			.locator(
+				'section[aria-label$=": Neutral change example"] [data-slot="metric-delta"]'
+			)
+			.evaluateAll((elements) =>
+				elements.map((element) => ({
+					dot: getComputedStyle(element, "::before").backgroundColor,
+					text: element.textContent,
+				}))
+			);
+		expect(neutral.map((chip) => chip.text)).toEqual([
+			"+12%",
+			"+100%",
+			"-3.1%",
+		]);
+		const [better, rise, fall] = neutral.map((chip) => chip.dot);
+		expect(rise).toBe(fall);
+		expect(rise).not.toBe(better);
+	});
 });

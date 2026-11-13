@@ -117,6 +117,40 @@ describe("MetricTrend contract", () => {
 		).toBe(true);
 	});
 
+	it("holds its shape and reports busy while loading", () => {
+		const markup = renderToStaticMarkup(
+			<MetricTrend
+				delta={<span data-delta="">+16%</span>}
+				description="From last week"
+				label="Income"
+				loading
+				value="$84,250"
+				valuePrefix="$"
+			/>
+		);
+
+		expect(markup).toContain('aria-busy="true"');
+		expect(markup).toContain("Income");
+		for (const slot of ["value", "description", "delta"]) {
+			expect(markup).toContain(
+				`aria-hidden="true" data-slot="metric-trend-${slot}-placeholder"`
+			);
+		}
+		// The data is not shown, but each slot keeps its element.
+		expect(markup).toContain('data-slot="metric-value"');
+		expect(markup).toContain('data-slot="metric-description"');
+		for (const hidden of ["84,250", "From last week", "data-delta"]) {
+			expect(markup).not.toContain(hidden);
+		}
+		const bare = renderToStaticMarkup(<MetricTrend label="Income" loading />);
+		expect(bare).toContain("metric-trend-value-placeholder");
+		expect(bare).not.toContain("metric-trend-description-placeholder");
+		expect(bare).not.toContain("metric-trend-delta-placeholder");
+		expect(
+			renderToStaticMarkup(<MetricTrend label="Income" value="1" />)
+		).not.toContain("aria-busy");
+	});
+
 	it("renders a stat card with icon, delta, and actions but no chart", () => {
 		const markup = renderToStaticMarkup(
 			<MetricTrend
