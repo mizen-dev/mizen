@@ -41,9 +41,11 @@ export type MetricTrendProps = Omit<
 	iconColor?: "blue" | "brand" | "green" | "neutral" | "orange" | "purple";
 	label: ReactNode;
 	/**
-	 * Holds the card's shape while its data loads. The value renders as a
-	 * placeholder, and so do the description and delta when they are passed.
-	 * Pass the props the loaded card will have; the label stays readable.
+	 * Holds the card's shape while its data loads. Each of value, description
+	 * and delta that the card names renders as a placeholder, even when its
+	 * data is not there yet: value={data?.total} keeps its line. Name the slots
+	 * the loaded card will show, and no others. The label stays readable, and
+	 * children render as given, so pass a chart its own loading state.
 	 */
 	loading?: boolean;
 	/**
@@ -59,8 +61,6 @@ export type MetricTrendProps = Omit<
 	valueSuffix?: string;
 };
 
-type Slot = "delta" | "description" | "value";
-
 // The category colors are the ones an AvatarFallback uses, so a category and
 // a person share one palette. The brand tile is the base style.
 const iconColors = {
@@ -68,6 +68,8 @@ const iconColors = {
 	brand: null,
 	neutral: metricTrendStyles.iconNeutral,
 } as const;
+
+type Slot = "delta" | "description" | "value";
 
 const placeholderSizes = {
 	delta: metricTrendStyles.placeholderDelta,
@@ -93,20 +95,17 @@ function Placeholder({ slot }: { slot: Slot }) {
 	);
 }
 
-const present = (node: ReactNode) => node !== undefined && node !== null;
-
-// What a loading card shows in place of its data: a bar for the value, and a
-// bar for each of the description and delta the card was given.
-function loadingSlots({
-	delta,
-	description,
-}: Pick<MetricTrendProps, "delta" | "description">) {
+// What a loading card shows in place of its data: a bar for each of value,
+// description and delta that the card names. A slot counts as named even when
+// its data is not there yet, as in value={data?.total}, so the card holds its
+// shape before the data arrives.
+function loadingSlots(trendProps: MetricTrendProps) {
+	const bar = (slot: Slot) =>
+		Object.hasOwn(trendProps, slot) ? <Placeholder slot={slot} /> : undefined;
 	return {
-		delta: present(delta) ? <Placeholder slot="delta" /> : undefined,
-		description: present(description) ? (
-			<Placeholder slot="description" />
-		) : undefined,
-		value: <Placeholder slot="value" />,
+		delta: bar("delta"),
+		description: bar("description"),
+		value: bar("value"),
 	};
 }
 
@@ -165,8 +164,8 @@ function MetricTrendFooter({
 function MetricTrendLead({
 	delta,
 	description,
-	iconColor = "brand",
 	icon,
+	iconColor = "brand",
 	label,
 	loading,
 	value,
@@ -176,8 +175,8 @@ function MetricTrendLead({
 	MetricTrendProps,
 	| "delta"
 	| "description"
-	| "iconColor"
 	| "icon"
+	| "iconColor"
 	| "label"
 	| "loading"
 	| "value"
@@ -261,13 +260,13 @@ export function MetricTrend(trendProps: MetricTrendProps) {
 	}
 	const inFooter = deltaPlacement === "footer";
 	const shown = loading
-		? loadingSlots({ delta, description })
+		? loadingSlots(trendProps)
 		: { delta, description, value };
 
 	return (
 		<MetricTrendRoot
 			{...rest}
-			aria-busy={loading || undefined}
+			aria-busy={loading || rest["aria-busy"]}
 			ref={forwardedRef}
 			render={render}
 		>
@@ -276,8 +275,8 @@ export function MetricTrend(trendProps: MetricTrendProps) {
 					{...shown}
 					delta={inFooter ? undefined : shown.delta}
 					description={inFooter ? undefined : shown.description}
-					iconColor={iconColor}
 					icon={icon}
+					iconColor={iconColor}
 					label={label}
 					loading={loading}
 					valuePrefix={valuePrefix}

@@ -149,6 +149,8 @@ export const metricTrendStyles = create({
 		marginInlineEnd: 0,
 		marginInlineStart: 0,
 		visibility: "hidden",
+		// A unit with a space must not wrap inside the zero width.
+		whiteSpace: "nowrap",
 	},
 	valueRow: {
 		alignItems: "center",

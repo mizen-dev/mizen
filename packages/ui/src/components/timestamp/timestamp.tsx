@@ -10,6 +10,10 @@ export type TimestampProps = Omit<
 	"children" | "data-slot" | "dateTime" | "lang" | "role"
 > & {
 	dateTime: string;
+	/**
+	 * `time` shows the hour and minute only, with no day and no zone. Pass the
+	 * `timeZone` the reader expects; the exact time is in the title.
+	 */
 	format?: TimestampFormat;
 	locale?: string;
 	/**
@@ -156,7 +160,8 @@ export function Timestamp({
 			ref={forwardedRef}
 			// Server and client render moments apart, so relative text may differ.
 			suppressHydrationWarning={relative}
-			title={relative ? exact : undefined}
+			// A format that leaves out the day or the zone keeps them on hover.
+			title={relative || format === "time" ? exact : undefined}
 			{...props(timestampStyles.root)}
 		>
 			{label}

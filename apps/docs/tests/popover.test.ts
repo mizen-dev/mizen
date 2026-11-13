@@ -67,16 +67,22 @@ describe("Popover component route", () => {
 		expect(await page.locator(`#${describedBy}`).textContent()).toContain(
 			"easy to recognize"
 		);
-		const [triggerBox, popupBox] = await Promise.all([
-			trigger.boundingBox(),
-			popup.boundingBox(),
-		]);
-		expect(
-			triggerBox &&
-				popupBox &&
-				(popupBox.y >= triggerBox.y + triggerBox.height ||
-					popupBox.y + popupBox.height <= triggerBox.y)
-		).toBe(true);
+		// Polled: the popup scales and slides in, so its first frames can touch
+		// the trigger.
+		await expect
+			.poll(async () => {
+				const [triggerBox, popupBox] = await Promise.all([
+					trigger.boundingBox(),
+					popup.boundingBox(),
+				]);
+				return (
+					triggerBox &&
+					popupBox &&
+					(popupBox.y >= triggerBox.y + triggerBox.height ||
+						popupBox.y + popupBox.height <= triggerBox.y)
+				);
+			})
+			.toBe(true);
 		await page.getByRole("button", { exact: true, name: "Done" }).click();
 		await popup.waitFor({ state: "detached" });
 		expect(await popup.count()).toBe(0);

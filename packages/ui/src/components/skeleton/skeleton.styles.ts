@@ -24,13 +24,19 @@ export const skeletonStyles = create({
 		},
 		animationTimingFunction: easing.linear,
 		backgroundAttachment: "fixed",
-		// The tile tone, like icon tiles and badges: present but quiet.
-		backgroundColor: colors.controlSurface,
+		// The tile tone, like icon tiles and badges: present but quiet. Forced
+		// colors paint every background with the canvas, so the placeholder
+		// takes a system color there and keeps it.
+		backgroundColor: {
+			[conditions.forcedColors]: "GrayText",
+			default: colors.controlSurface,
+		},
 		backgroundImage: `linear-gradient(120deg, transparent 40%, color-mix(in oklch, ${colors.content} 8%, transparent) 50%, transparent 60%)`,
 		backgroundRepeat: "no-repeat",
 		backgroundSize: "200% 100%",
 		boxSizing: "border-box",
 		display: "block",
+		forcedColorAdjust: { [conditions.forcedColors]: "none", default: "auto" },
 	},
 	circle: {
 		borderRadius: "9999px",

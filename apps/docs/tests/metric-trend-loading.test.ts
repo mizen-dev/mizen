@@ -50,6 +50,30 @@ describe("MetricTrend loading", { timeout: 30_000 }, () => {
 				example.getByText("Income", { exact: true })
 			).toBeVisible();
 			const loading = await heights();
+			// A hidden unit with spaces must not wrap and grow the value line.
+			const unit = example
+				.locator('[data-slot="metric-value"] > span:not([aria-hidden])')
+				.first();
+			const text = await unit.textContent();
+			await unit.evaluate((element) => {
+				element.textContent = "US $ per day";
+			});
+			expect(await heights()).toEqual(loading);
+			await unit.evaluate((element, original) => {
+				element.textContent = original;
+			}, text);
+			await page.emulateMedia({ forcedColors: "active" });
+			const [bar, card] = await Promise.all([
+				example
+					.locator('[data-slot$="-placeholder"] > span')
+					.first()
+					.evaluate((element) => getComputedStyle(element).backgroundColor),
+				cards
+					.first()
+					.evaluate((element) => getComputedStyle(element).backgroundColor),
+			]);
+			expect(bar).not.toBe(card);
+			await page.emulateMedia({ forcedColors: "none" });
 			await example.getByRole("button", { name: "Show the data" }).click();
 			await expectLocator(example.locator("[aria-busy]")).toHaveCount(0);
 			await expectLocator(example.getByText("18,420")).toBeVisible();

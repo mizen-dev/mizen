@@ -4,10 +4,12 @@ import type { ComponentPropsWithRef, ComponentType } from "react";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vite-plus/test";
+import { avatarFallbackColors } from "../../../packages/ui/src/components/avatar/avatar.styles";
 import {
 	MetricTrend,
 	type MetricTrendProps,
 } from "../../../packages/ui/src/components/metric-trend/metric-trend";
+import { metricTrendStyles } from "../../../packages/ui/src/components/metric-trend/metric-trend.styles";
 
 const propsSpy = vi.hoisted(() => vi.fn((..._styles: unknown[]) => ({})));
 
@@ -142,13 +144,53 @@ describe("MetricTrend contract", () => {
 		for (const hidden of ["84,250", "From last week", "data-delta"]) {
 			expect(markup).not.toContain(hidden);
 		}
-		const bare = renderToStaticMarkup(<MetricTrend label="Income" loading />);
-		expect(bare).toContain("metric-trend-value-placeholder");
-		expect(bare).not.toContain("metric-trend-description-placeholder");
-		expect(bare).not.toContain("metric-trend-delta-placeholder");
+		// A slot the card names holds its line before the data arrives.
+		const pending = renderToStaticMarkup(
+			<MetricTrend label="Income" loading value={undefined} />
+		);
+		expect(pending).toContain("metric-trend-value-placeholder");
+		expect(pending).not.toContain("metric-trend-description-placeholder");
+		expect(pending).not.toContain("metric-trend-delta-placeholder");
+		// A card without a value, such as rings, gains no value line.
+		expect(
+			renderToStaticMarkup(<MetricTrend label="Uptime" loading />)
+		).not.toContain("-placeholder");
 		expect(
 			renderToStaticMarkup(<MetricTrend label="Income" value="1" />)
 		).not.toContain("aria-busy");
+		expect(
+			renderToStaticMarkup(<MetricTrend aria-busy label="Income" value="1" />)
+		).toContain('aria-busy="true"');
+	});
+
+	it("colors the icon tile by category and keeps the brand tile by default", () => {
+		const tile = (iconColor?: MetricTrendProps["iconColor"]) => {
+			propsSpy.mockClear();
+			renderToStaticMarkup(
+				<MetricTrend
+					icon={<svg aria-hidden="true" />}
+					iconColor={iconColor}
+					label="Deposits"
+				/>
+			);
+			return propsSpy.mock.calls.find(
+				([base]) => base === metricTrendStyles.icon
+			);
+		};
+		expect(tile()).toEqual([metricTrendStyles.icon, null]);
+		expect(tile("brand")).toEqual([metricTrendStyles.icon, null]);
+		expect(tile("neutral")).toEqual([
+			metricTrendStyles.icon,
+			metricTrendStyles.iconNeutral,
+		]);
+		expect(tile("green")).toEqual([
+			metricTrendStyles.icon,
+			avatarFallbackColors.green,
+		]);
+		expect(tile("purple")).toEqual([
+			metricTrendStyles.icon,
+			avatarFallbackColors.purple,
+		]);
 	});
 
 	it("renders a stat card with icon, delta, and actions but no chart", () => {

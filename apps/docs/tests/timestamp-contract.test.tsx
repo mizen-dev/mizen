@@ -120,7 +120,20 @@ describe("Timestamp contract", () => {
 		expect(time.textContent).toBe("22:48");
 		expect(time.dateTime).toBe(dateTime);
 		expect(time.lang).toBe("ru-RU");
-		expect(time.hasAttribute("title")).toBe(false);
+		// The text shows no day and no zone; the title keeps both.
+		expect(time.title).toBe(
+			expectedDateTime(dateTime, "ru-RU", "Europe/Moscow")
+		);
+	});
+
+	it("rejects a format outside the vocabulary", () => {
+		for (const format of ["full", "toString", "__proto__"]) {
+			expect(() =>
+				renderToStaticMarkup(
+					<UnsafeTimestamp dateTime="2026-11-12T19:48:00Z" format={format} />
+				)
+			).toThrow(RangeError);
+		}
 	});
 
 	it("accepts ISO instants with microsecond precision", () => {

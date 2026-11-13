@@ -6796,7 +6796,7 @@
         "name": "Timestamp.format",
         "type": "\"date\" | \"date-time\" | \"time\" | \"relative\"",
         "defaultValue": "\"date-time\"",
-        "description": "date shows the day, date-time adds the time and timezone, and time shows only the hour and minute. relative counts from now and keeps the exact time in its title."
+        "description": "date shows the day, date-time adds the time and timezone, and time shows only the hour and minute, with no zone. relative counts from now. time and relative keep the exact time in the title."
       },
       {
         "name": "Timestamp.locale / Timestamp.timeZone",
@@ -7130,7 +7130,7 @@
         "name": "loading",
         "type": "boolean",
         "defaultValue": "false",
-        "description": "Holds the card's shape while its data loads and sets aria-busy. The value renders as a placeholder, and so do the description and delta when passed. The label stays readable."
+        "description": "Holds the card's shape while its data loads and sets aria-busy. Each of value, description, and delta that the card names renders as a placeholder, even when its data is not there yet, as in value={data?.total}. The label stays readable. Children render as given."
       }
     ],
     "category": "Charts",

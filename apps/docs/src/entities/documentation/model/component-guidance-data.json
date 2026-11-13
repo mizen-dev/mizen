@@ -996,7 +996,7 @@
     ],
     "recommendations": [
       "Provide a timezone-bearing instant and choose locale and timezone explicitly for consistent output.",
-      "Use format=\"time\" only where the surrounding text already states the day."
+      "Use format=\"time\" only where the surrounding text already states the day. It shows no zone, so pass the timeZone the reader expects."
     ]
   },
   "toast": {
