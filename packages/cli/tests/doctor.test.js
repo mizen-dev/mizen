@@ -346,3 +346,100 @@ test("unused document helpers do not verify the actual root theme", (t) => {
 	);
 	assert.equal(diagnostic(run(root), "setup.theme").status, "unverified");
 });
+
+test("a config function verifies only the object it always returns", (t) => {
+	const root = fixture(t, "start");
+	const marker = join(root, "EXECUTED");
+	const setting = 'ssr:{noExternal:["@mizen-labs/ui"]}';
+	const define =
+		'import {defineConfig} from "vite"; export default defineConfig';
+	for (const config of [
+		`${define}(({mode,command})=>{const env=mode+command; return {${setting},plugins:[env]};});`,
+		`${define}(()=>({${setting}}));`,
+		`${define}(async function(){ return {${setting},plugins:[{transform(){ return null; }}]}; });`,
+		`export default ()=>({${setting}});`,
+	]) {
+		put(root, "vite.config.ts", config);
+		assert.equal(
+			diagnostic(run(root), "setup.bundling").status,
+			"pass",
+			config
+		);
+	}
+	for (const config of [
+		`${define}(({mode})=>{ if(mode==="test") return {}; return {${setting}}; });`,
+		`${define}(({mode})=>{ return mode==="test" ? {} : {${setting}}; });`,
+		`${define}(()=>{ const config={${setting}}; return config; });`,
+		`const base={}; ${define}(()=>({...base,${setting}}));`,
+		`import {writeFileSync} from "node:fs"; ${define}(()=>{ writeFileSync(${JSON.stringify(marker)}, "bad"); return load(); });`,
+	]) {
+		put(root, "vite.config.ts", config);
+		const bundling = diagnostic(run(root), "setup.bundling");
+		assert.equal(bundling.status, "unverified", config);
+		assert.ok(bundling.message.includes("does not run the file"));
+		assert.ok(bundling.repair.includes("production server build"));
+		assert.equal(existsSync(marker), false);
+	}
+});
+
+test("a provider in the router's Wrap or InnerWrap verifies the Start theme", (t) => {
+	const root = fixture(t, "start");
+	const provider = 'import {ThemeProvider} from "@mizen-labs/ui/theme";';
+	const router = 'import {createRouter} from "@tanstack/react-router";';
+	put(
+		root,
+		"src/routes/__root.tsx",
+		`import css from "@mizen-labs/ui/styles.css?url"; import {ThemeScript} from "@mizen-labs/ui/theme"; import {createRootRoute} from "@tanstack/react-router"; export const Route=createRootRoute({shellComponent:Root,head:()=>({links:[{href:css,rel:"stylesheet"}]})}); function Root({children}) { return <html><head><ThemeScript /></head><body>{children}</body></html>; }`
+	);
+	const missing = diagnostic(run(root), "setup.theme");
+	assert.equal(missing.status, "unverified");
+	assert.ok(missing.message.includes("Wrap or InnerWrap"));
+	assert.ok(missing.repair.includes("first paint"));
+	for (const source of [
+		`${provider}${router} export const getRouter=()=>createRouter({routeTree,InnerWrap:({children})=><ThemeProvider defaultTheme={theme}>{children}</ThemeProvider>});`,
+		`${provider}${router} function Providers({children}) { return <ThemeProvider>{children}</ThemeProvider>; } export const router=createRouter({routeTree,Wrap:Providers});`,
+	]) {
+		put(root, "src/router.tsx", source);
+		const result = run(root, ["--strict"]);
+		const theme = diagnostic(result, "setup.theme");
+		assert.equal(theme.status, "pass", source);
+		assert.equal(result.exit, 0, result.raw);
+		assert.deepEqual(
+			theme.evidence.map((path) => normalize(path)),
+			["src/routes/__root.tsx", "src/router.tsx"].map((path) =>
+				normalize(join(root, path))
+			)
+		);
+	}
+	for (const source of [
+		`${router} import {ThemeProvider} from "./theme"; export const router=createRouter({InnerWrap:({children})=><ThemeProvider>{children}</ThemeProvider>});`,
+		`${provider}${router} export const router=createRouter({...options,InnerWrap:({children})=><ThemeProvider>{children}</ThemeProvider>});`,
+		`${provider}${router} export const router=createRouter({routeTree}); const unused=<ThemeProvider />;`,
+		`${provider}${router} export const router=createRouter({InnerWrap:pick()});`,
+		"export const router = {broken",
+	]) {
+		put(root, "src/router.tsx", source);
+		assert.equal(
+			diagnostic(run(root), "setup.theme").status,
+			"unverified",
+			source
+		);
+	}
+});
+
+test("a workspace root that is also an app points to --workspace", (t) => {
+	const root = fixture(t, "start");
+	const manifest = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+	put(root, "package.json", { ...manifest, workspaces: ["tools/*"] });
+	const result = run(root);
+	const target = diagnostic(result, "project.target");
+	assert.equal(result.exit, 1);
+	assert.ok(target.message.includes("workspace root and a start app"));
+	assert.ok(target.repair.includes("mizen doctor --workspace"));
+	put(root, "package.json", { private: true, workspaces: ["apps/*"] });
+	assert.ok(
+		diagnostic(run(root), "project.target").message.includes(
+			"select an app explicitly"
+		)
+	);
+});

@@ -70,6 +70,7 @@ const commands = {
 			"Checks Next.js App Router, TanStack Start, and React + Vite apps.",
 			"With --workspace, --cwd selects where to look for the workspace root.",
 			"Linked, external, and ambiguous packages stay unverified.",
+			"Doctor reads files and never runs them, so computed setup stays unverified.",
 			"Exits 1 when a check fails, or with --strict when one is unverified.",
 		],
 		options: ["cwd", "strict", "workspace"],

@@ -65,6 +65,62 @@ function unwrap(node: unknown): unknown {
 	return node;
 }
 
+const FUNCTIONS = [
+	"ArrowFunctionExpression",
+	"ClassMethod",
+	"FunctionDeclaration",
+	"FunctionExpression",
+	"ObjectMethod",
+];
+
+// Like nodes, but without the bodies of nested functions.
+function ownNodes(value: unknown): SyntaxNode[] {
+	if (Array.isArray(value)) {
+		return value.flatMap(ownNodes);
+	}
+	if (!isNode(value)) {
+		return [];
+	}
+	return FUNCTIONS.includes(value.type)
+		? [value]
+		: [value, ...Object.values(value).flatMap(ownNodes)];
+}
+
+// What a config function always returns: an arrow's expression body, or the
+// one return statement that ends its block. A conditional or early return
+// depends on runtime values, so it yields nothing.
+function returned(callback: SyntaxNode): unknown {
+	const { body } = callback;
+	if (!(isNode(body) && body.type === "BlockStatement")) {
+		return unwrap(body);
+	}
+	const statements = Array.isArray(body.body) ? body.body : [];
+	const last: unknown = statements.at(-1);
+	const returns = ownNodes(statements).filter(
+		(node) => node.type === "ReturnStatement"
+	);
+	return returns.length === 1 && returns[0] === last
+		? unwrap(returns[0].argument)
+		: null;
+}
+
+// A binding that is declared once and never referenced again cannot change
+// before it is exported.
+function declared(ast: SyntaxNode, identifier: unknown): unknown {
+	if (
+		nodes(ast).filter(
+			(node) => node.type === "Identifier" && node.name === identifier
+		).length !== 2
+	) {
+		return null;
+	}
+	const variable = nodes(ast).find(
+		(node) =>
+			node.type === "VariableDeclarator" && nameOf(node.id) === identifier
+	);
+	return unwrap(variable?.init);
+}
+
 export function staticConfig(ast: SyntaxNode): SyntaxNode | null {
 	const exported = nodes(ast).find(
 		(node) => node.type === "ExportDefaultDeclaration"
@@ -77,19 +133,10 @@ export function staticConfig(ast: SyntaxNode): SyntaxNode | null {
 		value = viteConfigArgument(ast, value);
 	}
 	if (isNode(value) && value.type === "Identifier") {
-		const identifier = value.name;
-		if (
-			nodes(ast).filter(
-				(node) => node.type === "Identifier" && node.name === identifier
-			).length !== 2
-		) {
-			return null;
-		}
-		const variable = nodes(ast).find(
-			(node) =>
-				node.type === "VariableDeclarator" && nameOf(node.id) === identifier
-		);
-		value = unwrap(variable?.init);
+		value = declared(ast, value.name);
+	}
+	if (isNode(value) && FUNCTIONS.includes(value.type)) {
+		value = returned(value);
 	}
 	return isNode(value) && value.type === "ObjectExpression" ? value : null;
 }
@@ -170,7 +217,7 @@ function viteConfigArgument(ast: SyntaxNode, call: SyntaxNode): unknown {
 	return unwrap(call.arguments[0]);
 }
 
-function topLevelFunction(
+export function topLevelFunction(
 	ast: SyntaxNode,
 	name: string | null
 ): SyntaxNode | null {

@@ -368,6 +368,51 @@ test("workspace root applications are checked without enabling root init", (t) =
 	assert.equal(parseOutput(init.stderr).error.reason, "unknown_option");
 });
 
+test("a root Start app with a config function and a router-owned provider passes strict", (t) => {
+	const root = workspace(t, "pnpm", ["tools/*"]);
+	const manifest = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+	app(root, "", "start");
+	const application = JSON.parse(
+		readFileSync(join(root, "package.json"), "utf8")
+	);
+	put(root, "package.json", {
+		...manifest,
+		dependencies: application.dependencies,
+	});
+	put(root, "tools/api-generator/package.json", { name: "api-generator" });
+	put(
+		root,
+		"vite.config.ts",
+		'import {defineConfig} from "vite"; export default defineConfig(({mode,command})=>{ const env={mode,command}; return {ssr:{noExternal:["@mizen-labs/ui"]},plugins:[env]}; });'
+	);
+	put(
+		root,
+		"src/routes/__root.tsx",
+		'import {createRootRoute} from "@tanstack/react-router"; import css from "@mizen-labs/ui/styles.css?url"; import {ThemeScript} from "@mizen-labs/ui/theme"; export const Route=createRootRoute({head:()=>({links:[{href:css,rel:"stylesheet"}]}),shellComponent:Root}); function Root({children}) {return <html><head><ThemeScript/></head><body>{children}</body></html>;}'
+	);
+	put(
+		root,
+		"src/router.tsx",
+		'import {createRouter} from "@tanstack/react-router"; import {ThemeProvider} from "@mizen-labs/ui/theme"; export const getRouter=()=>createRouter({routeTree,InnerWrap:({children})=><ThemeProvider defaultTheme={configuredTheme}>{children}</ThemeProvider>});'
+	);
+	const result = run(root, ["--strict"]);
+	assert.equal(
+		result.exit,
+		0,
+		JSON.stringify(
+			result.data.diagnostics.filter((item) => item.status !== "pass")
+		)
+	);
+	assert.deepEqual(
+		result.data.apps.map((item) => [item.path, item.framework]),
+		[[".", "start"]]
+	);
+	assert.deepEqual(
+		result.data.skipped.map((item) => item.path),
+		["tools/api-generator"]
+	);
+});
+
 test("linked and external members are surfaced without following them implicitly", (t) => {
 	const root = workspace(t, "pnpm", [
 		"apps/*",

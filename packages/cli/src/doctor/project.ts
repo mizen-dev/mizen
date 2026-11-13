@@ -188,13 +188,16 @@ async function inspectManifest(project: string, allowWorkspaceRoot = false) {
 			!allowWorkspaceRoot &&
 			(manifest.workspaces || (await hasPnpmWorkspacePackages(project)))
 		) {
+			const framework = frameworkOf(manifest);
 			return {
 				diagnostic: check(
 					"project.target",
 					"error",
-					"This directory is a workspace root; select an app explicitly.",
+					framework === "unknown"
+						? "This directory is a workspace root; select an app explicitly."
+						: `This directory is a workspace root and a ${framework} app. A plain run does not choose between the root app and the workspace members.`,
 					[path],
-					"Run mizen doctor --cwd <APP_DIR>."
+					"Run mizen doctor --workspace to check every app, including one at the root, or mizen doctor --cwd <APP_DIR> for one member."
 				),
 				project,
 			};

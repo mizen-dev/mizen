@@ -1,4 +1,4 @@
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { viteSetupChecks } from "../vite/doctor.js";
 import { type Manifest, readOptional } from "./files.js";
 import { check, type Diagnostic } from "./report.js";
@@ -16,6 +16,7 @@ import {
 	type SyntaxNode,
 	staticArrayContains,
 	staticConfig,
+	topLevelFunction,
 } from "./syntax.js";
 
 async function sourceAt(project: string, candidates: string[]) {
@@ -81,19 +82,21 @@ async function configCheck(
 		present === true ? "pass" : "unverified",
 		present === true
 			? "The static configuration includes Mizen in framework bundling."
-			: "Bundling could not be verified. Computed, wrapped, or absent settings require manual review.",
+			: "Bundling could not be verified. Doctor reads an object literal that the configuration exports, passes to defineConfig, or returns at the end of a config function. It does not run the file, so a computed, spread, or conditional setting stays unverified.",
 		[file.path],
-		repair
+		`${repair} If the setting is computed, confirm that the production server build renders a Mizen component.`
 	);
 }
 
-function aliases(ast: SyntaxNode, exported: string): string[] {
+const THEME_SOURCES = ["@mizen-labs/ui/theme", "@mizen-labs/ui"];
+
+function aliases(
+	ast: SyntaxNode,
+	exported: string,
+	sources = THEME_SOURCES
+): string[] {
 	return imports(ast)
-		.filter((node) =>
-			["@mizen-labs/ui/theme", "@mizen-labs/ui"].includes(
-				literal(node.source) ?? ""
-			)
-		)
+		.filter((node) => sources.includes(literal(node.source) ?? ""))
 		.flatMap((node) => (Array.isArray(node.specifiers) ? node.specifiers : []))
 		.filter(
 			(node) =>
@@ -105,10 +108,57 @@ function aliases(ast: SyntaxNode, exported: string): string[] {
 		.filter((name): name is string => name !== null);
 }
 
+// TanStack Router renders Wrap and InnerWrap around every route, the root
+// document included, so a provider there covers the app.
+function routerWraps(ast: SyntaxNode): boolean {
+	const providers = aliases(ast, "ThemeProvider");
+	const routers = aliases(ast, "createRouter", ["@tanstack/react-router"]);
+	const wrappers = nodes(ast)
+		.filter(
+			(node) =>
+				node.type === "CallExpression" &&
+				routers.includes(nameOf(node.callee) ?? "") &&
+				Array.isArray(node.arguments)
+		)
+		.flatMap((call) =>
+			["Wrap", "InnerWrap"].map((key) =>
+				property((call.arguments as unknown[])[0], key)
+			)
+		)
+		.map((value) =>
+			isNode(value) && value.type === "Identifier"
+				? topLevelFunction(ast, nameOf(value))
+				: value
+		);
+	return nodes(wrappers).some((node) =>
+		providers.includes(jsxName(node) ?? "")
+	);
+}
+
+// The router module beside the routes directory, when it wraps the app in
+// ThemeProvider.
+async function wrappingRouter(root: string): Promise<string | null> {
+	const router = await sourceAt(
+		dirname(dirname(root)),
+		["tsx", "jsx", "ts", "js"].map((extension) => `router.${extension}`)
+	);
+	try {
+		return router && routerWraps(parseSource(router.source))
+			? router.path
+			: null;
+	} catch {
+		return null;
+	}
+}
+
+const THEME_REPAIR =
+	"Render ThemeScript before body content and ThemeProvider around the app. If another component renders them, confirm in a browser that the first paint has the stored theme and that hydration reports no mismatch.";
+
 function themeCheck(
 	ast: SyntaxNode,
 	path: string,
-	document: SyntaxNode | null
+	document: SyntaxNode | null,
+	router: string | null = null
 ): Diagnostic {
 	const scripts = aliases(ast, "ThemeScript");
 	const providers = aliases(ast, "ThemeProvider");
@@ -121,14 +171,28 @@ function themeCheck(
 		nodes(body).some((node) => providers.includes(jsxName(node) ?? ""))
 	);
 	// Presence is evidence of syntax, not proof of runtime rendering or first paint.
+	if (scriptInHead && providerInBody) {
+		return check(
+			"setup.theme",
+			"pass",
+			"Root syntax contains ThemeScript in head and ThemeProvider in body; runtime behavior still needs a browser check.",
+			[path]
+		);
+	}
+	if (scriptInHead && router) {
+		return check(
+			"setup.theme",
+			"pass",
+			"Root syntax contains ThemeScript in head, and the router renders ThemeProvider in Wrap or InnerWrap; runtime behavior still needs a browser check.",
+			[path, router]
+		);
+	}
 	return check(
 		"setup.theme",
-		scriptInHead && providerInBody ? "pass" : "unverified",
-		scriptInHead && providerInBody
-			? "Root syntax contains ThemeScript in head and ThemeProvider in body; runtime behavior still needs a browser check."
-			: "Root theme bootstrap is not statically verified. It may be delegated to another component.",
+		"unverified",
+		`${scriptInHead ? "ThemeProvider was not found in the root document body, or in the Wrap or InnerWrap of a createRouter call in the router module beside the routes" : "ThemeScript was not found in the head of the root document"}. Doctor reads these places only and does not follow other components.`,
 		[path],
-		"Render ThemeScript before body content and ThemeProvider around the app. Verify first paint and hydration in a browser."
+		THEME_REPAIR
 	);
 }
 
@@ -222,7 +286,12 @@ export async function setupChecks(
 		return [
 			config,
 			stylesheetCheck(ast, root.path),
-			themeCheck(ast, root.path, documentFunction(ast, framework)),
+			themeCheck(
+				ast,
+				root.path,
+				documentFunction(ast, framework),
+				framework === "start" ? await wrappingRouter(root.path) : null
+			),
 		];
 	} catch {
 		return [

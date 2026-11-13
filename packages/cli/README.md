@@ -124,16 +124,27 @@ node packages/cli/dist/cli.js doctor --cwd apps/my-app --strict --json
 ```
 
 Doctor finds the nearest app manifest. Without `--workspace`, workspace roots require
-an explicit app path. It reports the installed framework version, Node and React peer compatibility,
+an explicit app path. When the root is itself an app, the diagnostic says so and
+points to `--workspace`, which checks the root app with the members. It reports the installed framework version, Node and React peer compatibility,
 React/ReactDOM version agreement, module identity, package-manager lockfiles and
 packageManager declarations, and supported setup declarations.
 
 Configuration and source are parsed, never imported or executed. The first syntax
 checks cover Next App Router roots, TanStack Start roots, and React/Vite client entries. They inspect literal configuration,
-simple unmodified configuration bindings, and Vite defineConfig object arguments.
-Custom wrappers, computed settings, indirect stylesheet pipelines, and delegated
-providers can remain unverified. A passing syntax check describes a declaration;
-it does not prove runtime delivery, hydration, or first-paint behavior.
+simple unmodified configuration bindings, Vite defineConfig object arguments, and
+config functions that end with one `return` of an object literal. For a Start app,
+`ThemeProvider` passes in the root document body, or in the `Wrap` or `InnerWrap` of
+a `createRouter` call in the `router` module beside the routes directory.
+Custom wrappers, computed, spread, or conditional settings, indirect stylesheet
+pipelines, and providers in other components remain unverified. A passing syntax
+check describes a declaration; it does not prove runtime delivery, hydration, or
+first-paint behavior.
+
+`--strict` suits a CI gate only when doctor can read every setup shape in the app.
+For a shape it cannot read, run without `--strict`, read each `unverified`
+diagnostic, and confirm it by the evidence its repair step names: a production
+server build that renders a Mizen component for bundling, and a first paint with
+the stored theme and no hydration mismatch for the theme.
 
 Two checks guard agent and styling setup. `package.skill` passes when the installed
 package ships its agent skill, and names the file. `setup.stylex` is unverified when
