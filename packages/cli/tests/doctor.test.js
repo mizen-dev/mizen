@@ -358,6 +358,7 @@ test("a config function verifies only the object it always returns", (t) => {
 		`${define}(()=>({${setting}}));`,
 		`${define}(async function(){ return {${setting},plugins:[{transform(){ return null; }}]}; });`,
 		`export default ()=>({${setting}});`,
+		`${define}(()=>({ssr:{noExternal:["@mizen-labs/ui"],external:["sharp"]}}));`,
 	]) {
 		put(root, "vite.config.ts", config);
 		assert.equal(
@@ -367,6 +368,12 @@ test("a config function verifies only the object it always returns", (t) => {
 		);
 	}
 	for (const config of [
+		`${define}(function*(){ return {${setting}}; });`,
+		`${define}(()=>{ try { return {${setting}}; } finally { return {}; } });`,
+		`${define}(({mode})=>{ switch(mode){ case "test": return {}; default: return {${setting}}; } });`,
+		`${define}(()=>({get ssr(){ return {}; }}));`,
+		`${define}(()=>({ssr:{noExternal:true,external:["@mizen-labs/ui"]}}));`,
+		`${define}(()=>({ssr:{noExternal:["@mizen-labs/ui"],external:list}}));`,
 		`${define}(({mode})=>{ if(mode==="test") return {}; return {${setting}}; });`,
 		`${define}(({mode})=>{ return mode==="test" ? {} : {${setting}}; });`,
 		`${define}(()=>{ const config={${setting}}; return config; });`,
@@ -397,6 +404,7 @@ test("a provider in the router's Wrap or InnerWrap verifies the Start theme", (t
 	assert.ok(missing.repair.includes("first paint"));
 	for (const source of [
 		`${provider}${router} export const getRouter=()=>createRouter({routeTree,InnerWrap:({children})=><ThemeProvider defaultTheme={theme}>{children}</ThemeProvider>});`,
+		`${provider}${router} export const router=createRouter({routeTree,Wrap:({children})=><QueryProvider client={client}><ThemeProvider><Toasts />{children}</ThemeProvider></QueryProvider>});`,
 		`${provider}${router} function Providers({children}) { return <ThemeProvider>{children}</ThemeProvider>; } export const router=createRouter({routeTree,Wrap:Providers});`,
 	]) {
 		put(root, "src/router.tsx", source);
@@ -411,7 +419,23 @@ test("a provider in the router's Wrap or InnerWrap verifies the Start theme", (t
 			)
 		);
 	}
+	const wrap = "({children})=><ThemeProvider>{children}</ThemeProvider>";
 	for (const source of [
+		// The provider does not always wrap the children.
+		`${provider}${router} export const router=createRouter({InnerWrap:({children})=><>{children}<ThemeProvider/></>});`,
+		`${provider}${router} export const router=createRouter({InnerWrap:({children})=>dark ? <ThemeProvider>{children}</ThemeProvider> : children});`,
+		`${provider}${router} export const router=createRouter({InnerWrap:({children})=><>{flag && <ThemeProvider>{children}</ThemeProvider>}</>});`,
+		`${provider}${router} function Providers({children}) { if (ssr) return children; return <ThemeProvider>{children}</ThemeProvider>; } export const router=createRouter({Wrap:Providers});`,
+		`${provider}${router} export const router=createRouter({InnerWrap:({children})=>{ const unused=()=><ThemeProvider>{children}</ThemeProvider>; return children; }});`,
+		`${provider}${router} export const router=createRouter({InnerWrap:({children})=><Suspense fallback={<ThemeProvider>{children}</ThemeProvider>}>{children}</Suspense>});`,
+		`${provider}${router} export const router=createRouter({InnerWrap:function*({children}) { return <ThemeProvider>{children}</ThemeProvider>; }});`,
+		// The module creates another router, or gives a name a new meaning.
+		`${provider}${router} const draft=createRouter({InnerWrap:${wrap}}); export const getRouter=()=>createRouter({routeTree});`,
+		`${provider}${router} export const router=createRouter({InnerWrap:({children})=>{ const ThemeProvider=Fake; return <ThemeProvider>{children}</ThemeProvider>; }});`,
+		`${provider}${router} export const router=createRouter({InnerWrap:({children, ThemeProvider})=><ThemeProvider>{children}</ThemeProvider>});`,
+		`${provider}${router} function Providers({children}) { return <ThemeProvider>{children}</ThemeProvider>; } Providers=({children})=>children; export const router=createRouter({Wrap:Providers});`,
+		`${provider}${router} function Providers({children}) { return <ThemeProvider>{children}</ThemeProvider>; } export const getRouter=()=>{ const Providers=Other; return createRouter({Wrap:Providers}); };`,
+		`${provider}${router} const Providers=${wrap}; export const router=createRouter({Wrap:Providers});`,
 		`${router} import {ThemeProvider} from "./theme"; export const router=createRouter({InnerWrap:({children})=><ThemeProvider>{children}</ThemeProvider>});`,
 		`${provider}${router} export const router=createRouter({...options,InnerWrap:({children})=><ThemeProvider>{children}</ThemeProvider>});`,
 		`${provider}${router} export const router=createRouter({routeTree}); const unused=<ThemeProvider />;`,
@@ -442,4 +466,33 @@ test("a workspace root that is also an app points to --workspace", (t) => {
 			"select an app explicitly"
 		)
 	);
+});
+
+test("a theme element under a condition, or beside the content, stays unverified", (t) => {
+	const root = fixture(t);
+	const imports =
+		'import "@mizen-labs/ui/styles.css"; import {ThemeProvider,ThemeScript} from "@mizen-labs/ui/theme";';
+	for (const document of [
+		"<html><head><ThemeScript /></head><body>{children}<ThemeProvider /></body></html>",
+		"<html><head><ThemeScript /></head><body>{dark && <ThemeProvider>{children}</ThemeProvider>}</body></html>",
+		"<html><head><ThemeScript /></head><body><Shell fallback={<ThemeProvider>{children}</ThemeProvider>} /></body></html>",
+		"<html><head>{early && <ThemeScript />}</head><body><ThemeProvider>{children}</ThemeProvider></body></html>",
+	]) {
+		put(
+			root,
+			"app/layout.tsx",
+			`${imports} export default function Root({children}) { return ${document}; }`
+		);
+		assert.equal(
+			diagnostic(run(root), "setup.theme").status,
+			"unverified",
+			document
+		);
+	}
+	put(
+		root,
+		"app/layout.tsx",
+		`${imports} export default function Root({children}) { return <html><head><meta /><ThemeScript /></head><body><Shell><ThemeProvider><Outlet /></ThemeProvider></Shell></body></html>; }`
+	);
+	assert.equal(diagnostic(run(root), "setup.theme").status, "pass");
 });

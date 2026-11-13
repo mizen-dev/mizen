@@ -65,7 +65,7 @@ function unwrap(node: unknown): unknown {
 	return node;
 }
 
-const FUNCTIONS = [
+export const FUNCTIONS = [
 	"ArrowFunctionExpression",
 	"ClassMethod",
 	"FunctionDeclaration",
@@ -89,8 +89,12 @@ function ownNodes(value: unknown): SyntaxNode[] {
 // What a config function always returns: an arrow's expression body, or the
 // one return statement that ends its block. A conditional or early return
 // depends on runtime values, so it yields nothing.
-function returned(callback: SyntaxNode): unknown {
+export function returned(callback: SyntaxNode): unknown {
 	const { body } = callback;
+	// A generator returns an iterator, not the value after return.
+	if (callback.generator === true) {
+		return null;
+	}
 	if (!(isNode(body) && body.type === "BlockStatement")) {
 		return unwrap(body);
 	}
@@ -168,6 +172,15 @@ export function property(object: unknown, key: string): unknown {
 	}
 	const selected = found[0] as SyntaxNode;
 	return selected.type === "ObjectProperty" ? selected.value : null;
+}
+
+// True when an object literal names the key at all, readable or not.
+export function member(object: unknown, key: string): boolean {
+	return (
+		isNode(object) &&
+		Array.isArray(object.properties) &&
+		object.properties.some((item) => isNode(item) && nameOf(item.key) === key)
+	);
 }
 
 export function staticArrayContains(

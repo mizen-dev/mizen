@@ -132,9 +132,13 @@ packageManager declarations, and supported setup declarations.
 Configuration and source are parsed, never imported or executed. The first syntax
 checks cover Next App Router roots, TanStack Start roots, and React/Vite client entries. They inspect literal configuration,
 simple unmodified configuration bindings, Vite defineConfig object arguments, and
-config functions that end with one `return` of an object literal. For a Start app,
-`ThemeProvider` passes in the root document body, or in the `Wrap` or `InnerWrap` of
-a `createRouter` call in the `router` module beside the routes directory.
+config functions that end with one `return` of an object literal. A Vite config that
+sets `ssr.external` stays unverified unless that list is literal and omits Mizen.
+`ThemeScript` and `ThemeProvider` count only where they always render: as JSX
+children, not under a condition or inside an attribute. For a Start app,
+`ThemeProvider` passes around the content of the root document body, or around
+`{children}` in the `Wrap` or `InnerWrap` of the one `createRouter` call in the
+`router` module beside the routes directory.
 Custom wrappers, computed, spread, or conditional settings, indirect stylesheet
 pipelines, and providers in other components remain unverified. A passing syntax
 check describes a declaration; it does not prove runtime delivery, hydration, or
