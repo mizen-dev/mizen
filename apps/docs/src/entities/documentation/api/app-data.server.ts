@@ -1,6 +1,6 @@
 import { getAppDoc } from "../model/apps";
 import dashboardApp from "../ui/apps/dashboard/app.tsx?raw";
-import dashboardShellCss from "../ui/apps/dashboard/app-shell.module.css?raw";
+import dashboardShellStyles from "../ui/apps/dashboard/app-shell.styles.ts?raw";
 import dashboardShell from "../ui/apps/dashboard/app-shell.tsx?raw";
 import dashboardData from "../ui/apps/dashboard/data.ts?raw";
 import dashboardHome from "../ui/apps/dashboard/home.tsx?raw";
@@ -11,7 +11,7 @@ const files: Record<string, { code: string; path: string }[]> = {
 		{ code: dashboardApp, path: "src/app.tsx" },
 		{ code: dashboardHome, path: "src/home.tsx" },
 		{ code: dashboardShell, path: "src/app-shell.tsx" },
-		{ code: dashboardShellCss, path: "src/app-shell.module.css" },
+		{ code: dashboardShellStyles, path: "src/app-shell.styles.ts" },
 		{ code: dashboardData, path: "src/data.ts" },
 	],
 };
@@ -33,6 +33,9 @@ export function renderAppMarkdown({ app, files: sources }: AppPageData) {
 		"## Set up",
 		`\`\`\`sh\n${app.setup.code}\n\`\`\``,
 		...app.setup.paragraphs,
+		app.setup.links
+			.map(({ href, label }) => `- [${label}](${href}/markdown)`)
+			.join("\n"),
 		"## Files",
 		...sources.flatMap(({ code, path }) => [
 			`### ${path}`,

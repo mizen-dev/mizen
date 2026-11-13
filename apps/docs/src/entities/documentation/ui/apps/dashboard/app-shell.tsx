@@ -13,6 +13,7 @@ import {
 	Input,
 	Text,
 } from "@mizen-labs/ui";
+import { props } from "@stylexjs/stylex";
 import {
 	type Icon,
 	IconChartBar,
@@ -26,7 +27,7 @@ import {
 	IconUsersGroup,
 } from "@tabler/icons-react";
 import { type MouseEvent, type ReactNode, useCallback, useState } from "react";
-import styles from "./app-shell.module.css";
+import { shellStyles } from "./app-shell.styles";
 
 interface NavItem {
 	count?: number;
@@ -52,9 +53,9 @@ const workspace: NavItem[] = [
 
 function NavList({ items, label }: { items: NavItem[]; label?: string }) {
 	return (
-		<ul aria-label={label} className={styles.group}>
+		<ul aria-label={label} {...props(shellStyles.group)}>
 			{label ? (
-				<li aria-hidden="true" className={styles.groupLabel}>
+				<li aria-hidden="true" {...props(shellStyles.groupLabel)}>
 					{label}
 				</li>
 			) : null}
@@ -62,12 +63,12 @@ function NavList({ items, label }: { items: NavItem[]; label?: string }) {
 				<li key={href}>
 					<a
 						aria-current={current ? "page" : undefined}
-						className={styles.link}
 						href={href}
+						{...props(shellStyles.link, current && shellStyles.linkCurrent)}
 					>
 						<Glyph aria-hidden="true" size={16} stroke={1.75} />
-						<span className={styles.linkLabel}>{name}</span>
-						{count ? <span className={styles.count}>{count}</span> : null}
+						<span {...props(shellStyles.linkLabel)}>{name}</span>
+						{count ? <span {...props(shellStyles.count)}>{count}</span> : null}
 					</a>
 				</li>
 			))}
@@ -77,7 +78,7 @@ function NavList({ items, label }: { items: NavItem[]; label?: string }) {
 
 function Brand() {
 	return (
-		<div className={styles.brand}>
+		<div {...props(shellStyles.brand)}>
 			<Avatar size="sm">
 				<AvatarFallback>N</AvatarFallback>
 			</Avatar>
@@ -97,11 +98,11 @@ function Navigation() {
 				size="sm"
 				type="search"
 			/>
-			<nav aria-label="Main" className={styles.nav}>
+			<nav aria-label="Main" {...props(shellStyles.nav)}>
 				<NavList items={primary} />
 				<NavList items={workspace} label="Workspace" />
 			</nav>
-			<div className={styles.account}>
+			<div {...props(shellStyles.account)}>
 				<Avatar size="sm">
 					<AvatarFallback>MC</AvatarFallback>
 				</Avatar>
@@ -141,7 +142,9 @@ function NavigationDrawer() {
 					<DrawerTitle>Northstar</DrawerTitle>
 				</DrawerHeader>
 				<DrawerPanel>
-					<div className={styles.drawer}>
+					<div
+						{...props(shellStyles.text, shellStyles.column, shellStyles.drawer)}
+					>
 						<Navigation />
 					</div>
 				</DrawerPanel>
@@ -154,16 +157,18 @@ function NavigationDrawer() {
 // sidebar; on a narrow one it moves into a drawer behind the menu button.
 export function AppShell({ children }: { children: ReactNode }) {
 	return (
-		<div className={styles.shell}>
-			<header className={styles.bar}>
+		<div {...props(shellStyles.shell)}>
+			<header {...props(shellStyles.text, shellStyles.bar)}>
 				<Brand />
 				<NavigationDrawer />
 			</header>
-			<aside className={styles.sidebar}>
+			<aside
+				{...props(shellStyles.text, shellStyles.column, shellStyles.sidebar)}
+			>
 				<Brand />
 				<Navigation />
 			</aside>
-			<main className={styles.pane}>{children}</main>
+			<main {...props(shellStyles.pane)}>{children}</main>
 		</div>
 	);
 }

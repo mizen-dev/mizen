@@ -85,7 +85,7 @@ describe("Apps", { timeout: 30_000 }, () => {
 			"### src/app.tsx",
 			"export function Home()",
 			"export function AppShell(",
-			".shell {",
+			"export const shellStyles = create({",
 			"export const orders",
 		]) {
 			expect(markdown).toContain(source);
@@ -119,7 +119,7 @@ describe("Apps", { timeout: 30_000 }, () => {
 			"src/app.tsx",
 			"src/home.tsx",
 			"src/app-shell.tsx",
-			"src/app-shell.module.css",
+			"src/app-shell.styles.ts",
 			"src/data.ts",
 		]);
 		expect(

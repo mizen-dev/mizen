@@ -68,7 +68,9 @@ describes the latest release. When it disagrees with the installed version,
 the installed package and its matching CLI win.
 
 For a whole screen, start from an app: `/apps/dashboard/markdown` has the
-sources of a dashboard in an application shell with a sidebar.
+sources of a dashboard in an application shell with a sidebar. Its shell
+styles are StyleX. In an app without a StyleX build, write those rules in
+plain CSS with the token variables.
 
 ## Lay out the screen
 

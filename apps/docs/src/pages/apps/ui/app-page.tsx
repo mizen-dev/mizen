@@ -2,6 +2,7 @@ import { Button } from "@mizen-labs/ui/button";
 import { Inline } from "@mizen-labs/ui/inline";
 import { props } from "@stylexjs/stylex";
 import { IconArrowUpRight } from "@tabler/icons-react";
+import { Link } from "@tanstack/react-router";
 import type { getAppPageData } from "../../../entities/documentation/api/app-data.server";
 import { PageActions } from "../../../features/copy-document/ui/page-actions";
 import { docsStyles } from "../../../shared/ui/docs.styles";
@@ -55,6 +56,13 @@ export default function AppPage({
 						{paragraph}
 					</p>
 				))}
+				<ul {...props(docsStyles.guideLinks)}>
+					{app.setup.links.map(({ href, label }) => (
+						<li key={href}>
+							<Link to={href}>{label}</Link>
+						</li>
+					))}
+				</ul>
 			</section>
 			<section
 				aria-labelledby="files-heading"
