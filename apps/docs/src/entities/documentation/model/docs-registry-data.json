@@ -7094,7 +7094,13 @@
         "name": "icon",
         "type": "ReactNode",
         "defaultValue": "Optional",
-        "description": "Shows a glyph in a 24px brand tile before the label."
+        "description": "Shows a glyph in a 24px tile before the label."
+      },
+      {
+        "name": "iconColor",
+        "type": "\"brand\" | \"neutral\" | \"blue\" | \"purple\" | \"green\" | \"orange\"",
+        "defaultValue": "\"brand\"",
+        "description": "Colors the icon tile by category, with the AvatarFallback palette. A color names a category, not a judgment."
       },
       {
         "name": "actions",

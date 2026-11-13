@@ -314,6 +314,7 @@ export const usageComponents: Record<string, ReturnType<typeof preloadableExampl
 "MetricRevenueAndUptimeExample2": preloadableExample(() => import("./examples/metric-variants").then((module) => ({ default: module.MetricRevenueAndUptimeExample2 }))),
 "MetricSubscriptionsExample1": preloadableExample(() => import("./examples/metric-variants").then((module) => ({ default: module.MetricSubscriptionsExample1 }))),
 "MetricTrafficAndCacheExample3": preloadableExample(() => import("./examples/metric-variants").then((module) => ({ default: module.MetricTrafficAndCacheExample3 }))),
+"MetricTrendCategoryColorsExample": preloadableExample(() => import("./examples/metric-trend-variants").then((module) => ({ default: module.MetricTrendCategoryColorsExample }))),
 "MetricTrendDailySigninsExample1": preloadableExample(() => import("./examples/metric-trend-variants").then((module) => ({ default: module.MetricTrendDailySigninsExample1 }))),
 "MetricTrendLinkedStatCardExample": preloadableExample(() => import("./examples/metric-trend-variants").then((module) => ({ default: module.MetricTrendLinkedStatCardExample }))),
 "MetricTrendLoadingExample": preloadableExample(() => import("./examples/metric-trend-variants").then((module) => ({ default: module.MetricTrendLoadingExample }))),

@@ -4616,6 +4616,13 @@
         "code": "\"use client\";\n\nimport { Grid, MetricDelta, MetricTrend } from \"@mizen-labs/ui\";\n\nimport { IconCoin, IconReceiptRefund, IconUsers } from \"@tabler/icons-react\";\n\nexport function MetricTrendSoftChangeChipExample() {\n\treturn (\n\t\t<Grid>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta appearance=\"soft\" value={0.16} />}\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconCoin />}\n\t\t\t\tlabel=\"Total revenue\"\n\t\t\t\tvalue=\"152,313.92\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta appearance=\"soft\" value={0} />}\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconUsers />}\n\t\t\t\tlabel=\"New customers\"\n\t\t\t\tvalue=\"3,847\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\tdelta={<MetricDelta appearance=\"soft\" good=\"down\" value={0.024} />}\n\t\t\t\tdescription=\"From last month\"\n\t\t\t\ticon={<IconReceiptRefund />}\n\t\t\t\tlabel=\"Refunds\"\n\t\t\t\tvalue=\"4,209.44\"\n\t\t\t\tvaluePrefix=\"$\"\n\t\t\t/>\n\t\t</Grid>\n\t);\n}\n"
       },
       {
+        "name": "MetricTrendCategoryColorsExample",
+        "title": "Category colors",
+        "description": "iconColor colors the icon tile by category, with the AvatarFallback palette. The default is the brand tile.",
+        "path": "entities/documentation/ui/examples/metric-trend-variants.tsx",
+        "code": "\"use client\";\n\nimport { Grid, MetricTrend } from \"@mizen-labs/ui\";\n\nimport {\n\tIconCoin,\n\tIconReceiptRefund,\n\tIconShoppingCart,\n\tIconUsers,\n} from \"@tabler/icons-react\";\n\nexport function MetricTrendCategoryColorsExample() {\n\treturn (\n\t\t<Grid columns=\"4\">\n\t\t\t<MetricTrend\n\t\t\t\ticon={<IconCoin />}\n\t\t\t\ticonColor=\"green\"\n\t\t\t\tlabel=\"Deposits\"\n\t\t\t\tvalue=\"1,284\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\ticon={<IconReceiptRefund />}\n\t\t\t\ticonColor=\"orange\"\n\t\t\t\tlabel=\"Withdrawals\"\n\t\t\t\tvalue=\"200\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\ticon={<IconShoppingCart />}\n\t\t\t\ticonColor=\"blue\"\n\t\t\t\tlabel=\"Inventory\"\n\t\t\t\tvalue=\"84\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\ticon={<IconUsers />}\n\t\t\t\ticonColor=\"purple\"\n\t\t\t\tlabel=\"Users\"\n\t\t\t\tvalue=\"3,847\"\n\t\t\t/>\n\t\t\t<MetricTrend\n\t\t\t\ticon={<IconCoin />}\n\t\t\t\ticonColor=\"neutral\"\n\t\t\t\tlabel=\"Archived\"\n\t\t\t\tvalue=\"12\"\n\t\t\t/>\n\t\t\t<MetricTrend icon={<IconCoin />} label=\"Revenue\" value=\"152,313\" />\n\t\t</Grid>\n\t);\n}\n"
+      },
+      {
         "name": "MetricTrendNeutralChangeExample",
         "title": "Neutral change",
         "description": "good=\"none\" keeps the flat tone for a change that is neither good nor bad. The sign still shows the direction.",

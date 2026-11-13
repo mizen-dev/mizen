@@ -6,6 +6,7 @@ import type {
 	ReactNode,
 } from "react";
 import type { Closed } from "../../closed";
+import { avatarFallbackColors } from "../avatar/avatar.styles";
 import {
 	Metric,
 	MetricDescription,
@@ -31,8 +32,13 @@ export type MetricTrendProps = Omit<
 	 */
 	deltaPlacement?: "footer" | "value";
 	description?: ReactNode;
-	/** A glyph shown in a small brand tile before the label. */
+	/** A glyph shown in a small tile before the label. */
 	icon?: ReactNode;
+	/**
+	 * The color of the icon tile: the brand tile by default. A color names a
+	 * category, not a judgment. Give a category the same color on every screen.
+	 */
+	iconColor?: "blue" | "brand" | "green" | "neutral" | "orange" | "purple";
 	label: ReactNode;
 	/**
 	 * Holds the card's shape while its data loads. The value renders as a
@@ -54,6 +60,14 @@ export type MetricTrendProps = Omit<
 };
 
 type Slot = "delta" | "description" | "value";
+
+// The category colors are the ones an AvatarFallback uses, so a category and
+// a person share one palette. The brand tile is the base style.
+const iconColors = {
+	...avatarFallbackColors,
+	brand: null,
+	neutral: metricTrendStyles.iconNeutral,
+} as const;
 
 const placeholderSizes = {
 	delta: metricTrendStyles.placeholderDelta,
@@ -151,6 +165,7 @@ function MetricTrendFooter({
 function MetricTrendLead({
 	delta,
 	description,
+	iconColor = "brand",
 	icon,
 	label,
 	loading,
@@ -161,6 +176,7 @@ function MetricTrendLead({
 	MetricTrendProps,
 	| "delta"
 	| "description"
+	| "iconColor"
 	| "icon"
 	| "label"
 	| "loading"
@@ -177,7 +193,7 @@ function MetricTrendLead({
 							<span
 								aria-hidden="true"
 								data-slot="metric-trend-icon"
-								{...props(metricTrendStyles.icon)}
+								{...props(metricTrendStyles.icon, iconColors[iconColor])}
 							>
 								{icon}
 							</span>
@@ -222,22 +238,24 @@ function MetricTrendRoot({
 	);
 }
 
-export function MetricTrend({
-	actions,
-	children,
-	delta,
-	deltaPlacement = "value",
-	description,
-	icon,
-	label,
-	loading = false,
-	ref: forwardedRef,
-	render,
-	value,
-	valuePrefix,
-	valueSuffix,
-	...rest
-}: MetricTrendProps) {
+export function MetricTrend(trendProps: MetricTrendProps) {
+	const {
+		actions,
+		children,
+		delta,
+		deltaPlacement = "value",
+		description,
+		icon,
+		iconColor,
+		label,
+		loading = false,
+		ref: forwardedRef,
+		render,
+		value,
+		valuePrefix,
+		valueSuffix,
+		...rest
+	} = trendProps;
 	for (const name of ["className", "data-slot", "role", "style"]) {
 		Reflect.deleteProperty(rest, name);
 	}
@@ -258,6 +276,7 @@ export function MetricTrend({
 					{...shown}
 					delta={inFooter ? undefined : shown.delta}
 					description={inFooter ? undefined : shown.description}
+					iconColor={iconColor}
 					icon={icon}
 					label={label}
 					loading={loading}

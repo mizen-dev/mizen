@@ -163,6 +163,46 @@ export function MetricTrendSoftChangeChipExample() {
 	);
 }
 
+// iconColor tells categories apart. The color names the category, not a
+// judgment: the change chip says whether a change is good.
+export function MetricTrendCategoryColorsExample() {
+	return (
+		<Grid columns="4">
+			<MetricTrend
+				icon={<IconCoin />}
+				iconColor="green"
+				label="Deposits"
+				value="1,284"
+			/>
+			<MetricTrend
+				icon={<IconReceiptRefund />}
+				iconColor="orange"
+				label="Withdrawals"
+				value="200"
+			/>
+			<MetricTrend
+				icon={<IconShoppingCart />}
+				iconColor="blue"
+				label="Inventory"
+				value="84"
+			/>
+			<MetricTrend
+				icon={<IconUsers />}
+				iconColor="purple"
+				label="Users"
+				value="3,847"
+			/>
+			<MetricTrend
+				icon={<IconCoin />}
+				iconColor="neutral"
+				label="Archived"
+				value="12"
+			/>
+			<MetricTrend icon={<IconCoin />} label="Revenue" value="152,313" />
+		</Grid>
+	);
+}
+
 // good="none" keeps the flat tone: the change is a fact, not good or bad news.
 export function MetricTrendNeutralChangeExample() {
 	return (

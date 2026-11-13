@@ -619,7 +619,9 @@
       "Put the legend in actions and pass legend={false} to the chart. Set good=\"down\" on MetricDelta for metrics where a fall is good, such as refunds.",
       "Set `appearance=\"soft\"` on MetricDelta where the view also uses soft status badges. Use one appearance per view.",
       "Set good=\"none\" on MetricDelta when a change is neither good nor bad, such as withdrawals or inventory value.",
-      "While data loads, set loading and pass the description and delta the loaded card will have. Do not hide the cards or put Skeleton in their slots.",
+      "Use iconColor to tell categories apart, one color per category on every screen. It does not say good or bad: MetricDelta does. Keep the brand tile when the cards are one kind.",
+      "While data loads, set loading and keep the same props: value={data?.total} holds its line before the data arrives. Name only the slots the loaded card will show. Do not hide the cards or put Skeleton in their slots.",
+      "loading does not cover the chart. Pass the chart its own loading or empty state.",
       "To make a stat card navigate, pass the link to render. Do not wrap the card in a link, and do not put a second link inside a linked card."
     ]
   },

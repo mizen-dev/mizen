@@ -2244,6 +2244,12 @@
       "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
     },
     {
+      "name": "MetricTrendCategoryColorsExample",
+      "title": "Category colors",
+      "description": "iconColor colors the icon tile by category, with the AvatarFallback palette. The default is the brand tile.",
+      "path": "entities/documentation/ui/examples/metric-trend-variants.tsx"
+    },
+    {
       "name": "MetricTrendNeutralChangeExample",
       "title": "Neutral change",
       "description": "good=\"none\" keeps the flat tone for a change that is neither good nor bad. The sign still shows the direction.",

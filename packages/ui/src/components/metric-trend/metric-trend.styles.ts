@@ -57,6 +57,11 @@ export const metricTrendStyles = create({
 		justifyContent: "center",
 		width: { ":is(*) > svg": glyphSize.xs, default: controlSize.xs },
 	},
+	// The card is the workarea tone, so a neutral tile takes the surface.
+	iconNeutral: {
+		backgroundColor: colors.surface,
+		color: colors.mutedContent,
+	},
 	labelRow: {
 		alignItems: "center",
 		display: "inline-flex",

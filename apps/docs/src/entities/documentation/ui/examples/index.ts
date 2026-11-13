@@ -410,6 +410,7 @@ import { MeterStorageUsageExample1 } from "./meter-variants";
 import { ActiveSubscriptions } from "./metric";
 import { MonthlyRevenueTrend } from "./metric-trend";
 import {
+	MetricTrendCategoryColorsExample,
 	MetricTrendDailySigninsExample1,
 	MetricTrendLinkedStatCardExample,
 	MetricTrendLoadingExample,
@@ -1000,6 +1001,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	MetricRevenueAndUptimeExample2,
 	MetricSubscriptionsExample1,
 	MetricTrafficAndCacheExample3,
+	MetricTrendCategoryColorsExample,
 	MetricTrendDailySigninsExample1,
 	MetricTrendLinkedStatCardExample,
 	MetricTrendLoadingExample,
