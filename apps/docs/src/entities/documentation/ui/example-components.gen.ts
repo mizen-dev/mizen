@@ -480,6 +480,7 @@ export const usageComponents: Record<string, ReturnType<typeof preloadableExampl
 "TimestampDocumentHistoryExample1": preloadableExample(() => import("./examples/timestamp-variants").then((module) => ({ default: module.TimestampDocumentHistoryExample1 }))),
 "ToastInContextExample1": preloadableExample(() => import("./examples/toast-variants").then((module) => ({ default: module.ToastInContextExample1 }))),
 "ToastPromise": preloadableExample(() => import("./examples/toast-states").then((module) => ({ default: module.ToastPromise }))),
+"TimestampTimeOnlyExample2": preloadableExample(() => import("./examples/timestamp-variants").then((module) => ({ default: module.TimestampTimeOnlyExample2 }))),
 "ToastVaryingHeights": preloadableExample(() => import("./examples/toast-states").then((module) => ({ default: module.ToastVaryingHeights }))),
 "ToastWithStatus": preloadableExample(() => import("./examples/toast-states").then((module) => ({ default: module.ToastWithStatus }))),
 "ToggleControlledState": preloadableExample(() => import("./examples/toggle-variants").then((module) => ({ default: module.ToggleControlledState }))),

@@ -4874,6 +4874,13 @@
         "name": "AttachmentReleaseFilesExample1",
         "title": "Release files",
         "description": "",
+      },
+      {
+        "name": "TimestampTimeOnlyExample2",
+        "title": "Time only",
+        "description": "format=\"time\" shows the hour and minute where the surrounding text already states the day.",
+        "path": "entities/documentation/ui/examples/timestamp-variants.tsx",
+        "code": "import { Stack, Text, Timestamp } from \"@mizen-labs/ui\";\n\nconst richContentDateTime = \"2026-10-07T09:00:00Z\";\n\nexport function TimestampTimeOnlyExample2() {\n\treturn (\n\t\t<Stack gap=\"1\">\n\t\t\t<Text>Today</Text>\n\t\t\t<Text tone=\"muted\">\n\t\t\t\tReceived{\" \"}\n\t\t\t\t<Timestamp\n\t\t\t\t\tdateTime={richContentDateTime}\n\t\t\t\t\tformat=\"time\"\n\t\t\t\t\tlocale=\"en-US\"\n\t\t\t\t\ttimeZone=\"UTC\"\n\t\t\t\t/>\n\t\t\t</Text>\n\t\t</Stack>\n\t);\n}\n"
         "path": "entities/documentation/ui/examples/attachment-variants.tsx",
         "code": "\"use client\";\n\nimport {\n\tAttachment,\n\tAttachmentActions,\n\tAttachmentContent,\n\tAttachmentDescription,\n\tAttachmentMedia,\n\tAttachmentName,\n\tLink,\n\tStack,\n\tThumbnail,\n} from \"@mizen-labs/ui\";\n\nexport function AttachmentReleaseFilesExample1() {\n\treturn (\n\t\t<Stack gap=\"4\">\n\t\t\t<Stack gap=\"3\">\n\t\t\t\t<Attachment>\n\t\t\t\t\t<AttachmentMedia>\n\t\t\t\t\t\t<Thumbnail\n\t\t\t\t\t\t\talt=\"Rows of lavender under a pink evening sky\"\n\t\t\t\t\t\t\tsize=\"default\"\n\t\t\t\t\t\t\tsrc=\"/media/lavender-valensole.jpg\"\n\t\t\t\t\t\t/>\n\t\t\t\t\t</AttachmentMedia>\n\t\t\t\t\t<AttachmentContent>\n\t\t\t\t\t\t<AttachmentName>lavender-valensole.jpg</AttachmentName>\n\t\t\t\t\t\t<AttachmentDescription>JPEG image · 271 KB</AttachmentDescription>\n\t\t\t\t\t</AttachmentContent>\n\t\t\t\t\t<AttachmentActions>\n\t\t\t\t\t\t<Link href=\"/components/attachment\">View file details</Link>\n\t\t\t\t\t</AttachmentActions>\n\t\t\t\t</Attachment>\n\t\t\t</Stack>\n\t\t</Stack>\n\t);\n}\n"
       }

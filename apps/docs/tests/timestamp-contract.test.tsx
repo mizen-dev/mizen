@@ -36,7 +36,9 @@ type TimestampContract = [
 	Required<TimestampProps, "dateTime">,
 	HasRef<TimestampProps>,
 	"dateTime" extends keyof ComponentPropsWithRef<"time"> ? true : false,
-	TimestampFormat extends "date" | "date-time" | "relative" ? true : false,
+	TimestampFormat extends "date" | "date-time" | "relative" | "time"
+		? true
+		: false,
 ];
 const contract: TimestampContract = [true, true, true, true, true];
 const UnsafeTimestamp = Timestamp as ComponentType<Record<string, unknown>>;
@@ -101,6 +103,24 @@ describe("Timestamp contract", () => {
 		expect(markup).toContain(expected);
 		expect(markup).not.toContain("UTC");
 		expect(requiredTimestamp(markup).dateTime).toBe(dateTime);
+	});
+
+	it("formats time-only output in the requested locale and timezone", () => {
+		const dateTime = "2026-11-12T19:48:00Z";
+		const markup = renderToStaticMarkup(
+			<Timestamp
+				dateTime={dateTime}
+				format="time"
+				locale="ru-RU"
+				timeZone="Europe/Moscow"
+			/>
+		);
+		const time = requiredTimestamp(markup);
+
+		expect(time.textContent).toBe("22:48");
+		expect(time.dateTime).toBe(dateTime);
+		expect(time.lang).toBe("ru-RU");
+		expect(time.hasAttribute("title")).toBe(false);
 	});
 
 	it("accepts ISO instants with microsecond precision", () => {

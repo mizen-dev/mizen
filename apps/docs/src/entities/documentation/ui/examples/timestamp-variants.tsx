@@ -1,6 +1,24 @@
 import { Stack, Text, Timestamp } from "@mizen-labs/ui";
 import { richContentDateTime } from "../compositions/rich-content-source";
 
+// The section already states the day, so the status line shows only the time.
+export function TimestampTimeOnlyExample2() {
+	return (
+		<Stack gap="1">
+			<Text>Today</Text>
+			<Text tone="muted">
+				Received{" "}
+				<Timestamp
+					dateTime={richContentDateTime}
+					format="time"
+					locale="en-US"
+					timeZone="UTC"
+				/>
+			</Text>
+		</Stack>
+	);
+}
+
 export function TimestampDocumentHistoryExample1() {
 	return (
 		<Stack gap="4">

@@ -623,7 +623,10 @@ import { DailyVisitors } from "./time-series";
 import { RevenueLineCard } from "./time-series-card";
 import { TimeSeriesDailySigninsExample1 } from "./time-series-variants";
 import { EditedAt } from "./timestamp";
-import { TimestampDocumentHistoryExample1 } from "./timestamp-variants";
+import {
+	TimestampDocumentHistoryExample1,
+	TimestampTimeOnlyExample2,
+} from "./timestamp-variants";
 import { ExampleToast } from "./toast";
 import {
 	ToastPromise,
@@ -1162,6 +1165,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	ToastPromise,
 	ToastVaryingHeights,
 	ToastWithStatus,
+	TimestampTimeOnlyExample2,
 	ToggleControlledState,
 	ToggleControlSizesExample3,
 	ToggleDocumentToolsExample1,

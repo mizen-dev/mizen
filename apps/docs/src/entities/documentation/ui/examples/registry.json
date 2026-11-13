@@ -2457,6 +2457,12 @@
       "name": "AttachmentReleaseFilesExample1",
       "title": "Release files",
       "description": "",
+    },
+    {
+      "name": "TimestampTimeOnlyExample2",
+      "title": "Time only",
+      "description": "format=\"time\" shows the hour and minute where the surrounding text already states the day.",
+      "path": "entities/documentation/ui/examples/timestamp-variants.tsx"
       "path": "entities/documentation/ui/examples/attachment-variants.tsx"
     }
   ],

@@ -4,7 +4,7 @@ import type { Closed } from "../../closed";
 import { visuallyHiddenStyles } from "../visually-hidden/visually-hidden.styles";
 import { timestampStyles } from "./timestamp.styles";
 
-export type TimestampFormat = "date" | "date-time" | "relative";
+export type TimestampFormat = "date" | "date-time" | "relative" | "time";
 export type TimestampProps = Omit<
 	Closed<ComponentPropsWithRef<"time">>,
 	"children" | "data-slot" | "dateTime" | "lang" | "role"
@@ -20,7 +20,17 @@ export type TimestampProps = Omit<
 	timeZone?: string;
 };
 
-const FORMATS = new Set<string>(["date", "date-time", "relative"]);
+const DATE = { day: "numeric", month: "short", year: "numeric" } as const;
+const TIME = { hour: "numeric", minute: "2-digit" } as const;
+// What each format shows. "relative" is counted from now, not formatted.
+const FORMATS: Record<
+	Exclude<TimestampFormat, "relative">,
+	Intl.DateTimeFormatOptions
+> = {
+	date: DATE,
+	"date-time": { ...DATE, ...TIME, timeZoneName: "short" },
+	time: TIME,
+};
 
 // Each unit is used until the next one fits; weeks stop at a month.
 const RELATIVE_UNITS: [Intl.RelativeTimeFormatUnit, number][] = [
@@ -91,22 +101,22 @@ function parseInstant(value: string): Date {
 
 function formatTimestamp(
 	date: Date,
-	format: TimestampFormat,
+	format: keyof typeof FORMATS,
 	locale: string,
 	timeZone: string
 ) {
-	const options: Intl.DateTimeFormatOptions =
-		format === "date"
-			? { day: "numeric", month: "short", year: "numeric" }
-			: {
-					day: "numeric",
-					hour: "numeric",
-					minute: "2-digit",
-					month: "short",
-					timeZoneName: "short",
-					year: "numeric",
-				};
-	return new Intl.DateTimeFormat(locale, { ...options, timeZone }).format(date);
+	return new Intl.DateTimeFormat(locale, {
+		...FORMATS[format],
+		timeZone,
+	}).format(date);
+}
+
+function assertFormat(format: string) {
+	if (format !== "relative" && !Object.hasOwn(FORMATS, format)) {
+		throw new RangeError(
+			"Timestamp format must be 'date', 'date-time', 'time', or 'relative'."
+		);
+	}
 }
 
 export function Timestamp({
@@ -118,17 +128,14 @@ export function Timestamp({
 	timeZone = "UTC",
 	...rest
 }: TimestampProps) {
-	if (!FORMATS.has(format)) {
-		throw new RangeError(
-			"Timestamp format must be 'date', 'date-time', or 'relative'."
-		);
-	}
+	assertFormat(format);
 	const date = parseInstant(dateTime);
 	const relative = format === "relative";
 	const exact = formatTimestamp(date, "date-time", locale, timeZone);
-	const label = relative
-		? formatRelative(date, now ? parseInstant(now) : new Date(), locale)
-		: formatTimestamp(date, format, locale, timeZone);
+	const label =
+		format === "relative"
+			? formatRelative(date, now ? parseInstant(now) : new Date(), locale)
+			: formatTimestamp(date, format, locale, timeZone);
 	for (const name of [
 		"className",
 		"data-slot",
