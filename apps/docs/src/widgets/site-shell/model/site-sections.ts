@@ -1,1 +1,4 @@
-export const siteSections = [["Docs", "/docs"]] as const;
+export const siteSections = [
+	["Docs", "/docs"],
+	["Apps", "/apps"],
+] as const;

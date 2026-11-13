@@ -1,3 +1,4 @@
+import { appDocs } from "../model/apps";
 import { componentCategories, componentDocs } from "../model/docs-registry";
 import { guides } from "../model/guides";
 
@@ -40,6 +41,13 @@ export function GET() {
 				(guide) =>
 					`- [${guide.title}](/docs/${guide.slug}/markdown): ${guide.description}`
 			),
+		"",
+		"## Apps",
+		"",
+		...appDocs.map(
+			(app) =>
+				`- [${app.title}](/apps/${app.slug}/markdown): ${app.description}`
+		),
 		"",
 		"## Workflow examples",
 		"",

@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
+import { Route as AppsIndexRouteImport } from './routes/apps.index'
+import { Route as AppsAppRouteImport } from './routes/apps.$app'
 import { Route as ComponentsSlugRouteImport } from './routes/components_.$slug'
 import { Route as DocsIndexRouteImport } from './routes/docs.index'
 import { Route as DocsGuideRouteImport } from './routes/docs.$guide'
@@ -19,6 +21,8 @@ import { Route as InternalComposerFixturesRouteImport } from './routes/internal.
 import { Route as InternalPressRouteImport } from './routes/internal.press'
 import { Route as InternalSpecimensRouteImport } from './routes/internal.specimens'
 import { Route as InternalThemeFixturesRouteImport } from './routes/internal.theme-fixtures'
+import { Route as AppsAppMarkdownRouteImport } from './routes/apps_.$app_.markdown'
+import { Route as AppsAppPreviewRouteImport } from './routes/apps_.$app_.preview'
 import { Route as ComponentsSlugMarkdownRouteImport } from './routes/components_.$slug_.markdown'
 import { Route as DocsComponentsSlugRouteImport } from './routes/docs.components.$slug'
 import { Route as DocsGuideMarkdownRouteImport } from './routes/docs_.$guide_.markdown'
@@ -40,6 +44,16 @@ const DocsRoute = DocsRouteImport.update({
 const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
   id: '/llms.txt',
   path: '/llms.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppsIndexRoute = AppsIndexRouteImport.update({
+  id: '/apps/',
+  path: '/apps/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppsAppRoute = AppsAppRouteImport.update({
+  id: '/apps/$app',
+  path: '/apps/$app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsSlugRoute = ComponentsSlugRouteImport.update({
@@ -76,6 +90,16 @@ const InternalSpecimensRoute = InternalSpecimensRouteImport.update({
 const InternalThemeFixturesRoute = InternalThemeFixturesRouteImport.update({
   id: '/internal/theme-fixtures',
   path: '/internal/theme-fixtures',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppsAppMarkdownRoute = AppsAppMarkdownRouteImport.update({
+  id: '/apps_/$app_/markdown',
+  path: '/apps/$app/markdown',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppsAppPreviewRoute = AppsAppPreviewRouteImport.update({
+  id: '/apps_/$app_/preview',
+  path: '/apps/$app/preview',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsSlugMarkdownRoute = ComponentsSlugMarkdownRouteImport.update({
@@ -120,13 +144,17 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/docs': typeof DocsRouteWithChildren
   '/llms.txt': typeof LlmsDottxtRoute
+  '/apps/$app': typeof AppsAppRoute
   '/components/$slug': typeof ComponentsSlugRoute
   '/docs/$guide': typeof DocsGuideRoute
   '/internal/composer-fixtures': typeof InternalComposerFixturesRoute
   '/internal/press': typeof InternalPressRoute
   '/internal/specimens': typeof InternalSpecimensRoute
   '/internal/theme-fixtures': typeof InternalThemeFixturesRoute
+  '/apps/': typeof AppsIndexRoute
   '/docs/': typeof DocsIndexRoute
+  '/apps/$app/markdown': typeof AppsAppMarkdownRoute
+  '/apps/$app/preview': typeof AppsAppPreviewRoute
   '/components/$slug/markdown': typeof ComponentsSlugMarkdownRoute
   '/docs/components/$slug': typeof DocsComponentsSlugRoute
   '/docs/$guide/markdown': typeof DocsGuideMarkdownRoute
@@ -138,13 +166,17 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/llms.txt': typeof LlmsDottxtRoute
+  '/apps/$app': typeof AppsAppRoute
   '/components/$slug': typeof ComponentsSlugRoute
   '/docs/$guide': typeof DocsGuideRoute
   '/internal/composer-fixtures': typeof InternalComposerFixturesRoute
   '/internal/press': typeof InternalPressRoute
   '/internal/specimens': typeof InternalSpecimensRoute
   '/internal/theme-fixtures': typeof InternalThemeFixturesRoute
+  '/apps': typeof AppsIndexRoute
   '/docs': typeof DocsIndexRoute
+  '/apps/$app/markdown': typeof AppsAppMarkdownRoute
+  '/apps/$app/preview': typeof AppsAppPreviewRoute
   '/components/$slug/markdown': typeof ComponentsSlugMarkdownRoute
   '/docs/components/$slug': typeof DocsComponentsSlugRoute
   '/docs/$guide/markdown': typeof DocsGuideMarkdownRoute
@@ -158,13 +190,17 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/docs': typeof DocsRouteWithChildren
   '/llms.txt': typeof LlmsDottxtRoute
+  '/apps/$app': typeof AppsAppRoute
   '/components_/$slug': typeof ComponentsSlugRoute
   '/docs/$guide': typeof DocsGuideRoute
   '/internal/composer-fixtures': typeof InternalComposerFixturesRoute
   '/internal/press': typeof InternalPressRoute
   '/internal/specimens': typeof InternalSpecimensRoute
   '/internal/theme-fixtures': typeof InternalThemeFixturesRoute
+  '/apps/': typeof AppsIndexRoute
   '/docs/': typeof DocsIndexRoute
+  '/apps_/$app_/markdown': typeof AppsAppMarkdownRoute
+  '/apps_/$app_/preview': typeof AppsAppPreviewRoute
   '/components_/$slug_/markdown': typeof ComponentsSlugMarkdownRoute
   '/docs/components/$slug': typeof DocsComponentsSlugRoute
   '/docs_/$guide_/markdown': typeof DocsGuideMarkdownRoute
@@ -179,13 +215,17 @@ export interface FileRouteTypes {
     | '/'
     | '/docs'
     | '/llms.txt'
+    | '/apps/$app'
     | '/components/$slug'
     | '/docs/$guide'
     | '/internal/composer-fixtures'
     | '/internal/press'
     | '/internal/specimens'
     | '/internal/theme-fixtures'
+    | '/apps/'
     | '/docs/'
+    | '/apps/$app/markdown'
+    | '/apps/$app/preview'
     | '/components/$slug/markdown'
     | '/docs/components/$slug'
     | '/docs/$guide/markdown'
@@ -197,13 +237,17 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/llms.txt'
+    | '/apps/$app'
     | '/components/$slug'
     | '/docs/$guide'
     | '/internal/composer-fixtures'
     | '/internal/press'
     | '/internal/specimens'
     | '/internal/theme-fixtures'
+    | '/apps'
     | '/docs'
+    | '/apps/$app/markdown'
+    | '/apps/$app/preview'
     | '/components/$slug/markdown'
     | '/docs/components/$slug'
     | '/docs/$guide/markdown'
@@ -216,13 +260,17 @@ export interface FileRouteTypes {
     | '/'
     | '/docs'
     | '/llms.txt'
+    | '/apps/$app'
     | '/components_/$slug'
     | '/docs/$guide'
     | '/internal/composer-fixtures'
     | '/internal/press'
     | '/internal/specimens'
     | '/internal/theme-fixtures'
+    | '/apps/'
     | '/docs/'
+    | '/apps_/$app_/markdown'
+    | '/apps_/$app_/preview'
     | '/components_/$slug_/markdown'
     | '/docs/components/$slug'
     | '/docs_/$guide_/markdown'
@@ -236,11 +284,15 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DocsRoute: typeof DocsRouteWithChildren
   LlmsDottxtRoute: typeof LlmsDottxtRoute
+  AppsAppRoute: typeof AppsAppRoute
   ComponentsSlugRoute: typeof ComponentsSlugRoute
   InternalComposerFixturesRoute: typeof InternalComposerFixturesRoute
   InternalPressRoute: typeof InternalPressRoute
   InternalSpecimensRoute: typeof InternalSpecimensRoute
   InternalThemeFixturesRoute: typeof InternalThemeFixturesRoute
+  AppsIndexRoute: typeof AppsIndexRoute
+  AppsAppMarkdownRoute: typeof AppsAppMarkdownRoute
+  AppsAppPreviewRoute: typeof AppsAppPreviewRoute
   ComponentsSlugMarkdownRoute: typeof ComponentsSlugMarkdownRoute
   DocsGuideMarkdownRoute: typeof DocsGuideMarkdownRoute
   DocsExamplesNameRoute: typeof DocsExamplesNameRoute
@@ -270,6 +322,20 @@ declare module '@tanstack/react-router' {
       path: '/llms.txt'
       fullPath: '/llms.txt'
       preLoaderRoute: typeof LlmsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apps/': {
+      id: '/apps/'
+      path: '/apps'
+      fullPath: '/apps/'
+      preLoaderRoute: typeof AppsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apps/$app': {
+      id: '/apps/$app'
+      path: '/apps/$app'
+      fullPath: '/apps/$app'
+      preLoaderRoute: typeof AppsAppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components_/$slug': {
@@ -319,6 +385,20 @@ declare module '@tanstack/react-router' {
       path: '/internal/theme-fixtures'
       fullPath: '/internal/theme-fixtures'
       preLoaderRoute: typeof InternalThemeFixturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apps_/$app_/markdown': {
+      id: '/apps_/$app_/markdown'
+      path: '/apps/$app/markdown'
+      fullPath: '/apps/$app/markdown'
+      preLoaderRoute: typeof AppsAppMarkdownRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apps_/$app_/preview': {
+      id: '/apps_/$app_/preview'
+      path: '/apps/$app/preview'
+      fullPath: '/apps/$app/preview'
+      preLoaderRoute: typeof AppsAppPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components_/$slug_/markdown': {
@@ -391,11 +471,15 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DocsRoute: DocsRouteWithChildren,
   LlmsDottxtRoute: LlmsDottxtRoute,
+  AppsAppRoute: AppsAppRoute,
   ComponentsSlugRoute: ComponentsSlugRoute,
   InternalComposerFixturesRoute: InternalComposerFixturesRoute,
   InternalPressRoute: InternalPressRoute,
   InternalSpecimensRoute: InternalSpecimensRoute,
   InternalThemeFixturesRoute: InternalThemeFixturesRoute,
+  AppsIndexRoute: AppsIndexRoute,
+  AppsAppMarkdownRoute: AppsAppMarkdownRoute,
+  AppsAppPreviewRoute: AppsAppPreviewRoute,
   ComponentsSlugMarkdownRoute: ComponentsSlugMarkdownRoute,
   DocsGuideMarkdownRoute: DocsGuideMarkdownRoute,
   DocsExamplesNameRoute: DocsExamplesNameRoute,

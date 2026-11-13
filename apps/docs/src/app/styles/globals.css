@@ -64,6 +64,11 @@ a {
 	html {
 		scrollbar-gutter: stable;
 	}
+
+	/* An app preview fills the window and scrolls inside its own pane. */
+	html:has([data-slot="app-preview"]) {
+		scrollbar-gutter: auto;
+	}
 }
 
 /* Delay feedback so cached navigations do not flash a progress indicator. */

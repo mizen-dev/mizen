@@ -5,6 +5,7 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite-plus";
 
+import { appDocs } from "./src/entities/documentation/model/apps";
 import { componentDocs } from "./src/entities/documentation/model/docs-registry";
 import { guides } from "./src/entities/documentation/model/guides";
 
@@ -21,6 +22,8 @@ export default defineConfig({
 				"/docs",
 				...guides.map(({ slug }) => `/docs/${slug}`),
 				...componentDocs.map(({ slug }) => `/docs/components/${slug}`),
+				"/apps",
+				...appDocs.map(({ slug }) => `/apps/${slug}`),
 			].map((path) => ({ path })),
 			prerender: {
 				autoStaticPathsDiscovery: false,

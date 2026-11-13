@@ -54,6 +54,10 @@ export function Overview() {
 			links: [
 				{ href: "/docs/components/page", label: "Page and the screen recipes" },
 				{ href: "/docs/components/section", label: "Section" },
+				{
+					href: "/apps/dashboard",
+					label: "A dashboard inside an application shell",
+				},
 			],
 			paragraphs: [
 				"Every screen has the same anatomy: one Page, a PageHeader with the title and the main action, then Sections. A Section groups one topic under a SectionTitle.",

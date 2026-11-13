@@ -67,6 +67,9 @@ examples: `/llms.txt` is its index, and each page has a Markdown form at
 describes the latest release. When it disagrees with the installed version,
 the installed package and its matching CLI win.
 
+For a whole screen, start from an app: `/apps/dashboard/markdown` has the
+sources of a dashboard in an application shell with a sidebar.
+
 ## Lay out the screen
 
 Lay out every screen with the layout layer. Do not write layout CSS.
