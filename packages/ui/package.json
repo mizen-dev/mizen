@@ -1,6 +1,6 @@
 {
   "name": "@mizen-labs/ui",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "React components for product interfaces, built on Base UI and StyleX, with docs agents can read.",
   "keywords": [
     "react",

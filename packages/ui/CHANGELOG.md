@@ -1,5 +1,33 @@
 # @mizen-labs/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- 679f01d: A control takes its width from the layout. `InputGroup`, `Select` and `NumberField` no longer set `width: 100%`, so they behave like `Input`: they fill the width in a `Stack`, a `Field` or a `Grid` cell, and are as wide as their content in an `Inline`, a `SectionAction` or a `PageAction`. `DatePicker` and `DateRangePicker` are as wide as their date format there, so a row of filters stays on one line. A group's input or textarea shrinks below its native width, so a group no longer overflows a narrow row.
+  
+  This changes existing layouts: a `Select`, `NumberField`, `InputGroup`, `Combobox`, `DatePicker` or `DateRangePicker` that filled a whole line of an `Inline`, or stood directly in a plain block element in the case of `Select`, is now as wide as its content. To make a control fill a line, put it in a `Stack` or a `Grid`.
+- 8098d8b: `MetricTrend` accepts `iconColor`: `"brand"` (the default), `"neutral"`, `"blue"`, `"purple"`, `"green"` or `"orange"`. It colors the icon tile by category with the `AvatarFallback` palette, so stat cards of different kinds can be told apart. Existing cards keep the brand tile.
+- 91fdb8f: `MetricTrend` accepts `loading`. The card keeps the height of its loaded state and sets `aria-busy`. Each of `value`, `description` and `delta` that the card names renders as a placeholder, even when its data is not there yet, as in `value={data?.total}`. The label stays readable, and children render as given.
+  
+  `Skeleton` placeholders stay visible in forced-colors mode.
+- 91fdb8f: `MetricDelta` accepts `good="none"` for a change that is neither good nor bad. The chip keeps the flat tone for any sign; the sign and the percent format do not change.
+- efbb86b: Add `@mizen-labs/ui/reset.css`, an opt-in reset. It sets `box-sizing: border-box` on every element and pseudo-element, removes the `body` margin, and makes form controls inherit `font` and `letter-spacing`. Its rules sit in the `mizen-reset` cascade layer, so any CSS outside a layer wins over them. No component and no other stylesheet imports it, and components render the same with it and without it.
+- d61d5f7: `MetricDelta` accepts `appearance="soft"`. The chip then fills with the tint of its tone instead of showing a dot, like a soft `Badge`. The default stays `"dot"`, so existing chips do not change.
+- 7f76413: `Badge` accepts `appearance="soft"`. A `destructive`, `info`, `success` or `warning` badge then fills with its status tint instead of showing a dot. The default stays `"dot"`, so existing badges do not change. Other variants ignore the prop.
+- 4bf320f: An application can now replace the `space`, `control-size`, `glyph-size`, `shadow`, `duration` and `easing` tokens. Declare `--mizen-space-4`, `--mizen-control-size-md`, `--mizen-shadow-floating` or `--mizen-duration-fast` again on `:root` and the components follow, as they do for colors and radii. Before, these variables could only be read.
+  
+  For an app that compiles StyleX itself: `space`, `controlSize`, `glyphSize`, `shadows`, `duration` and `easing` are now `defineVars` groups. Their values are `var(...)` references, so they no longer work inside a media query or in JavaScript arithmetic.
+- cd24a33: `Timestamp` accepts `format="time"`. It shows the hour and minute in the given `locale` and `timeZone`, for a line whose surrounding text already states the day. The text shows no zone, so the exact date, time and zone are in the `title`. The `dateTime` attribute does not change.
+
+### Patch Changes
+
+- f9ac290: Keep the hue of a color that mixes with a neutral token. Avatar identity colors, Token tones, code syntax colors and invalid field edges had drifted toward pink, because the mix rotated their hue toward the hue of the neutral.
+- 76aef0c: A default `PopoverPopup` wraps its text at 18rem. Base UI sets the popup width to `auto`, so the 18rem fallback never applied and a text-only popup grew to one long line. A popup is now as wide as its content, up to 18rem. It still grows for content that cannot shrink, such as a calendar, and narrows when the window leaves less room. A popup with `portalProps={{ keepMounted: true }}` follows the same rule; it was always 18rem before.
+- 0246602: The agent skill points to the dashboard app on the docs site, `/apps/dashboard/markdown`, as the starting point for a whole screen.
+- b3a674b: A hovered or selected `Table` row is now a band with rounded ends. Selected rows that touch form one band, and the rules above and below a band give way to its edge. The hover band is lighter, so a secondary control or a neutral avatar keeps its shape inside it. A `grid` table keeps square bands. `DataTable` marks a selected record with the same band when row selection is on.
+- 273d0e2: A toast action sits on the first line of the title, like the icon. It was centered in the row, 4px below a one-line title. The action no longer adds height: a one-line toast with an action is 8px shorter.
+
 ## 0.2.0
 
 ### Minor Changes
