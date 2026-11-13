@@ -353,6 +353,7 @@ export const usageComponents: Record<string, ReturnType<typeof preloadableExampl
 "PopoverDisabled": preloadableExample(() => import("./examples/popover-states").then((module) => ({ default: module.PopoverDisabled }))),
 "PopoverPositions": preloadableExample(() => import("./examples/popover-states").then((module) => ({ default: module.PopoverPositions }))),
 "PopoverProjectIdentityExample1": preloadableExample(() => import("./examples/popover-variants").then((module) => ({ default: module.PopoverProjectIdentityExample1 }))),
+"PopoverHelpTextExample2": preloadableExample(() => import("./examples/popover-variants").then((module) => ({ default: module.PopoverHelpTextExample2 }))),
 "PopoverTooltipStyle": preloadableExample(() => import("./examples/popover-states").then((module) => ({ default: module.PopoverTooltipStyle }))),
 "PopoverWithCloseButton": preloadableExample(() => import("./examples/popover-states").then((module) => ({ default: module.PopoverWithCloseButton }))),
 "PreviewCardAlexMorganExample1": preloadableExample(() => import("./examples/preview-card-variants").then((module) => ({ default: module.PreviewCardAlexMorganExample1 }))),

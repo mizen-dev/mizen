@@ -168,6 +168,36 @@ describe("Popover component route", () => {
 		}
 	);
 
+	it.each([
+		[1280, 288],
+		[280, 248],
+	])(
+		"wraps text alone at the default width in a %ipx window",
+		async (width, expected) => {
+			await page.setViewportSize({ height: 900, width });
+			await page.goto(`${handle.url}/components/popover`, {
+				waitUntil: "networkidle",
+			});
+			await page
+				.getByRole("button", { exact: true, name: "About the shared bank" })
+				.click();
+			const popup = page.locator('[data-slot="popover-popup"][data-open]');
+			await popup.waitFor({ state: "visible" });
+			// 18rem, or the room the window leaves; never one long line.
+			await expect
+				.poll(async () => (await popup.boundingBox())?.width)
+				.toBe(expected);
+			const description = popup.locator('[data-slot="popover-description"]');
+			expect((await description.boundingBox())?.height).toBeGreaterThan(40);
+			expect(
+				await page.evaluate(() => document.documentElement.scrollWidth)
+			).toBeLessThanOrEqual(width);
+			await page.keyboard.press("Escape");
+			await popup.waitFor({ state: "detached" });
+			await page.setViewportSize({ height: 900, width: 1280 });
+		}
+	);
+
 	it.each(["light", "dark"] as const)(
 		"fits all sides and dismisses outside with reduced motion in %s",
 		async (theme) => {

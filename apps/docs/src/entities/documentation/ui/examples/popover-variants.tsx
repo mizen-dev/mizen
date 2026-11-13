@@ -12,6 +12,7 @@ import {
 	PopoverTrigger,
 	Stack,
 } from "@mizen-labs/ui";
+import { IconInfoCircle } from "@tabler/icons-react";
 
 export function PopoverProjectIdentityExample1() {
 	return (
@@ -37,5 +38,31 @@ export function PopoverProjectIdentityExample1() {
 				</PopoverPopup>
 			</Popover>
 		</Stack>
+	);
+}
+
+export function PopoverHelpTextExample2() {
+	return (
+		<Popover>
+			<PopoverTrigger
+				openOnHover
+				render={
+					<Button
+						aria-label="About the shared bank"
+						size="icon-sm"
+						variant="ghost"
+					/>
+				}
+			>
+				<IconInfoCircle aria-hidden size={16} />
+			</PopoverTrigger>
+			<PopoverPopup align="start">
+				<PopoverDescription>
+					Income and expense of the shared bank for the selected day. The
+					difference is income minus expense. Data arrives with a delay of up to
+					a few minutes.
+				</PopoverDescription>
+			</PopoverPopup>
+		</Popover>
 	);
 }

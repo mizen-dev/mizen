@@ -42,8 +42,11 @@ export const popoverStyles = create({
 		boxShadow: shadows.floating,
 		boxSizing: "border-box",
 		color: colors.content,
-		display: "flex",
-		flexDirection: "column",
+		display: "grid",
+		// Base UI sets --popup-width to auto, so the column holds the default
+		// width: 18rem with the border, wider only when the content cannot
+		// shrink, and narrower when the popup has less room.
+		gridTemplateColumns: `minmax(min-content, calc(18rem - 2 * ${borderWidth.thin}))`,
 		height: "var(--popup-height, auto)",
 		maxWidth: "min(var(--available-width), calc(100vw - 2rem))",
 		opacity: {
@@ -88,7 +91,7 @@ export const popoverStyles = create({
 		},
 		transitionProperty: "width, height, opacity, transform",
 		transitionTimingFunction: easing.expoOut,
-		width: "var(--popup-width, 18rem)",
+		width: "var(--popup-width, auto)",
 	},
 	popupBare: {
 		backgroundColor: "transparent",
@@ -97,11 +100,13 @@ export const popoverStyles = create({
 		borderWidth: 0,
 		boxShadow: "none",
 		gap: space["0"],
+		gridTemplateColumns: "auto",
 		padding: space["0"],
 	},
 	popupTooltip: {
 		borderRadius: shape.controlRadius,
 		fontSize: fontSize["12"],
+		gridTemplateColumns: "auto",
 		letterSpacing: letterSpacing.caption,
 		width: "var(--popup-width, max-content)",
 	},

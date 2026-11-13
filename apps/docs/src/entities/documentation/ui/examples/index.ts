@@ -462,7 +462,10 @@ import {
 	PopoverTooltipStyle,
 	PopoverWithCloseButton,
 } from "./popover-states";
-import { PopoverProjectIdentityExample1 } from "./popover-variants";
+import {
+	PopoverHelpTextExample2,
+	PopoverProjectIdentityExample1,
+} from "./popover-variants";
 import { DocumentationPreview } from "./preview-card";
 import {
 	PreviewCardControlled,
@@ -1035,6 +1038,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	PreviewCardAlexMorganExample1,
 	PreviewCardControlled,
 	PreviewCardDelays,
+	PopoverHelpTextExample2,
 	PreviewCardMizentokensExample2,
 	ProductNavigationMenu,
 	ProductUpdatesCheckbox,

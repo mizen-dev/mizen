@@ -2729,6 +2729,12 @@
       "path": "entities/documentation/ui/examples/popover-states.tsx"
     },
     {
+      "name": "PopoverHelpTextExample2",
+      "title": "Help text",
+      "description": "Text alone wraps at the default width of the popup.",
+      "path": "entities/documentation/ui/examples/popover-variants.tsx"
+    },
+    {
       "name": "PopoverControlled",
       "title": "Controlled and keep mounted",
       "description": "Retain a draft across close and reopen.",
