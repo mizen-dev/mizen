@@ -83,7 +83,6 @@ export const numberFieldStyles = create({
 		transitionProperty:
 			"background-color, border-color, box-shadow, color, outline-color, outline-offset",
 		transitionTimingFunction: easing.expoOut,
-		width: "100%",
 	},
 	input: {
 		"::placeholder": { color: colors.mutedContent, opacity: 1 },
@@ -119,7 +118,8 @@ export const numberFieldStyles = create({
 		paddingBlock: space["0"],
 		paddingInline: space["1"],
 		textAlign: "center",
-		width: "auto",
+		// A percentage width lets the input shrink below its native width.
+		width: "100%",
 	},
 	inputDefault: {
 		fontSize: { [conditions.sm]: fontSize["14"], default: fontSize["16"] },
@@ -134,7 +134,6 @@ export const numberFieldStyles = create({
 		display: "flex",
 		flexDirection: "column",
 		gap: space["1"],
-		width: "100%",
 	},
 	scrubArea: {
 		alignItems: "center",

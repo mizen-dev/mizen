@@ -78,7 +78,8 @@ export const calendarStyles = create({
 		opacity: opacity.disabled,
 		pointerEvents: "none",
 	},
-	dropdown: { flexShrink: 0, inlineSize: "5rem" },
+	// A grid, so the select fills the fixed width whatever its value.
+	dropdown: { display: "grid", flexShrink: 0, inlineSize: "5rem" },
 	dropdowns: {
 		alignItems: "center",
 		display: "flex",

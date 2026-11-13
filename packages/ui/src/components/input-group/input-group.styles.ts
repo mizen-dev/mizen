@@ -74,6 +74,8 @@ export const inputGroupStyles = create({
 		paddingInlineEnd: space["2"],
 		paddingInlineStart: space["2"],
 	},
+	// No width: the layout sets it. The group stretches in a column and takes
+	// the width of its input and addons in a row, like a plain Input.
 	root: {
 		// The focused edge takes the focus color; an invalid field keeps its
 		// error color.
@@ -170,7 +172,6 @@ export const inputGroupStyles = create({
 		transitionProperty:
 			"background-color, border-color, box-shadow, color, outline-color, outline-offset",
 		transitionTimingFunction: easing.expoOut,
-		width: "100%",
 	},
 	text: {
 		alignItems: "center",

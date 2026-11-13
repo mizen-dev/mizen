@@ -116,6 +116,10 @@ Choose the arrangement by what the content is:
 
 Rules:
 
+- A control takes its width from the layout. `Input`, `Select`, `NumberField`,
+  `InputGroup`, `DatePicker` and `DateRangePicker` fill the width in a `Stack`,
+  a `Field` or a `Grid` cell, and are as wide as their content in an `Inline`
+  or a header action. Do not set a width on a control or wrap it to size it.
 - One `Page` per screen, with one `PageTitle`. The app shell around it adds no
   padding; `Page` owns the inset and the space between sections.
 - Set space only with `gap` props. Steps are 4px each: `"1"` is 4px, `"4"` is

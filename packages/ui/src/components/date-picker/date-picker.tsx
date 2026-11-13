@@ -21,6 +21,9 @@ import { CalendarTrigger } from "./date-picker-trigger";
 
 export type { DatePickerProps } from "./date-picker.types";
 
+// The native width in characters that fits YYYY-MM-DD and its placeholder.
+const DATE_FIELD_SIZE = 14;
+
 export function DatePicker(datePickerProps: DatePickerProps): ReactElement {
 	const [isControlled] = useState(() =>
 		Object.hasOwn(datePickerProps, "value")
@@ -158,6 +161,8 @@ export function DatePicker(datePickerProps: DatePickerProps): ReactElement {
 						placeholder="YYYY-MM-DD"
 						readOnly={readOnly}
 						ref={setInputRef}
+						// In a row the field is as wide as its date format.
+						render={<input size={DATE_FIELD_SIZE} />}
 						required={required}
 						size={size}
 						value={displayText}

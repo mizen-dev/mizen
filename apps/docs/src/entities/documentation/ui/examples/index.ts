@@ -210,6 +210,7 @@ import { DataTableBudgetRecordsExample1 } from "./data-table-variants";
 import {
 	ControlledDatePicker,
 	DatePickerDropdownNavigation,
+	DatePickerFilterRowExample7,
 } from "./date-picker";
 import {
 	DatePickerBoundedExample3,
@@ -843,6 +844,7 @@ export const usageComponents: Record<string, ComponentType> = {
 	DatePickerControlledExample2,
 	DatePickerDisabledExample4,
 	DatePickerDropdownNavigation,
+	DatePickerFilterRowExample7,
 	DatePickerInvalidExample6,
 	DatePickerReadonlyExample5,
 	DatePickerUncontrolledExample1,

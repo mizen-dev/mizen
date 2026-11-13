@@ -160,6 +160,7 @@ export const usageComponents: Record<string, ReturnType<typeof preloadableExampl
 "DatePickerControlledExample2": preloadableExample(() => import("./examples/date-picker-variants").then((module) => ({ default: module.DatePickerControlledExample2 }))),
 "DatePickerDisabledExample4": preloadableExample(() => import("./examples/date-picker-variants").then((module) => ({ default: module.DatePickerDisabledExample4 }))),
 "DatePickerDropdownNavigation": preloadableExample(() => import("./examples/date-picker").then((module) => ({ default: module.DatePickerDropdownNavigation }))),
+"DatePickerFilterRowExample7": preloadableExample(() => import("./examples/date-picker").then((module) => ({ default: module.DatePickerFilterRowExample7 }))),
 "DatePickerInvalidExample6": preloadableExample(() => import("./examples/date-picker-variants").then((module) => ({ default: module.DatePickerInvalidExample6 }))),
 "DatePickerReadonlyExample5": preloadableExample(() => import("./examples/date-picker-variants").then((module) => ({ default: module.DatePickerReadonlyExample5 }))),
 "DatePickerUncontrolledExample1": preloadableExample(() => import("./examples/date-picker-variants").then((module) => ({ default: module.DatePickerUncontrolledExample1 }))),

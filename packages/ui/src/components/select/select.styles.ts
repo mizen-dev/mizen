@@ -278,7 +278,6 @@ export const selectStyles = create({
 		transitionProperty:
 			"background-color, border-color, box-shadow, color, outline-color",
 		transitionTimingFunction: easing.expoOut,
-		width: "100%",
 	},
 	value: {
 		alignItems: "center",

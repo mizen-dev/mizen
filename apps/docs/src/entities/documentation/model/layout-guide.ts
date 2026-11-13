@@ -93,6 +93,7 @@ export function Overview() {
 				'Columns are sized for cards. Two columns need 30rem, three columns and the ratios need 45rem, and four need 60rem. Below that they stack; "4" steps to two columns before it stacks.',
 				"PageHeader and SectionHeader follow the same rule. The action sits beside the title when the header is at least 30rem wide, and under the text when it is narrower.",
 				"A Grid takes the width of its parent. Inside a parent that takes its width from its content, such as a centered item, it is one 16rem column. Give such a parent a width, or use Inline for small items.",
+				"A control takes its width from the layout too. An Input, Select, Number Field, Input Group, Date Picker, or Date Range Picker fills the width in a Stack, a Field, or a Grid cell. In an Inline or a header action it is as wide as its content, so filters sit side by side and wrap when the line is full. To make a control fill a line, put it in a Stack or a Grid, not in an Inline.",
 			],
 			title: "Width comes from the container",
 		},

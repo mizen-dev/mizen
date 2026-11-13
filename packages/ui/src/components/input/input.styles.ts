@@ -75,7 +75,10 @@ const inputUnstyledStyles = create({
 			":is([data-slot='input-group']:has(> [data-align='inline-start']) > *)": 0,
 			default: space["3"],
 		},
-		width: "auto",
+		// A percentage width lets the input shrink below its native width, so
+		// its group never overflows a narrow row. The native width, set by the
+		// size attribute, still gives the group its content width.
+		width: "100%",
 	},
 	unstyledDefault: {
 		height: `calc(${controlSize.md} - ${borderWidth.thin} * 2)`,

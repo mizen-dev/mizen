@@ -316,7 +316,8 @@
       "Values are dates, not timestamps. Use Date Time Input when the task requires a local time as well."
     ],
     "recommendations": [
-      "Label the date's purpose and state its constraints. Keep editable input and calendar selection available."
+      "Label the date's purpose and state its constraints. Keep editable input and calendar selection available.",
+      "The layout sets the width. The field fills a Field, a Stack, or a Grid cell. In an Inline it is as wide as its date, so use Inline for a row of filters."
     ]
   },
   "date-range-picker": {
@@ -325,7 +326,8 @@
       "A first calendar click may be a pending start; a complete range has both endpoints."
     ],
     "recommendations": [
-      "Explain the range's meaning and any stay limits. Use presets only for intervals relevant to the task."
+      "Explain the range's meaning and any stay limits. Use presets only for intervals relevant to the task.",
+      "The layout sets the width. The field fills a Field, a Stack, or a Grid cell. In an Inline it is as wide as its two dates."
     ]
   },
   "date-time-input": {
@@ -483,6 +485,7 @@
     ],
     "recommendations": [
       "Use it for a few related items that stay understandable when they wrap.",
+      "A control in an Inline is as wide as its content. To make one fill the line, use a Stack or a Grid.",
       "Use justify between for two ends of one row, such as a count and its actions. Use justify center for the actions of a centered empty or error state.",
       "Use align baseline for text of different sizes."
     ]
@@ -511,7 +514,8 @@
       "Keep the field label outside the input group. Decorative content must not replace the control's accessible name."
     ],
     "recommendations": [
-      "Use prefixes and suffixes for units or context. Give embedded action buttons accessible names."
+      "Use prefixes and suffixes for units or context. Give embedded action buttons accessible names.",
+      "The layout sets the width. The group fills a Field, a Stack, or a Grid cell. In an Inline it is as wide as its input and addons."
     ]
   },
   "kbd": {
@@ -632,7 +636,8 @@
       "Use Input for identifiers such as account numbers. Validate numeric business limits again on submission."
     ],
     "recommendations": [
-      "Set meaningful bounds and steps. Specify locale and formatting when displaying currency or other units."
+      "Set meaningful bounds and steps. Specify locale and formatting when displaying currency or other units.",
+      "The layout sets the width. The field fills a Field, a Stack, or a Grid cell. In an Inline it is as wide as its content."
     ]
   },
   "otp-field": {
@@ -801,6 +806,7 @@
     ],
     "recommendations": [
       "Label the field and use readable option names. Provide explicit labels when values are objects.",
+      "The layout sets the width. The trigger fills a Field, a Stack, or a Grid cell. In an Inline it is as wide as its value, so use Inline for a row of filters.",
       "SelectLabel names the trigger. Enter or Space opens the popup; arrow keys move through options and typing finds matching labels. Escape dismisses it.",
       "Uncontrolled composition with serializable items can live in a Server Component. Controlled values, callbacks, and object formatting functions belong in a Client Component."
     ]

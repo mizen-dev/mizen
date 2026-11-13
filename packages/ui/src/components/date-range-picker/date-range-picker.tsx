@@ -25,6 +25,9 @@ export type {
 	DateRangePreset,
 } from "./date-range-picker.types";
 
+// The native width in characters that fits two ISO dates and the placeholder.
+const RANGE_FIELD_SIZE = 30;
+
 export function DateRangePicker(
 	dateRangePickerProps: DateRangePickerProps
 ): ReactElement {
@@ -161,6 +164,8 @@ export function DateRangePicker(
 						placeholder="YYYY-MM-DD – YYYY-MM-DD"
 						readOnly={resolvedReadOnly}
 						ref={setInputRef}
+						// In a row the field is as wide as its range format.
+						render={<input size={RANGE_FIELD_SIZE} />}
 						required={dateRangePickerProps.required}
 						size={size}
 						value={displayText}

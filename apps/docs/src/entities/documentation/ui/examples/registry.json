@@ -886,6 +886,12 @@
       "path": "entities/documentation/ui/examples/date-picker-variants.tsx"
     },
     {
+      "name": "DatePickerFilterRowExample7",
+      "title": "Filter row",
+      "description": "In an Inline the field is as wide as its date, so other filters sit beside it. In a Field or a Stack it fills the width.",
+      "path": "entities/documentation/ui/examples/date-picker.tsx"
+    },
+    {
       "name": "DatePickerDropdownNavigation",
       "title": "Month and year navigation",
       "description": "Jump directly to a month or year using Mizen Select. Navigation bounds define the available years.",
