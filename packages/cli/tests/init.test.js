@@ -142,10 +142,11 @@ test("Next and Start setup preserves caller content and reruns without changes",
 	}
 });
 
+// The catalog holds LF, whatever line endings the checkout has.
 const vivid = readFileSync(
 	new URL("../presets/vivid.css", import.meta.url),
 	"utf8"
-);
+).replaceAll("\r\n", "\n");
 const themes = [
 	{
 		framework: "next",

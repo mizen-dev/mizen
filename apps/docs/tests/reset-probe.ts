@@ -76,6 +76,27 @@ const settle = async () => {
 	);
 };
 
+// Resolves when an element has kept its drawn size for five frames. A popup
+// scales in, and a size read during that motion differs between two runs.
+const atRest = (selector: string) =>
+	new Promise<void>((resolve) => {
+		const element = document.querySelector(selector);
+		let last = "";
+		let frames = 0;
+		const read = () => {
+			const { height, width } = element?.getBoundingClientRect() ?? {};
+			const size = `${width}x${height}`;
+			frames = size === last ? frames + 1 : 0;
+			last = size;
+			if (frames < 5) {
+				requestAnimationFrame(read);
+				return;
+			}
+			resolve();
+		};
+		read();
+	});
+
 async function readProbe(browser: Browser, url: string) {
 	const page = await browser.newPage({
 		viewport: { height: 900, width: 1280 },
@@ -129,6 +150,7 @@ async function exerciseProbe(
 		page.getByRole("dialog", { name: "Mizen dialog" })
 	).toBeVisible();
 	await page.evaluate(settle);
+	await page.evaluate(atRest, '[role="dialog"]');
 	reading.dialog = await page.evaluate(
 		look,
 		'[role="dialog"], [role="dialog"] *'

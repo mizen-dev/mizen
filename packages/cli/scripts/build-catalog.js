@@ -32,12 +32,14 @@ const catalog = components.map((component) => {
 const presetDirectory = new URL("../presets/", import.meta.url);
 const presets = Object.fromEntries(
 	await Promise.all(
-		(await readdir(presetDirectory))
-			.sort()
-			.map(async (file) => [
-				file.replace(".css", ""),
-				await readFile(new URL(file, presetDirectory), "utf8"),
-			])
+		(await readdir(presetDirectory)).sort().map(async (file) => [
+			file.replace(".css", ""),
+			// A Windows checkout can hold CRLF; the catalog always holds LF.
+			(await readFile(new URL(file, presetDirectory), "utf8")).replaceAll(
+				"\r\n",
+				"\n"
+			),
+		])
 	)
 );
 await writeFile(

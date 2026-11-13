@@ -154,7 +154,10 @@ test("--preset writes the theme beside the entry and imports it after the styles
 	assert.equal(result.data.verification.status, "healthy");
 	assert.equal(
 		readFileSync(join(root, "src/mizen-theme.css"), "utf8"),
-		readFileSync(new URL("../presets/vivid.css", import.meta.url), "utf8")
+		readFileSync(
+			new URL("../presets/vivid.css", import.meta.url),
+			"utf8"
+		).replaceAll("\r\n", "\n")
 	);
 	assert.ok(
 		readFileSync(join(root, "src/main.tsx"), "utf8").includes(
