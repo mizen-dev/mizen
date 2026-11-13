@@ -71,6 +71,14 @@ jobs:
             "Vite React JSX",
             "Vite React TSX",
           ]
+        test: [ tests/cli-init.integration.test.ts ]
+        # The same archive without the CLI: packed type declarations of every
+        # public export, and size budgets.
+        include:
+          - consumer: standalone Next consumer
+            test: tests/package-consumer.integration.test.ts
+          - consumer: standalone TanStack Start consumer
+            test: tests/package-consumer.integration.test.ts
     env:
       NEXT_TELEMETRY_DISABLED: "1"
       MIZEN_DOCS_TEST_URL: http://localhost:3000
@@ -89,11 +97,12 @@ jobs:
             run: pnpm --filter @mizen-labs/ui build && pnpm --filter @mizen-labs/cli build
           - name: Install Chromium
             run: pnpm --filter @mizen-labs/docs exec playwright install --with-deps chromium
-      - name: Packed init, production builds, and browser behavior
+      - name: Packed archives, production builds, and browser behavior
         shell: bash
         env:
           CONSUMER: ${{ matrix.consumer }}
-        run: pnpm --filter @mizen-labs/docs test tests/cli-init.integration.test.ts --testNamePattern="$CONSUMER"
+          TEST: ${{ matrix.test }}
+        run: pnpm --filter @mizen-labs/docs test "$TEST" --testNamePattern="$CONSUMER"
 
   quality:
     name: Quality and docs build

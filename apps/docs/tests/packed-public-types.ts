@@ -63,7 +63,11 @@ export async function verifyPackedPublicTypes(
 		peerDependencies: Record<string, string>;
 		peerDependenciesMeta: Record<string, { optional?: boolean }>;
 	};
-	const source = Object.keys(manifest.exports).map(publicImport).join("\n");
+	// The skill is a document an agent reads, not a module an app imports.
+	const source = Object.keys(manifest.exports)
+		.filter((name) => !name.endsWith(".md"))
+		.map(publicImport)
+		.join("\n");
 	const directory = join(consumerRoot, "public-type-audit");
 	await mkdir(directory);
 	await writeFile(
