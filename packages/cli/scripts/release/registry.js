@@ -19,19 +19,25 @@ export async function registryVersion(name, version) {
 	return response.json();
 }
 
-export async function verifyPublished(record, candidate) {
-	const url = new URL(record.dist.tarball);
-	assert.equal(url.origin, "https://registry.npmjs.org");
+// npm can list a version several minutes before it serves the archive, so a
+// missing archive of a listed version is waited for, up to ten minutes.
+async function download(url, pause, attempt = 0) {
 	const response = await fetch(url, { signal: AbortSignal.timeout(60_000) });
+	if (response.status === 404 && attempt < 60) {
+		await delay(pause);
+		return download(url, pause, attempt + 1);
+	}
 	assert.ok(
 		response.ok,
-		`Could not download published archive: ${response.status}`
+		`Could not download published archive: ${response.status}. If npm lists the version, wait until it serves the archive, then re-run the failed jobs.`
 	);
-	validatePublished(
-		record,
-		Buffer.from(await response.arrayBuffer()),
-		candidate
-	);
+	return Buffer.from(await response.arrayBuffer());
+}
+
+export async function verifyPublished(record, candidate, pause = 10_000) {
+	const url = new URL(record.dist.tarball);
+	assert.equal(url.origin, "https://registry.npmjs.org");
+	validatePublished(record, await download(url, pause), candidate);
 }
 
 export async function waitForPackage(candidate, attempt = 0) {

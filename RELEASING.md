@@ -107,8 +107,8 @@ preserves its source commit even if `main` has advanced. Never rebuild a partly
 published version and substitute a new archive. The retry checks existing npm
 versions, tags, and GitHub assets and refuses conflicts.
 
-npm can take several minutes to list a version it has accepted. The workflow
-waits up to ten minutes. A retry that starts before npm lists the version stops
+npm can take several minutes to list a version it has accepted, and several
+more to serve its archive. The workflow waits up to ten minutes for each. A retry that starts before npm lists the version stops
 with `E409 Cannot publish over previously staged version`. The version is not
 lost. Wait until `npm view @mizen-labs/ui versions` and
 `npm view @mizen-labs/cli versions` list it, then re-run the failed jobs.

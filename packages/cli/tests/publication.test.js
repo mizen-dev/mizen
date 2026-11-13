@@ -24,7 +24,10 @@ import {
 	validateRun,
 	validateVersionedChanges,
 } from "../scripts/release/publication.js";
-import { registryVersion } from "../scripts/release/registry.js";
+import {
+	registryVersion,
+	verifyPublished,
+} from "../scripts/release/registry.js";
 
 const UPLOAD_FAILURE = /Simulated upload failure/u;
 const ASSET_MISMATCH = /Existing release asset differs/u;
@@ -146,6 +149,31 @@ test("conflicting existing versions stop before any missing package is published
 				validatePublished(record, Buffer.from("other build"), item)
 		)
 	);
+});
+
+test("a listed version whose archive is not served yet is waited for", async (context) => {
+	const [candidate] = packages;
+	const record = {
+		...candidate,
+		dist: { tarball: "https://registry.npmjs.org/ui/-/ui.tgz" },
+	};
+	const responses = [
+		new Response("Not found", { status: 404 }),
+		new Response("Not found", { status: 404 }),
+		new Response(bytes),
+	];
+	const request = context.mock.method(globalThis, "fetch", async () =>
+		responses.shift()
+	);
+	await verifyPublished(record, candidate, 0);
+	assert.equal(request.mock.callCount(), 3);
+	request.mock.mockImplementation(
+		async () => new Response("outage", { status: 503 })
+	);
+	await assert.rejects(verifyPublished(record, candidate, 0), {
+		message:
+			"Could not download published archive: 503. If npm lists the version, wait until it serves the archive, then re-run the failed jobs.",
+	});
 });
 
 test("registry outages are not treated as absent versions", async (context) => {
