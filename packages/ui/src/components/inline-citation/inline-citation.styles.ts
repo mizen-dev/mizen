@@ -93,5 +93,10 @@ export const inlineCitationStyles = create({
 	// Several sources behind one chip, listed like Sources.
 	group: { inlineSize: "22rem", maxInlineSize: "100%" },
 	// The popup's 8px inset plus each row's padding puts text 16px in.
-	listPopup: { padding: space["2"] },
+	// The list keeps the 18rem it had and shrinks with the popup.
+	listPopup: {
+		gridTemplateColumns: "minmax(0, 1fr)",
+		padding: space["2"],
+		width: "18rem",
+	},
 });

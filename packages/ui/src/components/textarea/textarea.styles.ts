@@ -74,7 +74,9 @@ export const textareaStyles = create({
 		paddingInline: space["3"],
 		resize: "vertical",
 		verticalAlign: "top",
-		width: "auto",
+		// A percentage width lets the textarea shrink below its native width,
+		// like the input of a group.
+		width: "100%",
 	},
 	unstyledDefault: {
 		minHeight: "6rem",

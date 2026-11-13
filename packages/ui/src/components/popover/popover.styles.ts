@@ -43,10 +43,10 @@ export const popoverStyles = create({
 		boxSizing: "border-box",
 		color: colors.content,
 		display: "grid",
-		// Base UI sets --popup-width to auto, so the column holds the default
-		// width: 18rem with the border, wider only when the content cannot
-		// shrink, and narrower when the popup has less room.
-		gridTemplateColumns: `minmax(min-content, calc(18rem - 2 * ${borderWidth.thin}))`,
+		// Base UI sets --popup-width to auto, so the column sets the width: as
+		// wide as the content, up to 18rem with the border, where text wraps.
+		// Content that cannot shrink makes it wider.
+		gridTemplateColumns: `fit-content(calc(18rem - 2 * ${borderWidth.thin}))`,
 		height: "var(--popup-height, auto)",
 		maxWidth: "min(var(--available-width), calc(100vw - 2rem))",
 		opacity: {
@@ -143,6 +143,9 @@ export const popoverStyles = create({
 		gap: space["4"],
 		height: "100%",
 		maxHeight: "var(--available-height)",
+		// The column can be wider than a popup that has too little room, so
+		// the viewport takes the popup's own limit and clips there.
+		maxWidth: `calc(min(var(--available-width), 100vw - 2rem) - 2 * ${borderWidth.thin})`,
 		overflowX: "clip",
 		overflowY: { "[data-transitioning]": "clip", default: "auto" },
 		overscrollBehavior: "contain",

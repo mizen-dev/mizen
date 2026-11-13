@@ -204,6 +204,35 @@ describe("Popover component route", () => {
 		}
 	);
 
+	it("keeps content that cannot shrink inside a popup in a narrow window", async () => {
+		await page.setViewportSize({ height: 900, width: 300 });
+		await page.goto(`${handle.url}/components/composer`, {
+			waitUntil: "networkidle",
+		});
+		const trigger = page.locator('main button[aria-haspopup="dialog"]').first();
+		await trigger.scrollIntoViewIfNeeded();
+		await trigger.click();
+		const popup = page.locator('[data-slot="popover-popup"][data-open]');
+		await popup.waitFor({ state: "visible" });
+		// The card inside is 16rem wide; the popup has less room than that.
+		await expect
+			.poll(() =>
+				popup.evaluate((element) => {
+					const { right, width } = element.getBoundingClientRect();
+					const viewport = element.querySelector(
+						'[data-slot="popover-viewport"]'
+					);
+					return {
+						fits: width <= innerWidth,
+						spill: (viewport?.getBoundingClientRect().right ?? 0) - right,
+					};
+				})
+			)
+			.toEqual({ fits: true, spill: -1 });
+		await page.keyboard.press("Escape");
+		await page.setViewportSize({ height: 900, width: 1280 });
+	});
+
 	it.each(["light", "dark"] as const)(
 		"fits all sides and dismisses outside with reduced motion in %s",
 		async (theme) => {
